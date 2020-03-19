@@ -4,7 +4,7 @@ import { boolean, select } from "@storybook/addon-knobs";
 
 import { Button } from ".";
 
-const intents = ["", "primary"] as const;
+const intents = ["", "primary", "danger"] as const;
 
 storiesOf("Button", module).add("A common Button component", () => {
   const disabled = boolean("Disabled", false);

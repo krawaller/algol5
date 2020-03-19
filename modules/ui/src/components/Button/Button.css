@@ -99,14 +99,50 @@
 
 .buttonPrimary {
   background-color: #137cbd;
-  background-image: none;
+  background-image: linear-gradient(
+    180deg,
+    hsla(0, 0%, 100%, 0.1),
+    hsla(0, 0%, 100%, 0)
+  );
   color: white;
 }
 
-.buttonPrimary.buttonDisabled {
-  background-color: rgba(19, 124, 189, 0.5);
+.buttonPrimary:hover {
+  background-color: #106ba3;
 }
 
-.buttonPrimary.buttonActive {
+.buttonPrimary.buttonDisabled,
+.buttonPrimary:disabled {
+  background-color: rgba(19, 124, 189, 0.5);
+  color: hsla(0, 0%, 100%, 0.6);
+}
+
+.buttonPrimary.buttonActive,
+.buttonPrimary:active {
   background-color: #0e5a8a;
+}
+
+.buttonDanger {
+  background-color: #db3737;
+  background-image: linear-gradient(
+    180deg,
+    hsla(0, 0%, 100%, 0.1),
+    hsla(0, 0%, 100%, 0)
+  );
+  color: white;
+}
+
+.buttonDanger:hover {
+  background-color: #c23030;
+}
+
+.buttonDanger.buttonDisabled,
+.buttonDanger:disabled {
+  background-color: rgba(219, 55, 55, 0.5);
+  color: hsla(0, 0%, 100%, 0.6);
+}
+
+.buttonDanger.buttonActive,
+.buttonDanger:active {
+  background-color: #a82a2a;
 }

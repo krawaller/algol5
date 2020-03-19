@@ -11,7 +11,7 @@ export type ButtonProps = {
   controlId?: string;
   text?: string;
   active?: boolean;
-  intent?: "primary" | "";
+  intent?: "primary" | "danger" | "";
 };
 
 import css from "./Button.cssProxy";
@@ -47,6 +47,7 @@ export const Button: FunctionComponent<ButtonProps> = props => {
         [css.buttonBig]: big,
         [css.buttonActive]: active,
         [css.buttonPrimary]: intent === "primary",
+        [css.buttonDanger]: intent === "danger",
       })}
     >
       {text || children}

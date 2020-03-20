@@ -1,0 +1,111 @@
+.switchContainer {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  text-transform: none;
+  padding-left: 38px;
+
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Open Sans, Helvetica Neue, Icons16, sans-serif;
+  line-height: 1.28581;
+  letter-spacing: 0;
+  font-weight: 400;
+  color: #182026;
+}
+
+.switchContainer input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  z-index: -1;
+}
+
+.switchIndicator {
+  display: inline-block;
+  position: relative;
+  margin-top: -3px;
+  margin-right: 10px;
+  border: none;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(16, 22, 26, 0.2),
+    inset 0 -1px 0 rgba(16, 22, 26, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(16, 22, 26, 0.2),
+    inset 0 -1px 0 rgba(16, 22, 26, 0.1);
+  background-clip: padding-box;
+  background-color: #f5f8fa;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(hsla(0, 0%, 100%, 0.8)),
+    to(hsla(0, 0%, 100%, 0))
+  );
+  background-image: linear-gradient(
+    180deg,
+    hsla(0, 0%, 100%, 0.8),
+    hsla(0, 0%, 100%, 0)
+  );
+  cursor: pointer;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  margin-left: -38px;
+  background: rgba(167, 182, 194, 0.5);
+  border: none;
+  border-radius: 1.75em;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  width: auto;
+  min-width: 1.75em;
+  -webkit-transition: background-color 0.1s cubic-bezier(0.4, 1, 0.75, 0.9);
+  transition: background-color 0.1s cubic-bezier(0.4, 1, 0.75, 0.9);
+}
+
+.switchContainer input:checked ~ .switchIndicator {
+  background: #137cbd;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(16, 22, 26, 0.4),
+    inset 0 -1px 0 rgba(16, 22, 26, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(16, 22, 26, 0.4),
+    inset 0 -1px 0 rgba(16, 22, 26, 0.2);
+  background-color: #137cbd;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(hsla(0, 0%, 100%, 0.1)),
+    to(hsla(0, 0%, 100%, 0))
+  );
+  background-image: linear-gradient(
+    180deg,
+    hsla(0, 0%, 100%, 0.1),
+    hsla(0, 0%, 100%, 0)
+  );
+  color: #fff;
+}
+
+.switchIndicator:before {
+  box-sizing: inherit;
+  position: absolute;
+  left: 0;
+  margin: 2px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.2), 0 1px 1px rgba(16, 22, 26, 0.2);
+  background: #fff;
+  width: calc(1em - 4px);
+  height: calc(1em - 4px);
+  transition: left 0.1s cubic-bezier(0.4, 1, 0.75, 0.9);
+  display: block;
+  width: 12px;
+  height: 12px;
+  content: "";
+}
+
+.switchContainer input:checked ~ .switchIndicator:before {
+  left: calc(100% - 1em);
+}

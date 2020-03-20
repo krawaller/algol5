@@ -143,7 +143,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
         // still have a battle in memory, so just go back to that
         return {
           ...state,
-          mode: "battlelobby",
+          mode: "playing",
         };
       } else {
         // load the last session from disk
@@ -162,7 +162,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
         frame: -1,
         battle,
         session,
-        mode: "battlelobby",
+        mode: "playing",
         hasPrevious: true,
       };
     } else {

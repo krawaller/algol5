@@ -1,14 +1,13 @@
 .pageContainer {
   max-width: 450px;
   margin: 0 auto;
-  height: 100vh;
-  max-height: 1000px;
   display: flex;
   flex-direction: column;
 }
 
 .pageTop {
   background-color: saddlebrown; /* should be same as board border */
+  flex-shrink: 0;
 }
 
 .pageStrip {
@@ -18,13 +17,30 @@
   justify-content: left;
   align-items: center;
   padding: 0 5px;
+  flex-shrink: 0;
 }
 
 .pageBody {
-  padding: 10px;
-  padding-top: 20px;
   flex-grow: 1;
   position: relative;
+  min-height: 1px; /* otherwise flex-items uses content size as min-height  */
+}
+
+.pageBodyScrollBox {
+  height: 100%;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.pageBodyScrollBoxInner {
+  padding: 10px;
+  padding-top: 20px;
 }
 
 .pageContainer img {

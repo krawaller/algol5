@@ -29,8 +29,11 @@ export const Page: FunctionComponent<PageProps> = props => {
     <Div100vh className={css.pageContainer}>
       <div className={css.pageTop}>{top}</div>
       <div className={css.pageStrip}>{strip}</div>
-      <div className={css.pageBody}>{body}</div>
-    </div>
+      <div className={css.pageBody}>
+        <div className={css.pageBodyScrollBox}>
+          <div className={css.pageBodyScrollBoxInner}>{body}</div>
+        </div>
+      </div>
     </Div100vh>
   );
 };

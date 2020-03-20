@@ -40,7 +40,15 @@ export const BattleHistory: FunctionComponent<BattleHistoryProps> = props => {
       <Content content={content} />
       <div className={css.battleHistoryButtons}>
         <Button
-          onClick={actions.forkSession}
+          onClick={() => {
+            if (
+              confirm(
+                "Do you create a copy of this session from this point in the history, and switch to the new session?"
+              )
+            ) {
+              actions.forkSession();
+            }
+          }}
           onError={actions.reportError}
           controlId="fork-history-frame-button"
           disabled={

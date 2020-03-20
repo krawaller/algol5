@@ -15,16 +15,11 @@ const actions: BattleHelpActions = {
 
 storiesOf("BattleHelp", module).add("A common BattleHelp component", () => {
   const gameId = select("Game", list, list[0]) as GameId;
-  const { rules } = require(`../../../../content/dist/games/${gameId}/rules`);
   const api = allStatefulAPIs[gameId];
   const { instruction } = api.newBattle().initialUI;
   return (
     <div style={{ padding: 10 }}>
-      <BattleHelp
-        actions={actions}
-        content={{ rules }}
-        instruction={instruction}
-      />
+      <BattleHelp actions={actions} instruction={instruction} />
     </div>
   );
 });

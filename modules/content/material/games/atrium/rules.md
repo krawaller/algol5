@@ -1,11 +1,11 @@
 ---
-updated: 2020-02-18
+updated: 2020-03-21
 ---
 
 {GAME} is played on a {DIM} board with the following starting setup:
 
 {SETUP}
 
-Each turn players move one of their {UNIT:group=kings} or {UNIT:group=queens} one orthogonal step to an unoccupied square.
+Each turn players {CMND} one of their {UNIT:group=kings} or {UNIT:group=queens} one orthogonal step to an unoccupied square.
 
 If that makes an orthogonal or diagonal 3-in-a-row of all three units of that type, the player wins!

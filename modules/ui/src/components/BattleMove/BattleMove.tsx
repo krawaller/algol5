@@ -44,6 +44,17 @@ export const BattleMove: FunctionComponent<BattleMoveProps> = props => {
           <BattleControls actions={actions} ui={ui} />
         )}
       </ScrollBox>
+      <div className={css.battleMoveUndoButton}>
+        <Button
+          disabled={
+            (ui.winner !== undefined && "Battle is over") ||
+            (!Boolean(ui.undo) && "No command to undo")
+          }
+          onClick={actions.undoBattleCommand}
+        >
+          Undo
+        </Button>
+      </div>
       <div className={css.battleMoveHelpButton}>
         <Button>
           <Switch

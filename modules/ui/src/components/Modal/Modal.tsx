@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect } from "react";
 import { UniversalPortal } from "@jesstelford/react-portal-universal";
 import css from "./Modal.cssProxy";
 import { Button } from "../Button";
+import Div100vh from "react-div-100vh";
 
 type ModalProps = {
   isOpen: boolean;
@@ -20,18 +21,23 @@ export const Modal: FunctionComponent<ModalProps> = props => {
   if (!isOpen) return null;
   return (
     <UniversalPortal selector="body">
-      <div className={css.modalOverlay} onClick={onClose}>
-        <div onClick={e => e.stopPropagation()} className={css.modalContainer}>
-          <div className={css.modalHeader}>
-            <span className={css.modalTitle}>{title}</span>
-            <div>
-              <span className={css.modalSubtitle}>{subtitle}</span>
-              <Button onClick={onClose}>X</Button>
+      <Div100vh>
+        <div className={css.modalOverlay} onClick={onClose}>
+          <div
+            onClick={e => e.stopPropagation()}
+            className={css.modalContainer}
+          >
+            <div className={css.modalHeader}>
+              <span className={css.modalTitle}>{title}</span>
+              <div>
+                <span className={css.modalSubtitle}>{subtitle}</span>
+                <Button onClick={onClose}>X</Button>
+              </div>
             </div>
+            <div className={css.modalContent}>{children}</div>
           </div>
-          <div className={css.modalContent}>{children}</div>
         </div>
-      </div>
+      </Div100vh>
     </UniversalPortal>
   );
 };

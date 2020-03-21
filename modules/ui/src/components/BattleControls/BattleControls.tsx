@@ -21,18 +21,22 @@ export const BattleControls: FunctionComponent<BattleControlsProps> = ({
   ui,
   actions,
 }) => {
+  const disabledOver = ui.winner !== undefined && "Battle is over!";
   return (
     <Fragment>
       <ButtonGroup>
         <Button
-          disabled={!Boolean(ui.undo)}
+          disabled={disabledOver || (!Boolean(ui.undo) && "No command to undo")}
           onClick={actions.undoBattleCommand}
         >
           Undo
         </Button>
         {Object.entries(ui.commands).map(([cmnd, info]) => (
           <Button
-            disabled={!info.available}
+            disabled={
+              disabledOver ||
+              (!info.available && `You cannot ${cmnd} right now`)
+            }
             onClick={() => actions.command(cmnd)}
             key={cmnd}
           >
@@ -41,7 +45,10 @@ export const BattleControls: FunctionComponent<BattleControlsProps> = ({
         ))}
         <Button
           big
-          disabled={!Boolean(ui.endTurn) || ui.winner !== undefined}
+          disabled={
+            disabledOver ||
+            (!Boolean(ui.endTurn) && "You haven't made a complete turn yet")
+          }
           onClick={actions.endTurn}
         >
           End turn

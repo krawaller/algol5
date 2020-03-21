@@ -9,6 +9,7 @@ import { Switch } from "../Switch";
 import { useModal } from "../../helpers";
 import { Modal } from "../Modal";
 import { Markdown } from "../Markdown";
+import { ScrollBox } from "../ScrollBox";
 
 export interface BattleMoveActions {
   undoBattleCommand: () => void;
@@ -36,11 +37,13 @@ export const BattleMove: FunctionComponent<BattleMoveProps> = props => {
   const [isRulesModalOpen, openRulesModal, closeRulesModal] = useModal();
   return (
     <>
-      {showHelp ? (
-        <BattleHelp actions={actions} instruction={ui.instruction} />
-      ) : (
-        <BattleControls actions={actions} ui={ui} />
-      )}
+      <ScrollBox>
+        {showHelp ? (
+          <BattleHelp actions={actions} instruction={ui.instruction} />
+        ) : (
+          <BattleControls actions={actions} ui={ui} />
+        )}
+      </ScrollBox>
       <div className={css.battleMoveHelpButton}>
         <Button>
           <Switch

@@ -1,5 +1,12 @@
+body {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+}
+
 .pageContainer {
   max-width: 450px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -22,6 +29,8 @@
 
 .pageBody {
   flex-grow: 1;
+  flex-shrink: 1;
+  overflow: hidden;
   position: relative;
   min-height: 1px; /* otherwise flex-items uses content size as min-height  */
   padding: 10px;

@@ -25,12 +25,12 @@ export const BattleControls: FunctionComponent<BattleControlsProps> = ({
   return (
     <Fragment>
       <ButtonGroup>
-        <Button
+        {/* <Button
           disabled={disabledOver || (!Boolean(ui.undo) && "No command to undo")}
           onClick={actions.undoBattleCommand}
         >
           Undo
-        </Button>
+        </Button> */}
         {Object.entries(ui.commands).map(([cmnd, info]) => (
           <Button
             disabled={

@@ -4,9 +4,12 @@
     flex-grow: 0;
   }
 
+  /* By height strategy borrowed from: https://stackoverflow.com/a/14911949 */
+
   .aspectRatioBoxByHeight {
     position: relative;
     display: inline-block;
+    overflow: hidden;
   }
 
   .aspectRatioBoxByHeight > img:first-child {
@@ -20,6 +23,8 @@
     left: 0;
     right: 0;
   }
+
+  /* By width strategy borrowed from: https://css-tricks.com/aspect-ratio-boxes/#article-header-id-7 */
 
   .aspectRatioBoxByWidth > img:first-child {
     display: none;

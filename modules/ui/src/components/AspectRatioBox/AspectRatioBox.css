@@ -1,0 +1,50 @@
+@supports (--custom: property) {
+  .aspectRatioBox {
+    align-self: stretch;
+    flex-grow: 0;
+  }
+
+  .aspectRatioBoxByHeight {
+    position: relative;
+    display: inline-block;
+  }
+
+  .aspectRatioBoxByHeight > img:first-child {
+    height: calc(100% * (var(--aspect-ratio)));
+  }
+
+  .aspectRatioBoxByHeight :nth-child(2) {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .aspectRatioBoxByWidth > img:first-child {
+    display: none;
+  }
+
+  .aspectRatioBoxByWidth > :nth-child(2) {
+    width: 100%;
+  }
+
+  .aspectRatioBoxByWidth > img:nth-child(2) {
+    height: auto;
+  }
+
+  .aspectRatioBoxByWidth {
+    position: relative;
+  }
+  .aspectRatioBoxByWidth::before {
+    content: "";
+    display: block;
+    padding-bottom: calc(100% / (var(--aspect-ratio)));
+  }
+  .aspectRatioBoxByWidth > :nth-child(2) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+}

@@ -28,8 +28,10 @@ export const Page: FunctionComponent<PageProps> = props => {
   return (
     <Div100vh className={css.pageContainer}>
       <div className={css.pageTop}>{top}</div>
-      <div className={css.pageStrip}>{strip}</div>
-      <div className={css.pageBody}>{body}</div>
+      <div className={css.pageStripBodyContainer}>
+        <div className={css.pageStrip}>{strip}</div>
+        <div className={css.pageBody}>{body}</div>
+      </div>
     </Div100vh>
   );
 };

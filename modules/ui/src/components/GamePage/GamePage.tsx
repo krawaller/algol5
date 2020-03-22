@@ -76,7 +76,7 @@ export const GamePage = (props: GamePageProps) => {
   ];
   if (mode !== "gamelobby") {
     crumbs.push({
-      content: session?.id,
+      content: session!.id,
     });
   }
   let body: ReactNode;

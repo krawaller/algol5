@@ -26,6 +26,7 @@ import { Breadcrumbs, Crumb } from "../Breadcrumbs";
 import { BattleHelp } from "../BattleHelp";
 import { SessionViewSelector } from "../SessionViewSelector";
 import { BattleMove } from "../BattleMove";
+import { AspectRatioBox } from "../AspectRatioBox";
 
 type GamePageHTML = {
   about: {
@@ -121,19 +122,33 @@ export const GamePage = (props: GamePageProps) => {
     <SessionViewSelector mode={mode} actions={actions} />
   );
 
+  let height, width;
+  if (battle) {
+    const name = battle.variant.board;
+    const boardDef = graphics.boards[name];
+    height = boardDef.height;
+    width = boardDef.width;
+  } else {
+    height = 5;
+    width = 5;
+  }
+
   return (
     <Page
       errorReport={errorReport}
       top={
-        <Board
-          callback={actions.mark}
-          graphics={graphics}
-          units={ui.board.units}
-          marks={ui.board.marks}
-          potentialMarks={ui.board.potentialMarks}
-          anim={ui.board.anim}
-          active={mode === "playing" && !battle!.gameEndedBy}
-        />
+        <AspectRatioBox height={height} width={width} strategy="byOrientation">
+          <Board
+            callback={actions.mark}
+            graphics={graphics}
+            units={ui.board.units}
+            marks={ui.board.marks}
+            potentialMarks={ui.board.potentialMarks}
+            anim={ui.board.anim}
+            active={mode === "playing" && !battle!.gameEndedBy}
+            name={battle ? battle.variant.board : "basic"}
+          />
+        </AspectRatioBox>
       }
       strip={
         <>

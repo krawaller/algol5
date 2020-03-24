@@ -2,6 +2,7 @@ body {
   position: fixed;
   overflow: hidden;
   width: 100%;
+  background-color: #ededed;
 }
 
 .pageContainer {
@@ -15,6 +16,8 @@ body {
 .pageTop {
   background-color: saddlebrown; /* should be same as board border */
   flex-shrink: 0;
+  flex-grow: 0;
+  display: block;
 }
 
 .pageStripBodyContainer {
@@ -42,6 +45,7 @@ body {
   min-height: 1px; /* otherwise flex-items uses content size as min-height  */
   padding: 10px;
   padding-top: 20px;
+  background-color: white;
 }
 
 .pageContainer img {
@@ -50,9 +54,6 @@ body {
 }
 
 @media (orientation: landscape) {
-  .pageTop {
-    display: inline-block;
-  }
   .pageContainer {
     flex-direction: row;
     height: 100%;

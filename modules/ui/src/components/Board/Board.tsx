@@ -46,8 +46,8 @@ export const Board: React.FunctionComponent<BoardProps> = memo(
           background: `url("${dataURI}")`,
           backgroundRepeat: "no-repeat",
           // maintain aspect ratio of board by exploiting that % in padding-top/bottom refers to width
-          paddingTop: `${((height + 1) / (width + 1)) * 100}%`,
-          position: "relative",
+          // paddingTop: `${((height + 1) / (width + 1)) * 100}%`,
+          // position: "relative",
         }}
       >
         <div

@@ -15,6 +15,7 @@ import { Button } from "../Button";
 import TitlePageNews from "./TitlePage.News";
 import TitlePageAbout from "./TitlePage.About";
 import { ButtonGroup } from "../ButtonGroup";
+import { AspectRatioBox } from "../AspectRatioBox";
 
 type TitlePageProps = {
   actions: PageActions;
@@ -33,7 +34,13 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
 
   return (
     <Page
-      top={<img src={base64TitlePic} />}
+      top={
+        <AspectRatioBox height={1} width={1} strategy="byOrientation">
+          <div>
+            <img src={base64TitlePic} />
+          </div>
+        </AspectRatioBox>
+      }
       strip={
         <div className={styles.titlePageStrip}>
           A passion-powered collection of {list.length} abstract games

@@ -1,7 +1,6 @@
 @supports (--custom: property) {
   .aspectRatioBox {
-    align-self: stretch;
-    flex-grow: 0;
+    position: relative;
   }
 
   /* By height strategy borrowed from: https://stackoverflow.com/a/14911949 */

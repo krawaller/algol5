@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
 
 import {
   AlgolUnitState,
@@ -11,6 +11,7 @@ import { emptyAnim } from "../../../../common";
 import { BoardMarks } from "./BoardMarks";
 import { BoardUnits } from "./BoardUnits";
 import { BoardGhosts } from "./BoardGhosts";
+import css from "./Board.cssProxy";
 
 const noop = () => {};
 
@@ -40,16 +41,14 @@ export const Board: React.FunctionComponent<BoardProps> = memo(
   }) => {
     const { boards, icons } = graphics;
     const { dataURI, height, width } = boards[name];
+    const styles = useMemo(
+      () => ({
+        background: `url("${dataURI}")`,
+      }),
+      [dataURI]
+    );
     return (
-      <div
-        style={{
-          background: `url("${dataURI}")`,
-          backgroundRepeat: "no-repeat",
-          // maintain aspect ratio of board by exploiting that % in padding-top/bottom refers to width
-          // paddingTop: `${((height + 1) / (width + 1)) * 100}%`,
-          // position: "relative",
-        }}
-      >
+      <div style={styles} className={css.boardContainer}>
         <div
           style={{
             position: "absolute",

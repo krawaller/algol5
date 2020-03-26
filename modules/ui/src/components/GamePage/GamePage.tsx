@@ -137,7 +137,11 @@ export const GamePage = (props: GamePageProps) => {
     <Page
       errorReport={errorReport}
       top={
-        <AspectRatioBox height={height} width={width} strategy="byOrientation">
+        <AspectRatioBox
+          height={height + 1}
+          width={width + 1}
+          strategy="byOrientation"
+        >
           <Board
             callback={actions.mark}
             graphics={graphics}

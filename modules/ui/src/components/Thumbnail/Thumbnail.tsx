@@ -6,6 +6,7 @@ import { GameId } from "../../../../games/dist/list";
 import { useInView } from "react-intersection-observer";
 
 import { useDemo } from "../../helpers";
+import { AspectRatioBox } from "../AspectRatioBox";
 
 type ThumbnailProps = {
   demo: AlgolDemo;
@@ -25,15 +26,21 @@ export const Thumbnail: FunctionComponent<ThumbnailProps> = props => {
 
   return (
     <div ref={ref}>
-      <Board
-        key={gameId}
-        graphics={graphics}
-        marks={EMPTYARR}
-        potentialMarks={EMPTYARR}
-        callback={noop}
-        units={hydrDemo ? hydrDemo.positions[frame] : EMPTYOBJ}
-        anim={{ ...emptyAnim, ...(hydrDemo && hydrDemo.anims[frame]) }}
-      />
+      <AspectRatioBox
+        height={graphics.boards["basic"].height}
+        width={graphics.boards["basic"].width}
+        strategy="byHeight"
+      >
+        <Board
+          key={gameId}
+          graphics={graphics}
+          marks={EMPTYARR}
+          potentialMarks={EMPTYARR}
+          callback={noop}
+          units={hydrDemo ? hydrDemo.positions[frame] : EMPTYOBJ}
+          anim={{ ...emptyAnim, ...(hydrDemo && hydrDemo.anims[frame]) }}
+        />
+      </AspectRatioBox>
     </div>
   );
 };

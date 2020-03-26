@@ -17,7 +17,7 @@ export const useUI = (
 ): AlgolBattleUI => {
   const { frame: demoFrame, hydrDemo } = useDemo({
     demo,
-    playing: mode === "gamelobby",
+    playing: false, // mode === "gamelobby",
     restart: true,
   });
   return useMemo(() => {

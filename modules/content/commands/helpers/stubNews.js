@@ -17,6 +17,7 @@ const stubNews = date => {
       `---
 id: "${date}"
 title: "${date}"
+slug: "add_your_unique_never_changing_url_slug_here"
 blurb: "Add short description here!"
 thumbnail: "picToUseAsThumbnail.png"
 ---

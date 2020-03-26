@@ -13,14 +13,25 @@ export const writeNews = (date: string) => {
   fs.ensureDirSync(out);
   const md = readFileSync(path.join(source, `news.md`)).toString();
   const yaml = fm(md).attributes as any;
-  if (!yaml.thumbnail) {
-    throw new Error(`Have to provide thumbnail filename in yaml data!`);
+  for (const required of ["slug", "thumbnail", "blurb", "title", "id"]) {
+    if (!yaml[required]) {
+      throw new Error(
+        `Have to provide ${required} in yaml data for news ${date}!`
+      );
+    }
+  }
+  if (yaml.id !== date) {
+    throw new Error(
+      `ID doesn't match date for news ${date}! Never change id manually!`
+    );
   }
   const picSourcePath = path.join(source, "pics");
   fs.ensureDirSync(picSourcePath);
   const thumbPath = path.join(picSourcePath, yaml.thumbnail);
   if (!fs.existsSync(thumbPath)) {
-    throw new Error(`Failed to find thumbnail "${thumbPath}"`);
+    throw new Error(
+      `Failed to find thumbnail "${thumbPath}" for news ${date}!`
+    );
   }
   const thumbdata = encodePic(thumbPath);
   const picRefPath = `/images/news/${date}`;
@@ -35,6 +46,7 @@ export const writeNews = (date: string) => {
     id: \`${date}\`,
     title: \`${date}\`,
     blurb: \`${yaml.blurb}\`,
+    slug: \`${yaml.slug}\`,
     thumbdata: \`${thumbdata}\`
 };
 `;

@@ -6,7 +6,8 @@ import { newsList } from "../../../../content/dist/newsList";
 
 storiesOf("ArticleList", module).add("A common ArticleList component", () => {
   const actions: ArticleListActions = {
-    foo: () => console.log("Executed foo"),
+    prefetch: (str: string) => console.log("Prefetched", str),
+    goToArticle: (id: string) => console.log("Go to article", id),
   };
   return (
     <div style={{ padding: 10 }}>

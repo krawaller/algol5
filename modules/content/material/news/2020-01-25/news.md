@@ -7,3 +7,9 @@ slug: "we_are_live"
 ---
 
 Wee, we're live! OMG! :D
+
+Check out this BEER!
+
+{PIC:name=beer.jpg,credurl=http://www.google.com,cred=Photo by someone,title=Beer!}
+
+I like beer.

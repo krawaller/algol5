@@ -36,7 +36,7 @@ export const writeNews = (date: string) => {
   const thumbdata = encodePic(thumbPath);
   const picRefPath = `/images/news/${date}`;
 
-  const { html } = md2html({ md, picSourcePath, picRefPath });
+  const { html, preloads } = md2html({ md, picSourcePath, picRefPath });
   writeFileSync(path.join(out, `news.html`), html);
 
   const exported = `export const news = \`${html}\`\n`;
@@ -47,7 +47,8 @@ export const writeNews = (date: string) => {
     title: \`${date}\`,
     blurb: \`${yaml.blurb}\`,
     slug: \`${yaml.slug}\`,
-    thumbdata: \`${thumbdata}\`
+    preloads: ${JSON.stringify(preloads)},
+    thumbdata: \`${thumbdata}\`,
 };
 `;
   writeFileSync(path.join(out, "listing.ts"), listing);

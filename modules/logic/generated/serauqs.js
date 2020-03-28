@@ -327,10 +327,16 @@ const game = {
               .concat(
                 Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
               )
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         ).length > 3
       ) {
         LINKS.endGame = "win";
@@ -343,10 +349,16 @@ const game = {
               .concat(
                 Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
               )
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         ).length > 3
       ) {
         LINKS.endGame = "win";
@@ -471,10 +483,16 @@ const game = {
               .concat(
                 Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
               )
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         ).length > 3
       ) {
         LINKS.endGame = "win";
@@ -487,10 +505,16 @@ const game = {
               .concat(
                 Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
               )
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         ).length > 3
       ) {
         LINKS.endGame = "win";

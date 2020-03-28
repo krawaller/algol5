@@ -251,7 +251,10 @@ const game = {
       }
       for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
         .filter(k => k !== MARKS.selectdrop)
-        .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
+        .reduce((m, k) => {
+          m[k] = emptyObj;
+          return m;
+        }, {})) {
         delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
       }
       if (!UNITLAYERS.units[MARKS.selectdrop]) {
@@ -363,7 +366,10 @@ const game = {
       }
       for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
         .filter(k => k !== MARKS.selectdrop)
-        .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
+        .reduce((m, k) => {
+          m[k] = emptyObj;
+          return m;
+        }, {})) {
         delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
       }
       if (!UNITLAYERS.units[MARKS.selectdrop]) {
@@ -475,7 +481,10 @@ const game = {
       }
       for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
         .filter(k => k !== MARKS.selectdrop)
-        .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
+        .reduce((m, k) => {
+          m[k] = emptyObj;
+          return m;
+        }, {})) {
         delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
       }
       if (!UNITLAYERS.units[MARKS.selectdrop]) {
@@ -587,7 +596,10 @@ const game = {
       }
       for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
         .filter(k => k !== MARKS.selectdrop)
-        .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
+        .reduce((m, k) => {
+          m[k] = emptyObj;
+          return m;
+        }, {})) {
         delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
       }
       if (!UNITLAYERS.units[MARKS.selectdrop]) {
@@ -699,7 +711,10 @@ const game = {
       }
       for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
         .filter(k => k !== MARKS.selectdrop)
-        .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
+        .reduce((m, k) => {
+          m[k] = emptyObj;
+          return m;
+        }, {})) {
         delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
       }
       if (!UNITLAYERS.units[MARKS.selectdrop]) {
@@ -811,7 +826,10 @@ const game = {
       }
       for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
         .filter(k => k !== MARKS.selectdrop)
-        .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
+        .reduce((m, k) => {
+          m[k] = emptyObj;
+          return m;
+        }, {})) {
         delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
       }
       if (!UNITLAYERS.units[MARKS.selectdrop]) {
@@ -923,7 +941,10 @@ const game = {
       }
       for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
         .filter(k => k !== MARKS.selectdrop)
-        .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
+        .reduce((m, k) => {
+          m[k] = emptyObj;
+          return m;
+        }, {})) {
         delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
       }
       if (!UNITLAYERS.units[MARKS.selectdrop]) {
@@ -1035,7 +1056,10 @@ const game = {
       }
       for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
         .filter(k => k !== MARKS.selectdrop)
-        .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
+        .reduce((m, k) => {
+          m[k] = emptyObj;
+          return m;
+        }, {})) {
         delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
       }
       if (!UNITLAYERS.units[MARKS.selectdrop]) {

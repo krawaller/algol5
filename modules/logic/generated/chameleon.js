@@ -93,10 +93,16 @@ const game = {
       let filtersourcelayer = Object.entries(
         Object.keys(UNITLAYERS.oppunits)
           .concat(Object.keys(TERRAIN1.mybase))
-          .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+          .reduce((mem, k) => {
+            mem[k] = (mem[k] || 0) + 1;
+            return mem;
+          }, {})
       )
         .filter(([key, n]) => n === 2)
-        .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {});
+        .reduce((mem, [key]) => {
+          mem[key] = emptyObj;
+          return mem;
+        }, {});
       let filtertargetlayer = ARTIFACTS.invaders;
       for (let POS in filtersourcelayer) {
         let filterObj = filtersourcelayer[POS];
@@ -133,10 +139,16 @@ const game = {
       let filtersourcelayer = Object.entries(
         Object.keys(UNITLAYERS.oppunits)
           .concat(Object.keys(TERRAIN2.mybase))
-          .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+          .reduce((mem, k) => {
+            mem[k] = (mem[k] || 0) + 1;
+            return mem;
+          }, {})
       )
         .filter(([key, n]) => n === 2)
-        .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {});
+        .reduce((mem, [key]) => {
+          mem[key] = emptyObj;
+          return mem;
+        }, {});
       let filtertargetlayer = ARTIFACTS.invaders;
       for (let POS in filtersourcelayer) {
         let filterObj = filtersourcelayer[POS];

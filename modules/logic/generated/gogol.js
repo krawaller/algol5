@@ -102,10 +102,16 @@ const game = {
       for (let STARTPOS in Object.entries(
         Object.keys(TERRAIN1.edges)
           .concat(Object.keys(UNITLAYERS.mysoldiers))
-          .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+          .reduce((mem, k) => {
+            mem[k] = (mem[k] || 0) + 1;
+            return mem;
+          }, {})
       )
         .filter(([key, n]) => n === 2)
-        .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})) {
+        .reduce((mem, [key]) => {
+          mem[key] = emptyObj;
+          return mem;
+        }, {})) {
         let startconnections = connections[STARTPOS];
         for (let DIR of TERRAIN1.homerow[STARTPOS] ? orthoDirs : [1, 5]) {
           let POS = startconnections[DIR];
@@ -138,7 +144,10 @@ const game = {
               k =>
                 !{ ...UNITLAYERS.units, ...ARTIFACTS.nokings }.hasOwnProperty(k)
             )
-            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {})
         )) {
           LINKS.marks[pos] = "selectkingdeploy_basic_1";
         }
@@ -177,10 +186,16 @@ const game = {
       for (let STARTPOS in Object.entries(
         Object.keys(TERRAIN2.edges)
           .concat(Object.keys(UNITLAYERS.mysoldiers))
-          .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+          .reduce((mem, k) => {
+            mem[k] = (mem[k] || 0) + 1;
+            return mem;
+          }, {})
       )
         .filter(([key, n]) => n === 2)
-        .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})) {
+        .reduce((mem, [key]) => {
+          mem[key] = emptyObj;
+          return mem;
+        }, {})) {
         let startconnections = connections[STARTPOS];
         for (let DIR of TERRAIN2.homerow[STARTPOS] ? orthoDirs : [1, 5]) {
           let POS = startconnections[DIR];
@@ -213,7 +228,10 @@ const game = {
               k =>
                 !{ ...UNITLAYERS.units, ...ARTIFACTS.nokings }.hasOwnProperty(k)
             )
-            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {})
         )) {
           LINKS.marks[pos] = "selectkingdeploy_basic_2";
         }
@@ -314,7 +332,10 @@ const game = {
                     ...ARTIFACTS.jumptargets
                   }.hasOwnProperty(k)
               )
-              .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+              .reduce((m, k) => {
+                m[k] = emptyObj;
+                return m;
+              }, {})
       )) {
         LINKS.marks[pos] = "selectmovetarget_basic_1";
       }
@@ -472,7 +493,10 @@ const game = {
                     ...ARTIFACTS.jumptargets
                   }.hasOwnProperty(k)
               )
-              .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+              .reduce((m, k) => {
+                m[k] = emptyObj;
+                return m;
+              }, {})
       )) {
         LINKS.marks[pos] = "selectmovetarget_basic_2";
       }
@@ -624,10 +648,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.mykings)
               .concat(Object.keys(TERRAIN1.opphomerow))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         ).length !== 0
       ) {
         LINKS.endGame = "win";
@@ -636,10 +666,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.mykings)
               .concat(Object.keys(TERRAIN1.opphomerow))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         );
       } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
         LINKS.endGame = "win";
@@ -706,10 +742,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.mykings)
               .concat(Object.keys(TERRAIN1.opphomerow))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         ).length !== 0
       ) {
         LINKS.endGame = "win";
@@ -718,10 +760,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.mykings)
               .concat(Object.keys(TERRAIN1.opphomerow))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         );
       } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
         LINKS.endGame = "win";
@@ -819,10 +867,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.mykings)
               .concat(Object.keys(TERRAIN2.opphomerow))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         ).length !== 0
       ) {
         LINKS.endGame = "win";
@@ -831,10 +885,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.mykings)
               .concat(Object.keys(TERRAIN2.opphomerow))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         );
       } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
         LINKS.endGame = "win";
@@ -901,10 +961,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.mykings)
               .concat(Object.keys(TERRAIN2.opphomerow))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         ).length !== 0
       ) {
         LINKS.endGame = "win";
@@ -913,10 +979,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.mykings)
               .concat(Object.keys(TERRAIN2.opphomerow))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         );
       } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
         LINKS.endGame = "win";
@@ -1010,13 +1082,16 @@ const game = {
                         ...ARTIFACTS.jumptargets
                       })
                     )
-                    .reduce(
-                      (mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }),
-                      {}
-                    )
+                    .reduce((mem, k) => {
+                      mem[k] = (mem[k] || 0) + 1;
+                      return mem;
+                    }, {})
                 )
                   .filter(([key, n]) => n === 2)
-                  .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+                  .reduce((mem, [key]) => {
+                    mem[key] = emptyObj;
+                    return mem;
+                  }, {})
               ).length !== 0
                 ? { text: "without making a forbidden configuration" }
                 : undefined
@@ -1165,13 +1240,16 @@ const game = {
                         ...ARTIFACTS.jumptargets
                       })
                     )
-                    .reduce(
-                      (mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }),
-                      {}
-                    )
+                    .reduce((mem, k) => {
+                      mem[k] = (mem[k] || 0) + 1;
+                      return mem;
+                    }, {})
                 )
                   .filter(([key, n]) => n === 2)
-                  .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+                  .reduce((mem, [key]) => {
+                    mem[key] = emptyObj;
+                    return mem;
+                  }, {})
               ).length !== 0
                 ? { text: "without making a forbidden configuration" }
                 : undefined

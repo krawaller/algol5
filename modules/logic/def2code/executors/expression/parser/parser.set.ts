@@ -91,7 +91,7 @@ export default function parseSet(
     // arr of the keys we want to keep
     const validKeys = `${targetKeys}.filter(${keyTester})`;
     // turn valid keys back into a set object
-    return `${validKeys}.reduce((m, k) => ({...m, [k]: emptyObj}), {})`;
+    return `${validKeys}.reduce((m, k) => { m[k] = emptyObj; return m; }, {})`;
   }
 
   if (isAlgolSetIntersect(expr)) {
@@ -103,13 +103,13 @@ export default function parseSet(
       .map(r => `.concat(Object.keys(${parser.set(r)}))`)
       .join("")}`;
     // reduce keys to an object with count per key
-    const countObj = `${keysArr}.reduce((mem, k) => ({...mem, [k]: (mem[k] || 0) + 1}), {})`;
+    const countObj = `${keysArr}.reduce((mem, k) => { mem[k] = (mem[k] || 0) + 1; return mem; }, {})`;
     // func that returns true if value of entry equals number of total sets
     const entryTester = `([key,n]) => n === ${rest.length + 1}`;
     // transform keys to object entries and keep only those with sufficient count
     const validEntries = `Object.entries(${countObj}).filter(${entryTester})`;
     // Turn those valid entries into an object again!
-    return `${validEntries}.reduce((mem, [key]) => ({...mem, [key]: emptyObj}), {})`;
+    return `${validEntries}.reduce((mem, [key]) => { mem[key] = emptyObj; return mem; }, {})`;
   }
 
   if (isAlgolSetGroupAt(expr)) {
@@ -128,7 +128,7 @@ export default function parseSet(
     // arr of the keys we want to keep
     const validKeys = `${targetKeys}.filter(k => k !== ${exceptPos})`;
     // turn valid keys back into a set object
-    return `${validKeys}.reduce((m, k) => ({...m, [k]: emptyObj}), {})`;
+    return `${validKeys}.reduce((m, k) => { m[k] = emptyObj; return m; }, {})`;
   }
 
   throw new Error(`Unknown set definition: ${JSON.stringify(expr)}`);

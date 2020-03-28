@@ -187,7 +187,10 @@ const game = {
               !TERRAIN1.water.hasOwnProperty(k) &&
               !UNITLAYERS.holes.hasOwnProperty(k)
           )
-          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
+          .reduce((m, k) => {
+            m[k] = emptyObj;
+            return m;
+          }, {});
         for (let DIR of roseDirs) {
           let walkedsquares = [];
           let STOPREASON = "";
@@ -330,7 +333,10 @@ const game = {
               !TERRAIN2.water.hasOwnProperty(k) &&
               !UNITLAYERS.holes.hasOwnProperty(k)
           )
-          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
+          .reduce((m, k) => {
+            m[k] = emptyObj;
+            return m;
+          }, {});
         for (let DIR of roseDirs) {
           let walkedsquares = [];
           let STOPREASON = "";
@@ -516,7 +522,10 @@ const game = {
             let POS = STARTPOS;
             let walkpositionstocount = Object.keys(TERRAIN1.nowater)
               .filter(k => !UNITLAYERS.holes.hasOwnProperty(k))
-              .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
+              .reduce((m, k) => {
+                m[k] = emptyObj;
+                return m;
+              }, {});
             let CURRENTCOUNT = 0;
             let LENGTH = 0;
             while (LENGTH < MAX && (POS = connections[POS][DIR])) {
@@ -543,7 +552,10 @@ const game = {
         LINKS.endMarks = Object.keys(
           Object.keys(UNITLAYERS.seals)
             .filter(k => !ARTIFACTS.canmove.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {})
         );
       } else {
         LINKS.endTurn = "startTurn_basic_2";
@@ -609,7 +621,10 @@ const game = {
             let POS = STARTPOS;
             let walkpositionstocount = Object.keys(TERRAIN1.nowater)
               .filter(k => !UNITLAYERS.holes.hasOwnProperty(k))
-              .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
+              .reduce((m, k) => {
+                m[k] = emptyObj;
+                return m;
+              }, {});
             let CURRENTCOUNT = 0;
             let LENGTH = 0;
             while (LENGTH < MAX && (POS = connections[POS][DIR])) {
@@ -636,7 +651,10 @@ const game = {
         LINKS.endMarks = Object.keys(
           Object.keys(UNITLAYERS.seals)
             .filter(k => !ARTIFACTS.canmove.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {})
         );
       } else {
         LINKS.endTurn = "startTurn_basic_2";
@@ -706,7 +724,10 @@ const game = {
             let POS = STARTPOS;
             let walkpositionstocount = Object.keys(TERRAIN2.nowater)
               .filter(k => !UNITLAYERS.holes.hasOwnProperty(k))
-              .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
+              .reduce((m, k) => {
+                m[k] = emptyObj;
+                return m;
+              }, {});
             let CURRENTCOUNT = 0;
             let LENGTH = 0;
             while (LENGTH < MAX && (POS = connections[POS][DIR])) {
@@ -733,7 +754,10 @@ const game = {
         LINKS.endMarks = Object.keys(
           Object.keys(UNITLAYERS.seals)
             .filter(k => !ARTIFACTS.canmove.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {})
         );
       } else {
         LINKS.endTurn = "startTurn_basic_1";
@@ -800,7 +824,10 @@ const game = {
             let POS = STARTPOS;
             let walkpositionstocount = Object.keys(TERRAIN2.nowater)
               .filter(k => !UNITLAYERS.holes.hasOwnProperty(k))
-              .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
+              .reduce((m, k) => {
+                m[k] = emptyObj;
+                return m;
+              }, {});
             let CURRENTCOUNT = 0;
             let LENGTH = 0;
             while (LENGTH < MAX && (POS = connections[POS][DIR])) {
@@ -827,7 +854,10 @@ const game = {
         LINKS.endMarks = Object.keys(
           Object.keys(UNITLAYERS.seals)
             .filter(k => !ARTIFACTS.canmove.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {})
         );
       } else {
         LINKS.endTurn = "startTurn_basic_1";
@@ -879,7 +909,10 @@ const game = {
             let POS = STARTPOS;
             let walkpositionstocount = Object.keys(TERRAIN2.nowater)
               .filter(k => !UNITLAYERS.holes.hasOwnProperty(k))
-              .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
+              .reduce((m, k) => {
+                m[k] = emptyObj;
+                return m;
+              }, {});
             let CURRENTCOUNT = 0;
             let LENGTH = 0;
             while (LENGTH < MAX && (POS = connections[POS][DIR])) {
@@ -906,7 +939,10 @@ const game = {
         LINKS.endMarks = Object.keys(
           Object.keys(UNITLAYERS.seals)
             .filter(k => !ARTIFACTS.canmove.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {})
         );
       } else {
         LINKS.endTurn = "startTurn_basic_1";

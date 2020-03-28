@@ -96,7 +96,10 @@ const game = {
         for (const pos of Object.keys(
           Object.keys(BOARD.board)
             .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {})
         )) {
           LINKS.marks[pos] = "selectdeploy_basic_1";
         }
@@ -134,7 +137,10 @@ const game = {
         for (const pos of Object.keys(
           Object.keys(BOARD.board)
             .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {})
         )) {
           LINKS.marks[pos] = "selectdeploy_basic_2";
         }
@@ -206,7 +212,10 @@ const game = {
       {
         let allowedsteps = Object.keys(BOARD.board)
           .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
+          .reduce((m, k) => {
+            m[k] = emptyObj;
+            return m;
+          }, {});
         let BLOCKS = UNITLAYERS.oppunits;
         for (let STARTPOS in ARTIFACTS.growstarts) {
           let DIR = (ARTIFACTS.growstarts[STARTPOS] || {}).dir;
@@ -379,7 +388,10 @@ const game = {
       {
         let allowedsteps = Object.keys(BOARD.board)
           .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
+          .reduce((m, k) => {
+            m[k] = emptyObj;
+            return m;
+          }, {});
         let BLOCKS = UNITLAYERS.oppunits;
         for (let STARTPOS in ARTIFACTS.growstarts) {
           let DIR = (ARTIFACTS.growstarts[STARTPOS] || {}).dir;
@@ -531,7 +543,10 @@ const game = {
         for (const pos of Object.keys(
           Object.keys(BOARD.board)
             .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {})
         )) {
           LINKS.marks[pos] = "selectdeploy_basic_1";
         }
@@ -681,7 +696,10 @@ const game = {
         for (const pos of Object.keys(
           Object.keys(BOARD.board)
             .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {})
         )) {
           LINKS.marks[pos] = "selectdeploy_basic_2";
         }

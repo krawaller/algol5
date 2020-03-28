@@ -39,6 +39,7 @@ export const SessionListItem: FunctionComponent<SessionListItemProps> = props =>
           potentialMarks={EMPTYARR}
           marks={board.marks}
           units={board.units}
+          name={variant.board}
         />
       </div>
       <SessionItemInfo session={session} variant={variant} />

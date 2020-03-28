@@ -1,9 +1,10 @@
 {
   "scripts": {
-    "robot": "npm run exportIcons; npm run exportMarks; npm run makeGameGraphics; npm run exportGameGraphics",
+    "robot": "npm run exportIcons; npm run exportMarks; npm run makeGameGraphics; npm run exportGameGraphics; npm run renderGameActionShots",
     "clean": "rm -rf dist; mkdir dist;",
     "exportGameGraphics": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/graphics/commands/exportGameGraphics",
     "makeGameGraphics": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/graphics/commands/makeGameGraphics",
+    "renderGameActionShots": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/graphics/commands/renderGameActionShots",
     "exportIcons": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/graphics/commands/exportIcons",
     "exportMarks": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/graphics/commands/exportMarks"
   },

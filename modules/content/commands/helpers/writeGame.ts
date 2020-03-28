@@ -2,14 +2,14 @@ import { GameId } from "../../../games/dist/list";
 import { md2html } from "../../md2html";
 import path from "path";
 import fs, { readFileSync, writeFileSync } from "fs-extra";
-import { AlgolArrangements } from "../../../types";
+import { AlgolArrangements, AlgolGameBlobAnon } from "../../../types";
 
 export const writeGame = (gameId: GameId) => {
   const out = path.join(__dirname, `../../dist/games/${gameId}`);
   fs.ensureDirSync(out);
   const source = path.join(__dirname, `../../material/games/${gameId}`);
   const content: Record<string, string> = {};
-  const arrs: AlgolArrangements = require(`../../material/games/${gameId}/arrangements`)
+  const arrs: AlgolArrangements<AlgolGameBlobAnon> = require(`../../material/games/${gameId}/arrangements`)
     .arrangements;
   const links: Record<
     string,

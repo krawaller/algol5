@@ -14,22 +14,34 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn", kings: "king" };
-const emptyArtifactLayers = { movetargets: {} };
+const emptyArtifactLayers = {
+  mytrappedkings: {},
+  enemytrappedkings: {},
+  movetargets: {}
+};
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
-  soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]],
-  kings: [
+  soldiers: [
     ["units"],
-    ["units", "myunits", "mykings"],
-    ["units", "oppunits", "oppkings"]
+    ["units", "myunits", "mysoldiers"],
+    ["units", "oppunits", "oppsoldiers"]
+  ],
+  kings: [
+    ["units", "kings"],
+    ["units", "myunits", "kings", "mykings"],
+    ["units", "oppunits", "kings", "oppkings"]
   ]
 };
 const groupLayers2 = {
-  soldiers: [["units"], ["units", "oppunits"], ["units", "myunits"]],
-  kings: [
+  soldiers: [
     ["units"],
-    ["units", "oppunits", "oppkings"],
-    ["units", "myunits", "mykings"]
+    ["units", "oppunits", "oppsoldiers"],
+    ["units", "myunits", "mysoldiers"]
+  ],
+  kings: [
+    ["units", "kings"],
+    ["units", "oppunits", "kings", "oppkings"],
+    ["units", "myunits", "kings", "mykings"]
   ]
 };
 const game = {
@@ -50,6 +62,9 @@ const game = {
       units: {},
       myunits: {},
       oppunits: {},
+      mysoldiers: {},
+      oppsoldiers: {},
+      kings: {},
       mykings: {},
       oppkings: {}
     };
@@ -73,6 +88,9 @@ const game = {
         units: oldUnitLayers.units,
         myunits: oldUnitLayers.oppunits,
         oppunits: oldUnitLayers.myunits,
+        mysoldiers: oldUnitLayers.oppsoldiers,
+        oppsoldiers: oldUnitLayers.mysoldiers,
+        kings: oldUnitLayers.kings,
         mykings: oldUnitLayers.oppkings,
         oppkings: oldUnitLayers.mykings
       };
@@ -80,7 +98,10 @@ const game = {
         marks: {},
         commands: {}
       };
-      for (const pos of Object.keys(UNITLAYERS.myunits)) {
+      let TURN = step.TURN + 1;
+      for (const pos of Object.keys(
+        TURN === 1 ? UNITLAYERS.mysoldiers : UNITLAYERS.myunits
+      )) {
         LINKS.marks[pos] = "selectunit_basic_1";
       }
       return {
@@ -89,7 +110,7 @@ const game = {
         UNITLAYERS,
         ARTIFACTS: emptyArtifactLayers,
         MARKS: {},
-        TURN: step.TURN + 1
+        TURN
       };
     },
     startTurn_basic_2: step => {
@@ -98,6 +119,9 @@ const game = {
         units: oldUnitLayers.units,
         myunits: oldUnitLayers.oppunits,
         oppunits: oldUnitLayers.myunits,
+        mysoldiers: oldUnitLayers.oppsoldiers,
+        oppsoldiers: oldUnitLayers.mysoldiers,
+        kings: oldUnitLayers.kings,
         mykings: oldUnitLayers.oppkings,
         oppkings: oldUnitLayers.mykings
       };
@@ -105,7 +129,10 @@ const game = {
         marks: {},
         commands: {}
       };
-      for (const pos of Object.keys(UNITLAYERS.myunits)) {
+      let TURN = step.TURN;
+      for (const pos of Object.keys(
+        TURN === 1 ? UNITLAYERS.mysoldiers : UNITLAYERS.myunits
+      )) {
         LINKS.marks[pos] = "selectunit_basic_2";
       }
       return {
@@ -114,7 +141,7 @@ const game = {
         UNITLAYERS,
         ARTIFACTS: emptyArtifactLayers,
         MARKS: {},
-        TURN: step.TURN
+        TURN
       };
     },
     selectunit_basic_1: (step, newMarkPos) => {
@@ -128,16 +155,17 @@ const game = {
       let UNITLAYERS = step.UNITLAYERS;
       {
         let BLOCKS = UNITLAYERS.units;
+        let STARTPOS = MARKS.selectunit;
         for (let DIR of roseDirs) {
           let walkedsquares = [];
-          let POS = MARKS.selectunit;
+          let POS = STARTPOS;
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
             walkedsquares.push(POS);
           }
           let WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
             POS = walkedsquares[WALKLENGTH - 1];
-            if (!(TERRAIN1.goal[POS] && UNITLAYERS.mykings[STARTPOS])) {
+            if (!(TERRAIN1.goal[POS] && UNITLAYERS.mysoldiers[STARTPOS])) {
               ARTIFACTS.movetargets[POS] = emptyObj;
             }
           }
@@ -181,16 +209,17 @@ const game = {
       let UNITLAYERS = step.UNITLAYERS;
       {
         let BLOCKS = UNITLAYERS.units;
+        let STARTPOS = MARKS.selectunit;
         for (let DIR of roseDirs) {
           let walkedsquares = [];
-          let POS = MARKS.selectunit;
+          let POS = STARTPOS;
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
             walkedsquares.push(POS);
           }
           let WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
             POS = walkedsquares[WALKLENGTH - 1];
-            if (!(TERRAIN2.goal[POS] && UNITLAYERS.mykings[STARTPOS])) {
+            if (!(TERRAIN2.goal[POS] && UNITLAYERS.mysoldiers[STARTPOS])) {
               ARTIFACTS.movetargets[POS] = emptyObj;
             }
           }
@@ -225,6 +254,11 @@ const game = {
     },
     slide_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        mytrappedkings: {},
+        enemytrappedkings: {}
+      };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
@@ -241,6 +275,9 @@ const game = {
         units: {},
         myunits: {},
         oppunits: {},
+        mysoldiers: {},
+        oppsoldiers: {},
+        kings: {},
         mykings: {},
         oppkings: {}
       };
@@ -249,6 +286,21 @@ const game = {
         const { group, pos, owner } = currentunit;
         for (const layer of groupLayers1[group][owner]) {
           UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      for (let STARTPOS in UNITLAYERS.kings) {
+        let startconnections = connections[STARTPOS];
+        for (let DIR of roseDirs) {
+          let POS = startconnections[DIR];
+          if (POS) {
+          }
+        }
+        if (TOTALCOUNT === 0) {
+          ARTIFACTS[
+            UNITLAYERS.mykings[STARTPOS]
+              ? "mytrappedkings"
+              : "enemytrappedkings"
+          ][STARTPOS] = emptyObj;
         }
       }
       if (
@@ -279,7 +331,7 @@ const game = {
       return {
         LINKS,
         MARKS: {},
-        ARTIFACTS: step.ARTIFACTS,
+        ARTIFACTS,
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS
@@ -287,6 +339,11 @@ const game = {
     },
     slide_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        mytrappedkings: {},
+        enemytrappedkings: {}
+      };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
@@ -303,6 +360,9 @@ const game = {
         units: {},
         myunits: {},
         oppunits: {},
+        mysoldiers: {},
+        oppsoldiers: {},
+        kings: {},
         mykings: {},
         oppkings: {}
       };
@@ -311,6 +371,21 @@ const game = {
         const { group, pos, owner } = currentunit;
         for (const layer of groupLayers2[group][owner]) {
           UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      for (let STARTPOS in UNITLAYERS.kings) {
+        let startconnections = connections[STARTPOS];
+        for (let DIR of roseDirs) {
+          let POS = startconnections[DIR];
+          if (POS) {
+          }
+        }
+        if (TOTALCOUNT === 0) {
+          ARTIFACTS[
+            UNITLAYERS.mykings[STARTPOS]
+              ? "mytrappedkings"
+              : "enemytrappedkings"
+          ][STARTPOS] = emptyObj;
         }
       }
       if (
@@ -341,7 +416,7 @@ const game = {
       return {
         LINKS,
         MARKS: {},
-        ARTIFACTS: step.ARTIFACTS,
+        ARTIFACTS,
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS
@@ -350,15 +425,26 @@ const game = {
   },
   instruction: {
     startTurn_basic_1: step => {
-      return collapseContent({
-        line: [
-          { select: "Select" },
-          { unittype: ["pawn", 1] },
-          { text: "or" },
-          { unittype: ["king", 1] },
-          { text: "to slide" }
-        ]
-      });
+      let TURN = step.TURN;
+      return TURN === 1
+        ? collapseContent({
+            line: [
+              { select: "Select" },
+              { unittype: ["pawn", 1] },
+              { text: "to slide (you can't slide" },
+              { unittype: ["king", 1] },
+              { text: "in the first turn)" }
+            ]
+          })
+        : collapseContent({
+            line: [
+              { select: "Select" },
+              { unittype: ["pawn", 1] },
+              { text: "or" },
+              { unittype: ["king", 1] },
+              { text: "to slide" }
+            ]
+          });
     },
     slide_basic_1: () => defaultInstruction(1),
     selectunit_basic_1: step => {
@@ -398,15 +484,26 @@ const game = {
       });
     },
     startTurn_basic_2: step => {
-      return collapseContent({
-        line: [
-          { select: "Select" },
-          { unittype: ["pawn", 2] },
-          { text: "or" },
-          { unittype: ["king", 2] },
-          { text: "to slide" }
-        ]
-      });
+      let TURN = step.TURN;
+      return TURN === 1
+        ? collapseContent({
+            line: [
+              { select: "Select" },
+              { unittype: ["pawn", 2] },
+              { text: "to slide (you can't slide" },
+              { unittype: ["king", 2] },
+              { text: "in the first turn)" }
+            ]
+          })
+        : collapseContent({
+            line: [
+              { select: "Select" },
+              { unittype: ["pawn", 2] },
+              { text: "or" },
+              { unittype: ["king", 2] },
+              { text: "to slide" }
+            ]
+          });
     },
     slide_basic_2: () => defaultInstruction(2),
     selectunit_basic_2: step => {

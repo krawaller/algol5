@@ -6,6 +6,28 @@
 import { KingsvalleyDefinition } from "./_types";
 
 const kingsvalleyGenerators: KingsvalleyDefinition["generators"] = {
+  findtrappedkings: {
+    type: "neighbour",
+    starts: "kings",
+    dirs: "rose",
+    count: {
+      subtract: ["board", "units"],
+    },
+    draw: {
+      start: {
+        condition: {
+          same: [["totalcount"], 0],
+        },
+        tolayer: {
+          ifelse: [
+            { anyat: ["mykings", ["start"]] },
+            "mytrappedkings",
+            "enemytrappedkings",
+          ],
+        },
+      },
+    },
+  },
   findmovetargets: {
     type: "walker",
     start: "selectunit",
@@ -17,7 +39,7 @@ const kingsvalleyGenerators: KingsvalleyDefinition["generators"] = {
           not: {
             and: [
               { anyat: ["goal", ["target"]] },
-              { anyat: ["mykings", ["start"]] },
+              { anyat: ["mysoldiers", ["start"]] },
             ],
           },
         },

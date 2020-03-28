@@ -15,12 +15,13 @@ const kingsvalleyFlow: KingsvalleyDefinition["flow"] = {
       applyEffect: {
         moveat: ["selectunit", "selectmovetarget"],
       },
+      runGenerator: "findtrappedkings",
       link: "endTurn",
     },
   },
   marks: {
     selectunit: {
-      from: "myunits",
+      from: { ifelse: [{ same: [["turn"], 1] }, "mysoldiers", "myunits"] },
       runGenerator: "findmovetargets",
       link: "selectmovetarget",
     },

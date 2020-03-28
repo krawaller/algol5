@@ -23,8 +23,11 @@ type KingsvalleyUnitLayer =
   | "mykings"
   | "oppkings"
   | "neutralkings";
-type KingsvalleyGenerator = "findmovetargets";
-type KingsvalleyArtifactLayer = "movetargets";
+type KingsvalleyGenerator = "findtrappedkings" | "findmovetargets";
+type KingsvalleyArtifactLayer =
+  | "mytrappedkings"
+  | "enemytrappedkings"
+  | "movetargets";
 type KingsvalleyTerrainLayer = "goal" | "nogoal";
 type KingsvalleyLayer =
   | CommonLayer

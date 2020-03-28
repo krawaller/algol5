@@ -1,0 +1,49 @@
+.actionGalleryContainer {
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 1500px;
+  align-items: center;
+  position: relative;
+}
+
+.actionGalleryContainer img {
+  width: 100%;
+}
+
+.actionGalleryItemBox {
+  width: 150px;
+  margin: 5px;
+  position: relative;
+}
+
+.actionGalleryItemNameBox {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-family: fantasy;
+}
+
+.actionGalleryItemNameInner {
+  background-color: rgba(0, 0, 0, 0.45);
+  color: white;
+  padding: 0 3px;
+  border-radius: 3px;
+  text-align: center;
+  display: block;
+  max-width: 70%;
+}
+
+.actionGalleryEnding {
+  position: absolute;
+  bottom: 10px;
+  right: 70px;
+  font-size: 18px;
+  font-family: fantasy;
+}

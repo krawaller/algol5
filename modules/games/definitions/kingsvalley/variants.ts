@@ -6,8 +6,15 @@ const kingsvalleyVariants: KingsvalleyDefinition["variants"] = [
     board: "basic",
     setup: "basic",
     desc: "regular",
-    code: "r"
-  }
+    code: "r",
+  },
+  {
+    ruleset: "basic",
+    board: "basic",
+    setup: "retrieve",
+    desc: "retrieve",
+    code: "e",
+  },
 ];
 
 export default kingsvalleyVariants;

@@ -5,6 +5,26 @@
 
 import { KingsvalleyDefinition } from "./_types";
 
-const kingsvalleyGenerators: KingsvalleyDefinition["generators"] = {};
+const kingsvalleyGenerators: KingsvalleyDefinition["generators"] = {
+  findmovetargets: {
+    type: "walker",
+    start: "selectunit",
+    dirs: "rose",
+    blocks: "units",
+    draw: {
+      last: {
+        condition: {
+          not: {
+            and: [
+              { anyat: ["goal", ["target"]] },
+              { anyat: ["mykings", ["start"]] },
+            ],
+          },
+        },
+        tolayer: "movetargets",
+      },
+    },
+  },
+};
 
 export default kingsvalleyGenerators;

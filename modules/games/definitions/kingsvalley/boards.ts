@@ -8,8 +8,10 @@ const kingsvalleyBoardBook: KingsvalleyDefinition["boards"] = {
   basic: {
     height: 5,
     width: 5,
-    terrain: {}
-  }
+    terrain: {
+      goal: ["c3"],
+    },
+  },
 };
 
 export default kingsvalleyBoardBook;

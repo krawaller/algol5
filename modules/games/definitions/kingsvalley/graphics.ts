@@ -6,8 +6,8 @@
 import { KingsvalleyDefinition } from "./_types";
 
 const kingsvalleyGraphics: KingsvalleyDefinition["graphics"] = {
-  icons: {},
-  tiles: {}
+  icons: { soldiers: "pawn", kings: "king" },
+  tiles: { goal: "castle" },
 };
 
 export default kingsvalleyGraphics;

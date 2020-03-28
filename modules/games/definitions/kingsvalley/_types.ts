@@ -4,26 +4,42 @@ import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 type KingsvalleyBoardHeight = 5;
 type KingsvalleyBoardWidth = 5;
 
-type KingsvalleyTerrain = never;
-type KingsvalleyUnit = never;
-type KingsvalleyMark = never;
-type KingsvalleyCommand = never;
+type KingsvalleyTerrain = "goal";
+type KingsvalleyUnit = "soldiers" | "kings";
+type KingsvalleyMark = "selectunit" | "selectmovetarget";
+type KingsvalleyCommand = "slide";
 type KingsvalleyPhaseCommand = never;
 type KingsvalleyPhase = "startTurn" | KingsvalleyMark;
-type KingsvalleyUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits";
-type KingsvalleyGenerator = never;
-type KingsvalleyArtifactLayer = never;
-type KingsvalleyTerrainLayer = never;
-type KingsvalleyLayer = CommonLayer | KingsvalleyUnitLayer;
+type KingsvalleyUnitLayer =
+  | "units"
+  | "myunits"
+  | "oppunits"
+  | "neutralunits"
+  | "soldiers"
+  | "mysoldiers"
+  | "oppsoldiers"
+  | "neutralsoldiers"
+  | "kings"
+  | "mykings"
+  | "oppkings"
+  | "neutralkings";
+type KingsvalleyGenerator = "findmovetargets";
+type KingsvalleyArtifactLayer = "movetargets";
+type KingsvalleyTerrainLayer = "goal" | "nogoal";
+type KingsvalleyLayer =
+  | CommonLayer
+  | KingsvalleyUnitLayer
+  | KingsvalleyArtifactLayer
+  | KingsvalleyTerrainLayer;
 type KingsvalleyBattlePos = never;
 type KingsvalleyBattleVar = never;
 type KingsvalleyTurnPos = never;
 type KingsvalleyTurnVar = never;
 
 type KingsvalleyBoardName = "basic";
-type KingsvalleySetupName = "basic";
+type KingsvalleySetupName = "basic" | "retrieve";
 type KingsvalleyRulesetName = "basic";
-type KingsvalleyVariantName = "regular";
+type KingsvalleyVariantName = "regular" | "retrieve";
 
 type KingsvalleyGrid = never;
 

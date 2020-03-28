@@ -49,7 +49,7 @@ export default function executeWalker(
         }
       }
     `;
-  } else if (walkDef.draw.start) {
+  } else if (walkDef.draw.start || contains(walkDef, ["start"])) {
     return `{
       ${intro}
       let STARTPOS = ${parser.pos(walkDef.start!)};

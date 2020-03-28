@@ -94,7 +94,7 @@ const game = {
   },
   action: {
     ${starts.join(", ")},
-    ${marks.join(", ")},
+    ${marks.join(", ")} ${marks.length ? "," : ""}
     ${commands.join(", ")}
   },
   instruction: {

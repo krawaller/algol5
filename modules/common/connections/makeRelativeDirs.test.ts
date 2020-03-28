@@ -17,7 +17,11 @@ const relativeDirTests: RelativeDirTest[] = [
 test("relativeDirs", () => {
   relativeDirTests.forEach(({ dir, rel, expected, offsets }) =>
     expect(
-      makeRelativeDirs({ height: 1, width: 1, offsets })[dir][rel]
+      makeRelativeDirs({
+        height: (1 as unknown) as 3,
+        width: (1 as unknown) as 3,
+        offsets,
+      })[dir][rel]
     ).toEqual(expected)
   );
 });

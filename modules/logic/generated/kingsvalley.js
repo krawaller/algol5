@@ -147,7 +147,7 @@ const game = {
       };
       let UNITLAYERS = step.UNITLAYERS;
       {
-        let BLOCKS = UNITLAYERS.units;
+        let BLOCKS = { ...TERRAIN1.water, ...UNITLAYERS.units };
         let STARTPOS = MARKS.selectunit;
         for (let DIR of roseDirs) {
           let walkedsquares = [];
@@ -201,7 +201,7 @@ const game = {
       };
       let UNITLAYERS = step.UNITLAYERS;
       {
-        let BLOCKS = UNITLAYERS.units;
+        let BLOCKS = { ...TERRAIN2.water, ...UNITLAYERS.units };
         let STARTPOS = MARKS.selectunit;
         for (let DIR of roseDirs) {
           let walkedsquares = [];
@@ -288,7 +288,10 @@ const game = {
             POS &&
             Object.keys(BOARD.board)
               .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-              .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})[POS]
+              .reduce((m, k) => {
+                m[k] = emptyObj;
+                return m;
+              }, {})[POS]
           ) {
             foundneighbours.push(POS);
           }
@@ -303,10 +306,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.mykings)
               .concat(Object.keys(TERRAIN1.goal))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         ).length !== 0
       ) {
         LINKS.endGame = "win";
@@ -315,10 +324,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.mykings)
               .concat(Object.keys(TERRAIN1.goal))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         );
       } else if (Object.keys(ARTIFACTS.enemytrappedkings).length !== 0) {
         LINKS.endGame = "win";
@@ -379,7 +394,10 @@ const game = {
             POS &&
             Object.keys(BOARD.board)
               .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-              .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})[POS]
+              .reduce((m, k) => {
+                m[k] = emptyObj;
+                return m;
+              }, {})[POS]
           ) {
             foundneighbours.push(POS);
           }
@@ -394,10 +412,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.mykings)
               .concat(Object.keys(TERRAIN2.goal))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         ).length !== 0
       ) {
         LINKS.endGame = "win";
@@ -406,10 +430,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.mykings)
               .concat(Object.keys(TERRAIN2.goal))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         );
       } else if (Object.keys(ARTIFACTS.enemytrappedkings).length !== 0) {
         LINKS.endGame = "win";
@@ -562,6 +592,13 @@ const game = {
       setup: "retrieve",
       desc: "retrieve",
       code: "e"
+    },
+    {
+      ruleset: "basic",
+      board: "labyrinth",
+      setup: "labyrinth",
+      desc: "labyrinth",
+      code: "k"
     }
   ],
   boards: {
@@ -569,7 +606,16 @@ const game = {
       height: 5,
       width: 5,
       terrain: {
-        goal: ["c3"]
+        goal: ["c3"],
+        water: []
+      }
+    },
+    labyrinth: {
+      height: 7,
+      width: 7,
+      terrain: {
+        goal: ["d4"],
+        water: ["b3", "b5", "f3", "f5"]
       }
     }
   },
@@ -592,6 +638,16 @@ const game = {
       soldiers: {
         "1": ["a1", "b1", "d1", "e1"],
         "2": ["a5", "b5", "d5", "e5"]
+      }
+    },
+    labyrinth: {
+      kings: {
+        "1": ["d7"],
+        "2": ["d1"]
+      },
+      soldiers: {
+        "1": ["a1", "b1", "c1", "e1", "f1", "g1"],
+        "2": ["a7", "b7", "c7", "e7", "f7", "g7"]
       }
     }
   }

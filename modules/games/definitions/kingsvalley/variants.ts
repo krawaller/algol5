@@ -15,6 +15,13 @@ const kingsvalleyVariants: KingsvalleyDefinition["variants"] = [
     desc: "retrieve",
     code: "e",
   },
+  {
+    ruleset: "basic",
+    board: "labyrinth",
+    setup: "labyrinth",
+    desc: "labyrinth",
+    code: "k",
+  },
 ];
 
 export default kingsvalleyVariants;

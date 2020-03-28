@@ -2,18 +2,31 @@
 updated: 2020-03-28
 ---
 
-{GAME} is played on a {DIM} board with one of two setups:
+{GAME} is played on using one of these boards and setups:
 
-<div class="md-2col">
+<div class="md-3col">
 {SETUP:name=basic}
 {SETUP:name=retrieve}
+{SETUP:name=labyrinth,board=labyrinth}
 </div>
 
-The <em>regular</em> setup is shown to the left, and <em>retrieve</em> to the right. The <em>retrieve</em> setup will make for a longer game, and is aimed at experienced players.
+From left to right, these are:
 
-In {GAME} players take turn to {CMND} one of their {UNIT:group=kings} or {UNIT:group=soldiers} (except you're not allowed to move your {UNIT:group=kings} the first turn).
+- <em>Regular</em> - the basic form of the game
+- <em>Retrieve the king</em> - for experienced players, makes for a longer game
+- <em>Labyrinth</em> - the evolved version published in 2014
 
-Units {CMND} as far as possible in any orthogonal or diagonal direction, until they hit another unit or the edge of the board. You are not allowed to stop during a slide. Also, {UNIT:group=soldiers} are not allowed to stop at the central square.
+In {GAME} players take turn to {CMND} one of their {UNIT:group=kings} or {UNIT:group=soldiers} as far as possible in any orthogonal or diagonal direction, until they hit...
+
+- another unit
+- the edge of the board
+- a water square (if playing on the Labyrinth board)
+
+Some limitations:
+
+- You are never allowed to stop during a slide
+- {UNIT:group=soldiers} are not allowed to stop at the central square (but they can pass through it)
+- You may not move your {UNIT:group=kings} on the very first turn
 
 After a {CMND}, you win the game if...
 

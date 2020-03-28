@@ -10,6 +10,15 @@ const kingsvalleyBoardBook: KingsvalleyDefinition["boards"] = {
     width: 5,
     terrain: {
       goal: ["c3"],
+      water: [],
+    },
+  },
+  labyrinth: {
+    height: 7,
+    width: 7,
+    terrain: {
+      goal: ["d4"],
+      water: ["b3", "b5", "f3", "f5"],
     },
   },
 };

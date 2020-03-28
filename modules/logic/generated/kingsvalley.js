@@ -14,11 +14,7 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn", kings: "king" };
-const emptyArtifactLayers = {
-  mytrappedkings: {},
-  enemytrappedkings: {},
-  movetargets: {}
-};
+const emptyArtifactLayers = { enemytrappedkings: {}, movetargets: {} };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   soldiers: [
@@ -27,9 +23,9 @@ const groupLayers1 = {
     ["units", "oppunits", "oppsoldiers"]
   ],
   kings: [
-    ["units", "kings"],
-    ["units", "myunits", "kings", "mykings"],
-    ["units", "oppunits", "kings", "oppkings"]
+    ["units"],
+    ["units", "myunits", "mykings"],
+    ["units", "oppunits", "oppkings"]
   ]
 };
 const groupLayers2 = {
@@ -39,9 +35,9 @@ const groupLayers2 = {
     ["units", "myunits", "mysoldiers"]
   ],
   kings: [
-    ["units", "kings"],
-    ["units", "oppunits", "kings", "oppkings"],
-    ["units", "myunits", "kings", "mykings"]
+    ["units"],
+    ["units", "oppunits", "oppkings"],
+    ["units", "myunits", "mykings"]
   ]
 };
 const game = {
@@ -64,7 +60,6 @@ const game = {
       oppunits: {},
       mysoldiers: {},
       oppsoldiers: {},
-      kings: {},
       mykings: {},
       oppkings: {}
     };
@@ -90,7 +85,6 @@ const game = {
         oppunits: oldUnitLayers.myunits,
         mysoldiers: oldUnitLayers.oppsoldiers,
         oppsoldiers: oldUnitLayers.mysoldiers,
-        kings: oldUnitLayers.kings,
         mykings: oldUnitLayers.oppkings,
         oppkings: oldUnitLayers.mykings
       };
@@ -121,7 +115,6 @@ const game = {
         oppunits: oldUnitLayers.myunits,
         mysoldiers: oldUnitLayers.oppsoldiers,
         oppsoldiers: oldUnitLayers.mysoldiers,
-        kings: oldUnitLayers.kings,
         mykings: oldUnitLayers.oppkings,
         oppkings: oldUnitLayers.mykings
       };
@@ -256,7 +249,6 @@ const game = {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
-        mytrappedkings: {},
         enemytrappedkings: {}
       };
       let UNITLAYERS = step.UNITLAYERS;
@@ -277,7 +269,6 @@ const game = {
         oppunits: {},
         mysoldiers: {},
         oppsoldiers: {},
-        kings: {},
         mykings: {},
         oppkings: {}
       };
@@ -288,22 +279,23 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      for (let STARTPOS in UNITLAYERS.kings) {
+      for (let STARTPOS in UNITLAYERS.oppkings) {
         let foundneighbours = [];
         let startconnections = connections[STARTPOS];
         for (let DIR of roseDirs) {
           let POS = startconnections[DIR];
-          if (POS) {
+          if (
+            POS &&
+            Object.keys(BOARD.board)
+              .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+              .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})[POS]
+          ) {
             foundneighbours.push(POS);
           }
         }
         let NEIGHBOURCOUNT = foundneighbours.length;
         if (NEIGHBOURCOUNT === 0) {
-          ARTIFACTS[
-            UNITLAYERS.mykings[STARTPOS]
-              ? "mytrappedkings"
-              : "enemytrappedkings"
-          ][STARTPOS] = emptyObj;
+          ARTIFACTS.enemytrappedkings[STARTPOS] = emptyObj;
         }
       }
       if (
@@ -332,10 +324,6 @@ const game = {
         LINKS.endGame = "win";
         LINKS.endedBy = "trappedenemy";
         LINKS.endMarks = Object.keys(ARTIFACTS.enemytrappedkings);
-      } else if (Object.keys(ARTIFACTS.mytrappedkings).length !== 0) {
-        LINKS.endGame = "lose";
-        LINKS.endedBy = "suicide";
-        LINKS.endMarks = Object.keys(ARTIFACTS.mytrappedkings);
       } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
@@ -352,7 +340,6 @@ const game = {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
-        mytrappedkings: {},
         enemytrappedkings: {}
       };
       let UNITLAYERS = step.UNITLAYERS;
@@ -373,7 +360,6 @@ const game = {
         oppunits: {},
         mysoldiers: {},
         oppsoldiers: {},
-        kings: {},
         mykings: {},
         oppkings: {}
       };
@@ -384,22 +370,23 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      for (let STARTPOS in UNITLAYERS.kings) {
+      for (let STARTPOS in UNITLAYERS.oppkings) {
         let foundneighbours = [];
         let startconnections = connections[STARTPOS];
         for (let DIR of roseDirs) {
           let POS = startconnections[DIR];
-          if (POS) {
+          if (
+            POS &&
+            Object.keys(BOARD.board)
+              .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+              .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})[POS]
+          ) {
             foundneighbours.push(POS);
           }
         }
         let NEIGHBOURCOUNT = foundneighbours.length;
         if (NEIGHBOURCOUNT === 0) {
-          ARTIFACTS[
-            UNITLAYERS.mykings[STARTPOS]
-              ? "mytrappedkings"
-              : "enemytrappedkings"
-          ][STARTPOS] = emptyObj;
+          ARTIFACTS.enemytrappedkings[STARTPOS] = emptyObj;
         }
       }
       if (
@@ -428,10 +415,6 @@ const game = {
         LINKS.endGame = "win";
         LINKS.endedBy = "trappedenemy";
         LINKS.endMarks = Object.keys(ARTIFACTS.enemytrappedkings);
-      } else if (Object.keys(ARTIFACTS.mytrappedkings).length !== 0) {
-        LINKS.endGame = "lose";
-        LINKS.endedBy = "suicide";
-        LINKS.endMarks = Object.keys(ARTIFACTS.mytrappedkings);
       } else {
         LINKS.endTurn = "startTurn_basic_1";
       }

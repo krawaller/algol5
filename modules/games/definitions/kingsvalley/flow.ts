@@ -12,12 +12,6 @@ const kingsvalleyFlow: KingsvalleyDefinition["flow"] = {
       show: "enemytrappedkings",
       prio: 2,
     },
-    suicide: {
-      condition: { notempty: "mytrappedkings" },
-      show: "mytrappedkings",
-      who: ["otherplayer"],
-      prio: 3,
-    },
   },
   startTurn: {
     link: "selectunit",

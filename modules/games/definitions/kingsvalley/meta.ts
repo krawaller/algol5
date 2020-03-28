@@ -2,11 +2,11 @@ import { KingsvalleyDefinition } from "./_types";
 
 const kingsvalleyMeta: KingsvalleyDefinition["meta"] = {
   id: "kingsvalley",
-  name: "Kingsvalley",
+  name: "King's Valley",
   tags: [],
-  tagline: "An awesome game!",
-  source: "http://some.url.to.rules",
-  code: "O"
+  tagline: "Slide your king into the tomb before your opponent",
+  source: "http://www.logygames.com/english/kingsvalley.html",
+  code: "O",
 };
 
 export default kingsvalleyMeta;

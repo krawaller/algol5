@@ -18,10 +18,8 @@ export type NeighbourDef<Blob extends AlgolGameBlobAnon> = {
   condition?: AlgolBool<Blob>;
   ifover?: AlgolSet<Blob>;
   unlessover?: AlgolSet<Blob>;
-  count?: AlgolSet<Blob>;
   draw: {
     start?: DrawDef<Blob>;
     neighbours?: DrawDef<Blob>;
-    counted?: DrawDef<Blob>;
   };
 };

@@ -8,9 +8,9 @@ import { KingsvalleyDefinition } from "./_types";
 const kingsvalleyGenerators: KingsvalleyDefinition["generators"] = {
   findtrappedkings: {
     type: "neighbour",
-    starts: "kings",
+    starts: "oppkings",
     dirs: "rose",
-    count: {
+    ifover: {
       subtract: ["board", "units"],
     },
     draw: {
@@ -18,13 +18,7 @@ const kingsvalleyGenerators: KingsvalleyDefinition["generators"] = {
         condition: {
           same: [["neighbourcount"], 0],
         },
-        tolayer: {
-          ifelse: [
-            { anyat: ["mykings", ["start"]] },
-            "mytrappedkings",
-            "enemytrappedkings",
-          ],
-        },
+        tolayer: "enemytrappedkings",
       },
     },
   },

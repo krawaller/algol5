@@ -22,5 +22,6 @@ export type NeighbourDef<Blob extends AlgolGameBlobAnon> = {
   draw: {
     start?: DrawDef<Blob>;
     neighbours?: DrawDef<Blob>;
+    counted?: DrawDef<Blob>;
   };
 };

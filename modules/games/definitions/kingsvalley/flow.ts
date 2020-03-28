@@ -5,6 +5,18 @@ const kingsvalleyFlow: KingsvalleyDefinition["flow"] = {
     kinghome: {
       condition: { overlaps: ["mykings", "goal"] },
       show: { intersect: ["mykings", "goal"] },
+      prio: 1,
+    },
+    trappedenemy: {
+      condition: { notempty: "enemytrappedkings" },
+      show: "enemytrappedkings",
+      prio: 2,
+    },
+    suicide: {
+      condition: { notempty: "mytrappedkings" },
+      show: "mytrappedkings",
+      who: ["otherplayer"],
+      prio: 3,
     },
   },
   startTurn: {

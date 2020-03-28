@@ -16,7 +16,7 @@ const kingsvalleyGenerators: KingsvalleyDefinition["generators"] = {
     draw: {
       start: {
         condition: {
-          same: [["totalcount"], 0],
+          same: [["neighbourcount"], 0],
         },
         tolayer: {
           ifelse: [

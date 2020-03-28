@@ -289,13 +289,16 @@ const game = {
         }
       }
       for (let STARTPOS in UNITLAYERS.kings) {
+        let foundneighbours = [];
         let startconnections = connections[STARTPOS];
         for (let DIR of roseDirs) {
           let POS = startconnections[DIR];
           if (POS) {
+            foundneighbours.push(POS);
           }
         }
-        if (TOTALCOUNT === 0) {
+        let NEIGHBOURCOUNT = foundneighbours.length;
+        if (NEIGHBOURCOUNT === 0) {
           ARTIFACTS[
             UNITLAYERS.mykings[STARTPOS]
               ? "mytrappedkings"
@@ -325,6 +328,14 @@ const game = {
             .filter(([key, n]) => n === 2)
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
+      } else if (Object.keys(ARTIFACTS.enemytrappedkings).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "trappedenemy";
+        LINKS.endMarks = Object.keys(ARTIFACTS.enemytrappedkings);
+      } else if (Object.keys(ARTIFACTS.mytrappedkings).length !== 0) {
+        LINKS.endGame = "lose";
+        LINKS.endedBy = "suicide";
+        LINKS.endMarks = Object.keys(ARTIFACTS.mytrappedkings);
       } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
@@ -374,13 +385,16 @@ const game = {
         }
       }
       for (let STARTPOS in UNITLAYERS.kings) {
+        let foundneighbours = [];
         let startconnections = connections[STARTPOS];
         for (let DIR of roseDirs) {
           let POS = startconnections[DIR];
           if (POS) {
+            foundneighbours.push(POS);
           }
         }
-        if (TOTALCOUNT === 0) {
+        let NEIGHBOURCOUNT = foundneighbours.length;
+        if (NEIGHBOURCOUNT === 0) {
           ARTIFACTS[
             UNITLAYERS.mykings[STARTPOS]
               ? "mytrappedkings"
@@ -410,6 +424,14 @@ const game = {
             .filter(([key, n]) => n === 2)
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
+      } else if (Object.keys(ARTIFACTS.enemytrappedkings).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "trappedenemy";
+        LINKS.endMarks = Object.keys(ARTIFACTS.enemytrappedkings);
+      } else if (Object.keys(ARTIFACTS.mytrappedkings).length !== 0) {
+        LINKS.endGame = "lose";
+        LINKS.endedBy = "suicide";
+        LINKS.endMarks = Object.keys(ARTIFACTS.mytrappedkings);
       } else {
         LINKS.endTurn = "startTurn_basic_1";
       }

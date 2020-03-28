@@ -2,14 +2,23 @@ body {
   position: fixed;
   overflow: hidden;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .pageContainer {
-  max-width: 450px;
   width: 100%;
-  margin: 0 auto;
+  max-height: 800px;
   display: flex;
   flex-direction: column;
+}
+
+@media (min-width: 450px) {
+  .pageContainer {
+    width: 450px;
+  }
 }
 
 .pageTop {

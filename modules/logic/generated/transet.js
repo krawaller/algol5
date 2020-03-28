@@ -155,7 +155,10 @@ const game = {
       for (const pos of Object.keys(
         Object.keys(UNITLAYERS.myunits)
           .filter(k => !{ [MARKS.selectunit]: 1 }.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+          .reduce((m, k) => {
+            m[k] = emptyObj;
+            return m;
+          }, {})
       )) {
         LINKS.marks[pos] = "selectswapunit_basic_1";
       }
@@ -182,7 +185,10 @@ const game = {
         for (const pos of Object.keys(
           Object.keys(TERRAIN1.oppbase)
             .filter(k => !UNITLAYERS.oppunits.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {})
         )) {
           LINKS.marks[pos] = "selectdeportdestination_basic_1";
         }
@@ -313,7 +319,10 @@ const game = {
       for (const pos of Object.keys(
         Object.keys(UNITLAYERS.myunits)
           .filter(k => !{ [MARKS.selectunit]: 1 }.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+          .reduce((m, k) => {
+            m[k] = emptyObj;
+            return m;
+          }, {})
       )) {
         LINKS.marks[pos] = "selectswapunit_basic_2";
       }
@@ -340,7 +349,10 @@ const game = {
         for (const pos of Object.keys(
           Object.keys(TERRAIN2.oppbase)
             .filter(k => !UNITLAYERS.oppunits.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {})
         )) {
           LINKS.marks[pos] = "selectdeportdestination_basic_2";
         }
@@ -491,10 +503,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.myunits)
               .concat(Object.keys(TERRAIN1.oppbase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         ).length !== 0
       ) {
         LINKS.endGame = "win";
@@ -503,10 +521,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.myunits)
               .concat(Object.keys(TERRAIN1.oppbase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         );
       } else {
         LINKS.endTurn = "startTurn_basic_2";
@@ -567,10 +591,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.myunits)
               .concat(Object.keys(TERRAIN1.oppbase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         ).length !== 0
       ) {
         LINKS.endGame = "win";
@@ -579,10 +609,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.myunits)
               .concat(Object.keys(TERRAIN1.oppbase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         );
       } else {
         LINKS.endTurn = "startTurn_basic_2";
@@ -644,10 +680,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.myunits)
               .concat(Object.keys(TERRAIN2.oppbase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         ).length !== 0
       ) {
         LINKS.endGame = "win";
@@ -656,10 +698,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.myunits)
               .concat(Object.keys(TERRAIN2.oppbase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         );
       } else {
         LINKS.endTurn = "startTurn_basic_1";
@@ -720,10 +768,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.myunits)
               .concat(Object.keys(TERRAIN2.oppbase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         ).length !== 0
       ) {
         LINKS.endGame = "win";
@@ -732,10 +786,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.myunits)
               .concat(Object.keys(TERRAIN2.oppbase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         );
       } else {
         LINKS.endTurn = "startTurn_basic_1";

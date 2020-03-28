@@ -66,7 +66,10 @@ const game = {
       for (const pos of Object.keys(
         Object.keys(BOARD.board)
           .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+          .reduce((m, k) => {
+            m[k] = emptyObj;
+            return m;
+          }, {})
       )) {
         LINKS.marks[pos] = "selectdroptarget_basic_1";
       }
@@ -94,7 +97,10 @@ const game = {
       for (const pos of Object.keys(
         Object.keys(BOARD.board)
           .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+          .reduce((m, k) => {
+            m[k] = emptyObj;
+            return m;
+          }, {})
       )) {
         LINKS.marks[pos] = "selectdroptarget_basic_2";
       }

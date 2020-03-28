@@ -133,6 +133,7 @@ export const GamePage = (props: GamePageProps) => {
           potentialMarks={ui.board.potentialMarks}
           anim={ui.board.anim}
           active={mode === "playing" && !battle!.gameEndedBy}
+          name={battle ? battle.variant.board : "basic"}
         />
       }
       strip={

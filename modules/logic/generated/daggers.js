@@ -321,10 +321,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.mycrowns)
               .concat(Object.keys(TERRAIN1.oppbase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         ).length !== 0
       ) {
         LINKS.endGame = "win";
@@ -333,10 +339,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.mycrowns)
               .concat(Object.keys(TERRAIN1.oppbase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         );
       } else if (Object.keys(UNITLAYERS.oppcrowns).length === 1) {
         LINKS.endGame = "win";
@@ -391,10 +403,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.mycrowns)
               .concat(Object.keys(TERRAIN2.oppbase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         ).length !== 0
       ) {
         LINKS.endGame = "win";
@@ -403,10 +421,16 @@ const game = {
           Object.entries(
             Object.keys(UNITLAYERS.mycrowns)
               .concat(Object.keys(TERRAIN2.oppbase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
           )
             .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
         );
       } else if (Object.keys(UNITLAYERS.oppcrowns).length === 1) {
         LINKS.endGame = "win";

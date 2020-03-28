@@ -37,7 +37,7 @@ export const emptyFullDef: FullDefAnon = {
     canAlwaysEnd: {},
     massiveTree: {},
   },
-  scripts: {},
+  scripts: [],
   setups: { basic: {} },
   variants: [
     {

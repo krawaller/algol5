@@ -2,12 +2,17 @@ import React from "react";
 import css from "./GameList.cssProxy";
 
 import { Thumbnail } from "../Thumbnail";
-import { AlgolMeta, AlgolDemo, AlgolGameGraphics } from "../../../../types";
+import {
+  AlgolMeta,
+  AlgolDemo,
+  AlgolGameGraphics,
+  AlgolGameBlobAnon,
+} from "../../../../types";
 
 type GameListItemProps = {
   callback: () => void;
   demo: AlgolDemo;
-  meta: AlgolMeta<any, any>;
+  meta: AlgolMeta<AlgolGameBlobAnon>;
   graphics: AlgolGameGraphics;
 };
 

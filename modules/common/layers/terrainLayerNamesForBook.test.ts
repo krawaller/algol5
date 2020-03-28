@@ -6,11 +6,17 @@ type TerrainTest = {
   expected: string[];
 };
 
+const two = (2 as unknown) as 3;
+
 const terrainTests: TerrainTest[] = [
   {
     book: {
-      basic: { height: 2, width: 2, terrain: { knork: ["a1", "b2"] } },
-      other: { height: 2, width: 2, terrain: { blork: ["a2"] } },
+      basic: {
+        height: two,
+        width: two,
+        terrain: { knork: ["a1", "b2"] },
+      },
+      other: { height: two, width: two, terrain: { blork: ["a2"] } },
     },
     expected: ["knork", "noknork", "blork", "noblork"],
   },

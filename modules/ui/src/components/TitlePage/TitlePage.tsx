@@ -12,7 +12,6 @@ import { Page } from "../Page";
 import base64TitlePic from "../../../base64/title.png.proxy";
 import styles from "./TitlePage.cssProxy";
 import { Button } from "../Button";
-import TitlePageNews from "./TitlePage.News";
 import TitlePageAbout from "./TitlePage.About";
 import { ButtonGroup } from "../ButtonGroup";
 

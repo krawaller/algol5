@@ -14,9 +14,10 @@ let harvested =
   "/***** CSS collected by the `harvestCss` command from all UI components *****/\n\n";
 
 const root = path.join(__dirname, "../src");
-const out = path.join(__dirname, "../dist");
-
-fs.emptyDirSync(out);
+const outs = [
+  path.join(__dirname, "../dist"),
+  path.join(__dirname, "../dist/static"),
+];
 
 const toCheck = [root];
 while (toCheck.length) {
@@ -77,5 +78,7 @@ while (toCheck.length) {
   }
 }
 
-fs.ensureDir(out);
-fs.writeFileSync(path.join(out, "styles.css"), harvested);
+for (const out of outs) {
+  fs.ensureDir(out);
+  fs.writeFileSync(path.join(out, "ui.css"), harvested);
+}

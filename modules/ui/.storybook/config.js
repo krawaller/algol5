@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { configure, addDecorator } from "@storybook/react";
 import { withKnobs } from "@storybook/addon-knobs";
 
-import "../dist/styles.css";
+import "../dist/ui.css";
 
 function loadStories() {
   const req = require.context("../src", true, /\.stories\.tsx$/);

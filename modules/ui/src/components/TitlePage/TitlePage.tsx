@@ -9,7 +9,7 @@ import { PageActions, useModal } from "../../helpers";
 import { GameId, list } from "../../../../games/dist/list";
 import { Modal } from "../Modal";
 import { Page } from "../Page";
-import base64TitlePic from "../../../base64/title.png.proxy";
+import base64TitlePic from "../../../dist/base64/title.png.proxy";
 import styles from "./TitlePage.cssProxy";
 import { Button } from "../Button";
 import TitlePageAbout from "./TitlePage.About";

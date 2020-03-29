@@ -1,14 +1,9 @@
 {
   "scripts": {
-    "robot": "npm run prep && npm run build && npm run export",
-    "clean": "rm -rf dist; mkdir dist; rm -rf .next; rm -rf public; mkdir public;",
+    "robot": "npm run getStatic && npm run makeGamePages && npm run build && npm run export",
+    "clean": "rm -rf dist; mkdir dist; rm -rf .next; rm -rf public;",
     "makeGamePages": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/next/commands/makeGamePages",
-    "importGameImages": "node ./commands/importGameImages",
-    "importNewsImages": "node ./commands/importNewsImages",
-    "getResources": "rm -rf ./public; mkdir public; npm run getUiCSS; npm run getStatic",
-    "getUiCSS": "cp ../ui/dist/styles.css public/components.css",
-    "getStatic": "cp -a ../ui/src/static/. ./public",
-    "prep": "npm run getResources && npm run makeGamePages && npm run importGameImages && npm run importNewsImages",
+    "getStatic": "rm -rf ./public; cp -r ../ui/dist/static ./public",
     "dev": "next",
     "build": "next build",
     "start": "next start",

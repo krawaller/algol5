@@ -13,7 +13,14 @@ export const writeNews = (date: string) => {
   fs.ensureDirSync(out);
   const md = readFileSync(path.join(source, `news.md`)).toString();
   const yaml = fm(md).attributes as any;
-  for (const required of ["slug", "thumbnail", "blurb", "title", "id"]) {
+  for (const required of [
+    "slug",
+    "thumbnail",
+    "blurb",
+    "title",
+    "id",
+    "mainImage",
+  ]) {
     if (!yaml[required]) {
       throw new Error(
         `Have to provide ${required} in yaml data for news ${date}!`
@@ -30,11 +37,17 @@ export const writeNews = (date: string) => {
   const thumbPath = path.join(picSourcePath, yaml.thumbnail);
   if (!fs.existsSync(thumbPath)) {
     throw new Error(
-      `Failed to find thumbnail "${thumbPath}" for news ${date}!`
+      `Failed to find thumbnail "${thumbPath}" in pics folder for news ${date}!`
     );
   }
   const thumbdata = encodePic(thumbPath);
   const picRefPath = `/images/news/${date}`;
+  const mainImagePath = path.join(picSourcePath, yaml.mainImage);
+  if (!fs.existsSync(thumbPath)) {
+    throw new Error(
+      `Failed to find mainImage "${yaml.mainImage}" in pics folder for news ${date}!`
+    );
+  }
 
   const { html, preloads } = md2html({ md, picSourcePath, picRefPath });
   writeFileSync(path.join(out, `news.html`), html);
@@ -46,11 +59,12 @@ export const writeNews = (date: string) => {
     id: \`${date}\`,
     title: \`${yaml.title || date}\`,
     blurb: \`${yaml.blurb}\`,
-    slug: \`${yaml.slug}\`,
+    slug: \`${date}_${yaml.slug}\`,
     sort: \`${date}\`,
     created: \`${date}\`,
     updated: \`${yaml.updated || date}\`,
     preloads: ${JSON.stringify(preloads)},
+    mainImage: \`/images/news/${date}/${yaml.mainImage}\`,
     thumbdata: \`${thumbdata}\`,
 };
 `;

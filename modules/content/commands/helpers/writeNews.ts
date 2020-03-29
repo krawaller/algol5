@@ -44,9 +44,12 @@ export const writeNews = (date: string) => {
 
   const listing = `export const listing = {
     id: \`${date}\`,
-    title: \`${date}\`,
+    title: \`${yaml.title || date}\`,
     blurb: \`${yaml.blurb}\`,
     slug: \`${yaml.slug}\`,
+    sort: \`${date}\`,
+    created: \`${date}\`,
+    updated: \`${yaml.updated || date}\`,
     preloads: ${JSON.stringify(preloads)},
     thumbdata: \`${thumbdata}\`,
 };

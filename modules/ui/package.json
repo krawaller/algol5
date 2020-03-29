@@ -3,7 +3,7 @@
     "robot": "npm run setupStatic; npm run harvestCss; npm run importGameImages; npm run importNewsImages; npm run encodeImages;",
     "clean": "rm -rf dist; mkdir dist; rm -rf node_modules/.cache/storybook",
     "harvestCss": "node ./commands/harvestCss",
-    "setupStatic": "rm -rf static; cp -r ./public ./dist/static;",
+    "setupStatic": "rm -rf dist; mkdir dist; mkdir dist/static; cp -a ./public/. ./dist/static/.;",
     "importGameImages": "node ./commands/importGameImages",
     "importNewsImages": "node ./commands/importNewsImages",
     "encodeImages": "node ./commands/encodeImages",

@@ -29,9 +29,12 @@ export const ArticleList: FunctionComponent<ArticleListProps> = props => {
   }, []);
   return (
     <div className={css.articleList}>
-      {list.reverse().map(item => (
-        <ArticleListItem key={item.id} item={item} actions={actions} />
-      ))}
+      {list
+        .slice()
+        .reverse()
+        .map(item => (
+          <ArticleListItem key={item.id} item={item} actions={actions} />
+        ))}
     </div>
   );
 };

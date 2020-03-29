@@ -2,7 +2,12 @@
  * Used in the Next app as the main Index page for the app
  */
 
-import React, { FunctionComponent, useCallback, Fragment } from "react";
+import React, {
+  FunctionComponent,
+  useCallback,
+  Fragment,
+  useMemo,
+} from "react";
 import { GameList } from "../GameList";
 import { usePrefetchGames } from "./TitlePage.prefetch";
 import { PageActions, useModal } from "../../helpers";
@@ -17,8 +22,7 @@ import { ButtonGroup } from "../ButtonGroup";
 
 // TODO - lazy load?
 import { newsList } from "../../../../content/dist/newsList";
-import { allNews } from "../../../../content/dist/allNews";
-import { ArticleViewer } from "../ArticleViewer";
+import { ArticleList } from "../ArticleList";
 
 type TitlePageProps = {
   actions: PageActions;
@@ -34,6 +38,17 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
   const [isGameModalOpen, openGameModal, closeGameModal] = useModal();
   const [isNewsModalOpen, openNewsModal, closeNewsModal] = useModal();
   const [isAboutModalOpen, openAboutModal, closeAboutModal] = useModal();
+
+  const newsActions = useMemo(
+    () => ({
+      ...actions,
+      goToArticle: (id: string) => {
+        const listing = newsList.find(item => item.id === id);
+        actions.navTo(`/news/${listing!.slug}`);
+      },
+    }),
+    [actions]
+  );
 
   return (
     <Page
@@ -71,12 +86,7 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
             <TitlePageAbout />
           </Modal>
           <Modal isOpen={isNewsModalOpen} onClose={closeNewsModal} title="News">
-            <ArticleViewer
-              actions={actions}
-              backButtonText="Back to news list"
-              articles={allNews}
-              list={newsList}
-            />
+            <ArticleList actions={newsActions} list={newsList} />
           </Modal>
         </Fragment>
       }

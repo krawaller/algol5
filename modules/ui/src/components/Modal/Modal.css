@@ -13,7 +13,8 @@
 .modalContainer {
   height: 90%;
   width: 90%;
-  max-width: 500px;
+  max-width: calc(450px * 9 / 10); /* matching maxes from Page */
+  max-height: calc(800px * 9 / 10);
   display: flex;
   flex-direction: column;
 

@@ -9,12 +9,16 @@ import { PageActions, useModal } from "../../helpers";
 import { GameId, list } from "../../../../games/dist/list";
 import { Modal } from "../Modal";
 import { Page } from "../Page";
-import base64TitlePic from "../../../base64/title.png.proxy";
+import base64TitlePic from "../../../dist/base64/title.png.proxy";
 import styles from "./TitlePage.cssProxy";
 import { Button } from "../Button";
-import TitlePageNews from "./TitlePage.News";
 import TitlePageAbout from "./TitlePage.About";
 import { ButtonGroup } from "../ButtonGroup";
+
+// TODO - lazy load?
+import { newsList } from "../../../../content/dist/newsList";
+import { allNews } from "../../../../content/dist/allNews";
+import { ArticleViewer } from "../ArticleViewer";
 
 type TitlePageProps = {
   actions: PageActions;
@@ -67,7 +71,12 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
             <TitlePageAbout />
           </Modal>
           <Modal isOpen={isNewsModalOpen} onClose={closeNewsModal} title="News">
-            <TitlePageNews />
+            <ArticleViewer
+              actions={actions}
+              backButtonText="Back to news list"
+              articles={allNews}
+              list={newsList}
+            />
           </Modal>
         </Fragment>
       }

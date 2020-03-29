@@ -14,9 +14,10 @@ let harvested =
   "/***** CSS collected by the `harvestCss` command from all UI components *****/\n\n";
 
 const root = path.join(__dirname, "../src");
-const out = path.join(__dirname, "../dist");
-
-fs.emptyDirSync(out);
+const outs = [
+  path.join(__dirname, "../dist"),
+  path.join(__dirname, "../dist/static"),
+];
 
 const toCheck = [root];
 while (toCheck.length) {
@@ -41,12 +42,14 @@ while (toCheck.length) {
       ),
     ];
     for (const cls of classes) {
-      if (seenClasses[cls]) {
-        throw new Error(`Duplicate class ${cls} in ${name}`);
+      if (seenClasses[cls] && seenClasses[cls] !== name) {
+        throw new Error(
+          `Duplicate class ${cls} in ${name}, already seen in ${seenClasses[cls]}`
+        );
       }
     }
     for (const cls of classes) {
-      seenClasses[cls] = true;
+      seenClasses[cls] = name;
     }
     const keyframes =
       content.match(/\[\n ^]@keyframes ([A-Za-z0-9_-]*)/g) || [];
@@ -75,5 +78,7 @@ while (toCheck.length) {
   }
 }
 
-fs.ensureDir(out);
-fs.writeFileSync(path.join(out, "styles.css"), harvested);
+for (const out of outs) {
+  fs.ensureDir(out);
+  fs.writeFileSync(path.join(out, "ui.css"), harvested);
+}

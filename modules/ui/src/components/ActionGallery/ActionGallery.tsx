@@ -16,12 +16,12 @@ export const ActionGallery: FunctionComponent<ActionGalleryProps> = props => {
         const variantCode = lib[gameId].variants[0].code;
         const name = meta[gameId].name
           .split(" ")
-          .map(word => <span key={word}>{word} </span>);
+          .map((word, n) => <span key={n}>{word} </span>);
         return (
           <div className={css.actionGalleryItemBox}>
             <img
               key={gameId}
-              src={`/stolen/actionShots/${gameId}/${gameId}_${variantCode}${
+              src={`/images/games/${gameId}/${gameId}_${variantCode}${
                 active ? "_active" : ""
               }.png`}
             />

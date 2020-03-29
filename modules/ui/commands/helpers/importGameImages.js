@@ -2,7 +2,10 @@ const path = require("path");
 const fs = require("fs-extra");
 
 module.exports = gameId => {
-  const targetDir = path.join(__dirname, `../../public/images/games/${gameId}`);
+  const targetDir = path.join(
+    __dirname,
+    `../../dist/static/images/games/${gameId}`
+  );
   fs.ensureDirSync(path.join(targetDir, ".."));
   // content images
   const contentSource = path.join(

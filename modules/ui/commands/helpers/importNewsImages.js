@@ -7,8 +7,11 @@ module.exports = date => {
     `../../../content/material/news/${date}/pics`
   );
   if (fs.existsSync(source)) {
-    const target = path.join(__dirname, `../../public/images/news/${date}`);
-    fs.ensureDir(path.join(__dirname, `../../public/images/news`));
+    const target = path.join(
+      __dirname,
+      `../../dist/static/images/news/${date}`
+    );
+    fs.ensureDir(path.join(target, ".."));
     fs.removeSync(target);
     fs.copySync(source, target);
     console.log("images imported for", date);

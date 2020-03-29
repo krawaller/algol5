@@ -8,4 +8,5 @@ export type AlgolArticleData = {
   updated: string;
   preloads: string[];
   thumbdata: string;
+  mainImage: string;
 };

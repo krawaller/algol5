@@ -584,7 +584,21 @@ const game = {
       board: "basic",
       setup: "basic",
       desc: "regular",
-      code: "r"
+      code: "r",
+      arr: {
+        marks: ["c1"],
+        potentialMarks: ["b1", "b2", "c4", "e3"],
+        setup: {
+          soldiers: {
+            "1": ["a1", "b4", "d1", "d4"],
+            "2": ["a3", "a5", "d5", "e5"]
+          },
+          kings: {
+            "1": ["c5"],
+            "2": ["c1"]
+          }
+        }
+      }
     },
     {
       ruleset: "basic",

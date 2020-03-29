@@ -41,12 +41,14 @@ while (toCheck.length) {
       ),
     ];
     for (const cls of classes) {
-      if (seenClasses[cls]) {
-        throw new Error(`Duplicate class ${cls} in ${name}`);
+      if (seenClasses[cls] && seenClasses[cls] !== name) {
+        throw new Error(
+          `Duplicate class ${cls} in ${name}, already seen in ${seenClasses[cls]}`
+        );
       }
     }
     for (const cls of classes) {
-      seenClasses[cls] = true;
+      seenClasses[cls] = name;
     }
     const keyframes =
       content.match(/\[\n ^]@keyframes ([A-Za-z0-9_-]*)/g) || [];

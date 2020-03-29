@@ -16,6 +16,11 @@ import TitlePageNews from "./TitlePage.News";
 import TitlePageAbout from "./TitlePage.About";
 import { ButtonGroup } from "../ButtonGroup";
 
+// TODO - lazy load?
+import { newsList } from "../../../../content/dist/newsList";
+import { allNews } from "../../../../content/dist/allNews";
+import { ArticleViewer } from "../ArticleViewer";
+
 type TitlePageProps = {
   actions: PageActions;
 };
@@ -67,7 +72,12 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
             <TitlePageAbout />
           </Modal>
           <Modal isOpen={isNewsModalOpen} onClose={closeNewsModal} title="News">
-            <TitlePageNews />
+            <ArticleViewer
+              actions={actions}
+              backButtonText="Back to news list"
+              articles={allNews}
+              list={newsList}
+            />
           </Modal>
         </Fragment>
       }

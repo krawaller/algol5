@@ -9,13 +9,16 @@ import { ScrollBox } from "../ScrollBox";
 type ArticlePageProps = {
   actions: PageActions;
   title: string;
-  category: string;
   html: string;
 };
 
 export const ArticlePage: FunctionComponent<ArticlePageProps> = props => {
-  const { actions, html, title, category } = props;
-  const crumbs: Crumb[] = [{ content: category }, { content: title }];
+  const { actions, html, title } = props;
+  const crumbs: Crumb[] = [
+    // TODO - generalize?
+    { content: "News", onClick: () => actions.navTo("/news") },
+    { content: title },
+  ];
   const body = (
     <ScrollBox>
       <h3 className={css.articlePageTitle}>{title}</h3>

@@ -19,12 +19,7 @@ storiesOf("ArticlePage", module).add("A common ArticlePage component", () => {
   const title = `${data.id} - ${data.title}`;
   return (
     <div style={{ padding: 10 }}>
-      <ArticlePage
-        category="News"
-        actions={actions}
-        title={title}
-        html={html}
-      />
+      <ArticlePage actions={actions} title={title} html={html} />
     </div>
   );
 });

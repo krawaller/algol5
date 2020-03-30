@@ -1,15 +1,14 @@
 import { useRef, useEffect } from "react";
-import { list } from "../../../../games/dist/list";
-import { PageActions } from "../../helpers";
+import { PageActions } from "./pageActions";
 
-export const usePrefetchGames = (actions: PageActions) => {
+export const usePrefetchList = (actions: PageActions, urls: string[]) => {
   const interval = useRef<ReturnType<typeof setInterval> | null>(null);
-  const gameIdx = useRef<number>(0);
+  const idx = useRef<number>(0);
   useEffect(() => {
     interval.current = setInterval(() => {
-      actions.prefetch(`/games/${list[gameIdx.current]}`);
-      gameIdx.current++;
-      if (gameIdx.current >= list.length) {
+      actions.prefetch(urls[idx.current]);
+      idx.current++;
+      if (idx.current >= urls.length) {
         clearInterval(interval.current!);
       }
     }, 100);

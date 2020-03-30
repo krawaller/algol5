@@ -20,5 +20,5 @@ export const game: TokenHandler = opts => {
   const name = def.meta.name;
   if (gameId === thisGameId)
     return `<span class="md-game-selfref">${name}</span>`;
-  return `<a class="md-game-link" href="#" data-gameId="${gameId}">${name}</a>`;
+  return `<a class="md-game-link" href="/games/${gameId}" data-gameId="${gameId}">${name}</a>`;
 };

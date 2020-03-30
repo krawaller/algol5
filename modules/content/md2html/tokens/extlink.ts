@@ -8,6 +8,9 @@ export const extlink: TokenHandler = opts => {
   if (!url) {
     throw new Error("Have to provide extlink url!");
   }
+  if (!text) {
+    throw new Error("Have to provide extlink text!");
+  }
   return `<a class="md-external-link" href="${url.replace(
     /EQUALS/g,
     "="

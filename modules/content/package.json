@@ -1,7 +1,7 @@
 {
   "scripts": {
     "clean": "rm -rf dist; mkdir dist;",
-    "robot": "npm run writeGame; npm run writeNews; npm run listNews;",
+    "robot": "npm run writeNews; npm run listNews; npm run writeGame;",
     "writeGame": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeGame.ts",
     "stubGame": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/stubGame.ts",
     "stubNews": "node ./commands/stubNews",

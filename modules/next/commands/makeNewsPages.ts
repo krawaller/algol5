@@ -3,7 +3,7 @@ import path from "path";
 import { newsList } from "../../content/dist/newsList";
 
 const out = path.join(__dirname, "../pages/news");
-fs.emptyDirSync(out);
+fs.ensureDirSync(out);
 
 for (const data of newsList) {
   const content = `
@@ -18,18 +18,19 @@ import { news } from "../../../../content/dist/news/${data.id}/news";
 import { listing } from "../../../../content/dist/news/${data.id}/listing";
 
 export const Article = () => {
+  const title = \`${data.id} - ${data.title}\`;
   return (
     <Fragment>
       <Head>
         <meta property="og:site_name" content="Chessicals"/>
-        <meta property="og:image" content={listing.mainImage} />
-        <meta property="og:title" content={listing.title} />
-        <meta property="og:description" content={listing.blurb} />
-        <title>{listing.title}</title>
+        <meta property="og:image" content="${data.mainImage}" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content="${data.blurb}"/>
+        <title>{title}</title>
       </Head>
       <ArticlePage
         category="News"
-        data={listing}
+        title={title}
         actions={pageActions}
         html={news}
       />

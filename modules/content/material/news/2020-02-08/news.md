@@ -1,10 +1,15 @@
 ---
 id: "2020-02-08"
-title: "2020-02-08"
-blurb: "What a day!!"
+title: "It has begun"
+blurb: "The Chessicals beta is publically available"
 thumbnail: "testthumb.png"
-slug: "what_a_day"
+slug: "it_has_begun"
 mainImage: "beer.jpg"
+games: []
 ---
 
-Omg you can NEVER guess what happened 2020-02-08!! :D
+{ME} is alive! Skål!
+
+{PIC:name=beer.jpg,credurl=http://www.google.com,cred=Photo by someone,title=Beer!}
+
+(WIP)

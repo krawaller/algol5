@@ -20,6 +20,7 @@ title: "${date}"
 slug: "add_your_unique_never_changing_url_slug_here"
 blurb: "Add short description here!"
 thumbnail: "picToUseAsThumbnail.png"
+mainImage: "some_picture.jpg"
 ---
 
 Omg you can NEVER guess what happened ${date}!! :D

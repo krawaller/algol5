@@ -16,9 +16,10 @@ storiesOf("ArticlePage", module).add("A common ArticlePage component", () => {
     navTo: (url: string) => console.log("Nav to", url),
     prefetch: (url: string) => console.log("Prefetch", url),
   };
+  const title = `${data.id} - ${data.title}`;
   return (
     <div style={{ padding: 10 }}>
-      <ArticlePage category="News" actions={actions} data={data} html={html} />
+      <ArticlePage actions={actions} title={title} html={html} />
     </div>
   );
 });

@@ -27,7 +27,7 @@
 }
 
 .articleListItem:hover {
-  background-color: antiquewhite;
+  background-color: gold;
 }
 
 .articleListItem > :last-child {

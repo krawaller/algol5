@@ -6,10 +6,9 @@ import React, {
   FunctionComponent,
   useCallback,
   Fragment,
-  useMemo,
+  useEffect,
 } from "react";
 import { GameList } from "../GameList";
-import { usePrefetchGames } from "./TitlePage.prefetch";
 import { PageActions, useModal } from "../../helpers";
 import { GameId, list } from "../../../../games/dist/list";
 import { Modal } from "../Modal";
@@ -19,14 +18,13 @@ import styles from "./TitlePage.cssProxy";
 import { Button } from "../Button";
 import TitlePageAbout from "./TitlePage.About";
 import { ButtonGroup } from "../ButtonGroup";
-
-// TODO - lazy load?
-import { newsList } from "../../../../content/dist/newsList";
-import { ArticleList } from "../ArticleList";
+import { usePrefetchList } from "../../helpers/usePrefetchList";
 
 type TitlePageProps = {
   actions: PageActions;
 };
+
+const gameUrls = list.map(gameId => `/games/${gameId}`);
 
 export const TitlePage: FunctionComponent<TitlePageProps> = props => {
   const { actions } = props;
@@ -34,21 +32,12 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
     (gameId: GameId) => actions.navTo(`/games/${gameId}`),
     [actions]
   );
-  usePrefetchGames(actions);
+  usePrefetchList(actions, gameUrls);
+  useEffect(() => {
+    actions.prefetch("/news");
+  }, []);
   const [isGameModalOpen, openGameModal, closeGameModal] = useModal();
-  const [isNewsModalOpen, openNewsModal, closeNewsModal] = useModal();
   const [isAboutModalOpen, openAboutModal, closeAboutModal] = useModal();
-
-  const newsActions = useMemo(
-    () => ({
-      ...actions,
-      goToArticle: (id: string) => {
-        const listing = newsList.find(item => item.id === id);
-        actions.navTo(`/news/${listing!.slug}`);
-      },
-    }),
-    [actions]
-  );
 
   return (
     <Page
@@ -67,9 +56,7 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
             <Button disabled={isAboutModalOpen} onClick={openAboutModal}>
               About
             </Button>
-            <Button disabled={isNewsModalOpen} onClick={openNewsModal}>
-              News
-            </Button>
+            <Button onClick={() => actions.navTo("/news")}>News</Button>
           </ButtonGroup>
           <Modal
             isOpen={isGameModalOpen}
@@ -84,9 +71,6 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
             title="About the site"
           >
             <TitlePageAbout />
-          </Modal>
-          <Modal isOpen={isNewsModalOpen} onClose={closeNewsModal} title="News">
-            <ArticleList actions={newsActions} list={newsList} />
           </Modal>
         </Fragment>
       }

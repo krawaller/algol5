@@ -3,7 +3,7 @@ import path from "path";
 import { newsList } from "../../content/dist/newsList";
 
 const out = path.join(__dirname, "../pages/news");
-fs.emptyDirSync(out);
+fs.ensureDirSync(out);
 
 for (const data of newsList) {
   const content = `

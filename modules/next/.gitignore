@@ -1,4 +1,4 @@
 .next
 pages/games
-pages/news
+pages/news/*/*
 public

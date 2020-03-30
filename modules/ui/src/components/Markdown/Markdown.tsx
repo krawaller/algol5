@@ -16,10 +16,13 @@ export const Markdown: FunctionComponent<MarkdownProps> = props => {
     (e: MouseEvent) => {
       if (e.target) {
         const node = e.target as HTMLDivElement;
-        const toGame = node.dataset.gameid;
-        if (toGame) {
+        const { gameid, newsslug } = node.dataset;
+        if (gameid) {
           e.preventDefault();
-          actions.navTo(`/games/${toGame}`);
+          actions.navTo(`/games/${gameid}`);
+        } else if (newsslug) {
+          e.preventDefault();
+          actions.navTo(`/news/${newsslug}`);
         }
       }
     },

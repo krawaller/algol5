@@ -3,6 +3,7 @@ import { md2html } from "../../md2html";
 import path from "path";
 import fs, { readFileSync, writeFileSync } from "fs-extra";
 import { AlgolArrangements, AlgolGameBlobAnon } from "../../../types";
+import { games2news, newsWithGames } from "../../dist/games2news";
 
 export const writeGame = (gameId: GameId) => {
   const out = path.join(__dirname, `../../dist/games/${gameId}`);
@@ -21,6 +22,20 @@ export const writeGame = (gameId: GameId) => {
   for (const file of ["about", "rules"]) {
     let md = readFileSync(path.join(source, `${file}.md`)).toString();
     if (file === "about") {
+      const newsItems: { slug: string; title: string }[] = (
+        games2news[gameId] || []
+      ).map(newsId => newsWithGames[newsId]);
+      if (newsItems.length) {
+        md +=
+          `\n\nRelated news items:\n\n` +
+          newsItems
+            .map(
+              ({ slug, title }) =>
+                // TODO - convert to token?
+                `- <a class="md-news-link" href="/news/${slug}" data-newsslug="${slug}">${title}</a>`
+            )
+            .join("\n");
+      }
       const entries = Object.entries(links);
       if (entries.length) {
         md +=

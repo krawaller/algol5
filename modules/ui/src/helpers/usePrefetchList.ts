@@ -6,7 +6,6 @@ export const usePrefetchList = (actions: PageActions, urls: string[]) => {
   const idx = useRef<number>(0);
   useEffect(() => {
     interval.current = setInterval(() => {
-      console.log("PREFETCHING", urls[idx.current]);
       actions.prefetch(urls[idx.current]);
       idx.current++;
       if (idx.current >= urls.length) {

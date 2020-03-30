@@ -45,8 +45,9 @@ fs.writeFileSync(
   prettier.format(fullList, { filepath: "foo.ts" })
 );
 
-// game2news mapper
-import(newsListPath).then(file => {
+(async () => {
+  // game2news mapper
+  const file = await import(newsListPath);
   const list: AlgolArticleData[] = file.newsList;
   const game2news: Record<string, string[]> = {};
   const newsWithGames: Record<string, { slug: string; title: string }> = {};
@@ -67,4 +68,4 @@ import(newsListPath).then(file => {
     path.join(__dirname, "../dist/games2news.ts"),
     prettier.format(mapperContent, { filepath: "foo.ts" })
   );
-});
+})();

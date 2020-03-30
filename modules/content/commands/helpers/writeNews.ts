@@ -54,7 +54,7 @@ export const writeNews = (date: string) => {
   if (!Array.isArray(yaml.games)) {
     throw new Error(`News ${date} has non-array games data`);
   }
-  for (const gameId in yaml.games) {
+  for (const gameId of yaml.games) {
     if (!list.includes(gameId as GameId)) {
       throw new Error(`News ${date} connects to unknown game ${gameId}`);
     }
@@ -76,6 +76,7 @@ export const writeNews = (date: string) => {
     updated: \`${yaml.updated || date}\`,
     preloads: ${JSON.stringify(preloads)},
     mainImage: \`/images/news/${date}/${yaml.mainImage}\`,
+    games: ${JSON.stringify(yaml.games)},
     thumbdata: \`${thumbdata}\`,
 };
 `;

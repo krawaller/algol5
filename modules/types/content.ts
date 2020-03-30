@@ -7,6 +7,7 @@ export type AlgolArticleData = {
   created: string;
   updated: string;
   preloads: string[];
+  games: string[];
   thumbdata: string;
   mainImage: string;
 };

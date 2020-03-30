@@ -3,9 +3,10 @@ import { md2html } from "../../md2html";
 import path from "path";
 import fs, { readFileSync, writeFileSync } from "fs-extra";
 import { AlgolArrangements, AlgolGameBlobAnon } from "../../../types";
-import { games2news, newsWithGames } from "../../dist/games2news";
 
-export const writeGame = (gameId: GameId) => {
+export const writeGame = async (gameId: GameId) => {
+  // have to do this async for writeNews to work
+  const { games2news, newsWithGames } = await import("../../dist/games2news");
   const out = path.join(__dirname, `../../dist/games/${gameId}`);
   fs.ensureDirSync(out);
   const source = path.join(__dirname, `../../material/games/${gameId}`);

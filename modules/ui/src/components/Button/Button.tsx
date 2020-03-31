@@ -1,11 +1,10 @@
 import React, { FunctionComponent, MouseEvent } from "react";
 import classNames from "classnames";
-import { preventDoubleTapZoom } from "./Button.preventDoubleTap";
+import { preventDoubleTapZoom } from "../../helpers/preventDoubleTap";
 
 export type ButtonProps = {
   disabled?: boolean | string;
   onClick?: (e: MouseEvent) => void;
-  href?: string;
   big?: boolean;
   onError?: (err: Error) => void;
   controlId?: string;
@@ -22,7 +21,6 @@ export const Button: FunctionComponent<ButtonProps> = props => {
     disabled,
     onClick = preventDoubleTapZoom,
     children,
-    href,
     big,
     onError,
     controlId,
@@ -31,13 +29,12 @@ export const Button: FunctionComponent<ButtonProps> = props => {
     intent,
   } = props;
   const handler = useButtonClickHandler({
-    href,
     disabled,
     onClick,
     onError,
     controlId,
   });
-  const button = (
+  return (
     <button
       // Having a touch handler also makes :active work on iOS
       onTouchStart={preventDoubleTapZoom}
@@ -52,12 +49,5 @@ export const Button: FunctionComponent<ButtonProps> = props => {
     >
       {text || children}
     </button>
-  );
-  return href ? (
-    <a className={css.buttonLink} href={href} target="_blank">
-      {button}
-    </a>
-  ) : (
-    button
   );
 };

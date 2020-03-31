@@ -6,23 +6,22 @@
   flex-wrap: wrap;
 }
 
-.buttonGroupContainerMerged > button:not(:last-child) {
+.buttonGroupContainerMerged > :not(:last-child) {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-.buttonGroupContainerMerged > button:not(:first-child) {
+.buttonGroupContainerMerged > :not(:first-child) {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   margin-left: -1px;
 }
 
-.buttonGroupContainer:not(.buttonGroupContainerMerged) > button {
+.buttonGroupContainer:not(.buttonGroupContainerMerged) > * {
   margin-bottom: 10px;
 }
 
-.buttonGroupContainer:not(.buttonGroupContainerMerged)
-  > button:not(:first-child) {
+.buttonGroupContainer:not(.buttonGroupContainerMerged) > *:not(:first-child) {
   margin-left: 10px;
 }
 

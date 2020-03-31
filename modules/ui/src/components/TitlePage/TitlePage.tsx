@@ -19,6 +19,7 @@ import { Button } from "../Button";
 import TitlePageAbout from "./TitlePage.About";
 import { ButtonGroup } from "../ButtonGroup";
 import { usePrefetchList } from "../../helpers/usePrefetchList";
+import { Link } from "../Link";
 
 type TitlePageProps = {
   actions: PageActions;
@@ -56,7 +57,7 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
             <Button disabled={isAboutModalOpen} onClick={openAboutModal}>
               About
             </Button>
-            <Button onClick={() => actions.navTo("/news")}>News</Button>
+            <Link text="News" url="/news" actions={actions} asButton />
           </ButtonGroup>
           <Modal
             isOpen={isGameModalOpen}

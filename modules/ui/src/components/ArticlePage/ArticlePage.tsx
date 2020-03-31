@@ -16,7 +16,7 @@ export const ArticlePage: FunctionComponent<ArticlePageProps> = props => {
   const { actions, html, title } = props;
   const crumbs: Crumb[] = [
     // TODO - generalize?
-    { content: "News", onClick: () => actions.navTo("/news") },
+    { content: "News", url: "/news" },
     { content: title },
   ];
   const body = (

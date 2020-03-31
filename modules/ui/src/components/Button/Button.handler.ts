@@ -1,17 +1,16 @@
 import { useMemo, MouseEvent } from "react";
-import { preventDoubleTapZoom } from "./Button.preventDoubleTap";
+import { preventDoubleTapZoom } from "../../helpers/preventDoubleTap";
 import { AlgolError } from "../../../../types";
 
 export const useButtonClickHandler = (opts: {
-  href?: string;
   disabled?: boolean | string;
   onClick: (e: MouseEvent) => void;
   onError?: (err: AlgolError) => void;
   controlId?: string;
 }) => {
-  const { href, disabled, onClick, onError, controlId } = opts;
+  const { disabled, onClick, onError, controlId } = opts;
   return useMemo(() => {
-    if (href || disabled === true) {
+    if (disabled === true) {
       return preventDoubleTapZoom;
     }
     if (typeof disabled === "string") {
@@ -33,5 +32,5 @@ export const useButtonClickHandler = (opts: {
       preventDoubleTapZoom(e);
       onClick(e);
     };
-  }, [href, disabled, onClick, onError, controlId]);
+  }, [disabled, onClick, onError, controlId]);
 };

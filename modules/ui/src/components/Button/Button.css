@@ -12,6 +12,7 @@
   margin: 0;
 
   text-transform: none;
+  text-decoration: none;
 
   -webkit-appearance: button;
 
@@ -58,10 +59,6 @@
 
   font: 400 11px system-ui;
 
-  text-decoration: none;
-}
-
-.buttonLink {
   text-decoration: none;
 }
 

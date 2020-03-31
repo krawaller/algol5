@@ -24,7 +24,6 @@ export const Link: FunctionComponent<LinkProps> = props => {
         ? undefined
         : (e: MouseEvent) => {
             e.preventDefault();
-            console.log("NAVTO", url);
             actions!.navTo(url);
           },
     [url, actions]

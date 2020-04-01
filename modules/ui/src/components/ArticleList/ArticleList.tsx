@@ -4,36 +4,38 @@ import { ArticleListItem } from "./ArticleList.Item";
 
 export interface ArticleListActions {
   prefetch: (str: string) => void;
-  goToArticle: (id: string) => void;
+  navTo: (id: string) => void;
 }
 
 type ArticleListProps = {
   actions: ArticleListActions;
+  prefix: string;
   list: {
     id: string;
     title: string;
     thumbdata: string;
     preloads: string[];
     blurb: string;
+    slug: string;
   }[];
 };
 
 export const ArticleList: FunctionComponent<ArticleListProps> = props => {
-  const { actions, list } = props;
-  useEffect(() => {
-    for (const item of list) {
-      for (const preload of item.preloads) {
-        actions.prefetch(preload);
-      }
-    }
-  }, []);
+  let { actions, list, prefix } = props;
+  if (prefix[0] !== "/") prefix = "/" + prefix;
+  if (prefix.slice(-1) !== "/") prefix = prefix + "/";
   return (
     <div className={css.articleList}>
       {list
         .slice()
         .reverse()
         .map(item => (
-          <ArticleListItem key={item.id} item={item} actions={actions} />
+          <ArticleListItem
+            key={item.id}
+            item={item}
+            actions={actions}
+            url={`${prefix}${item.slug}`}
+          />
         ))}
     </div>
   );

@@ -34,7 +34,7 @@ export const NewsListPage: FunctionComponent<NewsListPageProps> = props => {
       strip={<Breadcrumbs crumbs={crumbs} actions={actions} />}
       body={
         <ScrollBox>
-          <ArticleList actions={newsActions} list={newsList} />
+          <ArticleList actions={newsActions} list={newsList} prefix="/news/" />
         </ScrollBox>
       }
     />

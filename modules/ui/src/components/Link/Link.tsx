@@ -39,7 +39,7 @@ export const Link: FunctionComponent<LinkProps> = props => {
     );
   const classes = classNames({
     [css.link]: styleMode === "link",
-    [css.linkNaked]: styleMode === "none",
+    [css.linkNaked]: styleMode === "none" || styleMode === "asButton",
   });
   // external link
   if (url[0] === "h") {

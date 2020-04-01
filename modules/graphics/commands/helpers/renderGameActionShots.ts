@@ -4,6 +4,7 @@ import lib from "../../../games/dist/lib";
 import { render } from "../../render";
 import { arrangement2sprites } from "../../../common";
 import svg2png from "../../svg2png";
+import img2data from "../../img2data";
 
 export const renderGameActionShots = async (gameId: string) => {
   const target = path.join(__dirname, `../../dist/actionShots/${gameId}`);
@@ -24,28 +25,37 @@ export const renderGameActionShots = async (gameId: string) => {
           arrangement: arr,
           iconMap: def.graphics.icons,
         });
-        const picWithMarks = render({
+        const svgPic = render({
           board,
           tileMap: def.graphics.tiles,
           sprites,
           pad: true,
           definitionStrategy: "inline",
         });
-        const svgPath = path.join(
-          target,
-          `${gameId}_${variant.code}${active ? "_active" : ""}.svg`
-        );
-        await fs.writeFile(svgPath, picWithMarks);
+        const fileName = `${gameId}_${variant.code}${active ? "_active" : ""}`;
+        const noCodeFilename = `${gameId}${active ? "_active" : ""}`;
+        // Write SVG pic
+        const svgPath = path.join(target, `${fileName}.svg`);
+        await fs.writeFile(svgPath, svgPic);
+        // Write PNG pic
         const pngBuffer = await svg2png(svgPath);
-        const pngPath = path.join(
-          target,
-          `${gameId}_${variant.code}${active ? "_active" : ""}.png`
-        );
+        const pngPath = path.join(target, `${fileName}.png`);
         const out = fs.createWriteStream(pngPath);
         await new Promise(resolve => {
           out.on("finish", resolve);
           pngBuffer.pipe(out);
         });
+        // Write TS pic
+        const dataURI = img2data(svgPath);
+        const dataURIcode = `export const dataURI = \`${dataURI}\`;\n`;
+        const dataURIpath = path.join(target, `${fileName}.ts`);
+        await fs.writeFile(dataURIpath, dataURIcode);
+        if (variant === def.variants[0]) {
+          await fs.writeFile(
+            path.join(target, `${noCodeFilename}.ts`),
+            dataURIcode
+          );
+        }
       }
       console.log("action shots rendered for", gameId, variant.desc);
     }

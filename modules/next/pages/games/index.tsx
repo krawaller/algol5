@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import Head from "next/head";
 
 import { pageActions } from "../../helpers";
-import { NewsListPage } from "../../../ui/src/components/NewsListPage";
+import { GameListPage } from "../../../ui/src/components/GameListPage";
 
 // TODO - metadata!
 
@@ -12,7 +12,7 @@ const IndexPage = () => {
       <Head>
         <title>Chessicals</title>
       </Head>
-      <NewsListPage actions={pageActions} />
+      <GameListPage actions={pageActions} />
     </Fragment>
   );
 };

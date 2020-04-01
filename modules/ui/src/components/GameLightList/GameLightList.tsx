@@ -15,6 +15,7 @@ const data: ArticleListProps["list"] = list.map(id => ({
   slug: id,
   title: meta[id].name,
   thumbdata: actionShots[id],
+  sort: id,
 }));
 
 type GameLightListProps = {

@@ -57,7 +57,12 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
             <Button disabled={isAboutModalOpen} onClick={openAboutModal}>
               About
             </Button>
-            <Link text="News" url="/news" actions={actions} asButton />
+            <Link
+              text="News"
+              url="/news"
+              actions={actions}
+              styleMode="asButton"
+            />
           </ButtonGroup>
           <Modal
             isOpen={isGameModalOpen}

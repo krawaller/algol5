@@ -2,15 +2,9 @@
  * Used in the Next app as the main Index page for the app
  */
 
-import React, {
-  FunctionComponent,
-  useCallback,
-  Fragment,
-  useEffect,
-} from "react";
-import { GameList } from "../GameList";
+import React, { FunctionComponent, Fragment, useEffect } from "react";
 import { PageActions, useModal } from "../../helpers";
-import { GameId, list } from "../../../../games/dist/list";
+import { list } from "../../../../games/dist/list";
 import { Modal } from "../Modal";
 import { Page } from "../Page";
 import base64TitlePic from "../../../dist/base64/title.png.proxy";
@@ -18,22 +12,15 @@ import styles from "./TitlePage.cssProxy";
 import { Button } from "../Button";
 import TitlePageAbout from "./TitlePage.About";
 import { ButtonGroup } from "../ButtonGroup";
-import { usePrefetchList } from "../../helpers/usePrefetchList";
 import { Link } from "../Link";
+import { GameLightList } from "../GameLightList";
 
 type TitlePageProps = {
   actions: PageActions;
 };
 
-const gameUrls = list.map(gameId => `/games/${gameId}`);
-
 export const TitlePage: FunctionComponent<TitlePageProps> = props => {
   const { actions } = props;
-  const navToGame = useCallback(
-    (gameId: GameId) => actions.navTo(`/games/${gameId}`),
-    [actions]
-  );
-  usePrefetchList(actions, gameUrls);
   useEffect(() => {
     actions.prefetch("/news");
   }, []);
@@ -69,7 +56,7 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
             onClose={closeGameModal}
             title="Pick your poison"
           >
-            <GameList callback={navToGame} />
+            <GameLightList actions={actions} />
           </Modal>
           <Modal
             isOpen={isAboutModalOpen}

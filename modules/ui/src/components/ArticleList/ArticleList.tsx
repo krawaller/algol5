@@ -7,7 +7,7 @@ export interface ArticleListActions {
   navTo: (id: string) => void;
 }
 
-type ArticleListProps = {
+export type ArticleListProps = {
   actions: ArticleListActions;
   prefix: string;
   list: {

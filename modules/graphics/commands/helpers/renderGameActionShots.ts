@@ -33,6 +33,7 @@ export const renderGameActionShots = async (gameId: string) => {
           definitionStrategy: "inline",
         });
         const fileName = `${gameId}_${variant.code}${active ? "_active" : ""}`;
+        const noCodeFilename = `${gameId}${active ? "_active" : ""}`;
         // Write SVG pic
         const svgPath = path.join(target, `${fileName}.svg`);
         await fs.writeFile(svgPath, svgPic);
@@ -49,6 +50,12 @@ export const renderGameActionShots = async (gameId: string) => {
         const dataURIcode = `export const dataURI = \`${dataURI}\`;\n`;
         const dataURIpath = path.join(target, `${fileName}.ts`);
         await fs.writeFile(dataURIpath, dataURIcode);
+        if (variant === def.variants[0]) {
+          await fs.writeFile(
+            path.join(target, `${noCodeFilename}.ts`),
+            dataURIcode
+          );
+        }
       }
       console.log("action shots rendered for", gameId, variant.desc);
     }

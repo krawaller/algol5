@@ -1,5 +1,6 @@
-import { TokenHandler } from "./_handler";
 import lib from "../../../games/dist/lib";
+import { TokenHandler } from "./_handler";
+import { intlink } from "./intlink";
 
 // Takes an GAME token and turns it into clickable link (unless the current game)
 
@@ -20,5 +21,11 @@ export const game: TokenHandler = opts => {
   const name = def.meta.name;
   if (gameId === thisGameId)
     return `<span class="md-game-selfref">${name}</span>`;
-  return `<a class="md-game-link" href="/games/${gameId}" data-gameId="${gameId}">${name}</a>`;
+  return intlink({
+    ...opts,
+    args: {
+      text: name,
+      url: `/games/${gameId}`,
+    },
+  });
 };

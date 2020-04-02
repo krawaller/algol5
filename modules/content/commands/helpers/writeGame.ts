@@ -31,9 +31,7 @@ export const writeGame = async (gameId: GameId) => {
           `\n\nRelated news items:\n\n` +
           newsItems
             .map(
-              ({ slug, title }) =>
-                // TODO - convert to token?
-                `- <a class="md-news-link" href="/news/${slug}" data-newsslug="${slug}">${title}</a>`
+              ({ slug, title }) => `- {INTLINK:text=${title},url=/news/${slug}}`
             )
             .join("\n");
       }

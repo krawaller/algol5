@@ -10,6 +10,7 @@ import { plr } from "./plr";
 import { cmnd } from "./cmnd";
 import { endgame } from "./endgame";
 import { setup } from "./setup";
+import { intlink } from "./intlink";
 
 export const tokenHandlers = {
   arr,
@@ -24,4 +25,5 @@ export const tokenHandlers = {
   cmnd,
   endgame,
   setup,
+  intlink,
 };

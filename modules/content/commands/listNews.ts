@@ -87,28 +87,3 @@ fs.writeFileSync(
   path.join(__dirname, "../dist/allNews.ts"),
   prettier.format(fullList, { filepath: "foo.ts" })
 );
-
-(async () => {
-  // game2news mapper
-  const file = await import(newsListPath);
-  const list: AlgolArticleData[] = file.newsList;
-  const game2news: Record<string, string[]> = {};
-  const newsWithGames: Record<string, { slug: string; title: string }> = {};
-  for (const item of list) {
-    for (const game of item.games) {
-      newsWithGames[item.id] = {
-        slug: item.slug,
-        title: item.title,
-      };
-      game2news[game] = (game2news[game] || []).concat(item.id);
-    }
-  }
-  const mapperContent = `
-    export const games2news = ${JSON.stringify(game2news)};
-    export const newsWithGames = ${JSON.stringify(newsWithGames)};
-  `;
-  fs.writeFileSync(
-    path.join(__dirname, "../dist/games2news.ts"),
-    prettier.format(mapperContent, { filepath: "foo.ts" })
-  );
-})();

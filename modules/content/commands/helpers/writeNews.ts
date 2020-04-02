@@ -21,7 +21,6 @@ export const writeNews = (date: string) => {
     "title",
     "id",
     "mainImage",
-    "games",
   ]) {
     if (!yaml[required]) {
       throw new Error(
@@ -51,15 +50,6 @@ export const writeNews = (date: string) => {
     );
   }
 
-  if (!Array.isArray(yaml.games)) {
-    throw new Error(`News ${date} has non-array games data`);
-  }
-  for (const gameId of yaml.games) {
-    if (!list.includes(gameId as GameId)) {
-      throw new Error(`News ${date} connects to unknown game ${gameId}`);
-    }
-  }
-
   const { html, preloads } = md2html({ md, picSourcePath, picRefPath });
   writeFileSync(path.join(out, `news.html`), html);
 
@@ -76,7 +66,6 @@ export const writeNews = (date: string) => {
     updated: \`${yaml.updated || date}\`,
     preloads: ${JSON.stringify(preloads)},
     mainImage: \`/images/news/${date}/${yaml.mainImage}\`,
-    games: ${JSON.stringify(yaml.games)},
     thumbdata: \`${thumbdata}\`,
 };
 `;

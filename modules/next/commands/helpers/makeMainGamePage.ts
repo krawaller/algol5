@@ -1,3 +1,4 @@
+import prettier from "prettier";
 import { punctuate } from "../../../common";
 import { FullDefAnon } from "../../../types";
 
@@ -18,10 +19,8 @@ import { pageActions } from "../../../helpers";
 import graphics from "../../../../graphics/dist/svgDataURIs/${gameId}";
 import meta from "../../../../games/dist/meta/${gameId}";
 import demo from "../../../../battle/dist/demos/${gameId}";
-import { about } from "../../../../content/dist/games/${gameId}/about";
 import { rules } from "../../../../content/dist/games/${gameId}/rules";
 import { preloads } from "../../../../content/dist/games/${gameId}/preloads";
-const content = { about, rules };
 
 export const Game = () => {
   const preloadTags = preloads.map(url => <link key={url} rel="preload" as="image" href={url} /> )
@@ -37,7 +36,7 @@ export const Game = () => {
       </Head>
       <GamePage
         api={api}
-        content={content}
+        rules={rules}
         graphics={graphics}
         meta={meta}
         demo={demo}
@@ -49,5 +48,5 @@ export const Game = () => {
 
 export default Game;
 `;
-  return content;
+  return prettier.format(content, { filepath: "foo.ts" });
 };

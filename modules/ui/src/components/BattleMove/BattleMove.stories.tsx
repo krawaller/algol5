@@ -8,6 +8,7 @@ import { BattleMove, BattleMoveActions } from ".";
 
 const actions: BattleMoveActions = {
   navTo: url => console.log("Nav to", url),
+  prefetch: url => console.log("Prefetch", url),
   undoBattleCommand: () => console.log("undo"),
   endTurn: () => console.log("endTurn"),
   command: (cmnd: string) => console.log("cmnd", cmnd),
@@ -20,7 +21,7 @@ storiesOf("BattleMove", module).add("A common BattleMove component", () => {
   const ui = api.newBattle().initialUI;
   return (
     <div style={{ padding: 10, height: 400, position: "relative" }}>
-      <BattleMove actions={actions} content={{ rules }} ui={ui} />
+      <BattleMove actions={actions} rules={rules} ui={ui} />
     </div>
   );
 });

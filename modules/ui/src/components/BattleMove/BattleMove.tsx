@@ -16,23 +16,20 @@ export interface BattleMoveActions {
   endTurn: () => void;
   command: (cmnd: string) => void;
   navTo: (url: string) => void;
-}
-
-export interface BattleMoveContent {
-  rules: {
-    html: string;
-    updated: string;
-  };
+  prefetch: (url: string) => void;
 }
 
 type BattleMoveProps = {
   ui: AlgolBattleUI;
   actions: BattleMoveActions;
-  content: BattleMoveContent;
+  rules: {
+    html: string;
+    updated: string;
+  };
 };
 
 export const BattleMove: FunctionComponent<BattleMoveProps> = props => {
-  const { ui, content, actions } = props;
+  const { ui, rules, actions } = props;
   const [showHelp, setShowHelp] = useState(false);
   const [isRulesModalOpen, openRulesModal, closeRulesModal] = useModal();
   return (
@@ -71,9 +68,9 @@ export const BattleMove: FunctionComponent<BattleMoveProps> = props => {
         isOpen={isRulesModalOpen}
         onClose={closeRulesModal}
         title={"How to play"}
-        subtitle={`updated ${content.rules.updated}`}
+        subtitle={`updated ${rules.updated}`}
       >
-        <Markdown actions={actions} html={content.rules.html} />
+        <Markdown actions={actions} html={rules.html} />
       </Modal>
     </>
   );

@@ -46,5 +46,5 @@ export const makeNewsPage = (data: AlgolArticleData) => {
     path.join(out, "index.tsx"),
     prettier.format(content, { filepath: "foo.ts" })
   );
-  console.log("Made news page for", data.title);
+  console.log("Made news page for", data.id);
 };

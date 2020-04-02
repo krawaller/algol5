@@ -13,43 +13,31 @@ import { Button } from "../Button";
 import { NewLocalSession, NewLocalSessionActions } from "../NewLocalSession";
 import { useModal } from "../../helpers";
 import { ButtonGroup } from "../ButtonGroup";
-import { Markdown } from "../Markdown";
+import { gameSlug } from "../../../../common";
+import { Link } from "../Link";
 
 export interface GameLandingActions {
+  navTo: (path: string) => void;
+  prefetch: (path: string) => void;
   newLocalBattle: (code: string) => void;
   loadLocalSession: (session: AlgolLocalBattle) => void;
-  navTo: (path: string) => void;
   toBattleLobby: () => void;
   importSession: (str: string) => void;
   continuePreviousSession: () => void;
   reportError: AlgolErrorReporter;
 }
 
-type GameLandingHTML = {
-  about: {
-    html: string;
-    updated: string;
-  };
-  rules: {
-    html: string;
-    updated: string;
-  };
-};
-
 type GameLandingProps = {
   meta: AlgolMeta<AlgolGameBlobAnon>;
   actions: GameLandingActions;
   graphics: AlgolGameGraphics;
   hasPrevious: boolean;
-  content: GameLandingHTML;
   variants: AlgolVariantAnon[];
 };
 
 export const GameLanding: FunctionComponent<GameLandingProps> = props => {
-  const { meta, actions, graphics, hasPrevious, content, variants } = props;
+  const { meta, actions, graphics, hasPrevious, variants } = props;
   const [isSessionModalOpen, openSessionModal, closeSessionModal] = useModal();
-  const [isRulesModalOpen, openRulesModal, closeRulesModal] = useModal();
-  const [isAboutModalOpen, openAboutModal, closeAboutModal] = useModal();
 
   // hack actions to close game modal when chosen a game
   const localSessionActions = useMemo(
@@ -83,10 +71,18 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         <Button disabled="Online play will come in a future version!">
           Remote
         </Button>
-        <Button disabled={isAboutModalOpen} onClick={openAboutModal}>
-          About
-        </Button>
-        <Button onClick={openRulesModal}>Rules</Button>
+        <Link
+          text="About"
+          url={`/games/${gameSlug(meta)}/about`}
+          actions={actions}
+          styleMode="asButton"
+        />
+        <Link
+          text="Rules"
+          url={`/games/${gameSlug(meta)}/rules`}
+          actions={actions}
+          styleMode="asButton"
+        />
       </ButtonGroup>
       <div className={styles.gameLandingQuote}>{meta.tagline}</div>
       <Modal
@@ -101,22 +97,6 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
           hasPrevious={hasPrevious}
           variants={variants}
         />
-      </Modal>
-      <Modal
-        isOpen={isAboutModalOpen}
-        onClose={closeAboutModal}
-        title={"About the game"}
-        subtitle={`updated ${content.about.updated}`}
-      >
-        <Markdown actions={actions} html={content.about.html} />
-      </Modal>
-      <Modal
-        isOpen={isRulesModalOpen}
-        onClose={closeRulesModal}
-        title={"How to play"}
-        subtitle={`updated ${content.rules.updated}`}
-      >
-        <Markdown actions={actions} html={content.rules.html} />
       </Modal>
     </Fragment>
   );

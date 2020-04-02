@@ -1,7 +1,7 @@
 #!/bin/bash 
 gameId="$1"
 what="$2"
-opts=("analyze" "compile" "graphics" "demo" "content" "pics")
+opts=("analyze" "compile" "graphics" "demo" "content" "pics", "pages")
 allOpts=$( IFS=/ ; echo "<${opts[*]}>" )
 
 if [ "$gameId" = "" ]; then
@@ -41,5 +41,10 @@ else
   if [ "$what" = "pics" ] || [ "$what" = "" ]; then
     cd ../next;
     npm run importGameImages "$gameId";
+  fi
+
+    if [ "$what" = "pages" ] || [ "$what" = "" ]; then
+    cd ../next;
+    npm run makeGamePages "$gameId";
   fi
 fi

@@ -15,22 +15,13 @@ storiesOf("GameLanding", module).add("init game", () => {
     newLocalBattle: (code: string) => console.log("new battle", code),
     loadLocalSession: save => console.log("loading save", save),
     navTo: path => console.log("navigating to", path),
+    prefetch: path => console.log("prefetch", path),
     toBattleLobby: () => console.log("to battle lobby"),
     importSession: (str: string) => {
       console.log("Import", str);
     },
     continuePreviousSession: () => console.log("previous"),
     reportError: err => console.log("error", err),
-  };
-  const content = {
-    about: {
-      updated: "2020-02-03",
-      html: "text about " + gameId + " would be here",
-    },
-    rules: {
-      updated: "2020-02-03",
-      html: "rules for " + gameId + " would be here",
-    },
   };
   const variants: AlgolVariantAnon[] = [
     {
@@ -43,7 +34,6 @@ storiesOf("GameLanding", module).add("init game", () => {
   ];
   return (
     <GameLanding
-      content={content}
       key={gameId}
       meta={meta[gameId]}
       graphics={dataURIs[gameId]}

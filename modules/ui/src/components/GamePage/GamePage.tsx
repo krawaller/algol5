@@ -23,20 +23,8 @@ import { PageActions } from "../../helpers";
 import { useUI } from "./GamePage.useUI";
 import { useBattle } from "./GamePage.useBattle";
 import { Breadcrumbs, Crumb } from "../Breadcrumbs";
-import { BattleHelp } from "../BattleHelp";
 import { SessionViewSelector } from "../SessionViewSelector";
 import { BattleMove } from "../BattleMove";
-
-type GamePageHTML = {
-  about: {
-    html: string;
-    updated: string;
-  };
-  rules: {
-    html: string;
-    updated: string;
-  };
-};
 
 type GamePageProps = {
   api: AlgolStaticGameAPI;
@@ -44,11 +32,14 @@ type GamePageProps = {
   meta: AlgolMeta<AlgolGameBlobAnon>;
   demo: AlgolDemo;
   actions: PageActions;
-  content: GamePageHTML;
+  rules: {
+    html: string;
+    updated: string;
+  };
 };
 
 export const GamePage = (props: GamePageProps) => {
-  const { api, graphics, meta, demo, actions: pageActions, content } = props;
+  const { api, graphics, meta, demo, actions: pageActions, rules } = props;
   const [
     { battle, frame, mode, session, hasPrevious },
     battleActions,
@@ -66,9 +57,12 @@ export const GamePage = (props: GamePageProps) => {
     [pageActions, battleActions]
   );
   const ui = useUI(api, battle, frame, demo, mode);
-  const frameCount = battle ? battle.history.length - 1 : 0;
 
   const crumbs: Crumb[] = [
+    {
+      content: "Games",
+      url: "/games",
+    },
     {
       content: meta.name,
       onClick: mode !== "gamelobby" ? actions.toGameLobby : undefined,
@@ -102,7 +96,7 @@ export const GamePage = (props: GamePageProps) => {
     );
   } else if (mode === "playing") {
     // We are actively playing an ongoing battle
-    body = <BattleMove actions={actions} ui={ui} content={content} />;
+    body = <BattleMove actions={actions} ui={ui} rules={rules} />;
   } else {
     // No battle active, we're just at the game landing page
     body = (
@@ -111,7 +105,6 @@ export const GamePage = (props: GamePageProps) => {
         actions={actions}
         graphics={graphics}
         hasPrevious={hasPrevious}
-        content={content}
         variants={api.variants}
       />
     );

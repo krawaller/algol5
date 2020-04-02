@@ -10,15 +10,11 @@ type ArticlePageProps = {
   actions: PageActions;
   title: string;
   html: string;
+  crumbs: Crumb[];
 };
 
 export const ArticlePage: FunctionComponent<ArticlePageProps> = props => {
-  const { actions, html, title } = props;
-  const crumbs: Crumb[] = [
-    // TODO - generalize?
-    { content: "News", url: "/news" },
-    { content: title },
-  ];
+  const { actions, html, title, crumbs } = props;
   const body = (
     <ScrollBox>
       <h3 className={css.articlePageTitle}>{title}</h3>

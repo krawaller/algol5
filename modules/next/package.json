@@ -1,7 +1,7 @@
 {
   "scripts": {
     "robot": "npm run getStatic && npm run makeGamePages && npm run makeNewsPages && npm run build && npm run export",
-    "clean": "rm -rf dist; mkdir dist; rm -rf .next; rm -rf public; rm -rf ./pages/games; rm -rf ./pages/news/*/",
+    "clean": "rm -rf dist; mkdir dist; rm -rf .next; rm -rf public; rm -rf ./pages/games/*/; rm -rf ./pages/news/*/",
     "makeGamePages": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/next/commands/makeGamePages",
     "makeNewsPages": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/next/commands/makeNewsPages",
     "getStatic": "rm -rf ./public; cp -r ../ui/dist/static ./public",

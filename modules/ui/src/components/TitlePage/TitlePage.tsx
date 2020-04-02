@@ -37,7 +37,7 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
               text="Play a game!"
               url="/games"
               actions={actions}
-              styleMode="asButton"
+              styleMode="asBigButton"
             />
             <Button disabled={isAboutModalOpen} onClick={openAboutModal}>
               About

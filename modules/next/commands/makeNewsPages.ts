@@ -19,6 +19,7 @@ import { news } from "../../../../content/dist/news/${data.id}/news";
 
 export const Article = () => {
   const title = \`${data.id} - ${data.title}\`;
+  const crumbs = [{ content: "News", url: "/news" }, { content: "${data.title}" }];
   return (
     <Fragment>
       <Head>
@@ -29,6 +30,7 @@ export const Article = () => {
         <title>{title}</title>
       </Head>
       <ArticlePage
+        crumbs={crumbs}
         title={title}
         actions={pageActions}
         html={news}

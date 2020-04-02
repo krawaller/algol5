@@ -17,9 +17,15 @@ storiesOf("ArticlePage", module).add("A common ArticlePage component", () => {
     prefetch: (url: string) => console.log("Prefetch", url),
   };
   const title = `${data.id} - ${data.title}`;
+  const crumbs = [{ content: "News", url: "/news" }, { content: title }];
   return (
     <div style={{ padding: 10 }}>
-      <ArticlePage actions={actions} title={title} html={html} />
+      <ArticlePage
+        crumbs={crumbs}
+        actions={actions}
+        title={title}
+        html={html}
+      />
     </div>
   );
 });

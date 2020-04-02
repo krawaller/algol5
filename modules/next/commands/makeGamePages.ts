@@ -1,10 +1,10 @@
 import fs from "fs-extra";
 import path from "path";
 import lib from "../../games/dist/lib";
-import { punctuate } from "../../common";
+import { punctuate, gameSlug } from "../../common";
 
 const out = path.join(__dirname, "../pages/games");
-fs.emptyDirSync(out);
+fs.ensureDirSync(out);
 
 for (const [gameId, def] of Object.entries(lib)) {
   const metaDesc = `Play the abstract board game ${
@@ -53,7 +53,7 @@ export const Game = () => {
 
 export default Game;
 `;
-  fs.emptyDirSync(path.join(out, gameId));
-  fs.writeFileSync(path.join(out, gameId, "index.tsx"), content);
+  fs.emptyDirSync(path.join(out, gameSlug(def.meta)));
+  fs.writeFileSync(path.join(out, gameSlug(def.meta), "index.tsx"), content);
   console.log("Created page for", gameId);
 }

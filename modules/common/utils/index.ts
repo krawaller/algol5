@@ -7,3 +7,4 @@ export * from "./find";
 export * from "./stepOptions";
 export * from "./rulesetNames";
 export * from "./punctuate";
+export * from "./gameSlug";

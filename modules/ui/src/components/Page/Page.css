@@ -10,6 +10,11 @@ body,
   background-color: #9f9382;
 }
 
+body.sb-show-main #root {
+  /* for Storybook */
+  background-color: white;
+}
+
 .pageContainer {
   width: 100%;
   height: 100%;

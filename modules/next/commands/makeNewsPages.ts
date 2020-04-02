@@ -19,15 +19,6 @@ import { news } from "../../../../content/dist/news/${data.id}/news";
 
 export const Article = () => {
   const title = \`${data.id} - ${data.title}\`;
-  ${
-    data.games.length
-      ? `useEffect(() => {
-    ${data.games
-      .map(gameId => `pageActions.prefetch('/games/${gameId}')`)
-      .join("; ")}
-  }, [])`
-      : ""
-  }
   return (
     <Fragment>
       <Head>

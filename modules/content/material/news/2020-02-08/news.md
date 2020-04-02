@@ -5,7 +5,6 @@ blurb: "The Chessicals beta is publically available"
 thumbnail: "testthumb.png"
 slug: "it_has_begun"
 mainImage: "beer.jpg"
-games: []
 ---
 
 {ME} is alive! Skål!

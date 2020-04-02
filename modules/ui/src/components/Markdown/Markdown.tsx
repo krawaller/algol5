@@ -1,8 +1,14 @@
-import React, { FunctionComponent, MouseEvent, useCallback } from "react";
+import React, {
+  FunctionComponent,
+  MouseEvent,
+  useCallback,
+  useEffect,
+} from "react";
 import css from "./Markdown.cssProxy";
 
 export interface MarkdownActions {
   navTo: (path: string) => void;
+  prefetch: (path: string) => void;
 }
 
 type MarkdownProps = {
@@ -10,8 +16,21 @@ type MarkdownProps = {
   html: string;
 };
 
+const linksFinder = /data-algollink="[^"]+"/g;
+const urlExtracter = /"([^"]+)"/;
+
 export const Markdown: FunctionComponent<MarkdownProps> = props => {
   const { actions, html } = props;
+  useEffect(() => {
+    if (html && html.match) {
+      for (const hit of html.match(linksFinder) || []) {
+        const [, url] = hit.match(urlExtracter) || [];
+        if (url) {
+          actions.prefetch(url);
+        }
+      }
+    }
+  }, [html, actions.prefetch]);
   const handleClick = useCallback(
     (e: MouseEvent) => {
       if (e.target) {

@@ -12,7 +12,7 @@ import { Button } from "../Button";
 type LinkProps = {
   actions?: PageActions;
   url: string;
-  styleMode?: "asButton" | "link" | "none";
+  styleMode?: "asButton" | "asBigButton" | "link" | "none";
   text?: string;
 };
 
@@ -30,8 +30,8 @@ export const Link: FunctionComponent<LinkProps> = props => {
     [url, actions]
   );
   const body =
-    styleMode === "asButton" ? (
-      <Button text={text} onClick={handler}>
+    styleMode === "asButton" || styleMode === "asBigButton" ? (
+      <Button big={styleMode === "asBigButton"} text={text} onClick={handler}>
         {children}
       </Button>
     ) : (
@@ -39,7 +39,10 @@ export const Link: FunctionComponent<LinkProps> = props => {
     );
   const classes = classNames({
     [css.link]: styleMode === "link",
-    [css.linkNaked]: styleMode === "none" || styleMode === "asButton",
+    [css.linkNaked]:
+      styleMode === "none" ||
+      styleMode === "asButton" ||
+      styleMode === "asBigButton",
   });
   // external link
   if (url[0] === "h") {

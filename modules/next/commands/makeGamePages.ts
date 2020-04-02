@@ -4,7 +4,7 @@ import lib from "../../games/dist/lib";
 import { punctuate } from "../../common";
 
 const out = path.join(__dirname, "../pages/games");
-fs.emptyDirSync(out);
+fs.ensureDirSync(out);
 
 for (const [gameId, def] of Object.entries(lib)) {
   const metaDesc = `Play the abstract board game ${

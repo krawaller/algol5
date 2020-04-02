@@ -7,6 +7,7 @@ body,
   justify-content: center;
   align-items: center;
   height: 100%;
+  background-color: #9f9382;
 }
 
 .pageContainer {
@@ -46,7 +47,7 @@ body,
   min-height: 1px; /* otherwise flex-items uses content size as min-height  */
   padding: 10px;
   padding-top: 20px;
-  background-color: blanchedalmond;
+  background-color: white;
 }
 
 .pageContainer img {

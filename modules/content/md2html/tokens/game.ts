@@ -1,4 +1,5 @@
 import lib from "../../../games/dist/lib";
+import { gameSlug } from "../../../common";
 import { TokenHandler } from "./_handler";
 import { intlink } from "./intlink";
 
@@ -25,7 +26,7 @@ export const game: TokenHandler = opts => {
     ...opts,
     args: {
       text: name,
-      url: `/games/${gameId}`,
+      url: `/games/${gameSlug(def.meta)}`,
     },
   });
 };

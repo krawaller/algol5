@@ -7,12 +7,13 @@ import {
   ArticleListProps,
   ArticleListActions,
 } from "../ArticleList";
+import { gameSlug } from "../../../../common";
 
 const data: ArticleListProps["list"] = list.map(id => ({
   id,
   blurb: meta[id].tagline,
   preloads: [],
-  slug: id,
+  slug: gameSlug(meta[id]),
   title: meta[id].name,
   thumbdata: actionShots[id],
   sort: id,

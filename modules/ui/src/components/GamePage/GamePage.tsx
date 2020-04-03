@@ -13,6 +13,7 @@ import {
   AlgolErrorReportLevel,
   AlgolGameBlobAnon,
 } from "../../../../types";
+import css from "./GamePage.cssProxy";
 
 import { Board } from "../Board";
 import { Page } from "../Page";
@@ -118,21 +119,25 @@ export const GamePage = (props: GamePageProps) => {
     <Page
       errorReport={errorReport}
       top={
-        <Board
-          callback={actions.mark}
-          graphics={graphics}
-          units={ui.board.units}
-          marks={ui.board.marks}
-          potentialMarks={ui.board.potentialMarks}
-          anim={ui.board.anim}
-          active={mode === "playing" && !battle!.gameEndedBy}
-          name={mode !== "gamelobby" ? battle!.variant.board : "basic"}
-        />
+        <>
+          <Board
+            callback={actions.mark}
+            graphics={graphics}
+            units={ui.board.units}
+            marks={ui.board.marks}
+            potentialMarks={ui.board.potentialMarks}
+            anim={ui.board.anim}
+            active={mode === "playing" && !battle!.gameEndedBy}
+            name={mode !== "gamelobby" ? battle!.variant.board : "basic"}
+          />{" "}
+          <div className={css.gamePageViewSelectorContainer}>
+            {viewSelector}
+          </div>
+        </>
       }
       strip={
         <>
           <Breadcrumbs crumbs={crumbs} actions={actions} />
-          {viewSelector}
         </>
       }
       body={body}

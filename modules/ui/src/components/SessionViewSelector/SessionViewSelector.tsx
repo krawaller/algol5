@@ -1,6 +1,4 @@
 import React, { FunctionComponent, useCallback } from "react";
-import { ButtonGroup } from "../ButtonGroup";
-import { Button } from "../Button";
 import { TabBar } from "../TabBar";
 import css from "./SessionViewSelector.cssProxy";
 

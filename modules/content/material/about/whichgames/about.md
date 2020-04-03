@@ -1,6 +1,6 @@
 ---
 id: "whichgames"
-title: "What characterises Chessicals?"
+title: "What's a chessical?"
 slug: "supported_games"
 blurb: "What games does the Chessicals engine support?"
 thumbnail: "needlethumb.jpg"

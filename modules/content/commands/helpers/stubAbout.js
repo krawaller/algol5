@@ -21,6 +21,7 @@ slug: "add_your_unique_never_changing_url_slug_here"
 blurb: "Add short description here!"
 thumbnail: "picToUseAsThumbnail.png"
 mainImage: "some_picture.jpg"
+sort: 42
 ---
 
 Come one, come all, read all about ${id}! :D

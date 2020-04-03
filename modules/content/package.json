@@ -7,6 +7,7 @@
     "stubNews": "node ./commands/stubNews",
     "stubAbout": "node ./commands/stubAbout",
     "writeNews": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeNews.ts",
+    "writeAbout": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeAbout.ts",
     "listNews": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/listNews.ts"
   },
   "dependencies": {

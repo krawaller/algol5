@@ -7,7 +7,7 @@ const stubNews = date => {
     throw new Error(`News ${date} already exists!`);
   } else if (!date || !date.match(/2[0-9]{3}-[0-9]{2}-[0-9]{2}/)) {
     throw new Error(
-      `Illegal news date ${date}, should be formatted as yyyy-mm-dd`
+      `Illegal news date "${date}", should be formatted as yyyy-mm-dd`
     );
   } else {
     fs.ensureDirSync(out);

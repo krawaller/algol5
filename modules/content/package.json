@@ -5,6 +5,7 @@
     "writeGame": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeGame.ts",
     "stubGame": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/stubGame.ts",
     "stubNews": "node ./commands/stubNews",
+    "stubAbout": "node ./commands/stubAbout",
     "writeNews": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeNews.ts",
     "listNews": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/listNews.ts"
   },

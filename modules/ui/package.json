@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "robot": "npm run setupStatic; npm run harvestCss; npm run importGameImages; npm run importNewsImages; ; npm run importAboutImages; npm run encodeImages;",
+    "robot": "npm run setupStatic; npm run harvestCss; npm run importGameImages; npm run importNewsImages; npm run importAboutImages; npm run encodeImages;",
     "clean": "rm -rf dist; mkdir dist; rm -rf node_modules/.cache/storybook",
     "harvestCss": "node ./commands/harvestCss",
     "setupStatic": "rm -rf dist; mkdir dist; mkdir dist/static; cp -a ./public/. ./dist/static/.;",

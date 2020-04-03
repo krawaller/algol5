@@ -27,8 +27,8 @@ export const Page: FunctionComponent<PageProps> = props => {
   }, [errorReport]);
   return (
     <Div100vh className={css.pageContainer}>
-      <div className={css.pageTop}>{top}</div>
       <div className={css.pageStrip}>{strip}</div>
+      <div className={css.pageTop}>{top}</div>
       <div className={css.pageBody}>{body}</div>
     </Div100vh>
   );

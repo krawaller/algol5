@@ -2,7 +2,7 @@ import prettier from "prettier";
 import { punctuate } from "../../../common";
 import { FullDefAnon } from "../../../types";
 
-export const makeMainGamePage = (def: FullDefAnon) => {
+export const makeGameMainPage = (def: FullDefAnon) => {
   const gameId = def.meta.id;
   const metaDesc = `Play the abstract board game ${
     def.meta.name

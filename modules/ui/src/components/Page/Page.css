@@ -32,6 +32,7 @@ body.sb-show-main #root {
 .pageTop {
   background-color: saddlebrown; /* should be same as board border */
   flex-shrink: 0;
+  position: relative;
 }
 
 .pageStrip {

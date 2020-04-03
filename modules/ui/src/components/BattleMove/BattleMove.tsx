@@ -62,7 +62,7 @@ export const BattleMove: FunctionComponent<BattleMoveProps> = props => {
         </Button>
       </div>
       <div className={css.battleMoveRulesButton}>
-        <Button onClick={openRulesModal}>See full rules</Button>
+        <Button onClick={openRulesModal}>Peek rules</Button>
       </div>
       <Modal
         isOpen={isRulesModalOpen}

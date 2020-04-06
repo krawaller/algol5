@@ -4,31 +4,18 @@ import { select } from "@storybook/addon-knobs";
 
 import { GamePage } from ".";
 import { GameId, list } from "../../../../games/dist/list";
-import games from "../../../../logic/dist";
-import meta from "../../../../games/dist/meta";
-import demos from "../../../../battle/dist/allDemos";
 
-import dataURIs from "../../../../graphics/dist/svgDataURIs";
-import { makeStaticGameAPI } from "../../../../battle/src";
+import allGamePayloads from "../../../dist/payloads";
 
 storiesOf("GamePage", module).add(
   "Used for individual game pages in the app",
   () => {
     const gameId = select("Game", list, list[0]) as GameId;
-    const api = makeStaticGameAPI(games[gameId]);
-    const graphics = dataURIs[gameId];
-    const rules = {
-      updated: "2020-02-03",
-      html: "rules for " + gameId + " would be here",
-    };
+    const payload = allGamePayloads[gameId];
     return (
       <GamePage
         key={gameId}
-        api={api}
-        graphics={graphics}
-        meta={meta[gameId]}
-        demo={demos[gameId]}
-        rules={rules}
+        gamePayload={payload}
         actions={{
           navTo: str => console.log("nav to", str),
           prefetch: str => console.log("prefetch", str),

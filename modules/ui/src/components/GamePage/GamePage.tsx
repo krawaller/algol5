@@ -4,14 +4,10 @@
 
 import React, { useMemo, ReactNode, useState } from "react";
 import {
-  AlgolStaticGameAPI,
-  AlgolGameGraphics,
-  AlgolMeta,
-  AlgolDemo,
   AlgolError,
   AlgolErrorReport,
   AlgolErrorReportLevel,
-  AlgolGameBlobAnon,
+  AlgolGamePayload,
 } from "../../../../types";
 import css from "./GamePage.cssProxy";
 
@@ -28,19 +24,13 @@ import { SessionViewSelector } from "../SessionViewSelector";
 import { BattleMove } from "../BattleMove";
 
 type GamePageProps = {
-  api: AlgolStaticGameAPI;
-  graphics: AlgolGameGraphics;
-  meta: AlgolMeta<AlgolGameBlobAnon>;
-  demo: AlgolDemo;
   actions: PageActions;
-  rules: {
-    html: string;
-    updated: string;
-  };
+  gamePayload: AlgolGamePayload;
 };
 
 export const GamePage = (props: GamePageProps) => {
-  const { api, graphics, meta, demo, actions: pageActions, rules } = props;
+  const { actions: pageActions, gamePayload } = props;
+  const { api, graphics, meta, demo, rules } = gamePayload;
   const [
     { battle, frame, mode, session, hasPrevious },
     battleActions,

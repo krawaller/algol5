@@ -13,7 +13,7 @@ export const makeGameMainPage = (def: FullDefAnon) => {
 import React, { Fragment } from "react";
 
 import Head from "next/head";
-import payload from "../../../../ui/dist/payloads/${gameId}";
+import payload from "../../../../payloads/dist/games/${gameId}";
 import { GamePage } from "../../../../ui/src/components/GamePage";
 import { pageActions } from "../../../helpers";
 

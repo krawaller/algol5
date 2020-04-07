@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "robot": "npm run makeGamePayloads; npm run exportAllGamePayloads",
+    "clean": "rm -rf dist",
+    "makeGamePayloads": "node ./commands/makeGamePayloads",
+    "exportAllGamePayloads": "node ./commands/exportAllGamePayloads"
+  }
+}

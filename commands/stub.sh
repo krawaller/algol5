@@ -26,7 +26,7 @@ cd ../content;
 npm run stubGame "$gameId"
 npm run writeGame "$gameId"
 
-cd ../ui
+cd ../payloads;
 npm run makeGamePayloads "$gameId"
 npm run exportAllGamePayloads
 

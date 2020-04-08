@@ -1,7 +1,7 @@
 const fs = require("fs-extra");
 const path = require("path");
 
-const payloadFolder = path.join(__dirname, "../../dist/payloads");
+const gamePayloadsFolder = path.join(__dirname, "../../dist/games");
 
 module.exports = gameId => {
   const content = `
@@ -25,7 +25,7 @@ export const payload: AlgolGamePayload = {
 };
 export default payload;
 `;
-  const outFolder = path.join(payloadFolder, gameId);
+  const outFolder = path.join(gamePayloadsFolder, gameId);
   fs.ensureDirSync(outFolder);
   const out = path.join(outFolder, "index.ts");
   fs.writeFileSync(out, content);

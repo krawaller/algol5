@@ -2,13 +2,13 @@
 id: "2020-02-08"
 title: "It has begun"
 blurb: "The Chessicals beta is publically available"
-thumbnail: "testthumb.png"
+thumbnail: "wip-thumb.png"
 slug: "it_has_begun"
-mainImage: "beer.jpg"
+mainImage: "wip-big.png"
 ---
 
 {ME} is alive! Skål!
 
-{PIC:name=beer.jpg,credurl=http://www.google.com,cred=Photo by someone,title=Beer!}
+{PIC:name=wip-big.png,cred=Art by David,title=Work in progress}
 
 (WIP)

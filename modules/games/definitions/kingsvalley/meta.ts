@@ -7,6 +7,7 @@ const kingsvalleyMeta: KingsvalleyDefinition["meta"] = {
   tagline: "Slide your king into the tomb before your opponent",
   source: "http://www.logygames.com/english/kingsvalley.html",
   code: "O",
+  slug: "kings_valley",
 };
 
 export default kingsvalleyMeta;

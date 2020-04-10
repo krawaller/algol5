@@ -6,7 +6,8 @@ const threemusketeersMeta: ThreemusketeersDefinition["meta"] = {
   name: "Three Musketeers",
   source: "http://www.di.fc.ul.pt/~jpn/gv/3musketeers.htm",
   tagline: "Will the three musketeers escape the soldiers out to get them?",
-  tags: ["asymmetric", "formation"]
+  tags: ["asymmetric", "formation"],
+  slug: "three_musketeers",
 };
 
 export default threemusketeersMeta;

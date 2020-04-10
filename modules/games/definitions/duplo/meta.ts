@@ -9,7 +9,7 @@ const duploMeta: DuploDefinition["meta"] = {
   year: 2002,
   tags: [],
   tagline: "A fierce battle of extending lines",
-  performance: { canAlwaysEnd: {} }
+  slug: "duplo",
 };
 
 export default duploMeta;

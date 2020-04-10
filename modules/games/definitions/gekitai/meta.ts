@@ -6,7 +6,8 @@ const gekitaiMeta: GekitaiDefinition["meta"] = {
   tags: [],
   tagline: "Push your opponent as you race for dual win conditions",
   source: "http://some.url.to.rules",
-  code: "x"
+  code: "x",
+  slug: "gekitai",
 };
 
 export default gekitaiMeta;

@@ -6,7 +6,8 @@ const momentumMeta: MomentumDefinition["meta"] = {
   tags: [],
   tagline: "Newton's cradle on the battlefield!",
   source: "http://some.url.to.rules",
-  code: "j"
+  code: "j",
+  slug: "momentum",
 };
 
 export default momentumMeta;

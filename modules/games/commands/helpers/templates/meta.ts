@@ -10,7 +10,8 @@ const ${gameId}Meta: ${capId}Definition['meta'] = {
   tags: [],
   tagline: "An awesome game!",
   source: "http://some.url.to.rules",
-  code: "${newCode()}"
+  code: "${newCode()}",
+  slug: "${gameId}"
 };
 
 export default ${gameId}Meta;

@@ -4,20 +4,21 @@ const daggersMeta: DaggersDefinition["meta"] = {
   code: "P",
   id: "daggers",
   name: "Daggers",
+  slug: "daggers",
   tags: [
     "differentunits",
     "asymmetric",
     "multiplegoals",
     "infiltrate",
     "killking",
-    "capture"
+    "capture",
   ],
   source: "http://www.di.fc.ul.pt/~jpn/gv/daggers.htm",
   tagline:
     "Will the superior position at the top of the hill beat overwhelming numbers?",
   links: {
     "World of Abstract Games": "http://www.di.fc.ul.pt/~jpn/gv/daggers.htm",
-    "Board game geek": "https://boardgamegeek.com/boardgame/186029/daggers"
+    "Board game geek": "https://boardgamegeek.com/boardgame/186029/daggers",
   },
   rules: {
     flow: ["line", "Players take turn to", "move", "a single unit"],
@@ -29,7 +30,7 @@ const daggersMeta: DaggersDefinition["meta"] = {
         "northwest, north or northeast",
         "is uphill, so",
         ["unitname", "bishops"],
-        "move slower in this direction"
+        "move slower in this direction",
       ],
       downhill: [
         "line",
@@ -38,8 +39,8 @@ const daggersMeta: DaggersDefinition["meta"] = {
         "southwest, south or southeast",
         "is downhill, so",
         ["unitname", "bishops"],
-        "move faster in this direction"
-      ]
+        "move faster in this direction",
+      ],
     },
     actions: {
       move: {
@@ -48,22 +49,22 @@ const daggersMeta: DaggersDefinition["meta"] = {
           "line",
           "Move a unit to a vacant space, or to an enemy unit which is captured (except ",
           ["unitname", "bishops"],
-          "can't capture each other vertically)"
-        ]
-      }
+          "can't capture each other vertically)",
+        ],
+      },
     },
     tiles: {
       base: {
         who: [1, 2],
-        rule: ["line", "move", "a", "king", "here to win via", "infiltration"]
-      }
+        rule: ["line", "move", "a", "king", "here to win via", "infiltration"],
+      },
     },
     goals: {
       regicide: { who: [1, 2], rule: ["line", "Kill an enemy", "king"] },
       infiltration: {
         who: [1, 2],
-        rule: ["line", "move", "a", "king", "to the enemy", ["tile", "base"]]
-      }
+        rule: ["line", "move", "a", "king", "to the enemy", ["tile", "base"]],
+      },
     },
     units: {
       bishop: {
@@ -78,8 +79,8 @@ const daggersMeta: DaggersDefinition["meta"] = {
           "downhill",
           ". Captures",
           ["unitname", "kings"],
-          "vertically, or any piece diagonally."
-        ]
+          "vertically, or any piece diagonally.",
+        ],
       },
       king: {
         who: [1, 2],
@@ -87,11 +88,11 @@ const daggersMeta: DaggersDefinition["meta"] = {
           "line",
           "Can",
           "move",
-          "1 step in any direction, capturing any enemy."
-        ]
-      }
-    }
-  }
+          "1 step in any direction, capturing any enemy.",
+        ],
+      },
+    },
+  },
 };
 
 export default daggersMeta;

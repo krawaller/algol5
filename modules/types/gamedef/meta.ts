@@ -9,6 +9,7 @@ export type AlgolMeta<Blob extends AlgolGameBlobAnon> = {
   tags: string[];
   [otherMeta: string]: any;
   code: string;
+  slug: string;
 };
 
 export type RuleObject = {

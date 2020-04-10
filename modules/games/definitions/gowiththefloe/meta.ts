@@ -6,7 +6,8 @@ const gowiththefloeMeta: GowiththefloeDefinition["meta"] = {
   name: "Go with the floe",
   tags: [],
   tagline: "Can the seals escape the polar bears?",
-  source: "https://nestorgames.com/rulebooks/gowiththefloe_EN.pdf"
+  source: "https://nestorgames.com/rulebooks/gowiththefloe_EN.pdf",
+  slug: "go_with_the_floe",
 };
 
 export default gowiththefloeMeta;

@@ -5,7 +5,7 @@ const kriegMeta: KriegDefinition["meta"] = {
   id: "krieg",
   name: "Krieg",
   source: "http://www.di.fc.ul.pt/~jpn/gv/krieg.htm",
-  tags: ["infiltrate", "multiplegoals"],
+  tags: [],
   tagline: "Outmanouver your opponent to gain access to her corner",
   slug: "krieg",
 };

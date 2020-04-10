@@ -47,6 +47,12 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
               actions={actions}
               styleMode="asButton"
             />
+            <Link
+              text="Tags"
+              url="/tags"
+              actions={actions}
+              styleMode="asButton"
+            />
           </ButtonGroup>
         </Fragment>
       }

@@ -20,12 +20,7 @@ export const AboutListPage: FunctionComponent<AboutListPageProps> = props => {
       strip={<Breadcrumbs crumbs={crumbs} actions={actions} />}
       body={
         <ScrollBox>
-          <ArticleList
-            reverse
-            actions={actions}
-            list={aboutList}
-            prefix="/about/"
-          />
+          <ArticleList actions={actions} list={aboutList} prefix="/about/" />
         </ScrollBox>
       }
     />

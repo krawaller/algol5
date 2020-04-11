@@ -22,6 +22,7 @@ blurb: "Add short description here!"
 thumbnail: "picToUseAsThumbnail.png"
 mainImage: "some_picture.jpg"
 sort: 42
+updated: ${new Date().toISOString().slice(0, 10)}
 ---
 
 Some games are tagged with ${id}! :D

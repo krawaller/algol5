@@ -6,6 +6,7 @@ blurb: "Games with irreversible moves"
 thumbnail: "wip-thumb.png"
 mainImage: "wip-big.png"
 sort: "irreversible"
+updated: "2020-04-10"
 ---
 
 WIP

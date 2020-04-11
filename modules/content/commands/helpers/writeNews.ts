@@ -20,6 +20,7 @@ export const writeNews = (date: string) => {
     "title",
     "id",
     "mainImage",
+    "updated",
   ]) {
     if (!yaml[required]) {
       throw new Error(

@@ -6,6 +6,7 @@ blurb: "How Chessicals is financed"
 thumbnail: "wip-thumb.png"
 mainImage: "wip-big.png"
 sort: 80
+updated: "2020-04-10"
 ---
 
 WIP

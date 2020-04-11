@@ -5,6 +5,8 @@ slug: "showing_off_chessicals_at_apple_and_edument"
 blurb: "Two games were added to Chessicals live during lunch lectures for programmers"
 thumbnail: "presentationthumb.png"
 mainImage: "presentation.jpg"
+created: "2020-02-28"
+updated: "2020-02-28"
 ---
 
 We recently had two opportunities to show off the data format for games in {ME}. Last week, at a lunch lecture for programmers at Apple in Malmö, David demoed the app by adding {GAME:id=gekitai} before the audience had finished eating.

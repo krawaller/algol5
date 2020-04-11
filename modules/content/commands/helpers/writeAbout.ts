@@ -17,6 +17,7 @@ export const writeAbout = (id: string) => {
     "slug",
     "thumbnail",
     "blurb",
+    "updated",
     "title",
     "id",
     "mainImage",

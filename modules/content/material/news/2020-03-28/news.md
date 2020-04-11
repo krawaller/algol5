@@ -5,6 +5,8 @@ slug: "variant_support"
 blurb: "Games can now have alternate setups, boards and rules"
 thumbnail: "wip-thumb.png"
 mainImage: "wip-big.png"
+created: "2020-03-28"
+updated: "2020-03-28"
 ---
 
 Even though {ME} has lived for over a decade - albeight in different shapes and through many rebirths - it has never had proper support for game variants. A rather embarrassing omission!

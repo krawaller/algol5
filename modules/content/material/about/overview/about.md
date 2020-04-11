@@ -6,6 +6,7 @@ blurb: "So, what's this app about?"
 thumbnail: "wip-thumb.png"
 mainImage: "wip-big.png"
 sort: 01
+updated: "2020-04-10"
 ---
 
 WIP

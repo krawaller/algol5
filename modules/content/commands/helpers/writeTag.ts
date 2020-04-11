@@ -20,6 +20,7 @@ export const writeTag = (id: string) => {
     "title",
     "id",
     "mainImage",
+    "updated",
     "sort",
   ]) {
     if (!yaml[required]) {

@@ -58,7 +58,7 @@ export const writeTag = (id: string) => {
     blurb: \`${yaml.blurb}\`,
     slug: \`${yaml.slug}\`,
     sort: \`${yaml.sort}\`,
-    created: \`${id}\`,
+    created: \`${yaml.created}\`,
     updated: \`${yaml.updated || id}\`,
     preloads: ${JSON.stringify(preloads)},
     mainImage: \`/images/tags/${id}/${yaml.mainImage}\`,

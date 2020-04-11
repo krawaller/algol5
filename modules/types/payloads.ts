@@ -14,3 +14,22 @@ export type AlgolGamePayload = {
   imgsToPreload: string[];
   demo: AlgolDemo;
 };
+
+export type AlgolArticlePayload = {
+  html: string;
+  listing: AlgolListing;
+  relations: Record<string, AlgolListing[]>;
+};
+
+export type AlgolListing = {
+  id: string;
+  title: string;
+  blurb: string;
+  slug: string;
+  sort: string;
+  created: string;
+  updated: string;
+  preloads: string[];
+  mainImage: string;
+  thumbdata: string;
+};

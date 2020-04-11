@@ -58,7 +58,7 @@ export const writeAbout = (id: string) => {
     blurb: \`${yaml.blurb}\`,
     slug: \`${yaml.slug}\`,
     sort: \`${yaml.sort}\`,
-    created: \`${id}\`,
+    created: \`${yaml.updated}\`,
     updated: \`${yaml.updated || id}\`,
     preloads: ${JSON.stringify(preloads)},
     mainImage: \`/images/about/${id}/${yaml.mainImage}\`,

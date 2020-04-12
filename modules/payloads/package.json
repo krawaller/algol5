@@ -3,6 +3,7 @@
     "robot": "npm run makeGamePayloads; npm run exportAllGamePayloads",
     "clean": "rm -rf dist",
     "makeGamePayloads": "node ./commands/makeGamePayloads",
+    "makeGameListing": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeGameListing",
     "exportAllGamePayloads": "node ./commands/exportAllGamePayloads"
   }
 }

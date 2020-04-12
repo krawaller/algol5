@@ -16,20 +16,19 @@ export type AlgolGamePayload = {
 };
 
 export type AlgolArticlePayload = {
+  id: string;
+  blurb: string;
+  mainImage: string;
   html: string;
-  listing: AlgolListing;
-  relations: Record<string, AlgolListing[]>;
+  updated?: string;
+  relations: Record<string, AlgolArticleListing[]>;
 };
 
-export type AlgolListing = {
-  id: string;
+export type AlgolArticleListing = {
   title: string;
   blurb: string;
-  slug: string;
+  url: string;
   sort: string;
-  created: string;
-  updated: string;
   preloads: string[];
-  mainImage: string;
   thumbdata: string;
 };

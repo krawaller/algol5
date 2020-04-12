@@ -4,6 +4,7 @@
     "clean": "rm -rf dist",
     "makeGamePayloads": "node ./commands/makeGamePayloads",
     "makeGameListing": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeGameListing",
+    "makeTagListing": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeTagListing",
     "exportAllGamePayloads": "node ./commands/exportAllGamePayloads"
   }
 }

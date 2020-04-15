@@ -3,11 +3,12 @@
     "robot": "npm run makeGamePayload; npm run exportAllGamePayloads; npm run makeListings; npm run makeArticles;",
     "clean": "rm -rf dist",
     "makeGamePayload": "node ./commands/makeGamePayload",
-    "makeListings": "npm run makeGameListing; npm run makeTagListing;",
+    "makeListings": "npm run makeGameListing; npm run makeTagListing; npm run makeListingIndexes",
     "makeArticles": "npm run makeTagArticle",
     "makeGameListing": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeGameListing",
     "makeTagListing": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeTagListing",
     "makeTagArticle": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeTagArticle",
+    "makeListingIndexes": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeListingIndexes",
     "exportAllGamePayloads": "node ./commands/exportAllGamePayloads"
   }
 }

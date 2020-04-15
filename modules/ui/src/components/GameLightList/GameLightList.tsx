@@ -1,29 +1,13 @@
 import React, { FunctionComponent } from "react";
-import meta from "../../../../games/dist/meta";
-import { list } from "../../../../games/dist/list";
-import actionShots from "../../../../graphics/dist/allRegularActionShots";
-import {
-  ArticleList,
-  ArticleListProps,
-  ArticleListActions,
-} from "../ArticleList";
-import { gameSlug } from "../../../../common";
-
-const data: ArticleListProps["list"] = list.map(id => ({
-  id,
-  blurb: meta[id].tagline,
-  preloads: [],
-  slug: gameSlug(meta[id]),
-  title: meta[id].name,
-  thumbdata: actionShots[id],
-  sort: id,
-}));
+import gameListings from "../../../../payloads/dist/listings/games";
+import { PayloadArticleList } from "../PayloadArticleList";
+import { PageActions } from "../../helpers";
 
 type GameLightListProps = {
-  actions: ArticleListActions;
+  actions: PageActions;
 };
 
 export const GameLightList: FunctionComponent<GameLightListProps> = props => {
   const { actions } = props;
-  return <ArticleList actions={actions} list={data} prefix="/games/" />;
+  return <PayloadArticleList actions={actions} list={gameListings} />;
 };

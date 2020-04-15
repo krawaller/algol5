@@ -13,13 +13,15 @@ export const makeTagArticle = (tagId: string) => {
   fs.ensureDirSync(tagArticlesFolder);
   const code = `
 // Created by the makeTagArticle command
+import { AlgolArticle } from '../../../../types'
 ${gameIds
   .map(gameId => `import ${gameId} from '../../listings/games/${gameId}'`)
   .join("\n")}
 
-const article = {
+const article: AlgolArticle = {
   id: "${tagId}",
   blurb: "${tagYaml.blurb}",
+  slug: "${tagYaml.slug}",
   title: "${tagYaml.title}",
   mainImage: "${tagYaml.mainImage}",
   updated: "${tagYaml.updated}",

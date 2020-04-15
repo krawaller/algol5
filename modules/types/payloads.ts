@@ -17,6 +17,7 @@ export type AlgolGamePayload = {
 
 export type AlgolArticle = {
   id: string;
+  slug: string;
   title: string;
   blurb: string;
   mainImage: string;

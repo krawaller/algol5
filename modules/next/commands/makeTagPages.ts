@@ -1,19 +1,19 @@
 import { makeTagPage } from "./helpers/makeTagPage";
-import { tagList } from "../../content/dist/tagList";
+import tags from "../../payloads/dist/articles/tags";
 
 const tagId = process.argv[2];
 
 if (!tagId) {
   console.log("---- Making pages for all tags ----");
-  for (const data of tagList) {
-    makeTagPage(data);
+  for (const tag of tags) {
+    makeTagPage(tag);
   }
   console.log("---- All tags got pages ----");
 } else {
-  const data = tagList.find(d => d.id === tagId);
-  if (!data) {
+  const tag = tags.find(t => t.id === tagId);
+  if (!tag) {
     console.log(`Tag "${tagId}" doesn't exists!`);
   } else {
-    makeTagPage(data);
+    makeTagPage(tag);
   }
 }

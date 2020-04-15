@@ -4,11 +4,12 @@
     "clean": "rm -rf dist",
     "makeGamePayload": "node ./commands/makeGamePayload",
     "makeListings": "npm run makeGameListing; npm run makeTagListing; npm run makeListingIndexes",
-    "makeArticles": "npm run makeTagArticle",
+    "makeArticles": "npm run makeTagArticle; npm run makeArticleIndexes",
     "makeGameListing": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeGameListing",
     "makeTagListing": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeTagListing",
     "makeTagArticle": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeTagArticle",
     "makeListingIndexes": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeListingIndexes",
+    "makeArticleIndexes": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeArticleIndexes",
     "exportAllGamePayloads": "node ./commands/exportAllGamePayloads"
   }
 }

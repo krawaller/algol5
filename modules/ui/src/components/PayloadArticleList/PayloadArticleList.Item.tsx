@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useCallback } from "react";
 import css from "./PayloadArticleList.cssProxy";
 import { Link } from "../Link";
+import { AlgolListing } from "../../../../types";
 
 export interface PayloadArticleListItemActions {
   navTo: (url: string) => void;
@@ -9,29 +10,16 @@ export interface PayloadArticleListItemActions {
 
 type PayloadArticleListItemProps = {
   actions: PayloadArticleListItemActions;
-  url: string;
-  item: {
-    id: string;
-    title: string;
-    thumbdata: string;
-    blurb: string;
-  };
+  listing: AlgolListing;
 };
 
 export const PayloadArticleListItem: FunctionComponent<PayloadArticleListItemProps> = props => {
-  const { actions, item, url } = props;
-  const { id, title, thumbdata, blurb } = item;
-  const handleClick = useCallback(() => actions.navTo(url), [
-    id,
-    actions.navTo,
-  ]);
+  const { actions, listing } = props;
+  const { title, thumbdata, blurb, url } = listing;
+  const handleClick = useCallback(() => actions.navTo(url), [actions.navTo]);
   return (
     <Link url={url} actions={actions} styleMode="none">
-      <div
-        className={css.payloadArticleListItem}
-        key={id}
-        onClick={handleClick}
-      >
+      <div className={css.payloadArticleListItem} onClick={handleClick}>
         <div>
           <img src={thumbdata} />
         </div>

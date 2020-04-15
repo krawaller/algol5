@@ -2,7 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 
 import { PayloadArticleList, PayloadArticleListActions } from ".";
-import { newsList } from "../../../../content/dist/newsList";
+import games from "../../../../payloads/dist/listings/games";
 
 storiesOf("PayloadArticleList", module).add(
   "A common PayloadArticleList component",
@@ -13,7 +13,7 @@ storiesOf("PayloadArticleList", module).add(
     };
     return (
       <div style={{ padding: 10 }}>
-        <PayloadArticleList actions={actions} list={newsList} prefix="/news/" />
+        <PayloadArticleList actions={actions} list={games} />
       </div>
     );
   }

@@ -1,10 +1,13 @@
 {
   "scripts": {
-    "robot": "npm run makeGamePayloads; npm run exportAllGamePayloads",
+    "robot": "npm run makeGamePayload; npm run exportAllGamePayloads; npm run makeListings; npm run makeArticles;",
     "clean": "rm -rf dist",
-    "makeGamePayloads": "node ./commands/makeGamePayloads",
+    "makeGamePayload": "node ./commands/makeGamePayload",
+    "makeListings": "npm run makeGameListing; npm run makeTagListing;",
+    "makeArticles": "npm run makeTagArticle",
     "makeGameListing": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeGameListing",
     "makeTagListing": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeTagListing",
+    "makeTagArticle": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeTagArticle",
     "exportAllGamePayloads": "node ./commands/exportAllGamePayloads"
   }
 }

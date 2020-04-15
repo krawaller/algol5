@@ -15,16 +15,17 @@ export type AlgolGamePayload = {
   demo: AlgolDemo;
 };
 
-export type AlgolArticlePayload = {
+export type AlgolArticle = {
   id: string;
+  title: string;
   blurb: string;
   mainImage: string;
   html: string;
   updated?: string;
-  relations: Record<string, AlgolArticleListing[]>;
+  relations: Record<string, AlgolListing[]>;
 };
 
-export type AlgolArticleListing = {
+export type AlgolListing = {
   title: string;
   blurb: string;
   url: string;

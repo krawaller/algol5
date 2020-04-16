@@ -9,11 +9,11 @@ export const makeTagArticle = (tagId: string) => {
   const gameIds = getGamesForTag(tagId);
   const tagYaml = require(`../../../content/dist/tags/${tagId}/listing`)
     .listing;
-  const tagHtml = require(`../../../content/dist/tags/${tagId}/tag`).tag;
   fs.ensureDirSync(tagArticlesFolder);
   const code = `
 // Created by the makeTagArticle command
 import { AlgolArticle } from '../../../../types'
+import { tag } from '../../../../content/dist/tags/${tagId}/tag'
 ${gameIds
   .map(gameId => `import ${gameId} from '../../listings/games/${gameId}'`)
   .join("\n")}
@@ -28,7 +28,7 @@ const article: AlgolArticle = {
   relations: {
     "Games with this tag": [${gameIds.join(", ")}]
   },
-  html: \`${tagHtml}\`
+  html: tag
 };
 
 export default article;

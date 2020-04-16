@@ -10,11 +10,11 @@ export const makeNewsArticle = (newsId: string) => {
     require("../../dist/relations/news2games").default[newsId] || [];
   const newsYaml = require(`../../../content/dist/news/${newsId}/listing`)
     .listing;
-  const newsHtml = require(`../../../content/dist/news/${newsId}/news`).news;
   fs.ensureDirSync(newsArticlesFolder);
   const code = `
 // Created by the makeNewsArticle command
 import { AlgolArticle } from '../../../../types'
+import { news } from '../../../../content/dist/news/${newsId}/news'
 ${gameIds
   .map(gameId => `import ${gameId} from '../../listings/games/${gameId}'`)
   .join("\n")}
@@ -29,7 +29,7 @@ const article: AlgolArticle = {
   relations: {
     "Mentioned games": [${gameIds.join(", ")}]
   },
-  html: \`${newsHtml}\`
+  html: news
 };
 
 export default article;

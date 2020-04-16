@@ -1,5 +1,5 @@
 ---
-id: "2020-02-08"
+id: "2020_02_08"
 title: "It has begun"
 blurb: "The Chessicals beta is publically available"
 thumbnail: "wip-thumb.png"

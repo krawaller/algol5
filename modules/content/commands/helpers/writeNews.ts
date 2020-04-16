@@ -4,12 +4,12 @@ import path from "path";
 import fs, { readFileSync, writeFileSync } from "fs-extra";
 import { encodePic } from "../../utils";
 
-export const writeNews = (date: string) => {
-  const source = path.join(__dirname, `../../material/news/${date}`);
+export const writeNews = (id: string) => {
+  const source = path.join(__dirname, `../../material/news/${id}`);
   if (!fs.existsSync(source)) {
-    throw new Error(`Could not find news "${date}"!`);
+    throw new Error(`Could not find news "${id}"!`);
   }
-  const out = path.join(__dirname, `../../dist/news/${date}`);
+  const out = path.join(__dirname, `../../dist/news/${id}`);
   fs.ensureDirSync(out);
   const md = readFileSync(path.join(source, `news.md`)).toString();
   const yaml = fm(md).attributes as any;
@@ -24,13 +24,13 @@ export const writeNews = (date: string) => {
   ]) {
     if (!yaml[required]) {
       throw new Error(
-        `Have to provide ${required} in yaml data for news ${date}!`
+        `Have to provide ${required} in yaml data for news ${id}!`
       );
     }
   }
-  if (yaml.id !== date) {
+  if (yaml.id !== id) {
     throw new Error(
-      `ID doesn't match date for news ${date}! Never change id manually!`
+      `ID doesn't match id for news ${id}! Never change id manually!`
     );
   }
   const picSourcePath = path.join(source, "pics");
@@ -38,15 +38,15 @@ export const writeNews = (date: string) => {
   const thumbPath = path.join(picSourcePath, yaml.thumbnail);
   if (!fs.existsSync(thumbPath)) {
     throw new Error(
-      `Failed to find thumbnail "${thumbPath}" in pics folder for news ${date}!`
+      `Failed to find thumbnail "${thumbPath}" in pics folder for news ${id}!`
     );
   }
   const thumbdata = encodePic(thumbPath);
-  const picRefPath = `/images/news/${date}`;
+  const picRefPath = `/images/news/${id}`;
   const mainImagePath = path.join(picSourcePath, yaml.mainImage);
   if (!fs.existsSync(mainImagePath)) {
     throw new Error(
-      `Failed to find mainImage "${yaml.mainImage}" in pics folder for news ${date}!`
+      `Failed to find mainImage "${yaml.mainImage}" in pics folder for news ${id}!`
     );
   }
 
@@ -56,8 +56,9 @@ export const writeNews = (date: string) => {
   const exported = `export const news = \`${html}\`\n`;
   writeFileSync(path.join(out, `news.ts`), exported);
 
+  const date = id.replace(/_/g, "-");
   const listing = `export const listing = {
-    id: \`${date}\`,
+    id: \`${id}\`,
     title: \`${yaml.title || date}\`,
     blurb: \`${yaml.blurb}\`,
     slug: \`${date}_${yaml.slug}\`,

@@ -1,5 +1,5 @@
 import { makeAboutPage } from "./helpers/makeAboutPage";
-import { aboutList } from "../../content/dist/aboutList";
+import aboutList from "../../payloads/dist/articles/about";
 
 const aboutId = process.argv[2];
 

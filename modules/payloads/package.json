@@ -4,7 +4,7 @@
     "clean": "rm -rf dist",
     "makeGamePayload": "node ./commands/makeGamePayload",
     "makeListings": "npm run makeGameListing; npm run makeTagListing; npm run makeNewsListing; npm run makeAboutListing; npm run makeListingIndexes",
-    "makeArticles": "npm run makeTagArticle; npm run makeNewsArticle; npm run makeAboutArticle; npm run makeGameRulesArticle;; npm run makeGameAboutArticle; npm run makeArticleIndexes",
+    "makeArticles": "npm run makeTagArticle; npm run makeNewsArticle; npm run makeAboutArticle; npm run makeGameRulesArticle; npm run makeGameAboutArticle; npm run makeArticleIndexes",
     "makeGameListing": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeGameListing",
     "makeGameAboutArticle": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeGameAboutArticle",
     "makeGameRulesArticle": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeGameRulesArticle",

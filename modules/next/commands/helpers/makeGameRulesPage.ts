@@ -17,7 +17,7 @@ import article from "../../../../../payloads/dist/articles/gamesRules/${meta.id}
 export const Game = () => {
   const crumbs = [
     { content: "Games", url: "/games" },
-    { content: "${meta.name}", url: "/games/${meta.id}" },
+    { content: "${meta.name}", url: "/games/${meta.slug}" },
     { content: "Rules" }
   ];
   return (

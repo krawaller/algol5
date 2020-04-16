@@ -1,5 +1,5 @@
 ---
-id: "2020_02_28"
+id: "news_2020_02_28"
 title: "Lunch lectures"
 slug: "showing_off_chessicals_at_apple_and_edument"
 blurb: "Two games were added to Chessicals live during lunch lectures for programmers"

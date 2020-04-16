@@ -1,5 +1,5 @@
 ---
-id: "2020_03_28"
+id: "news_2020_03_28"
 title: "Variants support"
 slug: "variant_support"
 blurb: "Games can now have alternate setups, boards and rules"

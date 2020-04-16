@@ -5,9 +5,9 @@ const stubNews = date => {
   const out = path.join(__dirname, `../../material/news/${date}`);
   if (fs.existsSync(out)) {
     throw new Error(`News ${date} already exists!`);
-  } else if (!date || !date.match(/2[0-9]{3}_[0-9]{2}_[0-9]{2}/)) {
+  } else if (!date || !date.match(/news_2[0-9]{3}_[0-9]{2}_[0-9]{2}/)) {
     throw new Error(
-      `Illegal news date "${date}", should be formatted as yyyy_mm_dd`
+      `Illegal news date "${date}", should be formatted as news_yyyy_mm_dd`
     );
   } else {
     fs.ensureDirSync(out);

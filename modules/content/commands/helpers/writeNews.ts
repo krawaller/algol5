@@ -56,7 +56,7 @@ export const writeNews = (id: string) => {
   const exported = `export const news = \`${html}\`\n`;
   writeFileSync(path.join(out, `news.ts`), exported);
 
-  const date = id.replace(/_/g, "-");
+  const date = id.replace(/^news_/, "").replace(/_/g, "-");
   const listing = `export const listing = {
     id: \`${id}\`,
     title: \`${yaml.title || date}\`,

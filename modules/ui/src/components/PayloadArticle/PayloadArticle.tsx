@@ -19,12 +19,14 @@ export const PayloadArticle: FunctionComponent<PayloadArticleProps> = props => {
   return (
     <>
       <Markdown html={article.html} actions={actions} />
-      {Object.entries(article.relations).map(([header, list]) => (
-        <Fragment key={header}>
-          <div className={css.payloadArticleRelationHeader}>{header}</div>
-          <PayloadArticleList actions={actions} list={list} />
-        </Fragment>
-      ))}
+      {Object.entries(article.relations)
+        .filter(([, list]) => list.length)
+        .map(([header, list]) => (
+          <Fragment key={header}>
+            <div className={css.payloadArticleRelationHeader}>{header}</div>
+            <PayloadArticleList actions={actions} list={list} />
+          </Fragment>
+        ))}
     </>
   );
 };

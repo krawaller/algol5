@@ -6,6 +6,8 @@ blurb: "A peek at the technology that powers Chessicals"
 thumbnail: "wip-thumb.png"
 mainImage: "wip-big.png"
 sort: 50
+created: "2020-04-10"
+updated: "2020-04-10"
 ---
 
 {PIC:name=wip-big.png,cred=Art by David,title=Work in progress}

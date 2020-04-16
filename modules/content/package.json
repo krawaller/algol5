@@ -1,15 +1,15 @@
 {
   "scripts": {
     "clean": "rm -rf dist; mkdir dist;",
-    "robot": "npm run writeNews; npm run listNews; npm run writeAbout; npm run listAbout; npm run writeGame;",
+    "robot": "npm run writeNews;npm run writeAbout; npm run writeTag; npm run writeGame;",
     "writeGame": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeGame.ts",
     "stubGame": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/stubGame.ts",
     "stubNews": "node ./commands/stubNews",
     "stubAbout": "node ./commands/stubAbout",
+    "stubTag": "node ./commands/stubTag",
     "writeNews": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeNews.ts",
     "writeAbout": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeAbout.ts",
-    "listNews": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/listNews.ts",
-    "listAbout": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/listAbout.ts"
+    "writeTag": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeTag.ts"
   },
   "dependencies": {
     "front-matter": "^3.1.0",

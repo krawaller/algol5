@@ -5,14 +5,7 @@ const gogolMeta: GogolDefinition["meta"] = {
   id: "gogol",
   name: "Gogol",
   source: "http://www.di.fc.ul.pt/~jpn/gv/gogol.htm",
-  tags: [
-    "deploy",
-    "infiltrate",
-    "kingkill",
-    "multiplegoals",
-    "differentunits",
-    "jump",
-  ],
+  tags: [],
   tagline: "Use your units that can move anywhere to hunt down the enemy king",
   slug: "gogol",
 };

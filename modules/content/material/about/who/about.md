@@ -6,6 +6,8 @@ blurb: "Meet the creator of the app"
 thumbnail: "deus-david-thumb.png"
 mainImage: "deus-ania-david.jpg"
 sort: 90
+created: "2020-04-10"
+updated: "2020-04-10"
 ---
 
 Welcome, friend!

@@ -5,7 +5,7 @@ import { select } from "@storybook/addon-knobs";
 import { GamePage } from ".";
 import { GameId, list } from "../../../../games/dist/list";
 
-import allGamePayloads from "../../../dist/payloads";
+import allGamePayloads from "../../../../payloads/dist/games";
 
 storiesOf("GamePage", module).add(
   "Used for individual game pages in the app",

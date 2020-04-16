@@ -1,5 +1,5 @@
 import { makeNewsPage } from "./helpers/makeNewsPage";
-import { newsList } from "../../content/dist/newsList";
+import newsList from "../../payloads/dist/articles/news";
 
 const newsId = process.argv[2];
 

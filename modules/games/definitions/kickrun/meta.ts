@@ -5,7 +5,7 @@ const kickrunMeta: KickrunDefinition["meta"] = {
   id: "kickrun",
   name: "Kick & run",
   source: "http://www.di.fc.ul.pt/~jpn/gv/kickrun.htm",
-  tags: ["infiltrate", "differentunits", "capture"],
+  tags: ["irreversible"],
   tagline: "A quick and fierce battle to invade the opposite corner",
   slug: "kick_and_run",
 };

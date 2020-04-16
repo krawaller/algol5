@@ -1,8 +1,21 @@
 {
   "scripts": {
-    "robot": "npm run makeGamePayloads; npm run exportAllGamePayloads",
+    "robot": "npm run buildRelations; npm run makeGamePayload; npm run exportAllGamePayloads; npm run makeListings; npm run makeArticles;",
     "clean": "rm -rf dist",
-    "makeGamePayloads": "node ./commands/makeGamePayloads",
-    "exportAllGamePayloads": "node ./commands/exportAllGamePayloads"
+    "makeGamePayload": "node ./commands/makeGamePayload",
+    "makeListings": "npm run makeGameListing; npm run makeTagListing; npm run makeNewsListing; npm run makeAboutListing; npm run makeListingIndexes",
+    "makeArticles": "npm run makeTagArticle; npm run makeNewsArticle; npm run makeAboutArticle; npm run makeGameAboutArticle; npm run makeArticleIndexes",
+    "makeGameListing": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeGameListing",
+    "makeGameAboutArticle": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeGameAboutArticle",
+    "makeTagListing": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeTagListing",
+    "makeTagArticle": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeTagArticle",
+    "makeNewsListing": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeNewsListing",
+    "makeNewsArticle": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeNewsArticle",
+    "makeAboutListing": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeAboutListing",
+    "makeAboutArticle": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeAboutArticle",
+    "makeListingIndexes": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeListingIndexes",
+    "makeArticleIndexes": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeArticleIndexes",
+    "exportAllGamePayloads": "node ./commands/exportAllGamePayloads",
+    "buildRelations": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/buildRelations"
   }
 }

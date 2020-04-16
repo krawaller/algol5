@@ -2,9 +2,12 @@ import React, { Fragment } from "react";
 import Head from "next/head";
 
 import { pageActions } from "../../helpers";
-import { TagListPage } from "../../../ui/src/components/TagListPage";
+import { PayloadArticleListPage } from "../../../ui/src/components/PayloadArticleListPage";
+import tags from "../../../payloads/dist/listings/tags";
 
 // TODO - metadata!
+
+const crumbs = [{ content: "Tags" }];
 
 const IndexPage = () => {
   return (
@@ -12,7 +15,12 @@ const IndexPage = () => {
       <Head>
         <title>Chessicals</title>
       </Head>
-      <TagListPage actions={pageActions} />
+      <PayloadArticleListPage
+        crumbs={crumbs}
+        actions={pageActions}
+        title="Tags"
+        list={tags}
+      />
     </Fragment>
   );
 };

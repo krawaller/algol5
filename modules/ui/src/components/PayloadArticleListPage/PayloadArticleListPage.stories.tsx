@@ -4,11 +4,13 @@ import { select } from "@storybook/addon-knobs";
 import news from "../../../../payloads/dist/listings/news";
 import tags from "../../../../payloads/dist/listings/tags";
 import games from "../../../../payloads/dist/listings/games";
+import about from "../../../../payloads/dist/listings/about";
 
 const lists = {
   News: news,
   Tags: tags,
   Games: games,
+  About: about,
 };
 
 import { PayloadArticleListPage } from ".";

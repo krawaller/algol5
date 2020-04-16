@@ -5,8 +5,6 @@ import fs, { readFileSync, writeFileSync } from "fs-extra";
 import { AlgolArrangements, AlgolGameBlobAnon } from "../../../types";
 
 export const writeGame = async (gameId: GameId) => {
-  // have to do this async for writeNews to work
-  const { games2news, newsWithGames } = await import("../../dist/games2news");
   const out = path.join(__dirname, `../../dist/games/${gameId}`);
   fs.ensureDirSync(out);
   const source = path.join(__dirname, `../../material/games/${gameId}`);
@@ -23,18 +21,6 @@ export const writeGame = async (gameId: GameId) => {
   for (const file of ["about", "rules"]) {
     let md = readFileSync(path.join(source, `${file}.md`)).toString();
     if (file === "about") {
-      const newsItems: { slug: string; title: string }[] = (
-        games2news[gameId] || []
-      ).map(newsId => newsWithGames[newsId]);
-      if (newsItems.length) {
-        md +=
-          `\n\nRelated news items:\n\n` +
-          newsItems
-            .map(
-              ({ slug, title }) => `- {INTLINK:text=${title},url=/news/${slug}}`
-            )
-            .join("\n");
-      }
       const entries = Object.entries(links);
       if (entries.length) {
         md +=

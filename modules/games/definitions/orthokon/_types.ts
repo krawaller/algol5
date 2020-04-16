@@ -6,8 +6,8 @@ type OrthokonBoardWidth = 4;
 
 type OrthokonTerrain = never;
 type OrthokonUnit = "soldiers";
-type OrthokonMark = "selectunit" | "selectmovetarget";
-type OrthokonCommand = "move";
+type OrthokonMark = "selectunit" | "selectslidetarget";
+type OrthokonCommand = "slide";
 type OrthokonPhaseCommand = never;
 type OrthokonPhase = "startTurn" | OrthokonMark;
 type OrthokonUnitLayer =
@@ -19,8 +19,8 @@ type OrthokonUnitLayer =
   | "mysoldiers"
   | "oppsoldiers"
   | "neutralsoldiers";
-type OrthokonGenerator = "findvictims" | "findmovetargets";
-type OrthokonArtifactLayer = "victims" | "movetargets";
+type OrthokonGenerator = "findvictims" | "findslidetargets";
+type OrthokonArtifactLayer = "victims" | "slidetargets";
 type OrthokonTerrainLayer = never;
 type OrthokonLayer = CommonLayer | OrthokonUnitLayer | OrthokonArtifactLayer;
 type OrthokonBattlePos = never;

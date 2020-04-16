@@ -5,24 +5,24 @@ const orthokonFlow: OrthokonDefinition["flow"] = {
   marks: {
     selectunit: {
       from: "myunits",
-      runGenerator: "findmovetargets",
-      link: "selectmovetarget"
+      runGenerator: "findslidetargets",
+      link: "selectslidetarget",
     },
-    selectmovetarget: {
-      from: "movetargets",
+    selectslidetarget: {
+      from: "slidetargets",
       runGenerator: "findvictims",
-      link: "move"
-    }
+      link: "slide",
+    },
   },
   commands: {
-    move: {
+    slide: {
       applyEffects: [
-        { moveat: ["selectunit", "selectmovetarget"] },
-        { adoptin: ["victims", ["player"]] }
+        { moveat: ["selectunit", "selectslidetarget"] },
+        { adoptin: ["victims", ["player"]] },
       ],
-      link: "endTurn"
-    }
-  }
+      link: "endTurn",
+    },
+  },
 };
 
 export default orthokonFlow;

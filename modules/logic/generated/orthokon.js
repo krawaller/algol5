@@ -14,7 +14,7 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn" };
-const emptyArtifactLayers = { victims: {}, movetargets: {} };
+const emptyArtifactLayers = { victims: {}, slidetargets: {} };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
@@ -24,7 +24,7 @@ const groupLayers2 = {
 };
 const game = {
   gameId: "orthokon",
-  commands: { move: {} },
+  commands: { slide: {} },
   iconMap: iconMapping,
   setBoard: board => {
     TERRAIN1 = terrainLayers(board.height, board.width, board.terrain, 1);
@@ -99,7 +99,7 @@ const game = {
     },
     selectunit_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
-        movetargets: {}
+        slidetargets: {}
       };
       let LINKS = { marks: {}, commands: {} };
       let MARKS = {
@@ -116,12 +116,12 @@ const game = {
           }
           let WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
-            ARTIFACTS.movetargets[walkedsquares[WALKLENGTH - 1]] = emptyObj;
+            ARTIFACTS.slidetargets[walkedsquares[WALKLENGTH - 1]] = emptyObj;
           }
         }
       }
-      for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-        LINKS.marks[pos] = "selectmovetarget_basic_1";
+      for (const pos of Object.keys(ARTIFACTS.slidetargets)) {
+        LINKS.marks[pos] = "selectslidetarget_basic_1";
       }
       return {
         LINKS,
@@ -132,19 +132,19 @@ const game = {
         MARKS
       };
     },
-    selectmovetarget_basic_1: (step, newMarkPos) => {
+    selectslidetarget_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
-        movetargets: step.ARTIFACTS.movetargets,
+        slidetargets: step.ARTIFACTS.slidetargets,
         victims: {}
       };
       let LINKS = { marks: {}, commands: {} };
       let MARKS = {
         selectunit: step.MARKS.selectunit,
-        selectmovetarget: newMarkPos
+        selectslidetarget: newMarkPos
       };
       let UNITLAYERS = step.UNITLAYERS;
       {
-        let startconnections = connections[MARKS.selectmovetarget];
+        let startconnections = connections[MARKS.selectslidetarget];
         for (let DIR of orthoDirs) {
           let POS = startconnections[DIR];
           if (POS && UNITLAYERS.oppunits[POS]) {
@@ -152,7 +152,7 @@ const game = {
           }
         }
       }
-      LINKS.commands.move = "move_basic_1";
+      LINKS.commands.slide = "slide_basic_1";
       return {
         LINKS,
         ARTIFACTS,
@@ -164,7 +164,7 @@ const game = {
     },
     selectunit_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
-        movetargets: {}
+        slidetargets: {}
       };
       let LINKS = { marks: {}, commands: {} };
       let MARKS = {
@@ -181,12 +181,12 @@ const game = {
           }
           let WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
-            ARTIFACTS.movetargets[walkedsquares[WALKLENGTH - 1]] = emptyObj;
+            ARTIFACTS.slidetargets[walkedsquares[WALKLENGTH - 1]] = emptyObj;
           }
         }
       }
-      for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-        LINKS.marks[pos] = "selectmovetarget_basic_2";
+      for (const pos of Object.keys(ARTIFACTS.slidetargets)) {
+        LINKS.marks[pos] = "selectslidetarget_basic_2";
       }
       return {
         LINKS,
@@ -197,19 +197,19 @@ const game = {
         MARKS
       };
     },
-    selectmovetarget_basic_2: (step, newMarkPos) => {
+    selectslidetarget_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
-        movetargets: step.ARTIFACTS.movetargets,
+        slidetargets: step.ARTIFACTS.slidetargets,
         victims: {}
       };
       let LINKS = { marks: {}, commands: {} };
       let MARKS = {
         selectunit: step.MARKS.selectunit,
-        selectmovetarget: newMarkPos
+        selectslidetarget: newMarkPos
       };
       let UNITLAYERS = step.UNITLAYERS;
       {
-        let startconnections = connections[MARKS.selectmovetarget];
+        let startconnections = connections[MARKS.selectslidetarget];
         for (let DIR of orthoDirs) {
           let POS = startconnections[DIR];
           if (POS && UNITLAYERS.oppunits[POS]) {
@@ -217,7 +217,7 @@ const game = {
           }
         }
       }
-      LINKS.commands.move = "move_basic_2";
+      LINKS.commands.slide = "slide_basic_2";
       return {
         LINKS,
         ARTIFACTS,
@@ -227,10 +227,10 @@ const game = {
         MARKS
       };
     },
-    move_basic_1: step => {
+    slide_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
-        movetargets: step.ARTIFACTS.movetargets,
+        slidetargets: step.ARTIFACTS.slidetargets,
         victims: step.ARTIFACTS.victims
       };
       let UNITLAYERS = step.UNITLAYERS;
@@ -241,7 +241,7 @@ const game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: MARKS.selectmovetarget
+            pos: MARKS.selectslidetarget
           };
         }
       }
@@ -276,10 +276,10 @@ const game = {
         UNITLAYERS
       };
     },
-    move_basic_2: step => {
+    slide_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
-        movetargets: step.ARTIFACTS.movetargets,
+        slidetargets: step.ARTIFACTS.slidetargets,
         victims: step.ARTIFACTS.victims
       };
       let UNITLAYERS = step.UNITLAYERS;
@@ -290,7 +290,7 @@ const game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: MARKS.selectmovetarget
+            pos: MARKS.selectslidetarget
           };
         }
       }
@@ -333,18 +333,18 @@ const game = {
           { select: "Select" },
           { text: "which" },
           { unittype: ["pawn", 1] },
-          { text: "to move" }
+          { text: "to slide" }
         ]
       });
     },
-    move_basic_1: () => defaultInstruction(1),
+    slide_basic_1: () => defaultInstruction(1),
     selectunit_basic_1: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
         line: [
           { select: "Select" },
-          { text: "where to move" },
+          { text: "where to slide" },
           {
             unit: [
               iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
@@ -355,14 +355,14 @@ const game = {
         ]
       });
     },
-    selectmovetarget_basic_1: step => {
+    selectslidetarget_basic_1: step => {
       let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
         line: [
           { text: "Press" },
-          { command: "move" },
+          { command: "slide" },
           { text: "to make" },
           {
             unit: [
@@ -372,7 +372,7 @@ const game = {
             ]
           },
           { text: "go to" },
-          { pos: MARKS.selectmovetarget },
+          { pos: MARKS.selectslidetarget },
           Object.keys(ARTIFACTS.victims).length !== 0
             ? collapseContent({
                 line: [
@@ -411,18 +411,18 @@ const game = {
           { select: "Select" },
           { text: "which" },
           { unittype: ["pawn", 2] },
-          { text: "to move" }
+          { text: "to slide" }
         ]
       });
     },
-    move_basic_2: () => defaultInstruction(2),
+    slide_basic_2: () => defaultInstruction(2),
     selectunit_basic_2: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
         line: [
           { select: "Select" },
-          { text: "where to move" },
+          { text: "where to slide" },
           {
             unit: [
               iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
@@ -433,14 +433,14 @@ const game = {
         ]
       });
     },
-    selectmovetarget_basic_2: step => {
+    selectslidetarget_basic_2: step => {
       let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
         line: [
           { text: "Press" },
-          { command: "move" },
+          { command: "slide" },
           { text: "to make" },
           {
             unit: [
@@ -450,7 +450,7 @@ const game = {
             ]
           },
           { text: "go to" },
-          { pos: MARKS.selectmovetarget },
+          { pos: MARKS.selectslidetarget },
           Object.keys(ARTIFACTS.victims).length !== 0
             ? collapseContent({
                 line: [

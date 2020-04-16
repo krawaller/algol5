@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "robot": "npm run makeGamePayload; npm run exportAllGamePayloads; npm run makeListings; npm run makeArticles;",
+    "robot": "npm run buildRelations; npm run makeGamePayload; npm run exportAllGamePayloads; npm run makeListings; npm run makeArticles;",
     "clean": "rm -rf dist",
     "makeGamePayload": "node ./commands/makeGamePayload",
     "makeListings": "npm run makeGameListing; npm run makeTagListing; npm run makeListingIndexes",
@@ -10,6 +10,7 @@
     "makeTagArticle": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeTagArticle",
     "makeListingIndexes": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeListingIndexes",
     "makeArticleIndexes": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeArticleIndexes",
-    "exportAllGamePayloads": "node ./commands/exportAllGamePayloads"
+    "exportAllGamePayloads": "node ./commands/exportAllGamePayloads",
+    "buildRelations": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/buildRelations"
   }
 }

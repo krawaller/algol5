@@ -1,5 +1,4 @@
 import prettier from "prettier";
-import { gameSlug } from "../../../common";
 import { AlgolArticle, AlgolMeta, AlgolGameBlobAnon } from "../../../types";
 import allMeta from "../../../games/dist/meta";
 

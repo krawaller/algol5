@@ -19,9 +19,9 @@ import { rules } from '../../../../content/dist/games/${gameId}/rules'
 
 const article: AlgolArticle = {
   id: "${gameId}",
-  blurb: "Rules for ${meta.name}",
+  blurb: "Everything on how to play ${meta.name}",
   slug: "${meta.slug}",
-  title: "About ${meta.name}",
+  title: "${meta.name} rules",
   mainImage: "/images/games/${gameId}/${gameId}_${def.variants[0].code}.png",
   updated: rules.updated,
   relations: {},

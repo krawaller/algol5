@@ -5,7 +5,7 @@ slug: "phil_leduc"
 blurb: "Made by master gamesmith Phillip Leduc"
 thumbnail: "wip-thumb.png"
 mainImage: "wip-big.png"
-sort: "Phil Leduc"
+sort: "phil leduc"
 updated: 2020-04-17
 ---
 

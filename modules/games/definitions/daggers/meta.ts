@@ -5,7 +5,7 @@ const daggersMeta: DaggersDefinition["meta"] = {
   id: "daggers",
   name: "Daggers",
   slug: "daggers",
-  tags: [],
+  tags: ["asymmetric"],
   source: "http://www.di.fc.ul.pt/~jpn/gv/daggers.htm",
   tagline:
     "Will the superior position at the top of the hill beat overwhelming numbers?",

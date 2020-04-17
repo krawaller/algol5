@@ -2,7 +2,7 @@
 id: "irreversible"
 title: "Irreversible"
 slug: "irreversible"
-blurb: "Games with irreversible moves"
+blurb: "You cannot escape the inescapable"
 thumbnail: "dynamite-zoom.png"
 mainImage: "joker-grin.jpg"
 sort: "irreversible"

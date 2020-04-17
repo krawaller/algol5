@@ -2,7 +2,7 @@
 updated: 2020-02-18
 ---
 
-{GAME} was invented by Mitsuo Yamamoto in 2019. As with all his games he makes and sells beautiful ceramic versions through {EXTLINK:text=LOGY games,url=http://www.logygames.com/}.
+{GAME} was invented by Mitsuo Yamamoto in 2019. As with all his games he makes and sells beautiful ceramic versions through {INTLINK:text=LOGY games,url=/tags/logy_games/}.
 
 {PIC:name=chameleon.jpg,title=Ceramic Chameleon,cred=Picture by LOGY games,credurl=https://www.kickstarter.com/projects/logygames/chameleon-a-modern-version-of-chess}
 

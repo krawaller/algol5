@@ -4,7 +4,7 @@ const murusgallicusMeta: MurusgallicusDefinition["meta"] = {
   code: "U",
   id: "murusgallicus",
   name: "Murus Gallicus",
-  tags: ["philleduc"],
+  tags: ["philleduc", "nestorgames"],
   author: "Phillip L. Leduc",
   tagline:
     "Topple your towers in a battle of wits where the forces stay balanced throughout the game",

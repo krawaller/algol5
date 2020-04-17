@@ -6,7 +6,7 @@ const coffeeMeta: CoffeeDefinition["meta"] = {
   name: "Coffee",
   source:
     "https://www.boardgamegeek.com/filepage/64972/coffee-rules-nestorgames",
-  tags: ["irreversible"],
+  tags: ["irreversible", "nestorgames"],
   author: "Néstor Romeral Andrés",
   tagline: "Take over units to form a line and limit your opponent's options",
   slug: "coffee",

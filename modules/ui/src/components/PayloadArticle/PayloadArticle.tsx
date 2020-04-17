@@ -23,7 +23,9 @@ export const PayloadArticle: FunctionComponent<PayloadArticleProps> = props => {
         .filter(([, list]) => list.length)
         .map(([header, list]) => (
           <Fragment key={header}>
-            <div className={css.payloadArticleRelationHeader}>{header}</div>
+            {header && (
+              <div className={css.payloadArticleRelationHeader}>{header}</div>
+            )}
             <PayloadArticleList actions={actions} list={list} />
           </Fragment>
         ))}

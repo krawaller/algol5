@@ -5,7 +5,7 @@ slug: "logy_games"
 blurb: "Hand-crafted ceramic awesomeness!"
 thumbnail: "logydetail.png"
 mainImage: "logygames2.png"
-sort: 42
+sort: "logy games"
 updated: 2020-04-17
 ---
 

@@ -8,18 +8,18 @@ import { OrthokonDefinition } from "./_types";
 const orthokonGenerators: OrthokonDefinition["generators"] = {
   findvictims: {
     type: "neighbour",
-    start: "selectmovetarget",
+    start: "selectslidetarget",
     dirs: "ortho",
     ifover: "oppunits",
-    draw: { neighbours: { tolayer: "victims" } }
+    draw: { neighbours: { tolayer: "victims" } },
   },
-  findmovetargets: {
+  findslidetargets: {
     type: "walker",
     start: "selectunit",
     dirs: "rose",
     blocks: "units",
-    draw: { last: { tolayer: "movetargets" } }
-  }
+    draw: { last: { tolayer: "slidetargets" } },
+  },
 };
 
 export default orthokonGenerators;

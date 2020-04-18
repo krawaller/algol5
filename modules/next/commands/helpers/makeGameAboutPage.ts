@@ -1,5 +1,4 @@
 import prettier from "prettier";
-import { gameSlug } from "../../../common";
 import { AlgolArticle, AlgolMeta, AlgolGameBlobAnon } from "../../../types";
 import allMeta from "../../../games/dist/meta";
 
@@ -11,14 +10,14 @@ export const makeGameAboutPage = (article: AlgolArticle) => {
 import React, { Fragment } from "react";
 
 import Head from "next/head";
-import { PayloadArticlePage } from "../../../../ui/src/components/PayloadArticlePage";
-import { pageActions } from "../../../helpers";
-import article from "../../../../payloads/dist/articles/gamesAbout/${meta.id}";
+import { PayloadArticlePage } from "../../../../../ui/src/components/PayloadArticlePage";
+import { pageActions } from "../../../../helpers";
+import article from "../../../../../payloads/dist/articles/gamesAbout/${meta.id}";
 
 export const Game = () => {
   const crumbs = [
     { content: "Games", url: "/games" },
-    { content: "${meta.name}", url: "/games/${meta.id}" },
+    { content: "${meta.name}", url: "/games/${meta.slug}" },
     { content: "About" }
   ];
   return (

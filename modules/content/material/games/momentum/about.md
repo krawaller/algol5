@@ -2,7 +2,7 @@
 updated: 2020-03-12
 ---
 
-{GAME} is another great game from {EXTLINK:text=Philip Leduc,url=https://sites.google.com/site/theowlsnest02}, the mastermind behind the splendid {GAME:id=murusgallicus} and {GAME:id=gowiththefloe}.
+{GAME} is another great game from {INTLINK:text=Philip Leduc,url=/tags/phil_leduc}, the mastermind behind the splendid {GAME:id=murusgallicus} and {GAME:id=gowiththefloe}.
 
 {PIC:name=momentum.jpg,cred=Photo by Nestor Games,title=The Nestor edition,credurl=https://nestorgames.com/#momentum_detail}
 

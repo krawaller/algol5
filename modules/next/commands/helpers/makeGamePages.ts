@@ -1,7 +1,8 @@
 import fs from "fs-extra";
 import path from "path";
 import lib from "../../../games/dist/lib";
-import abouts from "../../../payloads/dist/articles/gamesAbout";
+import aboutList from "../../../payloads/dist/articles/gamesAbout";
+import rulesList from "../../../payloads/dist/articles/gamesRules";
 
 import { makeGameMainPage } from "./makeGameMainPage";
 import { makeGameAboutPage } from "./makeGameAboutPage";
@@ -16,10 +17,15 @@ export const makeGamePages = (gameId: string) => {
   fs.emptyDirSync(gameFolder);
   const main = makeGameMainPage(def);
   fs.writeFileSync(path.join(gameFolder, "index.tsx"), main);
-  const aboutArticle = abouts.find(a => a.id === gameId);
+  const aboutArticle = aboutList.find(a => a.id === gameId);
+  const aboutPath = path.join(gameFolder, "about");
+  fs.ensureDirSync(aboutPath);
   const about = makeGameAboutPage(aboutArticle);
-  fs.writeFileSync(path.join(gameFolder, "about.tsx"), about);
-  const rules = makeGameRulesPage(def);
-  fs.writeFileSync(path.join(gameFolder, "rules.tsx"), rules);
+  fs.writeFileSync(path.join(aboutPath, "index.tsx"), about);
+  const rulesArticle = rulesList.find(a => a.id === gameId);
+  const rulesPath = path.join(gameFolder, "rules");
+  fs.ensureDirSync(rulesPath);
+  const rules = makeGameRulesPage(rulesArticle);
+  fs.writeFileSync(path.join(rulesPath, "index.tsx"), rules);
   console.log("Created pages for", gameId);
 };

@@ -15,6 +15,7 @@ import {
   AlgolSetAnon,
   AlgolDirsAnon,
   isAlgolExpressionIfRulesetElse,
+  isAlgolExpressionFirstTruthy,
 } from "../../../../types";
 
 type ExprReturn = string | number | undefined | boolean;
@@ -50,6 +51,11 @@ export function executeExpression<_T>(
     return `(${parse.bool(test)} ? ${me(whenTruthy)} : ${me(whenFalsy)})`;
   }
 
+  if (isAlgolExpressionFirstTruthy(expr)) {
+    const alts = expr.firsttruthy;
+    return `(${alts.map(me).join(" || ")})`;
+  }
+
   if (isAlgolExpressionIfActionElse(expr)) {
     const {
       ifactionelse: [testAction, whenYes, whenNo],
@@ -63,7 +69,8 @@ export function executeExpression<_T>(
       ifrulesetelse: [testRuleset, whenYes, whenNo],
     } = expr;
     // TODO - testRuleset is dynamic? fix type?
-    return me(testRuleset === ruleset ? whenYes : whenNo); // TODO - why TS unhappy here?!
+    // @ts-ignore TODO - why TS unhappy here?!
+    return me(testRuleset === ruleset ? whenYes : whenNo);
   }
 
   if (isAlgolExpressionPlayerCase(expr)) {

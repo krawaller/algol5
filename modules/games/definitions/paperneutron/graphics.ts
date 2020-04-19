@@ -6,8 +6,10 @@
 import { PaperneutronDefinition } from "./_types";
 
 const paperneutronGraphics: PaperneutronDefinition["graphics"] = {
-  icons: {},
-  tiles: {}
+  icons: {
+    soldiers: "pawn",
+  },
+  tiles: { base: "playercolour" },
 };
 
 export default paperneutronGraphics;

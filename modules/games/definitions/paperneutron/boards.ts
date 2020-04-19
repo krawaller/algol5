@@ -6,10 +6,12 @@ import { PaperneutronDefinition } from "./_types";
 
 const paperneutronBoardBook: PaperneutronDefinition["boards"] = {
   basic: {
-    height: 5,
-    width: 5,
-    terrain: {}
-  }
+    height: 4,
+    width: 4,
+    terrain: {
+      base: { "1": [{ rect: ["a1", "d1"] }], "2": [{ rect: ["a4", "d4"] }] },
+    },
+  },
 };
 
 export default paperneutronBoardBook;

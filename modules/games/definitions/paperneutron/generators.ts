@@ -5,6 +5,14 @@
 
 import { PaperneutronDefinition } from "./_types";
 
-const paperneutronGenerators: PaperneutronDefinition["generators"] = {};
+const paperneutronGenerators: PaperneutronDefinition["generators"] = {
+  findslidetargets: {
+    type: "walker",
+    start: "selectunit",
+    dirs: "rose",
+    blocks: "units",
+    draw: { last: { tolayer: "slidetargets" } },
+  },
+};
 
 export default paperneutronGenerators;

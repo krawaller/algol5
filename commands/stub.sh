@@ -14,7 +14,7 @@ npm run exportCompiledGames;
 
 cd ../graphics;
 npm run makeGameGraphics "$gameId";
-renderGameActionShots "$gameId";
+npm run renderGameActionShots "$gameId";
 npm run exportGameGraphics;
 
 cd ../battle;

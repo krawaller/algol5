@@ -54,7 +54,7 @@ export interface AlgolBoolCmndAvailable<Blob extends AlgolGameBlobAnon> {
 }
 
 export interface AlgolBoolTruthy<Blob extends AlgolGameBlobAnon> {
-  truthy: AlgolVal<Blob, string | number>;
+  truthy: AlgolVal<Blob, any>; // TODO - this is because of turnpos in paperneutron. find root cause!
 }
 
 export interface AlgolBoolFalsy<Blob extends AlgolGameBlobAnon> {

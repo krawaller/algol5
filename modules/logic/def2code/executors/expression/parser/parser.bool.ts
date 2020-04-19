@@ -43,6 +43,8 @@ export default function parseVal(
         return true;
       case "false":
         return false;
+      case "canEndTurn":
+        return "LINKS.endTurn || LINKS.endGame";
       default:
         throw new Error("Unknown bool singleton: " + expr);
     }

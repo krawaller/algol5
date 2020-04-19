@@ -38,6 +38,7 @@ export type AlgolBool<Blob extends AlgolGameBlobAnon> = AlgolExpression<
 type AlgolBoolInner<Blob extends AlgolGameBlobAnon> =
   | ["true"]
   | ["false"]
+  | ["canEndTurn"]
   | AlgolBoolNot<Blob>
   | AlgolBoolAnd<Blob>
   | AlgolBoolOr<Blob>

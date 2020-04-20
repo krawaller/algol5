@@ -45,4 +45,6 @@ const tests: AlgolBool<AlgolTestBlob>[] = [
   { stoppedBecause: "nomoresteps" },
   ["canEndTurn"],
   ["isFirstTurn"],
+  { truthypos: "mymark" },
+  { falsypos: "mymark" },
 ];

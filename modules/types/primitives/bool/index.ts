@@ -25,6 +25,8 @@ import {
   AlgolBoolTruthy,
   AlgolBoolValInList,
   AlgolBoolStoppedBecause,
+  AlgolBoolFalsyPos,
+  AlgolBoolTruthyPos,
 } from "./bool.interfaces";
 
 import { AlgolExpression } from "../../";
@@ -61,4 +63,6 @@ type AlgolBoolInner<Blob extends AlgolGameBlobAnon> =
   | AlgolBoolFalsy<Blob>
   | AlgolBoolOrtho<Blob>
   | AlgolBoolDiag<Blob>
-  | AlgolBoolStoppedBecause<Blob>;
+  | AlgolBoolStoppedBecause<Blob>
+  | AlgolBoolFalsyPos<Blob>
+  | AlgolBoolTruthyPos<Blob>;

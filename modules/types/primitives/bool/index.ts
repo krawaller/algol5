@@ -39,6 +39,7 @@ type AlgolBoolInner<Blob extends AlgolGameBlobAnon> =
   | ["true"]
   | ["false"]
   | ["canEndTurn"]
+  | ["isFirstTurn"]
   | AlgolBoolNot<Blob>
   | AlgolBoolAnd<Blob>
   | AlgolBoolOr<Blob>

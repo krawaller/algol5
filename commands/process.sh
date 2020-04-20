@@ -1,7 +1,7 @@
 #!/bin/bash 
 gameId="$1"
 what="$2"
-opts=("analyze" "compile" "graphics" "demo" "content" "pics", "pages")
+opts=("analyze" "compile" "graphics" "demo" "content" "pics" "pages")
 allOpts=$( IFS=/ ; echo "<${opts[*]}>" )
 
 if [ "$gameId" = "" ]; then

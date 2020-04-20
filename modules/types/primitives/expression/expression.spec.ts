@@ -8,4 +8,5 @@ const tests: TestExpression[] = [
   { ifelse: [{ anyat: ["mylayer", "mymark"] }, "GNURP", "FNURP"] },
   { ifrulesetelse: ["myrule", "GNURP", "FNURP"] },
   { indexlist: [["dir"], "GNURP", { playercase: ["GNURP", "FNURP"] }] },
+  { firsttruthy: ["FNURP", "GNURP"] },
 ];

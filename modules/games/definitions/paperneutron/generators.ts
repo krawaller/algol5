@@ -6,12 +6,26 @@
 import { PaperneutronDefinition } from "./_types";
 
 const paperneutronGenerators: PaperneutronDefinition["generators"] = {
-  findslidetargets: {
+  findfirstneutrontargets: {
     type: "walker",
-    start: "selectunit",
+    start: "selectfirstneutron",
     dirs: "rose",
     blocks: "units",
-    draw: { last: { tolayer: "slidetargets" } },
+    draw: { last: { tolayer: "firstneutrontargets" } },
+  },
+  findsecondneutrontargets: {
+    type: "walker",
+    start: { turnpos: "nextneutron" },
+    dirs: "rose",
+    blocks: "units",
+    draw: { last: { tolayer: "secondneutrontargets" } },
+  },
+  findmyunittargets: {
+    type: "walker",
+    start: "selectmyunit",
+    dirs: "rose",
+    blocks: "units",
+    draw: { last: { tolayer: "myunittargets" } },
   },
 };
 

@@ -2,12 +2,12 @@ import { PaperneutronDefinition } from "./_types";
 
 const paperneutronMeta: PaperneutronDefinition["meta"] = {
   id: "paperneutron",
-  name: "Paperneutron",
+  name: "Paper Neutron",
   tags: [],
   tagline: "An awesome game!",
   source: "http://some.url.to.rules",
   code: "X",
-  slug: "paperneutron"
+  slug: "paperneutron",
 };
 
 export default paperneutronMeta;

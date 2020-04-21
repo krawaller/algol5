@@ -1,70 +1,116 @@
 import { PaperneutronDefinition } from "./_types";
 
 const paperneutronFlow: PaperneutronDefinition["flow"] = {
+  endGame: {
+    goal: {
+      condition: { overlaps: ["neutralsoldiers", "mybase"] },
+      show: { intersect: ["mybase", "neutralsoldiers"] },
+    },
+    suicide: {
+      condition: { overlaps: ["neutralsoldiers", "oppbase"] },
+      who: ["otherplayer"],
+      show: { intersect: ["oppbase", "neutralsoldiers"] },
+    },
+  },
   startTurn: {
-    link: "selectunit",
+    link: {
+      playercase: [
+        { ifelse: [["isFirstTurn"], "selectmyunit", "selectfirstneutron"] },
+        "selectfirstneutron",
+      ],
+    },
   },
   commands: {
     slide: {
       applyEffects: [
-        { moveat: ["selectunit", "selectslidetarget"] },
+        {
+          moveat: [
+            {
+              firsttruthy: [
+                "selectmyunit",
+                { turnpos: "nextneutron" },
+                "selectfirstneutron",
+              ],
+            },
+            {
+              firsttruthy: [
+                "selectmyunittarget",
+                "selectsecondneutrontarget",
+                "selectfirstneutrontarget",
+              ],
+            },
+          ],
+        },
         {
           if: [
-            { anyat: ["neutralunits", "selectunit"] },
+            { falsypos: "selectmyunit" },
             {
               ifelse: [
-                { truthy: { turnvar: "firstneutron" } },
-                { setturnpos: ["secondneutron", "selectslidetarget"] },
-                { setturnpos: ["firstneutron", "selectslidetarget"] },
+                { truthypos: { turnpos: "nextneutron" } },
+                { setturnvar: ["neutronsdone", 1] },
+                {
+                  setturnpos: [
+                    "nextneutron",
+                    {
+                      onlyin: {
+                        exceptpos: ["neutralsoldiers", "selectfirstneutron"],
+                      },
+                    },
+                  ],
+                },
               ],
             },
           ],
         },
       ],
+      runGenerator: {
+        if: [
+          {
+            and: [
+              { truthypos: { turnpos: "nextneutron" } },
+              { falsypos: "selectmyunit" },
+            ],
+          },
+          "findsecondneutrontargets",
+        ],
+      },
       link: {
         ifelse: [
-          { anyat: ["myunits", "selectslidetarget"] },
+          { truthypos: "selectmyunit" },
           "endTurn",
-          "selectunit",
+          {
+            ifelse: [
+              { truthypos: "selectsecondneutrontarget" },
+              "selectmyunit",
+              "selectsecondneutrontarget",
+            ],
+          },
         ],
       },
     },
   },
   marks: {
-    selectslidetarget: {
-      from: "slidetargets",
+    selectfirstneutrontarget: {
+      from: "firstneutrontargets",
       link: "slide",
     },
-    selectunit: {
-      from: {
-        playercase: [
-          {
-            ifelse: [
-              {
-                or: [
-                  { same: [["turn"], 1] },
-                  { truthy: { turnvar: "secondneutron" } },
-                ],
-              },
-              "myunits",
-              {
-                exceptpos: ["neutralunits", { turnpos: "firstneutron" }],
-              },
-            ],
-          },
-          {
-            ifelse: [
-              { truthy: { turnvar: "secondneutron" } },
-              "myunits",
-              {
-                exceptpos: ["neutralunits", { turnpos: "firstneutron" }],
-              },
-            ],
-          },
-        ],
-      },
-      runGenerator: "findslidetargets",
-      link: "selectslidetarget",
+    selectsecondneutrontarget: {
+      from: "secondneutrontargets",
+      link: "slide",
+    },
+    selectmyunittarget: {
+      from: "myunittargets",
+      link: "slide",
+    },
+    selectmyunit: {
+      from: "myunits",
+      runGenerator: "findmyunittargets",
+      link: "selectmyunittarget",
+    },
+    selectfirstneutron: {
+      from: "neutralunits",
+      runGenerator: "findfirstneutrontargets",
+      link: "selectfirstneutrontarget",
     },
   },
 };

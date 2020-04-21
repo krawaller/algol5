@@ -6,7 +6,12 @@ type PaperneutronBoardWidth = 4;
 
 type PaperneutronTerrain = "base";
 type PaperneutronUnit = "soldiers";
-type PaperneutronMark = "selectslidetarget" | "selectunit";
+type PaperneutronMark =
+  | "selectfirstneutrontarget"
+  | "selectsecondneutrontarget"
+  | "selectmyunittarget"
+  | "selectmyunit"
+  | "selectfirstneutron";
 type PaperneutronCommand = "slide";
 type PaperneutronPhaseCommand = "slide";
 type PaperneutronPhase =
@@ -22,8 +27,14 @@ type PaperneutronUnitLayer =
   | "mysoldiers"
   | "oppsoldiers"
   | "neutralsoldiers";
-type PaperneutronGenerator = "findslidetargets";
-type PaperneutronArtifactLayer = "slidetargets";
+type PaperneutronGenerator =
+  | "findfirstneutrontargets"
+  | "findsecondneutrontargets"
+  | "findmyunittargets";
+type PaperneutronArtifactLayer =
+  | "firstneutrontargets"
+  | "secondneutrontargets"
+  | "myunittargets";
 type PaperneutronTerrainLayer = "base" | "mybase" | "oppbase" | "nobase";
 type PaperneutronLayer =
   | CommonLayer
@@ -32,8 +43,8 @@ type PaperneutronLayer =
   | PaperneutronTerrainLayer;
 type PaperneutronBattlePos = never;
 type PaperneutronBattleVar = never;
-type PaperneutronTurnPos = "secondneutron" | "firstneutron";
-type PaperneutronTurnVar = "firstneutron";
+type PaperneutronTurnPos = "nextneutron";
+type PaperneutronTurnVar = "neutronsdone" | "nextneutron";
 
 type PaperneutronBoardName = "basic";
 type PaperneutronSetupName = "basic";

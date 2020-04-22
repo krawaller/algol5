@@ -1,9 +1,9 @@
 ---
-updated: 2020-03-01
+updated: 2020-04-22
 ---
 
-{GAME} was invented by Walter Joris around Y2K, and published in his amazing book {EXTLINK:text=100 strategic games for pen and paper,url=https://www.amazon.com/100-Strategic-Games-Walter-Joris/dp/1842227270}
+{GAME} was invented by {INTLINK:url=/tags/walter_joris_and_100_strategic_games_for_pen_and_paper,text=Walter Joris} around Y2K, and published in his amazing book {INTLINK:url=/tags/walter_joris_and_100_strategic_games_for_pen_and_paper,text=100 Strategic Game for Pen and Paper}.
 
-{PIC:name=walterart.png,cred=Art by Walter Joris,title=He does abstract art too!,credurl=https://www.flickr.com/photos/waljoris/49173405073/}
+{PIC:name=duplointhebook.jpg,cred=Photo by me,title=Duplo in the book}
 
-{GAME} is characterised by pieces being added, never moved or removed (after all, the title of the book isn't "...for pen and paper and eraser"). This in combination with the line extension mechanic makes for a fast but rather deep game, difficult to play well!
+Like most games in the book {GAME} is characterised by pieces being continuously added, never moved or removed. This in combination with the line extension mechanic makes for a fast but rather deep game, difficult to play well!

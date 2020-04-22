@@ -23,6 +23,8 @@ import {
   isAlgolBoolOrtho,
   isAlgolBoolDiag,
   isAlgolBoolStoppedBecause,
+  isAlgolBoolFalsyPos,
+  isAlgolBoolTruthyPos,
 } from "../../../../../types";
 
 import { makeParser } from "../";
@@ -43,6 +45,10 @@ export default function parseVal(
         return true;
       case "false":
         return false;
+      case "canEndTurn":
+        return "LINKS.endTurn || LINKS.endGame";
+      case "isFirstTurn":
+        return "TURN === 1";
       default:
         throw new Error("Unknown bool singleton: " + expr);
     }
@@ -109,6 +115,14 @@ export default function parseVal(
   if (isAlgolBoolFalsy(expr)) {
     const { falsy: val } = expr;
     return `!${parser.val(val)}`;
+  }
+  if (isAlgolBoolTruthyPos(expr)) {
+    const { truthypos: pos } = expr;
+    return `!!${parser.pos(pos)}`;
+  }
+  if (isAlgolBoolFalsyPos(expr)) {
+    const { falsypos: pos } = expr;
+    return `!${parser.pos(pos)}`;
   }
   if (isAlgolBoolAnyAt(expr)) {
     const {

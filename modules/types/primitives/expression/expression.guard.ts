@@ -4,6 +4,7 @@ import {
   AlgolExpressionPlayerCaseAnon,
   AlgolExpressionIndexListAnon,
   AlgolExpressionIfRulesetElseAnon,
+  AlgolExpressionFirstTruthyAnon,
 } from "./expression.anon";
 
 // ---- former logical guards
@@ -40,4 +41,10 @@ export function isAlgolExpressionIndexList<_T>(
   expr: any
 ): expr is AlgolExpressionIndexListAnon<_T> {
   return (expr as AlgolExpressionIndexListAnon<_T>).indexlist !== undefined;
+}
+
+export function isAlgolExpressionFirstTruthy<_T>(
+  expr: any
+): expr is AlgolExpressionFirstTruthyAnon<_T> {
+  return (expr as AlgolExpressionFirstTruthyAnon<_T>).firsttruthy !== undefined;
 }

@@ -25,7 +25,7 @@ export function getBattleInstruction(
     } else {
       return {
         line: [
-          { player: 1 },
+          { player: battle.winner! },
           { text: " won through " },
           { bold: battle.gameEndedBy },
           { text: "!" },

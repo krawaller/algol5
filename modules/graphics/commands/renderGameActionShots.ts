@@ -11,6 +11,6 @@ const gameId = (process.argv[2] as unknown) as GameId;
   } else if (list.indexOf(gameId) === -1) {
     console.log(`Game "${gameId}" doesn't exists!`);
   } else {
-    renderGameActionShots(gameId);
+    await renderGameActionShots(gameId);
   }
 })();

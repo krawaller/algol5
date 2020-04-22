@@ -43,4 +43,8 @@ const tests: AlgolBool<AlgolTestBlob>[] = [
   { ortho: 7 },
   { diag: ["dir"] },
   { stoppedBecause: "nomoresteps" },
+  ["canEndTurn"],
+  ["isFirstTurn"],
+  { truthypos: "mymark" },
+  { falsypos: "mymark" },
 ];

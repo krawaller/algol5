@@ -7,7 +7,7 @@ const duploMeta: DuploDefinition["meta"] = {
   source: "http://www.di.fc.ul.pt/~jpn/gv/duplo.htm",
   author: "Walter Joris",
   year: 2002,
-  tags: ["irreversible"],
+  tags: ["irreversible", "walterjoris"],
   tagline: "A fierce battle of extending lines",
   slug: "duplo",
 };

@@ -42,5 +42,9 @@ import { ${cap}Blob } from "../../../../games/dist/games/${gameId}";
 // generated SVG when the content is written to html.
 export const arrangements: AlgolArrangements<${cap}Blob> = {};`
     );
+  } else {
+    throw new Error(
+      `Tried to stub content for ${gameId} but folder already existed!`
+    );
   }
 };

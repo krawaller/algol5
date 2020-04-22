@@ -9,7 +9,12 @@ const ${gameId}Variants: ${capId}Definition['variants'] = [
     board: "basic",
     setup: "basic",
     desc: "regular",
-    code: "r"
+    code: "r",
+    arr: {
+      setup: {},
+      marks: [],
+      potentialMarks: [],
+    },
   },
 ];
 

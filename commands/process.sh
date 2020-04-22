@@ -1,7 +1,7 @@
 #!/bin/bash 
 gameId="$1"
 what="$2"
-opts=("analyze" "compile" "graphics" "demo" "content" "pics", "pages")
+opts=("analyze" "compile" "graphics" "demo" "content" "pics" "pages")
 allOpts=$( IFS=/ ; echo "<${opts[*]}>" )
 
 if [ "$gameId" = "" ]; then
@@ -26,6 +26,9 @@ else
   if [ "$what" = "graphics" ] || [ "$what" = "" ]; then
     cd ../graphics;
     npm run makeGameGraphics "$gameId";
+    npm run renderGameActionShots "$gameId";
+    cd ../payloads;
+    npm run makeGameListing "$gameId";
   fi
 
   if [ "$what" = "demo" ] || [ "$what" = "" ]; then
@@ -38,9 +41,11 @@ else
     npm run writeGame "$gameId";
   fi
 
-  if [ "$what" = "pics" ] || [ "$what" = "" ]; then
-    cd ../next;
+  if [ "$what" = "pics" ] || [ "$what" = "graphics" ] || [ "$what" = "" ]; then
+    cd ../ui;
     npm run importGameImages "$gameId";
+    cd ../next;
+    npm run getStatic;
   fi
 
     if [ "$what" = "pages" ] || [ "$what" = "" ]; then

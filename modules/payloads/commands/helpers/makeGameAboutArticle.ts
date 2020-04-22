@@ -34,8 +34,8 @@ const article: AlgolArticle = {
   mainImage: "/images/games/${gameId}/${gameId}_${def.variants[0].code}.png",
   updated: about.updated,
   relations: {
-    "${meta.name} tags": [${tagIds.join(", ")}],
-    "Related news": [${newsIds.join(", ")}],
+    "${meta.name} has these tags:": [${tagIds.join(", ")}],
+    "News articles mentioning ${meta.name}:": [${newsIds.join(", ")}],
   },
   html: about.html
 };

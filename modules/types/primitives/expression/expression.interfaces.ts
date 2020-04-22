@@ -41,3 +41,10 @@ export interface AlgolExpressionIfRulesetElse<
 export interface AlgolExpressionIndexList<Blob extends AlgolGameBlobAnon, _T> {
   indexlist: [AlgolVal<Blob, string | number>, ...AlgolExpression<Blob, _T>[]];
 }
+
+export interface AlgolExpressionFirstTruthy<
+  Blob extends AlgolGameBlobAnon,
+  _T
+> {
+  firsttruthy: AlgolExpression<Blob, _T>[];
+}

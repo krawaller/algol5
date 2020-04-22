@@ -5,11 +5,11 @@ import fake from "./fake";
 
 import {
   FullDefAnon,
-  isAlgolPosTurnPos,
-  isAlgolPosBattlePos,
-  isAlgolValBattleVar,
-  isAlgolValTurnVar,
   AlgolLinkAnon,
+  isAlgolEffectSetTurnPos,
+  isAlgolEffectSetBattlePos,
+  isAlgolEffectSetTurnVar,
+  isAlgolEffectSetBattleVar,
 } from "../../../types";
 import {
   boardPositions,
@@ -95,36 +95,36 @@ export default async function analyze(def: FullDefAnon | string) {
 
   const turnpos = Array.from(
     new Set(
-      find(def, isAlgolPosTurnPos).reduce(
-        (mem, find) => mem.concat(possibilities(find.value.turnpos)),
+      find(def, isAlgolEffectSetTurnPos).reduce(
+        (mem, find) => mem.concat(possibilities(find.value.setturnpos[0])),
         [] as string[]
       )
     )
   );
   const battlepos = Array.from(
     new Set(
-      find(def, isAlgolPosBattlePos).reduce(
-        (mem, find) => mem.concat(possibilities(find.value.battlepos)),
+      find(def, isAlgolEffectSetBattlePos).reduce(
+        (mem, find) => mem.concat(possibilities(find.value.setbattlepos[0])),
         [] as string[]
       )
     )
   );
   const turnvar = Array.from(
     new Set(
-      find(def, isAlgolValTurnVar).reduce(
-        (mem, find) => mem.concat(possibilities(find.value.turnvar)),
+      find(def, isAlgolEffectSetTurnVar).reduce(
+        (mem, find) => mem.concat(possibilities(find.value.setturnvar[0])),
         [] as string[]
       )
     )
-  );
+  ).concat(turnpos);
   const battlevar = Array.from(
     new Set(
-      find(def, isAlgolValBattleVar).reduce(
-        (mem, find) => mem.concat(possibilities(find.value.battlevar)),
+      find(def, isAlgolEffectSetBattleVar).reduce(
+        (mem, find) => mem.concat(possibilities(find.value.setbattlevar[0])),
         [] as string[]
       )
     )
-  );
+  ).concat(battlepos);
 
   const boardNames = Object.keys(def.boards);
   const setupNames = Object.keys(def.setups);

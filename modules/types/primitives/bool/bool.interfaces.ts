@@ -92,3 +92,11 @@ export interface AlgolBoolDiag<Blob extends AlgolGameBlobAnon> {
 export interface AlgolBoolStoppedBecause<Blob extends AlgolGameBlobAnon> {
   stoppedBecause: AlgolVal<Blob, AlgolWalkerStop>;
 }
+
+export interface AlgolBoolTruthyPos<Blob extends AlgolGameBlobAnon> {
+  truthypos: AlgolPos<Blob>;
+}
+
+export interface AlgolBoolFalsyPos<Blob extends AlgolGameBlobAnon> {
+  falsypos: AlgolPos<Blob>;
+}

@@ -1006,7 +1006,13 @@ const game = {
       desc: "regular",
       code: "r",
       arr: {
-        setup: {},
+        setup: {
+          soldiers: {
+            "0": ["a2", "d2"],
+            "1": ["a1", "b1", "c3", "d3"],
+            "2": ["a4", "b2", "c4", "d4"]
+          }
+        },
         marks: [],
         potentialMarks: []
       }

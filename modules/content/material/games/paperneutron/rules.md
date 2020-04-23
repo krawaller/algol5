@@ -16,3 +16,4 @@ After completing all slides, you...
 
 - lose by {ENDGAME:name=suicide} if you had to {CMND} a {UNIT:who=0} into the opponent base
 - win by {ENDGAME:name=goal} if you manage to {CMND} a {UNIT:who=0} into your own base
+- win by {ENDGAME:name=starvation} if your opponent cannot complete her following turn

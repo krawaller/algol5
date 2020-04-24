@@ -66,11 +66,6 @@ export function executeStatement<_T>(
     const {
       ifrulesetelse: [testRuleset, whenYes, whenNo],
     } = statement;
-    console.log("IFRULESETELSE", testRuleset === ruleset, {
-      testRuleset,
-      whenYes,
-      whenNo,
-    });
     return me(testRuleset === ruleset ? whenYes : whenNo);
   }
 

@@ -66,6 +66,17 @@ export interface AlgolIfableExpressionIfActionElse<
   ];
 }
 
+export interface AlgolIfableExpressionIfRulesetElse<
+  Blob extends AlgolGameBlobAnon,
+  _T
+> {
+  ifrulesetelse: [
+    AlgolVal<Blob, Blob["ruleset"]>,
+    AlgolIfableExpression<Blob, _T>,
+    AlgolIfableExpression<Blob, _T>
+  ];
+}
+
 export interface AlgolIfableExpressionIndexList<
   Blob extends AlgolGameBlobAnon,
   _T

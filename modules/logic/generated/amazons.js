@@ -14,7 +14,6 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { amazons: "queen", fires: "pawn" };
-const emptyArtifactLayers = { movetargets: {}, firedfrom: {}, firetargets: {} };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   amazons: [
@@ -31,6 +30,11 @@ const groupLayers2 = {
     ["units", "myunits", "amazons"]
   ],
   fires: [["units"], ["units", "oppunits"], ["units", "myunits"]]
+};
+const emptyArtifactLayers_basic = {
+  movetargets: {},
+  firedfrom: {},
+  firetargets: {}
 };
 const game = {
   gameId: "amazons",
@@ -81,7 +85,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1,
         NEXTSPAWNID: step.NEXTSPAWNID
@@ -106,7 +110,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN,
         NEXTSPAWNID: step.NEXTSPAWNID

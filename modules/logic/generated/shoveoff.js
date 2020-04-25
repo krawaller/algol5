@@ -14,7 +14,14 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn" };
-const emptyArtifactLayers = {
+let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
+const groupLayers1 = {
+  soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
+};
+const groupLayers2 = {
+  soldiers: [["units"], ["units", "oppunits"], ["units", "myunits"]]
+};
+const emptyArtifactLayers_basic = {
   targetedgepoints: {},
   squishsouth: {},
   squishwest: {},
@@ -29,13 +36,6 @@ const emptyArtifactLayers = {
   spawnnorth: {},
   spawneast: {},
   fourinarow: {}
-};
-let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
-const groupLayers1 = {
-  soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
-};
-const groupLayers2 = {
-  soldiers: [["units"], ["units", "oppunits"], ["units", "myunits"]]
 };
 const game = {
   gameId: "shoveoff",
@@ -84,7 +84,7 @@ const game = {
           myunits: oldUnitLayers.oppunits,
           oppunits: oldUnitLayers.myunits
         },
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1,
         NEXTSPAWNID: step.NEXTSPAWNID
@@ -107,7 +107,7 @@ const game = {
           myunits: oldUnitLayers.oppunits,
           oppunits: oldUnitLayers.myunits
         },
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN,
         NEXTSPAWNID: step.NEXTSPAWNID

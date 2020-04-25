@@ -14,13 +14,6 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { seals: "king", bears: "queen", holes: "pawn" };
-const emptyArtifactLayers = {
-  eattargets: {},
-  movetargets: {},
-  jumptargets: {},
-  canmove: {},
-  cracks: {}
-};
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   seals: [
@@ -55,6 +48,13 @@ const groupLayers2 = {
     ["units", "oppunits", "holes"],
     ["units", "myunits", "holes"]
   ]
+};
+const emptyArtifactLayers_basic = {
+  eattargets: {},
+  movetargets: {},
+  jumptargets: {},
+  canmove: {},
+  cracks: {}
 };
 const game = {
   gameId: "gowiththefloe",
@@ -114,7 +114,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1,
         NEXTSPAWNID: step.NEXTSPAWNID
@@ -141,7 +141,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN,
         NEXTSPAWNID: step.NEXTSPAWNID

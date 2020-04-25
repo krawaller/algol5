@@ -14,14 +14,6 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { towers: "rook", walls: "pawn", catapults: "queen" };
-const emptyArtifactLayers = {
-  firetargets: {},
-  movetargets: {},
-  madetowers: {},
-  madewalls: {},
-  madecatapults: {},
-  crushtargets: {}
-};
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   towers: [
@@ -56,6 +48,22 @@ const groupLayers2 = {
     ["units", "oppunits", "catapults", "oppcatapults"],
     ["units", "myunits", "catapults", "mycatapults"]
   ]
+};
+const emptyArtifactLayers_basic = {
+  firetargets: {},
+  movetargets: {},
+  madetowers: {},
+  madewalls: {},
+  madecatapults: {},
+  crushtargets: {}
+};
+const emptyArtifactLayers_advanced = {
+  firetargets: {},
+  movetargets: {},
+  madecatapults: {},
+  madetowers: {},
+  madewalls: {},
+  crushtargets: {}
 };
 const game = {
   gameId: "murusgallicus",
@@ -127,7 +135,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1,
         NEXTSPAWNID: step.NEXTSPAWNID
@@ -160,7 +168,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN,
         NEXTSPAWNID: step.NEXTSPAWNID
@@ -196,7 +204,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_advanced,
         MARKS: {},
         TURN: step.TURN + 1,
         NEXTSPAWNID: step.NEXTSPAWNID
@@ -232,7 +240,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_advanced,
         MARKS: {},
         TURN: step.TURN,
         NEXTSPAWNID: step.NEXTSPAWNID

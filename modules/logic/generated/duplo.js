@@ -14,13 +14,6 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn" };
-const emptyArtifactLayers = {
-  spawndirs: {},
-  growstarts: {},
-  targets: {},
-  potentialopptargets: {},
-  spawns: {}
-};
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   soldiers: [
@@ -35,6 +28,13 @@ const groupLayers2 = {
     ["units", "oppunits", "soldiers", "oppsoldiers"],
     ["units", "myunits", "soldiers", "mysoldiers"]
   ]
+};
+const emptyArtifactLayers_basic = {
+  spawndirs: {},
+  growstarts: {},
+  targets: {},
+  potentialopptargets: {},
+  spawns: {}
 };
 const game = {
   gameId: "duplo",
@@ -108,7 +108,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN,
         NEXTSPAWNID: step.NEXTSPAWNID
@@ -149,7 +149,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN,
         NEXTSPAWNID: step.NEXTSPAWNID

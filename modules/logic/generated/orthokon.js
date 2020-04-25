@@ -14,7 +14,6 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn" };
-const emptyArtifactLayers = { victims: {}, slidetargets: {} };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
@@ -22,6 +21,7 @@ const groupLayers1 = {
 const groupLayers2 = {
   soldiers: [["units"], ["units", "oppunits"], ["units", "myunits"]]
 };
+const emptyArtifactLayers_basic = { victims: {}, slidetargets: {} };
 const game = {
   gameId: "orthokon",
   commands: { slide: {} },
@@ -69,7 +69,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1
       };
@@ -92,7 +92,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN
       };

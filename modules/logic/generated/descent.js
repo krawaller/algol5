@@ -19,7 +19,6 @@ const iconMapping = {
   lvl1: "knight",
   lvl0: "pawn"
 };
-const emptyArtifactLayers = { movetargets: {}, digtargets: {}, winline: {} };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   lvl3: [
@@ -64,6 +63,11 @@ const groupLayers2 = {
     ["units", "oppunits", "lvl0", "opplvl0"],
     ["units", "myunits", "lvl0", "mylvl0"]
   ]
+};
+const emptyArtifactLayers_basic = {
+  movetargets: {},
+  digtargets: {},
+  winline: {}
 };
 const game = {
   gameId: "descent",
@@ -143,7 +147,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1,
         NEXTSPAWNID: step.NEXTSPAWNID,
@@ -181,7 +185,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN,
         NEXTSPAWNID: step.NEXTSPAWNID,

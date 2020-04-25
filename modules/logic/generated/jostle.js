@@ -14,13 +14,6 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { checkers: "pawn" };
-const emptyArtifactLayers = {
-  movetargets: {},
-  initialenemy: {},
-  initialfriend: {},
-  newenemy: {},
-  newfriend: {}
-};
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   checkers: [
@@ -35,6 +28,13 @@ const groupLayers2 = {
     ["units", "oppunits", "oppcheckers"],
     ["units", "myunits", "mycheckers"]
   ]
+};
+const emptyArtifactLayers_basic = {
+  movetargets: {},
+  initialenemy: {},
+  initialfriend: {},
+  newenemy: {},
+  newfriend: {}
 };
 const game = {
   gameId: "jostle",
@@ -91,7 +91,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1
       };
@@ -116,7 +116,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN
       };

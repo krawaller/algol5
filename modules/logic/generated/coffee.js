@@ -14,14 +14,6 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn" };
-const emptyArtifactLayers = {
-  FOOBAR: {},
-  vertical: {},
-  uphill: {},
-  horisontal: {},
-  downhill: {},
-  winline: {}
-};
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   soldiers: [
@@ -36,6 +28,14 @@ const groupLayers2 = {
     ["units", "oppunits", "soldiers"],
     ["units", "myunits", "soldiers"]
   ]
+};
+const emptyArtifactLayers_basic = {
+  FOOBAR: {},
+  vertical: {},
+  uphill: {},
+  horisontal: {},
+  downhill: {},
+  winline: {}
 };
 const game = {
   gameId: "coffee",
@@ -97,7 +97,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1,
         NEXTSPAWNID: step.NEXTSPAWNID
@@ -127,7 +127,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN,
         NEXTSPAWNID: step.NEXTSPAWNID

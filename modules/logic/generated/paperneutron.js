@@ -14,11 +14,6 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn" };
-const emptyArtifactLayers = {
-  firstneutrontargets: {},
-  secondneutrontargets: {},
-  myunittargets: {}
-};
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   soldiers: [
@@ -33,6 +28,11 @@ const groupLayers2 = {
     ["units", "oppunits"],
     ["units", "myunits"]
   ]
+};
+const emptyArtifactLayers_basic = {
+  firstneutrontargets: {},
+  secondneutrontargets: {},
+  myunittargets: {}
 };
 const game = {
   gameId: "paperneutron",
@@ -96,7 +96,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN,
         TURNVARS: {}
@@ -122,7 +122,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN,
         TURNVARS: {}

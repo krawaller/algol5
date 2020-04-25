@@ -14,7 +14,6 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { kings: "king", pawns: "pawn", bishops: "bishop" };
-const emptyArtifactLayers = { line: {} };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   kings: [
@@ -50,6 +49,7 @@ const groupLayers2 = {
     ["units", "bishops"]
   ]
 };
+const emptyArtifactLayers_basic = { line: {} };
 const game = {
   gameId: "trafficlights",
   commands: { deploy: {}, promote: {} },
@@ -112,7 +112,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1,
         NEXTSPAWNID: step.NEXTSPAWNID
@@ -150,7 +150,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN,
         NEXTSPAWNID: step.NEXTSPAWNID

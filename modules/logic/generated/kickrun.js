@@ -14,7 +14,6 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { runners: "bishop", sidekickers: "pawn" };
-const emptyArtifactLayers = { movetargets: {} };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   runners: [
@@ -32,6 +31,7 @@ const groupLayers2 = {
   ],
   sidekickers: [["units"], ["units", "oppunits"], ["units", "myunits"]]
 };
+const emptyArtifactLayers_basic = { movetargets: {} };
 const game = {
   gameId: "kickrun",
   commands: { move: {} },
@@ -89,7 +89,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1
       };
@@ -115,7 +115,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN
       };

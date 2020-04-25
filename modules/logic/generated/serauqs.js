@@ -14,7 +14,6 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn", wild: "king" };
-const emptyArtifactLayers = { movetargets: {}, winline: {} };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]],
@@ -32,6 +31,7 @@ const groupLayers2 = {
     ["units", "myunits", "wild", "mywild"]
   ]
 };
+const emptyArtifactLayers_basic = { movetargets: {}, winline: {} };
 const game = {
   gameId: "serauqs",
   commands: { promote: {}, move: {} },
@@ -89,7 +89,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1
       };
@@ -115,7 +115,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN
       };

@@ -14,13 +14,18 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { markers: "pawn" };
-const emptyArtifactLayers = { winline: {}, loseline: {}, death: {}, push: {} };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   markers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
 };
 const groupLayers2 = {
   markers: [["units"], ["units", "oppunits"], ["units", "myunits"]]
+};
+const emptyArtifactLayers_basic = {
+  winline: {},
+  loseline: {},
+  death: {},
+  push: {}
 };
 const game = {
   gameId: "gekitai",
@@ -77,7 +82,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1,
         NEXTSPAWNID: step.NEXTSPAWNID
@@ -108,7 +113,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN,
         NEXTSPAWNID: step.NEXTSPAWNID

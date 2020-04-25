@@ -3,7 +3,7 @@ import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Head - Always",
+  title: "Section - Hydra - Artifacts",
   func: executeSection,
   defs: [
     {
@@ -14,17 +14,17 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             type: "neighbour",
             draw: {
               start: {
-                tolayer: "gnurps"
+                tolayer: "gnurps",
               },
               neighbours: {
                 tolayer: "flurps",
                 include: {
-                  owner: 1
-                }
-              }
-            }
-          }
-        }
+                  owner: 1,
+                },
+              },
+            },
+          },
+        },
       },
       contexts: [
         {
@@ -35,22 +35,22 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               naked: true,
               asserts: [
                 {
-                  sample: "emptyArtifactLayers",
+                  sample: "emptyArtifactLayers_basic",
                   res: {
                     gnurps: {},
                     flurps: {},
                     myflurps: {},
                     oppflurps: {},
-                    neutralflurps: {}
+                    neutralflurps: {},
                   },
                   desc:
-                    "we're not using generators in start turn, so define empty layers here"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                    "we're not using generators in start turn, so define empty layers here",
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
     {
       def: {
@@ -58,25 +58,25 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         flow: {
           ...emptyFullDef.flow,
           startTurn: {
-            runGenerator: "foo"
-          }
+            runGenerator: "foo",
+          },
         },
         generators: {
           foo: {
             type: "neighbour",
             draw: {
               start: {
-                tolayer: "gnurps"
+                tolayer: "gnurps",
               },
               neighbours: {
                 tolayer: "flurps",
                 include: {
-                  owner: 1
-                }
-              }
-            }
-          }
-        }
+                  owner: 1,
+                },
+              },
+            },
+          },
+        },
       },
       contexts: [
         {
@@ -87,15 +87,15 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               naked: true,
               asserts: [
                 {
-                  sample: "typeof emptyArtifactLayers",
+                  sample: "typeof emptyArtifactLayers_basic",
                   res: "undefined",
-                  desc: "have to define inside startInit, so dont do it here"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  desc: "have to define inside startInit, so dont do it here",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

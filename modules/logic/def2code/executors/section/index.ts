@@ -4,6 +4,7 @@ import { executeStartInit, executeStartEnd } from "./start";
 import { executeCmndInit, executeCmndEnd } from "./cmnd";
 import { executeNewBattle } from "./battle";
 import { executeHead } from "./head";
+import { executeHydra } from "./hydra";
 import { executeOrderSection } from "./section.orders";
 import { executeInstructionSection } from "./instruction";
 import { executeSetBoard } from "./board";
@@ -38,6 +39,8 @@ export function executeSection(
       return executeInstructionSection(gameDef, player, action, ruleset);
     case "setBoard":
       return executeSetBoard(gameDef, player, action, ruleset);
+    case "hydra":
+      return executeHydra(gameDef, player, action, ruleset);
     default:
       throw new Error("Unknown section: " + JSON.stringify(section));
   }

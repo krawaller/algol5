@@ -8,13 +8,28 @@ const neutronInstructions: NeutronDefinition["instructions"] = {
         line: [
           "Select a",
           "soldiers",
-          "to slide (first turn of the game you don't the",
+          "to slide (first turn you don't move",
           { unittype: ["soldiers", 0] },
           ")",
         ],
       },
       {
-        line: ["Select where to move", { unitat: { onlyin: "neutralunits" } }],
+        ifrulesetelse: [
+          "basic",
+          {
+            line: [
+              "Select where to move",
+              { unitat: { onlyin: "neutralunits" } },
+            ],
+          },
+          {
+            line: [
+              "Select which",
+              { unittype: ["soldiers", 0] },
+              "to move first",
+            ],
+          },
+        ],
       },
     ],
   },
@@ -29,14 +44,37 @@ const neutronInstructions: NeutronDefinition["instructions"] = {
       "selectmytarget",
     ],
   },
-  selectneutraltarget: {
+  selectsingleneutrontarget: {
     line: [
       "Press",
       "slide",
       "to move",
       { unitat: { onlyin: "neutralunits" } },
       "to",
-      "selectneutraltarget",
+      "selectsingleneutrontarget",
+    ],
+  },
+  selectfirstneutron: {
+    line: ["Select where to slide", { unitat: "selectfirstneutron" }],
+  },
+  selectfirstneutrontarget: {
+    line: [
+      "Press",
+      "slide",
+      "to move",
+      { unitat: "selectfirstneutron" },
+      "to",
+      "selectfirstneutrontarget",
+    ],
+  },
+  selectsecondneutrontarget: {
+    line: [
+      "Press",
+      "slide",
+      "to move",
+      { unitat: { turnpos: "nextneutron" } },
+      "to",
+      "selectsecondneutrontarget",
     ],
   },
   slide: {
@@ -52,7 +90,26 @@ const neutronInstructions: NeutronDefinition["instructions"] = {
           ["otherplayer"],
         ],
       },
-      { line: ["Now select which", "soldiers", "to move"] },
+      {
+        ifrulesetelse: [
+          "basic",
+          { line: ["Now select which", "soldiers", "to move"] },
+          {
+            ifelse: [
+              { truthy: { turnvar: "neutronsdone" } },
+              {
+                line: ["Now select which of your", "soldiers", "to move"],
+              },
+              {
+                line: [
+                  "Now you must select where to move the second",
+                  { unittype: ["soldiers", 0] },
+                ],
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
 };

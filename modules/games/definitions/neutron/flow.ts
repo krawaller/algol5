@@ -13,24 +13,121 @@ const neutronFlow: NeutronDefinition["flow"] = {
     },
   },
   startTurn: {
-    runGenerator: "findneutraltargets",
+    runGenerator: {
+      ifruleset: ["basic", "findsingleneutrontarget"],
+    },
     link: {
       playercase: [
-        { ifelse: [["isFirstTurn"], "selectunit", "selectneutraltarget"] },
-        "selectneutraltarget",
+        {
+          ifelse: [
+            ["isFirstTurn"],
+            "selectunit",
+            {
+              ifrulesetelse: [
+                "basic",
+                "selectsingleneutrontarget",
+                "selectfirstneutron",
+              ],
+            },
+          ],
+        },
+        {
+          ifrulesetelse: [
+            "basic",
+            "selectsingleneutrontarget",
+            "selectfirstneutron",
+          ],
+        },
       ],
     },
   },
   commands: {
     slide: {
-      applyEffect: {
-        moveat: [
-          { firsttruthy: ["selectunit", { onlyin: "neutralunits" }] },
-          { firsttruthy: ["selectneutraltarget", "selectmytarget"] },
+      applyEffects: [
+        {
+          moveat: [
+            {
+              firsttruthy: [
+                "selectunit",
+                { turnpos: "nextneutron" },
+                "selectfirstneutron",
+                { onlyin: "neutralunits" },
+              ],
+            },
+            {
+              firsttruthy: [
+                "selectmytarget",
+                "selectsecondneutrontarget",
+                "selectfirstneutrontarget",
+                "selectsingleneutrontarget",
+              ],
+            },
+          ],
+        },
+        {
+          ifruleset: [
+            "paperneutron",
+            {
+              if: [
+                { falsypos: "selectunit" },
+                {
+                  ifelse: [
+                    { truthypos: { turnpos: "nextneutron" } },
+                    { setturnvar: ["neutronsdone", 1] },
+                    {
+                      setturnpos: [
+                        "nextneutron",
+                        {
+                          onlyin: {
+                            exceptpos: [
+                              "neutralsoldiers",
+                              "selectfirstneutron",
+                            ],
+                          },
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      runGenerator: {
+        ifruleset: [
+          "paperneutron",
+          {
+            if: [
+              {
+                and: [
+                  { truthypos: { turnpos: "nextneutron" } },
+                  { falsypos: "selectunit" },
+                ],
+              },
+              "findsecondneutrontargets",
+            ],
+          },
         ],
       },
       link: {
-        ifelse: [{ truthypos: "selectunit" }, "endTurn", "selectunit"],
+        ifelse: [
+          { truthypos: "selectunit" },
+          "endTurn",
+          {
+            ifrulesetelse: [
+              "paperneutron",
+              {
+                ifelse: [
+                  { truthypos: "selectsecondneutrontarget" },
+                  "selectunit",
+                  "selectsecondneutrontarget",
+                ],
+              },
+              "selectunit",
+            ],
+          },
+        ],
       },
     },
   },
@@ -44,8 +141,21 @@ const neutronFlow: NeutronDefinition["flow"] = {
       from: "mytargets",
       link: "slide",
     },
-    selectneutraltarget: {
-      from: "neutraltargets",
+    selectfirstneutron: {
+      from: "neutralunits",
+      runGenerator: "findfirstneutrontargets",
+      link: "selectfirstneutrontarget",
+    },
+    selectsingleneutrontarget: {
+      from: "singleneutrontargets",
+      link: "slide",
+    },
+    selectfirstneutrontarget: {
+      from: "firstneutrontargets",
+      link: "slide",
+    },
+    selectsecondneutrontarget: {
+      from: "secondneutrontargets",
       link: "slide",
     },
   },

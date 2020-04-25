@@ -6,7 +6,13 @@ type NeutronBoardWidth = 5;
 
 type NeutronTerrain = "base";
 type NeutronUnit = "soldiers";
-type NeutronMark = "selectunit" | "selectmytarget" | "selectneutraltarget";
+type NeutronMark =
+  | "selectunit"
+  | "selectmytarget"
+  | "selectfirstneutron"
+  | "selectsingleneutrontarget"
+  | "selectfirstneutrontarget"
+  | "selectsecondneutrontarget";
 type NeutronCommand = "slide";
 type NeutronPhaseCommand = "slide";
 type NeutronPhase = "startTurn" | NeutronMark | NeutronPhaseCommand;
@@ -19,8 +25,16 @@ type NeutronUnitLayer =
   | "mysoldiers"
   | "oppsoldiers"
   | "neutralsoldiers";
-type NeutronGenerator = "findneutraltargets" | "findmytargets";
-type NeutronArtifactLayer = "neutraltargets" | "mytargets";
+type NeutronGenerator =
+  | "findsingleneutrontarget"
+  | "findfirstneutrontargets"
+  | "findsecondneutrontargets"
+  | "findmytargets";
+type NeutronArtifactLayer =
+  | "singleneutrontargets"
+  | "firstneutrontargets"
+  | "secondneutrontargets"
+  | "mytargets";
 type NeutronTerrainLayer = "base" | "mybase" | "oppbase" | "nobase";
 type NeutronLayer =
   | CommonLayer
@@ -29,13 +43,13 @@ type NeutronLayer =
   | NeutronTerrainLayer;
 type NeutronBattlePos = never;
 type NeutronBattleVar = never;
-type NeutronTurnPos = never;
-type NeutronTurnVar = never;
+type NeutronTurnPos = "nextneutron";
+type NeutronTurnVar = "neutronsdone" | "nextneutron";
 
-type NeutronBoardName = "basic";
-type NeutronSetupName = "basic";
-type NeutronRulesetName = "basic";
-type NeutronVariantName = "regular";
+type NeutronBoardName = "basic" | "paperneutron";
+type NeutronSetupName = "basic" | "paperneutron";
+type NeutronRulesetName = "basic" | "paperneutron";
+type NeutronVariantName = "regular" | "paper neutron";
 
 type NeutronGrid = never;
 

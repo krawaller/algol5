@@ -29,6 +29,18 @@ const groupLayers2 = {
     ["units", "myunits"]
   ]
 };
+const emptyArtifactLayers_basic = {
+  singleneutrontargets: {},
+  firstneutrontargets: {},
+  secondneutrontargets: {},
+  mytargets: {}
+};
+const emptyArtifactLayers_paperneutron = {
+  singleneutrontargets: {},
+  firstneutrontargets: {},
+  secondneutrontargets: {},
+  mytargets: {}
+};
 const game = {
   gameId: "neutron",
   commands: { slide: {} },
@@ -66,7 +78,7 @@ const game = {
   action: {
     startTurn_basic_1: step => {
       let ARTIFACTS = {
-        neutraltargets: {}
+        singleneutrontargets: {}
       };
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
@@ -91,7 +103,9 @@ const game = {
           }
           let WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
-            ARTIFACTS.neutraltargets[walkedsquares[WALKLENGTH - 1]] = emptyObj;
+            ARTIFACTS.singleneutrontargets[
+              walkedsquares[WALKLENGTH - 1]
+            ] = emptyObj;
           }
         }
       }
@@ -100,8 +114,8 @@ const game = {
           LINKS.marks[pos] = "selectunit_basic_1";
         }
       } else {
-        for (const pos of Object.keys(ARTIFACTS.neutraltargets)) {
-          LINKS.marks[pos] = "selectneutraltarget_basic_1";
+        for (const pos of Object.keys(ARTIFACTS.singleneutrontargets)) {
+          LINKS.marks[pos] = "selectsingleneutrontarget_basic_1";
         }
       }
       return {
@@ -110,12 +124,13 @@ const game = {
         UNITLAYERS,
         ARTIFACTS,
         MARKS: {},
-        TURN
+        TURN,
+        TURNVARS: {}
       };
     },
     startTurn_basic_2: step => {
       let ARTIFACTS = {
-        neutraltargets: {}
+        singleneutrontargets: {}
       };
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
@@ -139,12 +154,14 @@ const game = {
           }
           let WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
-            ARTIFACTS.neutraltargets[walkedsquares[WALKLENGTH - 1]] = emptyObj;
+            ARTIFACTS.singleneutrontargets[
+              walkedsquares[WALKLENGTH - 1]
+            ] = emptyObj;
           }
         }
       }
-      for (const pos of Object.keys(ARTIFACTS.neutraltargets)) {
-        LINKS.marks[pos] = "selectneutraltarget_basic_2";
+      for (const pos of Object.keys(ARTIFACTS.singleneutrontargets)) {
+        LINKS.marks[pos] = "selectsingleneutrontarget_basic_2";
       }
       return {
         UNITDATA: step.UNITDATA,
@@ -152,12 +169,72 @@ const game = {
         UNITLAYERS,
         ARTIFACTS,
         MARKS: {},
-        TURN: step.TURN
+        TURN: step.TURN,
+        TURNVARS: {}
+      };
+    },
+    startTurn_paperneutron_1: step => {
+      const oldUnitLayers = step.UNITLAYERS;
+      let UNITLAYERS = {
+        units: oldUnitLayers.units,
+        myunits: oldUnitLayers.oppunits,
+        oppunits: oldUnitLayers.myunits,
+        neutralunits: oldUnitLayers.neutralunits,
+        neutralsoldiers: oldUnitLayers.neutralsoldiers
+      };
+      let LINKS = {
+        marks: {},
+        commands: {}
+      };
+      let TURN = step.TURN + 1;
+      if (TURN === 1) {
+        for (const pos of Object.keys(UNITLAYERS.myunits)) {
+          LINKS.marks[pos] = "selectunit_paperneutron_1";
+        }
+      } else {
+        for (const pos of Object.keys(UNITLAYERS.neutralunits)) {
+          LINKS.marks[pos] = "selectfirstneutron_paperneutron_1";
+        }
+      }
+      return {
+        UNITDATA: step.UNITDATA,
+        LINKS,
+        UNITLAYERS,
+        ARTIFACTS: emptyArtifactLayers_paperneutron,
+        MARKS: {},
+        TURN,
+        TURNVARS: {}
+      };
+    },
+    startTurn_paperneutron_2: step => {
+      const oldUnitLayers = step.UNITLAYERS;
+      let UNITLAYERS = {
+        units: oldUnitLayers.units,
+        myunits: oldUnitLayers.oppunits,
+        oppunits: oldUnitLayers.myunits,
+        neutralunits: oldUnitLayers.neutralunits,
+        neutralsoldiers: oldUnitLayers.neutralsoldiers
+      };
+      let LINKS = {
+        marks: {},
+        commands: {}
+      };
+      for (const pos of Object.keys(UNITLAYERS.neutralunits)) {
+        LINKS.marks[pos] = "selectfirstneutron_paperneutron_2";
+      }
+      return {
+        UNITDATA: step.UNITDATA,
+        LINKS,
+        UNITLAYERS,
+        ARTIFACTS: emptyArtifactLayers_paperneutron,
+        MARKS: {},
+        TURN: step.TURN,
+        TURNVARS: {}
       };
     },
     selectunit_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
-        neutraltargets: step.ARTIFACTS.neutraltargets,
+        singleneutrontargets: step.ARTIFACTS.singleneutrontargets,
         mytargets: {}
       };
       let LINKS = { marks: {}, commands: {} };
@@ -188,7 +265,8 @@ const game = {
         UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS
+        MARKS,
+        TURNVARS: step.TURNVARS
       };
     },
     selectmytarget_basic_1: (step, newMarkPos) => {
@@ -200,10 +278,14 @@ const game = {
         UNITLAYERS: step.UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: { selectunit: step.MARKS.selectunit, selectmytarget: newMarkPos }
+        MARKS: {
+          selectunit: step.MARKS.selectunit,
+          selectmytarget: newMarkPos
+        },
+        TURNVARS: step.TURNVARS
       };
     },
-    selectneutraltarget_basic_1: (step, newMarkPos) => {
+    selectsingleneutrontarget_basic_1: (step, newMarkPos) => {
       let LINKS = { marks: {}, commands: {} };
       LINKS.commands.slide = "slide_basic_1";
       return {
@@ -212,12 +294,13 @@ const game = {
         UNITLAYERS: step.UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: { selectneutraltarget: newMarkPos }
+        MARKS: { selectsingleneutrontarget: newMarkPos },
+        TURNVARS: step.TURNVARS
       };
     },
     selectunit_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
-        neutraltargets: step.ARTIFACTS.neutraltargets,
+        singleneutrontargets: step.ARTIFACTS.singleneutrontargets,
         mytargets: {}
       };
       let LINKS = { marks: {}, commands: {} };
@@ -248,7 +331,8 @@ const game = {
         UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS
+        MARKS,
+        TURNVARS: step.TURNVARS
       };
     },
     selectmytarget_basic_2: (step, newMarkPos) => {
@@ -260,10 +344,14 @@ const game = {
         UNITLAYERS: step.UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: { selectunit: step.MARKS.selectunit, selectmytarget: newMarkPos }
+        MARKS: {
+          selectunit: step.MARKS.selectunit,
+          selectmytarget: newMarkPos
+        },
+        TURNVARS: step.TURNVARS
       };
     },
-    selectneutraltarget_basic_2: (step, newMarkPos) => {
+    selectsingleneutrontarget_basic_2: (step, newMarkPos) => {
       let LINKS = { marks: {}, commands: {} };
       LINKS.commands.slide = "slide_basic_2";
       return {
@@ -272,24 +360,273 @@ const game = {
         UNITLAYERS: step.UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: { selectneutraltarget: newMarkPos }
+        MARKS: { selectsingleneutrontarget: newMarkPos },
+        TURNVARS: step.TURNVARS
+      };
+    },
+    selectunit_paperneutron_1: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        mytargets: {}
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectunit: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        let BLOCKS = UNITLAYERS.units;
+        for (let DIR of roseDirs) {
+          let walkedsquares = [];
+          let POS = MARKS.selectunit;
+          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            walkedsquares.push(POS);
+          }
+          let WALKLENGTH = walkedsquares.length;
+          if (WALKLENGTH) {
+            ARTIFACTS.mytargets[walkedsquares[WALKLENGTH - 1]] = emptyObj;
+          }
+        }
+      }
+      for (const pos of Object.keys(ARTIFACTS.mytargets)) {
+        LINKS.marks[pos] = "selectmytarget_paperneutron_1";
+      }
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS,
+        TURNVARS: step.TURNVARS
+      };
+    },
+    selectmytarget_paperneutron_1: (step, newMarkPos) => {
+      let LINKS = { marks: {}, commands: {} };
+      LINKS.commands.slide = "slide_paperneutron_1";
+      return {
+        LINKS,
+        ARTIFACTS: step.ARTIFACTS,
+        UNITLAYERS: step.UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS: {
+          selectunit: step.MARKS.selectunit,
+          selectmytarget: newMarkPos
+        },
+        TURNVARS: step.TURNVARS
+      };
+    },
+    selectfirstneutron_paperneutron_1: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        firstneutrontargets: {}
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectfirstneutron: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        let BLOCKS = UNITLAYERS.units;
+        for (let DIR of roseDirs) {
+          let walkedsquares = [];
+          let POS = MARKS.selectfirstneutron;
+          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            walkedsquares.push(POS);
+          }
+          let WALKLENGTH = walkedsquares.length;
+          if (WALKLENGTH) {
+            ARTIFACTS.firstneutrontargets[
+              walkedsquares[WALKLENGTH - 1]
+            ] = emptyObj;
+          }
+        }
+      }
+      for (const pos of Object.keys(ARTIFACTS.firstneutrontargets)) {
+        LINKS.marks[pos] = "selectfirstneutrontarget_paperneutron_1";
+      }
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS,
+        TURNVARS: step.TURNVARS
+      };
+    },
+    selectfirstneutrontarget_paperneutron_1: (step, newMarkPos) => {
+      let LINKS = { marks: {}, commands: {} };
+      LINKS.commands.slide = "slide_paperneutron_1";
+      return {
+        LINKS,
+        ARTIFACTS: step.ARTIFACTS,
+        UNITLAYERS: step.UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS: {
+          selectfirstneutron: step.MARKS.selectfirstneutron,
+          selectfirstneutrontarget: newMarkPos
+        },
+        TURNVARS: step.TURNVARS
+      };
+    },
+    selectsecondneutrontarget_paperneutron_1: (step, newMarkPos) => {
+      let LINKS = { marks: {}, commands: {} };
+      LINKS.commands.slide = "slide_paperneutron_1";
+      return {
+        LINKS,
+        ARTIFACTS: step.ARTIFACTS,
+        UNITLAYERS: step.UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS: { selectsecondneutrontarget: newMarkPos },
+        TURNVARS: step.TURNVARS
+      };
+    },
+    selectunit_paperneutron_2: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        firstneutrontargets: step.ARTIFACTS.firstneutrontargets,
+        secondneutrontargets: step.ARTIFACTS.secondneutrontargets,
+        mytargets: {}
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectunit: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        let BLOCKS = UNITLAYERS.units;
+        for (let DIR of roseDirs) {
+          let walkedsquares = [];
+          let POS = MARKS.selectunit;
+          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            walkedsquares.push(POS);
+          }
+          let WALKLENGTH = walkedsquares.length;
+          if (WALKLENGTH) {
+            ARTIFACTS.mytargets[walkedsquares[WALKLENGTH - 1]] = emptyObj;
+          }
+        }
+      }
+      for (const pos of Object.keys(ARTIFACTS.mytargets)) {
+        LINKS.marks[pos] = "selectmytarget_paperneutron_2";
+      }
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS,
+        TURNVARS: step.TURNVARS
+      };
+    },
+    selectmytarget_paperneutron_2: (step, newMarkPos) => {
+      let LINKS = { marks: {}, commands: {} };
+      LINKS.commands.slide = "slide_paperneutron_2";
+      return {
+        LINKS,
+        ARTIFACTS: step.ARTIFACTS,
+        UNITLAYERS: step.UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS: {
+          selectunit: step.MARKS.selectunit,
+          selectmytarget: newMarkPos
+        },
+        TURNVARS: step.TURNVARS
+      };
+    },
+    selectfirstneutron_paperneutron_2: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        firstneutrontargets: {}
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectfirstneutron: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        let BLOCKS = UNITLAYERS.units;
+        for (let DIR of roseDirs) {
+          let walkedsquares = [];
+          let POS = MARKS.selectfirstneutron;
+          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            walkedsquares.push(POS);
+          }
+          let WALKLENGTH = walkedsquares.length;
+          if (WALKLENGTH) {
+            ARTIFACTS.firstneutrontargets[
+              walkedsquares[WALKLENGTH - 1]
+            ] = emptyObj;
+          }
+        }
+      }
+      for (const pos of Object.keys(ARTIFACTS.firstneutrontargets)) {
+        LINKS.marks[pos] = "selectfirstneutrontarget_paperneutron_2";
+      }
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS,
+        TURNVARS: step.TURNVARS
+      };
+    },
+    selectfirstneutrontarget_paperneutron_2: (step, newMarkPos) => {
+      let LINKS = { marks: {}, commands: {} };
+      LINKS.commands.slide = "slide_paperneutron_2";
+      return {
+        LINKS,
+        ARTIFACTS: step.ARTIFACTS,
+        UNITLAYERS: step.UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS: {
+          selectfirstneutron: step.MARKS.selectfirstneutron,
+          selectfirstneutrontarget: newMarkPos
+        },
+        TURNVARS: step.TURNVARS
+      };
+    },
+    selectsecondneutrontarget_paperneutron_2: (step, newMarkPos) => {
+      let LINKS = { marks: {}, commands: {} };
+      LINKS.commands.slide = "slide_paperneutron_2";
+      return {
+        LINKS,
+        ARTIFACTS: step.ARTIFACTS,
+        UNITLAYERS: step.UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS: { selectsecondneutrontarget: newMarkPos },
+        TURNVARS: step.TURNVARS
       };
     },
     slide_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let UNITLAYERS = step.UNITLAYERS;
+      let TURNVARS = step.TURNVARS;
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
       {
         let unitid = (
           UNITLAYERS.units[
-            MARKS.selectunit || Object.keys(UNITLAYERS.neutralunits)[0]
+            MARKS.selectunit ||
+              TURNVARS["nextneutron"] ||
+              MARKS.selectfirstneutron ||
+              Object.keys(UNITLAYERS.neutralunits)[0]
           ] || {}
         ).id;
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: MARKS.selectneutraltarget || MARKS.selectmytarget
+            pos:
+              MARKS.selectmytarget ||
+              MARKS.selectsecondneutrontarget ||
+              MARKS.selectfirstneutrontarget ||
+              MARKS.selectsingleneutrontarget
           };
         }
       }
@@ -390,24 +727,33 @@ const game = {
         ARTIFACTS: step.ARTIFACTS,
         TURN: step.TURN,
         UNITDATA,
-        UNITLAYERS
+        UNITLAYERS,
+        TURNVARS
       };
     },
     slide_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let UNITLAYERS = step.UNITLAYERS;
+      let TURNVARS = step.TURNVARS;
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
       {
         let unitid = (
           UNITLAYERS.units[
-            MARKS.selectunit || Object.keys(UNITLAYERS.neutralunits)[0]
+            MARKS.selectunit ||
+              TURNVARS["nextneutron"] ||
+              MARKS.selectfirstneutron ||
+              Object.keys(UNITLAYERS.neutralunits)[0]
           ] || {}
         ).id;
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: MARKS.selectneutraltarget || MARKS.selectmytarget
+            pos:
+              MARKS.selectmytarget ||
+              MARKS.selectsecondneutrontarget ||
+              MARKS.selectfirstneutrontarget ||
+              MARKS.selectsingleneutrontarget
           };
         }
       }
@@ -508,7 +854,347 @@ const game = {
         ARTIFACTS: step.ARTIFACTS,
         TURN: step.TURN,
         UNITDATA,
-        UNITLAYERS
+        UNITLAYERS,
+        TURNVARS
+      };
+    },
+    slide_paperneutron_1: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let ARTIFACTS = {
+        mytargets: step.ARTIFACTS.mytargets,
+        firstneutrontargets: step.ARTIFACTS.firstneutrontargets,
+        secondneutrontargets: {}
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      let TURNVARS = { ...step.TURNVARS };
+      let UNITDATA = { ...step.UNITDATA };
+      let MARKS = step.MARKS;
+      {
+        let unitid = (
+          UNITLAYERS.units[
+            MARKS.selectunit ||
+              TURNVARS["nextneutron"] ||
+              MARKS.selectfirstneutron ||
+              Object.keys(UNITLAYERS.neutralunits)[0]
+          ] || {}
+        ).id;
+        if (unitid) {
+          UNITDATA[unitid] = {
+            ...UNITDATA[unitid],
+            pos:
+              MARKS.selectmytarget ||
+              MARKS.selectsecondneutrontarget ||
+              MARKS.selectfirstneutrontarget ||
+              MARKS.selectsingleneutrontarget
+          };
+        }
+      }
+      if (!MARKS.selectunit) {
+        if (!!TURNVARS["nextneutron"]) {
+          TURNVARS.neutronsdone = 1;
+        } else {
+          TURNVARS.nextneutron = Object.keys(
+            Object.keys(UNITLAYERS.neutralsoldiers)
+              .filter(k => k !== MARKS.selectfirstneutron)
+              .reduce((m, k) => {
+                m[k] = emptyObj;
+                return m;
+              }, {})
+          )[0];
+        }
+      }
+      UNITLAYERS = {
+        units: {},
+        myunits: {},
+        oppunits: {},
+        neutralunits: {},
+        neutralsoldiers: {}
+      };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers1[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      if (!!TURNVARS["nextneutron"] && !MARKS.selectunit) {
+        {
+          let BLOCKS = UNITLAYERS.units;
+          for (let DIR of roseDirs) {
+            let walkedsquares = [];
+            let POS = TURNVARS["nextneutron"];
+            while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            if (WALKLENGTH) {
+              ARTIFACTS.secondneutrontargets[
+                walkedsquares[WALKLENGTH - 1]
+              ] = emptyObj;
+            }
+          }
+        }
+      }
+      if (!!MARKS.selectunit) {
+        if (
+          Object.keys(
+            Object.entries(
+              Object.keys(UNITLAYERS.neutralsoldiers)
+                .concat(Object.keys(TERRAIN1.mybase))
+                .reduce((mem, k) => {
+                  mem[k] = (mem[k] || 0) + 1;
+                  return mem;
+                }, {})
+            )
+              .filter(([key, n]) => n === 2)
+              .reduce((mem, [key]) => {
+                mem[key] = emptyObj;
+                return mem;
+              }, {})
+          ).length !== 0
+        ) {
+          LINKS.endGame = "win";
+          LINKS.endedBy = "goal";
+          LINKS.endMarks = Object.keys(
+            Object.entries(
+              Object.keys(TERRAIN1.mybase)
+                .concat(Object.keys(UNITLAYERS.neutralsoldiers))
+                .reduce((mem, k) => {
+                  mem[k] = (mem[k] || 0) + 1;
+                  return mem;
+                }, {})
+            )
+              .filter(([key, n]) => n === 2)
+              .reduce((mem, [key]) => {
+                mem[key] = emptyObj;
+                return mem;
+              }, {})
+          );
+        } else if (
+          Object.keys(
+            Object.entries(
+              Object.keys(UNITLAYERS.neutralsoldiers)
+                .concat(Object.keys(TERRAIN1.oppbase))
+                .reduce((mem, k) => {
+                  mem[k] = (mem[k] || 0) + 1;
+                  return mem;
+                }, {})
+            )
+              .filter(([key, n]) => n === 2)
+              .reduce((mem, [key]) => {
+                mem[key] = emptyObj;
+                return mem;
+              }, {})
+          ).length !== 0
+        ) {
+          LINKS.endGame = "lose";
+          LINKS.endedBy = "suicide";
+          LINKS.endMarks = Object.keys(
+            Object.entries(
+              Object.keys(TERRAIN1.oppbase)
+                .concat(Object.keys(UNITLAYERS.neutralsoldiers))
+                .reduce((mem, k) => {
+                  mem[k] = (mem[k] || 0) + 1;
+                  return mem;
+                }, {})
+            )
+              .filter(([key, n]) => n === 2)
+              .reduce((mem, [key]) => {
+                mem[key] = emptyObj;
+                return mem;
+              }, {})
+          );
+        } else {
+          LINKS.endTurn = "startTurn_paperneutron_2";
+        }
+      } else {
+        if (!!MARKS.selectsecondneutrontarget) {
+          for (const pos of Object.keys(UNITLAYERS.myunits)) {
+            LINKS.marks[pos] = "selectunit_paperneutron_1";
+          }
+        } else {
+          for (const pos of Object.keys(ARTIFACTS.secondneutrontargets)) {
+            LINKS.marks[pos] = "selectsecondneutrontarget_paperneutron_1";
+          }
+        }
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS,
+        TURNVARS
+      };
+    },
+    slide_paperneutron_2: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let ARTIFACTS = {
+        firstneutrontargets: step.ARTIFACTS.firstneutrontargets,
+        secondneutrontargets: {}
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      let TURNVARS = { ...step.TURNVARS };
+      let UNITDATA = { ...step.UNITDATA };
+      let MARKS = step.MARKS;
+      {
+        let unitid = (
+          UNITLAYERS.units[
+            MARKS.selectunit ||
+              TURNVARS["nextneutron"] ||
+              MARKS.selectfirstneutron ||
+              Object.keys(UNITLAYERS.neutralunits)[0]
+          ] || {}
+        ).id;
+        if (unitid) {
+          UNITDATA[unitid] = {
+            ...UNITDATA[unitid],
+            pos:
+              MARKS.selectmytarget ||
+              MARKS.selectsecondneutrontarget ||
+              MARKS.selectfirstneutrontarget ||
+              MARKS.selectsingleneutrontarget
+          };
+        }
+      }
+      if (!MARKS.selectunit) {
+        if (!!TURNVARS["nextneutron"]) {
+          TURNVARS.neutronsdone = 1;
+        } else {
+          TURNVARS.nextneutron = Object.keys(
+            Object.keys(UNITLAYERS.neutralsoldiers)
+              .filter(k => k !== MARKS.selectfirstneutron)
+              .reduce((m, k) => {
+                m[k] = emptyObj;
+                return m;
+              }, {})
+          )[0];
+        }
+      }
+      UNITLAYERS = {
+        units: {},
+        myunits: {},
+        oppunits: {},
+        neutralunits: {},
+        neutralsoldiers: {}
+      };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers2[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      if (!!TURNVARS["nextneutron"] && !MARKS.selectunit) {
+        {
+          let BLOCKS = UNITLAYERS.units;
+          for (let DIR of roseDirs) {
+            let walkedsquares = [];
+            let POS = TURNVARS["nextneutron"];
+            while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            if (WALKLENGTH) {
+              ARTIFACTS.secondneutrontargets[
+                walkedsquares[WALKLENGTH - 1]
+              ] = emptyObj;
+            }
+          }
+        }
+      }
+      if (!!MARKS.selectunit) {
+        if (
+          Object.keys(
+            Object.entries(
+              Object.keys(UNITLAYERS.neutralsoldiers)
+                .concat(Object.keys(TERRAIN2.mybase))
+                .reduce((mem, k) => {
+                  mem[k] = (mem[k] || 0) + 1;
+                  return mem;
+                }, {})
+            )
+              .filter(([key, n]) => n === 2)
+              .reduce((mem, [key]) => {
+                mem[key] = emptyObj;
+                return mem;
+              }, {})
+          ).length !== 0
+        ) {
+          LINKS.endGame = "win";
+          LINKS.endedBy = "goal";
+          LINKS.endMarks = Object.keys(
+            Object.entries(
+              Object.keys(TERRAIN2.mybase)
+                .concat(Object.keys(UNITLAYERS.neutralsoldiers))
+                .reduce((mem, k) => {
+                  mem[k] = (mem[k] || 0) + 1;
+                  return mem;
+                }, {})
+            )
+              .filter(([key, n]) => n === 2)
+              .reduce((mem, [key]) => {
+                mem[key] = emptyObj;
+                return mem;
+              }, {})
+          );
+        } else if (
+          Object.keys(
+            Object.entries(
+              Object.keys(UNITLAYERS.neutralsoldiers)
+                .concat(Object.keys(TERRAIN2.oppbase))
+                .reduce((mem, k) => {
+                  mem[k] = (mem[k] || 0) + 1;
+                  return mem;
+                }, {})
+            )
+              .filter(([key, n]) => n === 2)
+              .reduce((mem, [key]) => {
+                mem[key] = emptyObj;
+                return mem;
+              }, {})
+          ).length !== 0
+        ) {
+          LINKS.endGame = "lose";
+          LINKS.endedBy = "suicide";
+          LINKS.endMarks = Object.keys(
+            Object.entries(
+              Object.keys(TERRAIN2.oppbase)
+                .concat(Object.keys(UNITLAYERS.neutralsoldiers))
+                .reduce((mem, k) => {
+                  mem[k] = (mem[k] || 0) + 1;
+                  return mem;
+                }, {})
+            )
+              .filter(([key, n]) => n === 2)
+              .reduce((mem, [key]) => {
+                mem[key] = emptyObj;
+                return mem;
+              }, {})
+          );
+        } else {
+          LINKS.endTurn = "startTurn_paperneutron_1";
+        }
+      } else {
+        if (!!MARKS.selectsecondneutrontarget) {
+          for (const pos of Object.keys(UNITLAYERS.myunits)) {
+            LINKS.marks[pos] = "selectunit_paperneutron_2";
+          }
+        } else {
+          for (const pos of Object.keys(ARTIFACTS.secondneutrontargets)) {
+            LINKS.marks[pos] = "selectsecondneutrontarget_paperneutron_2";
+          }
+        }
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS,
+        TURNVARS
       };
     }
   },
@@ -521,7 +1207,7 @@ const game = {
             line: [
               { text: "Select a" },
               { unittype: ["pawn", 1] },
-              { text: "to slide (first turn of the game you don't the" },
+              { text: "to slide (first turn you don't move" },
               { unittype: ["pawn", 0] },
               { text: ")" }
             ]
@@ -603,7 +1289,7 @@ const game = {
         ]
       });
     },
-    selectneutraltarget_basic_1: step => {
+    selectsingleneutrontarget_basic_1: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -625,7 +1311,7 @@ const game = {
             ]
           },
           { text: "to" },
-          { pos: MARKS.selectneutraltarget }
+          { pos: MARKS.selectsingleneutrontarget }
         ]
       });
     },
@@ -637,7 +1323,7 @@ const game = {
             line: [
               { text: "Select a" },
               { unittype: ["pawn", 2] },
-              { text: "to slide (first turn of the game you don't the" },
+              { text: "to slide (first turn you don't move" },
               { unittype: ["pawn", 0] },
               { text: ")" }
             ]
@@ -719,7 +1405,7 @@ const game = {
         ]
       });
     },
-    selectneutraltarget_basic_2: step => {
+    selectsingleneutrontarget_basic_2: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -741,7 +1427,299 @@ const game = {
             ]
           },
           { text: "to" },
-          { pos: MARKS.selectneutraltarget }
+          { pos: MARKS.selectsingleneutrontarget }
+        ]
+      });
+    },
+    startTurn_paperneutron_1: step => {
+      let TURN = step.TURN;
+      return 1 === 1 && TURN === 1
+        ? collapseContent({
+            line: [
+              { text: "Select a" },
+              { unittype: ["pawn", 1] },
+              { text: "to slide (first turn you don't move" },
+              { unittype: ["pawn", 0] },
+              { text: ")" }
+            ]
+          })
+        : collapseContent({
+            line: [
+              { text: "Select which" },
+              { unittype: ["pawn", 0] },
+              { text: "to move first" }
+            ]
+          });
+    },
+    slide_paperneutron_1: step => {
+      let TURNVARS = step.TURNVARS;
+      let LINKS = step.LINKS;
+      return LINKS.endTurn || LINKS.endGame
+        ? collapseContent({
+            line: [
+              { text: "Press " },
+              { endTurn: "end turn" },
+              { text: " to submit your moves and hand over to " },
+              { player: 2 }
+            ]
+          })
+        : !!TURNVARS["neutronsdone"]
+        ? collapseContent({
+            line: [
+              { text: "Now select which of your" },
+              { unittype: ["pawn", 1] },
+              { text: "to move" }
+            ]
+          })
+        : collapseContent({
+            line: [
+              { text: "Now you must select where to move the second" },
+              { unittype: ["pawn", 0] }
+            ]
+          });
+    },
+    selectunit_paperneutron_1: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Select where to slide" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+              MARKS.selectunit
+            ]
+          }
+        ]
+      });
+    },
+    selectmytarget_paperneutron_1: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "slide" },
+          { text: "to move" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+              MARKS.selectunit
+            ]
+          },
+          { text: "to" },
+          { pos: MARKS.selectmytarget }
+        ]
+      });
+    },
+    selectfirstneutron_paperneutron_1: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Select where to slide" },
+          {
+            unit: [
+              iconMapping[
+                (UNITLAYERS.units[MARKS.selectfirstneutron] || {}).group
+              ],
+              (UNITLAYERS.units[MARKS.selectfirstneutron] || {}).owner,
+              MARKS.selectfirstneutron
+            ]
+          }
+        ]
+      });
+    },
+    selectfirstneutrontarget_paperneutron_1: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "slide" },
+          { text: "to move" },
+          {
+            unit: [
+              iconMapping[
+                (UNITLAYERS.units[MARKS.selectfirstneutron] || {}).group
+              ],
+              (UNITLAYERS.units[MARKS.selectfirstneutron] || {}).owner,
+              MARKS.selectfirstneutron
+            ]
+          },
+          { text: "to" },
+          { pos: MARKS.selectfirstneutrontarget }
+        ]
+      });
+    },
+    selectsecondneutrontarget_paperneutron_1: step => {
+      let TURNVARS = step.TURNVARS;
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "slide" },
+          { text: "to move" },
+          {
+            unit: [
+              iconMapping[
+                (UNITLAYERS.units[TURNVARS["nextneutron"]] || {}).group
+              ],
+              (UNITLAYERS.units[TURNVARS["nextneutron"]] || {}).owner,
+              TURNVARS["nextneutron"]
+            ]
+          },
+          { text: "to" },
+          { pos: MARKS.selectsecondneutrontarget }
+        ]
+      });
+    },
+    startTurn_paperneutron_2: step => {
+      let TURN = step.TURN;
+      return 2 === 1 && TURN === 1
+        ? collapseContent({
+            line: [
+              { text: "Select a" },
+              { unittype: ["pawn", 2] },
+              { text: "to slide (first turn you don't move" },
+              { unittype: ["pawn", 0] },
+              { text: ")" }
+            ]
+          })
+        : collapseContent({
+            line: [
+              { text: "Select which" },
+              { unittype: ["pawn", 0] },
+              { text: "to move first" }
+            ]
+          });
+    },
+    slide_paperneutron_2: step => {
+      let TURNVARS = step.TURNVARS;
+      let LINKS = step.LINKS;
+      return LINKS.endTurn || LINKS.endGame
+        ? collapseContent({
+            line: [
+              { text: "Press " },
+              { endTurn: "end turn" },
+              { text: " to submit your moves and hand over to " },
+              { player: 1 }
+            ]
+          })
+        : !!TURNVARS["neutronsdone"]
+        ? collapseContent({
+            line: [
+              { text: "Now select which of your" },
+              { unittype: ["pawn", 2] },
+              { text: "to move" }
+            ]
+          })
+        : collapseContent({
+            line: [
+              { text: "Now you must select where to move the second" },
+              { unittype: ["pawn", 0] }
+            ]
+          });
+    },
+    selectunit_paperneutron_2: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Select where to slide" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+              MARKS.selectunit
+            ]
+          }
+        ]
+      });
+    },
+    selectmytarget_paperneutron_2: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "slide" },
+          { text: "to move" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+              MARKS.selectunit
+            ]
+          },
+          { text: "to" },
+          { pos: MARKS.selectmytarget }
+        ]
+      });
+    },
+    selectfirstneutron_paperneutron_2: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Select where to slide" },
+          {
+            unit: [
+              iconMapping[
+                (UNITLAYERS.units[MARKS.selectfirstneutron] || {}).group
+              ],
+              (UNITLAYERS.units[MARKS.selectfirstneutron] || {}).owner,
+              MARKS.selectfirstneutron
+            ]
+          }
+        ]
+      });
+    },
+    selectfirstneutrontarget_paperneutron_2: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "slide" },
+          { text: "to move" },
+          {
+            unit: [
+              iconMapping[
+                (UNITLAYERS.units[MARKS.selectfirstneutron] || {}).group
+              ],
+              (UNITLAYERS.units[MARKS.selectfirstneutron] || {}).owner,
+              MARKS.selectfirstneutron
+            ]
+          },
+          { text: "to" },
+          { pos: MARKS.selectfirstneutrontarget }
+        ]
+      });
+    },
+    selectsecondneutrontarget_paperneutron_2: step => {
+      let TURNVARS = step.TURNVARS;
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "slide" },
+          { text: "to move" },
+          {
+            unit: [
+              iconMapping[
+                (UNITLAYERS.units[TURNVARS["nextneutron"]] || {}).group
+              ],
+              (UNITLAYERS.units[TURNVARS["nextneutron"]] || {}).owner,
+              TURNVARS["nextneutron"]
+            ]
+          },
+          { text: "to" },
+          { pos: MARKS.selectsecondneutrontarget }
         ]
       });
     }
@@ -759,6 +1737,24 @@ const game = {
             "0": ["a3"],
             "1": ["a4", "b4", "b3", "c1", "e1"],
             "2": ["a1", "a5", "c5", "d5", "e2"]
+          }
+        },
+        marks: [],
+        potentialMarks: []
+      }
+    },
+    {
+      ruleset: "paperneutron",
+      board: "paperneutron",
+      setup: "paperneutron",
+      desc: "paper neutron",
+      code: "p",
+      arr: {
+        setup: {
+          soldiers: {
+            "0": ["a2", "d2"],
+            "1": ["a1", "b1", "c3", "d3"],
+            "2": ["a4", "b2", "c4", "d4"]
           }
         },
         marks: [],
@@ -784,6 +1780,24 @@ const game = {
           ]
         }
       }
+    },
+    paperneutron: {
+      height: 4,
+      width: 4,
+      terrain: {
+        base: {
+          "1": [
+            {
+              rect: ["a1", "d1"]
+            }
+          ],
+          "2": [
+            {
+              rect: ["a4", "d4"]
+            }
+          ]
+        }
+      }
     }
   },
   setups: {
@@ -798,6 +1812,21 @@ const game = {
         "2": [
           {
             rect: ["a5", "e5"]
+          }
+        ]
+      }
+    },
+    paperneutron: {
+      soldiers: {
+        "0": ["b3", "c2"],
+        "1": [
+          {
+            rect: ["a1", "d1"]
+          }
+        ],
+        "2": [
+          {
+            rect: ["a4", "d4"]
           }
         ]
       }

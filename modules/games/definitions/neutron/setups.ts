@@ -8,6 +8,13 @@ const neutronSetupBook: NeutronDefinition["setups"] = {
       "2": [{ rect: ["a5", "e5"] }],
     },
   },
+  paperneutron: {
+    soldiers: {
+      "0": ["b3", "c2"],
+      "1": [{ rect: ["a1", "d1"] }],
+      "2": [{ rect: ["a4", "d4"] }],
+    },
+  },
 };
 
 export default neutronSetupBook;

@@ -31,7 +31,7 @@ export default function parseSet(
   if (typeof expr === "string") {
     const name = expr.replace(/^"|"$/g, ""); // since might be value processed
 
-    if (emptyArtifactLayers(gameDef.generators)[name]) {
+    if (emptyArtifactLayers(gameDef.generators, ruleset)[name]) {
       return `ARTIFACTS.${name}`;
     }
     const terrainNames = terrainLayerNamesForBook(gameDef.boards);

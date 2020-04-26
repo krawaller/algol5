@@ -3,20 +3,20 @@ import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 const defaultStartInitContext = {
-  emptyArtifactLayers: {},
+  emptyArtifactLayers_basic: {},
   step: {
-    UNITLAYERS: {}
-  }
+    UNITLAYERS: {},
+  },
 };
 
 const defaultStartEndContext = {
-  emptyArtifactLayers: {},
+  emptyArtifactLayers_basic: {},
   MARKS: {},
   LINKS: {},
   ARTIFACTS: {},
   UNITLAYERS: {},
   UNITDATA: {},
-  step: { path: [], UNITLAYERS: {} }
+  step: { path: [], UNITLAYERS: {} },
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
@@ -33,8 +33,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             ...defaultStartEndContext,
             step: {
               ...defaultStartEndContext.step,
-              NEXTSPAWNID: "bogusSpawnId"
-            }
+              NEXTSPAWNID: "bogusSpawnId",
+            },
           },
           tests: [
             {
@@ -44,13 +44,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "returnVal.NEXTSPAWNID",
                   res: undefined,
                   desc:
-                    "we didn't pass on spawnId since game doesn't use spawning"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                    "we didn't pass on spawnId since game doesn't use spawning",
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
     {
       def: {
@@ -60,11 +60,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           commands: {
             gnurp: {
               applyEffect: {
-                spawnat: ["somemark", "flurps"]
-              }
-            }
-          }
-        }
+                spawnat: ["somemark", "flurps"],
+              },
+            },
+          },
+        },
       },
       player: 1,
       action: "startTurn",
@@ -74,8 +74,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             ...defaultStartEndContext,
             step: {
               ...defaultStartEndContext.step,
-              NEXTSPAWNID: "oldSpawnId"
-            }
+              NEXTSPAWNID: "oldSpawnId",
+            },
           },
           tests: [
             {
@@ -84,13 +84,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.NEXTSPAWNID",
                   res: "oldSpawnId",
-                  desc: "we pass on spawnId since game uses it elsewhere"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  desc: "we pass on spawnId since game uses it elsewhere",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

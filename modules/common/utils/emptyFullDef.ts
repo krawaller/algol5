@@ -32,6 +32,7 @@ export const emptyFullDef: FullDefAnon = {
     name: "",
     tagline: "",
     tags: [],
+    slug: "",
   },
   performance: {
     canAlwaysEnd: {},

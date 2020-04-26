@@ -9,7 +9,7 @@ const defaultStartInitContext = {
 };
 
 const defaultStartEndContext = {
-  emptyArtifactLayers: {},
+  emptyArtifactLayers_basic: {},
   MARKS: {},
   LINKS: {},
   ARTIFACTS: {},
@@ -98,7 +98,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         {
           context: {
             ...defaultStartInitContext,
-            emptyArtifactLayers: { dontUse: "me" },
+            emptyArtifactLayers_basic: { dontUse: "me" },
             step: {
               ...defaultStartInitContext.step,
               ARTIFACTS: {

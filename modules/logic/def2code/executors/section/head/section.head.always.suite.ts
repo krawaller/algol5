@@ -12,8 +12,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         boards: {
           basic: {
             ...emptyFullDef.boards.basic,
-            height: 1,
-            width: 2,
+            height: 1 as 3,
+            width: 2 as 3,
           },
         },
       },

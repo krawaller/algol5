@@ -3,20 +3,20 @@ import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 const defaultStartInitContext = {
-  emptyArtifactLayers: {},
+  emptyArtifactLayers_basic: {},
   step: {
-    UNITLAYERS: {}
-  }
+    UNITLAYERS: {},
+  },
 };
 
 const defaultStartEndContext = {
-  emptyArtifactLayers: {},
+  emptyArtifactLayers_basic: {},
   MARKS: {},
   LINKS: {},
   ARTIFACTS: {},
   UNITLAYERS: {},
   UNITDATA: {},
-  step: { path: [], UNITLAYERS: {} }
+  step: { path: [], UNITLAYERS: {} },
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
@@ -31,21 +31,21 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           endGame: {
             something: {
               condition: {
-                isempty: { union: ["units", "myunits", "myflurps"] }
-              }
-            }
+                isempty: { union: ["units", "myunits", "myflurps"] },
+              },
+            },
           },
           startTurn: {
-            link: { if: [{ anyat: ["myunits", "somemark"] }, "endTurn"] }
-          }
+            link: { if: [{ anyat: ["myunits", "somemark"] }, "endTurn"] },
+          },
         },
         graphics: {
           ...emptyFullDef.graphics,
           icons: {
             flurps: "bishop",
-            gnurps: "king"
-          }
-        }
+            gnurps: "king",
+          },
+        },
       },
       player: 1,
       action: "startTurn",
@@ -59,9 +59,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 myunits: "shouldbecomeoppunits",
                 oppunits: "shouldbecomemyunits",
                 myflurps: "shouldbecomeoppflurps",
-                oppflurps: "shouldbecomemyflurps"
-              }
-            }
+                oppflurps: "shouldbecomemyflurps",
+              },
+            },
           },
           tests: [
             {
@@ -74,18 +74,18 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                     oppunits: "shouldbecomeoppunits",
                     myunits: "shouldbecomemyunits",
                     oppflurps: "shouldbecomeoppflurps",
-                    myflurps: "shouldbecomemyflurps"
+                    myflurps: "shouldbecomemyflurps",
                   },
-                  desc: "Local use, so import and switch old layers here"
-                }
-              ]
-            }
-          ]
+                  desc: "Local use, so import and switch old layers here",
+                },
+              ],
+            },
+          ],
         },
         {
           context: {
             ...defaultStartEndContext,
-            UNITLAYERS: "localUnitLayers"
+            UNITLAYERS: "localUnitLayers",
           },
           tests: [
             {
@@ -95,13 +95,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "returnVal.UNITLAYERS",
                   res: "localUnitLayers",
                   desc:
-                    "We're using layers locally so they've been initialised by startInit already"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                    "We're using layers locally so they've been initialised by startInit already",
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
     {
       def: {
@@ -110,19 +110,19 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           ...emptyFullDef.graphics,
           icons: {
             flurps: "bishop",
-            gnurps: "king"
-          }
+            gnurps: "king",
+          },
         },
         flow: {
           ...emptyFullDef.flow,
           endGame: {
             something: {
               condition: {
-                isempty: { union: ["units", "myunits", "mygnurps", "flurps"] }
-              }
-            }
-          }
-        }
+                isempty: { union: ["units", "myunits", "mygnurps", "flurps"] },
+              },
+            },
+          },
+        },
       },
       player: 1,
       action: "startTurn",
@@ -136,11 +136,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "typeof UNITLAYERS",
                   res: "undefined",
-                  desc: "no reference locally, so we defer to startEnd"
-                }
-              ]
-            }
-          ]
+                  desc: "no reference locally, so we defer to startEnd",
+                },
+              ],
+            },
+          ],
         },
         {
           context: {
@@ -153,9 +153,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 oppunits: "shouldbecomemyunits",
                 flurps: "willstayflurps",
                 mygnurps: "shouldbecomeoppgnurps",
-                oppgnurps: "shouldbecomemygnurps"
-              }
-            }
+                oppgnurps: "shouldbecomemygnurps",
+              },
+            },
           },
           tests: [
             {
@@ -169,16 +169,16 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                     myunits: "shouldbecomemyunits",
                     flurps: "willstayflurps",
                     oppgnurps: "shouldbecomeoppgnurps",
-                    mygnurps: "shouldbecomemygnurps"
+                    mygnurps: "shouldbecomemygnurps",
                   },
                   desc:
-                    "since we're not using them locally startInit hasn't set them, so we must"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                    "since we're not using them locally startInit hasn't set them, so we must",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

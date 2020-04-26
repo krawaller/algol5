@@ -2,6 +2,13 @@ import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
+const defaultContext = {
+  emptyArtifactLayers_basic: {},
+  step: {
+    UNITLAYERS: {},
+  },
+};
+
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
   title: "Section - Hydra - Artifacts",
   func: executeSection,
@@ -28,10 +35,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       },
       contexts: [
         {
-          context: {},
+          context: {}, //defaultContext,
           tests: [
             {
-              expr: "head",
+              expr: "hydra",
               naked: true,
               asserts: [
                 {
@@ -83,7 +90,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {},
           tests: [
             {
-              expr: "head",
+              expr: "hydra",
               naked: true,
               asserts: [
                 {

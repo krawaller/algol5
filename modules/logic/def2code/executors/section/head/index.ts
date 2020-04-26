@@ -1,8 +1,5 @@
 import { FullDefAnon } from "../../../../../types";
-import {
-  emptyArtifactLayers,
-  groupLayersForPlayer,
-} from "../../../../../common";
+import { groupLayersForPlayer } from "../../../../../common";
 
 // TODO - decide on boardLayers func
 
@@ -18,20 +15,9 @@ export function executeHead(
 
   ret += `const iconMapping = ${JSON.stringify(gameDef.graphics.icons)};\n`;
 
-  const startDef = gameDef.flow.startTurn || {};
-  const startGens = (startDef.runGenerators || []).concat(
-    startDef.runGenerator || []
-  );
-  if (!startGens.length) {
-    ret += `
-    const emptyArtifactLayers = ${JSON.stringify(
-      emptyArtifactLayers(gameDef.generators)
-    )};
-  `;
-  }
-
   ret += `let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions; `;
 
+  // TODO - hydra version of these?
   ret += `const groupLayers1 = ${JSON.stringify(
     groupLayersForPlayer(gameDef, 1)
   )}; `;

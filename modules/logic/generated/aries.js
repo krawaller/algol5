@@ -14,13 +14,17 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { soldiers: "rook" };
-const emptyArtifactLayers = { movetargets: {}, beingpushed: {}, squished: {} };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
 };
 const groupLayers2 = {
   soldiers: [["units"], ["units", "oppunits"], ["units", "myunits"]]
+};
+const emptyArtifactLayers_basic = {
+  movetargets: {},
+  beingpushed: {},
+  squished: {}
 };
 const game = {
   gameId: "aries",
@@ -70,7 +74,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1,
         BATTLEVARS: step.BATTLEVARS
@@ -94,7 +98,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN,
         BATTLEVARS: step.BATTLEVARS

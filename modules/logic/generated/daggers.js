@@ -14,7 +14,6 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { daggers: "bishop", crowns: "king" };
-const emptyArtifactLayers = { movetarget: {} };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   daggers: [
@@ -40,6 +39,7 @@ const groupLayers2 = {
     ["units", "myunits", "mycrowns"]
   ]
 };
+const emptyArtifactLayers_basic = { movetarget: {} };
 const game = {
   gameId: "daggers",
   commands: { move: {} },
@@ -101,7 +101,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1
       };
@@ -129,7 +129,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN
       };

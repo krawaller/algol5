@@ -3,20 +3,20 @@ import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 const defaultStartInitContext = {
-  emptyArtifactLayers: {},
+  emptyArtifactLayers_basic: {},
   step: {
-    UNITLAYERS: {}
-  }
+    UNITLAYERS: {},
+  },
 };
 
 const defaultStartEndContext = {
-  emptyArtifactLayers: {},
+  emptyArtifactLayers_basic: {},
   MARKS: {},
   LINKS: {},
   ARTIFACTS: {},
   UNITLAYERS: {},
   UNITDATA: {},
-  step: { path: [], UNITLAYERS: {} }
+  step: { path: [], UNITLAYERS: {} },
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
@@ -38,19 +38,19 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "typeof TURN",
                   res: "undefined",
                   desc:
-                    "we didn't define turn since we didn't need them locally"
-                }
-              ]
-            }
-          ]
+                    "we didn't define turn since we didn't need them locally",
+                },
+              ],
+            },
+          ],
         },
         {
           context: {
             ...defaultStartEndContext,
             step: {
               ...defaultStartEndContext.step,
-              TURN: 17
-            }
+              TURN: 17,
+            },
           },
           tests: [
             {
@@ -60,9 +60,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.TURN",
                   res: 18,
-                  desc: "no local TURN use so bump it here at startEnd"
-                }
-              ]
+                  desc: "no local TURN use so bump it here at startEnd",
+                },
+              ],
             },
             {
               expr: "startEnd",
@@ -71,13 +71,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.TURN",
                   res: 17,
-                  desc: "don't bump TURN since we are 2nd player"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  desc: "don't bump TURN since we are 2nd player",
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
     {
       def: {
@@ -85,14 +85,14 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         flow: {
           ...emptyFullDef.flow,
           marks: {
-            mymark: { from: "units" }
+            mymark: { from: "units" },
           },
           startTurn: {
             link: {
-              if: [{ same: [1, ["turn"]] }, "endTurn"]
-            }
-          }
-        }
+              if: [{ same: [1, ["turn"]] }, "endTurn"],
+            },
+          },
+        },
       },
       player: 1,
       action: "startTurn",
@@ -102,8 +102,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             ...defaultStartInitContext,
             step: {
               ...defaultStartInitContext.step,
-              TURN: 7
-            }
+              TURN: 7,
+            },
           },
           tests: [
             {
@@ -113,9 +113,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "TURN",
                   res: 8,
-                  desc: "Local turn use so bump it here"
-                }
-              ]
+                  desc: "Local turn use so bump it here",
+                },
+              ],
             },
             {
               expr: "startInit",
@@ -125,16 +125,16 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "TURN",
                   res: 7,
                   desc:
-                    "Local turn use so imported but not bumped since 2nd player"
-                }
-              ]
-            }
-          ]
+                    "Local turn use so imported but not bumped since 2nd player",
+                },
+              ],
+            },
+          ],
         },
         {
           context: {
             ...defaultStartEndContext,
-            TURN: "localTurnNumber"
+            TURN: "localTurnNumber",
           },
           tests: [
             {
@@ -143,13 +143,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.TURN",
                   res: "localTurnNumber",
-                  desc: "used locally so inited by startInit, pass it on"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  desc: "used locally so inited by startInit, pass it on",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

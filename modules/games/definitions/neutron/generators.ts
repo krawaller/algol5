@@ -6,12 +6,26 @@
 import { NeutronDefinition } from "./_types";
 
 const neutronGenerators: NeutronDefinition["generators"] = {
-  findneutraltargets: {
+  findsingleneutrontarget: {
     type: "walker",
     start: { onlyin: "neutralunits" },
     dirs: "rose",
     blocks: "units",
-    draw: { last: { tolayer: "neutraltargets" } },
+    draw: { last: { tolayer: "singleneutrontargets" } },
+  },
+  findfirstneutrontargets: {
+    type: "walker",
+    start: "selectfirstneutron",
+    dirs: "rose",
+    blocks: "units",
+    draw: { last: { tolayer: "firstneutrontargets" } },
+  },
+  findsecondneutrontargets: {
+    type: "walker",
+    start: { turnpos: "nextneutron" },
+    dirs: "rose",
+    blocks: "units",
+    draw: { last: { tolayer: "secondneutrontargets" } },
   },
   findmytargets: {
     type: "walker",

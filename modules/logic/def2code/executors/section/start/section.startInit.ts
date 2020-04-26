@@ -32,7 +32,7 @@ export function executeStartInit(
           .join(", ")}
       }; `;
     } else {
-      ret += `let ARTIFACTS = emptyArtifactLayers`;
+      ret += `let ARTIFACTS = emptyArtifactLayers_${ruleset}`;
     }
   }
 

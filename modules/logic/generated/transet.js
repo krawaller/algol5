@@ -14,7 +14,6 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { pinets: "pawn", piokers: "bishop", piases: "king" };
-const emptyArtifactLayers = { swap2step: {}, swap1steps: {}, movetargets: {} };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   pinets: [
@@ -41,6 +40,11 @@ const groupLayers2 = {
     ["units", "myunits", "piokers"]
   ],
   piases: [["units"], ["units", "oppunits"], ["units", "myunits"]]
+};
+const emptyArtifactLayers_basic = {
+  swap2step: {},
+  swap1steps: {},
+  movetargets: {}
 };
 const game = {
   gameId: "transet",
@@ -97,7 +101,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1
       };
@@ -122,7 +126,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN
       };

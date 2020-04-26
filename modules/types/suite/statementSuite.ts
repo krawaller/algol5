@@ -7,6 +7,7 @@ export type AlgolStatementTest<Input = any> = {
   naked?: boolean;
   player?: 1 | 2;
   action?: string;
+  ruleset?: string;
   asserts: {
     sample: string;
     res: any;

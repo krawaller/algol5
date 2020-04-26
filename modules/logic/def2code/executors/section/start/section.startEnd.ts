@@ -41,7 +41,11 @@ export function executeStartEnd(
        },`
         : "UNITLAYERS,"
     }
-    ${usage.ARTIFACTS ? "ARTIFACTS, " : "ARTIFACTS: emptyArtifactLayers, "}
+    ${
+      usage.ARTIFACTS
+        ? "ARTIFACTS, "
+        : `ARTIFACTS: emptyArtifactLayers_${ruleset}, `
+    }
     ${usage.MARKS ? "MARKS," : "MARKS: {},"}
     ${
       usage.TURN

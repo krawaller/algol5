@@ -82,6 +82,10 @@ import {offsetPos, boardConnections, makeRelativeDirs, setup2army, boardLayers, 
 
 ${executeSection(gameDef, 1, "head", "allRulesets", "head")}
 
+${ruleNames
+  .map(ruleset => executeSection(gameDef, 1, "hydra", ruleset, "hydra"))
+  .join("\n\n")}
+
 const game = {
   gameId: '${gameDef.meta.id}',
   commands: { ${cmndInfo} },

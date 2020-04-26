@@ -9,6 +9,7 @@ export type AlgolExpressionTest<Input = any, Output = any> = {
   skip?: boolean;
   player?: 1 | 2;
   action?: string;
+  ruleset?: string;
 };
 
 export type AlgolExpressionSuite<I = any, O = any> = AlgolSuiteFrame<

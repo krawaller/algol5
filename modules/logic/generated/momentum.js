@@ -14,7 +14,6 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { stones: "pawn" };
-const emptyArtifactLayers = { doomed: {}, pushed: {} };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   stones: [
@@ -30,6 +29,7 @@ const groupLayers2 = {
     ["units", "myunits", "stones"]
   ]
 };
+const emptyArtifactLayers_basic = { doomed: {}, pushed: {} };
 const game = {
   gameId: "momentum",
   commands: { pie: {}, drop: {} },
@@ -86,7 +86,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1,
         NEXTSPAWNID: step.NEXTSPAWNID
@@ -122,7 +122,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN,
         NEXTSPAWNID: step.NEXTSPAWNID

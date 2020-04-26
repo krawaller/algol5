@@ -4,18 +4,18 @@ import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 const defaultStartInitContext = {
   step: {
-    UNITLAYERS: {}
-  }
+    UNITLAYERS: {},
+  },
 };
 
 const defaultStartEndContext = {
-  emptyArtifactLayers: {},
+  emptyArtifactLayers_basic: {},
   MARKS: {},
   LINKS: {},
   ARTIFACTS: {},
   UNITLAYERS: {},
   UNITDATA: {},
-  step: { path: [], UNITLAYERS: {} }
+  step: { path: [], UNITLAYERS: {} },
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
@@ -36,16 +36,16 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "typeof ARTIFACTS",
                   res: "undefined",
-                  desc: "Not using locally, so don't import"
-                }
-              ]
-            }
-          ]
+                  desc: "Not using locally, so don't import",
+                },
+              ],
+            },
+          ],
         },
         {
           context: {
             ...defaultStartEndContext,
-            emptyArtifactLayers: "emptyArtifactLayers"
+            emptyArtifactLayers_basic: "emptyArtifactLayers_basic",
           },
           tests: [
             {
@@ -53,14 +53,14 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               asserts: [
                 {
                   sample: "returnVal.ARTIFACTS",
-                  res: "emptyArtifactLayers",
-                  desc: "we pass on empty artifact layer"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  res: "emptyArtifactLayers_basic",
+                  desc: "we pass on empty artifact layer",
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
     {
       def: {
@@ -68,8 +68,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         flow: {
           ...emptyFullDef.flow,
           startTurn: {
-            runGenerator: "simplereach"
-          }
+            runGenerator: "simplereach",
+          },
         },
         generators: {
           simplereach: {
@@ -80,17 +80,17 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               neighbours: {
                 tolayer: "flurps",
                 include: {
-                  owner: ["player"]
-                }
-              }
-            }
+                  owner: ["player"],
+                },
+              },
+            },
           },
           anothergen: {
             type: "filter",
             layer: "flurps",
-            tolayer: "gnurps"
-          }
-        }
+            tolayer: "gnurps",
+          },
+        },
       },
       player: 2,
       action: "startTurn",
@@ -98,7 +98,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         {
           context: {
             ...defaultStartInitContext,
-            emptyArtifactLayers: { dontUse: "me" },
+            emptyArtifactLayers_basic: { dontUse: "me" },
             step: {
               ...defaultStartInitContext.step,
               ARTIFACTS: {
@@ -106,9 +106,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 myflurps: { existing: "myflurp" },
                 oppflurps: { existing: "oppflurp" },
                 neutralflurps: { existing: "neutralflurp" },
-                gnurps: { existing: "gnurp" }
-              }
-            }
+                gnurps: { existing: "gnurp" },
+              },
+            },
           },
           tests: [
             {
@@ -120,23 +120,23 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                     flurps: {},
                     myflurps: {},
                     oppflurps: {},
-                    neutralflurps: {}
+                    neutralflurps: {},
                   },
-                  desc: "we get new layer"
+                  desc: "we get new layer",
                 },
                 {
-                  sample: "emptyArtifactLayers === ARTIFACTS",
+                  sample: "emptyArtifactLayers_basic === ARTIFACTS",
                   res: false,
-                  desc: "we created brand new one to be mutated"
-                }
-              ]
-            }
-          ]
+                  desc: "we created brand new one to be mutated",
+                },
+              ],
+            },
+          ],
         },
         {
           context: {
             ...defaultStartEndContext,
-            ARTIFACTS: "localArtifacts"
+            ARTIFACTS: "localArtifacts",
           },
           tests: [
             {
@@ -145,13 +145,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.ARTIFACTS",
                   res: "localArtifacts",
-                  desc: "we pass on the updated artifacts"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  desc: "we pass on the updated artifacts",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

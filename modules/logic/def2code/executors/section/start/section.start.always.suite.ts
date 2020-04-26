@@ -3,21 +3,21 @@ import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 const defaultStartInitContext = {
-  emptyArtifactLayers: {},
+  emptyArtifactLayers_basic: {},
   step: {
-    UNITLAYERS: {}
-  }
+    UNITLAYERS: {},
+  },
 };
 
 const defaultStartEndContext = {
-  emptyArtifactLayers: {},
+  emptyArtifactLayers_basic: {},
   LINKS: {},
   ARTIFACTS: {},
   UNITLAYERS: {},
   UNITDATA: {},
   MARKS: {},
   TURN: {},
-  step: { path: [], UNITLAYERS: {} }
+  step: { path: [], UNITLAYERS: {} },
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
@@ -34,8 +34,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             ...defaultStartInitContext,
             step: {
               ...defaultStartInitContext,
-              UNITDATA: "bogusOldUnitData"
-            }
+              UNITDATA: "bogusOldUnitData",
+            },
           },
           tests: [
             {
@@ -45,11 +45,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "LINKS",
                   res: {
                     marks: {},
-                    commands: {}
+                    commands: {},
                   },
-                  desc: "initialise LINKS to correct empty object"
-                }
-              ]
+                  desc: "initialise LINKS to correct empty object",
+                },
+              ],
             },
             {
               expr: "startInit",
@@ -57,11 +57,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "typeof UNITDATA",
                   res: "undefined",
-                  desc: "never deal with unitdata here, so don't init it"
-                }
-              ]
-            }
-          ]
+                  desc: "never deal with unitdata here, so don't init it",
+                },
+              ],
+            },
+          ],
         },
         {
           context: {
@@ -70,9 +70,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               ...defaultStartEndContext.step,
               TURN: 7,
               UNITDATA: "oldUnitData",
-              path: ["bogusPrevStep"]
+              path: ["bogusPrevStep"],
             },
-            LINKS: "localLinks"
+            LINKS: "localLinks",
           },
           tests: [
             {
@@ -82,18 +82,18 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "returnVal.UNITDATA",
                   res: "oldUnitData",
                   desc:
-                    "We never deal with UNITDATA in start, so just pass old along"
+                    "We never deal with UNITDATA in start, so just pass old along",
                 },
                 {
                   sample: "returnVal.LINKS",
                   res: "localLinks",
-                  desc: "We always have new local links, so pass that along"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  desc: "We always have new local links, so pass that along",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

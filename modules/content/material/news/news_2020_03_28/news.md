@@ -19,4 +19,4 @@ But today we're happy to announce that {ME} got proper variant support! So now i
 
 We also took the opportunity to add {GAME:id=kingsvalley} with three variants; regular, a more advanced setup, and a bigger more complex board.
 
-Sometimes there might still be reasons to have variants be separate entries - for example we've added {GAME:id=neutron} and {GAME:id=paperneutron}, where the latter is obviously a variant of the former, but splitting them up made sense since we want to tag them differently (and they're suprisingly different under the hood).
+And finally we added {GAME:id=neutron}, including the neat Paper Neutron variant.

@@ -10,4 +10,5 @@ export type AlgolSection =
   | "cmndInit"
   | "cmndEnd"
   | "instruction"
-  | "setBoard";
+  | "setBoard"
+  | "hydra";

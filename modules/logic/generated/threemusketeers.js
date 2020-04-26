@@ -14,11 +14,6 @@ import {
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { pawns: "pawn", kings: "king" };
-const emptyArtifactLayers = {
-  strandedmusketeers: {},
-  musketeerline: {},
-  movetargets: {}
-};
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   pawns: [
@@ -43,6 +38,11 @@ const groupLayers2 = {
     ["units", "oppunits", "kings"],
     ["units", "myunits", "kings"]
   ]
+};
+const emptyArtifactLayers_basic = {
+  strandedmusketeers: {},
+  musketeerline: {},
+  movetargets: {}
 };
 const game = {
   gameId: "threemusketeers",
@@ -99,7 +99,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1
       };
@@ -124,7 +124,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN
       };

@@ -25,7 +25,9 @@ export default function parseDirs(
     }
   }
   if (Array.isArray(expr)) {
-    return `[ ${expr.join(", ")} ]`;
+    return `[ ${expr
+      .map(d => (typeof d === "string" ? `'${d}'` : d))
+      .join(", ")} ]`;
   }
   throw new Error("Unknown dirs expression: " + JSON.stringify(expr));
 }

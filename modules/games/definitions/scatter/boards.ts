@@ -15,7 +15,14 @@ const scatterBoardBook: ScatterDefinition["boards"] = {
         { rect: ["c3", "d4"] },
       ],
     },
-    offsets: [["ortho", 2, 0]],
+    offsets: [
+      ["ortho", 2, 0],
+      ["ortho", 2, -1],
+      ["ortho", 2, 1],
+      ["ortho", 3, 0],
+      ["ortho", 3, 1],
+      ["ortho", 3, -1],
+    ],
     grids: {
       binary: [
         [1, 1, 2, 2, 4, 4],

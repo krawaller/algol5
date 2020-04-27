@@ -1,9 +1,16 @@
 import { ScatterDefinition } from "./_types";
 
 const scatterPerformance: ScatterDefinition["performance"] = {
-  canAlwaysEnd: {},
+  canAlwaysEnd: {
+    east: true,
+    west: true,
+    north: true,
+    south: true,
+    selectmovetarget: true,
+    move: true,
+  },
   massiveTree: {},
-  noEndGameCheck: []
+  noEndGameCheck: ["east", "west", "south", "north"],
 };
 
 export default scatterPerformance;

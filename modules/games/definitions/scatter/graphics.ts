@@ -9,6 +9,7 @@ const scatterGraphics: ScatterDefinition["graphics"] = {
   icons: {
     pawns: "pawn",
     nobles: "king",
+    kings: "king",
   },
   tiles: {
     odd: "grass",

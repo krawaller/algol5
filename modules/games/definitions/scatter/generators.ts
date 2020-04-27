@@ -6,6 +6,46 @@
 import { ScatterDefinition } from "./_types";
 
 const scatterGenerators: ScatterDefinition["generators"] = {
+  findnorthtargets: {
+    starts: "kings",
+    type: "neighbour",
+    dirs: [1, 2, "d1f2r0", "d1f2r1"],
+    draw: {
+      neighbours: {
+        tolayer: "northtargets",
+      },
+    },
+  },
+  findeasttargets: {
+    starts: "kings",
+    type: "neighbour",
+    dirs: ["d3f2r0", "d3f3r0", "d3f2r1", "d3f3r1"],
+    draw: {
+      neighbours: {
+        tolayer: "easttargets",
+      },
+    },
+  },
+  findsouthtargets: {
+    starts: "kings",
+    type: "neighbour",
+    dirs: ["d5f2r0", "d5f3r0", "d5f2r-1", "d5f3r-1"],
+    draw: {
+      neighbours: {
+        tolayer: "southtargets",
+      },
+    },
+  },
+  findwesttargets: {
+    starts: "kings",
+    type: "neighbour",
+    dirs: [6, 7, "d7f2r-1", "d7f2r0"],
+    draw: {
+      neighbours: {
+        tolayer: "westtargets",
+      },
+    },
+  },
   findmovetargets: {
     start: "selectunit",
     type: "neighbour",

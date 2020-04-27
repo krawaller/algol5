@@ -5,9 +5,9 @@ type ScatterBoardHeight = 6;
 type ScatterBoardWidth = 6;
 
 type ScatterTerrain = "odd";
-type ScatterUnit = "pawns" | "nobles";
+type ScatterUnit = "pawns" | "nobles" | "kings";
 type ScatterMark = "selectunit" | "selectmovetarget";
-type ScatterCommand = "move";
+type ScatterCommand = "move" | "north" | "east" | "south" | "west";
 type ScatterPhaseCommand = never;
 type ScatterPhase = "startTurn" | ScatterMark;
 type ScatterUnitLayer =
@@ -22,9 +22,23 @@ type ScatterUnitLayer =
   | "nobles"
   | "mynobles"
   | "oppnobles"
-  | "neutralnobles";
-type ScatterGenerator = "findmovetargets";
-type ScatterArtifactLayer = "movetargets";
+  | "neutralnobles"
+  | "kings"
+  | "mykings"
+  | "oppkings"
+  | "neutralkings";
+type ScatterGenerator =
+  | "findnorthtargets"
+  | "findeasttargets"
+  | "findsouthtargets"
+  | "findwesttargets"
+  | "findmovetargets";
+type ScatterArtifactLayer =
+  | "northtargets"
+  | "easttargets"
+  | "southtargets"
+  | "westtargets"
+  | "movetargets";
 type ScatterTerrainLayer = "odd" | "noodd";
 type ScatterLayer =
   | CommonLayer
@@ -32,7 +46,7 @@ type ScatterLayer =
   | ScatterArtifactLayer
   | ScatterTerrainLayer;
 type ScatterBattlePos = never;
-type ScatterBattleVar = never;
+type ScatterBattleVar = "noshift";
 type ScatterTurnPos = never;
 type ScatterTurnVar = never;
 

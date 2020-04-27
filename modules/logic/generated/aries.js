@@ -331,17 +331,15 @@ const game = {
       BATTLEVARS.pushsquare = MARKS.selectmovetarget;
       for (let LOOPPOS in ARTIFACTS.beingpushed) {
         {
-          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          let pos = LOOPPOS;
+          let unitid = (UNITLAYERS.units[pos] || {}).id;
           if (unitid) {
             UNITDATA[unitid] = {
               ...UNITDATA[unitid],
-              pos: offsetPos(
-                LOOPPOS,
-                (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir,
-                1,
-                0,
-                dimensions
-              )
+              pos:
+                connections[pos][
+                  (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir
+                ]
             };
           }
         }
@@ -441,17 +439,15 @@ const game = {
       BATTLEVARS.pushsquare = MARKS.selectmovetarget;
       for (let LOOPPOS in ARTIFACTS.beingpushed) {
         {
-          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          let pos = LOOPPOS;
+          let unitid = (UNITLAYERS.units[pos] || {}).id;
           if (unitid) {
             UNITDATA[unitid] = {
               ...UNITDATA[unitid],
-              pos: offsetPos(
-                LOOPPOS,
-                (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir,
-                1,
-                0,
-                dimensions
-              )
+              pos:
+                connections[pos][
+                  (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir
+                ]
             };
           }
         }

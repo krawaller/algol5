@@ -6,6 +6,7 @@ export function executeSetBoard(
   action: string,
   ruleset: string
 ): string {
+  const hasGrids = !!Object.values(gameDef.boards).find(b => b.grids);
   return `
     TERRAIN1 = terrainLayers(board.height, board.width, board.terrain, 1);
     TERRAIN2 = terrainLayers(board.height, board.width, board.terrain, 2);
@@ -13,5 +14,6 @@ export function executeSetBoard(
     BOARD = boardLayers(dimensions);
     connections = boardConnections(board);
     relativeDirs = makeRelativeDirs(board);
+    ${hasGrids ? `GRIDS = makeGrids(board.grids); ` : ""}
   `;
 }

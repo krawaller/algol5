@@ -279,17 +279,12 @@ const game = {
         const LOOPSET = ARTIFACTS.push;
         for (let LOOPPOS in LOOPSET) {
           {
-            let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+            let pos = LOOPPOS;
+            let unitid = (UNITLAYERS.units[pos] || {}).id;
             if (unitid) {
               UNITDATA[unitid] = {
                 ...UNITDATA[unitid],
-                pos: offsetPos(
-                  LOOPPOS,
-                  (LOOPSET[LOOPPOS] || {}).pushdir,
-                  1,
-                  0,
-                  dimensions
-                )
+                pos: connections[pos][(LOOPSET[LOOPPOS] || {}).pushdir]
               };
             }
           }
@@ -392,17 +387,12 @@ const game = {
         const LOOPSET = ARTIFACTS.push;
         for (let LOOPPOS in LOOPSET) {
           {
-            let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+            let pos = LOOPPOS;
+            let unitid = (UNITLAYERS.units[pos] || {}).id;
             if (unitid) {
               UNITDATA[unitid] = {
                 ...UNITDATA[unitid],
-                pos: offsetPos(
-                  LOOPPOS,
-                  (LOOPSET[LOOPPOS] || {}).pushdir,
-                  1,
-                  0,
-                  dimensions
-                )
+                pos: connections[pos][(LOOPSET[LOOPPOS] || {}).pushdir]
               };
             }
           }

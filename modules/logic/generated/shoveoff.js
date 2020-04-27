@@ -369,11 +369,12 @@ const game = {
       ];
       for (let LOOPPOS in ARTIFACTS.pushnorth) {
         {
-          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          let pos = LOOPPOS;
+          let unitid = (UNITLAYERS.units[pos] || {}).id;
           if (unitid) {
             UNITDATA[unitid] = {
               ...UNITDATA[unitid],
-              pos: offsetPos(LOOPPOS, 1, 1, 0, dimensions)
+              pos: connections[pos][1]
             };
           }
         }
@@ -471,11 +472,12 @@ const game = {
       ];
       for (let LOOPPOS in ARTIFACTS.pushsouth) {
         {
-          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          let pos = LOOPPOS;
+          let unitid = (UNITLAYERS.units[pos] || {}).id;
           if (unitid) {
             UNITDATA[unitid] = {
               ...UNITDATA[unitid],
-              pos: offsetPos(LOOPPOS, 5, 1, 0, dimensions)
+              pos: connections[pos][5]
             };
           }
         }
@@ -573,11 +575,12 @@ const game = {
       ];
       for (let LOOPPOS in ARTIFACTS.pusheast) {
         {
-          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          let pos = LOOPPOS;
+          let unitid = (UNITLAYERS.units[pos] || {}).id;
           if (unitid) {
             UNITDATA[unitid] = {
               ...UNITDATA[unitid],
-              pos: offsetPos(LOOPPOS, 3, 1, 0, dimensions)
+              pos: connections[pos][3]
             };
           }
         }
@@ -675,11 +678,12 @@ const game = {
       ];
       for (let LOOPPOS in ARTIFACTS.pushwest) {
         {
-          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          let pos = LOOPPOS;
+          let unitid = (UNITLAYERS.units[pos] || {}).id;
           if (unitid) {
             UNITDATA[unitid] = {
               ...UNITDATA[unitid],
-              pos: offsetPos(LOOPPOS, 7, 1, 0, dimensions)
+              pos: connections[pos][7]
             };
           }
         }
@@ -777,11 +781,12 @@ const game = {
       ];
       for (let LOOPPOS in ARTIFACTS.pushnorth) {
         {
-          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          let pos = LOOPPOS;
+          let unitid = (UNITLAYERS.units[pos] || {}).id;
           if (unitid) {
             UNITDATA[unitid] = {
               ...UNITDATA[unitid],
-              pos: offsetPos(LOOPPOS, 1, 1, 0, dimensions)
+              pos: connections[pos][1]
             };
           }
         }
@@ -879,11 +884,12 @@ const game = {
       ];
       for (let LOOPPOS in ARTIFACTS.pushsouth) {
         {
-          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          let pos = LOOPPOS;
+          let unitid = (UNITLAYERS.units[pos] || {}).id;
           if (unitid) {
             UNITDATA[unitid] = {
               ...UNITDATA[unitid],
-              pos: offsetPos(LOOPPOS, 5, 1, 0, dimensions)
+              pos: connections[pos][5]
             };
           }
         }
@@ -981,11 +987,12 @@ const game = {
       ];
       for (let LOOPPOS in ARTIFACTS.pusheast) {
         {
-          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          let pos = LOOPPOS;
+          let unitid = (UNITLAYERS.units[pos] || {}).id;
           if (unitid) {
             UNITDATA[unitid] = {
               ...UNITDATA[unitid],
-              pos: offsetPos(LOOPPOS, 3, 1, 0, dimensions)
+              pos: connections[pos][3]
             };
           }
         }
@@ -1083,11 +1090,12 @@ const game = {
       ];
       for (let LOOPPOS in ARTIFACTS.pushwest) {
         {
-          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          let pos = LOOPPOS;
+          let unitid = (UNITLAYERS.units[pos] || {}).id;
           if (unitid) {
             UNITDATA[unitid] = {
               ...UNITDATA[unitid],
-              pos: offsetPos(LOOPPOS, 7, 1, 0, dimensions)
+              pos: connections[pos][7]
             };
           }
         }

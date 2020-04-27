@@ -1,6 +1,22 @@
 import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
-import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
+import {
+  AlgolStatementSuite,
+  AlgolSection,
+  AlgolBoardAnon,
+} from "../../../../../types";
+
+const boardWithGrid: AlgolBoardAnon = {
+  ...emptyFullDef.boards.basic,
+  height: 2 as any,
+  width: 2 as any,
+  grids: {
+    somegrid: [
+      [1, 2],
+      [3, 4],
+    ],
+  },
+};
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
   title: "Section - Head - Always",
@@ -80,6 +96,39 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "relativeDirs",
                   res: undefined,
                   desc: "relativeDirs constant was set up",
+                },
+                {
+                  sample: "typeof GRIDS",
+                  res: "undefined",
+                  desc: "GRIDS was not set up",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      def: {
+        ...emptyFullDef,
+        boards: {
+          basic: boardWithGrid,
+        },
+      },
+      player: 1,
+      action: "head",
+      contexts: [
+        {
+          context: {},
+          tests: [
+            {
+              expr: "head",
+              naked: false,
+              asserts: [
+                {
+                  sample: "GRIDS",
+                  res: undefined,
+                  desc: "GRIDS is empty but exists",
                 },
               ],
             },

@@ -26,7 +26,6 @@ import {
   isAlgolEffectAdoptAt,
   isAlgolEffectAdoptIn,
   isAlgolEffectAdoptId,
-  AlgolEffectSpawnAtAnon,
 } from "../../../../../types";
 
 import { executeStatement, makeParser } from "../../../executors";
@@ -164,16 +163,27 @@ function executeEffectInner(
     const {
       pushat: [pos, dir, dist],
     } = effect;
-    const newPos = `offsetPos(${parser.pos(pos)}, ${parser.val(
-      dir
-    )}, ${parser.val(dist || 1)}, 0, dimensions)`;
-    return `{
-      let unitid = (UNITLAYERS.units[${parser.pos(pos)}] || {}).id;
-      if (unitid){
-        UNITDATA[unitid]= {
+    const calcDist = parser.val(dist || 1);
+    const block =
+      calcDist != 1
+        ? `    let dir = ${parser.val(dir)};
+    let dist = ${parser.val(dist || 1)};
+    while(dist--){ pos = connections[pos][dir]; }
+    UNITDATA[unitid] = {
+      ...UNITDATA[unitid],
+      pos
+    };
+`
+        : `        UNITDATA[unitid] = {
           ...UNITDATA[unitid],
-          pos: ${newPos}
+          pos: connections[pos][${parser.val(dir)}]
         };
+`;
+    return `{
+      let pos = ${parser.pos(pos)};
+      let unitid = (UNITLAYERS.units[pos] || {}).id;
+      if (unitid){
+        ${block}
       }
     }
   `;

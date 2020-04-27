@@ -1,5 +1,10 @@
 import { executeOrder } from "../../../executors";
-import { emptyFullDef, truthy, falsy } from "../../../../../common";
+import {
+  emptyFullDef,
+  truthy,
+  falsy,
+  boardConnections,
+} from "../../../../../common";
 import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
 export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
@@ -35,9 +40,11 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 a2: { id: "unit2" },
               },
             },
+            connections: boardConnections({ height: 5, width: 5 }),
           },
           tests: [
             {
+              naked: true,
               expr: { effects: [{ pushat: ["unit1mark", 2, 3] }] },
               asserts: [
                 {
@@ -48,6 +55,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               ],
             },
             {
+              naked: true,
               expr: { effects: [{ pushat: ["unit1mark", 2] }] },
               asserts: [
                 {
@@ -58,6 +66,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               ],
             },
             {
+              naked: true,
               expr: { effects: [{ pushin: ["units", 3, 2] }] },
               asserts: [
                 {
@@ -71,6 +80,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               ],
             },
             {
+              naked: true,
               expr: { effects: [{ pushin: ["units", 3] }] },
               asserts: [
                 {

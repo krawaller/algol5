@@ -34,7 +34,6 @@ export type FullDef<Blob extends AlgolGameBlobAnon> = {
   setups: AlgolSetupBook<Blob>;
   variants: AlgolVariant<Blob>[];
   graphics: Graphics<Blob>;
-  grids?: { [g in Blob["grid"]]: any }; // TODO - grid inside board? type?
   instructions: Instructions<Blob>;
   meta: AlgolMeta<Blob>;
   flow: Flow<Blob>;

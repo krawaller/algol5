@@ -67,10 +67,14 @@ export default async function analyze(def: FullDefAnon | string) {
       [] as string[]
     );
   const myTerrainLayerNames = terrainLayerNamesForBook(def.boards);
-  const myArtifactLayerNames = Object.keys(emptyArtifactLayers(def.generators));
+  const myArtifactLayerNames = Object.keys(
+    emptyArtifactLayers(def.generators, "all")
+  ); // TODO - getting all here?
   const myGeneratorNames = Object.keys(generators);
 
-  const gridNames = Object.keys(def.grids || {});
+  const gridNames = Object.values(def.boards).flatMap(b =>
+    Object.keys(b.grids || {})
+  );
 
   const origAI = def.AI;
   const AI: typeof origAI = {

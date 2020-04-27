@@ -4,10 +4,10 @@ const scatterMeta: ScatterDefinition["meta"] = {
   id: "scatter",
   name: "Scatter",
   tags: [],
-  tagline: "An awesome game!",
+  tagline: "Who can scatter their units the fastest?",
   source: "http://some.url.to.rules",
   code: "D",
-  slug: "scatter"
+  slug: "scatter",
 };
 
 export default scatterMeta;

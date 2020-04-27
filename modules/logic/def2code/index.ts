@@ -76,9 +76,13 @@ export function compileGameToCode(gameDef: FullDefAnon) {
   } `
   );
 
+  const hasGrids = !!Object.values(gameDef.boards).find(b => b.grids);
+
   const code = `
 
-import {offsetPos, boardConnections, makeRelativeDirs, setup2army, boardLayers, terrainLayers, collapseContent, defaultInstruction, roseDirs, orthoDirs, diagDirs, knightDirs} from '../../common'
+import {offsetPos, boardConnections, makeRelativeDirs, setup2army, boardLayers, terrainLayers, collapseContent, defaultInstruction, roseDirs, orthoDirs, diagDirs, knightDirs${
+    hasGrids ? ", makeGrids" : ""
+  }} from '../../common'
 
 ${executeSection(gameDef, 1, "head", "allRulesets", "head")}
 

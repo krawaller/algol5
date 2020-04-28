@@ -26,20 +26,7 @@ const yonmoqueFlow: YonmoqueDefinition["flow"] = {
     drop: {
       applyEffects: [
         {
-          setbattlevar: [
-            { playercase: ["plr1drop", "plr2drop"] },
-            {
-              sum: [
-                1,
-                {
-                  firsttruthy: [
-                    { battlevar: { playercase: ["plr1drop", "plr2drop"] } },
-                    0,
-                  ],
-                },
-              ],
-            },
-          ],
+          incbattlevar: [{ playercase: ["plr1drop", "plr2drop"] }],
         },
         {
           spawnat: [

@@ -318,7 +318,7 @@ const game = {
       let UNITDATA = { ...step.UNITDATA };
       let NEXTSPAWNID = step.NEXTSPAWNID;
       let MARKS = step.MARKS;
-      BATTLEVARS.plr1drop = 1 + (BATTLEVARS["plr1drop"] || 0);
+      BATTLEVARS.plr1drop = (BATTLEVARS.plr1drop || 0) + 1;
       {
         let newunitid = "spawn" + NEXTSPAWNID++;
         UNITDATA[newunitid] = {
@@ -441,7 +441,7 @@ const game = {
       let UNITDATA = { ...step.UNITDATA };
       let NEXTSPAWNID = step.NEXTSPAWNID;
       let MARKS = step.MARKS;
-      BATTLEVARS.plr2drop = 1 + (BATTLEVARS["plr2drop"] || 0);
+      BATTLEVARS.plr2drop = (BATTLEVARS.plr2drop || 0) + 1;
       {
         let newunitid = "spawn" + NEXTSPAWNID++;
         UNITDATA[newunitid] = {

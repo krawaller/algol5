@@ -53,4 +53,8 @@ const tests: AlgolEffect<AlgolTestBlob>[] = [
   { if: [["true"], { killat: "mymark" }] },
   { ifplayer: [1, { killat: "mymark" }] },
   { ifaction: ["mycmnd", { killat: "mymark" }] },
+  { incbattlevar: ["mybattlev", 5] },
+  { incbattlevar: ["mybattlev"] },
+  { incturnvar: ["myturnv", 5] },
+  { incturnvar: ["myturnv"] },
 ];

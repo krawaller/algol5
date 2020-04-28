@@ -25,6 +25,8 @@ import {
   AlgolEffectAdoptAt,
   AlgolEffectAdoptId,
   AlgolEffectAdoptIn,
+  AlgolEffectIncreaseBattleVar,
+  AlgolEffectIncreaseTurnVar,
 } from "./effect.interfaces";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -46,6 +48,12 @@ export type AlgolEffectSetTurnVarAnon = AlgolEffectSetTurnVar<
   AlgolGameBlobAnon
 >;
 export type AlgolEffectSetBattleVarAnon = AlgolEffectSetBattleVar<
+  AlgolGameBlobAnon
+>;
+export type AlgolEffectIncreaseTurnVarAnon = AlgolEffectIncreaseTurnVar<
+  AlgolGameBlobAnon
+>;
+export type AlgolEffectIncreaseBattleVarAnon = AlgolEffectIncreaseBattleVar<
   AlgolGameBlobAnon
 >;
 export type AlgolEffectPushAtAnon = AlgolEffectPushAt<AlgolGameBlobAnon>;

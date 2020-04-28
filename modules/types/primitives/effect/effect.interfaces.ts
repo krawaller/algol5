@@ -39,6 +39,18 @@ export interface AlgolEffectSetBattleVar<Blob extends AlgolGameBlobAnon> {
   setbattlevar: [AlgolVal<Blob, Blob["btlv"]>, AlgolVal<Blob, string | number>];
 }
 
+export interface AlgolEffectIncreaseTurnVar<Blob extends AlgolGameBlobAnon> {
+  incturnvar:
+    | [AlgolVal<Blob, Blob["turnv"]>, AlgolVal<Blob, number>]
+    | [AlgolVal<Blob, Blob["turnv"]>];
+}
+
+export interface AlgolEffectIncreaseBattleVar<Blob extends AlgolGameBlobAnon> {
+  incbattlevar:
+    | [AlgolVal<Blob, Blob["btlv"]>, AlgolVal<Blob, number>]
+    | [AlgolVal<Blob, Blob["btlv"]>];
+}
+
 export interface AlgolEffectPushAt<Blob extends AlgolGameBlobAnon> {
   pushat: // pos, dir, distance
   | [

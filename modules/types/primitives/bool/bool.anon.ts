@@ -25,6 +25,7 @@ import {
   AlgolBoolStoppedBecause,
   AlgolBoolFalsyPos,
   AlgolBoolTruthyPos,
+  AlgolBoolLessThan,
 } from "./bool.interfaces";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -53,6 +54,7 @@ export type AlgolBoolSameAnon = AlgolBoolSame<AlgolGameBlobAnon>;
 export type AlgolBoolDifferentAnon = AlgolBoolDifferent<AlgolGameBlobAnon>;
 export type AlgolBoolValInListAnon = AlgolBoolValInList<AlgolGameBlobAnon>;
 export type AlgolBoolMoreThanAnon = AlgolBoolMoreThan<AlgolGameBlobAnon>;
+export type AlgolBoolLessThanAnon = AlgolBoolLessThan<AlgolGameBlobAnon>;
 export type AlgolBoolTruthyAnon = AlgolBoolTruthy<AlgolGameBlobAnon>;
 export type AlgolBoolFalsyAnon = AlgolBoolFalsy<AlgolGameBlobAnon>;
 export type AlgolBoolOrthoAnon = AlgolBoolOrtho<AlgolGameBlobAnon>;

@@ -6,6 +6,19 @@
 import { YonmoqueDefinition } from "./_types";
 
 const yonmoqueGenerators: YonmoqueDefinition["generators"] = {
+  findloselines: {
+    starts: "edge",
+    type: "walker",
+    dirs: [1, 2, 3, 4],
+    steps: "myunits",
+    startasstep: true,
+    draw: {
+      steps: {
+        condition: { same: [["walklength"], 5] },
+        tolayer: "loseline",
+      },
+    },
+  },
   findsteptargets: {
     type: "neighbour",
     start: "selectunit",

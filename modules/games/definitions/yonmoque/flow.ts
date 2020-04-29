@@ -1,6 +1,13 @@
 import { YonmoqueDefinition } from "./_types";
 
 const yonmoqueFlow: YonmoqueDefinition["flow"] = {
+  endGame: {
+    forbiddenline: {
+      condition: { notempty: "loseline" },
+      who: ["otherplayer"],
+      show: "loseline",
+    },
+  },
   startTurn: {
     links: [
       "selectunit",
@@ -41,6 +48,7 @@ const yonmoqueFlow: YonmoqueDefinition["flow"] = {
           ],
         },
       ],
+      runGenerator: "findloselines",
       link: "endTurn",
     },
     move: {
@@ -72,6 +80,7 @@ const yonmoqueFlow: YonmoqueDefinition["flow"] = {
         { morphin: ["promote", "bishops"] },
         { morphin: ["demote", "pawns"] },
       ],
+      runGenerators: ["findloselines"],
       link: "endTurn",
     },
   },

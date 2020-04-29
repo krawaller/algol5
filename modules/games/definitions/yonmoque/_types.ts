@@ -4,7 +4,7 @@ import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 type YonmoqueBoardHeight = 5;
 type YonmoqueBoardWidth = 5;
 
-type YonmoqueTerrain = "base";
+type YonmoqueTerrain = "base" | "edge";
 type YonmoqueUnit = "pawns" | "bishops";
 type YonmoqueMark = "selectdroptarget" | "selectunit" | "selectmovetarget";
 type YonmoqueCommand = "drop" | "move";
@@ -24,15 +24,23 @@ type YonmoqueUnitLayer =
   | "oppbishops"
   | "neutralbishops";
 type YonmoqueGenerator =
+  | "findloselines"
   | "findsteptargets"
   | "findslidetargets"
   | "findconversions";
 type YonmoqueArtifactLayer =
+  | "loseline"
   | "movetargets"
   | "conversions"
   | "demote"
   | "promote";
-type YonmoqueTerrainLayer = "base" | "mybase" | "oppbase" | "nobase";
+type YonmoqueTerrainLayer =
+  | "base"
+  | "mybase"
+  | "oppbase"
+  | "edge"
+  | "nobase"
+  | "noedge";
 type YonmoqueLayer =
   | CommonLayer
   | YonmoqueUnitLayer

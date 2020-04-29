@@ -26,6 +26,7 @@ const yonmoqueBoardBook: YonmoqueDefinition["boards"] = {
           "e4",
         ],
       },
+      edge: [{ rect: ["a1", "a5"] }, { rect: ["b1", "e1"] }],
     },
   },
 };

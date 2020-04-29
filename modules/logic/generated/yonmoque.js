@@ -40,6 +40,7 @@ const groupLayers2 = {
   ]
 };
 const emptyArtifactLayers_basic = {
+  loseline: {},
   movetargets: {},
   conversions: {},
   demote: {},
@@ -472,6 +473,9 @@ const game = {
     },
     drop_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
+      let ARTIFACTS = {
+        loseline: {}
+      };
       let UNITLAYERS = step.UNITLAYERS;
       let BATTLEVARS = { ...step.BATTLEVARS };
       let UNITDATA = { ...step.UNITDATA };
@@ -506,12 +510,43 @@ const game = {
         }
       }
       {
+        let allowedsteps = UNITLAYERS.myunits;
+        for (let STARTPOS in TERRAIN1.edge) {
+          for (let DIR of [1, 2, 3, 4]) {
+            let walkedsquares = [];
+            let STOPREASON = "";
+            let POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while (
+              !(STOPREASON = !(POS = connections[POS][DIR])
+                ? "outofbounds"
+                : !allowedsteps[POS]
+                ? "nomoresteps"
+                : null)
+            ) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 5) {
+                ARTIFACTS.loseline[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (Object.keys(ARTIFACTS.loseline).length !== 0) {
+        LINKS.endGame = "lose";
+        LINKS.endedBy = "fiveline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.loseline);
+      } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
       return {
         LINKS,
         MARKS: {},
-        ARTIFACTS: step.ARTIFACTS,
+        ARTIFACTS,
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
@@ -525,7 +560,8 @@ const game = {
         movetargets: step.ARTIFACTS.movetargets,
         conversions: step.ARTIFACTS.conversions,
         demote: step.ARTIFACTS.demote,
-        promote: step.ARTIFACTS.promote
+        promote: step.ARTIFACTS.promote,
+        loseline: {}
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -619,6 +655,37 @@ const game = {
         }
       }
       {
+        let allowedsteps = UNITLAYERS.myunits;
+        for (let STARTPOS in TERRAIN1.edge) {
+          for (let DIR of [1, 2, 3, 4]) {
+            let walkedsquares = [];
+            let STOPREASON = "";
+            let POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while (
+              !(STOPREASON = !(POS = connections[POS][DIR])
+                ? "outofbounds"
+                : !allowedsteps[POS]
+                ? "nomoresteps"
+                : null)
+            ) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 5) {
+                ARTIFACTS.loseline[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (Object.keys(ARTIFACTS.loseline).length !== 0) {
+        LINKS.endGame = "lose";
+        LINKS.endedBy = "fiveline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.loseline);
+      } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
       return {
@@ -634,6 +701,9 @@ const game = {
     },
     drop_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
+      let ARTIFACTS = {
+        loseline: {}
+      };
       let UNITLAYERS = step.UNITLAYERS;
       let BATTLEVARS = { ...step.BATTLEVARS };
       let UNITDATA = { ...step.UNITDATA };
@@ -668,12 +738,43 @@ const game = {
         }
       }
       {
+        let allowedsteps = UNITLAYERS.myunits;
+        for (let STARTPOS in TERRAIN2.edge) {
+          for (let DIR of [1, 2, 3, 4]) {
+            let walkedsquares = [];
+            let STOPREASON = "";
+            let POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while (
+              !(STOPREASON = !(POS = connections[POS][DIR])
+                ? "outofbounds"
+                : !allowedsteps[POS]
+                ? "nomoresteps"
+                : null)
+            ) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 5) {
+                ARTIFACTS.loseline[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (Object.keys(ARTIFACTS.loseline).length !== 0) {
+        LINKS.endGame = "lose";
+        LINKS.endedBy = "fiveline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.loseline);
+      } else {
         LINKS.endTurn = "startTurn_basic_1";
       }
       return {
         LINKS,
         MARKS: {},
-        ARTIFACTS: step.ARTIFACTS,
+        ARTIFACTS,
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
@@ -687,7 +788,8 @@ const game = {
         movetargets: step.ARTIFACTS.movetargets,
         conversions: step.ARTIFACTS.conversions,
         demote: step.ARTIFACTS.demote,
-        promote: step.ARTIFACTS.promote
+        promote: step.ARTIFACTS.promote,
+        loseline: {}
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -781,6 +883,37 @@ const game = {
         }
       }
       {
+        let allowedsteps = UNITLAYERS.myunits;
+        for (let STARTPOS in TERRAIN2.edge) {
+          for (let DIR of [1, 2, 3, 4]) {
+            let walkedsquares = [];
+            let STOPREASON = "";
+            let POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while (
+              !(STOPREASON = !(POS = connections[POS][DIR])
+                ? "outofbounds"
+                : !allowedsteps[POS]
+                ? "nomoresteps"
+                : null)
+            ) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 5) {
+                ARTIFACTS.loseline[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (Object.keys(ARTIFACTS.loseline).length !== 0) {
+        LINKS.endGame = "lose";
+        LINKS.endedBy = "fiveline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.loseline);
+      } else {
         LINKS.endTurn = "startTurn_basic_1";
       }
       return {
@@ -1164,7 +1297,15 @@ const game = {
             "e2",
             "e4"
           ]
-        }
+        },
+        edge: [
+          {
+            rect: ["a1", "a5"]
+          },
+          {
+            rect: ["b1", "e1"]
+          }
+        ]
       }
     }
   },

@@ -8,7 +8,7 @@ const yonmoqueFlow: YonmoqueDefinition["flow"] = {
         if: [
           {
             morethan: [
-              7,
+              6,
               {
                 firsttruthy: [
                   { battlevar: { playercase: ["plr1drop", "plr2drop"] } },
@@ -68,6 +68,9 @@ const yonmoqueFlow: YonmoqueDefinition["flow"] = {
           ],
         },
         { moveat: ["selectunit", "selectmovetarget"] },
+        { adoptin: ["conversions"] },
+        { morphin: ["promote", "bishops"] },
+        { morphin: ["demote", "pawns"] },
       ],
       link: "endTurn",
     },
@@ -79,11 +82,15 @@ const yonmoqueFlow: YonmoqueDefinition["flow"] = {
     },
     selectunit: {
       from: "myunits",
-      runGenerators: ["findsteptargets", "findslidetargets"],
+      runGenerators: [
+        "findsteptargets",
+        { if: [{ anyat: ["bishops", "selectunit"] }, "findslidetargets"] },
+      ],
       link: "selectmovetarget",
     },
     selectmovetarget: {
       from: "movetargets",
+      runGenerator: "findconversions",
       link: "move",
     },
   },

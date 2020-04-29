@@ -8,7 +8,7 @@ import { YonmoqueDefinition } from "./_types";
 const yonmoqueGenerators: YonmoqueDefinition["generators"] = {
   findsteptargets: {
     type: "neighbour",
-    starts: "myunits",
+    start: "selectunit",
     dirs: "rose",
     unlessover: "units",
     draw: {
@@ -19,13 +19,49 @@ const yonmoqueGenerators: YonmoqueDefinition["generators"] = {
   },
   findslidetargets: {
     type: "walker",
-    starts: "mybishops",
+    start: "selectunit",
     dirs: "diag",
     blocks: "units",
     draw: {
       steps: {
         tolayer: "movetargets",
       },
+    },
+  },
+  findconversions: {
+    type: "walker",
+    start: "selectmovetarget",
+    dirs: "rose",
+    steps: "oppunits",
+    blocks: "myunits",
+    stopPrio: ["outofbounds", "hitblock", "nomoresteps", "reachedmax"],
+    draw: {
+      steps: [
+        {
+          condition: { stoppedBecause: "hitblock" },
+          tolayer: "conversions",
+        },
+        {
+          condition: {
+            and: [
+              { stoppedBecause: "hitblock" },
+              { anyat: ["bishops", ["target"]] },
+              { noneat: ["mybase", ["target"]] },
+            ],
+          },
+          tolayer: "demote",
+        },
+        {
+          condition: {
+            and: [
+              { stoppedBecause: "hitblock" },
+              { anyat: ["pawns", ["target"]] },
+              { anyat: ["mybase", ["target"]] },
+            ],
+          },
+          tolayer: "promote",
+        },
+      ],
     },
   },
 };

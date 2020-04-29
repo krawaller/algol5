@@ -13,7 +13,7 @@ const yonmoqueInstructions: YonmoqueDefinition["instructions"] = {
             if: [
               {
                 morethan: [
-                  7,
+                  6,
                   {
                     firsttruthy: [
                       { battlevar: { playercase: ["plr1drop", "plr2drop"] } },
@@ -22,7 +22,47 @@ const yonmoqueInstructions: YonmoqueDefinition["instructions"] = {
                   },
                 ],
               },
-              { line: ["an empty square to drop a unit into"] },
+              {
+                line: [
+                  "an empty square to drop",
+                  {
+                    ifelse: [
+                      {
+                        same: [
+                          5,
+                          {
+                            battlevar: { playercase: ["plr1drop", "plr2drop"] },
+                          },
+                        ],
+                      },
+                      "your last remaining off-board unit",
+                      {
+                        line: [
+                          "one of your",
+                          {
+                            value: {
+                              minus: [
+                                6,
+                                {
+                                  firsttruthy: [
+                                    {
+                                      battlevar: {
+                                        playercase: ["plr1drop", "plr2drop"],
+                                      },
+                                    },
+                                    0,
+                                  ],
+                                },
+                              ],
+                            },
+                          },
+                          "off-board units",
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
             ],
           },
         ],
@@ -33,9 +73,9 @@ const yonmoqueInstructions: YonmoqueDefinition["instructions"] = {
     line: [
       "Press",
       "drop",
-      "to spawn a",
+      "to spawn",
       {
-        unittype: [
+        unittypepos: [
           {
             ifelse: [
               { anyat: ["mybase", "selectdroptarget"] },
@@ -44,6 +84,7 @@ const yonmoqueInstructions: YonmoqueDefinition["instructions"] = {
             ],
           },
           ["player"],
+          "selectdroptarget",
         ],
       },
     ],
@@ -53,30 +94,40 @@ const yonmoqueInstructions: YonmoqueDefinition["instructions"] = {
     line: [
       "Press",
       "move",
-      "to move",
-      { unitat: "selectunit" },
       "to",
-      "selectmovetarget",
       {
-        if: [
+        andlist: [
           {
-            and: [
-              { anyat: ["mybishops", "selectunit"] },
-              { noneat: ["mybase", "selectmovetarget"] },
+            line: ["move", { unitat: "selectunit" }, "to", "selectmovetarget"],
+          },
+          {
+            if: [
+              {
+                and: [
+                  { anyat: ["mybishops", "selectunit"] },
+                  { noneat: ["mybase", "selectmovetarget"] },
+                ],
+              },
+              { line: ["demote it to a", "pawns"] },
             ],
           },
-          { line: ["and demote it to a", "pawns"] },
-        ],
-      },
-      {
-        if: [
           {
-            and: [
-              { anyat: ["mypawns", "selectunit"] },
-              { anyat: ["mybase", "selectmovetarget"] },
+            if: [
+              {
+                and: [
+                  { anyat: ["mypawns", "selectunit"] },
+                  { anyat: ["mybase", "selectmovetarget"] },
+                ],
+              },
+              { line: ["and promote it to a", "bishops"] },
             ],
           },
-          { line: ["and promote it to a", "bishops"] },
+          {
+            if: [
+              { notempty: "conversions" },
+              { line: ["take over", { unitlist: "conversions" }] },
+            ],
+          },
         ],
       },
     ],

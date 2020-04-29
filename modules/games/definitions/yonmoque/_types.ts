@@ -23,8 +23,15 @@ type YonmoqueUnitLayer =
   | "mybishops"
   | "oppbishops"
   | "neutralbishops";
-type YonmoqueGenerator = "findsteptargets" | "findslidetargets";
-type YonmoqueArtifactLayer = "movetargets";
+type YonmoqueGenerator =
+  | "findsteptargets"
+  | "findslidetargets"
+  | "findconversions";
+type YonmoqueArtifactLayer =
+  | "movetargets"
+  | "conversions"
+  | "demote"
+  | "promote";
 type YonmoqueTerrainLayer = "base" | "mybase" | "oppbase" | "nobase";
 type YonmoqueLayer =
   | CommonLayer

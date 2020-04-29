@@ -39,7 +39,12 @@ const groupLayers2 = {
     ["units", "myunits", "bishops", "mybishops"]
   ]
 };
-const emptyArtifactLayers_basic = { movetargets: {} };
+const emptyArtifactLayers_basic = {
+  movetargets: {},
+  conversions: {},
+  demote: {},
+  promote: {}
+};
 const game = {
   gameId: "yonmoque",
   commands: { drop: {}, move: {} },
@@ -102,7 +107,7 @@ const game = {
       for (const pos of Object.keys(UNITLAYERS.myunits)) {
         LINKS.marks[pos] = "selectunit_basic_1";
       }
-      if (7 > (BATTLEVARS["plr1drop"] || 0)) {
+      if (6 > (BATTLEVARS["plr1drop"] || 0)) {
         for (const pos of Object.keys(
           Object.keys(BOARD.board)
             .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
@@ -146,7 +151,7 @@ const game = {
       for (const pos of Object.keys(UNITLAYERS.myunits)) {
         LINKS.marks[pos] = "selectunit_basic_2";
       }
-      if (7 > (BATTLEVARS["plr2drop"] || 0)) {
+      if (6 > (BATTLEVARS["plr2drop"] || 0)) {
         for (const pos of Object.keys(
           Object.keys(BOARD.board)
             .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
@@ -188,9 +193,12 @@ const game = {
         movetargets: {}
       };
       let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectunit: newMarkPos
+      };
       let UNITLAYERS = step.UNITLAYERS;
-      for (let STARTPOS in UNITLAYERS.myunits) {
-        let startconnections = connections[STARTPOS];
+      {
+        let startconnections = connections[MARKS.selectunit];
         for (let DIR of roseDirs) {
           let POS = startconnections[DIR];
           if (POS && !UNITLAYERS.units[POS]) {
@@ -198,12 +206,28 @@ const game = {
           }
         }
       }
-      {
-        let BLOCKS = UNITLAYERS.units;
-        for (let STARTPOS in UNITLAYERS.mybishops) {
+      if (UNITLAYERS.bishops[MARKS.selectunit]) {
+        {
+          let BLOCKS = UNITLAYERS.units;
           for (let DIR of diagDirs) {
-            let POS = STARTPOS;
-            while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            let walkedsquares = [];
+            let STOPREASON = "";
+            let POS = MARKS.selectunit;
+            while (
+              !(STOPREASON = !(POS = connections[POS][DIR])
+                ? "outofbounds"
+                : BLOCKS[POS]
+                ? "hitblock"
+                : null)
+            ) {
+              walkedsquares.push(POS);
+            }
+            for (
+              let walkstepper = 0;
+              walkstepper < walkedsquares.length;
+              walkstepper++
+            ) {
+              POS = walkedsquares[walkstepper];
               ARTIFACTS.movetargets[POS] = emptyObj;
             }
           }
@@ -218,24 +242,82 @@ const game = {
         UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: { selectunit: newMarkPos },
+        MARKS,
         BATTLEVARS: step.BATTLEVARS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
     selectmovetarget_basic_1: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        conversions: {},
+        demote: {},
+        promote: {}
+      };
       let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectunit: step.MARKS.selectunit,
+        selectmovetarget: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        let allowedsteps = UNITLAYERS.oppunits;
+        let BLOCKS = UNITLAYERS.myunits;
+        for (let DIR of roseDirs) {
+          let walkedsquares = [];
+          let STOPREASON = "";
+          let POS = MARKS.selectmovetarget;
+          while (
+            !(STOPREASON = !(POS = connections[POS][DIR])
+              ? "outofbounds"
+              : BLOCKS[POS]
+              ? "hitblock"
+              : !allowedsteps[POS]
+              ? "nomoresteps"
+              : null)
+          ) {
+            walkedsquares.push(POS);
+          }
+          for (
+            let walkstepper = 0;
+            walkstepper < walkedsquares.length;
+            walkstepper++
+          ) {
+            POS = walkedsquares[walkstepper];
+            {
+              if (STOPREASON === "hitblock") {
+                ARTIFACTS.conversions[POS] = emptyObj;
+              }
+            }
+            {
+              if (
+                STOPREASON === "hitblock" &&
+                UNITLAYERS.bishops[POS] &&
+                !TERRAIN1.mybase[POS]
+              ) {
+                ARTIFACTS.demote[POS] = emptyObj;
+              }
+            }
+            {
+              if (
+                STOPREASON === "hitblock" &&
+                UNITLAYERS.pawns[POS] &&
+                TERRAIN1.mybase[POS]
+              ) {
+                ARTIFACTS.promote[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
       LINKS.commands.move = "move_basic_1";
       return {
         LINKS,
-        ARTIFACTS: step.ARTIFACTS,
-        UNITLAYERS: step.UNITLAYERS,
+        ARTIFACTS,
+        UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: {
-          selectunit: step.MARKS.selectunit,
-          selectmovetarget: newMarkPos
-        },
+        MARKS,
         BATTLEVARS: step.BATTLEVARS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
@@ -259,9 +341,12 @@ const game = {
         movetargets: {}
       };
       let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectunit: newMarkPos
+      };
       let UNITLAYERS = step.UNITLAYERS;
-      for (let STARTPOS in UNITLAYERS.myunits) {
-        let startconnections = connections[STARTPOS];
+      {
+        let startconnections = connections[MARKS.selectunit];
         for (let DIR of roseDirs) {
           let POS = startconnections[DIR];
           if (POS && !UNITLAYERS.units[POS]) {
@@ -269,12 +354,28 @@ const game = {
           }
         }
       }
-      {
-        let BLOCKS = UNITLAYERS.units;
-        for (let STARTPOS in UNITLAYERS.mybishops) {
+      if (UNITLAYERS.bishops[MARKS.selectunit]) {
+        {
+          let BLOCKS = UNITLAYERS.units;
           for (let DIR of diagDirs) {
-            let POS = STARTPOS;
-            while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            let walkedsquares = [];
+            let STOPREASON = "";
+            let POS = MARKS.selectunit;
+            while (
+              !(STOPREASON = !(POS = connections[POS][DIR])
+                ? "outofbounds"
+                : BLOCKS[POS]
+                ? "hitblock"
+                : null)
+            ) {
+              walkedsquares.push(POS);
+            }
+            for (
+              let walkstepper = 0;
+              walkstepper < walkedsquares.length;
+              walkstepper++
+            ) {
+              POS = walkedsquares[walkstepper];
               ARTIFACTS.movetargets[POS] = emptyObj;
             }
           }
@@ -289,24 +390,82 @@ const game = {
         UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: { selectunit: newMarkPos },
+        MARKS,
         BATTLEVARS: step.BATTLEVARS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
     selectmovetarget_basic_2: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        conversions: {},
+        demote: {},
+        promote: {}
+      };
       let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectunit: step.MARKS.selectunit,
+        selectmovetarget: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        let allowedsteps = UNITLAYERS.oppunits;
+        let BLOCKS = UNITLAYERS.myunits;
+        for (let DIR of roseDirs) {
+          let walkedsquares = [];
+          let STOPREASON = "";
+          let POS = MARKS.selectmovetarget;
+          while (
+            !(STOPREASON = !(POS = connections[POS][DIR])
+              ? "outofbounds"
+              : BLOCKS[POS]
+              ? "hitblock"
+              : !allowedsteps[POS]
+              ? "nomoresteps"
+              : null)
+          ) {
+            walkedsquares.push(POS);
+          }
+          for (
+            let walkstepper = 0;
+            walkstepper < walkedsquares.length;
+            walkstepper++
+          ) {
+            POS = walkedsquares[walkstepper];
+            {
+              if (STOPREASON === "hitblock") {
+                ARTIFACTS.conversions[POS] = emptyObj;
+              }
+            }
+            {
+              if (
+                STOPREASON === "hitblock" &&
+                UNITLAYERS.bishops[POS] &&
+                !TERRAIN2.mybase[POS]
+              ) {
+                ARTIFACTS.demote[POS] = emptyObj;
+              }
+            }
+            {
+              if (
+                STOPREASON === "hitblock" &&
+                UNITLAYERS.pawns[POS] &&
+                TERRAIN2.mybase[POS]
+              ) {
+                ARTIFACTS.promote[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
       LINKS.commands.move = "move_basic_2";
       return {
         LINKS,
-        ARTIFACTS: step.ARTIFACTS,
-        UNITLAYERS: step.UNITLAYERS,
+        ARTIFACTS,
+        UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: {
-          selectunit: step.MARKS.selectunit,
-          selectmovetarget: newMarkPos
-        },
+        MARKS,
         BATTLEVARS: step.BATTLEVARS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
@@ -362,6 +521,12 @@ const game = {
     },
     move_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        conversions: step.ARTIFACTS.conversions,
+        demote: step.ARTIFACTS.demote,
+        promote: step.ARTIFACTS.promote
+      };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
@@ -402,6 +567,39 @@ const game = {
           };
         }
       }
+      for (let LOOPPOS in ARTIFACTS.conversions) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              owner: 1
+            };
+          }
+        }
+      }
+      for (let LOOPPOS in ARTIFACTS.promote) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              group: "bishops"
+            };
+          }
+        }
+      }
+      for (let LOOPPOS in ARTIFACTS.demote) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              group: "pawns"
+            };
+          }
+        }
+      }
       UNITLAYERS = {
         units: {},
         myunits: {},
@@ -426,7 +624,7 @@ const game = {
       return {
         LINKS,
         MARKS: {},
-        ARTIFACTS: step.ARTIFACTS,
+        ARTIFACTS,
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
@@ -485,6 +683,12 @@ const game = {
     },
     move_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        conversions: step.ARTIFACTS.conversions,
+        demote: step.ARTIFACTS.demote,
+        promote: step.ARTIFACTS.promote
+      };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
@@ -525,6 +729,39 @@ const game = {
           };
         }
       }
+      for (let LOOPPOS in ARTIFACTS.conversions) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              owner: 2
+            };
+          }
+        }
+      }
+      for (let LOOPPOS in ARTIFACTS.promote) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              group: "bishops"
+            };
+          }
+        }
+      }
+      for (let LOOPPOS in ARTIFACTS.demote) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              group: "pawns"
+            };
+          }
+        }
+      }
       UNITLAYERS = {
         units: {},
         myunits: {},
@@ -549,7 +786,7 @@ const game = {
       return {
         LINKS,
         MARKS: {},
-        ARTIFACTS: step.ARTIFACTS,
+        ARTIFACTS,
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
@@ -570,9 +807,20 @@ const game = {
               Object.keys(UNITLAYERS.myunits).length !== 0
                 ? collapseContent({ line: [{ text: "a unit to move" }] })
                 : undefined,
-              7 > (BATTLEVARS["plr1drop"] || 0)
+              6 > (BATTLEVARS["plr1drop"] || 0)
                 ? collapseContent({
-                    line: [{ text: "an empty square to drop a unit into" }]
+                    line: [
+                      { text: "an empty square to drop" },
+                      5 === BATTLEVARS["plr1drop"]
+                        ? { text: "your last remaining off-board unit" }
+                        : collapseContent({
+                            line: [
+                              { text: "one of your" },
+                              { text: 6 - (BATTLEVARS["plr1drop"] || 0) },
+                              { text: "off-board units" }
+                            ]
+                          })
+                    ]
                   })
                 : undefined
             ]
@@ -598,13 +846,14 @@ const game = {
         line: [
           { text: "Press" },
           { command: "drop" },
-          { text: "to spawn a" },
+          { text: "to spawn" },
           {
-            unittype: [
+            unit: [
               iconMapping[
                 TERRAIN1.mybase[MARKS.selectdroptarget] ? "bishops" : "pawns"
               ],
-              1
+              1,
+              MARKS.selectdroptarget
             ]
           }
         ]
@@ -627,40 +876,89 @@ const game = {
       });
     },
     selectmovetarget_basic_1: step => {
+      let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
         line: [
           { text: "Press" },
           { command: "move" },
-          { text: "to move" },
-          {
-            unit: [
-              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
-              MARKS.selectunit
-            ]
-          },
           { text: "to" },
-          { pos: MARKS.selectmovetarget },
-          UNITLAYERS.mybishops[MARKS.selectunit] &&
-          !TERRAIN1.mybase[MARKS.selectmovetarget]
-            ? collapseContent({
+          collapseContent({
+            line: [
+              collapseContent({
                 line: [
-                  { text: "and demote it to a" },
-                  { unittype: ["pawn", 1] }
+                  { command: "move" },
+                  {
+                    unit: [
+                      iconMapping[
+                        (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                      ],
+                      (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                      MARKS.selectunit
+                    ]
+                  },
+                  { text: "to" },
+                  { pos: MARKS.selectmovetarget }
                 ]
-              })
-            : undefined,
-          UNITLAYERS.mypawns[MARKS.selectunit] &&
-          TERRAIN1.mybase[MARKS.selectmovetarget]
-            ? collapseContent({
-                line: [
-                  { text: "and promote it to a" },
-                  { unittype: ["bishop", 1] }
-                ]
-              })
-            : undefined
+              }),
+              UNITLAYERS.mybishops[MARKS.selectunit] &&
+              !TERRAIN1.mybase[MARKS.selectmovetarget]
+                ? collapseContent({
+                    line: [
+                      { text: "demote it to a" },
+                      { unittype: ["pawn", 1] }
+                    ]
+                  })
+                : undefined,
+              UNITLAYERS.mypawns[MARKS.selectunit] &&
+              TERRAIN1.mybase[MARKS.selectmovetarget]
+                ? collapseContent({
+                    line: [
+                      { text: "and promote it to a" },
+                      { unittype: ["bishop", 1] }
+                    ]
+                  })
+                : undefined,
+              Object.keys(ARTIFACTS.conversions).length !== 0
+                ? collapseContent({
+                    line: [
+                      { text: "take over" },
+                      collapseContent({
+                        line: Object.keys(ARTIFACTS.conversions)
+                          .filter(p => UNITLAYERS.units[p])
+                          .map(p => ({
+                            unit: [
+                              iconMapping[UNITLAYERS.units[p].group],
+                              UNITLAYERS.units[p].owner,
+                              p
+                            ]
+                          }))
+                          .reduce((mem, i, n, list) => {
+                            mem.push(i);
+                            if (n === list.length - 2) {
+                              mem.push({ text: " and " });
+                            } else if (n < list.length - 2) {
+                              mem.push({ text: ", " });
+                            }
+                            return mem;
+                          }, [])
+                      })
+                    ]
+                  })
+                : undefined
+            ]
+              .filter(i => !!i)
+              .reduce((mem, i, n, list) => {
+                mem.push(i);
+                if (n === list.length - 2) {
+                  mem.push({ text: " and " });
+                } else if (n < list.length - 2) {
+                  mem.push({ text: ", " });
+                }
+                return mem;
+              }, [])
+          })
         ]
       });
     },
@@ -675,9 +973,20 @@ const game = {
               Object.keys(UNITLAYERS.myunits).length !== 0
                 ? collapseContent({ line: [{ text: "a unit to move" }] })
                 : undefined,
-              7 > (BATTLEVARS["plr2drop"] || 0)
+              6 > (BATTLEVARS["plr2drop"] || 0)
                 ? collapseContent({
-                    line: [{ text: "an empty square to drop a unit into" }]
+                    line: [
+                      { text: "an empty square to drop" },
+                      5 === BATTLEVARS["plr2drop"]
+                        ? { text: "your last remaining off-board unit" }
+                        : collapseContent({
+                            line: [
+                              { text: "one of your" },
+                              { text: 6 - (BATTLEVARS["plr2drop"] || 0) },
+                              { text: "off-board units" }
+                            ]
+                          })
+                    ]
                   })
                 : undefined
             ]
@@ -703,13 +1012,14 @@ const game = {
         line: [
           { text: "Press" },
           { command: "drop" },
-          { text: "to spawn a" },
+          { text: "to spawn" },
           {
-            unittype: [
+            unit: [
               iconMapping[
                 TERRAIN2.mybase[MARKS.selectdroptarget] ? "bishops" : "pawns"
               ],
-              2
+              2,
+              MARKS.selectdroptarget
             ]
           }
         ]
@@ -732,40 +1042,89 @@ const game = {
       });
     },
     selectmovetarget_basic_2: step => {
+      let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
         line: [
           { text: "Press" },
           { command: "move" },
-          { text: "to move" },
-          {
-            unit: [
-              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
-              MARKS.selectunit
-            ]
-          },
           { text: "to" },
-          { pos: MARKS.selectmovetarget },
-          UNITLAYERS.mybishops[MARKS.selectunit] &&
-          !TERRAIN2.mybase[MARKS.selectmovetarget]
-            ? collapseContent({
+          collapseContent({
+            line: [
+              collapseContent({
                 line: [
-                  { text: "and demote it to a" },
-                  { unittype: ["pawn", 2] }
+                  { command: "move" },
+                  {
+                    unit: [
+                      iconMapping[
+                        (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                      ],
+                      (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                      MARKS.selectunit
+                    ]
+                  },
+                  { text: "to" },
+                  { pos: MARKS.selectmovetarget }
                 ]
-              })
-            : undefined,
-          UNITLAYERS.mypawns[MARKS.selectunit] &&
-          TERRAIN2.mybase[MARKS.selectmovetarget]
-            ? collapseContent({
-                line: [
-                  { text: "and promote it to a" },
-                  { unittype: ["bishop", 2] }
-                ]
-              })
-            : undefined
+              }),
+              UNITLAYERS.mybishops[MARKS.selectunit] &&
+              !TERRAIN2.mybase[MARKS.selectmovetarget]
+                ? collapseContent({
+                    line: [
+                      { text: "demote it to a" },
+                      { unittype: ["pawn", 2] }
+                    ]
+                  })
+                : undefined,
+              UNITLAYERS.mypawns[MARKS.selectunit] &&
+              TERRAIN2.mybase[MARKS.selectmovetarget]
+                ? collapseContent({
+                    line: [
+                      { text: "and promote it to a" },
+                      { unittype: ["bishop", 2] }
+                    ]
+                  })
+                : undefined,
+              Object.keys(ARTIFACTS.conversions).length !== 0
+                ? collapseContent({
+                    line: [
+                      { text: "take over" },
+                      collapseContent({
+                        line: Object.keys(ARTIFACTS.conversions)
+                          .filter(p => UNITLAYERS.units[p])
+                          .map(p => ({
+                            unit: [
+                              iconMapping[UNITLAYERS.units[p].group],
+                              UNITLAYERS.units[p].owner,
+                              p
+                            ]
+                          }))
+                          .reduce((mem, i, n, list) => {
+                            mem.push(i);
+                            if (n === list.length - 2) {
+                              mem.push({ text: " and " });
+                            } else if (n < list.length - 2) {
+                              mem.push({ text: ", " });
+                            }
+                            return mem;
+                          }, [])
+                      })
+                    ]
+                  })
+                : undefined
+            ]
+              .filter(i => !!i)
+              .reduce((mem, i, n, list) => {
+                mem.push(i);
+                if (n === list.length - 2) {
+                  mem.push({ text: " and " });
+                } else if (n < list.length - 2) {
+                  mem.push({ text: ", " });
+                }
+                return mem;
+              }, [])
+          })
         ]
       });
     }

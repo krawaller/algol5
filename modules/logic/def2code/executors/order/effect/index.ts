@@ -295,19 +295,19 @@ function executeEffectInner(
   }
   if (isAlgolEffectAdoptAt(effect)) {
     const {
-      adoptat: [pos, owner],
+      adoptat: [pos, owner = player],
     } = effect;
     return me({ setat: [pos, "owner", owner] });
   }
   if (isAlgolEffectAdoptId(effect)) {
     const {
-      adoptid: [id, owner],
+      adoptid: [id, owner = player],
     } = effect;
     return me({ setid: [id, "owner", owner] });
   }
   if (isAlgolEffectAdoptIn(effect)) {
     const {
-      adoptin: [set, owner],
+      adoptin: [set, owner = player],
     } = effect;
     return me({ forposin: [set, { adoptat: [["looppos"], owner] }] });
   }

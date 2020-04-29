@@ -47,6 +47,7 @@ const tests: AlgolEffect<AlgolTestBlob>[] = [
   { morphin: ["mylayer", { value: "myunit" }] },
   { morphid: [{ value: "someid" }, { value: "myunit" }] },
   { adoptat: ["mymark", { value: 0 }] },
+  { adoptat: ["mymark"] },
   { adoptin: ["mylayer", { value: ["player"] }] },
   { adoptid: [{ value: "someid" }, { value: ["otherplayer"] }] },
   { ifelse: [["true"], { killat: "mymark" }, { killat: "mymark" }] },

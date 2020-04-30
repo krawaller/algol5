@@ -6,6 +6,35 @@
 import { YonmoqueDefinition } from "./_types";
 
 const yonmoqueGenerators: YonmoqueDefinition["generators"] = {
+  findwinlinestarts: {
+    start: "selectmovetarget",
+    type: "walker",
+    dirs: "rose",
+    steps: "myunits",
+    draw: {
+      last: {
+        tolayer: "winlineheads",
+        include: {
+          dir: ["dir"],
+        },
+      },
+    },
+  },
+  findwinlines: {
+    starts: "winlineheads",
+    type: "walker",
+    startasstep: true,
+    dir: { reldir: [5, { read: ["winlineheads", ["start"], "dir"] }] },
+    steps: "myunits",
+    draw: {
+      steps: {
+        condition: {
+          same: [["walklength"], 4],
+        },
+        tolayer: "winline",
+      },
+    },
+  },
   findloselines: {
     starts: "edge",
     type: "walker",

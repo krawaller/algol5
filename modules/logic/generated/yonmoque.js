@@ -40,6 +40,8 @@ const groupLayers2 = {
   ]
 };
 const emptyArtifactLayers_basic = {
+  winlineheads: {},
+  winline: {},
   loseline: {},
   movetargets: {},
   conversions: {},
@@ -538,7 +540,7 @@ const game = {
       }
       if (Object.keys(ARTIFACTS.loseline).length !== 0) {
         LINKS.endGame = "lose";
-        LINKS.endedBy = "fiveline";
+        LINKS.endedBy = "fiveinarow";
         LINKS.endMarks = Object.keys(ARTIFACTS.loseline);
       } else {
         LINKS.endTurn = "startTurn_basic_2";
@@ -561,7 +563,9 @@ const game = {
         conversions: step.ARTIFACTS.conversions,
         demote: step.ARTIFACTS.demote,
         promote: step.ARTIFACTS.promote,
-        loseline: {}
+        loseline: {},
+        winlineheads: {},
+        winline: {}
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -681,10 +685,69 @@ const game = {
           }
         }
       }
+      if (Object.keys(ARTIFACTS.loseline).length === 0) {
+        {
+          let allowedsteps = UNITLAYERS.myunits;
+          for (let DIR of roseDirs) {
+            let walkedsquares = [];
+            let STOPREASON = "";
+            let POS = MARKS.selectmovetarget;
+            while (
+              !(STOPREASON = !(POS = connections[POS][DIR])
+                ? "outofbounds"
+                : !allowedsteps[POS]
+                ? "nomoresteps"
+                : null)
+            ) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            if (WALKLENGTH) {
+              ARTIFACTS.winlineheads[walkedsquares[WALKLENGTH - 1]] = {
+                dir: DIR
+              };
+            }
+          }
+        }
+        {
+          let allowedsteps = UNITLAYERS.myunits;
+          for (let STARTPOS in ARTIFACTS.winlineheads) {
+            let walkedsquares = [];
+            let STOPREASON = "";
+            let POS = "faux";
+            connections.faux[
+              relativeDirs[5][(ARTIFACTS.winlineheads[STARTPOS] || {}).dir]
+            ] = STARTPOS;
+            while (
+              !(STOPREASON = !(POS =
+                connections[POS][
+                  relativeDirs[5][(ARTIFACTS.winlineheads[STARTPOS] || {}).dir]
+                ])
+                ? "outofbounds"
+                : !allowedsteps[POS]
+                ? "nomoresteps"
+                : null)
+            ) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 4) {
+                ARTIFACTS.winline[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
       if (Object.keys(ARTIFACTS.loseline).length !== 0) {
         LINKS.endGame = "lose";
-        LINKS.endedBy = "fiveline";
+        LINKS.endedBy = "fiveinarow";
         LINKS.endMarks = Object.keys(ARTIFACTS.loseline);
+      } else if (Object.keys(ARTIFACTS.winline).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "fourinarow";
+        LINKS.endMarks = Object.keys(ARTIFACTS.winline);
       } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
@@ -766,7 +829,7 @@ const game = {
       }
       if (Object.keys(ARTIFACTS.loseline).length !== 0) {
         LINKS.endGame = "lose";
-        LINKS.endedBy = "fiveline";
+        LINKS.endedBy = "fiveinarow";
         LINKS.endMarks = Object.keys(ARTIFACTS.loseline);
       } else {
         LINKS.endTurn = "startTurn_basic_1";
@@ -789,7 +852,9 @@ const game = {
         conversions: step.ARTIFACTS.conversions,
         demote: step.ARTIFACTS.demote,
         promote: step.ARTIFACTS.promote,
-        loseline: {}
+        loseline: {},
+        winlineheads: {},
+        winline: {}
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -909,10 +974,69 @@ const game = {
           }
         }
       }
+      if (Object.keys(ARTIFACTS.loseline).length === 0) {
+        {
+          let allowedsteps = UNITLAYERS.myunits;
+          for (let DIR of roseDirs) {
+            let walkedsquares = [];
+            let STOPREASON = "";
+            let POS = MARKS.selectmovetarget;
+            while (
+              !(STOPREASON = !(POS = connections[POS][DIR])
+                ? "outofbounds"
+                : !allowedsteps[POS]
+                ? "nomoresteps"
+                : null)
+            ) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            if (WALKLENGTH) {
+              ARTIFACTS.winlineheads[walkedsquares[WALKLENGTH - 1]] = {
+                dir: DIR
+              };
+            }
+          }
+        }
+        {
+          let allowedsteps = UNITLAYERS.myunits;
+          for (let STARTPOS in ARTIFACTS.winlineheads) {
+            let walkedsquares = [];
+            let STOPREASON = "";
+            let POS = "faux";
+            connections.faux[
+              relativeDirs[5][(ARTIFACTS.winlineheads[STARTPOS] || {}).dir]
+            ] = STARTPOS;
+            while (
+              !(STOPREASON = !(POS =
+                connections[POS][
+                  relativeDirs[5][(ARTIFACTS.winlineheads[STARTPOS] || {}).dir]
+                ])
+                ? "outofbounds"
+                : !allowedsteps[POS]
+                ? "nomoresteps"
+                : null)
+            ) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 4) {
+                ARTIFACTS.winline[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
       if (Object.keys(ARTIFACTS.loseline).length !== 0) {
         LINKS.endGame = "lose";
-        LINKS.endedBy = "fiveline";
+        LINKS.endedBy = "fiveinarow";
         LINKS.endMarks = Object.keys(ARTIFACTS.loseline);
+      } else if (Object.keys(ARTIFACTS.winline).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "fourinarow";
+        LINKS.endMarks = Object.keys(ARTIFACTS.winline);
       } else {
         LINKS.endTurn = "startTurn_basic_1";
       }

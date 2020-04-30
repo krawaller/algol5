@@ -24,11 +24,15 @@ type YonmoqueUnitLayer =
   | "oppbishops"
   | "neutralbishops";
 type YonmoqueGenerator =
+  | "findwinlinestarts"
+  | "findwinlines"
   | "findloselines"
   | "findsteptargets"
   | "findslidetargets"
   | "findconversions";
 type YonmoqueArtifactLayer =
+  | "winlineheads"
+  | "winline"
   | "loseline"
   | "movetargets"
   | "conversions"

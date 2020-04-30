@@ -2,10 +2,17 @@ import { YonmoqueDefinition } from "./_types";
 
 const yonmoqueFlow: YonmoqueDefinition["flow"] = {
   endGame: {
-    forbiddenline: {
+    fiveinarow: {
       condition: { notempty: "loseline" },
       who: ["otherplayer"],
       show: "loseline",
+      prio: 1,
+    },
+    fourinarow: {
+      condition: { notempty: "winline" },
+      show: "winline",
+      unlessAction: "drop",
+      prio: 2,
     },
   },
   startTurn: {
@@ -80,7 +87,15 @@ const yonmoqueFlow: YonmoqueDefinition["flow"] = {
         { morphin: ["promote", "bishops"] },
         { morphin: ["demote", "pawns"] },
       ],
-      runGenerators: ["findloselines"],
+      runGenerators: [
+        "findloselines",
+        {
+          if: [
+            { isempty: "loseline" },
+            { multi: ["findwinlinestarts", "findwinlines"] },
+          ],
+        },
+      ],
       link: "endTurn",
     },
   },

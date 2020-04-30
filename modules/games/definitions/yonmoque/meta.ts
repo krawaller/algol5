@@ -3,11 +3,11 @@ import { YonmoqueDefinition } from "./_types";
 const yonmoqueMeta: YonmoqueDefinition["meta"] = {
   id: "yonmoque",
   name: "Yonmoque",
-  tags: [],
-  tagline: "An awesome game!",
-  source: "http://some.url.to.rules",
+  tags: ["asymmetric", "logy"],
+  tagline: "Change powers as you traverse the board!",
+  source: "http://www.logygames.com/english/yonmoque.html",
   code: "B",
-  slug: "yonmoque"
+  slug: "yonmoque",
 };
 
 export default yonmoqueMeta;

@@ -8,11 +8,20 @@ const yonmoqueVariants: YonmoqueDefinition["variants"] = [
     desc: "regular",
     code: "r",
     arr: {
-      setup: {},
+      setup: {
+        pawns: {
+          2: ["a3"],
+          1: ["b3", "c3", "c4"],
+        },
+        bishops: {
+          2: ["b1", "d5"],
+          1: ["d2", "e3"],
+        },
+      },
       marks: [],
-      potentialMarks: []
-    }
-  }
+      potentialMarks: [],
+    },
+  },
 ];
 
 export default yonmoqueVariants;

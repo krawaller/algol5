@@ -4,6 +4,7 @@ import {
   isAlgolBoolIsEmpty,
   isAlgolBoolNotEmpty,
   isAlgolBoolMoreThan,
+  isAlgolBoolLessThan,
   isAlgolBoolSame,
   isAlgolBoolDifferent,
   isAlgolBoolSamePos,
@@ -64,6 +65,12 @@ export default function parseVal(
       morethan: [first, second],
     } = expr;
     return `(${parser.val(first)} > ${parser.val(second)})`;
+  }
+  if (isAlgolBoolLessThan(expr)) {
+    const {
+      lessthan: [first, second],
+    } = expr;
+    return `(${parser.val(first)} < ${parser.val(second)})`;
   }
   if (isAlgolBoolSame(expr)) {
     const {

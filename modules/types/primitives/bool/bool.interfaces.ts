@@ -77,6 +77,10 @@ export interface AlgolBoolMoreThan<Blob extends AlgolGameBlobAnon> {
   morethan: [AlgolVal<Blob, number>, AlgolVal<Blob, string | number>];
 }
 
+export interface AlgolBoolLessThan<Blob extends AlgolGameBlobAnon> {
+  lessthan: [AlgolVal<Blob, number>, AlgolVal<Blob, string | number>];
+}
+
 export interface AlgolBoolValInList<Blob extends AlgolGameBlobAnon> {
   valinlist: AlgolVal<Blob, string | number>[];
 }

@@ -26,6 +26,8 @@ import {
   isAlgolEffectAdoptAt,
   isAlgolEffectAdoptIn,
   isAlgolEffectAdoptId,
+  isAlgolEffectIncreaseBattleVar,
+  isAlgolEffectIncreaseTurnVar,
 } from "../../../../../types";
 
 import { executeStatement, makeParser } from "../../../executors";
@@ -80,6 +82,19 @@ function executeEffectInner(
         : `[${parsedName}]`
     } = ${parser.val(val)};`;
   }
+  if (isAlgolEffectIncreaseTurnVar(effect)) {
+    const {
+      incturnvar: [name, val = 1],
+    } = effect;
+    const parsedName = parser.val(name) + "";
+    const parsedVal = parser.val(val);
+    const lookup = `TURNVARS${
+      parsedName.match(/^["']/)
+        ? `.${parsedName.replace(/(^["']|["']$)/g, "")}`
+        : `[${parsedName}]`
+    }`;
+    return `${lookup} = (${lookup} || 0) + ${parsedVal};`;
+  }
   if (isAlgolEffectSetTurnPos(effect)) {
     const {
       setturnpos: [name, pos],
@@ -101,6 +116,19 @@ function executeEffectInner(
         ? `.${parsedName.replace(/(^["']|["']$)/g, "")}`
         : `[${parsedName}]`
     } = ${parser.val(val)};`;
+  }
+  if (isAlgolEffectIncreaseBattleVar(effect)) {
+    const {
+      incbattlevar: [name, val = 1],
+    } = effect;
+    const parsedName = parser.val(name) + "";
+    const parsedVal = parser.val(val);
+    const lookup = `BATTLEVARS${
+      parsedName.match(/^["']/)
+        ? `.${parsedName.replace(/(^["']|["']$)/g, "")}`
+        : `[${parsedName}]`
+    }`;
+    return `${lookup} = (${lookup} || 0) + ${parsedVal};`;
   }
   if (isAlgolEffectSetBattlePos(effect)) {
     const {
@@ -267,19 +295,19 @@ function executeEffectInner(
   }
   if (isAlgolEffectAdoptAt(effect)) {
     const {
-      adoptat: [pos, owner],
+      adoptat: [pos, owner = player],
     } = effect;
     return me({ setat: [pos, "owner", owner] });
   }
   if (isAlgolEffectAdoptId(effect)) {
     const {
-      adoptid: [id, owner],
+      adoptid: [id, owner = player],
     } = effect;
     return me({ setid: [id, "owner", owner] });
   }
   if (isAlgolEffectAdoptIn(effect)) {
     const {
-      adoptin: [set, owner],
+      adoptin: [set, owner = player],
     } = effect;
     return me({ forposin: [set, { adoptat: [["looppos"], owner] }] });
   }

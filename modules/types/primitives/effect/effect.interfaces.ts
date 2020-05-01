@@ -39,6 +39,18 @@ export interface AlgolEffectSetBattleVar<Blob extends AlgolGameBlobAnon> {
   setbattlevar: [AlgolVal<Blob, Blob["btlv"]>, AlgolVal<Blob, string | number>];
 }
 
+export interface AlgolEffectIncreaseTurnVar<Blob extends AlgolGameBlobAnon> {
+  incturnvar:
+    | [AlgolVal<Blob, Blob["turnv"]>, AlgolVal<Blob, number>]
+    | [AlgolVal<Blob, Blob["turnv"]>];
+}
+
+export interface AlgolEffectIncreaseBattleVar<Blob extends AlgolGameBlobAnon> {
+  incbattlevar:
+    | [AlgolVal<Blob, Blob["btlv"]>, AlgolVal<Blob, number>]
+    | [AlgolVal<Blob, Blob["btlv"]>];
+}
+
 export interface AlgolEffectPushAt<Blob extends AlgolGameBlobAnon> {
   pushat: // pos, dir, distance
   | [
@@ -141,13 +153,15 @@ export interface AlgolEffectMorphId<Blob extends AlgolGameBlobAnon> {
 }
 
 export interface AlgolEffectAdoptAt<Blob extends AlgolGameBlobAnon> {
-  adoptat: [AlgolPos<Blob>, AlgolVal<Blob, 0 | 1 | 2>];
+  adoptat: [AlgolPos<Blob>, AlgolVal<Blob, 0 | 1 | 2>] | [AlgolPos<Blob>];
 }
 
 export interface AlgolEffectAdoptIn<Blob extends AlgolGameBlobAnon> {
-  adoptin: [AlgolSet<Blob>, AlgolVal<Blob, 0 | 1 | 2>];
+  adoptin: [AlgolSet<Blob>, AlgolVal<Blob, 0 | 1 | 2>] | [AlgolSet<Blob>];
 }
 
 export interface AlgolEffectAdoptId<Blob extends AlgolGameBlobAnon> {
-  adoptid: [AlgolVal<Blob, string>, AlgolVal<Blob, 0 | 1 | 2>];
+  adoptid:
+    | [AlgolVal<Blob, string>, AlgolVal<Blob, 0 | 1 | 2>]
+    | [AlgolVal<Blob, string>];
 }

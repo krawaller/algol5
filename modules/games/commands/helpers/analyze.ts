@@ -10,6 +10,8 @@ import {
   isAlgolEffectSetBattlePos,
   isAlgolEffectSetTurnVar,
   isAlgolEffectSetBattleVar,
+  isAlgolEffectIncreaseTurnVar,
+  isAlgolEffectIncreaseBattleVar,
 } from "../../../types";
 import {
   boardPositions,
@@ -95,7 +97,9 @@ export default async function analyze(def: FullDefAnon | string) {
   const aiAspects = Object.keys(AI.aspects);
   const aiGrids = Object.keys(AI.grids || {});
   const aiBrains = Object.keys(AI.brains);
-  const aiArtifactLayerNames = Object.keys(emptyArtifactLayers(AI.generators));
+  const aiArtifactLayerNames = Object.keys(
+    emptyArtifactLayers(AI.generators, "basic")
+  ); // TODO - hardcoded ruleset
 
   const turnpos = Array.from(
     new Set(
@@ -114,20 +118,28 @@ export default async function analyze(def: FullDefAnon | string) {
     )
   );
   const turnvar = Array.from(
-    new Set(
-      find(def, isAlgolEffectSetTurnVar).reduce(
+    new Set([
+      ...find(def, isAlgolEffectSetTurnVar).reduce(
         (mem, find) => mem.concat(possibilities(find.value.setturnvar[0])),
         [] as string[]
-      )
-    )
+      ),
+      ...find(def, isAlgolEffectIncreaseTurnVar).reduce(
+        (mem, find) => mem.concat(possibilities(find.value.incturnvar[0])),
+        [] as string[]
+      ),
+    ])
   ).concat(turnpos);
   const battlevar = Array.from(
-    new Set(
-      find(def, isAlgolEffectSetBattleVar).reduce(
+    new Set([
+      ...find(def, isAlgolEffectSetBattleVar).reduce(
         (mem, find) => mem.concat(possibilities(find.value.setbattlevar[0])),
         [] as string[]
-      )
-    )
+      ),
+      ...find(def, isAlgolEffectIncreaseBattleVar).reduce(
+        (mem, find) => mem.concat(possibilities(find.value.incbattlevar[0])),
+        [] as string[]
+      ),
+    ])
   ).concat(battlepos);
 
   const boardNames = Object.keys(def.boards);

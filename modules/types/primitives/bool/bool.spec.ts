@@ -47,4 +47,5 @@ const tests: AlgolBool<AlgolTestBlob>[] = [
   ["isFirstTurn"],
   { truthypos: "mymark" },
   { falsypos: "mymark" },
+  { lessthan: [2, 3] },
 ];

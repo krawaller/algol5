@@ -2,14 +2,16 @@ import {
   FullDefAnon,
   WalkerDefAnon,
   AlgolWalkerStop,
+  isAlgolBoolStoppedBecause,
 } from "../../../../../types";
 import { contains } from "../../../utils";
 import draw from "./generate.draw";
 import { makeParser } from "../../../executors";
+import { find } from "../../../../../common";
 
 /*
 draw directly in whileloop if:
-def.draw.steps and def.draw.all doesn't contain walklength or totalcount
+def.draw.steps and def.draw.all doesn't contain walklength or totalcount or stopreason
 */
 
 const defaultStopPrio: AlgolWalkerStop[] = [
@@ -116,6 +118,19 @@ function walkFromStart(
   }
 }
 
+const defNeedsStopReason = (def: any) =>
+  find(
+    def,
+    i =>
+      i &&
+      (i === "reachedmax" ||
+        i === "outofbounds" ||
+        i === "hitblock" ||
+        i === "nomoresteps" ||
+        i[0] === "stopreason" ||
+        isAlgolBoolStoppedBecause(i))
+  ).length > 0;
+
 function walkInDir(
   gameDef: FullDefAnon,
   player: 1 | 2,
@@ -125,17 +140,14 @@ function walkInDir(
   { dirVar, startVar }: { dirVar: string | number; startVar: string }
 ) {
   const parser = makeParser(gameDef, player, action, ruleset);
+  const needsStopReason = defNeedsStopReason(walkDef);
   const drawDuringWhile =
     !contains(
       [walkDef.draw.steps, walkDef.draw.all, walkDef.draw.counted],
       ["totalcount"]
-    ) && !contains([walkDef.draw.steps, walkDef.draw.all], ["walklength"]);
-  const needsStopReason = // TODO - simplify when we have functional contains!
-    contains(walkDef, ["stopreason"]) ||
-    contains(walkDef, "reachedmax") ||
-    contains(walkDef, "outofbounds") ||
-    contains(walkDef, "hitblock") ||
-    contains(walkDef, "nomoresteps");
+    ) &&
+    !contains([walkDef.draw.steps, walkDef.draw.all], ["walklength"]) &&
+    !defNeedsStopReason([walkDef.draw.steps, walkDef.draw.all]);
   const needsWalkLength =
     walkDef.draw.last ||
     walkDef.draw.counted ||
@@ -246,7 +258,9 @@ function walkInDir(
       ["step"]
     );
     if (needStepsAfterLoop) ret += `let STEP = 0; `;
-    ret += `for(let walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){`;
+    ret += `for(let walkstepper=0;walkstepper<${
+      needsWalkLength ? "WALKLENGTH" : "walkedsquares.length"
+    };walkstepper++){`;
     ret += `POS=walkedsquares[walkstepper]; `;
     if (needStepsAfterLoop) ret += `STEP++; `;
     if (countSoFar) ret += `CURRENTCOUNT = countedwalkpositions[walkstepper];`;

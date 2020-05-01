@@ -15,12 +15,12 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
           context: {
             UNITDATA: {
               unit1: { id: "unit1", pos: "a1", owner: 1 },
-              unit2: { id: "unit2", pos: "b2", owner: 1 }
+              unit2: { id: "unit2", pos: "b2", owner: 2 },
             },
             UNITLAYERS: {
-              units: { a1: { id: "unit1" }, b2: { id: "unit2" } }
+              units: { a1: { id: "unit1" }, b2: { id: "unit2" } },
             },
-            MARKS: { unit1mark: "a1", unit2mark: "b2" }
+            MARKS: { unit1mark: "a1", unit2mark: "b2" },
           },
           tests: [
             {
@@ -28,41 +28,50 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               asserts: [
                 {
                   sample: "UNITDATA.unit1.owner",
-                  res: 0
-                }
-              ]
+                  res: 0,
+                },
+              ],
             },
             {
               expr: {
                 effects: [
                   {
-                    adoptid: [{ value: "unit2" }, { value: ["otherplayer"] }]
-                  }
-                ]
+                    adoptid: [{ value: "unit2" }, { value: ["otherplayer"] }],
+                  },
+                ],
               },
               asserts: [
                 {
                   sample: "UNITDATA.unit2.owner",
-                  res: 2
-                }
-              ]
+                  res: 2,
+                },
+              ],
             },
             {
               expr: { effects: [{ adoptin: ["units", 0] }] },
               asserts: [
                 {
                   sample: "UNITDATA.unit1.owner",
-                  res: 0
+                  res: 0,
                 },
                 {
                   sample: "UNITDATA.unit2.owner",
-                  res: 0
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  res: 0,
+                },
+              ],
+            },
+            {
+              expr: { effects: [{ adoptat: ["unit2mark"] }] },
+              asserts: [
+                {
+                  sample: "UNITDATA.unit2.owner",
+                  res: 1,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

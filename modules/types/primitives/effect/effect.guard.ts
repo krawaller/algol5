@@ -23,7 +23,9 @@ import {
   AlgolEffectMorphInAnon,
   AlgolEffectAdoptAtAnon,
   AlgolEffectAdoptIdAnon,
-  AlgolEffectAdoptInAnon
+  AlgolEffectAdoptInAnon,
+  AlgolEffectIncreaseBattleVarAnon,
+  AlgolEffectIncreaseTurnVarAnon,
 } from "./effect.anon";
 
 export function isAlgolEffectMoveAt(
@@ -72,6 +74,18 @@ export function isAlgolEffectSetBattleVar(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectSetBattleVarAnon {
   return (expr as AlgolEffectSetBattleVarAnon).setbattlevar !== undefined;
+}
+
+export function isAlgolEffectIncreaseTurnVar(
+  expr: AlgolEffectAnon
+): expr is AlgolEffectIncreaseTurnVarAnon {
+  return (expr as AlgolEffectIncreaseTurnVarAnon).incturnvar !== undefined;
+}
+
+export function isAlgolEffectIncreaseBattleVar(
+  expr: AlgolEffectAnon
+): expr is AlgolEffectIncreaseBattleVarAnon {
+  return (expr as AlgolEffectIncreaseBattleVarAnon).incbattlevar !== undefined;
 }
 
 export function isAlgolEffectPushAt(

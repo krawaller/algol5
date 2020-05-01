@@ -213,24 +213,8 @@ const game = {
         {
           let BLOCKS = UNITLAYERS.units;
           for (let DIR of diagDirs) {
-            let walkedsquares = [];
-            let STOPREASON = "";
             let POS = MARKS.selectunit;
-            while (
-              !(STOPREASON = !(POS = connections[POS][DIR])
-                ? "outofbounds"
-                : BLOCKS[POS]
-                ? "hitblock"
-                : null)
-            ) {
-              walkedsquares.push(POS);
-            }
-            for (
-              let walkstepper = 0;
-              walkstepper < walkedsquares.length;
-              walkstepper++
-            ) {
-              POS = walkedsquares[walkstepper];
+            while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
               ARTIFACTS.movetargets[POS] = emptyObj;
             }
           }
@@ -361,24 +345,8 @@ const game = {
         {
           let BLOCKS = UNITLAYERS.units;
           for (let DIR of diagDirs) {
-            let walkedsquares = [];
-            let STOPREASON = "";
             let POS = MARKS.selectunit;
-            while (
-              !(STOPREASON = !(POS = connections[POS][DIR])
-                ? "outofbounds"
-                : BLOCKS[POS]
-                ? "hitblock"
-                : null)
-            ) {
-              walkedsquares.push(POS);
-            }
-            for (
-              let walkstepper = 0;
-              walkstepper < walkedsquares.length;
-              walkstepper++
-            ) {
-              POS = walkedsquares[walkstepper];
+            while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
               ARTIFACTS.movetargets[POS] = emptyObj;
             }
           }
@@ -516,16 +484,9 @@ const game = {
         for (let STARTPOS in TERRAIN1.edge) {
           for (let DIR of [1, 2, 3, 4]) {
             let walkedsquares = [];
-            let STOPREASON = "";
             let POS = "faux";
             connections.faux[DIR] = STARTPOS;
-            while (
-              !(STOPREASON = !(POS = connections[POS][DIR])
-                ? "outofbounds"
-                : !allowedsteps[POS]
-                ? "nomoresteps"
-                : null)
-            ) {
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
               walkedsquares.push(POS);
             }
             let WALKLENGTH = walkedsquares.length;
@@ -663,16 +624,9 @@ const game = {
         for (let STARTPOS in TERRAIN1.edge) {
           for (let DIR of [1, 2, 3, 4]) {
             let walkedsquares = [];
-            let STOPREASON = "";
             let POS = "faux";
             connections.faux[DIR] = STARTPOS;
-            while (
-              !(STOPREASON = !(POS = connections[POS][DIR])
-                ? "outofbounds"
-                : !allowedsteps[POS]
-                ? "nomoresteps"
-                : null)
-            ) {
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
               walkedsquares.push(POS);
             }
             let WALKLENGTH = walkedsquares.length;
@@ -690,15 +644,8 @@ const game = {
           let allowedsteps = UNITLAYERS.myunits;
           for (let DIR of roseDirs) {
             let walkedsquares = [];
-            let STOPREASON = "";
             let POS = MARKS.selectmovetarget;
-            while (
-              !(STOPREASON = !(POS = connections[POS][DIR])
-                ? "outofbounds"
-                : !allowedsteps[POS]
-                ? "nomoresteps"
-                : null)
-            ) {
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
               walkedsquares.push(POS);
             }
             let WALKLENGTH = walkedsquares.length;
@@ -713,20 +660,16 @@ const game = {
           let allowedsteps = UNITLAYERS.myunits;
           for (let STARTPOS in ARTIFACTS.winlineheads) {
             let walkedsquares = [];
-            let STOPREASON = "";
             let POS = "faux";
             connections.faux[
               relativeDirs[5][(ARTIFACTS.winlineheads[STARTPOS] || {}).dir]
             ] = STARTPOS;
             while (
-              !(STOPREASON = !(POS =
+              (POS =
                 connections[POS][
                   relativeDirs[5][(ARTIFACTS.winlineheads[STARTPOS] || {}).dir]
-                ])
-                ? "outofbounds"
-                : !allowedsteps[POS]
-                ? "nomoresteps"
-                : null)
+                ]) &&
+              allowedsteps[POS]
             ) {
               walkedsquares.push(POS);
             }
@@ -805,16 +748,9 @@ const game = {
         for (let STARTPOS in TERRAIN2.edge) {
           for (let DIR of [1, 2, 3, 4]) {
             let walkedsquares = [];
-            let STOPREASON = "";
             let POS = "faux";
             connections.faux[DIR] = STARTPOS;
-            while (
-              !(STOPREASON = !(POS = connections[POS][DIR])
-                ? "outofbounds"
-                : !allowedsteps[POS]
-                ? "nomoresteps"
-                : null)
-            ) {
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
               walkedsquares.push(POS);
             }
             let WALKLENGTH = walkedsquares.length;
@@ -952,16 +888,9 @@ const game = {
         for (let STARTPOS in TERRAIN2.edge) {
           for (let DIR of [1, 2, 3, 4]) {
             let walkedsquares = [];
-            let STOPREASON = "";
             let POS = "faux";
             connections.faux[DIR] = STARTPOS;
-            while (
-              !(STOPREASON = !(POS = connections[POS][DIR])
-                ? "outofbounds"
-                : !allowedsteps[POS]
-                ? "nomoresteps"
-                : null)
-            ) {
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
               walkedsquares.push(POS);
             }
             let WALKLENGTH = walkedsquares.length;
@@ -979,15 +908,8 @@ const game = {
           let allowedsteps = UNITLAYERS.myunits;
           for (let DIR of roseDirs) {
             let walkedsquares = [];
-            let STOPREASON = "";
             let POS = MARKS.selectmovetarget;
-            while (
-              !(STOPREASON = !(POS = connections[POS][DIR])
-                ? "outofbounds"
-                : !allowedsteps[POS]
-                ? "nomoresteps"
-                : null)
-            ) {
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
               walkedsquares.push(POS);
             }
             let WALKLENGTH = walkedsquares.length;
@@ -1002,20 +924,16 @@ const game = {
           let allowedsteps = UNITLAYERS.myunits;
           for (let STARTPOS in ARTIFACTS.winlineheads) {
             let walkedsquares = [];
-            let STOPREASON = "";
             let POS = "faux";
             connections.faux[
               relativeDirs[5][(ARTIFACTS.winlineheads[STARTPOS] || {}).dir]
             ] = STARTPOS;
             while (
-              !(STOPREASON = !(POS =
+              (POS =
                 connections[POS][
                   relativeDirs[5][(ARTIFACTS.winlineheads[STARTPOS] || {}).dir]
-                ])
-                ? "outofbounds"
-                : !allowedsteps[POS]
-                ? "nomoresteps"
-                : null)
+                ]) &&
+              allowedsteps[POS]
             ) {
               walkedsquares.push(POS);
             }
@@ -1394,7 +1312,16 @@ const game = {
       desc: "regular",
       code: "r",
       arr: {
-        setup: {},
+        setup: {
+          pawns: {
+            "1": ["b3", "c3", "c4"],
+            "2": ["a3"]
+          },
+          bishops: {
+            "1": ["d2", "e3"],
+            "2": ["b1", "d5"]
+          }
+        },
         marks: [],
         potentialMarks: []
       }

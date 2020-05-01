@@ -129,7 +129,7 @@ const defNeedsStopReason = (def: any) =>
         i === "nomoresteps" ||
         i[0] === "stopreason" ||
         isAlgolBoolStoppedBecause(i))
-  );
+  ).length > 0;
 
 function walkInDir(
   gameDef: FullDefAnon,

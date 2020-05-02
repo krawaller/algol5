@@ -7,4 +7,5 @@ export const links = {
     "http://www.littlegolem.net/jsp/games/gamedetail.jsp?gtid=amzn",
   "Play at Super Duper Games":
     "http://superdupergames.org/main.html?page=listgames#amazons",
+  "Play at IG GameCenter": "http://www.iggamecenter.com/info/en/amazons.html",
 };

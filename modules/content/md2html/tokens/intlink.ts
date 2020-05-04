@@ -14,5 +14,8 @@ export const intlink: TokenHandler = opts => {
   if (!text) {
     throw new Error(`Have to provide intlink text for url ${url}!`);
   }
-  return `<a class="md-internal-link" href="${url}" data-algollink="${url}">${text}</a>`;
+  return `<a class="md-internal-link" href="${url}" data-algollink="${url}">${text.replace(
+    /COMMA/,
+    ","
+  )}</a>`;
 };

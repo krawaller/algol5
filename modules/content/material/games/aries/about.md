@@ -2,7 +2,7 @@
 updated: 2020-02-26
 ---
 
-{GAME} was invented by Chris Huntoon in 2003.
+{GAME} was invented in 2003 by {EXTLINK:text=Chris Huntoon,url=https://boardgamegeek.com/boardgamedesigner/8259/chris-huntoon/linkeditems/boardgamedesigner}.
 
 {PIC:name=aries.jpg,cred=Photo by Lonjho,title=Improvised Aries by BGG user Lonjho,credurl=https://boardgamegeek.com/image/3929988/aries}
 

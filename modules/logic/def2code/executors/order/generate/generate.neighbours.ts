@@ -94,7 +94,7 @@ function findAndDrawNeighboursFromStart(
       })}
       let NEIGHBOURCOUNT = foundneighbours.length;
       for(let neighbournbr=0; neighbournbr < NEIGHBOURCOUNT; neighbournbr++){
-        POS=foundneighbours[neighbournbr];
+        let POS=foundneighbours[neighbournbr];
         ${dirMatters ? "let DIR=foundneighbourdirs[neighbournbr]; " : ""}
         ${draw(gameDef, player, action, ruleset, nghDef.draw.neighbours)}
       }

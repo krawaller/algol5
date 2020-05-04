@@ -10,8 +10,8 @@ export const plr: TokenHandler = opts => {
   }
   const names: Record<string, string> = {
     0: "Neutral",
-    1: "Player 1",
-    2: "Player 2",
+    1: "Player&nbsp;1",
+    2: "Player&nbsp;2",
   };
   if (!names[who]) {
     throw new Error(`Unknown PLR ref "${who}"`);

@@ -1,8 +1,14 @@
 ---
 updated: 2020-05-04
 ---
-{GAME} is played on a {DIM} board with the following setup:
 
-{SETUP}
+{GAME} is played on an initially empty {DIM} board.
 
-Soon we will show the rules for {GAME} here! In the meantime you can read them {EXTLINK:url=http://some.url.to.rules,text=here}.
+For their first turn players will each {CMND:name=deploy} a {UNIT:group=knights} anywhere on the board.
+
+Then they will take turns to {CMND:name=jump} their {UNIT:group=knights} like chess knights onto an empty square, spawning a {UNIT:group=marks} in the vacated square.
+
+Win by:
+
+- {ENDGAME:name=winline}: Form a line in any direction of 4 or more {UNIT:group=marks}
+- {ENDGAME:name=starvation}: Block in the opponent {UNIT:group=knights}

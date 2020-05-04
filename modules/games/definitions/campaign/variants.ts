@@ -8,11 +8,20 @@ const campaignVariants: CampaignDefinition["variants"] = [
     desc: "regular",
     code: "r",
     arr: {
-      setup: {},
+      setup: {
+        knights: {
+          1: ["d5"],
+          2: ["e4"],
+        },
+        marks: {
+          1: ["d4", "e6", "f4", "f5"],
+          2: ["c5", "d3", "d6", "e4"],
+        },
+      },
       marks: [],
-      potentialMarks: []
-    }
-  }
+      potentialMarks: [],
+    },
+  },
 ];
 
 export default campaignVariants;

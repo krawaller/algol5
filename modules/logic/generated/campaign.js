@@ -705,12 +705,7 @@ const game = {
     }
   },
   setups: {
-    basic: {
-      marks: {
-        "1": ["b2", "c2", "d2"],
-        "2": []
-      }
-    }
+    basic: {}
   }
 };
 export default game;

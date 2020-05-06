@@ -13,7 +13,10 @@ const allTags = fs
   .map(file => fm(file).attributes)
   .reduce((memo, t) => ({ ...memo, [t.id]: t }), {});
 
-const out = path.join(__dirname, "../dist/tagIndex.js");
+const dist = path.join(__dirname, "../dist");
+fs.ensureDirSync(dist);
+const out = path.join(dist, "tagIndex.js");
+
 const code = prettier.format(
   `export const tagIndex = ${JSON.stringify(
     allTags

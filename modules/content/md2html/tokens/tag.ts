@@ -18,7 +18,7 @@ export const tag: TokenHandler = opts => {
   return intlink({
     ...opts,
     args: {
-      text: text || def.title,
+      text: (text || def.title).replace(/COMMA/, ""),
       url: `/tags/${def.slug}`,
     },
   });

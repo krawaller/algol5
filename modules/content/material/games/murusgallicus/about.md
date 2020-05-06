@@ -2,7 +2,7 @@
 updated: 2020-03-12
 ---
 
-{GAME} is probably the most famous game by prolific designer {INTLINK:text=Philip Leduc,url=/tags/phil_leduc}, who also designed {GAME:id=momentum} and {GAME:id=gowiththefloe}. And for good reason - it is a gem of a game, and one of our absolute favourites!
+{GAME} is probably the most famous game by prolific designer {TAG:id=philleduc,text=Philip Leduc}, who also designed {GAME:id=momentum} and {GAME:id=gowiththefloe}. And for good reason - it is a gem of a game, and one of our absolute favourites!
 
 {PIC:name=murusgallicus.jpg,credurl=https://nestorgames.com/#murusgallicus_detail,cred=Photo by Nestor Games,title=The Nestor Games edition}
 

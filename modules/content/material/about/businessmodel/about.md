@@ -25,5 +25,5 @@ But mostly we just expect {ME} to be a black hole in both our wallets and calend
 Whatever the future brings, we hereby solemnly swear to the following:
 
 - All gameplay functionality will forever remain free, and not be locked behind paywalls. This includes upcoming functionality like online play and AI opponents.
-- If we ever take money from an outside party that will be made abundantly clear (so no, we're not being paid for fawning about {INTLINK:url=/tags/logy_games,text=LOGY} or {INTLINK:url=/tags/nestorgames,text=Nestor Games}, we're just excited fans like you).
+- If we ever take money from an outside party that will be made abundantly clear (so no, we're not being paid for fawning about {TAG:id=logy,text=LOGY} or {TAG:id=nestorgames,text=Nestor Games}, we're just excited fans like you).
 - There will never be automated ads. That's not compatible with the first of the P:s in SPP.

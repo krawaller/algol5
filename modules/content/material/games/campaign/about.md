@@ -4,7 +4,7 @@ updated: 2020-05-04
 
 {GAME} was invented by {EXTLINK:text=Chris Huntoon,url=https://boardgamegeek.com/boardgamedesigner/8259/chris-huntoon/linkeditems/boardgamedesigner} in 2001.
 
-It is described in Neto's and Silva's book {INTLINK:url=/tags/mathematical_games_abstract_games_book,text=Mathematical GamesCOMMA Abstract Games}.
+It is described in Neto's and Silva's book {TAG:id=netobook,text=Mathematical GamesCOMMA Abstract Games}.
 
 {PIC:name=campaign_book.png,cred=Photo by me,title=Campaign in the book}
 

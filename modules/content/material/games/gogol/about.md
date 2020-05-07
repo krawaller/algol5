@@ -8,6 +8,6 @@ updated: 2020-02-25
 
 The name {GAME} - which is math speak for a {EXTLINK:text=very large number,url=https://en.wikipedia.org/wiki/Googol} - refers to the explosive branching the game gets from allowing pawns to move anywhere on the board.
 
-There is some interesting commentary on {GAME} in Neto's and Silva's book {INTLINK:url=/tags/mathematical_games_abstract_games_book,text=Mathematical GamesCOMMA Abstract Games}.
+There is some interesting commentary on {GAME} in Neto's and Silva's book {TAG:id=netobook,text=Mathematical GamesCOMMA Abstract Games}.
 
 {PIC:name=gogolbook.png,cred=Photo by me,title=Gogol in the book}

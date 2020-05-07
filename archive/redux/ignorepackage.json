@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "test": "cd ../..; npx jest modules/redux/slices"
+  },
+  "dependencies": {
+    "immer": "^3.1.2",
+    "re-reselect": "^3.1.0",
+    "redux": "^4.0.1",
+    "redux-observable": "^1.1.0",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
+    "rxjs": "^6.5.1"
+  }
+}

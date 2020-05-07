@@ -1,7 +1,7 @@
 {
   "scripts": {
     "clean": "rm -rf dist; mkdir dist;",
-    "robot": "npm run writeNews;npm run writeAbout; npm run writeTag; npm run writeGame;",
+    "robot": "npm run makeTagIndex && npm run writeNews && npm run writeAbout && npm run writeTag && npm run writeGame",
     "writeGame": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeGame.ts",
     "stubGame": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/stubGame.ts",
     "stubNews": "node ./commands/stubNews",
@@ -9,7 +9,8 @@
     "stubTag": "node ./commands/stubTag",
     "writeNews": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeNews.ts",
     "writeAbout": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeAbout.ts",
-    "writeTag": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeTag.ts"
+    "writeTag": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeTag.ts",
+    "makeTagIndex": "node ./commands/makeTagIndex"
   },
   "dependencies": {
     "front-matter": "^3.1.0",

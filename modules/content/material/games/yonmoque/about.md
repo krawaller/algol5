@@ -2,7 +2,7 @@
 updated: 2020-04-28
 ---
 
-{GAME} is another splendid entry in the {INTLINK:text=LOGY games,url=/tags/logy_games} catalog of small clever games by {INTLINK:text=Mitsuo Yamamoto,url=/tags/logy_games}, who also makes beautiful ceramic versions of his creations.
+{GAME} is another splendid entry in the {TAG:id=logy,text=LOGY games} catalog of small clever games by {TAG:id=logy,text=Mitsuo Yamamoto}, who also makes beautiful ceramic versions of his creations.
 
 {PIC:name=yonmoque.jpeg,cred=Photo by LOGY games,credurl=http://www.logygames.com/english/yonmoque.html,title=Wooden frame edition}
 

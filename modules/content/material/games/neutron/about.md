@@ -8,7 +8,7 @@ updated: 2020-04-22
 
 It is a simple (and solved) game, but even so, the easy rules and tug-of-war over the common neutral unit makes for interesting play!
 
-{ME} also implements the Paper Neutron variant that {INTLINK:url=/tags/walter_joris_and_100_strategic_games_for_pen_and_paper,text=Walter Joris} describes in {INTLINK:url=/tags/walter_joris_and_100_strategic_games_for_pen_and_paper,text=100 Strategic Games for Pen & Paper}.
+{ME} also implements the Paper Neutron variant that {TAG:id=walterjoris,text=Walter Joris} describes in {TAG:id=walterjoris,text=100 Strategic Games for Pen & Paper}.
 
 {PIC:name=paperneutronbook.jpg,cred=Photo by me,title=Paper Neutron in the book}
 

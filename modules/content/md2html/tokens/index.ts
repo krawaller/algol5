@@ -11,6 +11,7 @@ import { cmnd } from "./cmnd";
 import { endgame } from "./endgame";
 import { setup } from "./setup";
 import { intlink } from "./intlink";
+import { tag } from "./tag";
 
 export const tokenHandlers = {
   arr,
@@ -26,4 +27,5 @@ export const tokenHandlers = {
   endgame,
   setup,
   intlink,
+  tag,
 };

@@ -1,0 +1,6 @@
+{
+  "devDependencies": {},
+  "scripts": {
+    "makeSuiteParts": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/book/commands/makeSuiteParts"
+  }
+}

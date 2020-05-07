@@ -1159,7 +1159,15 @@ const game = {
       desc: "speed",
       code: "r",
       arr: {
-        setup: {},
+        setup: {
+          ball: {
+            "0": ["e3"]
+          },
+          players: {
+            "1": ["b2", "c2", "d1", "f2", "f3"],
+            "2": ["c3", "c6", "d6", "e6", "f5"]
+          }
+        },
         marks: [],
         potentialMarks: []
       }

@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "robot": "npm run setupStatic; npm run harvestCss; npm run importGameImages; npm run importNewsImages; npm run importAboutImages; npm run importTagImages; npm run encodeImages;",
+    "robot": "npm run setupStatic && npm run harvestCss && npm run importGameImages && npm run importNewsImages && npm run importAboutImages && npm run importTagImages && npm run encodeImages",
     "clean": "rm -rf dist; mkdir dist; rm -rf node_modules/.cache/storybook",
     "harvestCss": "node ./commands/harvestCss",
     "setupStatic": "rm -rf dist; mkdir dist; mkdir dist/static; cp -a ./public/. ./dist/static/.;",
@@ -12,7 +12,7 @@
     "exportAllGamePayloads": "node ./commands/exportAllGamePayloads",
     "encodeImages": "node ./commands/encodeImages",
     "storybook": "npm run robot; start-storybook -s ./dist/static -p 6006",
-    "build-storybook": "npm run robot; rm -rf dist/storybook; build-storybook -c .storybook -o dist/storybook",
+    "build-storybook": "npm run robot && rm -rf dist/storybook && build-storybook -c .storybook -o dist/storybook",
     "publish-storybook": "cd dist/storybook; rm -rf .git; git init; git remote add origin git@github.com:krawaller/chessicals-storybook.git; git checkout -b gh-pages; git add .; git commit -m 'payload'; git push origin gh-pages; rm -rf .git;",
     "postinstall": "rm -rf node_modules/react; rm -rf node_modules/react-dom; rm -rf node_modules/@types/react",
     "stub": "node ./commands/stub"

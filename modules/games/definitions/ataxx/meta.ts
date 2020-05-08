@@ -3,7 +3,7 @@ import { AtaxxDefinition } from "./_types";
 const ataxxMeta: AtaxxDefinition["meta"] = {
   id: "ataxx",
   name: "Ataxx",
-  tags: [],
+  tags: ["iggamecenter"],
   tagline: "Battle of the microbes!",
   source: "https://en.wikipedia.org/wiki/Ataxx",
   code: "v",

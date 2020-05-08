@@ -11,6 +11,8 @@ import {
   orthoDirs,
   diagDirs,
   knightDirs,
+  jumpTwoDirs,
+  ringTwoDirs,
   makeGrids
 } from "../../common";
 const emptyObj = {};

@@ -10,7 +10,9 @@ import {
   roseDirs,
   orthoDirs,
   diagDirs,
-  knightDirs
+  knightDirs,
+  jumpTwoDirs,
+  ringTwoDirs
 } from "../../common";
 const emptyObj = {};
 const iconMapping = { towers: "rook", walls: "pawn", catapults: "queen" };

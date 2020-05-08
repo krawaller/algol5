@@ -28,4 +28,6 @@ export type AlgolOffsetBasic = [BasicDir[], OffsetForward, OffsetRight];
 export type AlgolOffset =
   | AlgolOffsetBasic
   | [AlgolDirsInnerAnon, OffsetForward, OffsetRight]
-  | "knight";
+  | "knight"
+  | "ring2"
+  | "jump2";

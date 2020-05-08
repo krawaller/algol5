@@ -27,7 +27,7 @@ export function posConnections(
   parsedOffsets.forEach((offset: AlgolOffsetBasic) => {
     const [dirs, forward, right] = offset;
     dirs.forEach(dir => {
-      const newpos = offsetPos(pos, dir, forward, right, board);
+      const newpos = offsetPos(pos, dir as number, forward, right, board);
       if (newpos) {
         ret[`d${dir}f${forward}r${right}`] = newpos;
       }

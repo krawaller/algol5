@@ -13,6 +13,13 @@ export function parseOffset(offset: AlgolOffset): AlgolOffsetBasic[] {
   if (offset === "knight") {
     return parseOffset(["ortho", 2, 1]).concat(parseOffset(["ortho", 2, -1]));
   }
+  if (offset === "ring2") {
+    return [
+      ...parseOffset(["ortho", 2, 1]),
+      ...parseOffset(["rose", 2, 0]),
+      ...parseOffset(["ortho", 2, -1]),
+    ];
+  }
   throw new Error(`Unknown offset def: ${JSON.stringify(offset)}`);
 }
 

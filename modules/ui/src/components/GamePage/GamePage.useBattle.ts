@@ -25,10 +25,6 @@ type BattleAction =
   | "endTurn"
   | "undo"
   | "toFrame"
-  | "gamelobby"
-  | "battlelobby"
-  | "history"
-  | "play"
   | "new"
   | "load"
   | "deleteCurrentSession"
@@ -41,11 +37,10 @@ type BattleHookState = {
   battle: AlgolBattle | null;
   frame: number;
   session: AlgolLocalBattle | null;
-  mode: "gamelobby" | "battlelobby" | "playing" | "history";
   hasPrevious: boolean;
 };
 
-export function useBattle(api: AlgolStaticGameAPI) {
+const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
   const reducer = (
     state: BattleHookState,
     instr: BattleCmnd
@@ -57,7 +52,6 @@ export function useBattle(api: AlgolStaticGameAPI) {
         battle: state.battle,
         session: state.session,
         frame: arg,
-        mode: "history",
         hasPrevious: true,
       };
     } else if (cmnd === "new") {
@@ -67,9 +61,8 @@ export function useBattle(api: AlgolStaticGameAPI) {
       setLatestSessionId(api.gameId, session.id);
       return {
         battle,
-        frame: -1,
+        frame: 0,
         session,
-        mode: "playing", // think about whether to go to "playing" or "battlelobby" here
         hasPrevious: true,
       };
     } else if (cmnd === "load") {
@@ -78,43 +71,11 @@ export function useBattle(api: AlgolStaticGameAPI) {
       const session: AlgolLocalBattle = arg;
       setLatestSessionId(api.gameId, session.id);
       const battle = session2battle(session, api);
-      return battle.gameEndedBy
-        ? {
-            battle,
-            session,
-            frame: battle.history.length - 1,
-            mode: "history", // what is the best?
-            hasPrevious: true,
-          }
-        : {
-            battle,
-            session,
-            frame: -1,
-            mode: "playing", // what is the best?
-            hasPrevious: true,
-          };
-    } else if (cmnd === "gamelobby") {
       return {
-        ...state, // keep eventual battle and session, will allow for "continue" button
-        mode: "gamelobby",
-      };
-    } else if (cmnd === "history") {
-      const frame =
-        typeof arg === "number" ? arg : state.battle!.history.length - 1;
-      return {
-        ...state,
-        frame,
-        mode: "history",
-      };
-    } else if (cmnd === "battlelobby") {
-      return {
-        ...state,
-        mode: "battlelobby",
-      };
-    } else if (cmnd === "play") {
-      return {
-        ...state,
-        mode: "playing",
+        battle,
+        session,
+        frame: battle.history.length - 1,
+        hasPrevious: true,
       };
     } else if (cmnd === "deleteCurrentSession") {
       deleteSession(api.gameId, state.session!.id);
@@ -122,7 +83,6 @@ export function useBattle(api: AlgolStaticGameAPI) {
         battle: null,
         session: null,
         frame: 0,
-        mode: "gamelobby",
         hasPrevious: false,
       };
     } else if (cmnd === "fork") {
@@ -134,8 +94,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
       return {
         battle,
         session,
-        frame: 0,
-        mode: "battlelobby",
+        frame: battle.history.length - 1,
         hasPrevious: true,
       };
     } else if (cmnd === "continuePreviousSession") {
@@ -143,7 +102,6 @@ export function useBattle(api: AlgolStaticGameAPI) {
         // still have a battle in memory, so just go back to that
         return {
           ...state,
-          mode: "playing",
         };
       } else {
         // load the last session from disk
@@ -159,30 +117,34 @@ export function useBattle(api: AlgolStaticGameAPI) {
       setLatestSessionId(api.gameId, session.id);
       writeSession(api.gameId, session);
       return {
-        frame: -1,
+        frame: battle.history.length - 1,
         battle,
         session,
-        mode: "playing",
         hasPrevious: true,
       };
     } else {
       // action was mark, command or endTurn. passing it on to game API
       const battle = api.performAction(state.battle!, cmnd, instr[1]);
-      const frame = battle.gameEndedBy ? battle.history.length - 1 : -1;
+      let newFrame = state.frame;
       let session = state.session;
       if (cmnd === "endTurn") {
         session = updateSession(battle, state.session!, api.iconMap);
         writeSession(api.gameId, session);
+        newFrame = battle.history.length - 1;
       }
       return {
-        frame,
+        frame: newFrame,
         battle,
         session,
-        mode: "playing",
         hasPrevious: true,
       };
     }
   };
+  return reducer;
+};
+
+export function useBattle(api: AlgolStaticGameAPI) {
+  const reducer = useMemo(() => makeReducerForAPI(api), [api]);
   const [state, dispatch] = useReducer(
     reducer,
     // initial state is in the game lobby with nothing in memory.
@@ -191,7 +153,6 @@ export function useBattle(api: AlgolStaticGameAPI) {
       battle: null,
       frame: -1,
       session: null,
-      mode: "gamelobby",
       hasPrevious: !!getLatestSessionId(api.gameId),
     }
   );
@@ -205,10 +166,6 @@ export function useBattle(api: AlgolStaticGameAPI) {
       loadLocalSession: (session: AlgolLocalBattle) =>
         dispatch(["load", session]),
       toFrame: (frame: number) => dispatch(["toFrame", frame]),
-      toHistory: (atFrame?: number) => dispatch(["history", atFrame]),
-      toGameLobby: () => dispatch(["gamelobby", null]),
-      toBattleLobby: () => dispatch(["battlelobby", null]),
-      toBattleControls: () => dispatch(["play", null]),
       deleteCurrentSession: () => dispatch(["deleteCurrentSession", null]),
       forkSession: () => dispatch(["fork", null]),
       importSession: (str: string) => {
@@ -222,3 +179,5 @@ export function useBattle(api: AlgolStaticGameAPI) {
   );
   return [state, actions] as const;
 }
+
+export type BattleActions = ReturnType<typeof useBattle>[1];

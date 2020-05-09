@@ -2,13 +2,8 @@
  * Used in the Next app as a "homepage" for the individual games.
  */
 
-import React, { useMemo, ReactNode, useState } from "react";
-import {
-  AlgolError,
-  AlgolErrorReport,
-  AlgolErrorReportLevel,
-  AlgolGamePayload,
-} from "../../../../types";
+import React, { ReactNode, useState } from "react";
+import { AlgolErrorReport, AlgolGamePayload } from "../../../../types";
 import css from "./GamePage.cssProxy";
 
 import { Board } from "../Board";
@@ -18,7 +13,9 @@ import { GameLanding } from "../GameLanding";
 import { BattleHistory } from "../BattleHistory";
 import { PageActions } from "../../helpers";
 import { useUI } from "./GamePage.useUI";
+import { useMode } from "./GamePage.useMode";
 import { useBattle } from "./GamePage.useBattle";
+import { useActions } from "./GamePage.useActions";
 import { Breadcrumbs, Crumb } from "../Breadcrumbs";
 import { SessionViewSelector } from "../SessionViewSelector";
 import { BattleMove } from "../BattleMove";
@@ -31,22 +28,17 @@ type GamePageProps = {
 export const GamePage = (props: GamePageProps) => {
   const { actions: pageActions, gamePayload } = props;
   const { api, graphics, meta, demo, rules } = gamePayload;
-  const [
-    { battle, frame, mode, session, hasPrevious },
-    battleActions,
-  ] = useBattle(api);
-  const [errorReport, setErrorReport] = useState<AlgolErrorReport>();
-  const actions = useMemo(
-    () => ({
-      ...pageActions,
-      ...battleActions,
-      reportError: (
-        error: AlgolError,
-        level: AlgolErrorReportLevel = "warning"
-      ) => setErrorReport({ error, level }),
-    }),
-    [pageActions, battleActions]
+  const [{ battle, frame, session, hasPrevious }, battleActions] = useBattle(
+    api
   );
+  const [mode, modeActions] = useMode();
+  const [errorReport, setErrorReport] = useState<AlgolErrorReport>();
+  const actions = useActions({
+    pageActions,
+    battleActions,
+    modeActions,
+    setErrorReport,
+  });
   const ui = useUI(api, battle, frame, demo, mode);
 
   const crumbs: Crumb[] = [

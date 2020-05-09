@@ -80,7 +80,7 @@ export function compileGameToCode(gameDef: FullDefAnon) {
 
   const code = `
 
-import {offsetPos, boardConnections, makeRelativeDirs, setup2army, boardLayers, terrainLayers, collapseContent, defaultInstruction, roseDirs, orthoDirs, diagDirs, knightDirs${
+import {offsetPos, boardConnections, makeRelativeDirs, setup2army, boardLayers, terrainLayers, collapseContent, defaultInstruction, roseDirs, orthoDirs, diagDirs, knightDirs, jumpTwoDirs, ringTwoDirs${
     hasGrids ? ", makeGrids" : ""
   }} from '../../common'
 

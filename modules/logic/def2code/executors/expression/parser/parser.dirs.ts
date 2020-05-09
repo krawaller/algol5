@@ -20,6 +20,10 @@ export default function parseDirs(
         return "roseDirs";
       case "knight":
         return "knightDirs";
+      case "jump2":
+        return "jumpTwoDirs";
+      case "ring2":
+        return "ringTwoDirs";
       default:
         throw new Error("Unknown dirs singleton: " + JSON.stringify(expr));
     }

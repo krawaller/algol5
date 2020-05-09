@@ -11,3 +11,14 @@ export const knightDirs = [
   "d7f2r1",
   "d7f2r-1",
 ];
+export const jumpTwoDirs = [
+  "d1f2r0",
+  "d2f2r0",
+  "d3f2r0",
+  "d4f2r0",
+  "d5f2r0",
+  "d6f2r0",
+  "d7f2r0",
+  "d8f2r0",
+];
+export const ringTwoDirs = knightDirs.concat(jumpTwoDirs);

@@ -15,5 +15,7 @@ export type AlgolDirsInner<Blob extends AlgolGameBlobAnon> =
   | "diag"
   | "rose"
   | "knight"
+  | "jump2"
+  | "ring2"
   | BasicDir[]
   | AlgolDirsList<Blob>;

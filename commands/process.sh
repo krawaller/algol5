@@ -44,6 +44,9 @@ else
   if [ "$what" = "content" ] || [ "$what" = "" ]; then
     cd ../content;
     npm run writeGame "$gameId";
+    cd ../payloads;
+    npm run makeGameAboutArticle "$gameId"
+    npm run makeGameRulesArticle "$gameId"
   fi
 
   if [ "$what" = "pics" ] || [ "$what" = "graphics" ] || [ "$what" = "" ]; then

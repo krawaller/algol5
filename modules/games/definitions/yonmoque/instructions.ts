@@ -98,7 +98,12 @@ const yonmoqueInstructions: YonmoqueDefinition["instructions"] = {
       {
         andlist: [
           {
-            line: ["move", { unitat: "selectunit" }, "to", "selectmovetarget"],
+            line: [
+              { text: "move" },
+              { unitat: "selectunit" },
+              "to",
+              "selectmovetarget",
+            ],
           },
           {
             if: [

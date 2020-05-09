@@ -1065,7 +1065,7 @@ const game = {
             line: [
               collapseContent({
                 line: [
-                  { command: "move" },
+                  { text: "move" },
                   {
                     unit: [
                       iconMapping[
@@ -1231,7 +1231,7 @@ const game = {
             line: [
               collapseContent({
                 line: [
-                  { command: "move" },
+                  { text: "move" },
                   {
                     unit: [
                       iconMapping[

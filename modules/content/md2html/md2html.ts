@@ -1,5 +1,5 @@
 import prettier from "prettier";
-import { AlgolArrangements } from "../../types";
+import { AlgolArrangements, AlgolGameBlobAnon } from "../../types";
 import { GameId } from "../../games/dist/list";
 import fm from "front-matter";
 import { insertTokens } from "./md2html.insertTokens";
@@ -7,7 +7,7 @@ import { processMarkdown } from "./md2html.processMarkdown";
 
 type Md2htmlOpts = {
   md: string;
-  arrs?: AlgolArrangements;
+  arrs?: AlgolArrangements<AlgolGameBlobAnon>;
   gameId?: GameId;
   picSourcePath: string;
   picRefPath: string;
@@ -15,7 +15,7 @@ type Md2htmlOpts = {
 
 export const md2html = (opts: Md2htmlOpts) => {
   const { md: orig, arrs = {}, gameId, picSourcePath, picRefPath } = opts;
-  const { body: md, attributes: yaml } = fm(orig);
+  const { body: md, attributes: yaml } = fm<any>(orig);
   const { markdown, preloads } = insertTokens({
     md,
     yaml,

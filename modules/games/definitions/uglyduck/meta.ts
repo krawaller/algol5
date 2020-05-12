@@ -2,7 +2,7 @@ import { UglyduckDefinition } from "./_types";
 
 const uglyduckMeta: UglyduckDefinition["meta"] = {
   code: "o",
-  name: "Ugly duck",
+  name: "Ugly Duck",
   id: "uglyduck",
   source: "http://www.di.fc.ul.pt/~jpn/gv/uglyduck.htm",
   tags: ["irreversible"],

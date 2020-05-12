@@ -6,7 +6,7 @@ const threemusketeersMeta: ThreemusketeersDefinition["meta"] = {
   name: "Three Musketeers",
   source: "http://www.di.fc.ul.pt/~jpn/gv/3musketeers.htm",
   tagline: "Will the three musketeers escape the soldiers out to get them?",
-  tags: ["irreversible", "asymmetric", "iggamecenter"],
+  tags: ["irreversible", "asymmetric", "iggamecenter", "gamut"],
   slug: "three_musketeers",
 };
 

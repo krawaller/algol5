@@ -10,4 +10,6 @@ export const links = {
     "https://boardgamegeek.com/boardgame/55131/murus-gallicus",
   "Advanced rules thread":
     "https://boardgamegeek.com/thread/844020/advanced-murus-gallicus",
+  "Abstract Meanderings entry":
+    "https://abstractmeanderings.wordpress.com/2014/10/01/murus-gallicus-game/",
 };

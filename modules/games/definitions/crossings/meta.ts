@@ -4,10 +4,10 @@ const crossingsMeta: CrossingsDefinition["meta"] = {
   id: "crossings",
   name: "Crossings",
   tags: [],
-  tagline: "An awesome game!",
-  source: "http://some.url.to.rules",
+  tagline: "March your opponent into the ground",
+  source: "",
   code: "i",
-  slug: "crossings"
+  slug: "crossings",
 };
 
 export default crossingsMeta;

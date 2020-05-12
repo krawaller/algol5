@@ -194,6 +194,7 @@ const game = {
       let ARTIFACTS = {
         steptargets: step.ARTIFACTS.steptargets,
         heads: step.ARTIFACTS.heads,
+        phalanx: {},
         marchtargets: {},
         potentialvictim: {}
       };
@@ -203,6 +204,24 @@ const game = {
         selecthead: newMarkPos
       };
       let UNITLAYERS = step.UNITLAYERS;
+      {
+        let MAX = (ARTIFACTS.heads[MARKS.selecthead] || {}).max;
+        let POS = "faux";
+        connections.faux[
+          relativeDirs[5][(ARTIFACTS.heads[MARKS.selecthead] || {}).dir]
+        ] = MARKS.selecthead;
+        let LENGTH = 0;
+        while (
+          LENGTH < MAX &&
+          (POS =
+            connections[POS][
+              relativeDirs[5][(ARTIFACTS.heads[MARKS.selecthead] || {}).dir]
+            ])
+        ) {
+          LENGTH++;
+          ARTIFACTS.phalanx[POS] = emptyObj;
+        }
+      }
       {
         let BLOCKS = UNITLAYERS.units;
         let DIR = (ARTIFACTS.heads[MARKS.selecthead] || {}).dir;
@@ -267,45 +286,19 @@ const game = {
       };
     },
     selectmarchtarget_basic_1: (step, newMarkPos) => {
-      let ARTIFACTS = {
-        steptargets: step.ARTIFACTS.steptargets,
-        heads: step.ARTIFACTS.heads,
-        marchtargets: step.ARTIFACTS.marchtargets,
-        potentialvictim: step.ARTIFACTS.potentialvictim,
-        phalanx: {}
-      };
       let LINKS = { marks: {}, commands: {} };
-      let MARKS = {
-        selecttail: step.MARKS.selecttail,
-        selecthead: step.MARKS.selecthead,
-        selectmarchtarget: newMarkPos
-      };
-      {
-        let MAX = (ARTIFACTS.heads[MARKS.selecthead] || {}).max;
-        let POS = "faux";
-        connections.faux[
-          relativeDirs[5][(ARTIFACTS.heads[MARKS.selecthead] || {}).dir]
-        ] = MARKS.selecthead;
-        let LENGTH = 0;
-        while (
-          LENGTH < MAX &&
-          (POS =
-            connections[POS][
-              relativeDirs[5][(ARTIFACTS.heads[MARKS.selecthead] || {}).dir]
-            ])
-        ) {
-          LENGTH++;
-          ARTIFACTS.phalanx[POS] = emptyObj;
-        }
-      }
       LINKS.commands.march = "march_basic_1";
       return {
         LINKS,
-        ARTIFACTS,
+        ARTIFACTS: step.ARTIFACTS,
         UNITLAYERS: step.UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS
+        MARKS: {
+          selecttail: step.MARKS.selecttail,
+          selecthead: step.MARKS.selecthead,
+          selectmarchtarget: newMarkPos
+        }
       };
     },
     selectsteptarget_basic_1: (step, newMarkPos) => {
@@ -378,6 +371,7 @@ const game = {
       let ARTIFACTS = {
         steptargets: step.ARTIFACTS.steptargets,
         heads: step.ARTIFACTS.heads,
+        phalanx: {},
         marchtargets: {},
         potentialvictim: {}
       };
@@ -387,6 +381,24 @@ const game = {
         selecthead: newMarkPos
       };
       let UNITLAYERS = step.UNITLAYERS;
+      {
+        let MAX = (ARTIFACTS.heads[MARKS.selecthead] || {}).max;
+        let POS = "faux";
+        connections.faux[
+          relativeDirs[5][(ARTIFACTS.heads[MARKS.selecthead] || {}).dir]
+        ] = MARKS.selecthead;
+        let LENGTH = 0;
+        while (
+          LENGTH < MAX &&
+          (POS =
+            connections[POS][
+              relativeDirs[5][(ARTIFACTS.heads[MARKS.selecthead] || {}).dir]
+            ])
+        ) {
+          LENGTH++;
+          ARTIFACTS.phalanx[POS] = emptyObj;
+        }
+      }
       {
         let BLOCKS = UNITLAYERS.units;
         let DIR = (ARTIFACTS.heads[MARKS.selecthead] || {}).dir;
@@ -451,45 +463,19 @@ const game = {
       };
     },
     selectmarchtarget_basic_2: (step, newMarkPos) => {
-      let ARTIFACTS = {
-        steptargets: step.ARTIFACTS.steptargets,
-        heads: step.ARTIFACTS.heads,
-        marchtargets: step.ARTIFACTS.marchtargets,
-        potentialvictim: step.ARTIFACTS.potentialvictim,
-        phalanx: {}
-      };
       let LINKS = { marks: {}, commands: {} };
-      let MARKS = {
-        selecttail: step.MARKS.selecttail,
-        selecthead: step.MARKS.selecthead,
-        selectmarchtarget: newMarkPos
-      };
-      {
-        let MAX = (ARTIFACTS.heads[MARKS.selecthead] || {}).max;
-        let POS = "faux";
-        connections.faux[
-          relativeDirs[5][(ARTIFACTS.heads[MARKS.selecthead] || {}).dir]
-        ] = MARKS.selecthead;
-        let LENGTH = 0;
-        while (
-          LENGTH < MAX &&
-          (POS =
-            connections[POS][
-              relativeDirs[5][(ARTIFACTS.heads[MARKS.selecthead] || {}).dir]
-            ])
-        ) {
-          LENGTH++;
-          ARTIFACTS.phalanx[POS] = emptyObj;
-        }
-      }
       LINKS.commands.march = "march_basic_2";
       return {
         LINKS,
-        ARTIFACTS,
+        ARTIFACTS: step.ARTIFACTS,
         UNITLAYERS: step.UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS
+        MARKS: {
+          selecttail: step.MARKS.selecttail,
+          selecthead: step.MARKS.selecthead,
+          selectmarchtarget: newMarkPos
+        }
       };
     },
     selectsteptarget_basic_2: (step, newMarkPos) => {
@@ -582,9 +568,9 @@ const game = {
       let ARTIFACTS = {
         steptargets: step.ARTIFACTS.steptargets,
         heads: step.ARTIFACTS.heads,
+        phalanx: step.ARTIFACTS.phalanx,
         marchtargets: step.ARTIFACTS.marchtargets,
-        potentialvictim: step.ARTIFACTS.potentialvictim,
-        phalanx: step.ARTIFACTS.phalanx
+        potentialvictim: step.ARTIFACTS.potentialvictim
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -741,9 +727,9 @@ const game = {
       let ARTIFACTS = {
         steptargets: step.ARTIFACTS.steptargets,
         heads: step.ARTIFACTS.heads,
+        phalanx: step.ARTIFACTS.phalanx,
         marchtargets: step.ARTIFACTS.marchtargets,
-        potentialvictim: step.ARTIFACTS.potentialvictim,
-        phalanx: step.ARTIFACTS.phalanx
+        potentialvictim: step.ARTIFACTS.potentialvictim
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -850,26 +836,78 @@ const game = {
     step_basic_1: () => defaultInstruction(1),
     march_basic_1: () => defaultInstruction(1),
     selecttail_basic_1: step => {
+      let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
         line: [
           { select: "Select" },
-          { text: "where to step with" },
-          {
-            unit: [
-              iconMapping[(UNITLAYERS.units[MARKS.selecttail] || {}).group],
-              (UNITLAYERS.units[MARKS.selecttail] || {}).owner,
-              MARKS.selecttail
+          collapseContent({
+            line: [
+              Object.keys(ARTIFACTS.steptargets).length !== 0
+                ? collapseContent({
+                    line: [
+                      { text: "where to step with" },
+                      {
+                        unit: [
+                          iconMapping[
+                            (UNITLAYERS.units[MARKS.selecttail] || {}).group
+                          ],
+                          (UNITLAYERS.units[MARKS.selecttail] || {}).owner,
+                          MARKS.selecttail
+                        ]
+                      }
+                    ]
+                  })
+                : undefined,
+              Object.keys(ARTIFACTS.heads).length !== 0
+                ? collapseContent({
+                    line: [{ text: "a head for the phalanx" }]
+                  })
+                : undefined
             ]
-          },
-          { text: "or a head for the phalanx" }
+              .filter(i => !!i)
+              .reduce((mem, i, n, list) => {
+                mem.push(i);
+                if (n === list.length - 2) {
+                  mem.push({ text: " or " });
+                } else if (n < list.length - 2) {
+                  mem.push({ text: ", " });
+                }
+                return mem;
+              }, [])
+          })
         ]
       });
     },
     selecthead_basic_1: step => {
+      let ARTIFACTS = step.ARTIFACTS;
+      let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
-        line: [{ select: "Select" }, { text: "where to march to" }]
+        line: [
+          { select: "Select" },
+          { text: "where to march" },
+          collapseContent({
+            line: Object.keys(ARTIFACTS.phalanx)
+              .filter(p => UNITLAYERS.units[p])
+              .map(p => ({
+                unit: [
+                  iconMapping[UNITLAYERS.units[p].group],
+                  UNITLAYERS.units[p].owner,
+                  p
+                ]
+              }))
+              .reduce((mem, i, n, list) => {
+                mem.push(i);
+                if (n === list.length - 2) {
+                  mem.push({ text: " and " });
+                } else if (n < list.length - 2) {
+                  mem.push({ text: ", " });
+                }
+                return mem;
+              }, [])
+          })
+        ]
       });
     },
     selectmarchtarget_basic_1: step => {
@@ -1005,26 +1043,78 @@ const game = {
     step_basic_2: () => defaultInstruction(2),
     march_basic_2: () => defaultInstruction(2),
     selecttail_basic_2: step => {
+      let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
         line: [
           { select: "Select" },
-          { text: "where to step with" },
-          {
-            unit: [
-              iconMapping[(UNITLAYERS.units[MARKS.selecttail] || {}).group],
-              (UNITLAYERS.units[MARKS.selecttail] || {}).owner,
-              MARKS.selecttail
+          collapseContent({
+            line: [
+              Object.keys(ARTIFACTS.steptargets).length !== 0
+                ? collapseContent({
+                    line: [
+                      { text: "where to step with" },
+                      {
+                        unit: [
+                          iconMapping[
+                            (UNITLAYERS.units[MARKS.selecttail] || {}).group
+                          ],
+                          (UNITLAYERS.units[MARKS.selecttail] || {}).owner,
+                          MARKS.selecttail
+                        ]
+                      }
+                    ]
+                  })
+                : undefined,
+              Object.keys(ARTIFACTS.heads).length !== 0
+                ? collapseContent({
+                    line: [{ text: "a head for the phalanx" }]
+                  })
+                : undefined
             ]
-          },
-          { text: "or a head for the phalanx" }
+              .filter(i => !!i)
+              .reduce((mem, i, n, list) => {
+                mem.push(i);
+                if (n === list.length - 2) {
+                  mem.push({ text: " or " });
+                } else if (n < list.length - 2) {
+                  mem.push({ text: ", " });
+                }
+                return mem;
+              }, [])
+          })
         ]
       });
     },
     selecthead_basic_2: step => {
+      let ARTIFACTS = step.ARTIFACTS;
+      let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
-        line: [{ select: "Select" }, { text: "where to march to" }]
+        line: [
+          { select: "Select" },
+          { text: "where to march" },
+          collapseContent({
+            line: Object.keys(ARTIFACTS.phalanx)
+              .filter(p => UNITLAYERS.units[p])
+              .map(p => ({
+                unit: [
+                  iconMapping[UNITLAYERS.units[p].group],
+                  UNITLAYERS.units[p].owner,
+                  p
+                ]
+              }))
+              .reduce((mem, i, n, list) => {
+                mem.push(i);
+                if (n === list.length - 2) {
+                  mem.push({ text: " and " });
+                } else if (n < list.length - 2) {
+                  mem.push({ text: ", " });
+                }
+                return mem;
+              }, [])
+          })
+        ]
       });
     },
     selectmarchtarget_basic_2: step => {
@@ -1146,7 +1236,44 @@ const game = {
       desc: "regular",
       code: "r",
       arr: {
-        setup: {},
+        setup: {
+          soldiers: {
+            "1": [
+              "a1",
+              "a2",
+              "b2",
+              "c1",
+              "d3",
+              "d4",
+              "e1",
+              "e2",
+              "e3",
+              "e4",
+              "f1",
+              "f2",
+              "g2",
+              "h1",
+              "h2"
+            ],
+            "2": [
+              "a7",
+              "a8",
+              "b7",
+              "b8",
+              "c7",
+              "d8",
+              "e6",
+              "e7",
+              "e8",
+              "f5",
+              "f6",
+              "g7",
+              "g8",
+              "h7",
+              "h8"
+            ]
+          }
+        },
         marks: [],
         potentialMarks: []
       }
@@ -1177,20 +1304,13 @@ const game = {
       soldiers: {
         "1": [
           {
-            rect: ["a1", "h1"]
-          },
-          "a6",
-          "a5",
-          "a7",
-          "b5",
-          "b6"
+            rect: ["a1", "h2"]
+          }
         ],
         "2": [
           {
-            rect: ["b8", "h8"]
-          },
-          "h3",
-          "h4"
+            rect: ["a7", "h8"]
+          }
         ]
       }
     }

@@ -77,12 +77,11 @@ const crossingsFlow: CrossingsDefinition["flow"] = {
     },
     selecthead: {
       from: "heads",
-      runGenerators: ["findmarchtargets", "findvictims"],
+      runGenerators: ["findphalanx", "findmarchtargets", "findvictims"],
       link: "selectmarchtarget",
     },
     selectmarchtarget: {
       from: "marchtargets",
-      runGenerators: ["findphalanx"],
       link: "march",
     },
     selectsteptarget: {

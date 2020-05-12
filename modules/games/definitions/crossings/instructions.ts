@@ -17,13 +17,23 @@ const crossingsInstructions: CrossingsDefinition["instructions"] = {
   selecttail: {
     line: [
       "Select",
-      "where to step with",
-      { unitat: "selecttail" },
-      "or a head for the phalanx",
+      {
+        orlist: [
+          {
+            if: [
+              { notempty: "steptargets" },
+              { line: ["where to step with", { unitat: "selecttail" }] },
+            ],
+          },
+          {
+            if: [{ notempty: "heads" }, { line: ["a head for the phalanx"] }],
+          },
+        ],
+      },
     ],
   },
   selecthead: {
-    line: ["Select", "where to march to"],
+    line: ["Select", "where to march", { unitlist: "phalanx" }],
   },
   selectmarchtarget: {
     line: [

@@ -494,6 +494,54 @@ const game = {
       desc: "regular",
       code: "r",
       arr: {
+        setup: {
+          soldiers: {
+            "1": [
+              "b1",
+              "b4",
+              "c3",
+              "c4",
+              "d3",
+              "d4",
+              "e3",
+              "e4",
+              "f1",
+              "f3",
+              "f4",
+              "g1",
+              "g2",
+              "h4"
+            ],
+            "2": [
+              "b5",
+              "b6",
+              "b7",
+              "c5",
+              "c7",
+              "d5",
+              "d6",
+              "e5",
+              "e6",
+              "f5",
+              "f6",
+              "f8",
+              "g4",
+              "g7",
+              "h5"
+            ]
+          }
+        },
+        marks: ["f4"],
+        potentialMarks: ["e5", "g5"]
+      }
+    },
+    {
+      ruleset: "basic",
+      board: "mini",
+      setup: "mini",
+      desc: "mini",
+      code: "M",
+      arr: {
         setup: {},
         marks: [],
         potentialMarks: []
@@ -518,6 +566,24 @@ const game = {
           ]
         }
       }
+    },
+    mini: {
+      height: 5,
+      width: 5,
+      terrain: {
+        base: {
+          "1": [
+            {
+              rect: ["a1", "e1"]
+            }
+          ],
+          "2": [
+            {
+              rect: ["a5", "e5"]
+            }
+          ]
+        }
+      }
     }
   },
   setups: {
@@ -531,6 +597,20 @@ const game = {
         "2": [
           {
             rect: ["a7", "h8"]
+          }
+        ]
+      }
+    },
+    mini: {
+      soldiers: {
+        "1": [
+          {
+            rect: ["a1", "e2"]
+          }
+        ],
+        "2": [
+          {
+            rect: ["a4", "e5"]
           }
         ]
       }

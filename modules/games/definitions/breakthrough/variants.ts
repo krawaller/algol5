@@ -54,7 +54,7 @@ const breakthroughVariants: BreakthroughDefinition["variants"] = [
     board: "mini",
     setup: "mini",
     desc: "mini",
-    code: "r",
+    code: "M",
     arr: {
       setup: {},
       marks: [],

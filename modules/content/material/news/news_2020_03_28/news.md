@@ -3,15 +3,15 @@ id: "news_2020_03_28"
 title: "Variants support"
 slug: "variant_support"
 blurb: "Games can now have alternate setups, boards and rules"
-thumbnail: "wip-thumb.png"
-mainImage: "wip-big.png"
+thumbnail: "variants-thumb2.jpg"
+mainImage: "variants.jpg"
 created: "2020-03-28"
 updated: "2020-03-28"
 ---
 
 Even though {ME} has lived for over a decade - albeight in different shapes and through many rebirths - it has never had proper support for game variants. A rather embarrassing omission!
 
-{PIC:name=wip-big.png,cred=Art by David,title=Work in progress}
+{PIC:name=variants.jpg,title=Mostly slight variations,cred=Photo by Reddit user CX52J,credurl=https://www.reddit.com/r/StarWars/comments/dk3llm/finally_completed_my_line_up_of_the_greatest/}
 
 This meant that whenever we actually did want variants, such as having the advanced version of {GAME:id=murusgallicus}, the variant was added as a separate game.
 

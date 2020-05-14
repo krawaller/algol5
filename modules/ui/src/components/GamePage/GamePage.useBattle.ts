@@ -9,7 +9,6 @@ import {
   updateSession,
   writeSession,
   session2battle,
-  deleteSession,
   getLatestSessionId,
   getSessionById,
   setLatestSessionId,
@@ -23,7 +22,6 @@ type BattleAction =
   | "toFrame"
   | "new"
   | "load"
-  | "deleteCurrentSession"
   | "continuePreviousSession";
 type BattleCmnd = [BattleAction, any];
 
@@ -71,14 +69,6 @@ const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
         session,
         frame: battle.history.length - 1,
         hasPrevious: true,
-      };
-    } else if (cmnd === "deleteCurrentSession") {
-      deleteSession(api.gameId, state.session!.id);
-      return {
-        battle: null,
-        session: null,
-        frame: 0,
-        hasPrevious: false,
       };
     } else if (cmnd === "continuePreviousSession") {
       if (state.battle) {
@@ -136,7 +126,6 @@ export function useBattle(api: AlgolStaticGameAPI) {
       newLocalBattle: (code: string) => dispatch(["new", code]),
       loadLocalSession: (sessionId: string) => dispatch(["load", sessionId]),
       toFrame: (frame: number) => dispatch(["toFrame", frame]),
-      deleteCurrentSession: () => dispatch(["deleteCurrentSession", null]),
       continuePreviousSession: () =>
         dispatch(["continuePreviousSession", null]),
     }),

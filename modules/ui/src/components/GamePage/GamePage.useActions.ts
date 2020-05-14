@@ -14,6 +14,7 @@ import {
   importSessionFromBattle,
   writeSession,
   forkSessionFromBattle,
+  deleteSession,
 } from "../../../../local/src";
 
 type UseActionsOpts = {
@@ -35,9 +36,11 @@ export const useActions = (opts: UseActionsOpts) => {
         battleActions.newLocalBattle(code);
         modeActions.toBattleControls();
       },
-      deleteCurrentSession: () => {
-        battleActions.deleteCurrentSession();
-        modeActions.toGameLobby();
+      deleteSession: (sessionId: string, retreatToGameLobby: boolean) => {
+        deleteSession(api.gameId, sessionId);
+        if (retreatToGameLobby) {
+          modeActions.toGameLobby();
+        }
       },
       loadLocalSession: (sessionId: string) => {
         battleActions.loadLocalSession(sessionId);

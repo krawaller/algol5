@@ -7,6 +7,7 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           <link rel="stylesheet" href="/ui.css" />
+          <meta property="og:site_name" content="Chessicals" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
         </Head>
         <body>

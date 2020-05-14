@@ -23,7 +23,6 @@ export const Game = () => {
   return (
     <Fragment>
       <Head>
-        <meta property="og:site_name" content="Chessicals"/>
         <meta property="og:image" content={article.mainImage} />
         <meta property="og:title" content={article.title} />
         <meta property="og:description" content={article.blurb} />

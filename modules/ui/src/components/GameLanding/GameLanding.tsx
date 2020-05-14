@@ -2,7 +2,6 @@ import React, { FunctionComponent, useMemo, Fragment } from "react";
 import styles from "./GameLanding.cssProxy";
 import {
   AlgolMeta,
-  AlgolLocalBattle,
   AlgolGameGraphics,
   AlgolErrorReporter,
   AlgolGameBlobAnon,
@@ -20,7 +19,7 @@ export interface GameLandingActions {
   navTo: (path: string) => void;
   prefetch: (path: string) => void;
   newLocalBattle: (code: string) => void;
-  loadLocalSession: (session: AlgolLocalBattle) => void;
+  loadLocalSession: (sessionId: string) => void;
   toBattleLobby: () => void;
   importSession: (str: string) => void;
   continuePreviousSession: () => void;
@@ -42,8 +41,8 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   // hack actions to close game modal when chosen a game
   const localSessionActions = useMemo(
     (): NewLocalSessionActions => ({
-      loadLocalSession: (session: AlgolLocalBattle) => {
-        actions.loadLocalSession(session);
+      loadLocalSession: (sessionId: string) => {
+        actions.loadLocalSession(sessionId);
         closeSessionModal();
       },
       newLocalBattle: (code: string) => {

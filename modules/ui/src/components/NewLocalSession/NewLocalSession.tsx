@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from "react";
 import css from "./NewLocalSession.cssProxy";
 import {
-  AlgolLocalBattle,
   AlgolGameGraphics,
   AlgolMeta,
   AlgolErrorReporter,
@@ -15,7 +14,7 @@ import { VariantSelector } from "./NewLocalSession.VariantSelector";
 
 export interface NewLocalSessionActions {
   newLocalBattle: (code: string) => void;
-  loadLocalSession: (session: AlgolLocalBattle) => void;
+  loadLocalSession: (sessionId: string) => void;
   importSession: (str: string) => void;
   continuePreviousSession: () => void;
   reportError: AlgolErrorReporter;

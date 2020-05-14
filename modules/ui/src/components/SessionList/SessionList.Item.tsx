@@ -11,7 +11,7 @@ import { Board } from "../Board";
 import { SessionItemInfo } from "./SessionList.ItemInfo";
 
 interface SessionListItemActions {
-  loadLocalSession: (session: AlgolLocalBattle) => void;
+  loadLocalSession: (sessionId: string) => void;
 }
 
 type SessionListItemProps = {
@@ -30,7 +30,7 @@ export const SessionListItem: FunctionComponent<SessionListItemProps> = props =>
     <div
       key={session.id}
       className={css.sessionListItem}
-      onClick={() => actions.loadLocalSession(session)}
+      onClick={() => actions.loadLocalSession(session.id)}
       title="Click to load this session"
     >
       <div className={css.sessionListItemScreenshot}>

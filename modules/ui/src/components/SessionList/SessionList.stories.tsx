@@ -17,7 +17,7 @@ import { SessionLoadFail } from "../../../../local/src";
 import { AlgolLocalBattle, AlgolVariantAnon } from "../../../../types";
 
 const innerActions: SessionListInnerActions = {
-  loadLocalSession: save => console.log("Save", save),
+  loadLocalSession: id => console.log("Loading session id", id),
   reportError: (error, level) => console.log("Reported error", error, level),
   updateList: () => console.log("Updating list"),
   purgeErrorLines: () => console.log("Purging"),
@@ -38,7 +38,7 @@ storiesOf("SessionList", module)
     const gameId = select("Game", list, list[0]) as GameId;
     const finished = boolean("Finished", false);
     const actions: SessionListActions = {
-      loadLocalSession: save => console.log("Save", save),
+      loadLocalSession: id => console.log("Loading session id", id),
       reportError: (error, level) =>
         console.log("Reported error", error, level),
     };

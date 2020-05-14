@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 
 import {
   AlgolGameGraphics,
-  AlgolLocalBattle,
   AlgolMeta,
   AlgolErrorReporter,
   AlgolGameBlobAnon,
@@ -16,7 +15,7 @@ import {
 import { SessionListInner, SessionInfo } from "./SessionList.Inner";
 
 export interface SessionListActions {
-  loadLocalSession: (session: AlgolLocalBattle) => void;
+  loadLocalSession: (sessionId: string) => void;
   reportError: AlgolErrorReporter;
 }
 

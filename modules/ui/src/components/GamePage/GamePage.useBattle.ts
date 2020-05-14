@@ -68,7 +68,8 @@ const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
     } else if (cmnd === "load") {
       // user chose a battle in the list of saved battles. we load it
       // and set it as current battle.
-      const session: AlgolLocalBattle = arg;
+      const sessionId = arg;
+      const session = getSessionById(api.gameId, sessionId)!; // TODO - handle error
       setLatestSessionId(api.gameId, session.id);
       const battle = session2battle(session, api);
       return {
@@ -163,8 +164,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
       command: (cmnd: string) => dispatch(["command", cmnd]),
       undoBattleCommand: () => dispatch(["undo", null]),
       newLocalBattle: (code: string) => dispatch(["new", code]),
-      loadLocalSession: (session: AlgolLocalBattle) =>
-        dispatch(["load", session]),
+      loadLocalSession: (sessionId: string) => dispatch(["load", sessionId]),
       toFrame: (frame: number) => dispatch(["toFrame", frame]),
       deleteCurrentSession: () => dispatch(["deleteCurrentSession", null]),
       forkSession: () => dispatch(["fork", null]),

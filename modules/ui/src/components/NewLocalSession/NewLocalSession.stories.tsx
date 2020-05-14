@@ -13,7 +13,7 @@ storiesOf("NewLocalSession", module).add(
     const gameId = select("Game", list, list[0]) as GameId;
     const hasPrevious = boolean("Previous battle", false);
     const actions: NewLocalSessionActions = {
-      loadLocalSession: save => console.log("Save", save),
+      loadLocalSession: id => console.log("Loading session id", id),
       newLocalBattle: () => console.log("New!"),
       importSession: str => console.log("Import", str),
       continuePreviousSession: () => console.log("Previous!"),

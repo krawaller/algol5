@@ -3,7 +3,6 @@ import { BattleActions } from "./GamePage.useBattle";
 import { ModeActions } from "./GamePage.useMode";
 import {
   AlgolErrorReport,
-  AlgolLocalBattle,
   AlgolError,
   AlgolErrorReportLevel,
 } from "../../../../types";
@@ -31,8 +30,8 @@ export const useActions = (opts: UseActionsOpts) => {
         battleActions.deleteCurrentSession();
         modeActions.toGameLobby();
       },
-      loadLocalSession: (session: AlgolLocalBattle) => {
-        battleActions.loadLocalSession(session);
+      loadLocalSession: (sessionId: string) => {
+        battleActions.loadLocalSession(sessionId);
         modeActions.toBattleLobby();
       },
       forkSession: () => {

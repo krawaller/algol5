@@ -3,7 +3,6 @@ import css from "./SessionList.cssProxy";
 
 import {
   AlgolGameGraphics,
-  AlgolLocalBattle,
   AlgolMeta,
   AlgolError,
   AlgolErrorReporter,
@@ -18,7 +17,7 @@ import { ButtonGroup } from "../ButtonGroup";
 import { Button } from "../Button";
 
 export interface SessionListInnerActions {
-  loadLocalSession: (session: AlgolLocalBattle) => void;
+  loadLocalSession: (sessionId: string) => void;
   reportError: AlgolErrorReporter;
   updateList: () => void;
   purgeErrorLines: () => void;

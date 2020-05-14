@@ -1,4 +1,4 @@
-import { useReducer, useMemo } from "react";
+import { useReducer, useMemo, useEffect } from "react";
 import {
   AlgolStaticGameAPI,
   AlgolBattle,
@@ -13,6 +13,7 @@ import {
   getSessionById,
   setLatestSessionId,
 } from "../../../../local/src";
+import { ModeActions } from "./GamePage.useMode";
 
 type BattleAction =
   | "mark"
@@ -90,7 +91,11 @@ const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
   return reducer;
 };
 
-export function useBattle(api: AlgolStaticGameAPI) {
+export function useBattle(
+  api: AlgolStaticGameAPI,
+  sessionId: string | null,
+  toSession: ModeActions["toSession"]
+) {
   const reducer = useMemo(() => makeReducerForAPI(api), [api]);
   const [state, dispatch] = useReducer(
     reducer,
@@ -103,14 +108,31 @@ export function useBattle(api: AlgolStaticGameAPI) {
       hasPrevious: !!getLatestSessionId(api.gameId),
     }
   );
+  useEffect(() => {
+    // If sessionId changed, get correct session
+    if (sessionId) {
+      if (sessionId.match(/^new_/)) {
+        const code = sessionId.slice(4);
+        dispatch(["new", code]);
+      } else {
+        dispatch(["load", sessionId]);
+      }
+    }
+  }, [sessionId, api]);
+  const currentSessionId = state.session?.id;
+  const hasMoves = (state.battle?.history.length || 0) >= 2;
+  useEffect(() => {
+    // If we're in a new session that now has proper history, navigate to it
+    if (sessionId && sessionId.match(/^new_/) && currentSessionId && hasMoves) {
+      toSession(currentSessionId, "playing");
+    }
+  }, [sessionId, currentSessionId, hasMoves]);
   const actions = useMemo(
     () => ({
       mark: (pos: string) => dispatch(["mark", pos]),
       endTurn: () => dispatch(["endTurn", null]),
       command: (cmnd: string) => dispatch(["command", cmnd]),
       undoBattleCommand: () => dispatch(["undo", null]),
-      newLocalBattle: (code: string) => dispatch(["new", code]),
-      loadLocalSession: (sessionId: string) => dispatch(["load", sessionId]),
       toFrame: (frame: number) => dispatch(["toFrame", frame]),
     }),
     []

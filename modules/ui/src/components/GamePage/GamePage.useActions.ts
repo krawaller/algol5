@@ -33,8 +33,7 @@ export const useActions = (opts: UseActionsOpts) => {
       ...battleActions,
       ...modeActions,
       newLocalBattle: (code: string) => {
-        battleActions.newLocalBattle(code);
-        modeActions.toBattleControls();
+        modeActions.newLocalBattle(code);
       },
       deleteSession: (sessionId: string, retreatToGameLobby: boolean) => {
         deleteSession(api.gameId, sessionId);
@@ -43,24 +42,21 @@ export const useActions = (opts: UseActionsOpts) => {
         }
       },
       loadLocalSession: (sessionId: string) => {
-        battleActions.loadLocalSession(sessionId);
-        modeActions.toBattleLobby();
+        modeActions.toSession(sessionId);
       },
       forkBattleFrame: (battle: AlgolBattle, frame: number) => {
         const historyFrame = battle.history[frame];
         const newBattle = api.fromFrame(historyFrame, battle.variant.code);
         const session = forkSessionFromBattle(newBattle, api.iconMap);
         writeSession(api.gameId, session);
-        battleActions.loadLocalSession(session.id);
-        modeActions.toBattleLobby();
+        modeActions.toSession(session.id);
       },
       importSession: (str: string) => {
         const save = parseSeed(str, api.gameId);
         const battle = api.fromSave(save);
         const session = importSessionFromBattle(battle, api.iconMap);
         writeSession(api.gameId, session);
-        battleActions.loadLocalSession(session.id);
-        modeActions.toBattleLobby();
+        modeActions.toSession(session.id);
       },
       reportError: (
         error: AlgolError,

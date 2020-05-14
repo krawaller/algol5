@@ -29,10 +29,12 @@ type GamePageProps = {
 export const GamePage = (props: GamePageProps) => {
   const { actions: pageActions, gamePayload } = props;
   const { api, graphics, meta, demo, rules } = gamePayload;
-  const [{ battle, frame, session, hasPrevious }, battleActions] = useBattle(
-    api
+  const [givenMode, sessionId, modeActions] = useMode();
+  const [{ battle, frame, session }, battleActions] = useBattle(
+    api,
+    sessionId,
+    modeActions.toSession
   );
-  const [mode, modeActions] = useMode();
   const [errorReport, setErrorReport] = useState<AlgolErrorReport>();
   const actions = useActions({
     pageActions,
@@ -41,7 +43,8 @@ export const GamePage = (props: GamePageProps) => {
     setErrorReport,
     api,
   });
-  const ui = useUI(api, battle, frame, demo, mode);
+  const ui = useUI(api, battle, frame, demo, givenMode);
+  const mode = battle ? givenMode : "gamelobby";
 
   // TODO - maybe not read this on every render? move to state somewhere?
   const previousSessionId = getLatestSessionId(api.gameId);

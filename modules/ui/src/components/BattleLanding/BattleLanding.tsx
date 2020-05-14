@@ -15,7 +15,7 @@ import { BattleLandingOngoing } from "./BattleLanding.Ongoing";
 import { ButtonGroup } from "../ButtonGroup";
 
 interface BattleLandingActions {
-  deleteCurrentSession: () => void;
+  deleteSession: (sessionId: string, retreatToGameLobby: boolean) => void;
   reportError: AlgolErrorReporter;
 }
 
@@ -62,7 +62,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
                 "Are you sure you want to delete this session? It will be forever lost!"
               )
             ) {
-              actions.deleteCurrentSession();
+              actions.deleteSession(session.id, true);
             }
           }}
         >

@@ -13,10 +13,9 @@ storiesOf("NewLocalSession", module).add(
     const gameId = select("Game", list, list[0]) as GameId;
     const hasPrevious = boolean("Previous battle", false);
     const actions: NewLocalSessionActions = {
-      loadLocalSession: save => console.log("Save", save),
+      loadLocalSession: id => console.log("Loading session id", id),
       newLocalBattle: () => console.log("New!"),
       importSession: str => console.log("Import", str),
-      continuePreviousSession: () => console.log("Previous!"),
       reportError: err => console.log("Error", err),
     };
     const variants: AlgolVariantAnon[] = [
@@ -33,7 +32,7 @@ storiesOf("NewLocalSession", module).add(
         actions={actions}
         meta={meta[gameId]}
         graphics={dataURIs[gameId]}
-        hasPrevious={hasPrevious}
+        previousSessionId={hasPrevious ? "somePreviousId" : undefined}
         variants={variants}
       />
     );

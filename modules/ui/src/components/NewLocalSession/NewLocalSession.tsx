@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from "react";
 import css from "./NewLocalSession.cssProxy";
 import {
-  AlgolLocalBattle,
   AlgolGameGraphics,
   AlgolMeta,
   AlgolErrorReporter,
@@ -15,29 +14,32 @@ import { VariantSelector } from "./NewLocalSession.VariantSelector";
 
 export interface NewLocalSessionActions {
   newLocalBattle: (code: string) => void;
-  loadLocalSession: (session: AlgolLocalBattle) => void;
+  loadLocalSession: (sessionId: string) => void;
   importSession: (str: string) => void;
-  continuePreviousSession: () => void;
   reportError: AlgolErrorReporter;
 }
 
 type NewLocalSessionProps = {
   graphics: AlgolGameGraphics;
   actions: NewLocalSessionActions;
-  hasPrevious: boolean;
+  previousSessionId?: string | null;
   meta: AlgolMeta<AlgolGameBlobAnon>;
   variants: AlgolVariantAnon[];
 };
 
 export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props => {
-  const { actions, meta, graphics, hasPrevious, variants } = props;
+  const { actions, meta, graphics, previousSessionId, variants } = props;
   return (
     <div className={css.newLocalSession}>
       <VariantSelector variants={variants} actions={actions} />
       <div className={css.newLocalSessionDivider} />
       <Button
-        disabled={!hasPrevious && "No previous battle found for this game."}
-        onClick={actions.continuePreviousSession}
+        disabled={
+          !previousSessionId && "No previous battle found for this game."
+        }
+        onClick={() =>
+          previousSessionId && actions.loadLocalSession(previousSessionId)
+        }
         controlId="continue-previous-battle"
         onError={actions.reportError}
       >

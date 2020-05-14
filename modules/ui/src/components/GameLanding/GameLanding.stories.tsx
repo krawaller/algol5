@@ -13,14 +13,13 @@ storiesOf("GameLanding", module).add("init game", () => {
   const hasPrevious = boolean("Previous battle", false);
   const actions: GameLandingActions = {
     newLocalBattle: (code: string) => console.log("new battle", code),
-    loadLocalSession: save => console.log("loading save", save),
+    loadLocalSession: id => console.log("Loading session id", id),
     navTo: path => console.log("navigating to", path),
     prefetch: path => console.log("prefetch", path),
     toBattleLobby: () => console.log("to battle lobby"),
     importSession: (str: string) => {
       console.log("Import", str);
     },
-    continuePreviousSession: () => console.log("previous"),
     reportError: err => console.log("error", err),
   };
   const variants: AlgolVariantAnon[] = [
@@ -38,7 +37,7 @@ storiesOf("GameLanding", module).add("init game", () => {
       meta={meta[gameId]}
       graphics={dataURIs[gameId]}
       actions={actions}
-      hasPrevious={hasPrevious}
+      previousSessionId={hasPrevious ? "somePreviousId" : undefined}
       variants={variants}
     />
   );

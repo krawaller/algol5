@@ -2,13 +2,8 @@
  * Used in the Next app as a "homepage" for the individual games.
  */
 
-import React, { useMemo, ReactNode, useState } from "react";
-import {
-  AlgolError,
-  AlgolErrorReport,
-  AlgolErrorReportLevel,
-  AlgolGamePayload,
-} from "../../../../types";
+import React, { ReactNode, useState } from "react";
+import { AlgolErrorReport, AlgolGamePayload } from "../../../../types";
 import css from "./GamePage.cssProxy";
 
 import { Board } from "../Board";
@@ -18,10 +13,13 @@ import { GameLanding } from "../GameLanding";
 import { BattleHistory } from "../BattleHistory";
 import { PageActions } from "../../helpers";
 import { useUI } from "./GamePage.useUI";
+import { useMode } from "./GamePage.useMode";
 import { useBattle } from "./GamePage.useBattle";
+import { useActions } from "./GamePage.useActions";
 import { Breadcrumbs, Crumb } from "../Breadcrumbs";
 import { SessionViewSelector } from "../SessionViewSelector";
 import { BattleMove } from "../BattleMove";
+import { getLatestSessionId } from "../../../../local/src";
 
 type GamePageProps = {
   actions: PageActions;
@@ -31,23 +29,25 @@ type GamePageProps = {
 export const GamePage = (props: GamePageProps) => {
   const { actions: pageActions, gamePayload } = props;
   const { api, graphics, meta, demo, rules } = gamePayload;
-  const [
-    { battle, frame, mode, session, hasPrevious },
-    battleActions,
-  ] = useBattle(api);
-  const [errorReport, setErrorReport] = useState<AlgolErrorReport>();
-  const actions = useMemo(
-    () => ({
-      ...pageActions,
-      ...battleActions,
-      reportError: (
-        error: AlgolError,
-        level: AlgolErrorReportLevel = "warning"
-      ) => setErrorReport({ error, level }),
-    }),
-    [pageActions, battleActions]
+  const [givenMode, sessionId, modeActions] = useMode();
+  const [{ battle, frame, session }, battleActions] = useBattle(
+    api,
+    sessionId,
+    modeActions.toSession
   );
-  const ui = useUI(api, battle, frame, demo, mode);
+  const [errorReport, setErrorReport] = useState<AlgolErrorReport>();
+  const actions = useActions({
+    pageActions,
+    battleActions,
+    modeActions,
+    setErrorReport,
+    api,
+  });
+  const ui = useUI(api, battle, frame, demo, givenMode);
+  const mode = battle ? givenMode : "gamelobby";
+
+  // TODO - maybe not read this on every render? move to state somewhere?
+  const previousSessionId = getLatestSessionId(api.gameId);
 
   const crumbs: Crumb[] = [
     {
@@ -95,7 +95,7 @@ export const GamePage = (props: GamePageProps) => {
         meta={meta}
         actions={actions}
         graphics={graphics}
-        hasPrevious={hasPrevious}
+        previousSessionId={previousSessionId}
         variants={api.variants}
       />
     );

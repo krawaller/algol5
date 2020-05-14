@@ -38,6 +38,7 @@ export const GamePage = (props: GamePageProps) => {
     battleActions,
     modeActions,
     setErrorReport,
+    api,
   });
   const ui = useUI(api, battle, frame, demo, mode);
 

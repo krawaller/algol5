@@ -3,7 +3,6 @@ import {
   AlgolStaticGameAPI,
   AlgolBattle,
   AlgolLocalBattle,
-  AlgolBattleSave,
 } from "../../../../types";
 import {
   newSessionFromBattle,
@@ -16,8 +15,6 @@ import {
   getSessionById,
   setLatestSessionId,
 } from "../../../../local/src";
-import { parseSeed } from "../../../../encoding/src/seed";
-import { importSessionFromBattle } from "../../../../local/src/session/importSessionFromBattle";
 
 type BattleAction =
   | "mark"
@@ -29,7 +26,6 @@ type BattleAction =
   | "load"
   | "deleteCurrentSession"
   | "fork"
-  | "import"
   | "continuePreviousSession";
 type BattleCmnd = [BattleAction, any];
 
@@ -111,18 +107,6 @@ const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
         const session = getSessionById(api.gameId, lastSessionId);
         return reducer(state, ["load", session]);
       }
-    } else if (cmnd === "import") {
-      const save: AlgolBattleSave = arg;
-      const battle = api.fromSave(save);
-      const session = importSessionFromBattle(battle, api.iconMap);
-      setLatestSessionId(api.gameId, session.id);
-      writeSession(api.gameId, session);
-      return {
-        frame: battle.history.length - 1,
-        battle,
-        session,
-        hasPrevious: true,
-      };
     } else {
       // action was mark, command or endTurn. passing it on to game API
       const battle = api.performAction(state.battle!, cmnd, instr[1]);
@@ -168,10 +152,6 @@ export function useBattle(api: AlgolStaticGameAPI) {
       toFrame: (frame: number) => dispatch(["toFrame", frame]),
       deleteCurrentSession: () => dispatch(["deleteCurrentSession", null]),
       forkSession: () => dispatch(["fork", null]),
-      importSession: (str: string) => {
-        const save = parseSeed(str, api.gameId);
-        dispatch(["import", save]);
-      },
       continuePreviousSession: () =>
         dispatch(["continuePreviousSession", null]),
     }),

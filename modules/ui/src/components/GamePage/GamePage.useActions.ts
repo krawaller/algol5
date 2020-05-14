@@ -5,18 +5,22 @@ import {
   AlgolErrorReport,
   AlgolError,
   AlgolErrorReportLevel,
+  AlgolStaticGameAPI,
 } from "../../../../types";
 import { PageActions } from "../../helpers";
+import { parseSeed } from "../../../../encoding/src/seed";
+import { importSessionFromBattle, writeSession } from "../../../../local/src";
 
 type UseActionsOpts = {
   battleActions: BattleActions;
   modeActions: ModeActions;
   pageActions: PageActions;
   setErrorReport: (err: AlgolErrorReport) => void;
+  api: AlgolStaticGameAPI;
 };
 
 export const useActions = (opts: UseActionsOpts) => {
-  const { battleActions, modeActions, pageActions, setErrorReport } = opts;
+  const { battleActions, modeActions, pageActions, setErrorReport, api } = opts;
   const actions = useMemo(
     () => ({
       ...pageActions,
@@ -39,7 +43,11 @@ export const useActions = (opts: UseActionsOpts) => {
         modeActions.toBattleLobby();
       },
       importSession: (str: string) => {
-        battleActions.importSession(str);
+        const save = parseSeed(str, api.gameId);
+        const battle = api.fromSave(save);
+        const session = importSessionFromBattle(battle, api.iconMap);
+        writeSession(api.gameId, session);
+        battleActions.loadLocalSession(session.id);
         modeActions.toBattleLobby();
       },
       reportError: (
@@ -47,7 +55,7 @@ export const useActions = (opts: UseActionsOpts) => {
         level: AlgolErrorReportLevel = "warning"
       ) => setErrorReport({ error, level }),
     }),
-    [pageActions, battleActions, modeActions, setErrorReport]
+    [pageActions, battleActions, modeActions, setErrorReport, api]
   );
   return actions;
 };

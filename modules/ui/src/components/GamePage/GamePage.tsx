@@ -19,6 +19,7 @@ import { useActions } from "./GamePage.useActions";
 import { Breadcrumbs, Crumb } from "../Breadcrumbs";
 import { SessionViewSelector } from "../SessionViewSelector";
 import { BattleMove } from "../BattleMove";
+import { getLatestSessionId } from "../../../../local/src";
 
 type GamePageProps = {
   actions: PageActions;
@@ -41,6 +42,9 @@ export const GamePage = (props: GamePageProps) => {
     api,
   });
   const ui = useUI(api, battle, frame, demo, mode);
+
+  // TODO - maybe not read this on every render? move to state somewhere?
+  const previousSessionId = getLatestSessionId(api.gameId);
 
   const crumbs: Crumb[] = [
     {
@@ -88,7 +92,7 @@ export const GamePage = (props: GamePageProps) => {
         meta={meta}
         actions={actions}
         graphics={graphics}
-        hasPrevious={hasPrevious}
+        previousSessionId={previousSessionId}
         variants={api.variants}
       />
     );

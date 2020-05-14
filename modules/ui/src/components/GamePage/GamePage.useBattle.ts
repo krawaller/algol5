@@ -21,8 +21,7 @@ type BattleAction =
   | "undo"
   | "toFrame"
   | "new"
-  | "load"
-  | "continuePreviousSession";
+  | "load";
 type BattleCmnd = [BattleAction, any];
 
 type BattleHookState = {
@@ -70,19 +69,6 @@ const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
         frame: battle.history.length - 1,
         hasPrevious: true,
       };
-    } else if (cmnd === "continuePreviousSession") {
-      if (state.battle) {
-        // still have a battle in memory, so just go back to that
-        return {
-          ...state,
-        };
-      } else {
-        // load the last session from disk
-        // (we know we have one since otherwise this cmnd wouldn't be available)
-        const lastSessionId = getLatestSessionId(api.gameId)!;
-        const session = getSessionById(api.gameId, lastSessionId);
-        return reducer(state, ["load", session]);
-      }
     } else {
       // action was mark, command or endTurn. passing it on to game API
       const battle = api.performAction(state.battle!, cmnd, instr[1]);
@@ -126,8 +112,6 @@ export function useBattle(api: AlgolStaticGameAPI) {
       newLocalBattle: (code: string) => dispatch(["new", code]),
       loadLocalSession: (sessionId: string) => dispatch(["load", sessionId]),
       toFrame: (frame: number) => dispatch(["toFrame", frame]),
-      continuePreviousSession: () =>
-        dispatch(["continuePreviousSession", null]),
     }),
     []
   );

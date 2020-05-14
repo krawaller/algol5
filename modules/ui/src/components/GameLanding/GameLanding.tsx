@@ -22,7 +22,6 @@ export interface GameLandingActions {
   loadLocalSession: (sessionId: string) => void;
   toBattleLobby: () => void;
   importSession: (str: string) => void;
-  continuePreviousSession: () => void;
   reportError: AlgolErrorReporter;
 }
 
@@ -30,12 +29,12 @@ type GameLandingProps = {
   meta: AlgolMeta<AlgolGameBlobAnon>;
   actions: GameLandingActions;
   graphics: AlgolGameGraphics;
-  hasPrevious: boolean;
   variants: AlgolVariantAnon[];
+  previousSessionId?: string | null;
 };
 
 export const GameLanding: FunctionComponent<GameLandingProps> = props => {
-  const { meta, actions, graphics, hasPrevious, variants } = props;
+  const { meta, actions, graphics, previousSessionId, variants } = props;
   const [isSessionModalOpen, openSessionModal, closeSessionModal] = useModal();
 
   // hack actions to close game modal when chosen a game
@@ -52,10 +51,6 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
       importSession: (str: string) => {
         actions.importSession(str);
         closeSessionModal();
-      },
-      continuePreviousSession: () => {
-        closeSessionModal();
-        actions.continuePreviousSession();
       },
       reportError: actions.reportError,
     }),
@@ -93,7 +88,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
           actions={localSessionActions}
           meta={meta}
           graphics={graphics}
-          hasPrevious={hasPrevious}
+          previousSessionId={previousSessionId}
           variants={variants}
         />
       </Modal>

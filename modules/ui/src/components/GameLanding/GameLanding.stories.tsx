@@ -20,7 +20,6 @@ storiesOf("GameLanding", module).add("init game", () => {
     importSession: (str: string) => {
       console.log("Import", str);
     },
-    continuePreviousSession: () => console.log("previous"),
     reportError: err => console.log("error", err),
   };
   const variants: AlgolVariantAnon[] = [
@@ -38,7 +37,7 @@ storiesOf("GameLanding", module).add("init game", () => {
       meta={meta[gameId]}
       graphics={dataURIs[gameId]}
       actions={actions}
-      hasPrevious={hasPrevious}
+      previousSessionId={hasPrevious ? "somePreviousId" : undefined}
       variants={variants}
     />
   );

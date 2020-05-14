@@ -6,10 +6,15 @@ import {
   AlgolError,
   AlgolErrorReportLevel,
   AlgolStaticGameAPI,
+  AlgolBattle,
 } from "../../../../types";
 import { PageActions } from "../../helpers";
 import { parseSeed } from "../../../../encoding/src/seed";
-import { importSessionFromBattle, writeSession } from "../../../../local/src";
+import {
+  importSessionFromBattle,
+  writeSession,
+  forkSessionFromBattle,
+} from "../../../../local/src";
 
 type UseActionsOpts = {
   battleActions: BattleActions;
@@ -38,8 +43,12 @@ export const useActions = (opts: UseActionsOpts) => {
         battleActions.loadLocalSession(sessionId);
         modeActions.toBattleLobby();
       },
-      forkSession: () => {
-        battleActions.forkSession();
+      forkBattleFrame: (battle: AlgolBattle, frame: number) => {
+        const historyFrame = battle.history[frame];
+        const newBattle = api.fromFrame(historyFrame, battle.variant.code);
+        const session = forkSessionFromBattle(newBattle, api.iconMap);
+        writeSession(api.gameId, session);
+        battleActions.loadLocalSession(session.id);
         modeActions.toBattleLobby();
       },
       importSession: (str: string) => {

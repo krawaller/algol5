@@ -12,7 +12,7 @@ import { Button } from "../Button";
 
 interface BattleHistoryActions {
   toFrame: (frame: number) => void;
-  forkSession: () => void;
+  forkBattleFrame: (battle: AlgolBattle, frame: number) => void;
   reportError: AlgolErrorReporter;
 }
 
@@ -46,7 +46,7 @@ export const BattleHistory: FunctionComponent<BattleHistoryProps> = props => {
                 "Do you create a copy of this session from this point in the history, and switch to the new session?"
               )
             ) {
-              actions.forkSession();
+              actions.forkBattleFrame(battle, frame);
             }
           }}
           onError={actions.reportError}

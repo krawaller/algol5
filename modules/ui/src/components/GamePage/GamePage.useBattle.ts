@@ -10,7 +10,6 @@ import {
   writeSession,
   session2battle,
   deleteSession,
-  forkSessionFromBattle,
   getLatestSessionId,
   getSessionById,
   setLatestSessionId,
@@ -25,7 +24,6 @@ type BattleAction =
   | "new"
   | "load"
   | "deleteCurrentSession"
-  | "fork"
   | "continuePreviousSession";
 type BattleCmnd = [BattleAction, any];
 
@@ -81,18 +79,6 @@ const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
         session: null,
         frame: 0,
         hasPrevious: false,
-      };
-    } else if (cmnd === "fork") {
-      const historyFrame = state.battle!.history[state.frame];
-      const battle = api.fromFrame(historyFrame, state.battle!.variant.code);
-      const session = forkSessionFromBattle(battle, api.iconMap);
-      setLatestSessionId(api.gameId, session.id);
-      writeSession(api.gameId, session);
-      return {
-        battle,
-        session,
-        frame: battle.history.length - 1,
-        hasPrevious: true,
       };
     } else if (cmnd === "continuePreviousSession") {
       if (state.battle) {
@@ -151,7 +137,6 @@ export function useBattle(api: AlgolStaticGameAPI) {
       loadLocalSession: (sessionId: string) => dispatch(["load", sessionId]),
       toFrame: (frame: number) => dispatch(["toFrame", frame]),
       deleteCurrentSession: () => dispatch(["deleteCurrentSession", null]),
-      forkSession: () => dispatch(["fork", null]),
       continuePreviousSession: () =>
         dispatch(["continuePreviousSession", null]),
     }),

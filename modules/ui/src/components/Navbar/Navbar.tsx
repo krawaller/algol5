@@ -1,0 +1,93 @@
+import React, {
+  FunctionComponent,
+  Component,
+  useState,
+  useEffect,
+} from "react";
+import classNames from "classnames";
+import { TransitionGroup } from "react-transition-group";
+import Transition, {
+  TransitionStatus,
+} from "react-transition-group/Transition";
+import css from "./Navbar.cssProxy";
+import { NavbarList } from "./Navbar.List";
+
+type Dir = "up" | "down" | "same";
+type Pos = "nearer" | "further" | "same";
+
+export type NavbarProps = {
+  crumbs: { text: string; onClick?: () => void }[];
+  buttons: { text: string; onClick?: () => void }[];
+};
+
+type NavbarState = {
+  depth: number;
+  dir: Dir;
+};
+
+export const Navbar: FunctionComponent<NavbarProps> = props => {
+  const [{ depth, dir }, setState] = useState<NavbarState>({
+    depth: -1,
+    dir: "same",
+  });
+  const { buttons, crumbs } = props;
+  const count = crumbs.length;
+  useEffect(
+    () =>
+      setState({
+        depth: count,
+        dir: count > depth ? "down" : count < depth ? "up" : "same",
+      }),
+    [count]
+  );
+  const key = buttons.map(b => b.text).join("_");
+  return (
+    <div
+      className={classNames(css.navbarContainer, {
+        [css.navbarGoingUp]: dir === "up",
+        [css.navbarGoingDown]: dir === "down",
+      })}
+    >
+      <TransitionGroup
+        childFactory={child =>
+          /* to ensure exiting comps get fresh dir */
+          React.cloneElement(child, { dir })
+        }
+      >
+        <Transition key={key} timeout={{ enter: 20, exit: 500 }}>
+          {(status: TransitionStatus, { dir }: { dir: Dir }) => {
+            if (status === "exited") {
+              return null;
+            }
+            const pos = whereAmI(status, dir);
+            console.log(key, status, dir, pos);
+            return (
+              <div className={whatsMyClass(status, pos)}>
+                <NavbarList buttons={buttons} />
+              </div>
+            );
+          }}
+        </Transition>
+      </TransitionGroup>
+    </div>
+  );
+};
+
+const whereAmI = (status: TransitionStatus, dir: Dir): Pos =>
+  status === "exiting" && dir === "down"
+    ? "further"
+    : status === "exiting" && dir === "up"
+    ? "nearer"
+    : status === "entering" && dir === "down"
+    ? "nearer"
+    : status === "entering" && dir === "up"
+    ? "further"
+    : "same";
+
+const whatsMyClass = (status: TransitionStatus, pos: Pos) =>
+  classNames(css.navbarInner, {
+    [css.navbarInnerDuringEntering]: status === "entering",
+    [css.navbarInnerDuringExiting]: status === "exiting",
+    [css.navbarInnerFurther]: pos === "further",
+    [css.navbarInnerNearer]: pos === "nearer",
+  });

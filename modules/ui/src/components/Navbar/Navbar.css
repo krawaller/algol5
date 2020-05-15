@@ -1,0 +1,62 @@
+.navbarContainer {
+  height: 30px;
+  position: relative;
+}
+
+.navbarInner {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  transition: opacity 500ms ease, transform 500ms ease;
+  transform: scale(1, 1);
+  opacity: 1;
+}
+
+.navbarInnerDuringEntering {
+  opacity: 0;
+}
+
+.navbarInnerDuringExiting {
+  position: absolute;
+  opacity: 0;
+}
+
+.navbarInnerFurther {
+  transform: translate3d(0, -40px, -40px) scale(0.7, 0.7);
+}
+
+.navbarInnerNearer {
+  transform: translate3d(0, 40px, 40px) scale(1.3, 1.3);
+}
+
+.navbarList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.navbarButton {
+  border: 1px solid blue;
+  border-radius: 3px;
+  background-color: rgba(38, 92, 206, 0.324);
+  display: inline-block;
+  cursor: pointer;
+  padding: 0 3px;
+  min-width: 50px;
+  text-align: center;
+  user-select: none;
+  font-family: verdana;
+  margin: 0 6px;
+}
+
+.navbarButton:hover {
+  background-color: rgba(38, 92, 206, 0.6);
+}
+
+.navbarButton:active {
+  background-color: blue;
+  color: white;
+}

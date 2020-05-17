@@ -24,11 +24,11 @@
 }
 
 .navbarInnerFurther {
-  transform: translate3d(0, -40px, -40px) scale(0.7, 0.7);
+  transform: translate3d(0, -40px, 0) scale(0.5, 0.5);
 }
 
 .navbarInnerNearer {
-  transform: translate3d(0, 40px, 40px) scale(1.3, 1.3);
+  transform: translate3d(0, 40px, 0) scale(1.5, 1.5);
 }
 
 .navbarList {

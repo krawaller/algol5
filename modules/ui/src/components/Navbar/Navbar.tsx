@@ -1,9 +1,4 @@
-import React, {
-  FunctionComponent,
-  Component,
-  useState,
-  useEffect,
-} from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
 import classNames from "classnames";
 import { TransitionGroup } from "react-transition-group";
 import Transition, {
@@ -42,12 +37,7 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
   );
   const key = buttons.map(b => b.text).join("_");
   return (
-    <div
-      className={classNames(css.navbarContainer, {
-        [css.navbarGoingUp]: dir === "up",
-        [css.navbarGoingDown]: dir === "down",
-      })}
-    >
+    <div className={css.navbarContainer}>
       <TransitionGroup
         childFactory={child =>
           /* to ensure exiting comps get fresh dir */

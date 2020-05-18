@@ -5,7 +5,7 @@ const uglyduckMeta: UglyduckDefinition["meta"] = {
   name: "Ugly Duck",
   id: "uglyduck",
   source: "http://www.di.fc.ul.pt/~jpn/gv/uglyduck.htm",
-  tags: ["irreversible", "troyka"],
+  tags: ["irreversible", "troyka", "infiltration"],
   tagline: "Be the first to bring your ugly duck home as a swan!",
   slug: "ugly_duck",
 };

@@ -19,8 +19,8 @@ const iconMapping = {
   leader: "pawn",
   knightortho: "rook",
   knightdiag: "bishop",
-  leaderortho: "queen",
-  leaderdiag: "king"
+  leaderortho: "king",
+  leaderdiag: "queen"
 };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
@@ -1156,11 +1156,11 @@ const game = {
                   ]
                 },
                 { text: "to" },
-                { unit: ["queen", 1, MARKS.selectmovetarget] },
+                { unit: ["king", 1, MARKS.selectmovetarget] },
                 { text: "or" },
                 { command: "diagonal" },
                 { text: "for" },
-                { unit: ["king", 1, MARKS.selectmovetarget] }
+                { unit: ["queen", 1, MARKS.selectmovetarget] }
               ]
             })
           : collapseContent({
@@ -1196,14 +1196,14 @@ const game = {
               { text: "to" },
               UNITLAYERS.leaderortho[MARKS.selectunit] ||
               UNITLAYERS.leaderdiag[MARKS.selectunit]
-                ? { unit: ["queen", 1, MARKS.selectmovetarget] }
+                ? { unit: ["king", 1, MARKS.selectmovetarget] }
                 : { unit: ["rook", 1, MARKS.selectmovetarget] },
               { text: "or" },
               { command: "diagonal" },
               { text: "for" },
               UNITLAYERS.leaderortho[MARKS.selectunit] ||
               UNITLAYERS.leaderdiag[MARKS.selectunit]
-                ? { unit: ["king", 1, MARKS.selectmovetarget] }
+                ? { unit: ["queen", 1, MARKS.selectmovetarget] }
                 : { unit: ["bishop", 1, MARKS.selectmovetarget] }
             ]
           });
@@ -1288,11 +1288,11 @@ const game = {
                   ]
                 },
                 { text: "to" },
-                { unit: ["queen", 2, MARKS.selectmovetarget] },
+                { unit: ["king", 2, MARKS.selectmovetarget] },
                 { text: "or" },
                 { command: "diagonal" },
                 { text: "for" },
-                { unit: ["king", 2, MARKS.selectmovetarget] }
+                { unit: ["queen", 2, MARKS.selectmovetarget] }
               ]
             })
           : collapseContent({
@@ -1328,14 +1328,14 @@ const game = {
               { text: "to" },
               UNITLAYERS.leaderortho[MARKS.selectunit] ||
               UNITLAYERS.leaderdiag[MARKS.selectunit]
-                ? { unit: ["queen", 2, MARKS.selectmovetarget] }
+                ? { unit: ["king", 2, MARKS.selectmovetarget] }
                 : { unit: ["rook", 2, MARKS.selectmovetarget] },
               { text: "or" },
               { command: "diagonal" },
               { text: "for" },
               UNITLAYERS.leaderortho[MARKS.selectunit] ||
               UNITLAYERS.leaderdiag[MARKS.selectunit]
-                ? { unit: ["king", 2, MARKS.selectmovetarget] }
+                ? { unit: ["queen", 2, MARKS.selectmovetarget] }
                 : { unit: ["bishop", 2, MARKS.selectmovetarget] }
             ]
           });
@@ -1349,7 +1349,22 @@ const game = {
       desc: "regular",
       code: "r",
       arr: {
-        setup: {},
+        setup: {
+          leader: {
+            "2": ["a4"]
+          },
+          leaderortho: {
+            "1": ["c3"]
+          },
+          knightortho: {
+            "1": ["d3"],
+            "2": ["a2", "b4"]
+          },
+          knightdiag: {
+            "1": ["c2"],
+            "2": ["b3"]
+          }
+        },
         marks: [],
         potentialMarks: []
       }

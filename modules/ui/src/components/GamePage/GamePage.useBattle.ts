@@ -1,4 +1,4 @@
-import { useReducer, useMemo, useEffect } from "react";
+import { useReducer, useMemo, useEffect, useRef } from "react";
 import {
   AlgolStaticGameAPI,
   AlgolBattle,
@@ -108,11 +108,13 @@ export function useBattle(
       hasPrevious: !!getLatestSessionId(api.gameId),
     }
   );
+  const justStartedNew = useRef(false);
   useEffect(() => {
     // If sessionId changed, get correct session
     if (sessionId) {
       if (sessionId.match(/^new_/)) {
         const code = sessionId.slice(4);
+        justStartedNew.current = true;
         dispatch(["new", code]);
       } else {
         dispatch(["load", sessionId]);
@@ -123,10 +125,17 @@ export function useBattle(
   const hasMoves = (state.battle?.history.length || 0) >= 2;
   useEffect(() => {
     // If we're in a new session that now has proper history, navigate to it
-    if (sessionId && sessionId.match(/^new_/) && currentSessionId && hasMoves) {
+    if (
+      !justStartedNew.current &&
+      sessionId &&
+      sessionId.match(/^new_/) &&
+      currentSessionId &&
+      hasMoves
+    ) {
       toSession(currentSessionId, "playing");
     }
   }, [sessionId, currentSessionId, hasMoves]);
+  justStartedNew.current = false;
   const actions = useMemo(
     () => ({
       mark: (pos: string) => dispatch(["mark", pos]),

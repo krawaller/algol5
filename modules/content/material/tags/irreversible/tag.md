@@ -2,7 +2,7 @@
 id: "irreversible"
 title: "Irreversible"
 slug: "irreversible"
-blurb: "You cannot escape the inescapable"
+blurb: "Games where the fuse is lit"
 thumbnail: "dynamite-zoom.png"
 mainImage: "joker-grin.jpg"
 sort: "irreversible"

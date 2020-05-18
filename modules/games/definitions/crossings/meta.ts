@@ -3,7 +3,7 @@ import { CrossingsDefinition } from "./_types";
 const crossingsMeta: CrossingsDefinition["meta"] = {
   id: "crossings",
   name: "Crossings",
-  tags: ["gamut", "hundredother"],
+  tags: ["gamut", "hundredother", "infiltration"],
   tagline: "March your opponent into the ground",
   source: "",
   code: "i",

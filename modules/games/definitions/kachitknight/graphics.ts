@@ -10,8 +10,8 @@ const kachitknightGraphics: KachitknightDefinition["graphics"] = {
     leader: "pawn",
     knightortho: "rook",
     knightdiag: "bishop",
-    leaderortho: "queen",
-    leaderdiag: "king",
+    leaderortho: "king",
+    leaderdiag: "queen",
   },
   tiles: {
     base: "castle",

@@ -5,7 +5,7 @@ slug: "multiple_win_coditions"
 blurb: "Games with more than one target to hit"
 thumbnail: "multithumb.jpg"
 mainImage: "archerytournament.jpg"
-sort: 42
+sort: "multiple win conditions"
 updated: 2020-05-18
 ---
 

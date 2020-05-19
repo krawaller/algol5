@@ -20,6 +20,7 @@ export const useUI = (
     playing: mode === "gamelobby",
     restart: true,
   });
+  const prevBattleFrame = useRef(0);
   return useMemo(() => {
     if (mode === "gamelobby") {
       return hydrDemo ? demo2ui(hydrDemo, demoFrame) : emptyBattleUI;
@@ -30,13 +31,20 @@ export const useUI = (
         return battleUi;
       }
       if (mode === "history") {
-        return {
+        const historyUI = {
           ...battleUi,
           turnNumber: battle!.history[battleFrame].turn,
           player: battle!.history[battleFrame].player,
           board: battle!.history[battleFrame].board,
           instruction: battle!.history[battleFrame].description,
         };
+        if (prevBattleFrame.current !== battleFrame) {
+          if (prevBattleFrame.current !== battleFrame - 1) {
+            historyUI.board.anim = emptyAnim;
+          }
+          prevBattleFrame.current = battleFrame;
+        }
+        return historyUI;
       }
       return {
         ...battleUi,

@@ -1,10 +1,11 @@
-import { useMemo, useReducer } from "react";
+import { useMemo, useReducer, useEffect } from "react";
 import {
   BattleNavActions,
   BattleMode,
 } from "../../ui/src/helpers/battleActions";
 
 type Action =
+  | "reset"
   | BattleMode
   | ["load", string]
   | ["load", string, BattleMode | undefined]
@@ -17,6 +18,7 @@ const reducer = (state: State, action: Action): State => {
   if (action === "gamelobby") return ["gamelobby", sessionId];
   if (action === "history") return ["history", sessionId];
   if (action === "playing") return ["playing", sessionId];
+  if (action === "reset") return ["gamelobby", null];
   if (Array.isArray(action)) {
     if (action[0] === "load") return [action[2] || "battlelobby", action[1]];
     if (action[0] === "new")
@@ -25,11 +27,12 @@ const reducer = (state: State, action: Action): State => {
   throw new Error(`Unknown action: ${JSON.stringify(action || {})}`);
 };
 
-export const useBattleNavActions = () => {
+export const useBattleNavActions = (domain?: string) => {
   const [[mode, sessionId], dispatch] = useReducer(reducer, [
     "gamelobby",
     null,
   ]);
+  useEffect(() => dispatch("reset"), [domain]);
   const actions: BattleNavActions = useMemo(
     () => ({
       toHistory: () => dispatch("history"),

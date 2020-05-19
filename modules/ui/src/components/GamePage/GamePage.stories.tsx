@@ -6,7 +6,7 @@ import { GamePage } from ".";
 import { GameId, list } from "../../../../games/dist/list";
 
 import allGamePayloads from "../../../../payloads/dist/games";
-import { fakePageActions, fakeBattleNavActions } from "../../helpers";
+import { fakeAppActions, fakeBattleNavActions } from "../../helpers";
 
 storiesOf("GamePage", module).add(
   "Used for individual game pages in the app",
@@ -18,7 +18,7 @@ storiesOf("GamePage", module).add(
         key={gameId}
         gamePayload={payload}
         actions={{
-          ...fakePageActions,
+          ...fakeAppActions,
           ...fakeBattleNavActions,
         }}
         ctxt={{ mode: "gamelobby", sessionId: null }}

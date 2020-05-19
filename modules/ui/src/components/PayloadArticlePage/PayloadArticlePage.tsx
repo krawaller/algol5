@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { PageActions } from "../../helpers";
+import { AppActions } from "../../helpers";
 import css from "./PayloadArticlePage.cssProxy";
 import { Page } from "../Page";
 import { Breadcrumbs, Crumb } from "../Breadcrumbs";
@@ -8,7 +8,7 @@ import { AlgolArticle } from "../../../../types";
 import { PayloadArticle } from "../PayloadArticle/PayloadArticle";
 
 type PayloadArticlePageProps = {
-  actions: PageActions;
+  actions: AppActions;
   article: AlgolArticle;
   crumbs: Crumb[];
 };

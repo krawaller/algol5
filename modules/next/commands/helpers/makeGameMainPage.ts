@@ -15,15 +15,11 @@ import React, { Fragment, useMemo } from "react";
 import Head from "next/head";
 import payload from "../../../../payloads/dist/games/${gameId}";
 import { GamePage } from "../../../../ui/src/components/GamePage";
-import { pageActions, useBattleNavActions } from "../../../helpers";
+import { AlgolPage } from "../../../helpers/pageProps";
 
-export const Game = () => {
+export const Game: AlgolPage = props => {
+  const { ctxt, actions } = props;
   const preloadTags = payload.imgsToPreload.map(url => <link key={url} rel="preload" as="image" href={url} /> )
-  const [mode, sessionId, battleNavActions] = useBattleNavActions();
-  const actions = useMemo(() => ({ ...pageActions, ...battleNavActions }), [
-    battleNavActions,
-  ]);
-  const ctxt = useMemo(() => ({ sessionId, mode }), [sessionId, mode]);
   return (
     <Fragment>
       <Head>
@@ -37,6 +33,8 @@ export const Game = () => {
     </Fragment>
   );
 };
+
+Game.domain = "${gameId}";
 
 export default Game;
 `;

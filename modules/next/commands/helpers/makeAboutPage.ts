@@ -13,10 +13,10 @@ export const makeAboutPage = (article: AlgolArticle) => {
   
   import Head from "next/head";
   import { PayloadArticlePage } from "../../../../ui/src/components/PayloadArticlePage";
-  import { pageActions } from "../../../helpers";
+  import { AlgolPage } from "../../../helpers/pageProps";
   import article from "../../../../payloads/dist/articles/about/${article.id}";
   
-  export const Article = () => {
+  export const Article: AlgolPage = props => {
     const crumbs = [{ content: "About", url: "/about" }, { content: article.title }];
     return (
       <Fragment>
@@ -29,7 +29,7 @@ export const makeAboutPage = (article: AlgolArticle) => {
         <PayloadArticlePage
           crumbs={crumbs}
           article={article}
-          actions={pageActions}
+          actions={props.actions}
         />
       </Fragment>
     );

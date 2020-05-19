@@ -11,10 +11,10 @@ import React, { Fragment } from "react";
 
 import Head from "next/head";
 import { PayloadArticlePage } from "../../../../../ui/src/components/PayloadArticlePage";
-import { pageActions } from "../../../../helpers";
+import { AlgolPage } from "../../../../helpers/pageProps";
 import article from "../../../../../payloads/dist/articles/gamesRules/${meta.id}";
 
-export const Game = () => {
+export const GameRulePage: AlgolPage = props => {
   const crumbs = [
     { content: "Games", url: "/games" },
     { content: "${meta.name}", url: "/games/${meta.slug}" },
@@ -31,13 +31,13 @@ export const Game = () => {
       <PayloadArticlePage
         crumbs={crumbs}
         article={article}
-        actions={pageActions}
+        actions={props.actions}
       />
     </Fragment>
   );
 };
 
-export default Game;
+export default GameRulePage;
 `;
   return prettier.format(content, { filepath: "foo.ts" });
 };

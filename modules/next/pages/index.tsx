@@ -1,16 +1,16 @@
 import React, { Fragment } from "react";
 import Head from "next/head";
 
-import { pageActions } from "../helpers";
+import { AlgolPage } from "../helpers/pageProps";
 import { TitlePage } from "../../ui/src/components/TitlePage";
 
-const IndexPage = () => {
+const IndexPage: AlgolPage = props => {
   return (
     <Fragment>
       <Head>
         <title>Chessicals</title>
       </Head>
-      <TitlePage actions={pageActions} />
+      <TitlePage actions={props.actions} />
     </Fragment>
   );
 };

@@ -4,10 +4,11 @@ import React, { Fragment } from "react";
 
 import Head from "next/head";
 import { PayloadArticlePage } from "../../../../ui/src/components/PayloadArticlePage";
-import { pageActions } from "../../../helpers";
+import { AlgolPage } from "../../../helpers/pageProps";
+
 import article from "../../../../payloads/dist/articles/tags/irreversible";
 
-export const Article = () => {
+export const Article: AlgolPage = props => {
   const crumbs = [
     { content: "Tags", url: "/tags" },
     { content: article.title }
@@ -24,7 +25,7 @@ export const Article = () => {
       <PayloadArticlePage
         crumbs={crumbs}
         article={article}
-        actions={pageActions}
+        actions={props.actions}
       />
     </Fragment>
   );

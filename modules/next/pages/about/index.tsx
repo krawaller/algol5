@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import Head from "next/head";
 
-import { pageActions } from "../../helpers";
+import { AlgolPage } from "../../helpers/pageProps";
 import { PayloadArticleListPage } from "../../../ui/src/components/PayloadArticleListPage";
 import about from "../../../payloads/dist/listings/about";
 
@@ -9,7 +9,7 @@ import about from "../../../payloads/dist/listings/about";
 
 const crumbs = [{ content: "About" }];
 
-const IndexPage = () => {
+const AboutIndexPage: AlgolPage = props => {
   return (
     <Fragment>
       <Head>
@@ -17,7 +17,7 @@ const IndexPage = () => {
       </Head>
       <PayloadArticleListPage
         crumbs={crumbs}
-        actions={pageActions}
+        actions={props.actions}
         title="About Chessicals"
         list={about}
       />
@@ -25,4 +25,4 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default AboutIndexPage;

@@ -3,7 +3,7 @@
  */
 
 import React, { FunctionComponent, Fragment } from "react";
-import { PageActions } from "../../helpers";
+import { AppActions } from "../../helpers";
 import { list } from "../../../../games/dist/list";
 import { Page } from "../Page";
 import base64TitlePic from "../../../dist/base64/title.png.proxy";
@@ -12,7 +12,7 @@ import { ButtonGroup } from "../ButtonGroup";
 import { Link } from "../Link";
 
 type TitlePageProps = {
-  actions: PageActions;
+  actions: AppActions;
 };
 
 export const TitlePage: FunctionComponent<TitlePageProps> = props => {

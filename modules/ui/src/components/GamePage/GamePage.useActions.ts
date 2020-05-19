@@ -7,7 +7,7 @@ import {
   AlgolStaticGameAPI,
   AlgolBattle,
 } from "../../../../types";
-import { PageActions, BattleNavActions } from "../../helpers";
+import { AppActions, BattleNavActions } from "../../helpers";
 import { parseSeed } from "../../../../encoding/src/seed";
 import {
   importSessionFromBattle,
@@ -18,7 +18,7 @@ import {
 
 type UseActionsOpts = {
   battleActions: BattleActions;
-  pageActions: PageActions & BattleNavActions;
+  pageActions: AppActions & BattleNavActions;
   setErrorReport: (err: AlgolErrorReport) => void;
   api: AlgolStaticGameAPI;
 };

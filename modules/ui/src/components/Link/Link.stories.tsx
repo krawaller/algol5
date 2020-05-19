@@ -3,10 +3,10 @@ import { storiesOf } from "@storybook/react";
 import { select } from "@storybook/addon-knobs";
 
 import { Link } from ".";
-import { PageActions } from "../../helpers";
+import { AppActions } from "../../helpers";
 
 storiesOf("Link", module).add("A common Link component", () => {
-  const actions: PageActions = {
+  const actions: AppActions = {
     prefetch: (url: string) => console.log("Prefetch", url),
     navTo: (url: string) => console.log("Nav to", url),
   };

@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import Head from "next/head";
 
-import { pageActions } from "../../helpers";
+import { AlgolPage } from "../../helpers/pageProps";
 import { PayloadArticleListPage } from "../../../ui/src/components/PayloadArticleListPage";
 import tags from "../../../payloads/dist/listings/tags";
 
@@ -9,7 +9,7 @@ import tags from "../../../payloads/dist/listings/tags";
 
 const crumbs = [{ content: "Tags" }];
 
-const IndexPage = () => {
+const TagIndexPage: AlgolPage = props => {
   return (
     <Fragment>
       <Head>
@@ -17,7 +17,7 @@ const IndexPage = () => {
       </Head>
       <PayloadArticleListPage
         crumbs={crumbs}
-        actions={pageActions}
+        actions={props.actions}
         title="Tags"
         list={tags}
       />
@@ -25,4 +25,4 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default TagIndexPage;

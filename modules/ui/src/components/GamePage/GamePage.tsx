@@ -11,9 +11,8 @@ import { Page } from "../Page";
 import { BattleLanding } from "../BattleLanding";
 import { GameLanding } from "../GameLanding";
 import { BattleHistory } from "../BattleHistory";
-import { PageActions, BattleNavActions } from "../../helpers";
+import { AppActions, BattleNavActions } from "../../helpers";
 import { useUI } from "./GamePage.useUI";
-import { useMode } from "./GamePage.useMode";
 import { useBattle } from "./GamePage.useBattle";
 import { useActions } from "./GamePage.useActions";
 import { Breadcrumbs, Crumb } from "../Breadcrumbs";
@@ -23,18 +22,18 @@ import { getLatestSessionId } from "../../../../local/src";
 import { BattleMode } from "../../helpers/battleActions";
 
 type GamePageProps = {
-  actions: PageActions & BattleNavActions;
+  actions: AppActions & BattleNavActions;
   gamePayload: AlgolGamePayload;
-  ctxt: { sessionId: string | null; mode: BattleMode };
+  ctxt: { sessionId?: string | null; mode?: BattleMode };
 };
 
 export const GamePage = (props: GamePageProps) => {
   const { actions: pageActions, gamePayload, ctxt } = props;
-  const { mode: givenMode, sessionId } = ctxt;
+  const { mode: givenMode = "gamelobby", sessionId } = ctxt;
   const { api, graphics, meta, demo, rules } = gamePayload;
   const [{ battle, frame, session }, battleActions] = useBattle(
     api,
-    sessionId,
+    sessionId as string,
     pageActions.toSession
   );
   const [errorReport, setErrorReport] = useState<AlgolErrorReport>();

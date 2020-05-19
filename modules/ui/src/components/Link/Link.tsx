@@ -6,11 +6,11 @@ import React, {
 } from "react";
 import classNames from "classnames";
 import css from "./Link.cssProxy";
-import { PageActions } from "../../helpers";
+import { AppActions } from "../../helpers";
 import { Button } from "../Button";
 
 type LinkProps = {
-  actions?: PageActions;
+  actions?: AppActions;
   url: string;
   styleMode?: "asButton" | "asBigButton" | "link" | "none";
   text?: string;

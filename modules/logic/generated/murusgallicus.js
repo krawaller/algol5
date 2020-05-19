@@ -889,6 +889,7 @@ const game = {
       for (let LOOPPOS in ARTIFACTS.madewalls) {
         anim.enterFrom[LOOPPOS] = MARKS.selecttower;
       }
+      anim.exitTo[MARKS.selecttower] = MARKS.selectmove;
       for (let LOOPPOS in ARTIFACTS.madetowers) {
         anim.ghosts.push([MARKS.selecttower, LOOPPOS, "pawn", 1]);
       }
@@ -1005,6 +1006,7 @@ const game = {
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
       anim.ghosts.push([MARKS.selecttower, MARKS.selectcrush, "pawn", 1]);
+      anim.exitTo[MARKS.selecttower] = MARKS.selectcrush;
       {
         let unitid = (UNITLAYERS.units[MARKS.selecttower] || {}).id;
         if (unitid) {
@@ -1113,6 +1115,7 @@ const game = {
       for (let LOOPPOS in ARTIFACTS.madewalls) {
         anim.enterFrom[LOOPPOS] = MARKS.selecttower;
       }
+      anim.exitTo[MARKS.selecttower] = MARKS.selectmove;
       for (let LOOPPOS in ARTIFACTS.madetowers) {
         anim.ghosts.push([MARKS.selecttower, LOOPPOS, "pawn", 2]);
       }
@@ -1229,6 +1232,7 @@ const game = {
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
       anim.ghosts.push([MARKS.selecttower, MARKS.selectcrush, "pawn", 2]);
+      anim.exitTo[MARKS.selecttower] = MARKS.selectcrush;
       {
         let unitid = (UNITLAYERS.units[MARKS.selecttower] || {}).id;
         if (unitid) {
@@ -1337,6 +1341,7 @@ const game = {
       for (let LOOPPOS in ARTIFACTS.madewalls) {
         anim.enterFrom[LOOPPOS] = MARKS.selecttower;
       }
+      anim.exitTo[MARKS.selecttower] = MARKS.selectmove;
       for (let LOOPPOS in ARTIFACTS.madetowers) {
         anim.ghosts.push([MARKS.selecttower, LOOPPOS, "pawn", 1]);
       }
@@ -1453,6 +1458,7 @@ const game = {
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
       anim.ghosts.push([MARKS.selecttower, MARKS.selectcrush, "pawn", 1]);
+      anim.exitTo[MARKS.selecttower] = MARKS.selectcrush;
       {
         let unitid = (UNITLAYERS.units[MARKS.selecttower] || {}).id;
         if (unitid) {
@@ -1764,6 +1770,7 @@ const game = {
       for (let LOOPPOS in ARTIFACTS.madewalls) {
         anim.enterFrom[LOOPPOS] = MARKS.selecttower;
       }
+      anim.exitTo[MARKS.selecttower] = MARKS.selectmove;
       for (let LOOPPOS in ARTIFACTS.madetowers) {
         anim.ghosts.push([MARKS.selecttower, LOOPPOS, "pawn", 2]);
       }
@@ -1880,6 +1887,7 @@ const game = {
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
       anim.ghosts.push([MARKS.selecttower, MARKS.selectcrush, "pawn", 2]);
+      anim.exitTo[MARKS.selecttower] = MARKS.selectcrush;
       {
         let unitid = (UNITLAYERS.units[MARKS.selecttower] || {}).id;
         if (unitid) {

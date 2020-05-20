@@ -1,7 +1,7 @@
 const fs = require("fs-extra");
 const path = require("path");
 
-const support = ["png", "svg"];
+const support = ["png", "svg", "jpg"];
 
 const img2data = f => {
   const ext = path.extname(f).substr(1);

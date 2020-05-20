@@ -1,5 +1,4 @@
 import React, { FunctionComponent, ReactNode, useEffect } from "react";
-import Div100vh from "react-div-100vh";
 import css from "./Page.cssProxy";
 import { AlgolError, AlgolErrorReport } from "../../../../types";
 
@@ -26,10 +25,10 @@ export const Page: FunctionComponent<PageProps> = props => {
     }
   }, [errorReport]);
   return (
-    <Div100vh className={css.pageContainer}>
+    <div className={css.pageContainer}>
       <div className={css.pageStrip}>{strip}</div>
       <div className={css.pageTop}>{top}</div>
       <div className={css.pageBody}>{body}</div>
-    </Div100vh>
+    </div>
   );
 };

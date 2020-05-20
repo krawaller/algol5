@@ -1,32 +1,8 @@
-body,
-#__next {
-  position: fixed;
-  overflow: hidden;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  background-color: #9f9382;
-}
-
-body.sb-show-main #root {
-  /* for Storybook */
-  background-color: white;
-}
-
 .pageContainer {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-}
-
-@media (min-width: 450px) {
-  .pageContainer {
-    width: 450px;
-    max-height: 800px;
-  }
 }
 
 .pageTop {

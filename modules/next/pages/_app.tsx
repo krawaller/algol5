@@ -1,5 +1,5 @@
 import { AppProps } from "next/app";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Shell } from "../../ui/src/components/Shell";
 import { appActions } from "../helpers/appActions";
 import { useBattleNavActions, AlgolPage } from "../helpers";
@@ -7,7 +7,8 @@ import { useBattleNavActions, AlgolPage } from "../helpers";
 function MyApp({ Component, pageProps }: AppProps) {
   const Comp = Component as AlgolPage;
   const [mode, sessionId, battleNavActions] = useBattleNavActions(Comp.domain);
-  const [nav, setNav] = useState();
+  const [nav, setNav] = useState(Comp.nav);
+  useEffect(() => setNav(Comp.nav), [Comp]);
   const actions = useMemo(
     () => ({ ...appActions, ...battleNavActions, setNav }),
     [battleNavActions]

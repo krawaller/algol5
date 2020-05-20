@@ -12,7 +12,7 @@ type Dir = "up" | "down" | "same";
 type Pos = "nearer" | "further" | "same";
 
 export type NavbarProps = {
-  nav: AlgolNav;
+  nav?: AlgolNav;
 };
 
 type NavbarState = {
@@ -26,7 +26,11 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
     dir: "same",
   });
   const { nav } = props;
-  const { crumbs, links } = nav;
+  const { crumbs, links, key } = nav || {
+    crumbs: [],
+    links: [],
+    key: Math.random(),
+  };
   const count = crumbs.length;
   useEffect(
     () =>
@@ -36,7 +40,6 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
       }),
     [count]
   );
-  const key = links.map(b => b.title).join("_");
   return (
     <div className={css.navbarContainer}>
       <TransitionGroup
@@ -51,7 +54,7 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
               return null;
             }
             const pos = whereAmI(status, dir);
-            console.log(key, status, dir, pos);
+            //console.log(key, status, dir, pos);
             return (
               <div className={whatsMyClass(status, pos)}>
                 <NavbarList buttons={links} />

@@ -50,6 +50,7 @@
   user-select: none;
   font-family: verdana;
   margin: 0 6px;
+  pointer-events: all;
 }
 
 .navbarButton:hover {

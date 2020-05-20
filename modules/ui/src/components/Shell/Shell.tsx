@@ -13,7 +13,9 @@ export const Shell: FunctionComponent<ShellProps> = props => {
   return (
     <Div100vh className={css.shellContainer}>
       {children}
-      <div className={css.shellNav}>{nav && <Navbar nav={nav}></Navbar>}</div>
+      <div className={css.shellNav}>
+        <Navbar nav={nav}></Navbar>
+      </div>
     </Div100vh>
   );
 };

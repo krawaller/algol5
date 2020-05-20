@@ -6,13 +6,13 @@ import Transition, {
 } from "react-transition-group/Transition";
 import css from "./Navbar.cssProxy";
 import { NavbarList } from "./Navbar.List";
+import { AlgolNav } from "../../helpers";
 
 type Dir = "up" | "down" | "same";
 type Pos = "nearer" | "further" | "same";
 
 export type NavbarProps = {
-  crumbs: { text: string; onClick?: () => void }[];
-  buttons: { text: string; onClick?: () => void }[];
+  nav: AlgolNav;
 };
 
 type NavbarState = {
@@ -25,7 +25,8 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
     depth: -1,
     dir: "same",
   });
-  const { buttons, crumbs } = props;
+  const { nav } = props;
+  const { crumbs, links } = nav;
   const count = crumbs.length;
   useEffect(
     () =>
@@ -35,7 +36,7 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
       }),
     [count]
   );
-  const key = buttons.map(b => b.text).join("_");
+  const key = links.map(b => b.title).join("_");
   return (
     <div className={css.navbarContainer}>
       <TransitionGroup
@@ -53,7 +54,7 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
             console.log(key, status, dir, pos);
             return (
               <div className={whatsMyClass(status, pos)}>
-                <NavbarList buttons={buttons} />
+                <NavbarList buttons={links} />
               </div>
             );
           }}

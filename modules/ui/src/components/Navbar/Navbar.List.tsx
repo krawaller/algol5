@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from "react";
 import css from "./Navbar.cssProxy";
 import { NavbarButton } from "./Navbar.Button";
+import { AlgolNav } from "../../helpers";
 
 type NavbarListProps = {
-  buttons: { text: string; onClick?: () => void }[];
+  buttons: AlgolNav["links"];
 };
 
 export const NavbarList: FunctionComponent<NavbarListProps> = props => {
@@ -11,7 +12,7 @@ export const NavbarList: FunctionComponent<NavbarListProps> = props => {
   return (
     <div className={css.navbarList}>
       {buttons.map(btn => (
-        <NavbarButton key={btn.text} {...btn} />
+        <NavbarButton key={btn.title} {...btn} />
       ))}
     </div>
   );

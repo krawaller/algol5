@@ -1,5 +1,6 @@
 import { AppProps } from "next/app";
-import { useMemo, useState, useEffect } from "react";
+import Head from "next/head";
+import { useMemo, useState, useEffect, Fragment } from "react";
 import { Shell } from "../../ui/src/components/Shell";
 import { AlgolPage } from "../../ui/src/helpers/AlgolPage";
 import { appActions } from "../helpers/appActions";
@@ -15,10 +16,33 @@ function MyApp({ Component, pageProps }: AppProps) {
     [battleNavActions]
   );
   const ctxt = useMemo(() => ({ sessionId, mode }), [sessionId, mode]);
+  const preloads = useMemo(
+    () =>
+      (Comp.preloadImages || []).map(url => (
+        <link key={url} rel="preload" as="image" href={url} />
+      )),
+    [Comp.preloadImages]
+  );
   return (
-    <Shell nav={nav}>
-      <Component {...pageProps} actions={actions} ctxt={ctxt} />
-    </Shell>
+    <Fragment>
+      <Head>
+        {Comp.mainImage && (
+          <meta property="og:image" content={Comp.mainImage} />
+        )}
+        {Comp.metaDesc && (
+          <meta property="og:description" content={Comp.metaDesc} />
+        )}
+        {Comp.title && <title>{Comp.title}</title>}
+        {Comp.metaTitle ||
+          (Comp.title && (
+            <meta property="og:title" content={Comp.metaTitle || Comp.title} />
+          ))}
+        {preloads.length > 0 && preloads}
+      </Head>
+      <Shell nav={nav}>
+        <Component {...pageProps} actions={actions} ctxt={ctxt} />
+      </Shell>
+    </Fragment>
   );
 }
 

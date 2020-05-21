@@ -1,28 +1,24 @@
-import React, { Fragment } from "react";
-import Head from "next/head";
+import React from "react";
 
 import { AlgolPage } from "../../../ui/src/helpers/AlgolPage";
 import { PayloadArticleListPage } from "../../../ui/src/components/PayloadArticleListPage";
 import news from "../../../payloads/dist/listings/news";
 
-// TODO - metadata!
+// TODO - more metadata!
 
 const crumbs = [{ content: "News" }];
 
 const NewsIndexPage: AlgolPage = props => {
   return (
-    <Fragment>
-      <Head>
-        <title>Chessicals</title>
-      </Head>
-      <PayloadArticleListPage
-        crumbs={crumbs}
-        actions={props.actions}
-        title="News"
-        list={news}
-      />
-    </Fragment>
+    <PayloadArticleListPage
+      crumbs={crumbs}
+      actions={props.actions}
+      title="News"
+      list={news}
+    />
   );
 };
+
+NewsIndexPage.title = "News";
 
 export default NewsIndexPage;

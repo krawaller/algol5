@@ -9,4 +9,9 @@ export type AlgolPageProps = {
 export type AlgolPage = FunctionComponent<AlgolPageProps> & {
   domain?: string;
   nav?: AlgolNav;
+  title?: string;
+  metaTitle?: string;
+  mainImage?: string;
+  metaDesc?: string;
+  preloadImages?: string[];
 };

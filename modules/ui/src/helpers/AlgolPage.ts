@@ -1,9 +1,4 @@
-import {
-  AppActions,
-  BattleNavActions,
-  BattleMode,
-  AlgolNav,
-} from "../../ui/src/helpers";
+import { AppActions, BattleNavActions, BattleMode, AlgolNav } from ".";
 import { FunctionComponent } from "react";
 
 export type AlgolPageProps = {

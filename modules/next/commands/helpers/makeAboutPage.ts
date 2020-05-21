@@ -13,7 +13,7 @@ export const makeAboutPage = (article: AlgolArticle) => {
   
   import Head from "next/head";
   import { PayloadArticlePage } from "../../../../ui/src/components/PayloadArticlePage";
-  import { AlgolPage } from "../../../helpers/pageProps";
+  import { AlgolPage } from "../../../../ui/src/helpers/algolPage";
   import article from "../../../../payloads/dist/articles/about/${article.id}";
   
   export const Article: AlgolPage = props => {

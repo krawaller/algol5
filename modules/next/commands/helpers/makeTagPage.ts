@@ -13,7 +13,7 @@ export const makeTagPage = (article: AlgolArticle) => {
   
   import Head from "next/head";
   import { PayloadArticlePage } from "../../../../ui/src/components/PayloadArticlePage";
-  import { AlgolPage } from "../../../helpers/pageProps";
+  import { AlgolPage } from "../../../../ui/src/helpers/algolPage";
   
   import article from "../../../../payloads/dist/articles/tags/${article.id}";
   

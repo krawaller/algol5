@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import Head from "next/head";
 
-import { AlgolPage } from "../helpers/pageProps";
+import { AlgolPage } from "../../ui/src/helpers/AlgolPage";
 import { TitlePage } from "../../ui/src/components/TitlePage";
 
 const IndexPage: AlgolPage = props => {

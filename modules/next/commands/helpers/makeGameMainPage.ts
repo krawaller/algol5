@@ -15,7 +15,7 @@ import React, { Fragment, useMemo } from "react";
 import Head from "next/head";
 import payload from "../../../../payloads/dist/games/${gameId}";
 import { GamePage } from "../../../../ui/src/components/GamePage";
-import { AlgolPage } from "../../../helpers/pageProps";
+import { AlgolPage } from "../../../../ui/src/helpers/algolPage";
 
 export const Game: AlgolPage = props => {
   const { ctxt, actions } = props;

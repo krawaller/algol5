@@ -1,8 +1,9 @@
 import { AppProps } from "next/app";
 import { useMemo, useState, useEffect } from "react";
 import { Shell } from "../../ui/src/components/Shell";
+import { AlgolPage } from "../../ui/src/helpers/AlgolPage";
 import { appActions } from "../helpers/appActions";
-import { useBattleNavActions, AlgolPage } from "../helpers";
+import { useBattleNavActions } from "../helpers";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const Comp = Component as AlgolPage;

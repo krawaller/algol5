@@ -5,10 +5,10 @@ import { AlgolNavLink } from "../../helpers";
 type NavbarButtonProps = AlgolNavLink;
 
 export const NavbarButton: FunctionComponent<NavbarButtonProps> = props => {
-  const { title, onClick, desc } = props;
+  const { title, onClick, desc, url } = props;
   return (
-    <div className={css.navbarButton} title={desc} onClick={onClick}>
+    <a href={url} className={css.navbarButton} title={desc} onClick={onClick}>
       {title}
-    </div>
+    </a>
   );
 };

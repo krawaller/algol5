@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from "react";
 import css from "./Navbar.cssProxy";
-import { AlgolNav } from "../../helpers";
+import { AlgolNavLink } from "../../helpers";
 
-type NavbarButtonProps = AlgolNav["links"][number];
+type NavbarButtonProps = AlgolNavLink;
 
 export const NavbarButton: FunctionComponent<NavbarButtonProps> = props => {
   const { title, onClick, desc } = props;

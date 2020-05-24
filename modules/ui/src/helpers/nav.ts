@@ -1,5 +1,12 @@
 export type AlgolNav = {
   key: string;
-  crumbs: { title: string; desc: string; onClick: () => void }[];
-  links: { title: string; desc: string; onClick: () => void }[];
+  crumbs: AlgolNavLink[];
+  links: AlgolNavLink[];
+};
+
+export type AlgolNavLink = {
+  title: string;
+  desc: string;
+  url?: string;
+  onClick?: () => void;
 };

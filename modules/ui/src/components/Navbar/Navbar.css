@@ -42,6 +42,7 @@
   border: 1px solid blue;
   border-radius: 3px;
   background-color: rgba(38, 92, 206, 0.324);
+  text-decoration: none;
   display: inline-block;
   cursor: pointer;
   padding: 0 3px;
@@ -51,6 +52,16 @@
   font-family: verdana;
   margin: 0 6px;
   pointer-events: all;
+}
+
+.navbarBackButtonContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.navbarBackButtonContainer .navbarButton {
+  min-width: 18px;
 }
 
 .navbarButton:hover {

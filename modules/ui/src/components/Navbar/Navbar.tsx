@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
+import React, { FunctionComponent, useState, useEffect, useMemo } from "react";
 import classNames from "classnames";
 import { TransitionGroup } from "react-transition-group";
 import Transition, {
@@ -7,6 +7,7 @@ import Transition, {
 import css from "./Navbar.cssProxy";
 import { NavbarList } from "./Navbar.List";
 import { AlgolNav } from "../../helpers";
+import { NavbarButton } from "./Navbar.Button";
 
 type Dir = "up" | "down" | "same";
 type Pos = "nearer" | "further" | "same";
@@ -40,6 +41,19 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
       }),
     [count]
   );
+  const backBtn = useMemo(
+    () =>
+      count ? (
+        <div className={css.navbarBackButtonContainer}>
+          <NavbarButton
+            title="↑"
+            desc="go back"
+            onClick={crumbs[count - 1].onClick}
+          />
+        </div>
+      ) : null,
+    [crumbs]
+  );
   return (
     <div className={css.navbarContainer}>
       <TransitionGroup
@@ -57,6 +71,7 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
             //console.log(key, status, dir, pos);
             return (
               <div className={whatsMyClass(status, pos)}>
+                {backBtn}
                 <NavbarList buttons={links} />
               </div>
             );

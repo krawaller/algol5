@@ -6,7 +6,7 @@ import Transition, {
 } from "react-transition-group/Transition";
 import css from "./Navbar.cssProxy";
 import { NavbarList } from "./Navbar.List";
-import { AlgolNav } from "../../helpers";
+import { AlgolNav, AppActions } from "../../helpers";
 import { NavbarButton } from "./Navbar.Button";
 
 type Dir = "up" | "down" | "same";
@@ -14,6 +14,7 @@ type Pos = "nearer" | "further" | "same";
 
 export type NavbarProps = {
   nav?: AlgolNav;
+  actions: AppActions;
 };
 
 type NavbarState = {
@@ -26,7 +27,7 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
     depth: -1,
     dir: "same",
   });
-  const { nav } = props;
+  const { nav, actions } = props;
   const { crumbs, links, key } = nav || {
     crumbs: [],
     links: [],
@@ -46,9 +47,8 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
       count ? (
         <div className={css.navbarBackButtonContainer}>
           <NavbarButton
-            title="↑"
-            desc="go back"
-            onClick={crumbs[count - 1].onClick}
+            link={{ ...crumbs[count - 1], title: "↑", desc: "Go back" }}
+            actions={actions}
           />
         </div>
       ) : null,
@@ -68,11 +68,10 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
               return null;
             }
             const pos = whereAmI(status, dir);
-            //console.log(key, status, dir, pos);
             return (
               <div className={whatsMyClass(status, pos)}>
                 {backBtn}
-                <NavbarList buttons={links} />
+                <NavbarList buttons={links} actions={actions} />
               </div>
             );
           }}

@@ -39,7 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           ))}
         {preloads.length > 0 && preloads}
       </Head>
-      <Shell nav={nav}>
+      <Shell nav={nav} actions={actions}>
         <Component {...pageProps} actions={actions} ctxt={ctxt} />
       </Shell>
     </Fragment>

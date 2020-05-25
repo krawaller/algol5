@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo, useCallback } from "react";
+import React, { FunctionComponent, useMemo, SyntheticEvent } from "react";
 import css from "./Navbar.cssProxy";
 import { AlgolNavLink, AppActions } from "../../helpers";
 
@@ -11,7 +11,15 @@ export const NavbarButton: FunctionComponent<NavbarButtonProps> = props => {
   const { actions, link } = props;
   const { title, onClick, desc, url } = link;
   const handleClick = useMemo(
-    () => (onClick ? onClick : url ? () => actions.navTo(url) : () => {}),
+    () =>
+      onClick
+        ? onClick
+        : url
+        ? (e: SyntheticEvent) => {
+            e && e.preventDefault();
+            actions.navTo(url);
+          }
+        : () => {},
     [url, onClick, actions.navTo]
   );
   return (

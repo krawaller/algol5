@@ -1,24 +1,12 @@
-import React from "react";
-
-import { AlgolPage } from "../../../ui/src/helpers/AlgolPage";
-import { PayloadArticleListPage } from "../../../ui/src/components/PayloadArticleListPage";
+import { makePayloadArticleListPage } from "../../../ui/src/components/PayloadArticleListPage";
 import news from "../../../payloads/dist/listings/news";
+import { newsIndexNav } from "../../../common/nav/newsIndexNav";
 
 // TODO - more metadata!
 
-const crumbs = [{ content: "News" }];
-
-const NewsIndexPage: AlgolPage = props => {
-  return (
-    <PayloadArticleListPage
-      crumbs={crumbs}
-      actions={props.actions}
-      title="News"
-      list={news}
-    />
-  );
-};
+const NewsIndexPage = makePayloadArticleListPage(news, "News");
 
 NewsIndexPage.title = "News";
+NewsIndexPage.nav = newsIndexNav;
 
 export default NewsIndexPage;

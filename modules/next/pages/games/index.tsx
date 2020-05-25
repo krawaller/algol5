@@ -1,24 +1,13 @@
-import React from "react";
-
-import { AlgolPage } from "../../../ui/src/helpers/AlgolPage";
-import { PayloadArticleListPage } from "../../../ui/src/components/PayloadArticleListPage";
+import { makePayloadArticleListPage } from "../../../ui/src/components/PayloadArticleListPage";
 import games from "../../../payloads/dist/listings/games";
+import { gameIndexNav } from "../../../common/nav/gameIndexNav";
 
 // TODO - more metadata!
 
-const crumbs = [{ content: "Games" }];
+const title = `All ${games.length} games`;
 
-const GameIndexPage: AlgolPage = props => {
-  return (
-    <PayloadArticleListPage
-      crumbs={crumbs}
-      actions={props.actions}
-      title={`All ${games.length} games`}
-      list={games}
-    />
-  );
-};
-
-GameIndexPage.title = `All ${games.length} games`;
+const GameIndexPage = makePayloadArticleListPage(games, title);
+GameIndexPage.title = title;
+GameIndexPage.nav = gameIndexNav;
 
 export default GameIndexPage;

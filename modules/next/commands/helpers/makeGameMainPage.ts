@@ -12,6 +12,7 @@ import React from "react";
 import payload from "../../../../payloads/dist/games/${gameId}";
 import { GamePage } from "../../../../ui/src/components/GamePage";
 import { AlgolPage } from "../../../../ui/src/helpers/algolPage";
+import { makeGameNav } from "../../../../common/nav/makeGameNav";
 
 export const Game: AlgolPage = props => {
   const { ctxt, actions } = props;
@@ -30,6 +31,7 @@ Game.metaDesc = "Play the abstract board game ${
 Game.metaTitle = "Play ${def.meta.name} online"
 Game.title = "${def.meta.name}"
 Game.preloadImages = payload.imgsToPreload
+Game.nav = makeGameNav(payload.meta)
 
 export default Game;
 `;

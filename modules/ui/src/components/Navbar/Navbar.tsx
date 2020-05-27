@@ -45,15 +45,14 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
   const backBtn = useMemo(
     () =>
       count ? (
-        <div className={css.navbarBackButtonContainer}>
-          <NavbarButton
-            link={{ ...crumbs[count - 1], title: "↑", desc: "Go back" }}
-            actions={actions}
-          />
-        </div>
+        <NavbarButton
+          link={{ ...crumbs[count - 1], title: "↑", desc: "Go back" }}
+          actions={actions}
+        />
       ) : null,
     [crumbs]
   );
+  const mapBtn = null;
   return (
     <div className={css.navbarContainer}>
       <TransitionGroup
@@ -70,8 +69,11 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
             const pos = whereAmI(status, dir);
             return (
               <div className={whatsMyClass(status, pos)}>
-                {backBtn}
-                <NavbarList buttons={links} actions={actions} />
+                <div className={css.navbarListOuter}>
+                  <div className={css.navbarBackButtonContainer}>{backBtn}</div>
+                  <NavbarList buttons={links} actions={actions} />
+                  <div className={css.navbarMapButtonContainer}>{mapBtn}</div>
+                </div>
               </div>
             );
           }}

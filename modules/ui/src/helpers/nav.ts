@@ -2,6 +2,7 @@ export type AlgolNav = {
   key: string;
   crumbs: AlgolNavLink[];
   links: AlgolNavLink[];
+  me: AlgolNavLink;
 };
 
 export type AlgolNavLink = {

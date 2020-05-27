@@ -5,5 +5,6 @@ import { tagIndexLink } from "./tagIndexLink";
 export const tagIndexNav: AlgolNav = {
   key: "tagindexnav",
   links: [],
-  crumbs: [homeLink, tagIndexLink],
+  crumbs: [homeLink],
+  me: tagIndexLink,
 };

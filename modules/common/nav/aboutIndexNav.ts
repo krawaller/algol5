@@ -5,5 +5,6 @@ import { aboutIndexLink } from "./aboutIndexLink";
 export const aboutIndexNav: AlgolNav = {
   key: "aboutindexnav",
   links: [],
-  crumbs: [homeLink, aboutIndexLink],
+  me: aboutIndexLink,
+  crumbs: [homeLink],
 };

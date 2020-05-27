@@ -5,5 +5,6 @@ import { newsIndexLink } from "./newsIndexLink";
 export const newsIndexNav: AlgolNav = {
   key: "newsindexnav",
   links: [],
-  crumbs: [homeLink, newsIndexLink],
+  crumbs: [homeLink],
+  me: newsIndexLink,
 };

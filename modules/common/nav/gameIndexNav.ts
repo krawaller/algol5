@@ -5,5 +5,6 @@ import { gameIndexLink } from "./gameIndexLink";
 export const gameIndexNav: AlgolNav = {
   key: "gameindexnav",
   links: [],
-  crumbs: [homeLink, gameIndexLink],
+  crumbs: [homeLink],
+  me: gameIndexLink,
 };

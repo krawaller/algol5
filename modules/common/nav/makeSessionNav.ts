@@ -21,6 +21,8 @@ type MakeSessionNavOpts = {
 export const makeSessionNav = (opts: MakeSessionNavOpts): AlgolNav => {
   const { battleNavActions, session, meta, mode } = opts;
   const gameNav = makeGameNav(meta);
+  gameNav.me.onClick = battleNavActions.toGameLobby;
+  delete gameNav.me.url;
   const crumbs = gameNav.crumbs.concat(gameNav.me);
   const lobbyLink = makeSessionLobbyLink(opts);
   const historyLink = makeSessionHistoryLink(battleNavActions);

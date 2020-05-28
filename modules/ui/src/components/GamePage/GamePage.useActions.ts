@@ -6,8 +6,9 @@ import {
   AlgolErrorReportLevel,
   AlgolStaticGameAPI,
   AlgolBattle,
+  AppActions,
+  BattleNavActions,
 } from "../../../../types";
-import { AppActions, BattleNavActions } from "../../helpers";
 import { parseSeed } from "../../../../encoding/src/seed";
 import {
   importSessionFromBattle,

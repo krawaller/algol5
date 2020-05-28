@@ -11,7 +11,7 @@ import React from "react";
 
 import payload from "../../../../payloads/dist/games/${gameId}";
 import { GamePage } from "../../../../ui/src/components/GamePage";
-import { AlgolPage } from "../../../../ui/src/helpers/algolPage";
+import { AlgolPage } from "../../../../types";
 import { makeGameNav } from "../../../../common/nav/makeGameNav";
 
 export const Game: AlgolPage = props => {

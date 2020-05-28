@@ -2,8 +2,13 @@
  * Used in the Next app as a "homepage" for the individual games.
  */
 
-import React, { ReactNode, useState } from "react";
-import { AlgolErrorReport, AlgolGamePayload, AppActions, BattleNavActions } from "../../../../types";
+import React, { ReactNode, useState, useEffect } from "react";
+import {
+  AlgolErrorReport,
+  AlgolGamePayload,
+  AppActions,
+  BattleNavActions,
+} from "../../../../types";
 import css from "./GamePage.cssProxy";
 
 import { Board } from "../Board";
@@ -14,11 +19,12 @@ import { BattleHistory } from "../BattleHistory";
 import { useUI } from "./GamePage.useUI";
 import { useBattle } from "./GamePage.useBattle";
 import { useActions } from "./GamePage.useActions";
-import { Breadcrumbs, Crumb } from "../Breadcrumbs";
 import { SessionViewSelector } from "../SessionViewSelector";
 import { BattleMove } from "../BattleMove";
 import { getLatestSessionId } from "../../../../local/src";
 import { BattleMode } from "../../../../types/page/battleActions";
+import { makeSessionNav } from "../../../../common/nav/makeSessionNav";
+import { makeGameNav } from "../../../../common/nav/makeGameNav";
 
 type GamePageProps = {
   actions: AppActions & BattleNavActions;
@@ -45,24 +51,24 @@ export const GamePage = (props: GamePageProps) => {
   const ui = useUI(api, battle, frame, demo, givenMode);
   const mode = battle ? givenMode : "gamelobby";
 
+  useEffect(
+    () =>
+      actions.setNav(
+        mode === "gamelobby"
+          ? makeGameNav(gamePayload.meta)
+          : makeSessionNav({
+              mode,
+              session: session!,
+              battleNavActions: actions,
+              meta: gamePayload.meta,
+            })
+      ),
+    [mode, actions.setNav]
+  );
+
   // TODO - maybe not read this on every render? move to state somewhere?
   const previousSessionId = getLatestSessionId(api.gameId);
 
-  const crumbs: Crumb[] = [
-    {
-      content: "Games",
-      url: "/games",
-    },
-    {
-      content: meta.name,
-      onClick: mode !== "gamelobby" ? actions.toGameLobby : undefined,
-    },
-  ];
-  if (mode !== "gamelobby") {
-    crumbs.push({
-      content: session!.id,
-    });
-  }
   let body: ReactNode;
   if (mode === "history") {
     // We are currently watching the history of a battle
@@ -124,11 +130,7 @@ export const GamePage = (props: GamePageProps) => {
           </div>
         </>
       }
-      strip={
-        <>
-          <Breadcrumbs crumbs={crumbs} actions={actions} />
-        </>
-      }
+      strip={null}
       body={body}
     />
   );

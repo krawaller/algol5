@@ -55,30 +55,34 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
   const mapBtn = null;
   return (
     <div className={css.navbarContainer}>
-      <TransitionGroup
-        childFactory={child =>
-          /* to ensure exiting comps get fresh dir */
-          React.cloneElement(child, { dir })
-        }
-      >
-        <Transition key={key} timeout={{ enter: 20, exit: 500 }}>
-          {(status: TransitionStatus, { dir }: { dir: Dir }) => {
-            if (status === "exited") {
-              return null;
-            }
-            const pos = whereAmI(status, dir);
-            return (
-              <div className={whatsMyClass(status, pos)}>
-                <div className={css.navbarListOuter}>
-                  <div className={css.navbarBackButtonContainer}>{backBtn}</div>
-                  <NavbarList buttons={links} actions={actions} />
-                  <div className={css.navbarMapButtonContainer}>{mapBtn}</div>
+      <div className={css.navbarBottom}>
+        <TransitionGroup
+          childFactory={child =>
+            /* to ensure exiting comps get fresh dir */
+            React.cloneElement(child, { dir })
+          }
+        >
+          <Transition key={key} timeout={{ enter: 20, exit: 500 }}>
+            {(status: TransitionStatus, { dir }: { dir: Dir }) => {
+              if (status === "exited") {
+                return null;
+              }
+              const pos = whereAmI(status, dir);
+              return (
+                <div className={whatsMyClass(status, pos)}>
+                  <div className={css.navbarListOuter}>
+                    <div className={css.navbarBackButtonContainer}>
+                      {backBtn}
+                    </div>
+                    <NavbarList buttons={links} actions={actions} />
+                    <div className={css.navbarMapButtonContainer}>{mapBtn}</div>
+                  </div>
                 </div>
-              </div>
-            );
-          }}
-        </Transition>
-      </TransitionGroup>
+              );
+            }}
+          </Transition>
+        </TransitionGroup>
+      </div>
     </div>
   );
 };

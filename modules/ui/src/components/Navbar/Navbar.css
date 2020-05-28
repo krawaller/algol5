@@ -1,17 +1,21 @@
 .navbarContainer {
-  height: 30px;
-  position: relative;
+  height: 100%;
+  padding-bottom: 5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  pointer-events: none;
 }
 
 .navbarInner {
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  position: absolute;
   transition: opacity 500ms ease, transform 500ms ease;
   transform: scale(1, 1);
   opacity: 1;
+  width: 100%;
+}
+
+.navbarBottom {
 }
 
 .navbarInnerDuringEntering {
@@ -20,6 +24,9 @@
 
 .navbarInnerDuringExiting {
   position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
   opacity: 0;
 }
 
@@ -47,6 +54,7 @@
 
 .navbarButton {
   border: 1px solid blue;
+  color: blue;
   border-radius: 3px;
   background-color: rgba(38, 92, 206, 0.324);
   text-decoration: none;
@@ -72,6 +80,10 @@
 
 .navbarButton:hover {
   background-color: rgba(38, 92, 206, 0.6);
+}
+
+.navbarButton:visited {
+  color: blue;
 }
 
 .navbarButton:active {

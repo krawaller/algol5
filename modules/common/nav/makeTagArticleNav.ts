@@ -1,11 +1,10 @@
 import { AlgolArticle, AlgolNav } from "../../types";
-import { homeLink } from "./homeLink";
-import { tagIndexLink } from "./tagIndexLink";
+import { tagIndexNav } from "./tagIndexNav";
 import { makeTagArticleLink } from "./makeTagArticleLink";
 
 export const makeTagArticleNav = (article: AlgolArticle): AlgolNav => ({
   key: `tag_${article.id}`,
-  crumbs: [homeLink, tagIndexLink],
+  crumbs: tagIndexNav.crumbs.concat(tagIndexNav.me),
   links: [],
   me: makeTagArticleLink(article),
 });

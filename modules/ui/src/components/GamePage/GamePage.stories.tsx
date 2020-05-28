@@ -6,7 +6,7 @@ import { GamePage } from ".";
 import { GameId, list } from "../../../../games/dist/list";
 
 import allGamePayloads from "../../../../payloads/dist/games";
-import { fakeAppActions, fakeBattleNavActions } from "../../helpers";
+import { fakeAppActions, fakeBattleNavActions } from "../../../../types";
 
 storiesOf("GamePage", module).add(
   "Used for individual game pages in the app",

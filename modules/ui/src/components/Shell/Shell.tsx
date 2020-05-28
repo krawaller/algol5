@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import Div100vh from "react-div-100vh";
 import css from "./Shell.cssProxy";
-import { AlgolNav, AppActions } from "../../helpers";
+import { AlgolNav, AppActions } from "../../../../types";
 import { Navbar } from "../Navbar";
 
 type ShellProps = {

@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from "react";
-import { AppActions } from "../../helpers";
 import css from "./PayloadArticlePage.cssProxy";
 import { Page } from "../Page";
 import { Breadcrumbs, Crumb } from "../Breadcrumbs";
 import { ScrollBox } from "../ScrollBox";
-import { AlgolArticle } from "../../../../types";
+import { AlgolArticle, AppActions } from "../../../../types";
 import { PayloadArticle } from "../PayloadArticle/PayloadArticle";
 
 type PayloadArticlePageProps = {

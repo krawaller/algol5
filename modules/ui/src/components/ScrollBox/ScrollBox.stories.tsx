@@ -18,7 +18,7 @@ storiesOf("ScrollBox", module).add("A common ScrollBox component", () => {
       }}
     >
       <ScrollBox>
-        <Markdown actions={{ navTo: () => {} }} html={rules.html} />
+        <Markdown actions={{ navTo: () => {}, prefetch: () => {} }} html={rules.html} />
       </ScrollBox>
     </div>
   );

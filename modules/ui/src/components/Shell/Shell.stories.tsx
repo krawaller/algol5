@@ -2,7 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 
 import { Shell } from ".";
-import { fakeAppActions } from "../../helpers";
+import { fakeAppActions } from "../../../../types";
 
 storiesOf("Shell", module).add("A common Shell component", () => {
   return (

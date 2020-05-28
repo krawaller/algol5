@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo, SyntheticEvent } from "react";
 import css from "./Navbar.cssProxy";
-import { AlgolNavLink, AppActions } from "../../helpers";
+import { AlgolNavLink, AppActions } from "../../../../types";
 
 type NavbarButtonProps = {
   actions: AppActions;

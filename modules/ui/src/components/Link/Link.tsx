@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import classNames from "classnames";
 import css from "./Link.cssProxy";
-import { AppActions } from "../../helpers";
+import { AppActions } from "../../../../types";
 import { Button } from "../Button";
 
 type LinkProps = {

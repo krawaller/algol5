@@ -1,4 +1,4 @@
-import { AlgolNav } from "../../ui/src/helpers";
+import { AlgolNav } from "../../types";
 import { homeLink } from "./homeLink";
 import { aboutIndexLink } from "./aboutIndexLink";
 

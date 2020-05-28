@@ -1,6 +1,5 @@
 import React from "react";
-import { AlgolListing } from "../../../../types";
-import { AlgolPage } from "../../helpers/AlgolPage";
+import { AlgolListing, AlgolPage } from "../../../../types";
 import { PayloadArticleListPage } from "./PayloadArticleListPage";
 
 export const makePayloadArticleListPage = (

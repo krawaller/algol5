@@ -1,8 +1,5 @@
 import { useMemo, useReducer, useEffect } from "react";
-import {
-  BattleNavActions,
-  BattleMode,
-} from "../../ui/src/helpers/battleActions";
+import { BattleNavActions, BattleMode } from "../../types";
 
 type Action =
   | "reset"

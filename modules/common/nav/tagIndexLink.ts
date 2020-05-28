@@ -1,4 +1,4 @@
-import { AlgolNavLink } from "../../ui/src/helpers";
+import { AlgolNavLink } from "../../types";
 
 export const tagIndexLink: AlgolNavLink = {
   title: "Tags",

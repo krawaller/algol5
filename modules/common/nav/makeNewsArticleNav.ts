@@ -1,5 +1,4 @@
-import { AlgolArticle } from "../../types";
-import { AlgolNav } from "../../ui/src/helpers";
+import { AlgolArticle, AlgolNav } from "../../types";
 import { homeLink } from "./homeLink";
 import { newsIndexLink } from "./newsIndexLink";
 import { makeNewsArticleLink } from "./makeNewsArticleLink";

@@ -3,7 +3,7 @@
  */
 
 import React, { ReactNode, useState } from "react";
-import { AlgolErrorReport, AlgolGamePayload } from "../../../../types";
+import { AlgolErrorReport, AlgolGamePayload, AppActions, BattleNavActions } from "../../../../types";
 import css from "./GamePage.cssProxy";
 
 import { Board } from "../Board";
@@ -11,7 +11,6 @@ import { Page } from "../Page";
 import { BattleLanding } from "../BattleLanding";
 import { GameLanding } from "../GameLanding";
 import { BattleHistory } from "../BattleHistory";
-import { AppActions, BattleNavActions } from "../../helpers";
 import { useUI } from "./GamePage.useUI";
 import { useBattle } from "./GamePage.useBattle";
 import { useActions } from "./GamePage.useActions";
@@ -19,7 +18,7 @@ import { Breadcrumbs, Crumb } from "../Breadcrumbs";
 import { SessionViewSelector } from "../SessionViewSelector";
 import { BattleMove } from "../BattleMove";
 import { getLatestSessionId } from "../../../../local/src";
-import { BattleMode } from "../../helpers/battleActions";
+import { BattleMode } from "../../../../types/page/battleActions";
 
 type GamePageProps = {
   actions: AppActions & BattleNavActions;

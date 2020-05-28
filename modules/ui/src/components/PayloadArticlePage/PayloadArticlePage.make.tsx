@@ -1,6 +1,5 @@
 import React from "react";
-import { AlgolArticle } from "../../../../types";
-import { AlgolPage } from "../../helpers/AlgolPage";
+import { AlgolArticle, AlgolPage } from "../../../../types";
 import { PayloadArticlePage } from "./PayloadArticlePage";
 
 export const makePayloadArticlePage = (article: AlgolArticle) => {
@@ -23,6 +22,10 @@ export const makePayloadArticlePage = (article: AlgolArticle) => {
     key: article.id,
     links: [],
     crumbs: [],
+    me: {
+      title: article.title,
+      desc: article.blurb,
+    },
   };
 
   return ArticleComp;

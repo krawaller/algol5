@@ -1,5 +1,4 @@
-import { AlgolGameBlobAnon, AlgolMeta } from "../../types";
-import { AlgolNavLink } from "../../ui/src/helpers";
+import { AlgolGameBlobAnon, AlgolMeta, AlgolNavLink } from "../../types";
 
 export const makeGameRulesLink = (
   meta: AlgolMeta<AlgolGameBlobAnon>

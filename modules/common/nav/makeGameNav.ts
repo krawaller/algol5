@@ -1,5 +1,4 @@
-import { AlgolGameBlobAnon, AlgolMeta } from "../../types";
-import { AlgolNav } from "../../ui/src/helpers";
+import { AlgolGameBlobAnon, AlgolMeta, AlgolNav } from "../../types";
 import { makeGameLink } from "./makeGameLink";
 import { homeLink } from "./homeLink";
 import { gameIndexLink } from "./gameIndexLink";

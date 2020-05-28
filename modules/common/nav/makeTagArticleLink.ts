@@ -1,5 +1,4 @@
-import { AlgolArticle } from "../../types";
-import { AlgolNavLink } from "../../ui/src/helpers";
+import { AlgolArticle, AlgolNavLink } from "../../types";
 
 export const makeTagArticleLink = (article: AlgolArticle): AlgolNavLink => ({
   title: article.title,

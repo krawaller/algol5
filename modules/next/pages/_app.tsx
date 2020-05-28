@@ -2,9 +2,8 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import { useMemo, useState, useEffect, Fragment } from "react";
 import { Shell } from "../../ui/src/components/Shell";
-import { AlgolPage } from "../../ui/src/helpers/AlgolPage";
-import { appActions } from "../helpers/appActions";
-import { useBattleNavActions } from "../helpers";
+import { AlgolPage } from "../../types";
+import { useBattleNavActions, appActions } from "../helpers";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const Comp = Component as AlgolPage;

@@ -4,9 +4,9 @@ import { TransitionGroup } from "react-transition-group";
 import Transition, {
   TransitionStatus,
 } from "react-transition-group/Transition";
+import { AlgolNav, AppActions } from "../../../../types";
 import css from "./Navbar.cssProxy";
 import { NavbarList } from "./Navbar.List";
-import { AlgolNav, AppActions } from "../../helpers";
 import { NavbarButton } from "./Navbar.Button";
 
 type Dir = "up" | "down" | "same";

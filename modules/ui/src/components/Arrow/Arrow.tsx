@@ -4,10 +4,12 @@ import css from "./Arrow.cssProxy";
 
 export type ArrowLayout = keyof typeof layoutClassMap;
 export type ArrowHead = keyof typeof headClassMap;
+export type ArrowFlush = keyof typeof flushClassMap;
 
 export type ArrowProps = {
   layout: ArrowLayout;
   head?: ArrowHead;
+  flush?: ArrowFlush;
 };
 
 const layoutClassMap = {
@@ -26,19 +28,27 @@ const headClassMap = {
   west: css.arrowHeadWest,
 };
 
+const flushClassMap = {
+  top: css.arrowFlushTop,
+};
+
 export const arrowLayouts = Object.keys(layoutClassMap) as ArrowLayout[];
 export const arrowHeads = ["none"].concat(
   Object.keys(headClassMap)
 ) as ArrowHead[];
+export const arrowFlush = ["none"].concat(
+  Object.keys(flushClassMap)
+) as ArrowFlush[];
 
 export const Arrow: FunctionComponent<ArrowProps> = props => {
-  const { layout, head } = props;
+  const { layout, head, flush } = props;
   return (
     <div
       className={classNames(
         css.arrowContainer,
         layoutClassMap[layout],
-        head && headClassMap[head]
+        head && headClassMap[head],
+        flush && flushClassMap[flush]
       )}
     ></div>
   );

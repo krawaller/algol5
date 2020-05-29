@@ -9,6 +9,10 @@
 
 /* --------------- Arrow body --------------- */
 
+.arrowFlushTop {
+  align-items: flex-start;
+}
+
 .arrowContainer:after {
   content: "";
   display: block;
@@ -40,6 +44,9 @@
   border-left-width: 1px;
   border-top-left-radius: 5px;
 }
+.arrowFlushTop.arrowSouthEast:after {
+  height: 100%;
+}
 
 .arrowSouthWest {
   justify-content: flex-start;
@@ -51,6 +58,9 @@
   border-top-width: 1px;
   border-right-width: 1px;
   border-top-right-radius: 5px;
+}
+.arrowFlushTop.arrowSouthWest:after {
+  height: 100%;
 }
 
 .arrowNorthWest {
@@ -111,10 +121,16 @@
   border-left-color: var(--arrow-color);
   transform: scale3d(1, var(--arrow-scale), 1);
 }
+.arrowFlushTop.arrowHeadEast:before {
+  top: calc(var(--arrow-size) * -1);
+}
 
 .arrowHeadWest:before {
   left: calc(var(--arrow-size) * -1);
   top: calc(50% - var(--arrow-size));
   border-right-color: var(--arrow-color);
   transform: scale3d(1, var(--arrow-scale), 1);
+}
+.arrowFlushTop.arrowHeadWest:before {
+  top: calc(var(--arrow-size) * -1);
 }

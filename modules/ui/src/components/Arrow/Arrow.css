@@ -1,0 +1,120 @@
+.arrowContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* --------------- Arrow body --------------- */
+
+.arrowContainer:after {
+  content: "";
+  display: block;
+  border-color: blue;
+  border-style: solid;
+  border-width: 0;
+}
+
+.arrowEastWest:after {
+  border-top-width: 1px;
+  justify-self: flex-end;
+  width: 100%;
+}
+
+.arrowNorthSouth:after {
+  border-left-width: 1px;
+  align-self: flex-end;
+  height: 100%;
+}
+
+.arrowSouthEast {
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.arrowSouthEast:after {
+  height: 50%;
+  width: 50%;
+  border-top-width: 1px;
+  border-left-width: 1px;
+  border-top-left-radius: 5px;
+}
+
+.arrowSouthWest {
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.arrowSouthWest:after {
+  height: 50%;
+  width: 50%;
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-top-right-radius: 5px;
+}
+
+.arrowNorthWest {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.arrowNorthWest:after {
+  height: 50%;
+  width: 50%;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+  border-bottom-right-radius: 5px;
+}
+
+.arrowNorthEast {
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+.arrowNorthEast:after {
+  height: 50%;
+  width: 50%;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-bottom-left-radius: 5px;
+}
+
+/* --------------- Arrow head --------------- */
+
+.arrowContainer:before {
+  --arrow-size: 15px;
+  --arrow-scale: 0.4;
+  --arrow-color: blue;
+  border: var(--arrow-size) solid transparent;
+  position: absolute;
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+}
+
+.arrowHeadNorth:before {
+  top: calc(var(--arrow-size) * -1);
+  left: calc(50% - var(--arrow-size));
+  border-bottom-color: var(--arrow-color);
+  transform: scale3d(var(--arrow-scale), 1, 1);
+}
+
+.arrowHeadSouth:before {
+  bottom: calc(var(--arrow-size) * -1);
+  left: calc(50% - var(--arrow-size));
+  border-top-color: var(--arrow-color);
+  transform: scale3d(var(--arrow-scale), 1, 1);
+}
+
+.arrowHeadEast:before {
+  right: calc(var(--arrow-size) * -1);
+  top: calc(50% - var(--arrow-size));
+  border-left-color: var(--arrow-color);
+  transform: scale3d(1, var(--arrow-scale), 1);
+}
+
+.arrowHeadWest:before {
+  left: calc(var(--arrow-size) * -1);
+  top: calc(50% - var(--arrow-size));
+  border-right-color: var(--arrow-color);
+  transform: scale3d(1, var(--arrow-scale), 1);
+}

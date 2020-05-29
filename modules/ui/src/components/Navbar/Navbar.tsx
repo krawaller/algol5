@@ -71,11 +71,13 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
               return (
                 <div className={whatsMyClass(status, pos)}>
                   <div className={css.navbarListOuter}>
-                    <div className={css.navbarBackButtonContainer}>
+                    <div className={css.navbarSideButtonContainer}>
                       {backBtn}
                     </div>
                     <NavbarList buttons={links} actions={actions} />
-                    <div className={css.navbarMapButtonContainer}>{mapBtn}</div>
+                    <div className={css.navbarSideButtonContainer}>
+                      {mapBtn}
+                    </div>
                   </div>
                 </div>
               );

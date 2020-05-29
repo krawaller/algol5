@@ -6,6 +6,7 @@
   flex-direction: column;
   justify-content: flex-end;
   pointer-events: none;
+  position: relative;
 }
 
 .navbarInner {
@@ -53,29 +54,40 @@
 }
 
 .navbarButton {
+  display: inline-block;
+  min-width: 60px;
+}
+
+.navbarButtonInner {
+  pointer-events: all;
+  margin: 0 3px;
+  padding: 0 3px;
   border: 1px solid blue;
   color: blue;
+  cursor: pointer;
   border-radius: 3px;
   background-color: rgba(38, 92, 206, 0.324);
   text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-  padding: 0 3px;
-  min-width: 50px;
   text-align: center;
   user-select: none;
   font-family: verdana;
-  margin: 0 6px;
-  pointer-events: all;
+  display: block;
 }
 
-.navbarMapButtonContainer,
-.navbarBackButtonContainer {
-  width: 20px;
+.navbarSideButtonContainer,
+.navbarSideButtonContainer .navbarButton {
+  width: 35px;
+  min-width: 35px;
+}
+
+.navbarMapButtonContainer {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 
 .navbarBackButtonContainer .navbarButton {
-  min-width: 18px;
+  min-width: 25px;
 }
 
 .navbarButton:hover {

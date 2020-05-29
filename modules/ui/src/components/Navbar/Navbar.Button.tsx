@@ -23,13 +23,15 @@ export const NavbarButton: FunctionComponent<NavbarButtonProps> = props => {
     [url, onClick, actions.navTo]
   );
   return (
-    <a
-      href={url}
-      className={css.navbarButton}
-      title={desc}
-      onClick={handleClick}
-    >
-      {title}
-    </a>
+    <div className={css.navbarButton}>
+      <a
+        href={url}
+        className={css.navbarButtonInner}
+        title={desc}
+        onClick={handleClick}
+      >
+        {title}
+      </a>
+    </div>
   );
 };

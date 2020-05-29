@@ -26,7 +26,7 @@ storiesOf("Arrow", module).add("Multi Arrow", () => {
   const head = select("Head", arrowHeads, arrowHeads[0]);
   const flush = select("Flush", arrowFlush, arrowFlush[0]);
   return (
-    <div style={{ padding: 0, width: 49, height: 49 }}>
+    <div style={{ padding: 0, width: 50, height: 50 }}>
       <ArrowMulti
         southeast={southeast}
         southwest={southwest}

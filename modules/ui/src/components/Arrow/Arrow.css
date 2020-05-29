@@ -53,13 +53,13 @@
 }
 .arrowSouthEast:after {
   height: 50%;
-  width: 50%;
+  width: calc(50% - 1px);
   border-top-width: 1px;
   border-left-width: 1px;
   border-top-left-radius: 5px;
 }
 .arrowFlushTop.arrowSouthEast:after {
-  height: 100%;
+  height: calc(100% - 1px);
 }
 
 .arrowSouthWest {
@@ -74,7 +74,7 @@
   border-top-right-radius: 5px;
 }
 .arrowFlushTop.arrowSouthWest:after {
-  height: 100%;
+  height: calc(100% - 1px);
 }
 
 .arrowNorthWest {
@@ -82,7 +82,7 @@
   align-items: flex-start;
 }
 .arrowNorthWest:after {
-  height: 50%;
+  height: calc(50% - 1px);
   width: 50%;
   border-bottom-width: 1px;
   border-right-width: 1px;
@@ -94,8 +94,8 @@
   align-items: flex-start;
 }
 .arrowNorthEast:after {
-  height: 50%;
-  width: 50%;
+  height: calc(50% - 1px);
+  width: calc(50% - 1px);
   border-bottom-width: 1px;
   border-left-width: 1px;
   border-bottom-left-radius: 5px;

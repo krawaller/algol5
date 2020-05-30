@@ -28,6 +28,7 @@
 }
 
 .arrowContainer:after {
+  --corner-radius: 12px;
   content: "";
   display: block;
   border-color: blue;
@@ -56,7 +57,7 @@
   width: calc(50% - 1px);
   border-top-width: 1px;
   border-left-width: 1px;
-  border-top-left-radius: 5px;
+  border-top-left-radius: var(--corner-radius);
 }
 .arrowFlushTop.arrowSouthEast:after {
   height: calc(100% - 1px);
@@ -71,7 +72,7 @@
   width: 50%;
   border-top-width: 1px;
   border-right-width: 1px;
-  border-top-right-radius: 5px;
+  border-top-right-radius: var(--corner-radius);
 }
 .arrowFlushTop.arrowSouthWest:after {
   height: calc(100% - 1px);
@@ -86,7 +87,7 @@
   width: 50%;
   border-bottom-width: 1px;
   border-right-width: 1px;
-  border-bottom-right-radius: 5px;
+  border-bottom-right-radius: var(--corner-radius);
 }
 
 .arrowNorthEast {
@@ -98,7 +99,7 @@
   width: calc(50% - 1px);
   border-bottom-width: 1px;
   border-left-width: 1px;
-  border-bottom-left-radius: 5px;
+  border-bottom-left-radius: var(--corner-radius);
 }
 
 /* --------------- Arrow head --------------- */

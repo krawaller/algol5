@@ -1,0 +1,6 @@
+.navStep {
+  border: 1px solid black;
+  background-color: rgb(210, 217, 231);
+  border-radius: 8px;
+  padding: 5px;
+}

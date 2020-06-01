@@ -9,33 +9,6 @@
   position: relative;
 }
 
-.navBottom {
-  transition: opacity 500ms ease, transform 500ms ease;
-  transform: scale(1, 1);
-  opacity: 1;
-  width: 100%;
-}
-
-.navBottomDuringEntering {
-  opacity: 0;
-}
-
-.navBottomDuringExiting {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0;
-}
-
-.navBottomFurther {
-  transform: translate3d(0, -40px, 0) scale(0.5, 0.5);
-}
-
-.navBottomNearer {
-  transform: translate3d(0, 40px, 0) scale(1.5, 1.5);
-}
-
 .navRow {
   display: flex;
   justify-content: space-between;

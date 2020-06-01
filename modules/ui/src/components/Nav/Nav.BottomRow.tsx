@@ -5,7 +5,8 @@ import Transition, {
   TransitionStatus,
 } from "react-transition-group/Transition";
 import { AlgolNav, AppActions } from "../../../../types";
-import css from "./Nav.cssProxy";
+import navCss from "./Nav.cssProxy";
+import navBottomCss from "./Nav.Bottom.cssProxy";
 import { NavButton } from "./Nav.Button";
 
 type Dir = "up" | "down" | "same";
@@ -69,12 +70,12 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
           const pos = whereAmI(status, dir);
           return (
             <div className={whatsMyClass(status, pos)}>
-              <div className={css.navRow}>
-                <div className={css.navSideButtonContainer}>{backBtn}</div>
+              <div className={navCss.navRow}>
+                <div className={navCss.navSideButtonContainer}>{backBtn}</div>
                 {links.map(btn => (
                   <NavButton key={btn.title} link={btn} actions={actions} />
                 ))}
-                <div className={css.navSideButtonContainer}>{mapBtn}</div>
+                <div className={navCss.navSideButtonContainer}>{mapBtn}</div>
               </div>
             </div>
           );
@@ -96,9 +97,9 @@ const whereAmI = (status: TransitionStatus, dir: Dir): Pos =>
     : "same";
 
 const whatsMyClass = (status: TransitionStatus, pos: Pos) =>
-  classNames(css.navBottom, {
-    [css.navBottomDuringEntering]: status === "entering",
-    [css.navBottomDuringExiting]: status === "exiting",
-    [css.navBottomFurther]: pos === "further",
-    [css.navBottomNearer]: pos === "nearer",
+  classNames(navBottomCss.navBottom, {
+    [navBottomCss.navBottomDuringEntering]: status === "entering",
+    [navBottomCss.navBottomDuringExiting]: status === "exiting",
+    [navBottomCss.navBottomFurther]: pos === "further",
+    [navBottomCss.navBottomNearer]: pos === "nearer",
   });

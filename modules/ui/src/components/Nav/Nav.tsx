@@ -5,24 +5,24 @@ import Transition, {
   TransitionStatus,
 } from "react-transition-group/Transition";
 import { AlgolNav, AppActions } from "../../../../types";
-import css from "./Navbar.cssProxy";
-import { NavbarButton } from "./Navbar.Button";
+import css from "./Nav.cssProxy";
+import { NavButton } from "./Nav.Button";
 
 type Dir = "up" | "down" | "same";
 type Pos = "nearer" | "further" | "same";
 
-export type NavbarProps = {
+export type NavProps = {
   nav?: AlgolNav;
   actions: AppActions;
 };
 
-type NavbarState = {
+type NavState = {
   depth: number;
   dir: Dir;
 };
 
-export const Navbar: FunctionComponent<NavbarProps> = props => {
-  const [{ depth, dir }, setState] = useState<NavbarState>({
+export const Nav: FunctionComponent<NavProps> = props => {
+  const [{ depth, dir }, setState] = useState<NavState>({
     depth: -1,
     dir: "same",
   });
@@ -46,7 +46,7 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
   const backBtn = useMemo(
     () =>
       count ? (
-        <NavbarButton
+        <NavButton
           link={{ ...crumbs[count - 1], title: "↑", desc: "Go back" }}
           actions={actions}
         />
@@ -55,8 +55,8 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
   );
   const mapBtn = null;
   return (
-    <div className={css.navbarContainer}>
-      <div className={css.navbarBottom}>
+    <div className={css.navContainer}>
+      <div className={css.navBottom}>
         <TransitionGroup
           childFactory={child =>
             /* to ensure exiting comps get fresh dir */
@@ -71,20 +71,12 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
               const pos = whereAmI(status, dir);
               return (
                 <div className={whatsMyClass(status, pos)}>
-                  <div className={css.navbarListOuter}>
-                    <div className={css.navbarSideButtonContainer}>
-                      {backBtn}
-                    </div>
+                  <div className={css.navListOuter}>
+                    <div className={css.navSideButtonContainer}>{backBtn}</div>
                     {links.map(btn => (
-                      <NavbarButton
-                        key={btn.title}
-                        link={btn}
-                        actions={actions}
-                      />
+                      <NavButton key={btn.title} link={btn} actions={actions} />
                     ))}
-                    <div className={css.navbarSideButtonContainer}>
-                      {mapBtn}
-                    </div>
+                    <div className={css.navSideButtonContainer}>{mapBtn}</div>
                   </div>
                 </div>
               );
@@ -108,9 +100,9 @@ const whereAmI = (status: TransitionStatus, dir: Dir): Pos =>
     : "same";
 
 const whatsMyClass = (status: TransitionStatus, pos: Pos) =>
-  classNames(css.navbarInner, {
-    [css.navbarInnerDuringEntering]: status === "entering",
-    [css.navbarInnerDuringExiting]: status === "exiting",
-    [css.navbarInnerFurther]: pos === "further",
-    [css.navbarInnerNearer]: pos === "nearer",
+  classNames(css.navInner, {
+    [css.navInnerDuringEntering]: status === "entering",
+    [css.navInnerDuringExiting]: status === "exiting",
+    [css.navInnerFurther]: pos === "further",
+    [css.navInnerNearer]: pos === "nearer",
   });

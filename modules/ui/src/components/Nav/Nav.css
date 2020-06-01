@@ -1,4 +1,4 @@
-.navbarContainer {
+.navContainer {
   height: 100%;
   padding: 5px;
   box-sizing: border-box;
@@ -9,21 +9,21 @@
   position: relative;
 }
 
-.navbarInner {
+.navInner {
   transition: opacity 500ms ease, transform 500ms ease;
   transform: scale(1, 1);
   opacity: 1;
   width: 100%;
 }
 
-.navbarBottom {
+.navBottom {
 }
 
-.navbarInnerDuringEntering {
+.navInnerDuringEntering {
   opacity: 0;
 }
 
-.navbarInnerDuringExiting {
+.navInnerDuringExiting {
   position: absolute;
   left: 0;
   right: 0;
@@ -31,27 +31,27 @@
   opacity: 0;
 }
 
-.navbarInnerFurther {
+.navInnerFurther {
   transform: translate3d(0, -40px, 0) scale(0.5, 0.5);
 }
 
-.navbarInnerNearer {
+.navInnerNearer {
   transform: translate3d(0, 40px, 0) scale(1.5, 1.5);
 }
 
-.navbarListOuter {
+.navListOuter {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
 }
 
-.navbarButton {
+.navButton {
   display: inline-block;
   min-width: 60px;
 }
 
-.navbarButtonInner {
+.navButtonInner {
   pointer-events: all;
   padding: 0 3px;
   border: 1px solid blue;
@@ -66,31 +66,31 @@
   display: block;
 }
 
-.navbarSideButtonContainer,
-.navbarSideButtonContainer .navbarButton {
+.navSideButtonContainer,
+.navSideButtonContainer .navButton {
   width: 35px;
   min-width: 35px;
 }
 
-.navbarMapButtonContainer {
+.navMapButtonContainer {
   position: absolute;
   bottom: 5px;
   right: 5px;
 }
 
-.navbarBackButtonContainer .navbarButton {
+.navBackButtonContainer .navButton {
   min-width: 25px;
 }
 
-.navbarButtonInner:hover {
+.navButtonInner:hover {
   background-color: rgb(169, 184, 216);
 }
 
-.navbarButtonInner:visited {
+.navButtonInner:visited {
   color: blue;
 }
 
-.navbarButtonInner:active {
+.navButtonInner:active {
   background-color: blue;
   color: white;
 }

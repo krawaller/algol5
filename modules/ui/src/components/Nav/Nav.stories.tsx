@@ -2,7 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { select } from "@storybook/addon-knobs";
 
-import { Navbar } from ".";
+import { Nav } from ".";
 import { AlgolNav, fakeAppActions } from "../../../../types";
 
 const btn = (str: string) => ({
@@ -16,13 +16,13 @@ const scenarios: Record<string, AlgolNav> = {
     key: "A",
     links: [btn("Foo"), btn("Bar")],
     crumbs: [btn("1"), btn("2")],
-    me: { title: 'Step A', desc: 'Full of A:s' }
+    me: { title: "Step A", desc: "Full of A:s" },
   },
   B: {
     key: "B",
     links: [btn("Baz"), btn("Bin"), btn("Boo")],
     crumbs: [btn("1"), btn("2"), btn("3")],
-    me: { title: 'Step B', desc: 'Full of B:s' }
+    me: { title: "Step B", desc: "Full of B:s" },
   },
 };
 const list = Object.keys(scenarios);
@@ -32,7 +32,7 @@ storiesOf("Navbar", module).add("A common Navbar component", () => {
   const scenario = scenarios[key];
   return (
     <div style={{ width: 500, height: 500, position: "relative" }}>
-      <Navbar nav={scenario} actions={fakeAppActions} />
+      <Nav nav={scenario} actions={fakeAppActions} />
     </div>
   );
 });

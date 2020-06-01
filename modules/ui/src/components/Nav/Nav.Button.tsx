@@ -1,13 +1,13 @@
 import React, { FunctionComponent, useMemo, SyntheticEvent } from "react";
-import css from "./Navbar.cssProxy";
+import css from "./Nav.cssProxy";
 import { AlgolNavLink, AppActions } from "../../../../types";
 
-type NavbarButtonProps = {
+type NavButtonProps = {
   actions: AppActions;
   link: AlgolNavLink;
 };
 
-export const NavbarButton: FunctionComponent<NavbarButtonProps> = props => {
+export const NavButton: FunctionComponent<NavButtonProps> = props => {
   const { actions, link } = props;
   const { title, onClick, desc, url } = link;
   const handleClick = useMemo(
@@ -23,10 +23,10 @@ export const NavbarButton: FunctionComponent<NavbarButtonProps> = props => {
     [url, onClick, actions.navTo]
   );
   return (
-    <div className={css.navbarButton}>
+    <div className={css.navButton}>
       <a
         href={url}
-        className={css.navbarButtonInner}
+        className={css.navButtonInner}
         title={desc}
         onClick={handleClick}
       >

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import Div100vh from "react-div-100vh";
 import css from "./Shell.cssProxy";
 import { AlgolNav, AppActions } from "../../../../types";
-import { Navbar } from "../Navbar";
+import { Nav } from "../Nav";
 
 type ShellProps = {
   nav?: AlgolNav;
@@ -15,7 +15,7 @@ export const Shell: FunctionComponent<ShellProps> = props => {
     <Div100vh className={css.shellContainer}>
       {children}
       <div className={css.shellNav}>
-        <Navbar key="_nav" nav={nav} actions={actions}></Navbar>
+        <Nav key="_nav" nav={nav} actions={actions}></Nav>
       </div>
     </Div100vh>
   );

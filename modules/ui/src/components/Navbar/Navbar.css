@@ -1,6 +1,6 @@
 .navbarContainer {
   height: 100%;
-  padding-bottom: 5px;
+  padding: 5px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -53,6 +53,10 @@
   height: 100%;
 }
 
+.navbarList .navbarButton {
+  margin: 0 2.5px;
+}
+
 .navbarButton {
   display: inline-block;
   min-width: 60px;
@@ -60,13 +64,12 @@
 
 .navbarButtonInner {
   pointer-events: all;
-  margin: 0 3px;
   padding: 0 3px;
   border: 1px solid blue;
   color: blue;
   cursor: pointer;
-  border-radius: 3px;
-  background-color: rgba(38, 92, 206, 0.324);
+  border-radius: 4px;
+  background-color: rgb(210, 217, 231);
   text-decoration: none;
   text-align: center;
   user-select: none;
@@ -90,15 +93,15 @@
   min-width: 25px;
 }
 
-.navbarButton:hover {
-  background-color: rgba(38, 92, 206, 0.6);
+.navbarButtonInner:hover {
+  background-color: rgb(169, 184, 216);
 }
 
-.navbarButton:visited {
+.navbarButtonInner:visited {
   color: blue;
 }
 
-.navbarButton:active {
+.navbarButtonInner:active {
   background-color: blue;
   color: white;
 }

@@ -96,9 +96,9 @@ const whereAmI = (status: TransitionStatus, dir: Dir): Pos =>
     : "same";
 
 const whatsMyClass = (status: TransitionStatus, pos: Pos) =>
-  classNames(css.navInner, {
-    [css.navInnerDuringEntering]: status === "entering",
-    [css.navInnerDuringExiting]: status === "exiting",
-    [css.navInnerFurther]: pos === "further",
-    [css.navInnerNearer]: pos === "nearer",
+  classNames(css.navBottom, {
+    [css.navBottomDuringEntering]: status === "entering",
+    [css.navBottomDuringExiting]: status === "exiting",
+    [css.navBottomFurther]: pos === "further",
+    [css.navBottomNearer]: pos === "nearer",
   });

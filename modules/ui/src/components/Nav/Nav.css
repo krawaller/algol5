@@ -9,18 +9,18 @@
   position: relative;
 }
 
-.navInner {
+.navBottom {
   transition: opacity 500ms ease, transform 500ms ease;
   transform: scale(1, 1);
   opacity: 1;
   width: 100%;
 }
 
-.navInnerDuringEntering {
+.navBottomDuringEntering {
   opacity: 0;
 }
 
-.navInnerDuringExiting {
+.navBottomDuringExiting {
   position: absolute;
   left: 0;
   right: 0;
@@ -28,22 +28,30 @@
   opacity: 0;
 }
 
-.navInnerFurther {
+.navBottomFurther {
   transform: translate3d(0, -40px, 0) scale(0.5, 0.5);
 }
 
-.navInnerNearer {
+.navBottomNearer {
   transform: translate3d(0, 40px, 0) scale(1.5, 1.5);
 }
 
 .navRow {
   display: flex;
   justify-content: space-between;
+  min-height: 20px;
+}
+
+.navLinkArrowRow {
+  min-height: 49px;
 }
 
 .navButton {
-  display: inline-block;
-  min-width: 60px;
+  width: 70px;
+}
+
+.navFiller {
+  flex: 1;
 }
 
 .navButtonInner {

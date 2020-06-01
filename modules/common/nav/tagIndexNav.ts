@@ -1,10 +1,10 @@
 import { AlgolNav } from "../../types";
-import { homeLink } from "./homeLink";
+import { gameIndexNav } from "./gameIndexNav";
 import { tagIndexLink } from "./tagIndexLink";
 
 export const tagIndexNav: AlgolNav = {
   key: "tagindexnav",
   links: [],
-  crumbs: [homeLink],
+  crumbs: gameIndexNav.crumbs.concat(gameIndexNav.me),
   me: tagIndexLink,
 };

@@ -6,7 +6,6 @@ import Transition, {
 } from "react-transition-group/Transition";
 import { AlgolNav, AppActions } from "../../../../types";
 import css from "./Navbar.cssProxy";
-import { NavbarList } from "./Navbar.List";
 import { NavbarButton } from "./Navbar.Button";
 
 type Dir = "up" | "down" | "same";
@@ -28,11 +27,13 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
     dir: "same",
   });
   const { nav, actions } = props;
-  const { crumbs, links, key } = nav || {
-    crumbs: [],
-    links: [],
-    key: Math.random(),
-  };
+  const { crumbs, links, key } =
+    nav ||
+    (({
+      crumbs: [],
+      links: [],
+      key: Math.random(),
+    } as unknown) as AlgolNav);
   const count = crumbs.length;
   useEffect(
     () =>
@@ -74,7 +75,13 @@ export const Navbar: FunctionComponent<NavbarProps> = props => {
                     <div className={css.navbarSideButtonContainer}>
                       {backBtn}
                     </div>
-                    <NavbarList buttons={links} actions={actions} />
+                    {links.map(btn => (
+                      <NavbarButton
+                        key={btn.title}
+                        link={btn}
+                        actions={actions}
+                      />
+                    ))}
                     <div className={css.navbarSideButtonContainer}>
                       {mapBtn}
                     </div>

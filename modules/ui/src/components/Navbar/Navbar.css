@@ -46,17 +46,6 @@
   height: 100%;
 }
 
-.navbarList {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-.navbarList .navbarButton {
-  margin: 0 2.5px;
-}
-
 .navbarButton {
   display: inline-block;
   min-width: 60px;

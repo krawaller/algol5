@@ -16,9 +16,6 @@
   width: 100%;
 }
 
-.navBottom {
-}
-
 .navInnerDuringEntering {
   opacity: 0;
 }
@@ -39,11 +36,9 @@
   transform: translate3d(0, 40px, 0) scale(1.5, 1.5);
 }
 
-.navListOuter {
+.navRow {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  height: 100%;
 }
 
 .navButton {

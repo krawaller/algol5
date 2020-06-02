@@ -12,7 +12,15 @@
 .navRow {
   display: flex;
   justify-content: space-between;
-  min-height: 20px;
+}
+
+.navBetweenRow {
+  min-height: 30px;
+  flex: 1;
+}
+
+.navRowStepContainer {
+  max-width: 40%;
 }
 
 .navLinkArrowRow {
@@ -25,6 +33,13 @@
 
 .navFiller {
   flex: 1;
+}
+
+.navFlexLeft {
+  justify-content: flex-start;
+  display: flex;
+  align-items: stretch;
+  height: 100%;
 }
 
 .navButtonInner {

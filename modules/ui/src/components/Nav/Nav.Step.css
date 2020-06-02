@@ -1,6 +1,49 @@
 .navStep {
-  border: 1px solid black;
+  border: 1px solid blue;
   background-color: rgb(210, 217, 231);
   border-radius: 8px;
   padding: 5px;
+  color: blue;
+  font-family: verdana;
+  text-align: center;
+  position: relative;
+}
+
+.navStep:not(.navStepCurrent) {
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.navStepCurrent:before {
+  display: block;
+  height: 36px;
+  width: 36px;
+  line-height: 10px;
+  box-sizing: border-box;
+  padding: 0 4px;
+  content: "you are here";
+  border-radius: 20px;
+  background-color: red;
+  color: white;
+  font-size: 8px;
+  font-family: verdana;
+  position: absolute;
+  transform: rotate(20deg);
+  transform-origin: 50% 50%;
+  right: -25px;
+  top: 10px;
+}
+
+.navStep:hover {
+  background-color: rgb(169, 184, 216);
+}
+
+.navStepTitle {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.navStepDesc {
+  margin-bottom: 0;
+  font-size: 0.8em;
 }

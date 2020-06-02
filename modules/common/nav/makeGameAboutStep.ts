@@ -6,4 +6,5 @@ export const makeGameAboutStep = (
   title: `About`,
   desc: `All about ${meta.name}`,
   url: `/games/${meta.slug}/about`,
+  links: [],
 });

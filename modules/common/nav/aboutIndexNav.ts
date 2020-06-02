@@ -4,7 +4,6 @@ import { aboutIndexStep } from "./aboutIndexStep";
 
 export const aboutIndexNav: AlgolNav = {
   key: "aboutindexnav",
-  links: [],
   me: aboutIndexStep,
   crumbs: [homeStep],
 };

@@ -34,21 +34,18 @@ export const makeSessionNav = (opts: MakeSessionNavOpts): AlgolNav => {
         key: `session-${session.id}-lobby`,
         crumbs,
         me: lobbyStep,
-        links: [controlsStep, historyStep],
       };
     case "history":
       return {
         key: `session-${session.id}-history`,
         crumbs: crumbs.concat(lobbyStep),
         me: historyStep,
-        links: [],
       };
     case "playing":
       return {
         key: `session-${session.id}-playing`,
         crumbs: crumbs.concat(lobbyStep),
         me: controlsStep,
-        links: [],
       };
     case "gamelobby":
       return gameNav;

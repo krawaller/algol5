@@ -5,6 +5,5 @@ import { makeAboutArticleStep } from "./makeAboutArticleStep";
 export const makeAboutArticleNav = (article: AlgolArticle): AlgolNav => ({
   key: `about_${article.id}`,
   crumbs: aboutIndexNav.crumbs.concat(aboutIndexNav.me),
-  links: [],
   me: makeAboutArticleStep(article),
 });

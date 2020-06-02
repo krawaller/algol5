@@ -1,4 +1,6 @@
 import { AlgolLocalBattle, BattleNavActions, AlgolNavStep } from "../../types";
+import { makeSessionControlsStep } from "./makeSessionControlsStep";
+import { makeSessionHistoryStep } from "./makeSessionHistoryStep";
 
 type MakeSessionLobbyStepOpts = {
   session: AlgolLocalBattle;
@@ -35,5 +37,9 @@ export const makeSessionLobbyStep = (
     title: `Session ${session.id}`,
     desc: descs.join("\n"),
     onClick: battleNavActions.toBattleLobby,
+    links: [
+      makeSessionControlsStep(battleNavActions),
+      makeSessionHistoryStep(battleNavActions),
+    ],
   };
 };

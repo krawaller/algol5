@@ -28,13 +28,14 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
     dir: "same",
   });
   const { nav, actions } = props;
-  const { crumbs, links, key } =
+  const { crumbs, key, me } =
     nav ||
     (({
       crumbs: [],
-      links: [],
+      me: { links: [] },
       key: Math.random(),
     } as unknown) as AlgolNav);
+  const { links } = me;
   const count = crumbs.length;
   useEffect(
     () =>

@@ -6,4 +6,5 @@ export const makeSessionControlsStep = (
   title: "Play",
   desc: "Make a move",
   onClick: battleNavActions.toBattleControls,
+  links: [],
 });

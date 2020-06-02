@@ -4,7 +4,6 @@ import { tagIndexStep } from "./tagIndexStep";
 
 export const tagIndexNav: AlgolNav = {
   key: "tagindexnav",
-  links: [],
   crumbs: gameIndexNav.crumbs.concat(gameIndexNav.me),
   me: tagIndexStep,
 };

@@ -20,11 +20,11 @@ export const makePayloadArticlePage = (article: AlgolArticle) => {
     "Article" + article.id[0].toUpperCase() + article.id.slice(1);
   ArticleComp.nav = {
     key: article.id,
-    links: [],
     crumbs: [],
     me: {
       title: article.title,
       desc: article.blurb,
+      links: [],
     },
   };
 

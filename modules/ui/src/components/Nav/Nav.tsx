@@ -15,7 +15,7 @@ export const Nav: FunctionComponent<NavProps> = props => {
     <div className={css.navContainer}>
       <NavLinkArrowRow
         hasBackBtn={Boolean(nav && nav.crumbs.length > 0)}
-        nbrOfLinks={nav ? nav.links.length : 0}
+        nbrOfLinks={nav ? nav.me.links.length : 0}
       />
       <NavBottomRow {...props} />
     </div>

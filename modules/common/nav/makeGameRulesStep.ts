@@ -6,4 +6,5 @@ export const makeGameRulesStep = (
   title: `Rules`,
   desc: `How to play ${meta.name}`,
   url: `/games/${meta.slug}/rules`,
+  links: [],
 });

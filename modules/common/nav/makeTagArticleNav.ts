@@ -5,6 +5,5 @@ import { makeTagArticleStep } from "./makeTagArticleStep";
 export const makeTagArticleNav = (article: AlgolArticle): AlgolNav => ({
   key: `tag_${article.id}`,
   crumbs: tagIndexNav.crumbs.concat(tagIndexNav.me),
-  links: [],
   me: makeTagArticleStep(article),
 });

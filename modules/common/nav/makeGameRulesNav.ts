@@ -9,6 +9,5 @@ export const makeGameRulesNav = (
 ): AlgolNav => ({
   key: `game-rules-${meta.id}`,
   me: makeGameRulesStep(meta),
-  links: [],
   crumbs: [homeStep, gameIndexStep, makeGameStep(meta)],
 });

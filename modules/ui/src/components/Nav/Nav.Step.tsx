@@ -1,20 +1,23 @@
 import classNames from "classnames";
 import React, { FunctionComponent } from "react";
-import { AlgolNavStep } from "../../../../types";
+import { AlgolNavStep, AppActions } from "../../../../types";
 import css from "./Nav.Step.cssProxy";
+import { useNavHandler } from "./Nav.useNavHandler";
 
 type NavStepProps = {
-  me: AlgolNavStep;
-  current?: boolean;
+  step: AlgolNavStep;
+  isCurrent?: boolean;
+  actions: AppActions;
 };
 
 export const NavStep: FunctionComponent<NavStepProps> = props => {
-  const { me, current } = props;
-  const { title, desc, onClick } = me;
+  const { step, isCurrent, actions } = props;
+  const { title, desc } = step;
+  const handleClick = useNavHandler({ actions, step });
   return (
     <div
-      className={classNames(css.navStep, current && css.navStepCurrent)}
-      onClick={current ? undefined : onClick}
+      className={classNames(css.navStep, isCurrent && css.navStepCurrent)}
+      onClick={isCurrent ? undefined : handleClick}
     >
       <h4 className={css.navStepTitle}>{title}</h4>
       <p className={css.navStepDesc}>{desc}</p>

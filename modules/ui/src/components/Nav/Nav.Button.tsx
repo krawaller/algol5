@@ -1,27 +1,17 @@
 import React, { FunctionComponent, useMemo, SyntheticEvent } from "react";
 import css from "./Nav.cssProxy";
 import { AlgolNavStep, AppActions } from "../../../../types";
+import { useNavHandler } from "./Nav.useNavHandler";
 
 type NavButtonProps = {
   actions: AppActions;
-  link: AlgolNavStep;
+  step: AlgolNavStep;
 };
 
 export const NavButton: FunctionComponent<NavButtonProps> = props => {
-  const { actions, link } = props;
-  const { title, onClick, desc, url } = link;
-  const handleClick = useMemo(
-    () =>
-      onClick
-        ? onClick
-        : url
-        ? (e: SyntheticEvent) => {
-            e && e.preventDefault();
-            actions.navTo(url);
-          }
-        : () => {},
-    [url, onClick, actions.navTo]
-  );
+  const { actions, step } = props;
+  const { title, desc, url } = step;
+  const handleClick = useNavHandler({ actions, step });
   return (
     <div className={css.navButton}>
       <a

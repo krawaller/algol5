@@ -49,7 +49,7 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
     () =>
       count ? (
         <NavButton
-          link={{
+          step={{
             ...crumbs[count - 1],
             title: "↑",
             desc: "Go back up one level",
@@ -78,7 +78,7 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
               <div className={navCss.navRow}>
                 <div className={navCss.navSideButtonContainer}>{backBtn}</div>
                 {links.map(btn => (
-                  <NavButton key={btn.title} link={btn} actions={actions} />
+                  <NavButton key={btn.title} step={btn} actions={actions} />
                 ))}
                 <div className={navCss.navSideButtonContainer}>{mapBtn}</div>
               </div>

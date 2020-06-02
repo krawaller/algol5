@@ -33,7 +33,7 @@ export const NavStepRow: FunctionComponent<NavStepRowProps> = props => {
         )}
       </div>
       <div className={navCss.navRowStepContainer}>
-        <NavStep me={step} current={current} />
+        <NavStep step={step} isCurrent={current} actions={actions} />
       </div>
       <div className={classNames(navCss.navFiller, navStepCss.navStepLinkBox)}>
         {!current &&
@@ -42,7 +42,7 @@ export const NavStepRow: FunctionComponent<NavStepRowProps> = props => {
             .map(l => (
               <div className={navStepCss.navStepLinkEntry}>
                 <Arrow head="east" layout="eastwest" />
-                <NavButton link={l} actions={actions} />
+                <NavButton step={l} actions={actions} />
               </div>
             ))}
       </div>

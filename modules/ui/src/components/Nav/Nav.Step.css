@@ -14,6 +14,13 @@
   cursor: pointer;
 }
 
+.navStepCurrent {
+  background-color: white;
+  border-width: 1px;
+  color: black;
+  border-color: black;
+}
+
 .navStepCurrent:before {
   display: block;
   height: 36px;

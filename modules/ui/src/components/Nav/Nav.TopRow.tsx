@@ -23,7 +23,7 @@ export const NavTopRow: FunctionComponent<NavTopRowProps> = props => {
         <Arrow layout="eastwest" />
       </div>
       <div className={css.navSideButtonContainer}>
-        <NavButton link={{ ...link, title: "⌂" }} actions={actions} />
+        <NavButton step={{ ...link, title: "⌂" }} actions={actions} />
       </div>
     </div>
   );

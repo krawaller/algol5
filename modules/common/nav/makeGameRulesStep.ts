@@ -1,8 +1,8 @@
-import { AlgolGameBlobAnon, AlgolMeta, AlgolNavLink } from "../../types";
+import { AlgolGameBlobAnon, AlgolMeta, AlgolNavStep } from "../../types";
 
-export const makeGameRulesLink = (
+export const makeGameRulesStep = (
   meta: AlgolMeta<AlgolGameBlobAnon>
-): AlgolNavLink => ({
+): AlgolNavStep => ({
   title: `Rules`,
   desc: `How to play ${meta.name}`,
   url: `/games/${meta.slug}/rules`,

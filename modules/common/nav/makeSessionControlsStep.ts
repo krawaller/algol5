@@ -1,8 +1,8 @@
-import { BattleNavActions, AlgolNavLink } from "../../types";
+import { BattleNavActions, AlgolNavStep } from "../../types";
 
-export const makeSessionControlsLink = (
+export const makeSessionControlsStep = (
   battleNavActions: BattleNavActions
-): AlgolNavLink => ({
+): AlgolNavStep => ({
   title: "Play",
   desc: "Make a move",
   onClick: battleNavActions.toBattleControls,

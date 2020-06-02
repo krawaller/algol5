@@ -1,13 +1,13 @@
-import { AlgolLocalBattle, BattleNavActions, AlgolNavLink } from "../../types";
+import { AlgolLocalBattle, BattleNavActions, AlgolNavStep } from "../../types";
 
-type MakeSessionLobbyLinkOpts = {
+type MakeSessionLobbyStepOpts = {
   session: AlgolLocalBattle;
   battleNavActions: BattleNavActions;
 };
 
-export const makeSessionLobbyLink = (
-  opts: MakeSessionLobbyLinkOpts
-): AlgolNavLink => {
+export const makeSessionLobbyStep = (
+  opts: MakeSessionLobbyStepOpts
+): AlgolNavStep => {
   const { battleNavActions, session } = opts;
   const verb =
     session.type === "normal"

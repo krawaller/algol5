@@ -1,11 +1,11 @@
 export type AlgolNav = {
   key: string;
-  crumbs: AlgolNavLink[];
-  links: AlgolNavLink[];
-  me: AlgolNavLink;
+  crumbs: AlgolNavStep[];
+  links: AlgolNavStep[];
+  me: AlgolNavStep;
 };
 
-export type AlgolNavLink = {
+export type AlgolNavStep = {
   title: string;
   desc: string;
   url?: string;

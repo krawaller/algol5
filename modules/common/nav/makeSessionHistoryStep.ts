@@ -1,8 +1,8 @@
-import { BattleNavActions, AlgolNavLink } from "../../types";
+import { BattleNavActions, AlgolNavStep } from "../../types";
 
-export const makeSessionHistoryLink = (
+export const makeSessionHistoryStep = (
   battleNavActions: BattleNavActions
-): AlgolNavLink => ({
+): AlgolNavStep => ({
   title: "History",
   desc: "All moves in this session",
   onClick: battleNavActions.toHistory,

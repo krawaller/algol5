@@ -1,10 +1,10 @@
 import { AlgolArticle, AlgolNav } from "../../types";
 import { newsIndexNav } from "./newsIndexNav";
-import { makeNewsArticleLink } from "./makeNewsArticleLink";
+import { makeNewsArticleStep } from "./makeNewsArticleStep";
 
 export const makeNewsArticleNav = (article: AlgolArticle): AlgolNav => ({
   key: `news_${article.id}`,
   crumbs: newsIndexNav.crumbs.concat(newsIndexNav.me),
   links: [],
-  me: makeNewsArticleLink(article),
+  me: makeNewsArticleStep(article),
 });

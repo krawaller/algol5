@@ -1,10 +1,10 @@
 import { AlgolNav } from "../../types";
-import { homeLink } from "./homeLink";
-import { newsIndexLink } from "./newsIndexLink";
+import { homeStep } from "./homeStep";
+import { newsIndexStep } from "./newsIndexStep";
 
 export const newsIndexNav: AlgolNav = {
   key: "newsindexnav",
   links: [],
-  crumbs: [homeLink],
-  me: newsIndexLink,
+  crumbs: [homeStep],
+  me: newsIndexStep,
 };

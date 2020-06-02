@@ -6,9 +6,9 @@ import {
   BattleMode,
   AlgolNav,
 } from "../../types";
-import { makeSessionControlsLink } from "./makeSessionControlsLink";
-import { makeSessionHistoryLink } from "./makeSessionHistoryLink";
-import { makeSessionLobbyLink } from "./makeSessionLobbyLink";
+import { makeSessionControlsStep } from "./makeSessionControlsStep";
+import { makeSessionHistoryStep } from "./makeSessionHistoryStep";
+import { makeSessionLobbyStep } from "./makeSessionLobbyStep";
 import { makeGameNav } from "./makeGameNav";
 
 type MakeSessionNavOpts = {
@@ -24,30 +24,30 @@ export const makeSessionNav = (opts: MakeSessionNavOpts): AlgolNav => {
   gameNav.me.onClick = battleNavActions.toGameLobby;
   delete gameNav.me.url;
   const crumbs = gameNav.crumbs.concat(gameNav.me);
-  const lobbyLink = makeSessionLobbyLink(opts);
-  const historyLink = makeSessionHistoryLink(battleNavActions);
-  const controlsLink = makeSessionControlsLink(battleNavActions);
+  const lobbyStep = makeSessionLobbyStep(opts);
+  const historyStep = makeSessionHistoryStep(battleNavActions);
+  const controlsStep = makeSessionControlsStep(battleNavActions);
 
   switch (mode) {
     case "battlelobby":
       return {
         key: `session-${session.id}-lobby`,
         crumbs,
-        me: lobbyLink,
-        links: [controlsLink, historyLink],
+        me: lobbyStep,
+        links: [controlsStep, historyStep],
       };
     case "history":
       return {
         key: `session-${session.id}-history`,
-        crumbs: crumbs.concat(lobbyLink),
-        me: historyLink,
+        crumbs: crumbs.concat(lobbyStep),
+        me: historyStep,
         links: [],
       };
     case "playing":
       return {
         key: `session-${session.id}-playing`,
-        crumbs: crumbs.concat(lobbyLink),
-        me: controlsLink,
+        crumbs: crumbs.concat(lobbyStep),
+        me: controlsStep,
         links: [],
       };
     case "gamelobby":

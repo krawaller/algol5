@@ -1,12 +1,12 @@
 import { AlgolGameBlobAnon, AlgolMeta, AlgolNav } from "../../types";
-import { makeGameLink } from "./makeGameLink";
+import { makeGameStep } from "./makeGameStep";
 import { gameIndexNav } from "./gameIndexNav";
-import { makeGameAboutLink } from "./makeGameAboutLink";
-import { makeGameRulesLink } from "./makeGameRulesLink";
+import { makeGameAboutStep } from "./makeGameAboutStep";
+import { makeGameRulesStep } from "./makeGameRulesStep";
 
 export const makeGameNav = (meta: AlgolMeta<AlgolGameBlobAnon>): AlgolNav => ({
   key: `game-main-${meta.id}`,
-  me: makeGameLink(meta),
-  links: [makeGameAboutLink(meta), makeGameRulesLink(meta)],
+  me: makeGameStep(meta),
+  links: [makeGameAboutStep(meta), makeGameRulesStep(meta)],
   crumbs: gameIndexNav.crumbs.concat(gameIndexNav.me),
 });

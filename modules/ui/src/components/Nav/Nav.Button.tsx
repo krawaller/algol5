@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useMemo, SyntheticEvent } from "react";
 import css from "./Nav.cssProxy";
-import { AlgolNavLink, AppActions } from "../../../../types";
+import { AlgolNavStep, AppActions } from "../../../../types";
 
 type NavButtonProps = {
   actions: AppActions;
-  link: AlgolNavLink;
+  link: AlgolNavStep;
 };
 
 export const NavButton: FunctionComponent<NavButtonProps> = props => {

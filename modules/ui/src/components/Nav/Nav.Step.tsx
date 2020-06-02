@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from "react";
-import { AlgolNavLink } from "../../../../types";
+import { AlgolNavStep } from "../../../../types";
 import css from "./Nav.Step.cssProxy";
 
 type NavStepProps = {
-  me: AlgolNavLink;
+  me: AlgolNavStep;
   current?: boolean;
 };
 

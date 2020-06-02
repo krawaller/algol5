@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React, { FunctionComponent, Fragment } from "react";
 import { AlgolNav, AppActions } from "../../../../types";
 import css from "./Nav.cssProxy";
@@ -6,6 +7,7 @@ import { NavLinkArrowRow } from "./NavLinkArrowRow";
 import { NavStepRow } from "./Nav.StepRow";
 import { Arrow } from "../Arrow";
 import NavBetweenRow from "./Nav.BetweenRow";
+import { NavTopRow } from "./Nav.TopRow";
 
 export type NavProps = {
   nav?: AlgolNav;
@@ -30,15 +32,21 @@ export const Nav: FunctionComponent<NavProps> = props => {
   ));
   return (
     <div className={css.navContainer}>
-      {history}
-      <NavStepRow
-        step={me}
-        back={hasBackBtn ? "pipe" : "none"}
-        current
-        actions={actions}
-      />
-      <NavLinkArrowRow hasBackBtn={hasBackBtn} nbrOfLinks={me.links.length} />
-      <NavBottomRow {...props} />
+      <NavTopRow actions={actions} link={crumbs[0]} />
+      <div className={classNames(css.navRow, css.navFiller)}>
+        {hasBackBtn && <Arrow layout="northsouth" head="south" />}
+      </div>
+      <div>
+        {history}
+        <NavStepRow
+          step={me}
+          back={hasBackBtn ? "pipe" : "none"}
+          current
+          actions={actions}
+        />
+        <NavLinkArrowRow hasBackBtn={hasBackBtn} nbrOfLinks={me.links.length} />
+        <NavBottomRow {...props} />
+      </div>
     </div>
   );
 };

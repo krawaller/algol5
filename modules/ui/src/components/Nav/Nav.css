@@ -7,6 +7,12 @@
   justify-content: flex-end;
   pointer-events: none;
   position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.navFull.navContainer {
+  background-color: rgba(255, 255, 255, 0.9);
+  pointer-events: all;
 }
 
 .navRow {

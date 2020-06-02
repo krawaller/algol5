@@ -13,17 +13,9 @@ storiesOf("PayloadArticlePage", module).add(
   () => {
     const newsId = select("Tag item", articleIds, articleIds[0]);
     const article = tagArticles.find(item => item.id === newsId)!;
-    const crumbs = [
-      { content: "Tags", url: "/tags" },
-      { content: article.title },
-    ];
     return (
       <div style={{ padding: 10 }}>
-        <PayloadArticlePage
-          crumbs={crumbs}
-          actions={fakeAppActions}
-          article={article}
-        />
+        <PayloadArticlePage actions={fakeAppActions} article={article} />
       </div>
     );
   }

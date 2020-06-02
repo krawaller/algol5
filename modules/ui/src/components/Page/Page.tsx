@@ -4,7 +4,6 @@ import { AlgolError, AlgolErrorReport } from "../../../../types";
 
 type PageProps = {
   top: ReactNode;
-  strip: ReactNode;
   body: ReactNode;
   errorReport?: AlgolErrorReport;
 };
@@ -12,7 +11,7 @@ type PageProps = {
 const shown = new WeakSet<AlgolError>();
 
 export const Page: FunctionComponent<PageProps> = props => {
-  const { top, strip, body, errorReport } = props;
+  const { top, body, errorReport } = props;
   useEffect(() => {
     if (
       errorReport &&
@@ -26,7 +25,6 @@ export const Page: FunctionComponent<PageProps> = props => {
   }, [errorReport]);
   return (
     <div className={css.pageContainer}>
-      <div className={css.pageStrip}>{strip}</div>
       <div className={css.pageTop}>{top}</div>
       <div className={css.pageBody}>{body}</div>
     </div>

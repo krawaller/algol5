@@ -6,7 +6,6 @@ storiesOf("Page", module).add("The basic page shell", () => {
   return (
     <Page
       top={<img src="/images/title.png" />}
-      strip={"something something"}
       body={<p>page content goes here</p>}
     />
   );

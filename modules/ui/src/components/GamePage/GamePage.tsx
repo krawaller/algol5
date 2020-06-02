@@ -130,7 +130,6 @@ export const GamePage = (props: GamePageProps) => {
           </div>
         </>
       }
-      strip={null}
       body={body}
     />
   );

@@ -13,7 +13,6 @@ export const makePayloadArticleListPage = (
         title={title}
         list={list}
         actions={props.actions}
-        crumbs={[]} // TODO - kill
       />
     );
   };

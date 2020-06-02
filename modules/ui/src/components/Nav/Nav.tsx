@@ -40,7 +40,10 @@ export const Nav: FunctionComponent<NavProps> = props => {
     [fullNav]
   );
   return (
-    <div className={classNames(css.navContainer, fullNav && css.navFull)}>
+    <div
+      className={classNames(css.navContainer, fullNav && css.navFull)}
+      // onClick={e => setFullNav(false)}
+    >
       <div
         className={classNames(
           css.navHomeBtnContainer,

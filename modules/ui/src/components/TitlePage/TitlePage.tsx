@@ -18,7 +18,6 @@ export const TitlePage: FunctionComponent<TitlePageProps> = () => {
   return (
     <Page
       top={<img src={base64TitlePic} />}
-      strip={null}
       body={
         <Fragment>
           <ButtonGroup>

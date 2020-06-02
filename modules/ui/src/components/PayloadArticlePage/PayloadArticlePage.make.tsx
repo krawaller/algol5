@@ -4,13 +4,7 @@ import { PayloadArticlePage } from "./PayloadArticlePage";
 
 export const makePayloadArticlePage = (article: AlgolArticle) => {
   const ArticleComp: AlgolPage = props => {
-    return (
-      <PayloadArticlePage
-        crumbs={[]} // TODO - kill
-        article={article}
-        actions={props.actions}
-      />
-    );
+    return <PayloadArticlePage article={article} actions={props.actions} />;
   };
 
   ArticleComp.mainImage = article.mainImage;

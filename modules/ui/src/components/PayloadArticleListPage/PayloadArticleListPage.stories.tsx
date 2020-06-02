@@ -25,11 +25,9 @@ storiesOf("PayloadArticleListPage", module).add(
       Object.keys(lists)[0]
     ) as keyof typeof lists;
     const list = lists[title];
-    const crumbs = [{ content: title }];
     return (
       <div style={{ padding: 10 }}>
         <PayloadArticleListPage
-          crumbs={crumbs}
           actions={fakeAppActions}
           list={list}
           title={title}

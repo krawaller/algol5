@@ -80,7 +80,30 @@
   color: blue;
 }
 
-.navButtonInner:active {
+.navButtonActive {
+}
+.navButtonInner:active,
+.navButton.navButtonActive .navButtonInner {
   background-color: blue;
   color: white;
+}
+
+.navCompassBtnContainer {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  height: 21px;
+}
+
+.navCompassBtnContainer > .navButton {
+  height: 21px;
+}
+
+.navRow:not(.navAlways) {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.navFull .navRow {
+  opacity: 1;
 }

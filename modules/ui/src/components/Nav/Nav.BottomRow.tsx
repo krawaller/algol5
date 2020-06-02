@@ -15,6 +15,8 @@ type Pos = "nearer" | "further" | "same";
 export type NavBottomRowProps = {
   nav?: AlgolNav;
   actions: AppActions;
+  fullNav?: boolean;
+  onToggle?: () => void;
 };
 
 type NavBottomRowState = {
@@ -27,7 +29,7 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
     depth: -1,
     dir: "same",
   });
-  const { nav, actions } = props;
+  const { nav, actions, onToggle, fullNav } = props;
   const { crumbs, key, me } =
     nav ||
     (({
@@ -59,7 +61,6 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
       ) : null,
     [crumbs]
   );
-  const mapBtn = null;
   return (
     <TransitionGroup
       childFactory={child =>
@@ -75,12 +76,12 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
           const pos = whereAmI(status, dir);
           return (
             <div className={whatsMyClass(status, pos)}>
-              <div className={navCss.navRow}>
+              <div className={classNames(navCss.navRow, navCss.navAlways)}>
                 <div className={navCss.navSideButtonContainer}>{backBtn}</div>
                 {links.map(btn => (
                   <NavButton key={btn.title} step={btn} actions={actions} />
                 ))}
-                <div className={navCss.navSideButtonContainer}>{mapBtn}</div>
+                <div className={navCss.navSideButtonContainer} />
               </div>
             </div>
           );

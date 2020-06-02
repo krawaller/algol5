@@ -95,6 +95,17 @@
   height: 21px;
 }
 
+.navHomeBtnContainer {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 21px;
+}
+
+.navHomeBtnContainer > .navButton {
+  height: 21px;
+}
+
 .navCompassBtnContainer > .navButton {
   height: 21px;
 }
@@ -106,4 +117,8 @@
 
 .navFull .navRow {
   opacity: 1;
+}
+
+.navTopRow {
+  min-height: 21px;
 }

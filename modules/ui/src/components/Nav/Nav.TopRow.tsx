@@ -1,19 +1,18 @@
+import classNames from "classnames";
 import React, { FunctionComponent } from "react";
 import css from "./Nav.cssProxy";
-import { AppActions, AlgolNavStep } from "../../../../types";
 import { Arrow } from "../Arrow";
-import { NavButton } from "./Nav.Button";
 
 type NavTopRowProps = {
-  actions: AppActions;
-  link?: AlgolNavStep;
+  fullNav?: boolean;
 };
 
 export const NavTopRow: FunctionComponent<NavTopRowProps> = props => {
-  const { actions, link } = props;
-  if (!link) return <div className={css.navRow}></div>;
+  const { fullNav } = props;
+  if (!fullNav)
+    return <div className={classNames(css.navRow, css.navTopRow)}></div>;
   return (
-    <div className={css.navRow}>
+    <div className={classNames(css.navRow, css.navTopRow)}>
       <div className={css.navSideButtonContainer} />
       <div className={css.navFiller} />
       <div className={css.navSideButtonContainer}>
@@ -23,7 +22,7 @@ export const NavTopRow: FunctionComponent<NavTopRowProps> = props => {
         <Arrow layout="eastwest" />
       </div>
       <div className={css.navSideButtonContainer}>
-        <NavButton step={{ ...link, title: "H" }} actions={actions} />
+        {/* <Arrow layout="eastwest" /> */}
       </div>
     </div>
   );

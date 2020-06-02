@@ -49,7 +49,11 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
     () =>
       count ? (
         <NavButton
-          link={{ ...crumbs[count - 1], title: "↑", desc: "Go back" }}
+          link={{
+            ...crumbs[count - 1],
+            title: "↑",
+            desc: "Go back up one level",
+          }}
           actions={actions}
         />
       ) : null,

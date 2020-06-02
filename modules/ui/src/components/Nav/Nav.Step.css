@@ -32,6 +32,7 @@
   transform-origin: 50% 50%;
   right: -25px;
   top: 10px;
+  padding-top: 1px;
 }
 
 .navStep:hover {
@@ -40,10 +41,10 @@
 
 .navStepTitle {
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .navStepDesc {
-  margin-bottom: 0;
+  margin: 0;
   font-size: 0.8em;
 }

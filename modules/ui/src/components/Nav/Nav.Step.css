@@ -48,3 +48,15 @@
   margin: 0;
   font-size: 0.8em;
 }
+
+.navStepLinkBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.navStepLinkEntry {
+  display: flex;
+  font-size: 0.8em;
+  align-items: center;
+}

@@ -59,12 +59,13 @@ export const Nav: FunctionComponent<NavProps> = props => {
         {hasBackBtn && <Arrow layout="northsouth" head="south" />}
       </div>
       <div>
-        <NavCrumbs actions={actions} nav={nav} />
+        <NavCrumbs actions={actions} nav={nav} mute={!fullNav} />
         <NavStepRow
           step={me}
           back={hasBackBtn ? "pipe" : "none"}
           current
           actions={actions}
+          mute={!fullNav}
         />
         <NavLinkArrowRow hasBackBtn={hasBackBtn} nbrOfLinks={me.links.length} />
         <NavBottomRow {...props} />

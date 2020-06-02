@@ -8,19 +8,26 @@ type NavButtonProps = {
   actions: AppActions;
   step: AlgolNavStep;
   active?: boolean;
+  mute?: boolean;
 };
 
 export const NavButton: FunctionComponent<NavButtonProps> = props => {
-  const { actions, step, active } = props;
+  const { actions, step, active, mute } = props;
   const { title, desc, url } = step;
   const handleClick = useNavHandler({ actions, step });
   return (
-    <div className={classNames(css.navButton, active && css.navButtonActive)}>
+    <div
+      className={classNames(
+        css.navButton,
+        active && css.navButtonActive,
+        mute && css.navMute
+      )}
+    >
       <a
         href={url}
         className={css.navButtonInner}
         title={desc}
-        onClick={handleClick}
+        onClick={mute ? undefined : handleClick}
       >
         {title}
       </a>

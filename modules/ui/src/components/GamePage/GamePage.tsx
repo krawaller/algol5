@@ -19,7 +19,6 @@ import { BattleHistory } from "../BattleHistory";
 import { useUI } from "./GamePage.useUI";
 import { useBattle } from "./GamePage.useBattle";
 import { useActions } from "./GamePage.useActions";
-import { SessionViewSelector } from "../SessionViewSelector";
 import { BattleMove } from "../BattleMove";
 import { getLatestSessionId } from "../../../../local/src";
 import { BattleMode } from "../../../../types/page/battleActions";
@@ -106,29 +105,20 @@ export const GamePage = (props: GamePageProps) => {
     );
   }
 
-  let viewSelector = mode !== "gamelobby" && (
-    <SessionViewSelector mode={mode} actions={actions} />
-  );
-
   return (
     <Page
       errorReport={errorReport}
       top={
-        <>
-          <Board
-            callback={actions.mark}
-            graphics={graphics}
-            units={ui.board.units}
-            marks={ui.board.marks}
-            potentialMarks={ui.board.potentialMarks}
-            anim={ui.board.anim}
-            active={mode === "playing" && !battle!.gameEndedBy}
-            name={mode !== "gamelobby" ? battle!.variant.board : "basic"}
-          />{" "}
-          <div className={css.gamePageViewSelectorContainer}>
-            {viewSelector}
-          </div>
-        </>
+        <Board
+          callback={actions.mark}
+          graphics={graphics}
+          units={ui.board.units}
+          marks={ui.board.marks}
+          potentialMarks={ui.board.potentialMarks}
+          anim={ui.board.anim}
+          active={mode === "playing" && !battle!.gameEndedBy}
+          name={mode !== "gamelobby" ? battle!.variant.board : "basic"}
+        />
       }
       body={body}
     />

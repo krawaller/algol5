@@ -1,6 +1,9 @@
 const path = require("path");
 
 module.exports = {
+  devIndicators: {
+    autoPrerender: false,
+  },
   exportTrailingSlash: true,
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     const babelRule = config.module.rules.find(

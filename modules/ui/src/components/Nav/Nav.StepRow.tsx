@@ -12,12 +12,13 @@ type NavStepRowProps = {
   back: "pipe" | "this" | "none";
   step: AlgolNavStep;
   current?: boolean;
+  mute?: boolean;
   skipLink?: string;
   actions: AppActions;
 };
 
 export const NavStepRow: FunctionComponent<NavStepRowProps> = props => {
-  const { back, step, current, skipLink, actions } = props;
+  const { back, step, current, skipLink, actions, mute } = props;
   return (
     <div className={navCss.navRow}>
       <div className={classNames(navCss.navFiller, navCss.navFlexLeft)}>
@@ -33,16 +34,21 @@ export const NavStepRow: FunctionComponent<NavStepRowProps> = props => {
         )}
       </div>
       <div className={navCss.navRowStepContainer}>
-        <NavStep step={step} isCurrent={current} actions={actions} />
+        <NavStep
+          step={step}
+          isCurrent={current}
+          actions={actions}
+          mute={mute}
+        />
       </div>
       <div className={classNames(navCss.navFiller, navStepCss.navStepLinkBox)}>
         {!current &&
           step.links
             .filter(l => l.title != skipLink)
             .map(l => (
-              <div className={navStepCss.navStepLinkEntry}>
+              <div className={navStepCss.navStepLinkEntry} key={l.title}>
                 <Arrow head="east" layout="eastwest" />
-                <NavButton step={l} actions={actions} />
+                <NavButton step={l} actions={actions} mute={mute} />
               </div>
             ))}
       </div>

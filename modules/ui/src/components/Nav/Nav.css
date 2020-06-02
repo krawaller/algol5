@@ -128,3 +128,8 @@
 .navTopRow {
   min-height: 21px;
 }
+
+.navMute {
+  pointer-events: none !important;
+  cursor: inherit;
+}

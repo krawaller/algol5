@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React, { FunctionComponent } from "react";
-import css from "./Nav.cssProxy";
+import navCss from "./Nav.cssProxy";
+import hintCss from "./Nav.Hint.cssProxy";
 import { Arrow } from "../Arrow";
 import { ArrowMulti } from "../Arrow/Arrow.Multi";
 
@@ -18,7 +19,7 @@ export const NavLinkArrowRow: FunctionComponent<NavLinkArrowRowProps> = props =>
     if (i % 2) {
       // filler
       pieces.push(
-        <div key={i} className={css.navFiller}>
+        <div key={i} className={navCss.navFiller}>
           {i === middle ? (
             <ArrowMulti northwest northeast />
           ) : i > 1 && i < pieceCount ? (
@@ -29,7 +30,7 @@ export const NavLinkArrowRow: FunctionComponent<NavLinkArrowRowProps> = props =>
     } else {
       // above button
       pieces.push(
-        <div key={i} className={css.navButton}>
+        <div key={i} className={navCss.navButton}>
           {i < middle ? (
             i === 2 ? (
               <Arrow layout="southeast" head="south" />
@@ -52,12 +53,17 @@ export const NavLinkArrowRow: FunctionComponent<NavLinkArrowRowProps> = props =>
     }
   }
   return (
-    <div className={classNames(css.navRow, css.navLinkArrowRow)}>
-      <div className={css.navSideButtonContainer}>
+    <div className={classNames(navCss.navRow, navCss.navLinkArrowRow)}>
+      <div
+        className={classNames(
+          navCss.navSideButtonContainer,
+          hasBackBtn && hintCss.navHintBack
+        )}
+      >
         {hasBackBtn && <Arrow layout="northsouth" />}
       </div>
       {pieces}
-      <div className={css.navSideButtonContainer}></div>
+      <div className={navCss.navSideButtonContainer}></div>
     </div>
   );
 };

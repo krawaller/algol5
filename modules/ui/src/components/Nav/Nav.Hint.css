@@ -1,0 +1,47 @@
+.navHintBack,
+.navHintYouAreHere,
+.navHintHome {
+  position: relative;
+}
+
+.navHintBack:before,
+.navHintYouAreHere:before,
+.navHintHome:before {
+  display: block;
+  height: 36px;
+  width: 36px;
+  line-height: 10px;
+  box-sizing: border-box;
+  padding: 0 4px;
+  border-radius: 20px;
+  background-color: rgb(119, 115, 115);
+  color: white;
+  font-size: 8px;
+  font-family: verdana;
+  position: absolute;
+  transform-origin: 50% 50%;
+  right: 0px;
+  top: 0px;
+  z-index: 1;
+  padding-top: 1px;
+  text-align: center;
+}
+
+.navHintYouAreHere:before {
+  content: "you are here";
+  background-color: red;
+  transform: rotate(20deg);
+  right: -30px;
+  top: 10px;
+}
+
+.navHintBack:before {
+  content: "go up one step";
+  transform: rotate(-20deg);
+}
+
+.navHintHome:before {
+  right: -52px;
+  top: -8px;
+  content: "go back home";
+}

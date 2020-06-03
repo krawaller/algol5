@@ -3,6 +3,7 @@ import React, { FunctionComponent } from "react";
 import { AlgolNavStep, AppActions } from "../../../../types";
 import stepCss from "./Nav.Step.cssProxy";
 import navCss from "./Nav.cssProxy";
+import hintCss from "./Nav.Hint.cssProxy";
 import { useNavHandler } from "./Nav.useNavHandler";
 
 type NavStepProps = {
@@ -21,6 +22,7 @@ export const NavStep: FunctionComponent<NavStepProps> = props => {
       className={classNames(
         stepCss.navStep,
         isCurrent && stepCss.navStepCurrent,
+        isCurrent && hintCss.navHintYouAreHere,
         mute && navCss.navMute
       )}
       onClick={isCurrent || mute ? undefined : handleClick}

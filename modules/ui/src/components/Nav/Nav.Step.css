@@ -21,28 +21,7 @@
   border-color: black;
 }
 
-.navStepCurrent:before {
-  display: block;
-  height: 36px;
-  width: 36px;
-  line-height: 10px;
-  box-sizing: border-box;
-  padding: 0 4px;
-  content: "you are here";
-  border-radius: 20px;
-  background-color: red;
-  color: white;
-  font-size: 8px;
-  font-family: verdana;
-  position: absolute;
-  transform: rotate(20deg);
-  transform-origin: 50% 50%;
-  right: -25px;
-  top: 10px;
-  padding-top: 1px;
-}
-
-.navStep:hover {
+.navStep:not(.navStepCurrent):hover {
   background-color: rgb(169, 184, 216);
 }
 

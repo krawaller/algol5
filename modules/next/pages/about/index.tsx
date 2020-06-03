@@ -4,7 +4,7 @@ import { aboutIndexNav } from "../../../common/nav/aboutIndexNav";
 
 // TODO - more metadata!
 
-const AboutIndexPage = makePayloadArticleListPage(about, "About");
+const AboutIndexPage = makePayloadArticleListPage(about, "About Chessicals");
 
 AboutIndexPage.nav = aboutIndexNav;
 AboutIndexPage.title = "About Chessicals";

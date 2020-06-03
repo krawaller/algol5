@@ -4,7 +4,10 @@ import { tagIndexNav } from "../../../common/nav/tagIndexNav";
 
 // TODO - more metadata!
 
-const TagIndexPage = makePayloadArticleListPage(tags, "Tags");
+const TagIndexPage = makePayloadArticleListPage(
+  tags,
+  "Tags for sorting the games"
+);
 
 TagIndexPage.nav = tagIndexNav;
 TagIndexPage.title = "Tags";

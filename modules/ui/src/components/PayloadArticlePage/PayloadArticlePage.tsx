@@ -14,9 +14,8 @@ export const PayloadArticlePage: FunctionComponent<PayloadArticlePageProps> = pr
   const { actions, article } = props;
   const body = (
     <ScrollBox>
-      <h3 className={css.payloadArticlePageTitle}>{article.title}</h3>
       <PayloadArticle actions={actions} article={article} />
     </ScrollBox>
   );
-  return <Page top={null} body={body} />;
+  return <Page title={article.title} top={null} body={body} />;
 };

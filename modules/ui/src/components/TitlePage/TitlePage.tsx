@@ -17,6 +17,7 @@ type TitlePageProps = {
 export const TitlePage: FunctionComponent<TitlePageProps> = () => {
   return (
     <Page
+      title="Welcome to Chessicals!"
       top={<img src={base64TitlePic} />}
       body={
         <Fragment>

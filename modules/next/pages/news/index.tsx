@@ -4,7 +4,7 @@ import { newsIndexNav } from "../../../common/nav/newsIndexNav";
 
 // TODO - more metadata!
 
-const NewsIndexPage = makePayloadArticleListPage(news, "News");
+const NewsIndexPage = makePayloadArticleListPage(news, "News about Chessicals");
 
 NewsIndexPage.title = "News";
 NewsIndexPage.nav = newsIndexNav;

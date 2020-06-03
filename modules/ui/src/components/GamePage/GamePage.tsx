@@ -105,9 +105,24 @@ export const GamePage = (props: GamePageProps) => {
     );
   }
 
+  const name = gamePayload.meta.name;
+  const title =
+    mode === "playing"
+      ? "Making a move"
+      : mode === "history"
+      ? "Battle history"
+      : mode === "battlelobby"
+      ? battle!.history!.length
+        ? "New battle"
+        : battle!.gameEndedBy
+        ? "Finished battle"
+        : "Ongoing battle"
+      : name;
+
   return (
     <Page
       errorReport={errorReport}
+      title={gamePayload.meta.name}
       top={
         <Board
           callback={actions.mark}

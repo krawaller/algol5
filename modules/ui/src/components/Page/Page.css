@@ -5,6 +5,17 @@
   flex-direction: column;
 }
 
+.pageStrip {
+  background-color: sandybrown;
+  height: 2em;
+  display: flex;
+  padding: 0 5px;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  font-family: verdana;
+}
+
 .pageTop {
   background-color: saddlebrown; /* should be same as board border */
   flex-shrink: 0;

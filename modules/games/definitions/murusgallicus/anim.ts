@@ -12,9 +12,13 @@ import { MurusgallicusDefinition } from "./_types";
 
 const murusgallicusAnim: MurusgallicusDefinition["anim"] = {
   sacrifice: [{ exitto: ["selecttower", "selectcrush"] }],
-  crush: [{ ghost: ["selecttower", "selectcrush", "walls", ["player"]] }],
+  crush: [
+    { ghost: ["selecttower", "selectcrush", "walls", ["player"]] },
+    { exitto: ["selecttower", "selectcrush"] },
+  ],
   move: [
     { enterin: ["madewalls", "selecttower"] },
+    { exitto: ["selecttower", "selectmove"] },
     { ghosttoin: ["madetowers", "selecttower", "walls", ["player"]] },
     { ghosttoin: ["madecatapults", "selecttower", "walls", ["player"]] },
   ],

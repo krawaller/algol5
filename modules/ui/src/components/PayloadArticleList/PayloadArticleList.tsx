@@ -1,15 +1,10 @@
 import React, { FunctionComponent, useEffect, useMemo } from "react";
 import css from "./PayloadArticleList.cssProxy";
 import { PayloadArticleListItem } from "./PayloadArticleList.Item";
-import { AlgolListing } from "../../../../types";
-
-export interface PayloadArticleListActions {
-  prefetch: (str: string) => void;
-  navTo: (id: string) => void;
-}
+import { AlgolListing, AppActions } from "../../../../types";
 
 export type PayloadArticleListProps = {
-  actions: PayloadArticleListActions;
+  actions: AppActions;
   reverse?: boolean;
   list: AlgolListing[];
 };

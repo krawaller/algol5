@@ -1,5 +1,6 @@
 import path from "path";
 import fs from "fs-extra";
+import resizeImg from "resize-img";
 import lib from "../../../games/dist/lib";
 import { render } from "../../render";
 import { arrangement2sprites } from "../../../common";
@@ -45,8 +46,16 @@ export const renderGameActionShots = async (gameId: string) => {
           out.on("finish", resolve);
           pngBuffer.pipe(out);
         });
+        // Write small JPG pic
+        const smallPath = path.join(target, `${fileName}_small.jpg`);
+        const smallJpg = await resizeImg(fs.readFileSync(pngPath), {
+          width: 140,
+          height: 140,
+          format: "jpg",
+        });
+        fs.writeFileSync(smallPath, smallJpg);
         // Write TS pic
-        const dataURI = img2data(svgPath);
+        const dataURI = img2data(smallPath); // TODO - try SVG pic without definitions?
         const dataURIcode = `export const dataURI = \`${dataURI}\`;\n`;
         const dataURIpath = path.join(target, `${fileName}.ts`);
         await fs.writeFile(dataURIpath, dataURIcode);

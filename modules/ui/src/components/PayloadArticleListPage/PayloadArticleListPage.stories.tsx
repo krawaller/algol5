@@ -14,6 +14,7 @@ const lists = {
 };
 
 import { PayloadArticleListPage } from ".";
+import { fakeAppActions } from "../../../../types";
 
 storiesOf("PayloadArticleListPage", module).add(
   "A common PayloadArticleListPage component",
@@ -24,16 +25,10 @@ storiesOf("PayloadArticleListPage", module).add(
       Object.keys(lists)[0]
     ) as keyof typeof lists;
     const list = lists[title];
-    const actions = {
-      navTo: (url: string) => console.log("Nav to", url),
-      prefetch: (url: string) => console.log("Prefetch", url),
-    };
-    const crumbs = [{ content: title }];
     return (
       <div style={{ padding: 10 }}>
         <PayloadArticleListPage
-          crumbs={crumbs}
-          actions={actions}
+          actions={fakeAppActions}
           list={list}
           title={title}
         />

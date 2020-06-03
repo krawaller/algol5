@@ -1,4 +1,4 @@
-import React, { useCallback, CSSProperties, useRef } from "react";
+import React, { useCallback } from "react";
 import classnames from "classnames";
 import { positionStyles } from "../../helpers";
 import styles from "./Mark.cssProxy";

@@ -121,8 +121,8 @@ export function useBattle(
       }
     }
   }, [sessionId, api]);
-  const currentSessionId = state.session?.id;
-  const hasMoves = (state.battle?.history.length || 0) >= 2;
+  const currentSessionId = state.session && state.session.id;
+  const hasMoves = ((state.battle && state.battle.history.length) || 0) >= 2;
   useEffect(() => {
     // If we're in a new session that now has proper history, navigate to it
     if (

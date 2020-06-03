@@ -4,8 +4,8 @@ import {
   AlgolBattleUI,
   AlgolDemo,
 } from "../../../../types";
-import { useMemo } from "react";
-import { demo2ui, emptyBattleUI } from "../../../../common";
+import { useMemo, useRef } from "react";
+import { demo2ui, emptyBattleUI, emptyAnim } from "../../../../common";
 import { useDemo } from "../../helpers";
 
 export const useUI = (
@@ -20,6 +20,7 @@ export const useUI = (
     playing: mode === "gamelobby",
     restart: true,
   });
+  const prevBattleFrame = useRef(0);
   return useMemo(() => {
     if (mode === "gamelobby") {
       return hydrDemo ? demo2ui(hydrDemo, demoFrame) : emptyBattleUI;
@@ -30,13 +31,22 @@ export const useUI = (
         return battleUi;
       }
       if (mode === "history") {
-        return {
+        const historyUI = {
           ...battleUi,
           turnNumber: battle!.history[battleFrame].turn,
           player: battle!.history[battleFrame].player,
           board: battle!.history[battleFrame].board,
           instruction: battle!.history[battleFrame].description,
         };
+        //console.log("BATTLE", battle, battle!.history[battleFrame]);
+        if (prevBattleFrame.current !== battleFrame) {
+          if (prevBattleFrame.current !== battleFrame - 1) {
+            //console.log("ALARM", prevBattleFrame.current, battleFrame);
+            historyUI.board.anim = emptyAnim;
+          }
+          prevBattleFrame.current = battleFrame;
+        }
+        return historyUI;
       }
       return {
         ...battleUi,

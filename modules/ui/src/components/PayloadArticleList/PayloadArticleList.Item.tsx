@@ -1,15 +1,10 @@
 import React, { FunctionComponent, useCallback } from "react";
 import css from "./PayloadArticleList.cssProxy";
 import { Link } from "../Link";
-import { AlgolListing } from "../../../../types";
-
-export interface PayloadArticleListItemActions {
-  navTo: (url: string) => void;
-  prefetch: (url: string) => void;
-}
+import { AlgolListing, AppActions } from "../../../../types";
 
 type PayloadArticleListItemProps = {
-  actions: PayloadArticleListItemActions;
+  actions: AppActions;
   listing: AlgolListing;
 };
 

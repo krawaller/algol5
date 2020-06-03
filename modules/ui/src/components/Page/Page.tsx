@@ -1,11 +1,10 @@
 import React, { FunctionComponent, ReactNode, useEffect } from "react";
-import Div100vh from "react-div-100vh";
 import css from "./Page.cssProxy";
 import { AlgolError, AlgolErrorReport } from "../../../../types";
 
 type PageProps = {
+  title: ReactNode;
   top: ReactNode;
-  strip: ReactNode;
   body: ReactNode;
   errorReport?: AlgolErrorReport;
 };
@@ -13,7 +12,7 @@ type PageProps = {
 const shown = new WeakSet<AlgolError>();
 
 export const Page: FunctionComponent<PageProps> = props => {
-  const { top, strip, body, errorReport } = props;
+  const { top, body, errorReport, title } = props;
   useEffect(() => {
     if (
       errorReport &&
@@ -26,10 +25,10 @@ export const Page: FunctionComponent<PageProps> = props => {
     }
   }, [errorReport]);
   return (
-    <Div100vh className={css.pageContainer}>
-      <div className={css.pageStrip}>{strip}</div>
+    <div className={css.pageContainer}>
+      <div className={css.pageStrip}>{title}</div>
       <div className={css.pageTop}>{top}</div>
       <div className={css.pageBody}>{body}</div>
-    </Div100vh>
+    </div>
   );
 };

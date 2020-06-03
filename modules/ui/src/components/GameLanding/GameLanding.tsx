@@ -12,8 +12,6 @@ import { Button } from "../Button";
 import { NewLocalSession, NewLocalSessionActions } from "../NewLocalSession";
 import { useModal } from "../../helpers";
 import { ButtonGroup } from "../ButtonGroup";
-import { gameSlug } from "../../../../common";
-import { Link } from "../Link";
 
 export interface GameLandingActions {
   navTo: (path: string) => void;
@@ -60,23 +58,8 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
     <Fragment>
       <ButtonGroup>
         <Button big onClick={openSessionModal}>
-          Local
+          Play {meta.name}!
         </Button>
-        <Button disabled="Online play will come in a future version!">
-          Remote
-        </Button>
-        <Link
-          text="About"
-          url={`/games/${gameSlug(meta)}/about`}
-          actions={actions}
-          styleMode="asButton"
-        />
-        <Link
-          text="Rules"
-          url={`/games/${gameSlug(meta)}/rules`}
-          actions={actions}
-          styleMode="asButton"
-        />
       </ButtonGroup>
       <div className={styles.gameLandingQuote}>{meta.tagline}</div>
       <Modal

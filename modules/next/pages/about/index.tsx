@@ -1,28 +1,13 @@
-import React, { Fragment } from "react";
-import Head from "next/head";
-
-import { pageActions } from "../../helpers";
-import { PayloadArticleListPage } from "../../../ui/src/components/PayloadArticleListPage";
+import { makePayloadArticleListPage } from "../../../ui/src/components/PayloadArticleListPage";
 import about from "../../../payloads/dist/listings/about";
+import { aboutIndexNav } from "../../../common/nav/aboutIndexNav";
 
-// TODO - metadata!
+// TODO - more metadata!
 
-const crumbs = [{ content: "About" }];
+const AboutIndexPage = makePayloadArticleListPage(about, "About Chessicals");
 
-const IndexPage = () => {
-  return (
-    <Fragment>
-      <Head>
-        <title>Chessicals</title>
-      </Head>
-      <PayloadArticleListPage
-        crumbs={crumbs}
-        actions={pageActions}
-        title="About Chessicals"
-        list={about}
-      />
-    </Fragment>
-  );
-};
+AboutIndexPage.nav = aboutIndexNav;
+AboutIndexPage.title = "About Chessicals";
+AboutIndexPage.metaDesc = "Articles with more information about Chessicals";
 
-export default IndexPage;
+export default AboutIndexPage;

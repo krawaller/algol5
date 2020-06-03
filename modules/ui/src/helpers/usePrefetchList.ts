@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
-import { PageActions } from "./pageActions";
+import { AppActions } from "../../../types";
 
-export const usePrefetchList = (actions: PageActions, urls: string[]) => {
+export const usePrefetchList = (actions: AppActions, urls: string[]) => {
   const interval = useRef<ReturnType<typeof setInterval> | null>(null);
   const idx = useRef<number>(0);
   useEffect(() => {

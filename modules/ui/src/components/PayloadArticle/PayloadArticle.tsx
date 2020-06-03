@@ -1,16 +1,11 @@
 import React, { Fragment, FunctionComponent } from "react";
 import css from "./PayloadArticle.cssProxy";
-import { AlgolArticle } from "../../../../types";
+import { AlgolArticle, AppActions } from "../../../../types";
 import { Markdown } from "../Markdown";
 import { PayloadArticleList } from "../PayloadArticleList";
 
-export interface PayloadArticleActions {
-  prefetch: (str: string) => void;
-  navTo: (id: string) => void;
-}
-
 type PayloadArticleProps = {
-  actions: PayloadArticleActions;
+  actions: AppActions;
   article: AlgolArticle;
 };
 

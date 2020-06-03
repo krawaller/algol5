@@ -1,18 +1,15 @@
-import React, { Fragment } from "react";
-import Head from "next/head";
+import React from "react";
 
-import { pageActions } from "../helpers";
+import { AlgolPage } from "../../ui/src/helpers/AlgolPage";
 import { TitlePage } from "../../ui/src/components/TitlePage";
+import { homeNav } from "../../common/nav/homeNav";
 
-const IndexPage = () => {
-  return (
-    <Fragment>
-      <Head>
-        <title>Chessicals</title>
-      </Head>
-      <TitlePage actions={pageActions} />
-    </Fragment>
-  );
+const IndexPage: AlgolPage = props => {
+  return <TitlePage actions={props.actions} />;
 };
+
+IndexPage.title = "Chessicals";
+IndexPage.nav = homeNav;
+IndexPage.mainImage = "/images/title.png";
 
 export default IndexPage;

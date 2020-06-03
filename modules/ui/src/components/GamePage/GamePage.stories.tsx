@@ -6,6 +6,7 @@ import { GamePage } from ".";
 import { GameId, list } from "../../../../games/dist/list";
 
 import allGamePayloads from "../../../../payloads/dist/games";
+import { fakeAppActions, fakeBattleNavActions } from "../../../../types";
 
 storiesOf("GamePage", module).add(
   "Used for individual game pages in the app",
@@ -17,9 +18,10 @@ storiesOf("GamePage", module).add(
         key={gameId}
         gamePayload={payload}
         actions={{
-          navTo: str => console.log("nav to", str),
-          prefetch: str => console.log("prefetch", str),
+          ...fakeAppActions,
+          ...fakeBattleNavActions,
         }}
+        ctxt={{ mode: "gamelobby", sessionId: null }}
       />
     );
   }

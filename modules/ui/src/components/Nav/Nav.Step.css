@@ -1,0 +1,48 @@
+.navStep {
+  border: 1px solid blue;
+  background-color: rgb(210, 217, 231);
+  border-radius: 8px;
+  padding: 5px;
+  color: blue;
+  font-family: verdana;
+  text-align: center;
+  position: relative;
+}
+
+.navStep:not(.navStepCurrent) {
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.navStepCurrent {
+  background-color: white;
+  border-width: 1px;
+  color: black;
+  border-color: black;
+}
+
+.navStep:not(.navStepCurrent):hover {
+  background-color: rgb(169, 184, 216);
+}
+
+.navStepTitle {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.navStepDesc {
+  margin: 0;
+  font-size: 0.8em;
+}
+
+.navStepLinkBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.navStepLinkEntry {
+  display: flex;
+  font-size: 0.8em;
+  align-items: center;
+}

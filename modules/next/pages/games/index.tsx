@@ -1,28 +1,13 @@
-import React, { Fragment } from "react";
-import Head from "next/head";
-
-import { pageActions } from "../../helpers";
-import { PayloadArticleListPage } from "../../../ui/src/components/PayloadArticleListPage";
+import { makePayloadArticleListPage } from "../../../ui/src/components/PayloadArticleListPage";
 import games from "../../../payloads/dist/listings/games";
+import { gameIndexNav } from "../../../common/nav/gameIndexNav";
 
-// TODO - metadata!
+// TODO - more metadata!
 
-const crumbs = [{ content: "Games" }];
+const title = `All ${games.length} games`;
 
-const IndexPage = () => {
-  return (
-    <Fragment>
-      <Head>
-        <title>Chessicals</title>
-      </Head>
-      <PayloadArticleListPage
-        crumbs={crumbs}
-        actions={pageActions}
-        title={`All ${games.length} games`}
-        list={games}
-      />
-    </Fragment>
-  );
-};
+const GameIndexPage = makePayloadArticleListPage(games, title);
+GameIndexPage.title = title;
+GameIndexPage.nav = gameIndexNav;
 
-export default IndexPage;
+export default GameIndexPage;

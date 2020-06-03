@@ -1,0 +1,136 @@
+.navContainer {
+  height: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  pointer-events: none;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.navFull.navContainer {
+  background-color: rgba(255, 255, 255, 0.9);
+  pointer-events: all;
+}
+
+.navRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navBetweenRow {
+  min-height: 30px;
+  flex: 1;
+}
+
+.navRowStepContainer {
+  max-width: 40%;
+}
+
+.navLinkArrowRow {
+  min-height: 49px;
+}
+
+.navButton {
+  width: 70px;
+}
+
+.navFiller {
+  flex: 1;
+}
+
+.navFlexLeft {
+  justify-content: flex-start;
+  display: flex;
+  align-items: stretch;
+}
+
+.navButtonInner {
+  pointer-events: all;
+  padding: 0 3px;
+  border: 1px solid blue;
+  color: blue;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: rgb(210, 217, 231);
+  text-decoration: none;
+  text-align: center;
+  user-select: none;
+  font-family: verdana;
+  display: block;
+}
+
+.navSideButtonContainer,
+.navSideButtonContainer .navButton {
+  width: 35px;
+  min-width: 35px;
+}
+
+.navMapButtonContainer {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.navBackButtonContainer .navButton {
+  min-width: 25px;
+}
+
+.navButtonInner:hover {
+  background-color: rgb(169, 184, 216);
+}
+
+.navButtonInner:visited {
+  color: blue;
+}
+
+.navButtonActive {
+}
+.navButtonInner:active,
+.navButton.navButtonActive .navButtonInner {
+  background-color: blue;
+  color: white;
+}
+
+.navCompassBtnContainer {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  height: 21px;
+}
+
+.navHomeBtnContainer {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  height: 21px;
+  z-index: 5px; /* to be above toprow */
+}
+
+.navHomeBtnContainer > .navButton {
+  height: 21px;
+}
+
+.navCompassBtnContainer > .navButton {
+  height: 21px;
+}
+
+.navRow:not(.navAlways) {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.navFull .navRow {
+  opacity: 1;
+}
+
+.navTopRow {
+  min-height: 21px;
+}
+
+.navMute {
+  pointer-events: none !important;
+  cursor: inherit;
+}

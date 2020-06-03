@@ -1,13 +1,13 @@
-import { useMemo, useReducer } from "react";
-
-type Mode = "gamelobby" | "battlelobby" | "playing" | "history";
+import { useMemo, useReducer, useEffect } from "react";
+import { BattleNavActions, BattleMode } from "../../types";
 
 type Action =
-  | Mode
+  | "reset"
+  | BattleMode
   | ["load", string]
-  | ["load", string, Mode | undefined]
-  | ["new", string, Mode | undefined];
-type State = [Mode, string | null];
+  | ["load", string, BattleMode | undefined]
+  | ["new", string, BattleMode | undefined];
+type State = [BattleMode, string | null];
 
 const reducer = (state: State, action: Action): State => {
   const [mode, sessionId] = state;
@@ -15,6 +15,7 @@ const reducer = (state: State, action: Action): State => {
   if (action === "gamelobby") return ["gamelobby", sessionId];
   if (action === "history") return ["history", sessionId];
   if (action === "playing") return ["playing", sessionId];
+  if (action === "reset") return ["gamelobby", null];
   if (Array.isArray(action)) {
     if (action[0] === "load") return [action[2] || "battlelobby", action[1]];
     if (action[0] === "new")
@@ -23,25 +24,24 @@ const reducer = (state: State, action: Action): State => {
   throw new Error(`Unknown action: ${JSON.stringify(action || {})}`);
 };
 
-export const useMode = () => {
+export const useBattleNavActions = (domain?: string) => {
   const [[mode, sessionId], dispatch] = useReducer(reducer, [
     "gamelobby",
     null,
   ]);
-  const actions = useMemo(
+  useEffect(() => dispatch("reset"), [domain]);
+  const actions: BattleNavActions = useMemo(
     () => ({
       toHistory: () => dispatch("history"),
       toGameLobby: () => dispatch("gamelobby"),
       toBattleLobby: () => dispatch("battlelobby"),
       toBattleControls: () => dispatch("playing"),
-      toSession: (sessionId: string, mode?: Mode) =>
+      toSession: (sessionId: string, mode?: BattleMode) =>
         dispatch(["load", sessionId, mode]),
-      newLocalBattle: (code: string, mode?: Mode) =>
+      newLocalBattle: (code: string, mode?: BattleMode) =>
         dispatch(["new", code, mode]),
     }),
     []
   );
   return [mode, sessionId, actions] as const;
 };
-
-export type ModeActions = ReturnType<typeof useMode>[2];

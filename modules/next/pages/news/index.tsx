@@ -1,28 +1,12 @@
-import React, { Fragment } from "react";
-import Head from "next/head";
-
-import { pageActions } from "../../helpers";
-import { PayloadArticleListPage } from "../../../ui/src/components/PayloadArticleListPage";
+import { makePayloadArticleListPage } from "../../../ui/src/components/PayloadArticleListPage";
 import news from "../../../payloads/dist/listings/news";
+import { newsIndexNav } from "../../../common/nav/newsIndexNav";
 
-// TODO - metadata!
+// TODO - more metadata!
 
-const crumbs = [{ content: "News" }];
+const NewsIndexPage = makePayloadArticleListPage(news, "News about Chessicals");
 
-const IndexPage = () => {
-  return (
-    <Fragment>
-      <Head>
-        <title>Chessicals</title>
-      </Head>
-      <PayloadArticleListPage
-        crumbs={crumbs}
-        actions={pageActions}
-        title="News"
-        list={news}
-      />
-    </Fragment>
-  );
-};
+NewsIndexPage.title = "News";
+NewsIndexPage.nav = newsIndexNav;
 
-export default IndexPage;
+export default NewsIndexPage;

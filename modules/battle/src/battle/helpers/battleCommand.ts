@@ -46,7 +46,7 @@ export function battleCommand(
         board: {
           marks: oldState.board.marks,
           units: newStep.UNITDATA,
-          anim: oldStep.anim || emptyAnim,
+          anim: newStep.anim || emptyAnim,
           potentialMarks: EMPTYARR,
         },
       }),

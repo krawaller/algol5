@@ -14,16 +14,14 @@ export const NavTopRow: FunctionComponent<NavTopRowProps> = props => {
   return (
     <div className={classNames(css.navRow, css.navTopRow)}>
       <div className={css.navSideButtonContainer} />
-      <div className={css.navFiller} />
-      <div className={css.navSideButtonContainer}>
-        <Arrow layout="southeast" />
-      </div>
       <div className={css.navFiller}>
         <Arrow layout="eastwest" />
       </div>
       <div className={css.navSideButtonContainer}>
-        {/* <Arrow layout="eastwest" /> */}
+        <Arrow layout="southwest" />
       </div>
+      <div className={css.navFiller}></div>
+      <div className={css.navSideButtonContainer} />
     </div>
   );
 };

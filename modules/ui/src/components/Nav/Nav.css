@@ -104,7 +104,7 @@
 .navHomeBtnContainer {
   position: absolute;
   top: 5px;
-  right: 5px;
+  left: 5px;
   height: 21px;
 }
 

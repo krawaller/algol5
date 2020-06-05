@@ -15,6 +15,8 @@ export type NavProps = {
   actions: AppActions;
 };
 
+const prefetched: Record<string, boolean> = {};
+
 export const Nav: FunctionComponent<NavProps> = props => {
   const [fullNav, setFullNav] = useState(false);
   const { nav, actions } = props;
@@ -23,6 +25,18 @@ export const Nav: FunctionComponent<NavProps> = props => {
   const hasBackBtn = Boolean(nav && crumbs.length > 0);
   useEffect(() => {
     setFullNav(false);
+    if (nav) {
+      const allSteps = nav.crumbs.concat(nav.me).flatMap(s => [s, ...s.links]);
+      if (nav.me.url) {
+        prefetched[nav.me.url] = true;
+      }
+      for (const s of allSteps) {
+        if (s.url && s !== nav.me && !prefetched[s.url]) {
+          actions.prefetch(s.url);
+          prefetched[s.url] = true;
+        }
+      }
+    }
   }, [nav]);
   const mapBtn = useMemo(
     () => (

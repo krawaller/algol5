@@ -3,6 +3,7 @@ import {
   AlgolStaticGameAPI,
   AlgolBattle,
   AlgolLocalBattle,
+  BattleNavActions,
 } from "../../../../types";
 import {
   newSessionFromBattle,
@@ -13,7 +14,6 @@ import {
   getSessionById,
   setLatestSessionId,
 } from "../../../../local/src";
-import { ModeActions } from "./GamePage.useMode";
 
 type BattleAction =
   | "mark"
@@ -94,7 +94,7 @@ const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
 export function useBattle(
   api: AlgolStaticGameAPI,
   sessionId: string | null,
-  toSession: ModeActions["toSession"]
+  toSession: BattleNavActions["toSession"]
 ) {
   const reducer = useMemo(() => makeReducerForAPI(api), [api]);
   const [state, dispatch] = useReducer(

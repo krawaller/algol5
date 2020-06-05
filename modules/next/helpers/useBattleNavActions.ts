@@ -1,47 +1,47 @@
-import { useMemo, useReducer, useEffect } from "react";
+import { Router } from "next/router";
+import { useMemo } from "react";
 import { BattleNavActions, BattleMode } from "../../types";
 
-type Action =
-  | "reset"
-  | BattleMode
-  | ["load", string]
-  | ["load", string, BattleMode | undefined]
-  | ["new", string, BattleMode | undefined];
-type State = [BattleMode, string | null];
+const gameRoot = (path: string) =>
+  path
+    .split("/")
+    .slice(0, 3)
+    .join("/");
 
-const reducer = (state: State, action: Action): State => {
-  const [mode, sessionId] = state;
-  if (action === "battlelobby") return ["battlelobby", sessionId];
-  if (action === "gamelobby") return ["gamelobby", sessionId];
-  if (action === "history") return ["history", sessionId];
-  if (action === "playing") return ["playing", sessionId];
-  if (action === "reset") return ["gamelobby", null];
-  if (Array.isArray(action)) {
-    if (action[0] === "load") return [action[2] || "battlelobby", action[1]];
-    if (action[0] === "new")
-      return [action[2] || "battlelobby", `new_${action[1]}`];
-  }
-  throw new Error(`Unknown action: ${JSON.stringify(action || {})}`);
-};
-
-export const useBattleNavActions = (domain?: string) => {
-  const [[mode, sessionId], dispatch] = useReducer(reducer, [
-    "gamelobby",
-    null,
-  ]);
-  useEffect(() => dispatch("reset"), [domain]);
+export const useBattleNavActions = (router: Router) => {
   const actions: BattleNavActions = useMemo(
     () => ({
-      toHistory: () => dispatch("history"),
-      toGameLobby: () => dispatch("gamelobby"),
-      toBattleLobby: () => dispatch("battlelobby"),
-      toBattleControls: () => dispatch("playing"),
+      toHistory: () =>
+        router.push({
+          pathname: gameRoot(router.pathname),
+          query: { sid: router.query.sid, m: "history" },
+        }),
+      toGameLobby: () =>
+        router.push({
+          pathname: gameRoot(router.pathname),
+        }),
+      toBattleLobby: () =>
+        router.push({
+          pathname: gameRoot(router.pathname),
+          query: { sid: router.query.sid, m: "battlelobby" },
+        }),
+      toBattleControls: () =>
+        router.push({
+          pathname: gameRoot(router.pathname),
+          query: { sid: router.query.sid, m: "playing" },
+        }),
       toSession: (sessionId: string, mode?: BattleMode) =>
-        dispatch(["load", sessionId, mode]),
+        router.push({
+          pathname: gameRoot(router.pathname),
+          query: { sid: sessionId, m: mode || "battlelobby" },
+        }),
       newLocalBattle: (code: string, mode?: BattleMode) =>
-        dispatch(["new", code, mode]),
+        router.push({
+          pathname: gameRoot(router.pathname),
+          query: { sid: `new_${code}`, m: mode || "battlelobby" },
+        }),
     }),
     []
   );
-  return [mode, sessionId, actions] as const;
+  return [router.query.m, router.query.sid, actions] as const;
 };

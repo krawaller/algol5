@@ -5,9 +5,9 @@ import { Shell } from "../../ui/src/components/Shell";
 import { AlgolPage } from "../../types";
 import { useBattleNavActions, appActions } from "../helpers";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, router }: AppProps) {
   const Comp = Component as AlgolPage;
-  const [mode, sessionId, battleNavActions] = useBattleNavActions(Comp.domain);
+  const [mode, sessionId, battleNavActions] = useBattleNavActions(router);
   const [nav, setNav] = useState(Comp.nav);
   useEffect(() => setNav(Comp.nav), [Comp]);
   const actions = useMemo(

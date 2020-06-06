@@ -11,7 +11,6 @@ export const makeSessionLobbyStep = (
   opts: MakeSessionLobbyStepOpts
 ): AlgolNavStep => {
   const { battleNavActions, session } = opts;
-  console.log("FOO", session);
   const desc =
     session.turn === 1 && session.player === 1
       ? `The battle has just begun!`

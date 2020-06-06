@@ -132,7 +132,7 @@ export function useBattle(
       currentSessionId &&
       hasMoves
     ) {
-      toSession(currentSessionId, "playing");
+      toSession(currentSessionId, "playing", true);
     }
   }, [sessionId, currentSessionId, hasMoves]);
   justStartedNew.current = false;

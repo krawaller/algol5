@@ -5,7 +5,11 @@ export interface BattleNavActions {
   toGameLobby: () => void;
   toBattleLobby: () => void;
   toBattleControls: () => void;
-  toSession: (sessionId: string, mode?: BattleMode | undefined) => void;
+  toSession: (
+    sessionId: string,
+    mode?: BattleMode | undefined,
+    replace?: boolean
+  ) => void;
   newLocalBattle: (code: string, mode?: BattleMode | undefined) => void;
 }
 

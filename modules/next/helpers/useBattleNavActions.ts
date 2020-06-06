@@ -30,15 +30,15 @@ export const useBattleNavActions = (router: Router) => {
           pathname: gameRoot(router.pathname),
           query: { sid: router.query.sid, m: "playing" },
         }),
-      toSession: (sessionId: string, mode?: BattleMode) =>
-        router.push({
+      toSession: (sessionId: string, mode?: BattleMode, replace?: boolean) =>
+        router[replace ? "replace" : "push"]({
           pathname: gameRoot(router.pathname),
           query: { sid: sessionId, m: mode || "battlelobby" },
         }),
       newLocalBattle: (code: string, mode?: BattleMode) =>
         router.push({
           pathname: gameRoot(router.pathname),
-          query: { sid: `new_${code}`, m: mode || "battlelobby" },
+          query: { sid: `new_${code}`, m: mode || "playing" },
         }),
     }),
     []

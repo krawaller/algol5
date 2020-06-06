@@ -16,17 +16,18 @@ type MakeSessionNavOpts = {
   session: AlgolLocalBattle;
   battleNavActions: BattleNavActions;
   mode: BattleMode;
+  isNew?: boolean;
 };
 
 export const makeSessionNav = (opts: MakeSessionNavOpts): AlgolNav => {
-  const { battleNavActions, session, meta, mode } = opts;
+  const { battleNavActions, session, meta, mode, isNew } = opts;
   const gameNav = makeGameNav(meta);
   gameNav.me.onClick = battleNavActions.toGameLobby;
   delete gameNav.me.url;
   const crumbs = gameNav.crumbs.concat(gameNav.me);
   const lobbyStep = makeSessionLobbyStep(opts);
   const historyStep = makeSessionHistoryStep(battleNavActions);
-  const controlsStep = makeSessionControlsStep(battleNavActions);
+  const controlsStep = makeSessionControlsStep(battleNavActions, isNew);
 
   switch (mode) {
     case "battlelobby":
@@ -43,8 +44,8 @@ export const makeSessionNav = (opts: MakeSessionNavOpts): AlgolNav => {
       };
     case "playing":
       return {
-        key: `session-${session.id}-playing`,
-        crumbs: crumbs.concat(lobbyStep),
+        key: isNew ? `session-new` : `session-${session.id}-playing`,
+        crumbs: isNew ? crumbs : crumbs.concat(lobbyStep),
         me: controlsStep,
       };
     case "gamelobby":

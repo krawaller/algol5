@@ -68,12 +68,6 @@
   min-width: 35px;
 }
 
-.navMapButtonContainer {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-}
-
 .navBackButtonContainer .navButton {
   min-width: 25px;
 }
@@ -109,11 +103,21 @@
   z-index: 5px; /* to be above toprow */
 }
 
-.navHomeBtnContainer > .navButton {
-  height: 21px;
+.navMapButtonContainer {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 
-.navCompassBtnContainer > .navButton {
+.navBackButtonContainer {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+}
+
+.navHomeBtnContainer > .navButton,
+.navCompassBtnContainer > .navButton,
+.navBackBtnContainer > .navButton {
   height: 21px;
 }
 

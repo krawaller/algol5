@@ -22,7 +22,8 @@ export const Nav: FunctionComponent<NavProps> = props => {
   const { nav, actions } = props;
   if (!nav) return <div></div>;
   const { crumbs, me } = nav;
-  const hasBackBtn = Boolean(nav && crumbs.length > 0);
+  const hasCrumbs = Boolean(nav && crumbs.length > 0);
+
   useEffect(() => {
     setFullNav(false);
     if (nav) {
@@ -44,9 +45,23 @@ export const Nav: FunctionComponent<NavProps> = props => {
         actions={actions}
         active={fullNav}
         step={{
-          desc: fullNav ? "Show full nav" : "Hide full nav",
+          desc: fullNav ? "Hide full nav" : "Show full nav",
           title: "N",
           onClick: () => setFullNav(!fullNav),
+          links: [],
+        }}
+      />
+    ),
+    [fullNav]
+  );
+  const backBtn = useMemo(
+    () => (
+      <NavButton
+        actions={actions}
+        step={{
+          desc: "Go back",
+          title: "←",
+          onClick: () => actions.back(),
           links: [],
         }}
       />
@@ -70,18 +85,18 @@ export const Nav: FunctionComponent<NavProps> = props => {
       </div>
       <NavTopRow fullNav={fullNav && crumbs.length > 0} />
       <div className={classNames(css.navRow, css.navFiller)}>
-        {hasBackBtn && <Arrow layout="northsouth" head="south" />}
+        {hasCrumbs && <Arrow layout="northsouth" head="south" />}
       </div>
       <div>
         <NavCrumbs actions={actions} nav={nav} mute={!fullNav} />
         <NavStepRow
           step={me}
-          back={hasBackBtn ? "pipe" : "none"}
+          back="none"
           current
           actions={actions}
           mute={!fullNav}
         />
-        <NavLinkArrowRow hasBackBtn={hasBackBtn} nbrOfLinks={me.links.length} />
+        <NavLinkArrowRow nbrOfLinks={me.links.length} />
         <NavBottomRow {...props} />
         <div
           className={classNames(
@@ -90,6 +105,14 @@ export const Nav: FunctionComponent<NavProps> = props => {
           )}
         >
           {mapBtn}
+        </div>
+        <div
+          className={classNames(
+            css.navBackButtonContainer,
+            css.navSideButtonContainer
+          )}
+        >
+          {backBtn}
         </div>
       </div>
     </div>

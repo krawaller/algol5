@@ -47,20 +47,6 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
       }),
     [count]
   );
-  const backBtn = useMemo(
-    () =>
-      count ? (
-        <NavButton
-          step={{
-            ...crumbs[count - 1],
-            title: "↑",
-            desc: "Go back up one level",
-          }}
-          actions={actions}
-        />
-      ) : null,
-    [crumbs]
-  );
   return (
     <TransitionGroup
       childFactory={child =>
@@ -77,7 +63,7 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
           return (
             <div className={whatsMyClass(status, pos)}>
               <div className={classNames(navCss.navRow, navCss.navAlways)}>
-                <div className={navCss.navSideButtonContainer}>{backBtn}</div>
+                <div className={navCss.navSideButtonContainer}></div>
                 {links.map(btn => (
                   <NavButton key={btn.title} step={btn} actions={actions} />
                 ))}

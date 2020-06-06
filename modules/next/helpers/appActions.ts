@@ -5,4 +5,5 @@ export const appActions = {
   prefetch: path => {
     Router.prefetch(path);
   },
+  back: () => Router.back(),
 };

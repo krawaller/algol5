@@ -23,8 +23,8 @@ type AtriumUnitLayer =
   | "myqueens"
   | "oppqueens"
   | "neutralqueens";
-type AtriumGenerator = "findmovetargets" | "findwinlines";
-type AtriumArtifactLayer = "movetargets" | "winline";
+type AtriumGenerator = "findmovetargets" | "findpushees" | "findwinlines";
+type AtriumArtifactLayer = "movetargets" | "pushees" | "winline";
 type AtriumTerrainLayer = never;
 type AtriumLayer = CommonLayer | AtriumUnitLayer | AtriumArtifactLayer;
 type AtriumBattlePos = never;

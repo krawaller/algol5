@@ -5,21 +5,36 @@ const atriumInstructions: AtriumDefinition["instructions"] = {
   selectunit: {
     line: [
       "Select",
-      "orthogonal empty neighbour to move",
-      { unitat: "selectunit" },
-      "to"
-    ]
-  },
-  selectmovetarget: {
-    line: [
-      "Press",
-      "move",
-      "to walk",
+      "orthogonal neighbour to move",
       { unitat: "selectunit" },
       "to",
-      "selectmovetarget"
-    ]
-  }
+    ],
+  },
+  selectmovetarget: {
+    ifelse: [
+      { isempty: "pushees" },
+      {
+        line: [
+          "Press",
+          "move",
+          "to walk",
+          { unitat: "selectunit" },
+          "to",
+          "selectmovetarget",
+        ],
+      },
+      {
+        line: [
+          "Press",
+          "move",
+          "to make",
+          { unitat: "selectunit" },
+          "push",
+          { unitlist: "pushees" },
+        ],
+      },
+    ],
+  },
 };
 
 export default atriumInstructions;

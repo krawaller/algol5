@@ -2,24 +2,48 @@ import { AtriumDefinition } from "./_types";
 
 const atriumFlow: AtriumDefinition["flow"] = {
   endGame: {
-    madewinline: { condition: { notempty: "winline" }, show: "winline" }
+    madewinline: { condition: { notempty: "winline" }, show: "winline" },
   },
   startTurn: { link: "selectunit" },
   marks: {
     selectunit: {
       from: "myunits",
       runGenerator: "findmovetargets",
-      link: "selectmovetarget"
+      link: "selectmovetarget",
     },
-    selectmovetarget: { from: "movetargets", link: "move" }
+    selectmovetarget: {
+      from: "movetargets",
+      runGenerator: {
+        if: [{ anyat: ["units", "selectmovetarget"] }, "findpushees"],
+      },
+      link: {
+        if: [
+          {
+            or: [
+              { noneat: ["units", "selectmovetarget"] },
+              { notempty: "pushees" },
+            ],
+          },
+          "move",
+        ],
+      },
+    },
   },
   commands: {
     move: {
-      applyEffect: { moveat: ["selectunit", "selectmovetarget"] },
+      applyEffects: [
+        {
+          pushin: [
+            "pushees",
+            { read: ["movetargets", "selectmovetarget", "dir"] },
+          ],
+        },
+        { moveat: ["selectunit", "selectmovetarget"] },
+      ],
       runGenerator: "findwinlines",
-      link: "endTurn"
-    }
-  }
+      link: "endTurn",
+    },
+  },
 };
 
 export default atriumFlow;

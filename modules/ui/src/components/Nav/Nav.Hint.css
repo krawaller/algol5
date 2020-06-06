@@ -41,7 +41,7 @@
 }
 
 .navHintHome:before {
-  right: -52px;
-  top: -8px;
+  right: -45px;
+  top: 0px;
   content: "go back home";
 }

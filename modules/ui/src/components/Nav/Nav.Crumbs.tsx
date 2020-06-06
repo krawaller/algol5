@@ -19,11 +19,11 @@ export const NavCrumbs: FunctionComponent<NavCrumbsProps> = props => {
           <NavStepRow
             actions={actions}
             step={crumb}
-            back={i === crumbs.length - 1 ? "this" : "none"}
+            back="none"
             skipLink={i === crumbs.length - 1 ? me.title : crumbs[i + 1].title}
             mute={mute}
           />
-          <NavBetweenRow hasBack={i === crumbs.length - 1} />
+          <NavBetweenRow />
         </Fragment>
       ))}
     </Fragment>

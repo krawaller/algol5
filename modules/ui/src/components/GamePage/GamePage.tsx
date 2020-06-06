@@ -50,20 +50,19 @@ export const GamePage = (props: GamePageProps) => {
   const ui = useUI(api, battle, frame, demo, givenMode);
   const mode = battle ? givenMode : "gamelobby";
 
-  useEffect(
-    () =>
-      actions.setNav(
-        mode === "gamelobby"
-          ? makeGameNav(gamePayload.meta)
-          : makeSessionNav({
-              mode,
-              session: session!,
-              battleNavActions: actions,
-              meta: gamePayload.meta,
-            })
-      ),
-    [mode, actions.setNav]
-  );
+  useEffect(() => {
+    actions.setNav(
+      mode === "gamelobby"
+        ? makeGameNav(gamePayload.meta)
+        : makeSessionNav({
+            mode,
+            session: session!,
+            battleNavActions: actions,
+            meta: gamePayload.meta,
+            isNew: Boolean(sessionId && sessionId.match(/new/)),
+          })
+    );
+  }, [mode, sessionId, actions.setNav]);
 
   // TODO - maybe not read this on every render? move to state somewhere?
   const previousSessionId = getLatestSessionId(api.gameId);

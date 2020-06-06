@@ -11,6 +11,8 @@ type NavButtonProps = {
   mute?: boolean;
 };
 
+const noop = () => {};
+
 export const NavButton: FunctionComponent<NavButtonProps> = props => {
   const { actions, step, active, mute } = props;
   const { title, desc, url } = step;
@@ -25,9 +27,9 @@ export const NavButton: FunctionComponent<NavButtonProps> = props => {
     >
       <a
         href={url}
-        className={css.navButtonInner}
+        className={classNames(css.navButtonInner, mute && css.navMute)}
         title={desc}
-        onClick={mute ? undefined : handleClick}
+        onClick={mute ? noop : handleClick}
       >
         {title}
       </a>

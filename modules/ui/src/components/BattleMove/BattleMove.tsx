@@ -2,7 +2,6 @@ export * from "./BattleMove";
 import React, { FunctionComponent, useState } from "react";
 import { AlgolBattleUI } from "../../../../types";
 import { Button } from "../Button";
-import css from "./BattleMove.cssProxy";
 import { BattleHelp } from "../BattleHelp";
 import { BattleControls } from "../BattleControls";
 import { Switch } from "../Switch";
@@ -10,6 +9,8 @@ import { useModal } from "../../helpers";
 import { Modal } from "../Modal";
 import { Markdown } from "../Markdown";
 import { ScrollBox } from "../ScrollBox";
+import { ButtonGroup } from "../ButtonGroup";
+import { Content } from "../Content";
 
 export interface BattleMoveActions {
   undoBattleCommand: () => void;
@@ -35,35 +36,41 @@ export const BattleMove: FunctionComponent<BattleMoveProps> = props => {
   return (
     <>
       <ScrollBox>
-        {showHelp ? (
-          <BattleHelp actions={actions} instruction={ui.instruction} />
-        ) : (
-          <BattleControls actions={actions} ui={ui} />
-        )}
+        <>
+          <ButtonGroup>
+            <Content
+              content={{
+                line: [
+                  { text: `turn ${ui.turnNumber}, ` },
+                  { player: ui.player },
+                ],
+              }}
+            />
+            <Button
+              disabled={
+                (ui.winner !== undefined && "Battle is over") ||
+                (!Boolean(ui.undo) && "No command to undo")
+              }
+              onClick={actions.undoBattleCommand}
+            >
+              Undo
+            </Button>
+            <Button>
+              <Switch
+                text="Text"
+                flipped={showHelp}
+                onFlip={() => setShowHelp(!showHelp)}
+              />
+            </Button>{" "}
+            <Button onClick={openRulesModal}>Peek rules</Button>
+          </ButtonGroup>
+          {showHelp ? (
+            <BattleHelp actions={actions} instruction={ui.instruction} />
+          ) : (
+            <BattleControls actions={actions} ui={ui} />
+          )}
+        </>
       </ScrollBox>
-      <div className={css.battleMoveUndoButton}>
-        <Button
-          disabled={
-            (ui.winner !== undefined && "Battle is over") ||
-            (!Boolean(ui.undo) && "No command to undo")
-          }
-          onClick={actions.undoBattleCommand}
-        >
-          Undo
-        </Button>
-      </div>
-      <div className={css.battleMoveHelpButton}>
-        <Button>
-          <Switch
-            text="Verbose"
-            flipped={showHelp}
-            onFlip={() => setShowHelp(!showHelp)}
-          />
-        </Button>
-      </div>
-      <div className={css.battleMoveRulesButton}>
-        <Button onClick={openRulesModal}>Peek rules</Button>
-      </div>
       <Modal
         isOpen={isRulesModalOpen}
         onClose={closeRulesModal}

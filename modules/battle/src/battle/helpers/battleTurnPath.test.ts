@@ -12,8 +12,8 @@ describe("the battleTurnPath helper", () => {
     battle = atriumAPI.performAction(battle, "command", "move");
     const result = battleTurnPath(battle);
     expect(result).toEqual([
-      0, // mark a2, first option out of many
-      1, // mark b2, 2nd option out of 2
+      0, // mark a2
+      2, // mark b2
       // move single option so excluded
       // endturn single option so excluded
     ]);
@@ -25,8 +25,8 @@ describe("the battleTurnPath helper", () => {
     battle = atriumAPI.performAction(battle, "command", "move");
     const result = battleTurnPath(battle);
     expect(result).toEqual([
-      1, // mark a3, 2nd option out of many
-      // mark b3, single option so excluded
+      1, // mark a3
+      2, // mark b3
       // move single option so excluded
       // endturn single option so excluded
     ]);

@@ -9,19 +9,6 @@ type InflationGameSuite = [AlgolGame, InflationTest];
 
 const tests: InflationGameSuite[] = [
   [
-    atrium,
-    {
-      singleTurn: { player: 2, turn: 1, path: [2], variantCode: "x" },
-      simple: { player: 1, turn: 2, path: [1, 1, 1], variantCode: "x" },
-      long: {
-        player: 1,
-        turn: 5,
-        path: [2, 4, 4, 1, 1, 1, 1, 0, 0, 4, 5, 0],
-        variantCode: "x",
-      },
-    },
-  ],
-  [
     trafficlights,
     {
       win: {

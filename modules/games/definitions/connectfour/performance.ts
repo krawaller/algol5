@@ -2,7 +2,7 @@ import { ConnectfourDefinition } from "./_types";
 
 const connectfourPerformance: ConnectfourDefinition["performance"] = {
   canAlwaysEnd: {
-    selectcolumn: true,
+    selectdroptarget: true,
   },
   massiveTree: {},
   noEndGameCheck: [],

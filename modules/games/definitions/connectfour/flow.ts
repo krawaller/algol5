@@ -5,6 +5,12 @@ const connectfourFlow: ConnectfourDefinition["flow"] = {
     connectfour: {
       condition: { notempty: "winline" },
       show: "winline",
+      prio: 1,
+    },
+    full: {
+      condition: { same: [{ sizeof: "units" }, { sizeof: "board" }] },
+      who: 0,
+      prio: 2,
     },
   },
   startTurn: {

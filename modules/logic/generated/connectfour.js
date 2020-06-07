@@ -240,6 +240,11 @@ const game = {
         LINKS.endGame = "win";
         LINKS.endedBy = "connectfour";
         LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      } else if (
+        Object.keys(UNITLAYERS.units).length === Object.keys(BOARD.board).length
+      ) {
+        LINKS.endGame = "draw";
+        LINKS.endedBy = "full";
       } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
@@ -310,6 +315,11 @@ const game = {
         LINKS.endGame = "win";
         LINKS.endedBy = "connectfour";
         LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      } else if (
+        Object.keys(UNITLAYERS.units).length === Object.keys(BOARD.board).length
+      ) {
+        LINKS.endGame = "draw";
+        LINKS.endedBy = "full";
       } else {
         LINKS.endTurn = "startTurn_basic_1";
       }

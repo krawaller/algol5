@@ -48,4 +48,6 @@ const tests2: TestNumberVal[] = [
   { sum: [3, 4, ["totalcount"]] },
   { prod: [3, 4, ["totalcount"]] },
   { minus: [3, 4, ["totalcount"]] },
+  { posx: "mymark" },
+  { posy: "mymark" },
 ];

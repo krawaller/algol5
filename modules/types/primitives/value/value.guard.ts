@@ -15,6 +15,8 @@ import {
   AlgolValTurnVarAnon,
   AlgolValValueAnon,
   AlgolValLoopReadAnon,
+  AlgolValPosXAnon,
+  AlgolValPosYAnon,
 } from "./value.anon";
 
 export function isAlgolValValue(expr: AlgolValAnon): expr is AlgolValValueAnon {
@@ -91,4 +93,12 @@ export function isAlgolValLoopRead(
   expr: AlgolValAnon
 ): expr is AlgolValLoopReadAnon {
   return (expr as AlgolValLoopReadAnon).loopread !== undefined;
+}
+
+export function isAlgolValPosX(expr: AlgolValAnon): expr is AlgolValPosXAnon {
+  return (expr as AlgolValPosXAnon).posx !== undefined;
+}
+
+export function isAlgolValPosY(expr: AlgolValAnon): expr is AlgolValPosYAnon {
+  return (expr as AlgolValPosYAnon).posy !== undefined;
 }

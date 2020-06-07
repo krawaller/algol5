@@ -2,7 +2,13 @@ import { AtriumDefinition } from "./_types";
 
 const atriumFlow: AtriumDefinition["flow"] = {
   endGame: {
-    madewinline: { condition: { notempty: "winline" }, show: "winline" },
+    winline: { condition: { notempty: "winline" }, show: "winline", prio: 1 },
+    loseline: {
+      condition: { notempty: "loseline" },
+      show: "loseline",
+      prio: 2,
+      who: ["otherplayer"],
+    },
   },
   startTurn: { link: "selectunit" },
   marks: {
@@ -103,7 +109,7 @@ const atriumFlow: AtriumDefinition["flow"] = {
         },
         { moveat: ["selectunit", "selectmovetarget"] },
       ],
-      runGenerator: "findwinlines",
+      runGenerators: ["findwinlines", "findloselines"],
       link: "endTurn",
     },
   },

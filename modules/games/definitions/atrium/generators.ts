@@ -48,6 +48,18 @@ const atriumGenerators: AtriumDefinition["generators"] = {
       steps: { condition: { same: [["walklength"], 3] }, tolayer: "winline" },
     },
   },
+  findloselines: {
+    type: "walker",
+    starts: "oppunits",
+    startasstep: true,
+    dirs: "rose",
+    steps: {
+      ifelse: [{ anyat: ["oppkings", ["start"]] }, "oppkings", "oppqueens"],
+    },
+    draw: {
+      steps: { condition: { same: [["walklength"], 3] }, tolayer: "loseline" },
+    },
+  },
 };
 
 export default atriumGenerators;

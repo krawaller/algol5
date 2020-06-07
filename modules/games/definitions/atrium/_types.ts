@@ -23,8 +23,17 @@ type AtriumUnitLayer =
   | "myqueens"
   | "oppqueens"
   | "neutralqueens";
-type AtriumGenerator = "findmovetargets" | "findpushees" | "findwinlines";
-type AtriumArtifactLayer = "movetargets" | "pushees" | "lastpushee" | "winline";
+type AtriumGenerator =
+  | "findmovetargets"
+  | "findpushees"
+  | "findwinlines"
+  | "findloselines";
+type AtriumArtifactLayer =
+  | "movetargets"
+  | "pushees"
+  | "lastpushee"
+  | "winline"
+  | "loseline";
 type AtriumTerrainLayer = never;
 type AtriumLayer = CommonLayer | AtriumUnitLayer | AtriumArtifactLayer;
 type AtriumBattlePos = "forbiddenpushtarget" | "forbiddenpusher";

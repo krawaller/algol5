@@ -45,7 +45,8 @@ const emptyArtifactLayers_basic = {
   movetargets: {},
   pushees: {},
   lastpushee: {},
-  winline: {}
+  winline: {},
+  loseline: {}
 };
 const game = {
   gameId: "atrium",
@@ -343,7 +344,8 @@ const game = {
         movetargets: step.ARTIFACTS.movetargets,
         pushees: step.ARTIFACTS.pushees,
         lastpushee: step.ARTIFACTS.lastpushee,
-        winline: {}
+        winline: {},
+        loseline: {}
       };
       let UNITLAYERS = step.UNITLAYERS;
       let BATTLEVARS = { ...step.BATTLEVARS };
@@ -423,10 +425,36 @@ const game = {
           }
         }
       }
+      {
+        for (let STARTPOS in UNITLAYERS.oppunits) {
+          let allowedsteps = UNITLAYERS.oppkings[STARTPOS]
+            ? UNITLAYERS.oppkings
+            : UNITLAYERS.oppqueens;
+          for (let DIR of roseDirs) {
+            let walkedsquares = [];
+            let POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 3) {
+                ARTIFACTS.loseline[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
       if (Object.keys(ARTIFACTS.winline).length !== 0) {
         LINKS.endGame = "win";
-        LINKS.endedBy = "madewinline";
+        LINKS.endedBy = "winline";
         LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      } else if (Object.keys(ARTIFACTS.loseline).length !== 0) {
+        LINKS.endGame = "lose";
+        LINKS.endedBy = "loseline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.loseline);
       } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
@@ -446,7 +474,8 @@ const game = {
         movetargets: step.ARTIFACTS.movetargets,
         pushees: step.ARTIFACTS.pushees,
         lastpushee: step.ARTIFACTS.lastpushee,
-        winline: {}
+        winline: {},
+        loseline: {}
       };
       let UNITLAYERS = step.UNITLAYERS;
       let BATTLEVARS = { ...step.BATTLEVARS };
@@ -526,10 +555,36 @@ const game = {
           }
         }
       }
+      {
+        for (let STARTPOS in UNITLAYERS.oppunits) {
+          let allowedsteps = UNITLAYERS.oppkings[STARTPOS]
+            ? UNITLAYERS.oppkings
+            : UNITLAYERS.oppqueens;
+          for (let DIR of roseDirs) {
+            let walkedsquares = [];
+            let POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 3) {
+                ARTIFACTS.loseline[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
       if (Object.keys(ARTIFACTS.winline).length !== 0) {
         LINKS.endGame = "win";
-        LINKS.endedBy = "madewinline";
+        LINKS.endedBy = "winline";
         LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      } else if (Object.keys(ARTIFACTS.loseline).length !== 0) {
+        LINKS.endGame = "lose";
+        LINKS.endedBy = "loseline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.loseline);
       } else {
         LINKS.endTurn = "startTurn_basic_1";
       }

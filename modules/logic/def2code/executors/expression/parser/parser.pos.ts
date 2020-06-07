@@ -6,6 +6,7 @@ import {
   isAlgolPosBattlePos,
   isAlgolPosTurnPos,
   isAlgolPosOffset,
+  isAlgolPosFromXY,
 } from "../../../../../types";
 
 import { makeParser } from "../";
@@ -58,5 +59,11 @@ export default function parsePos(
     return `offsetPos(${parser.pos(pos)}, ${parser.val(dir)}, ${parser.val(
       forw || 1
     )}, ${parser.val(right || 0)})`;
+  }
+  if (isAlgolPosFromXY(expr)) {
+    const {
+      fromxy: [x, y],
+    } = expr;
+    return `coords2pos({x: ${parser.val(x)}, y: ${parser.val(y)}})`;
   }
 }

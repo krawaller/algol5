@@ -19,6 +19,10 @@ export interface AlgolPosOnlyIn<Blob extends AlgolGameBlobAnon> {
   onlyin: AlgolSet<Blob>;
 }
 
+export interface AlgolPosFromXY<Blob extends AlgolGameBlobAnon> {
+  fromxy: [AlgolVal<Blob, number>, AlgolVal<Blob, number>];
+}
+
 export interface AlgolPosOffset<Blob extends AlgolGameBlobAnon> {
   offset: // pos, dir, forward, right
   | [

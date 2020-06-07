@@ -10,8 +10,31 @@ const atriumGenerators: AtriumDefinition["generators"] = {
     type: "neighbour",
     start: "selectunit",
     dirs: "ortho",
-    unlessover: "units",
-    draw: { neighbours: { tolayer: "movetargets" } }
+    draw: {
+      neighbours: {
+        tolayer: "movetargets",
+        include: {
+          dir: ["dir"],
+        },
+      },
+    },
+  },
+  findpushees: {
+    type: "walker",
+    dir: { read: ["movetargets", "selectmovetarget", "dir"] },
+    start: "selectmovetarget",
+    startasstep: true,
+    steps: "units",
+    draw: {
+      steps: {
+        condition: { stoppedBecause: "nomoresteps" },
+        tolayer: "pushees",
+      },
+      last: {
+        tolayer: "lastpushee",
+        condition: { stoppedBecause: "nomoresteps" },
+      },
+    },
   },
   findwinlines: {
     type: "walker",
@@ -19,12 +42,24 @@ const atriumGenerators: AtriumDefinition["generators"] = {
     startasstep: true,
     dirs: "rose",
     steps: {
-      ifelse: [{ anyat: ["mykings", ["start"]] }, "mykings", "myqueens"]
+      ifelse: [{ anyat: ["mykings", ["start"]] }, "mykings", "myqueens"],
     },
     draw: {
-      steps: { condition: { same: [["walklength"], 3] }, tolayer: "winline" }
-    }
-  }
+      steps: { condition: { same: [["walklength"], 3] }, tolayer: "winline" },
+    },
+  },
+  findloselines: {
+    type: "walker",
+    starts: "oppunits",
+    startasstep: true,
+    dirs: "rose",
+    steps: {
+      ifelse: [{ anyat: ["oppkings", ["start"]] }, "oppkings", "oppqueens"],
+    },
+    draw: {
+      steps: { condition: { same: [["walklength"], 3] }, tolayer: "loseline" },
+    },
+  },
 };
 
 export default atriumGenerators;

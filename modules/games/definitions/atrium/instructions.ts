@@ -5,21 +5,48 @@ const atriumInstructions: AtriumDefinition["instructions"] = {
   selectunit: {
     line: [
       "Select",
-      "orthogonal empty neighbour to move",
-      { unitat: "selectunit" },
-      "to"
-    ]
-  },
-  selectmovetarget: {
-    line: [
-      "Press",
-      "move",
-      "to walk",
+      "orthogonal neighbour to move",
       { unitat: "selectunit" },
       "to",
-      "selectmovetarget"
-    ]
-  }
+      {
+        if: [
+          { samepos: ["selectunit", { battlepos: "forbiddenpusher" }] },
+          {
+            line: [
+              " (but you cannot push back at",
+              { pos: { battlepos: "forbiddenpushtarget" } },
+              "this turn)",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  selectmovetarget: {
+    ifelse: [
+      { isempty: "pushees" },
+      {
+        line: [
+          "Press",
+          "move",
+          "to walk",
+          { unitat: "selectunit" },
+          "to",
+          "selectmovetarget",
+        ],
+      },
+      {
+        line: [
+          "Press",
+          "move",
+          "to make",
+          { unitat: "selectunit" },
+          "push",
+          { unitlist: "pushees" },
+        ],
+      },
+    ],
+  },
 };
 
 export default atriumInstructions;

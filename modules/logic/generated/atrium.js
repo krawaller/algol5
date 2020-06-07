@@ -41,7 +41,13 @@ const groupLayers2 = {
     ["units", "myunits", "myqueens"]
   ]
 };
-const emptyArtifactLayers_basic = { movetargets: {}, winline: {} };
+const emptyArtifactLayers_basic = {
+  movetargets: {},
+  pushees: {},
+  lastpushee: {},
+  winline: {},
+  loseline: {}
+};
 const game = {
   gameId: "atrium",
   commands: { move: {} },
@@ -73,6 +79,7 @@ const game = {
       }
     }
     return game.action[`startTurn_${ruleset}_1`]({
+      BATTLEVARS: {},
       TURN: 0,
       UNITDATA,
       UNITLAYERS
@@ -103,7 +110,8 @@ const game = {
         UNITLAYERS,
         ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
-        TURN: step.TURN + 1
+        TURN: step.TURN + 1,
+        BATTLEVARS: step.BATTLEVARS
       };
     },
     startTurn_basic_2: step => {
@@ -130,7 +138,8 @@ const game = {
         UNITLAYERS,
         ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
-        TURN: step.TURN
+        TURN: step.TURN,
+        BATTLEVARS: step.BATTLEVARS
       };
     },
     selectunit_basic_1: (step, newMarkPos) => {
@@ -141,13 +150,12 @@ const game = {
       let MARKS = {
         selectunit: newMarkPos
       };
-      let UNITLAYERS = step.UNITLAYERS;
       {
         let startconnections = connections[MARKS.selectunit];
         for (let DIR of orthoDirs) {
           let POS = startconnections[DIR];
-          if (POS && !UNITLAYERS.units[POS]) {
-            ARTIFACTS.movetargets[POS] = emptyObj;
+          if (POS) {
+            ARTIFACTS.movetargets[POS] = { dir: DIR };
           }
         }
       }
@@ -157,25 +165,79 @@ const game = {
       return {
         LINKS,
         ARTIFACTS,
-        UNITLAYERS,
-        UNITDATA: step.UNITDATA,
-        TURN: step.TURN,
-        MARKS
-      };
-    },
-    selectmovetarget_basic_1: (step, newMarkPos) => {
-      let LINKS = { marks: {}, commands: {} };
-      LINKS.commands.move = "move_basic_1";
-      return {
-        LINKS,
-        ARTIFACTS: step.ARTIFACTS,
         UNITLAYERS: step.UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: {
-          selectunit: step.MARKS.selectunit,
-          selectmovetarget: newMarkPos
+        MARKS,
+        BATTLEVARS: step.BATTLEVARS
+      };
+    },
+    selectmovetarget_basic_1: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        pushees: {},
+        lastpushee: {}
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectunit: step.MARKS.selectunit,
+        selectmovetarget: newMarkPos
+      };
+      let BATTLEVARS = step.BATTLEVARS;
+      let UNITLAYERS = step.UNITLAYERS;
+      if (UNITLAYERS.units[MARKS.selectmovetarget]) {
+        {
+          let allowedsteps = UNITLAYERS.units;
+          let walkedsquares = [];
+          let STOPREASON = "";
+          let POS = "faux";
+          connections.faux[
+            (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir
+          ] = MARKS.selectmovetarget;
+          while (
+            !(STOPREASON = !(POS =
+              connections[POS][
+                (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir
+              ])
+              ? "outofbounds"
+              : !allowedsteps[POS]
+              ? "nomoresteps"
+              : null)
+          ) {
+            walkedsquares.push(POS);
+          }
+          let WALKLENGTH = walkedsquares.length;
+          for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+            POS = walkedsquares[walkstepper];
+            if (STOPREASON === "nomoresteps") {
+              ARTIFACTS.pushees[POS] = emptyObj;
+            }
+          }
+          if (WALKLENGTH) {
+            if (STOPREASON === "nomoresteps") {
+              ARTIFACTS.lastpushee[walkedsquares[WALKLENGTH - 1]] = emptyObj;
+            }
+          }
         }
+      }
+      if (
+        !UNITLAYERS.units[MARKS.selectmovetarget] ||
+        (Object.keys(ARTIFACTS.pushees).length !== 0 &&
+          !(
+            MARKS.selectunit === BATTLEVARS["forbiddenpusher"] &&
+            MARKS.selectmovetarget === BATTLEVARS["forbiddenpushtarget"]
+          ))
+      ) {
+        LINKS.commands.move = "move_basic_1";
+      }
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS,
+        BATTLEVARS
       };
     },
     selectunit_basic_2: (step, newMarkPos) => {
@@ -186,13 +248,12 @@ const game = {
       let MARKS = {
         selectunit: newMarkPos
       };
-      let UNITLAYERS = step.UNITLAYERS;
       {
         let startconnections = connections[MARKS.selectunit];
         for (let DIR of orthoDirs) {
           let POS = startconnections[DIR];
-          if (POS && !UNITLAYERS.units[POS]) {
-            ARTIFACTS.movetargets[POS] = emptyObj;
+          if (POS) {
+            ARTIFACTS.movetargets[POS] = { dir: DIR };
           }
         }
       }
@@ -202,36 +263,121 @@ const game = {
       return {
         LINKS,
         ARTIFACTS,
-        UNITLAYERS,
-        UNITDATA: step.UNITDATA,
-        TURN: step.TURN,
-        MARKS
-      };
-    },
-    selectmovetarget_basic_2: (step, newMarkPos) => {
-      let LINKS = { marks: {}, commands: {} };
-      LINKS.commands.move = "move_basic_2";
-      return {
-        LINKS,
-        ARTIFACTS: step.ARTIFACTS,
         UNITLAYERS: step.UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: {
-          selectunit: step.MARKS.selectunit,
-          selectmovetarget: newMarkPos
+        MARKS,
+        BATTLEVARS: step.BATTLEVARS
+      };
+    },
+    selectmovetarget_basic_2: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        pushees: {},
+        lastpushee: {}
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectunit: step.MARKS.selectunit,
+        selectmovetarget: newMarkPos
+      };
+      let BATTLEVARS = step.BATTLEVARS;
+      let UNITLAYERS = step.UNITLAYERS;
+      if (UNITLAYERS.units[MARKS.selectmovetarget]) {
+        {
+          let allowedsteps = UNITLAYERS.units;
+          let walkedsquares = [];
+          let STOPREASON = "";
+          let POS = "faux";
+          connections.faux[
+            (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir
+          ] = MARKS.selectmovetarget;
+          while (
+            !(STOPREASON = !(POS =
+              connections[POS][
+                (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir
+              ])
+              ? "outofbounds"
+              : !allowedsteps[POS]
+              ? "nomoresteps"
+              : null)
+          ) {
+            walkedsquares.push(POS);
+          }
+          let WALKLENGTH = walkedsquares.length;
+          for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+            POS = walkedsquares[walkstepper];
+            if (STOPREASON === "nomoresteps") {
+              ARTIFACTS.pushees[POS] = emptyObj;
+            }
+          }
+          if (WALKLENGTH) {
+            if (STOPREASON === "nomoresteps") {
+              ARTIFACTS.lastpushee[walkedsquares[WALKLENGTH - 1]] = emptyObj;
+            }
+          }
         }
+      }
+      if (
+        !UNITLAYERS.units[MARKS.selectmovetarget] ||
+        (Object.keys(ARTIFACTS.pushees).length !== 0 &&
+          !(
+            MARKS.selectunit === BATTLEVARS["forbiddenpusher"] &&
+            MARKS.selectmovetarget === BATTLEVARS["forbiddenpushtarget"]
+          ))
+      ) {
+        LINKS.commands.move = "move_basic_2";
+      }
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS,
+        BATTLEVARS
       };
     },
     move_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
-        winline: {}
+        pushees: step.ARTIFACTS.pushees,
+        lastpushee: step.ARTIFACTS.lastpushee,
+        winline: {},
+        loseline: {}
       };
       let UNITLAYERS = step.UNITLAYERS;
+      let BATTLEVARS = { ...step.BATTLEVARS };
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
+      BATTLEVARS.pushdir = (
+        ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}
+      ).dir;
+      if (Object.keys(ARTIFACTS.pushees).length !== 0) {
+        BATTLEVARS.forbiddenpushtarget = Object.keys(ARTIFACTS.lastpushee)[0];
+        BATTLEVARS.forbiddenpusher = offsetPos(
+          Object.keys(ARTIFACTS.lastpushee)[0],
+          BATTLEVARS["pushdir"],
+          1,
+          0
+        );
+        for (let LOOPPOS in ARTIFACTS.pushees) {
+          {
+            let pos = LOOPPOS;
+            let unitid = (UNITLAYERS.units[pos] || {}).id;
+            if (unitid) {
+              UNITDATA[unitid] = {
+                ...UNITDATA[unitid],
+                pos: connections[pos][BATTLEVARS["pushdir"]]
+              };
+            }
+          }
+        }
+      } else {
+        BATTLEVARS.forbiddenpusher = Object.keys(ARTIFACTS.lastpushee)[0];
+        BATTLEVARS.forbiddenpushtarget = Object.keys(ARTIFACTS.lastpushee)[0];
+      }
       {
         let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
         if (unitid) {
@@ -279,10 +425,36 @@ const game = {
           }
         }
       }
+      {
+        for (let STARTPOS in UNITLAYERS.oppunits) {
+          let allowedsteps = UNITLAYERS.oppkings[STARTPOS]
+            ? UNITLAYERS.oppkings
+            : UNITLAYERS.oppqueens;
+          for (let DIR of roseDirs) {
+            let walkedsquares = [];
+            let POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 3) {
+                ARTIFACTS.loseline[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
       if (Object.keys(ARTIFACTS.winline).length !== 0) {
         LINKS.endGame = "win";
-        LINKS.endedBy = "madewinline";
+        LINKS.endedBy = "winline";
         LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      } else if (Object.keys(ARTIFACTS.loseline).length !== 0) {
+        LINKS.endGame = "lose";
+        LINKS.endedBy = "loseline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.loseline);
       } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
@@ -292,18 +464,50 @@ const game = {
         ARTIFACTS,
         TURN: step.TURN,
         UNITDATA,
-        UNITLAYERS
+        UNITLAYERS,
+        BATTLEVARS
       };
     },
     move_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
-        winline: {}
+        pushees: step.ARTIFACTS.pushees,
+        lastpushee: step.ARTIFACTS.lastpushee,
+        winline: {},
+        loseline: {}
       };
       let UNITLAYERS = step.UNITLAYERS;
+      let BATTLEVARS = { ...step.BATTLEVARS };
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
+      BATTLEVARS.pushdir = (
+        ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}
+      ).dir;
+      if (Object.keys(ARTIFACTS.pushees).length !== 0) {
+        BATTLEVARS.forbiddenpushtarget = Object.keys(ARTIFACTS.lastpushee)[0];
+        BATTLEVARS.forbiddenpusher = offsetPos(
+          Object.keys(ARTIFACTS.lastpushee)[0],
+          BATTLEVARS["pushdir"],
+          1,
+          0
+        );
+        for (let LOOPPOS in ARTIFACTS.pushees) {
+          {
+            let pos = LOOPPOS;
+            let unitid = (UNITLAYERS.units[pos] || {}).id;
+            if (unitid) {
+              UNITDATA[unitid] = {
+                ...UNITDATA[unitid],
+                pos: connections[pos][BATTLEVARS["pushdir"]]
+              };
+            }
+          }
+        }
+      } else {
+        BATTLEVARS.forbiddenpusher = Object.keys(ARTIFACTS.lastpushee)[0];
+        BATTLEVARS.forbiddenpushtarget = Object.keys(ARTIFACTS.lastpushee)[0];
+      }
       {
         let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
         if (unitid) {
@@ -351,10 +555,36 @@ const game = {
           }
         }
       }
+      {
+        for (let STARTPOS in UNITLAYERS.oppunits) {
+          let allowedsteps = UNITLAYERS.oppkings[STARTPOS]
+            ? UNITLAYERS.oppkings
+            : UNITLAYERS.oppqueens;
+          for (let DIR of roseDirs) {
+            let walkedsquares = [];
+            let POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 3) {
+                ARTIFACTS.loseline[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
       if (Object.keys(ARTIFACTS.winline).length !== 0) {
         LINKS.endGame = "win";
-        LINKS.endedBy = "madewinline";
+        LINKS.endedBy = "winline";
         LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      } else if (Object.keys(ARTIFACTS.loseline).length !== 0) {
+        LINKS.endGame = "lose";
+        LINKS.endedBy = "loseline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.loseline);
       } else {
         LINKS.endTurn = "startTurn_basic_1";
       }
@@ -364,7 +594,8 @@ const game = {
         ARTIFACTS,
         TURN: step.TURN,
         UNITDATA,
-        UNITLAYERS
+        UNITLAYERS,
+        BATTLEVARS
       };
     }
   },
@@ -383,31 +614,13 @@ const game = {
     },
     move_basic_1: () => defaultInstruction(1),
     selectunit_basic_1: step => {
+      let BATTLEVARS = step.BATTLEVARS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
         line: [
           { select: "Select" },
-          { text: "orthogonal empty neighbour to move" },
-          {
-            unit: [
-              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
-              MARKS.selectunit
-            ]
-          },
-          { text: "to" }
-        ]
-      });
-    },
-    selectmovetarget_basic_1: step => {
-      let MARKS = step.MARKS;
-      let UNITLAYERS = step.UNITLAYERS;
-      return collapseContent({
-        line: [
-          { text: "Press" },
-          { command: "move" },
-          { text: "to walk" },
+          { text: "orthogonal neighbour to move" },
           {
             unit: [
               iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
@@ -416,9 +629,74 @@ const game = {
             ]
           },
           { text: "to" },
-          { pos: MARKS.selectmovetarget }
+          MARKS.selectunit === BATTLEVARS["forbiddenpusher"]
+            ? collapseContent({
+                line: [
+                  { text: " (but you cannot push back at" },
+                  { pos: BATTLEVARS["forbiddenpushtarget"] },
+                  { text: "this turn)" }
+                ]
+              })
+            : undefined
         ]
       });
+    },
+    selectmovetarget_basic_1: step => {
+      let ARTIFACTS = step.ARTIFACTS;
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return Object.keys(ARTIFACTS.pushees).length === 0
+        ? collapseContent({
+            line: [
+              { text: "Press" },
+              { command: "move" },
+              { text: "to walk" },
+              {
+                unit: [
+                  iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+                  (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                  MARKS.selectunit
+                ]
+              },
+              { text: "to" },
+              { pos: MARKS.selectmovetarget }
+            ]
+          })
+        : collapseContent({
+            line: [
+              { text: "Press" },
+              { command: "move" },
+              { text: "to make" },
+              {
+                unit: [
+                  iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+                  (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                  MARKS.selectunit
+                ]
+              },
+              { text: "push" },
+              collapseContent({
+                line: Object.keys(ARTIFACTS.pushees)
+                  .filter(p => UNITLAYERS.units[p])
+                  .map(p => ({
+                    unit: [
+                      iconMapping[UNITLAYERS.units[p].group],
+                      UNITLAYERS.units[p].owner,
+                      p
+                    ]
+                  }))
+                  .reduce((mem, i, n, list) => {
+                    mem.push(i);
+                    if (n === list.length - 2) {
+                      mem.push({ text: " and " });
+                    } else if (n < list.length - 2) {
+                      mem.push({ text: ", " });
+                    }
+                    return mem;
+                  }, [])
+              })
+            ]
+          });
     },
     startTurn_basic_2: step => {
       return collapseContent({
@@ -434,31 +712,13 @@ const game = {
     },
     move_basic_2: () => defaultInstruction(2),
     selectunit_basic_2: step => {
+      let BATTLEVARS = step.BATTLEVARS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
         line: [
           { select: "Select" },
-          { text: "orthogonal empty neighbour to move" },
-          {
-            unit: [
-              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
-              MARKS.selectunit
-            ]
-          },
-          { text: "to" }
-        ]
-      });
-    },
-    selectmovetarget_basic_2: step => {
-      let MARKS = step.MARKS;
-      let UNITLAYERS = step.UNITLAYERS;
-      return collapseContent({
-        line: [
-          { text: "Press" },
-          { command: "move" },
-          { text: "to walk" },
+          { text: "orthogonal neighbour to move" },
           {
             unit: [
               iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
@@ -467,9 +727,74 @@ const game = {
             ]
           },
           { text: "to" },
-          { pos: MARKS.selectmovetarget }
+          MARKS.selectunit === BATTLEVARS["forbiddenpusher"]
+            ? collapseContent({
+                line: [
+                  { text: " (but you cannot push back at" },
+                  { pos: BATTLEVARS["forbiddenpushtarget"] },
+                  { text: "this turn)" }
+                ]
+              })
+            : undefined
         ]
       });
+    },
+    selectmovetarget_basic_2: step => {
+      let ARTIFACTS = step.ARTIFACTS;
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return Object.keys(ARTIFACTS.pushees).length === 0
+        ? collapseContent({
+            line: [
+              { text: "Press" },
+              { command: "move" },
+              { text: "to walk" },
+              {
+                unit: [
+                  iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+                  (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                  MARKS.selectunit
+                ]
+              },
+              { text: "to" },
+              { pos: MARKS.selectmovetarget }
+            ]
+          })
+        : collapseContent({
+            line: [
+              { text: "Press" },
+              { command: "move" },
+              { text: "to make" },
+              {
+                unit: [
+                  iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+                  (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                  MARKS.selectunit
+                ]
+              },
+              { text: "push" },
+              collapseContent({
+                line: Object.keys(ARTIFACTS.pushees)
+                  .filter(p => UNITLAYERS.units[p])
+                  .map(p => ({
+                    unit: [
+                      iconMapping[UNITLAYERS.units[p].group],
+                      UNITLAYERS.units[p].owner,
+                      p
+                    ]
+                  }))
+                  .reduce((mem, i, n, list) => {
+                    mem.push(i);
+                    if (n === list.length - 2) {
+                      mem.push({ text: " and " });
+                    } else if (n < list.length - 2) {
+                      mem.push({ text: ", " });
+                    }
+                    return mem;
+                  }, [])
+              })
+            ]
+          });
     }
   },
   variants: [

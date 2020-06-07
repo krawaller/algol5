@@ -21,7 +21,29 @@ const atriumFlow: AtriumDefinition["flow"] = {
           {
             or: [
               { noneat: ["units", "selectmovetarget"] },
-              { notempty: "pushees" },
+              {
+                and: [
+                  { notempty: "pushees" },
+                  {
+                    not: {
+                      and: [
+                        {
+                          samepos: [
+                            "selectunit",
+                            { battlepos: "forbiddenpusher" },
+                          ],
+                        },
+                        {
+                          samepos: [
+                            "selectmovetarget",
+                            { battlepos: "forbiddenpushtarget" },
+                          ],
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
             ],
           },
           "move",
@@ -33,9 +55,50 @@ const atriumFlow: AtriumDefinition["flow"] = {
     move: {
       applyEffects: [
         {
-          pushin: [
-            "pushees",
+          setbattlevar: [
+            "pushdir",
             { read: ["movetargets", "selectmovetarget", "dir"] },
+          ],
+        },
+        {
+          ifelse: [
+            { notempty: "pushees" },
+            {
+              multi: [
+                {
+                  setbattlepos: [
+                    "forbiddenpushtarget",
+                    { onlyin: "lastpushee" },
+                  ],
+                },
+                {
+                  setbattlepos: [
+                    "forbiddenpusher",
+                    {
+                      offset: [
+                        { onlyin: "lastpushee" },
+                        { battlevar: "pushdir" },
+                        1,
+                      ],
+                    },
+                  ],
+                },
+                {
+                  pushin: ["pushees", { battlevar: "pushdir" }],
+                },
+              ],
+            },
+            {
+              multi: [
+                { setbattlepos: ["forbiddenpusher", { onlyin: "lastpushee" }] },
+                {
+                  setbattlepos: [
+                    "forbiddenpushtarget",
+                    { onlyin: "lastpushee" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         { moveat: ["selectunit", "selectmovetarget"] },

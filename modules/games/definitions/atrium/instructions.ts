@@ -8,6 +8,18 @@ const atriumInstructions: AtriumDefinition["instructions"] = {
       "orthogonal neighbour to move",
       { unitat: "selectunit" },
       "to",
+      {
+        if: [
+          { samepos: ["selectunit", { battlepos: "forbiddenpusher" }] },
+          {
+            line: [
+              " (but you cannot push back at",
+              { pos: { battlepos: "forbiddenpushtarget" } },
+              "this turn)",
+            ],
+          },
+        ],
+      },
     ],
   },
   selectmovetarget: {

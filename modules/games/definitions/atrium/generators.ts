@@ -30,6 +30,10 @@ const atriumGenerators: AtriumDefinition["generators"] = {
         condition: { stoppedBecause: "nomoresteps" },
         tolayer: "pushees",
       },
+      last: {
+        tolayer: "lastpushee",
+        condition: { stoppedBecause: "nomoresteps" },
+      },
     },
   },
   findwinlines: {

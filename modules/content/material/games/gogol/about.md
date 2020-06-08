@@ -10,4 +10,4 @@ The name {GAME} - which is math speak for a {EXTLINK:text=very large number,url=
 
 There is some interesting commentary on {GAME} in Neto's and Silva's book {TAG:id=netobook,text=Mathematical GamesCOMMA Abstract Games}.
 
-{PIC:name=gogolbook.png,cred=Photo by me,title=Gogol in the book}
+{PIC:name=gogolbook.jpg,cred=Photo by me,title=Gogol in the book}

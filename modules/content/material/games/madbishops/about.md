@@ -4,7 +4,7 @@ updated: 2020-05-07
 
 {GAME} was invented by {EXTLINK:url=http://www.marksteeregames.com/,text=Mark Steere} in 2010.
 
-{PIC:name=madbishopbeer.png,credurl=https://duclaw.com/,cred=Label by DuClaw Brewing,title=Also a good beer}
+{PIC:name=madbishopbeer.jpg,credurl=https://duclaw.com/,cred=Label by DuClaw Brewing,title=Also a good beer}
 
 As mr Steere himself {EXTLINK:url=https://rec.games.abstract.narkive.com/24O4DeQa/new-msg-game-mad-bishops,text=said about the game}:
 

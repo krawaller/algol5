@@ -63,3 +63,11 @@ export interface AlgolValProd<Blob extends AlgolGameBlobAnon> {
 export interface AlgolValMinus<Blob extends AlgolGameBlobAnon> {
   minus: AlgolVal<Blob, number>[];
 }
+
+export interface AlgolValPosX<Blob extends AlgolGameBlobAnon> {
+  posx: AlgolPos<Blob>;
+}
+
+export interface AlgolValPosY<Blob extends AlgolGameBlobAnon> {
+  posy: AlgolPos<Blob>;
+}

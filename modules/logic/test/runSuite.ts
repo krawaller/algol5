@@ -89,7 +89,7 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                     ""
                   );
                 pre += `
-                    const {offsetPos, boardConnections, makeRelativeDirs, setup2army, boardLayers, terrainLayers, collapseContent, makeGrids} = require('${path.join(
+                    const {offsetPos, boardConnections, makeRelativeDirs, setup2army, coords2pos, boardLayers, terrainLayers, collapseContent, makeGrids} = require('${path.join(
                       __dirname,
                       "../../common"
                     )}');`;

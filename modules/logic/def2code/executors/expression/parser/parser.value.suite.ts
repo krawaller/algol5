@@ -95,6 +95,7 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
           context: {
             GRIDS: { meep: { a1: 3, c2: 5 } },
             MARKS: { mymark: "a1", othermark: "c2" },
+            BOARD: { board: { c2: { x: 3, y: 2 } } },
           },
           tests: [
             { expr: { gridat: ["meep", "mymark"] }, res: 3 },
@@ -108,6 +109,8 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
               },
               res: 8,
             },
+            { expr: { posx: "othermark" }, res: 3 },
+            { expr: { posy: "othermark" }, res: 2 },
           ],
         },
       ],

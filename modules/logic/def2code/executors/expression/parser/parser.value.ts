@@ -16,6 +16,8 @@ import {
   isAlgolValGridIn,
   isAlgolValRelDir,
   isAlgolValLoopRead,
+  isAlgolValPosX,
+  isAlgolValPosY,
 } from "../../../../../types";
 
 import { makeParser } from "../";
@@ -64,6 +66,10 @@ export default function parseVal(
         return "TURN";
       case "countsofar":
         return "CURRENTCOUNT";
+      case "boardheight":
+        return "dimensions.height";
+      case "boardwidth":
+        return "dimensions.width";
       default:
         throw new Error("Unknown value singleton: " + expr);
     }
@@ -149,5 +155,13 @@ export default function parseVal(
       reldir: [dir, rel],
     } = expr;
     return `relativeDirs[${parser.val(dir)}][${parser.val(rel)}]`;
+  }
+  if (isAlgolValPosX(expr)) {
+    const { posx: pos } = expr;
+    return `BOARD.board[${parser.pos(pos)}].x`;
+  }
+  if (isAlgolValPosY(expr)) {
+    const { posy: pos } = expr;
+    return `BOARD.board[${parser.pos(pos)}].y`;
   }
 }

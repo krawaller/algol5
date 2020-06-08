@@ -17,4 +17,5 @@ const tests: AlgolPos<AlgolTestBlob>[] = [
   { offset: ["mymark", 4, 1, 0] },
   { offset: ["mymark", 4, 1] },
   { offset: ["mymark", 4] },
+  { fromxy: [1, { posy: "mymark" }] },
 ];

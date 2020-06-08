@@ -10,6 +10,7 @@ import {
   AlgolPosOnlyIn,
   AlgolPosTurnPos,
   AlgolPosOffset,
+  AlgolPosFromXY,
 } from "./pos.interface";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -27,4 +28,5 @@ type AlgolPosInner<Blob extends AlgolGameBlobAnon> =
   | AlgolPosOnlyIn<Blob>
   | AlgolPosBattlePos<Blob>
   | AlgolPosTurnPos<Blob>
-  | AlgolPosOffset<Blob>;
+  | AlgolPosOffset<Blob>
+  | AlgolPosFromXY<Blob>;

@@ -12,7 +12,10 @@ export const testSuite: AlgolExpressionSuite<AlgolPosAnon, string> = {
       action: "someaction",
       contexts: [
         {
-          context: { MARKS: { mymark: "h9", myothermark: "q5" } },
+          context: {
+            MARKS: { mymark: "h9", myothermark: "q5" },
+            BOARD: { board: { h9: { x: 8, y: 9 } } },
+          },
           tests: [
             { expr: "mymark", res: "h9" },
             {
@@ -22,6 +25,7 @@ export const testSuite: AlgolExpressionSuite<AlgolPosAnon, string> = {
             { expr: { onlyin: { single: "mymark" } }, res: "h9" },
             { expr: { indexlist: [0, "mymark", "myothermark"] }, res: "h9" },
             { expr: { indexlist: [1, "mymark", "myothermark"] }, res: "q5" },
+            { expr: { fromxy: [2, { posy: "mymark" }] }, res: "b9" },
           ],
         },
         {

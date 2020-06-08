@@ -20,6 +20,8 @@ import {
   AlgolValTurnVar,
   AlgolValValue,
   AlgolValLoopRead,
+  AlgolValPosX,
+  AlgolValPosY,
 } from "./value.interface";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -43,6 +45,8 @@ type AlgolValInner<Blob extends AlgolGameBlobAnon, _T> =
   | ["walklength"]
   | ["max"]
   | ["step"]
+  | ["boardheight"]
+  | ["boardwidth"]
   | AlgolValValue<Blob, _T>
   | AlgolValRead<Blob>
   | AlgolValBattleVar<Blob>
@@ -57,4 +61,6 @@ type AlgolValInner<Blob extends AlgolGameBlobAnon, _T> =
   | AlgolValSum<Blob>
   | AlgolValProd<Blob>
   | AlgolValMinus<Blob>
-  | AlgolValLoopRead<Blob>;
+  | AlgolValLoopRead<Blob>
+  | AlgolValPosX<Blob>
+  | AlgolValPosY<Blob>;

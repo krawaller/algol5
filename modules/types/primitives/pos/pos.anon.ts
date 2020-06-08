@@ -6,6 +6,7 @@ import {
   AlgolPosBattlePos,
   AlgolPosTurnPos,
   AlgolPosOffset,
+  AlgolPosFromXY,
 } from "./pos.interface";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -16,3 +17,4 @@ export type AlgolPosOnlyInAnon = AlgolPosOnlyIn<AlgolGameBlobAnon>;
 export type AlgolPosBattlePosAnon = AlgolPosBattlePos<AlgolGameBlobAnon>;
 export type AlgolPosTurnPosAnon = AlgolPosTurnPos<AlgolGameBlobAnon>;
 export type AlgolPosOffsetAnon = AlgolPosOffset<AlgolGameBlobAnon>;
+export type AlgolPosFromXYAnon = AlgolPosFromXY<AlgolGameBlobAnon>;

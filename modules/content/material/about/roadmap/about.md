@@ -3,23 +3,23 @@ id: "roadmap"
 title: "Roadmap"
 slug: "roadmap"
 blurb: "A peek at what is to come"
-thumbnail: "wip-thumb.png"
-mainImage: "wip-big.png"
+thumbnail: "road-thumb.jpg"
+mainImage: "roadmap.jpg"
 sort: 42
 created: "2020-04-10"
-updated: "2020-04-10"
+updated: "2020-06-08"
 ---
 
-WIP
+{PIC:name=roadmap.jpg,cred=Photo by LEGO,credurl=https://www.lego.com/en-ie/product/road-tape-854048,title=Road map}
 
-{PIC:name=wip-big.png,cred=Art by David,title=Work in progress}
+So, where do we want to take {ME}? After all it is still very much in a beta state.
 
-What we gonna do with {ME}?
+Here's the list of things we hope to add, in semi-prioritised order!
 
-- Online play
-- AI
-- Slack bot
-- Better UI
-- Large screen support
+1. Graphical design
+1. Online play
+1. AI opponents
+1. Dedicated UI for larger screens
+1. Bots for Slack, Messenger, Twitter, etc
 
 And, of course, moar games!

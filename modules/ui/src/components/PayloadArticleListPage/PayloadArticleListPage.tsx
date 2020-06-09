@@ -2,12 +2,12 @@ import React, { FunctionComponent } from "react";
 import css from "./PayloadArticleListPage.cssProxy";
 import { Page } from "../Page";
 import { ScrollBox } from "../ScrollBox";
-import { AlgolListing, AppActions } from "../../../../types";
+import { AlgolListingContainer, AppActions } from "../../../../types";
 import { PayloadArticleList } from "../PayloadArticleList";
 
 type PayloadArticleListPageProps = {
   actions: AppActions;
-  list: AlgolListing[];
+  list: AlgolListingContainer;
   reverse?: boolean;
   title: string;
 };

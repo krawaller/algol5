@@ -36,7 +36,7 @@ const article: AlgolArticle = {
   relations: [
     {
       title: "${meta.name} has these tags:",
-      composite: "games.jpg",
+      composite: "tags.jpg",
       listings: [${tagIds.join(", ")}]
     },
     {

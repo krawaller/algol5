@@ -37,6 +37,10 @@ function MyApp({ Component, pageProps, router }: AppProps) {
             <meta property="og:title" content={Comp.metaTitle || Comp.title} />
           ))}
         {preloads.length > 0 && preloads}
+        <link rel="preload" as="image" href="/images/composites/about.jpg" />
+        <link rel="preload" as="image" href="/images/composites/news.jpg" />
+        <link rel="preload" as="image" href="/images/composites/tags.jpg" />
+        <link rel="preload" as="image" href="/images/composites/games.jpg" />
       </Head>
       <Shell nav={nav} actions={actions}>
         <Component {...pageProps} actions={actions} ctxt={ctxt} />

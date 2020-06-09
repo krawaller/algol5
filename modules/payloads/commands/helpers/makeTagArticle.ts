@@ -27,7 +27,7 @@ const article: AlgolArticle = {
   updated: "${tagYaml.updated}",
   relations: [{
     title: "",
-    composite: "tags.jpg",
+    composite: "games.jpg",
     listings: [${gameIds.join(", ")}]
   }],
   html: tag

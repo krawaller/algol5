@@ -14,14 +14,16 @@ export const PayloadArticle: FunctionComponent<PayloadArticleProps> = props => {
   return (
     <>
       <Markdown html={article.html} actions={actions} />
-      {Object.entries(article.relations)
-        .filter(([, list]) => list.length)
-        .map(([header, list]) => (
-          <Fragment key={header}>
-            {header && (
-              <div className={css.payloadArticleRelationHeader}>{header}</div>
+      {article.relations
+        .filter(rel => rel.listings.length)
+        .map(rel => (
+          <Fragment key={`rel-${rel.title}`}>
+            {rel.title && (
+              <div className={css.payloadArticleRelationHeader}>
+                {rel.title}
+              </div>
             )}
-            <PayloadArticleList actions={actions} list={list} />
+            <PayloadArticleList actions={actions} list={rel} />
           </Fragment>
         ))}
     </>

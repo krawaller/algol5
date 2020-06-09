@@ -5,7 +5,7 @@ const prettier = require("prettier");
 const composite = require("../../graphics/composite");
 
 const content = path.join(__dirname, "../../content/dist");
-const root = path.join(__dirname, "../dist/composites")
+const root = path.join(__dirname, "../dist/composites");
 
 const toMake = [
   { name: "tags", folder: "tags" },
@@ -13,18 +13,23 @@ const toMake = [
   { name: "about", folder: "about" },
 ];
 
+const compositeSize = 160;
+
 async function makeComposite(opts) {
   const { name, folder } = opts;
   const paths = fs
     .readdirSync(path.join(content, folder))
     .filter(f => f != ".DS_Store")
     .map(t => {
-      const { thumbnail } = require(
-        path.join(content, folder, t, 'listing.ts')
-      ).listing
+      const { thumbnail } = require(path.join(
+        content,
+        folder,
+        t,
+        "listing.ts"
+      )).listing;
       return path.join(content, folder, t, "pics", thumbnail);
     });
-  await composite({ paths, size: 140, name, root });
+  await composite({ paths, size: compositeSize, name, root });
 }
 
 (async function() {
@@ -43,7 +48,7 @@ async function makeComposite(opts) {
   await composite({
     name: "games",
     paths: actionShots,
-    size: 140,
-    root
+    size: compositeSize,
+    root,
   });
 })();

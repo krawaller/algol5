@@ -41,5 +41,6 @@ export type AlgolListing = {
   composite: {
     x: number;
     y: number;
+    ratio: number;
   };
 };

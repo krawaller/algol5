@@ -21,6 +21,7 @@ const composite = async opts => {
   const rows = Math.ceil(paths.length / perRow);
   const canvas = createCanvas(perRow * size, rows * size);
   const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   const buffers = await Promise.all(
     paths.map(
       p => new Promise(res => fs.readFile(p, {}, (err, data) => res(data)))
@@ -33,9 +34,10 @@ const composite = async opts => {
     const col = row * perRow ? i % (row * perRow) : i;
     const x = col * size;
     const y = row * size;
-    ctx.drawImage(images[i], x, y, size, size);
+    const ratio = images[i].height / images[i].width;
+    ctx.drawImage(images[i], x, y, size, size * ratio);
     const pname = path.basename(paths[i]);
-    map[pname] = { x, y };
+    map[pname] = { x, y, ratio };
   }
   const jpgStream = canvas.createJPEGStream();
   const outFolder = path.join(root, name);

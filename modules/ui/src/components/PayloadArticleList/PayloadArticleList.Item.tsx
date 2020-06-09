@@ -13,7 +13,7 @@ export const PayloadArticleListItem: FunctionComponent<PayloadArticleListItemPro
   const { actions, listing, compositeName } = props;
   const {
     title,
-    composite: { x, y },
+    composite: { x, y, ratio },
     blurb,
     url,
   } = listing;
@@ -27,6 +27,7 @@ export const PayloadArticleListItem: FunctionComponent<PayloadArticleListItemPro
               backgroundImage: `url(/images/composites/${compositeName})`,
               backgroundPositionX: -x,
               backgroundPositionY: -y,
+              height: 160 * ratio,
             }}
           />
         </div>

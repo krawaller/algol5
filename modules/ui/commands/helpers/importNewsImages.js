@@ -4,7 +4,7 @@ const fs = require("fs-extra");
 module.exports = date => {
   const source = path.join(
     __dirname,
-    `../../../content/material/news/${date}/pics`
+    `../../../content/dist/news/${date}/pics`
   );
   if (fs.existsSync(source)) {
     const target = path.join(

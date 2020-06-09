@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "robot": "npm run setupStatic && npm run harvestCss && npm run importGameImages && npm run importNewsImages && npm run importAboutImages && npm run importTagImages && npm run encodeImages",
+    "robot": "npm run setupStatic && npm run harvestCss && npm run importCompositeImages && npm run importGameImages && npm run importNewsImages && npm run importAboutImages && npm run importTagImages && npm run encodeImages",
     "clean": "rm -rf dist; mkdir dist; rm -rf node_modules/.cache/storybook",
     "harvestCss": "node ./commands/harvestCss",
     "setupStatic": "rm -rf dist; mkdir dist; mkdir dist/static; cp -a ./public/. ./dist/static/.;",
@@ -8,6 +8,7 @@
     "importNewsImages": "node ./commands/importNewsImages",
     "importAboutImages": "node ./commands/importAboutImages",
     "importTagImages": "node ./commands/importTagImages",
+    "importCompositeImages": "node ./commands/importCompositeImages",
     "makeGamePayloads": "node ./commands/makeGamePayloads",
     "exportAllGamePayloads": "node ./commands/exportAllGamePayloads",
     "encodeImages": "node ./commands/encodeImages",

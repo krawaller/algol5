@@ -10,7 +10,7 @@ module.exports = gameId => {
   // content images
   const contentSource = path.join(
     __dirname,
-    `../../../content/material/games/${gameId}/pics`
+    `../../../content/dist/games/${gameId}/pics`
   );
   if (fs.existsSync(contentSource)) {
     fs.removeSync(targetDir);

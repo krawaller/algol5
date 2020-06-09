@@ -2,13 +2,12 @@ const path = require("path");
 const fs = require("fs-extra");
 const { createCanvas, loadImage } = require("canvas");
 
-const outBase = path.join(__dirname, "dist/composites");
-
 /**
  * @typedef {Object} CompositeOpts
  * @property {string[]} paths List of paths to square images with unique names
  * @property {string} name Name for composite
  * @property {number} size Square side length
+ * @property {string} root Root folder to create resources in
  */
 
 /**
@@ -16,7 +15,7 @@ const outBase = path.join(__dirname, "dist/composites");
  * @param {CompositeOpts} opts
  */
 const composite = async opts => {
-  const { size, paths, name } = opts;
+  const { size, paths, name, root } = opts;
   paths.sort((p1, p2) => (path.basename(p1) < path.basename(p2) ? -1 : 1));
   const perRow = 5;
   const rows = Math.ceil(paths.length / perRow);
@@ -39,7 +38,7 @@ const composite = async opts => {
     map[pname] = { x, y };
   }
   const jpgStream = canvas.createJPEGStream();
-  const outFolder = path.join(outBase, name);
+  const outFolder = path.join(root, name);
   await fs.ensureDir(outFolder);
   const outStream = fs.createWriteStream(path.join(outFolder, `${name}.jpg`));
   await new Promise(resolve => {

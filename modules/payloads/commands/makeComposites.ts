@@ -1,30 +1,30 @@
 const fs = require("fs-extra");
 const path = require("path");
-const fm = require("front-matter");
 const tagsFolder = path.join(__dirname, "../material/tags");
 const prettier = require("prettier");
 const composite = require("../../graphics/composite");
 
-const content = path.join(__dirname, "../../content/material");
+const content = path.join(__dirname, "../../content/dist");
+const root = path.join(__dirname, "../dist/composites")
 
 const toMake = [
-  { name: "tags", folder: "tags", info: "tag.md" },
-  { name: "news", folder: "news", info: "news.md" },
-  { name: "about", folder: "about", info: "about.md" },
+  { name: "tags", folder: "tags" },
+  { name: "news", folder: "news" },
+  { name: "about", folder: "about" },
 ];
 
 async function makeComposite(opts) {
-  const { name, folder, info } = opts;
+  const { name, folder } = opts;
   const paths = fs
     .readdirSync(path.join(content, folder))
     .filter(f => f != ".DS_Store")
     .map(t => {
-      const thumbnail = fm(
-        fs.readFileSync(path.join(content, folder, t, info)).toString()
-      ).attributes.thumbnail;
+      const { thumbnail } = require(
+        path.join(content, folder, t, 'listing.ts')
+      ).listing
       return path.join(content, folder, t, "pics", thumbnail);
     });
-  await composite({ paths, size: 140, name });
+  await composite({ paths, size: 140, name, root });
 }
 
 (async function() {
@@ -44,5 +44,6 @@ async function makeComposite(opts) {
     name: "games",
     paths: actionShots,
     size: 140,
+    root
   });
 })();

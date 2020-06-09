@@ -13,6 +13,7 @@
     "makeTagIndex": "node ./commands/makeTagIndex"
   },
   "dependencies": {
+    "front-matter": "^4.0.2",
     "marked": "^0.8.0"
   },
   "devDependencies": {

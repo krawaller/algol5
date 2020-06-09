@@ -25,9 +25,11 @@ const article: AlgolArticle = {
   title: "${tagYaml.title}",
   mainImage: "${tagYaml.mainImage}",
   updated: "${tagYaml.updated}",
-  relations: {
-    "": [${gameIds.join(", ")}]
-  },
+  relations: [{
+    title: "",
+    composite: "tags.jpg",
+    listings: [${gameIds.join(", ")}]
+  }],
   html: tag
 };
 

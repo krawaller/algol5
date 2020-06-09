@@ -21,7 +21,7 @@ const article: AlgolArticle = {
   mainImage: "${aboutYaml.mainImage}",
   updated: "${aboutYaml.updated}",
   html: about,
-  relations: {}
+  relations: []
 };
 
 export default article;

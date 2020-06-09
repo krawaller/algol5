@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "robot": "npm run buildRelations && npm run makeGamePayload && npm run exportAllGamePayloads && npm run makeListings && npm run makeArticles",
+    "robot": "npm run makeComposites && npm run buildRelations && npm run makeGamePayload && npm run exportAllGamePayloads && npm run makeListings && npm run makeArticles",
     "clean": "rm -rf dist",
+    "makeComposites": "node ./commands/makeComposites",
     "makeGamePayload": "node ./commands/makeGamePayload",
     "makeListings": "npm run makeGameListing && npm run makeTagListing && npm run makeNewsListing && npm run makeAboutListing && npm run makeListingIndexes",
     "makeArticles": "npm run makeTagArticle && npm run makeNewsArticle && npm run makeAboutArticle && npm run makeGameRulesArticle && npm run makeGameAboutArticle && npm run makeArticleIndexes",

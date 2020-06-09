@@ -44,6 +44,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "front-matter": "^4.0.2",
     "jsondiffpatch": "^0.3.11",
     "lodash.isequal": "^4.5.0",
     "react": "^16.12.0",

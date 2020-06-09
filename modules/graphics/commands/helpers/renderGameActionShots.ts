@@ -64,6 +64,10 @@ export const renderGameActionShots = async (gameId: string) => {
             path.join(target, `${noCodeFilename}.ts`),
             dataURIcode
           );
+          await fs.writeFile(
+            path.join(target, `${noCodeFilename}_small.jpg`),
+            smallJpg
+          );
         }
       }
       console.log("action shots rendered for", gameId, variant.desc);

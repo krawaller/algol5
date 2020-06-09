@@ -64,5 +64,9 @@ export const writeAbout = (id: string) => {
 };
 `;
   writeFileSync(path.join(out, "listing.ts"), listing);
+  fs.copySync(
+    picSourcePath,
+    path.join(out, "pics")
+  )
   console.log("Wrote about", id);
 };

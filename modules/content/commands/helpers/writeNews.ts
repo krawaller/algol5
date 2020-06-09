@@ -69,5 +69,9 @@ export const writeNews = (id: string) => {
 };
 `;
   writeFileSync(path.join(out, "listing.ts"), listing);
+  fs.copySync(
+    picSourcePath,
+    path.join(out, "pics")
+  )
   console.log("Wrote news", date);
 };

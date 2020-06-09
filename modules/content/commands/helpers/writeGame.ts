@@ -54,4 +54,8 @@ export const writeGame = async (gameId: GameId) => {
     path.join(out, "preloads.ts"),
     `export const preloads = ${JSON.stringify(allGamePreloads)};\n`
   );
+  fs.copySync(
+    picSourcePath,
+    path.join(out, "pics")
+  )
 };

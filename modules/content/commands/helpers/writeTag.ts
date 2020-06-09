@@ -64,5 +64,9 @@ export const writeTag = (id: string) => {
 };
 `;
   writeFileSync(path.join(out, "listing.ts"), listing);
+  fs.copySync(
+    picSourcePath,
+    path.join(out, "pics")
+  )
   console.log("Wrote tag", id);
 };

@@ -35,10 +35,13 @@ export const pic: TokenHandler = opts => {
   if (dims.width > 800) {
     throw new Error(`Picture ${name} is too wide! (${dims.width})`);
   }
-  return `<div class="md-img" data-height="${dims.height}" data-width="${
-    dims.width
-  }" data-ratio="${dims.height /
-    dims.width}"><img src="${src}" alt="${title}" title="${title}" /><div class="md-img-info"><span>${title}</span>${
+  const placeholder = `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${dims.width} ${dims.height}"%3E%3C/svg%3E`;
+  const imgAttrs = !inline
+    ? `data-src="${src}" src='${placeholder}'`
+    : `src="${src}"`;
+  return `<div class="md-img${
+    !inline ? " md-img-with-placeholder" : ""
+  }"><img ${imgAttrs} alt="${title}" title="${title}" /><div class="md-img-info"><span>${title}</span>${
     credurl
       ? `<span><a href="${credurl.replace(
           /EQUALS/g,

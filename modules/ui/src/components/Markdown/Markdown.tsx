@@ -3,6 +3,7 @@ import React, {
   MouseEvent,
   useCallback,
   useEffect,
+  useRef,
 } from "react";
 import css from "./Markdown.cssProxy";
 
@@ -21,6 +22,7 @@ const urlExtracter = /"([^"]+)"/;
 
 export const Markdown: FunctionComponent<MarkdownProps> = props => {
   const { actions, html } = props;
+  const me = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (html && html.match) {
       for (const hit of html.match(linksFinder) || []) {
@@ -31,6 +33,15 @@ export const Markdown: FunctionComponent<MarkdownProps> = props => {
       }
     }
   }, [html, actions.prefetch]);
+  useEffect(() => {
+    if (me.current) {
+      for (const img of Array.from(me.current.querySelectorAll("[data-src]"))) {
+        img.setAttribute("src", img.getAttribute("data-src")!);
+        img.removeAttribute("data-src");
+        img.parentElement!.classList.remove("md-img-with-placeholder");
+      }
+    }
+  }, [me.current, html]);
   const handleClick = useCallback(
     (e: MouseEvent) => {
       if (e.target) {
@@ -46,6 +57,7 @@ export const Markdown: FunctionComponent<MarkdownProps> = props => {
   );
   return (
     <div
+      ref={me}
       onClick={handleClick}
       className={css.markdownContainer}
       dangerouslySetInnerHTML={{ __html: html }}

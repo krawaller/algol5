@@ -4,7 +4,7 @@ title: "Business model"
 slug: "business_model"
 blurb: "How Chessicals is financed"
 thumbnail: "moneythumb.png"
-mainImage: "moneylaundering.png"
+mainImage: "moneylaundering.jpg"
 sort: 30
 created: "2020-04-10"
 updated: "2020-04-10"
@@ -12,7 +12,7 @@ updated: "2020-04-10"
 
 So, what is the {ME} business model?
 
-{PIC:name=moneylaundering.png,cred=Photo by HothBricks,credurl=https://www.flickr.com/photos/hothbricks/21458946083,title=Business model?}
+{PIC:name=moneylaundering.jpg,cred=Photo by HothBricks,credurl=https://www.flickr.com/photos/hothbricks/21458946083,title=Business model?}
 
 Short answer - there isn't one. This is very much an SPP&trade; (Stupid Passion Project), and like all proper SPP:s, light years from being economically viable.
 

@@ -8,6 +8,6 @@ updated: 2020-05-02
 
 It was also published by {EXTLINK:url=https://www.happypuzzle.co.uk/,text=The Happy Puzzle Company} with a rather different theme:
 
-{PIC:name=ducksinarow.png,cred=Photo by Happy Puzzle Company,title=Quack!}
+{PIC:name=ducksinarow.jpg,cred=Photo by Happy Puzzle Company,title=Quack!}
 
 The game is ridiculously simple - be the first to form 4-in-a-row with your queens. Still, the well-balanced starting setup makes for an interesting game.

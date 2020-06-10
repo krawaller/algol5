@@ -2,7 +2,6 @@ import fm from "front-matter";
 import { md2html } from "../../md2html";
 import path from "path";
 import fs, { readFileSync, writeFileSync } from "fs-extra";
-import { encodePic } from "../../utils";
 
 export const writeTag = (id: string) => {
   const source = path.join(__dirname, `../../material/tags/${id}`);
@@ -37,7 +36,6 @@ export const writeTag = (id: string) => {
       `Failed to find thumbnail "${thumbPath}" in pics folder for tag ${id}!`
     );
   }
-  const thumbdata = encodePic(thumbPath);
   const picRefPath = `/images/tags/${id}`;
   const mainImagePath = path.join(picSourcePath, yaml.mainImage);
   if (!fs.existsSync(mainImagePath)) {
@@ -62,9 +60,13 @@ export const writeTag = (id: string) => {
     updated: \`${yaml.updated || id}\`,
     preloads: ${JSON.stringify(preloads)},
     mainImage: \`/images/tags/${id}/${yaml.mainImage}\`,
-    thumbdata: \`${thumbdata}\`,
+    thumbnail: \`${yaml.thumbnail}\`,
 };
 `;
   writeFileSync(path.join(out, "listing.ts"), listing);
+  fs.copySync(
+    picSourcePath,
+    path.join(out, "pics")
+  )
   console.log("Wrote tag", id);
 };

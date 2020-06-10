@@ -50,7 +50,8 @@ export const renderGameActionShots = async (gameId: string) => {
         const smallPath = path.join(target, `${fileName}_small.jpg`);
         const smallJpg = await resizeImg(fs.readFileSync(pngPath), {
           width: 140,
-          height: 140,
+          height:
+            (140 * def.boards["basic"].height) / def.boards["basic"].width,
           format: "jpg",
         });
         fs.writeFileSync(smallPath, smallJpg);
@@ -63,6 +64,10 @@ export const renderGameActionShots = async (gameId: string) => {
           await fs.writeFile(
             path.join(target, `${noCodeFilename}.ts`),
             dataURIcode
+          );
+          await fs.writeFile(
+            path.join(target, `${noCodeFilename}_small.jpg`),
+            smallJpg
           );
         }
       }

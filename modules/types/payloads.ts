@@ -23,7 +23,13 @@ export type AlgolArticle = {
   mainImage: string;
   html: string;
   updated?: string;
-  relations: Record<string, AlgolListing[]>;
+  relations: AlgolListingContainer[];
+};
+
+export type AlgolListingContainer = {
+  title: string;
+  composite: string;
+  listings: AlgolListing[];
 };
 
 export type AlgolListing = {
@@ -32,5 +38,9 @@ export type AlgolListing = {
   url: string;
   sort: string;
   preloads: string[];
-  thumbdata: string;
+  composite: {
+    x: number;
+    y: number;
+    ratio: number;
+  };
 };

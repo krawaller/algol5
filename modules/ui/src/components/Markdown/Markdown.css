@@ -13,10 +13,21 @@
 .md-img {
   max-width: 100%;
   position: relative;
+  transition: background-color 0.3s ease;
+  background-color: transparent;
 }
 
 .md-img > img {
   max-width: 100%;
+  transition: opacity 0.3s ease;
+}
+
+.md-img-with-placeholder {
+  background-color: bisque;
+}
+
+.md-img-with-placeholder > img {
+  opacity: 0;
 }
 
 .md-img-info {

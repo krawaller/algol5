@@ -12,6 +12,7 @@ import { endgame } from "./endgame";
 import { setup } from "./setup";
 import { intlink } from "./intlink";
 import { tag } from "./tag";
+import { count } from "./count";
 
 export const tokenHandlers = {
   arr,
@@ -28,4 +29,5 @@ export const tokenHandlers = {
   setup,
   intlink,
   tag,
+  count
 };

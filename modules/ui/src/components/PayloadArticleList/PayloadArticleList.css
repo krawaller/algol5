@@ -16,14 +16,14 @@
   flex-grow: 0;
   height: 80px;
   width: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.payloadArticleListItem > :first-child > img {
-  max-height: 80px;
-  max-width: 80px;
+.payloadArticleListItem > :first-child > div {
+  background-repeat: no-repeat;
+  height: 160px;
+  width: 160px;
+  transform: scale(0.5, 0.5);
+  transform-origin: top left;
 }
 
 .payloadArticleListItem:hover {

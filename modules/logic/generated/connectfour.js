@@ -168,7 +168,8 @@ const game = {
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
         MARKS: { selectdroptarget: newMarkPos },
-        NEXTSPAWNID: step.NEXTSPAWNID
+        NEXTSPAWNID: step.NEXTSPAWNID,
+        canAlwaysEnd: true
       };
     },
     selectdroptarget_basic_2: (step, newMarkPos) => {
@@ -181,7 +182,8 @@ const game = {
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
         MARKS: { selectdroptarget: newMarkPos },
-        NEXTSPAWNID: step.NEXTSPAWNID
+        NEXTSPAWNID: step.NEXTSPAWNID,
+        canAlwaysEnd: true
       };
     },
     drop_basic_1: step => {
@@ -389,9 +391,14 @@ const game = {
       desc: "regular",
       code: "r",
       arr: {
-        setup: {},
+        setup: {
+          markers: {
+            "1": ["c1", "d1", "d2", "d3", "e3"],
+            "2": ["b1", "c2", "e1", "e2"]
+          }
+        },
         marks: [],
-        potentialMarks: []
+        potentialMarks: ["a1", "b2", "c3", "d4", "e4", "f1", "g1"]
       }
     }
   ],

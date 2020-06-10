@@ -33,10 +33,18 @@ const article: AlgolArticle = {
   title: "About ${meta.name}",
   mainImage: "/images/games/${gameId}/${gameId}_${def.variants[0].code}.png",
   updated: about.updated,
-  relations: {
-    "${meta.name} has these tags:": [${tagIds.join(", ")}],
-    "News articles mentioning ${meta.name}:": [${newsIds.join(", ")}],
-  },
+  relations: [
+    {
+      title: "${meta.name} has these tags:",
+      composite: "tags.jpg",
+      listings: [${tagIds.join(", ")}]
+    },
+    {
+      title: "News articles mentioning ${meta.name}",
+      composite: "news.jpg",
+      listings: [${newsIds.join(", ")}]
+    }
+  ],
   html: about.html
 };
 

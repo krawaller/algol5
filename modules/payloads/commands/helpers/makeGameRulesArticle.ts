@@ -24,7 +24,7 @@ const article: AlgolArticle = {
   title: "${meta.name} rules",
   mainImage: "/images/games/${gameId}/${gameId}_${def.variants[0].code}.png",
   updated: rules.updated,
-  relations: {},
+  relations: [],
   html: rules.html
 };
 

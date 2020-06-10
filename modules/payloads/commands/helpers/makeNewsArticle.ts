@@ -26,9 +26,13 @@ const article: AlgolArticle = {
   title: "${newsYaml.title}",
   mainImage: "${newsYaml.mainImage}",
   updated: "${newsYaml.updated}",
-  relations: {
-    "Mentioned games:": [${gameIds.join(", ")}]
-  },
+  relations: [
+    {
+      title: "Mentioned games",
+      composite: "games.jpg",
+      listings: [${gameIds.join(", ")}]
+    }
+  ],
   html: news
 };
 

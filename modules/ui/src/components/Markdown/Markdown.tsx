@@ -35,10 +35,18 @@ export const Markdown: FunctionComponent<MarkdownProps> = props => {
   }, [html, actions.prefetch]);
   useEffect(() => {
     if (me.current) {
-      for (const img of Array.from(me.current.querySelectorAll("[data-src]"))) {
+      for (const img of Array.from(
+        me.current.querySelectorAll("[data-src]")
+      ) as HTMLImageElement[]) {
         img.setAttribute("src", img.getAttribute("data-src")!);
         img.removeAttribute("data-src");
-        img.parentElement!.classList.remove("md-img-with-placeholder");
+        if (img.complete) {
+          img.parentElement!.classList.remove("md-img-with-placeholder");
+        } else {
+          img.addEventListener("load", () =>
+            img.parentElement!.classList.remove("md-img-with-placeholder")
+          );
+        }
       }
     }
   }, [me.current, html]);

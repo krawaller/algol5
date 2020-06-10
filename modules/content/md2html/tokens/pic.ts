@@ -2,6 +2,7 @@ import fs from "fs-extra";
 import path from "path";
 import { TokenHandler } from "./_handler";
 import { encodePic } from "../../utils";
+const sizeOf = require("image-size");
 
 // Takes a PIC token and inlines it as dataURI image. expects `name`, `cred` and `title`
 
@@ -30,7 +31,14 @@ export const pic: TokenHandler = opts => {
     }
     src = `${picRefPath}/${name}`.replace("//", "/");
   }
-  return `<div class="md-img"><img src="${src}" alt="${title}" title="${title}" /><div class="md-img-info"><span>${title}</span>${
+  const dims = sizeOf(path.join(picSourcePath, name));
+  if (dims.width > 800) {
+    throw new Error(`Picture ${name} is too wide! (${dims.width})`);
+  }
+  return `<div class="md-img" data-height="${dims.height}" data-width="${
+    dims.width
+  }" data-ratio="${dims.height /
+    dims.width}"><img src="${src}" alt="${title}" title="${title}" /><div class="md-img-info"><span>${title}</span>${
     credurl
       ? `<span><a href="${credurl.replace(
           /EQUALS/g,

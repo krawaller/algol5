@@ -10,7 +10,7 @@ created: "2020-06-10"
 updated: "2020-06-10"
 ---
 
-{PIC:name=computer.jpg,cred=Photo & model by NewClayburn,credurl=https://www.reddit.com/r/lego/comments/6ajmq7/lego_computer_desk,title=What the heck is this app?!}
+{PIC:name=computer.jpg,cred=Photo & model by Johan Alexandersson,credurl=https://www.flickr.com/photos/78666052@N05/15007415989,title=What the heck is this app?!}
 
 Hello!
 

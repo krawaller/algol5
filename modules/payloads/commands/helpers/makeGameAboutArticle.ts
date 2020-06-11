@@ -36,12 +36,12 @@ const article: AlgolArticle = {
   relations: [
     {
       title: "${meta.name} has these tags:",
-      composite: "tags.jpg",
+      composite: "tags.png",
       listings: [${tagIds.join(", ")}]
     },
     {
       title: "News articles mentioning ${meta.name}",
-      composite: "news.jpg",
+      composite: "news.png",
       listings: [${newsIds.join(", ")}]
     }
   ],

@@ -10,8 +10,8 @@ fs.readdirSync(compositeRoot)
   .filter(f => f !== ".DS_Store")
   .forEach(c =>
     fs.copyFileSync(
-      path.join(compositeRoot, c, `${c}.jpg`),
-      path.join(outRoot, `${c}.jpg`)
+      path.join(compositeRoot, c, `${c}.png`),
+      path.join(outRoot, `${c}.png`)
     )
   );
 

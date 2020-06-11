@@ -39,13 +39,13 @@ const composite = async opts => {
     const pname = path.basename(paths[i]);
     map[pname] = { x, y, ratio };
   }
-  const jpgStream = canvas.createJPEGStream();
+  const pngStream = canvas.createPNGStream();
   const outFolder = path.join(root, name);
   await fs.ensureDir(outFolder);
-  const outStream = fs.createWriteStream(path.join(outFolder, `${name}.jpg`));
+  const outStream = fs.createWriteStream(path.join(outFolder, `${name}.png`));
   await new Promise(resolve => {
     outStream.on("finish", resolve);
-    jpgStream.pipe(outStream);
+    pngStream.pipe(outStream);
   });
   await new Promise(res => {
     fs.writeFile(

@@ -16,9 +16,9 @@ So, what is the {ME} business model?
 
 Short answer - there isn't one. This is very much an SPP&trade; (Stupid Passion Project), and like all proper SPP:s, light years from being economically viable.
 
-The plan is to set up a Patreon to allow for throwing a voluntary coin in the cap, but this isn't in place yet.
+The plan is to set up a Patreon or similar to allow for throwing a voluntary coin in the cap, but this isn't in place yet.
 
-Further down the line there might be hand-curated ads or sponsorshipts, should such an opportunity arise, or paid game inclusions.
+Further down the line there might be hand-curated ads or sponsorships, should such an opportunity arise, or paid game inclusions.
 
 But mostly we just expect {ME} to be a black hole in both our wallets and calendars. SPP, after all!
 

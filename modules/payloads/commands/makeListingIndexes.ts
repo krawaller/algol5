@@ -15,7 +15,7 @@ for (const listing of listings) {
   import { AlgolListingContainer } from '../../../../types'
   export const ${listing}Listings: AlgolListingContainer = {
     title: "${listing[0].toUpperCase()}${listing.slice(1)}",
-    composite: "${listing}.jpg",
+    composite: "${listing}.png",
     listings: [${all.join(", ")}]
   };
   export default ${listing}Listings;

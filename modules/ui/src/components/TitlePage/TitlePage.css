@@ -11,3 +11,25 @@
   text-align: center;
   width: 100%;
 }
+
+.titlePageLink {
+  display: block;
+  text-decoration: none;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 120px;
+  height: 30px;
+  background-size: contain;
+}
+
+.titlePageLink:hover {
+  opacity: 0.8;
+}
+
+.titlePageLinkCoffee {
+  background-image: url(/images/buymeacoffee3.png);
+}
+
+.titlePageLinkForum {
+  background-image: url(/images/jointheforum3.png);
+}

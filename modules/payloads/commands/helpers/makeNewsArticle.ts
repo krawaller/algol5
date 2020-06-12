@@ -29,7 +29,7 @@ const article: AlgolArticle = {
   relations: [
     {
       title: "Mentioned games",
-      composite: "games.jpg",
+      composite: "games.png",
       listings: [${gameIds.join(", ")}]
     }
   ],

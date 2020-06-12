@@ -39,14 +39,13 @@ export const pic: TokenHandler = opts => {
   const imgAttrs = !inline
     ? `data-src="${src}" src='${placeholder}'`
     : `src="${src}"`;
+  const CredText = credurl
+    ? `<span><a href="${credurl.replace(
+        /EQUALS/g,
+        "="
+      )}" target="_blank" rel="noopener">${cred}</a></span>`
+    : `<span>${cred}</span>`;
   return `<div class="md-img${
     !inline ? " md-img-with-placeholder" : ""
-  }"><img ${imgAttrs} alt="${title}" title="${title}" /><div class="md-img-info"><span>${title}</span>${
-    credurl
-      ? `<span><a href="${credurl.replace(
-          /EQUALS/g,
-          "="
-        )}" target="_blank" rel="noopener">${cred}</a></span>`
-      : `<span>${cred}</span>`
-  }</div></div>`;
+  }"><img ${imgAttrs} alt="${title}" title="${title}" /><div class="md-img-info"><span>${title}</span>${CredText}</div></div>`;
 };

@@ -5,8 +5,8 @@ import { fakeAppActions } from "../../../../types";
 
 storiesOf("TitlePage", module).add("Welcome! :D", () => {
   return (
-    <TitlePage
-      actions={fakeAppActions}
-    />
+    <div style={{ height: 700, width: 400 }}>
+      <TitlePage actions={fakeAppActions} />
+    </div>
   );
 });

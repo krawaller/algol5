@@ -32,6 +32,7 @@ export const writeChunk = (id: string) => {
         `Failed to find mainImage "${yaml.mainImage}" in pics folder for chunk ${id}!`
       );
     }
+    yaml.mainImage = `/images/chunks/${id}/${yaml.mainImage}`;
   }
 
   const { html, preloads } = md2html({ md, picSourcePath, picRefPath });
@@ -40,9 +41,7 @@ export const writeChunk = (id: string) => {
   const exported = `export const chunk = \`${html}\`\n; export default chunk;`;
   writeFileSync(path.join(out, `chunk.ts`), exported);
 
-  const info = `export const info = {
-    ${JSON.stringify(yaml)}
-};
+  const info = `export const info = ${JSON.stringify(yaml)};
 export default info;
 `;
   writeFileSync(path.join(out, "info.ts"), info);

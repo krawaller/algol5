@@ -1,6 +1,6 @@
 import React from "react";
 
-import { AlgolPage } from "../../ui/src/helpers/AlgolPage";
+import { AlgolPage } from "../../types";
 import { TitlePage } from "../../ui/src/components/TitlePage";
 import { homeNav } from "../../common/nav/homeNav";
 

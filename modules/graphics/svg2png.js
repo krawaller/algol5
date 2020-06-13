@@ -5,8 +5,6 @@ const path = require("path");
 const svg2png = async svgPath => {
   const buffer = await fs.readFile(svgPath);
   const img = await loadImage(buffer);
-  img.width *= 2;
-  img.height *= 2;
 
   const svg = buffer.toString();
   const dims = svg.match(/^<svg[^>]* viewBox="(\d+) (\d+) (\d+) (\d+)"[^>]*>/);

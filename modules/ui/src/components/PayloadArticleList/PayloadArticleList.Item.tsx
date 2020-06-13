@@ -27,7 +27,7 @@ export const PayloadArticleListItem: FunctionComponent<PayloadArticleListItemPro
               backgroundImage: `url(/images/composites/${compositeName})`,
               backgroundPositionX: -x,
               backgroundPositionY: -y,
-              height: 160 * ratio,
+              height: 80 * ratio,
             }}
           />
         </div>

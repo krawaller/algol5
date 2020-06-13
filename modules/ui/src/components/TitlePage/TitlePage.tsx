@@ -2,12 +2,13 @@
  * Used in the Next app as the main Index page for the app
  */
 
-import classNames from "classnames";
 import React, { FunctionComponent, Fragment } from "react";
 import { AppActions } from "../../../../types";
 import { list } from "../../../../games/dist/list";
 import { Page } from "../Page";
 import base64TitlePic from "../../../dist/base64/title.png.proxy";
+import base64CoffeePic from "../../../dist/base64/buymeacoffee3.png.proxy";
+import base64ForumPic from "../../../dist/base64/jointheforum3.png.proxy";
 import css from "./TitlePage.cssProxy";
 import { ButtonGroup } from "../ButtonGroup";
 
@@ -31,16 +32,18 @@ export const TitlePage: FunctionComponent<TitlePageProps> = () => {
           </ButtonGroup>
           <ButtonGroup>
             <a
-              className={classNames(css.titlePageLinkForum, css.titlePageLink)}
+              className={css.titlePageLink}
               href="https://forum.chessicals.com"
               target="_blank"
               rel="noopener"
+              style={{ backgroundImage: `url(${base64ForumPic})` }}
             />
             <a
-              className={classNames(css.titlePageLinkCoffee, css.titlePageLink)}
+              className={css.titlePageLink}
               href="https://www.buymeacoffee.com/chessicals"
               target="_blank"
               rel="noopener"
+              style={{ backgroundImage: `url(${base64CoffeePic})` }}
             />
           </ButtonGroup>
         </Fragment>

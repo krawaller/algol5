@@ -26,10 +26,9 @@ module.exports = gameId => {
     `../../../graphics/dist/actionShots/${gameId}`
   );
   if (fs.existsSync(actionSource)) {
-    for (const pic of fs.readdirSync(actionSource)) {
-      if (pic !== ".DS_Store") {
-        fs.copySync(path.join(actionSource, pic), path.join(targetDir, pic));
-      }
-    }
+    fs.copySync(
+      path.join(actionSource, `${gameId}_active.png`),
+      path.join(targetDir, `${gameId}_active.png`)
+    );
   }
 };

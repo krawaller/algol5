@@ -46,15 +46,14 @@ export const renderGameActionShots = async (gameId: string) => {
           out.on("finish", resolve);
           pngBuffer.pipe(out);
         });
-        // Write small JPG pic
-        const smallPath = path.join(target, `${fileName}_small.jpg`);
-        const smallJpg = await resizeImg(fs.readFileSync(pngPath), {
-          width: 140,
-          height:
-            (140 * def.boards["basic"].height) / def.boards["basic"].width,
-          format: "jpg",
+        // Write small PNG pic
+        const smallPath = path.join(target, `${fileName}_small.png`);
+        const smallPng = await resizeImg(fs.readFileSync(pngPath), {
+          width: 80,
+          height: (80 * def.boards["basic"].height) / def.boards["basic"].width,
+          format: "png",
         });
-        fs.writeFileSync(smallPath, smallJpg);
+        fs.writeFileSync(smallPath, smallPng);
         // Write TS pic
         const dataURI = img2data(smallPath); // TODO - try SVG pic without definitions?
         const dataURIcode = `export const dataURI = \`${dataURI}\`;\n`;
@@ -66,8 +65,12 @@ export const renderGameActionShots = async (gameId: string) => {
             dataURIcode
           );
           await fs.writeFile(
-            path.join(target, `${noCodeFilename}_small.jpg`),
-            smallJpg
+            path.join(target, `${noCodeFilename}_small.png`),
+            smallPng
+          );
+          await fs.copy(
+            path.join(target, `${fileName}.png`),
+            path.join(target, `${noCodeFilename}.png`)
           );
         }
       }

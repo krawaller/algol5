@@ -16,6 +16,13 @@
   font-family: verdana;
 }
 
+.pageStrip > span {
+  margin: 0 38px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .pageTop {
   background-color: saddlebrown; /* should be same as board border */
   flex-shrink: 0;

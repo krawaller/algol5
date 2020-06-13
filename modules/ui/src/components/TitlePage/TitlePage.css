@@ -25,11 +25,3 @@
 .titlePageLink:hover {
   opacity: 0.8;
 }
-
-.titlePageLinkCoffee {
-  background-image: url(/images/buymeacoffee3.png);
-}
-
-.titlePageLinkForum {
-  background-image: url(/images/jointheforum3.png);
-}

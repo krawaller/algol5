@@ -26,7 +26,9 @@ export const Page: FunctionComponent<PageProps> = props => {
   }, [errorReport]);
   return (
     <div className={css.pageContainer}>
-      <div className={css.pageStrip}>{title}</div>
+      <div className={css.pageStrip}>
+        <span>{title}</span>
+      </div>
       <div className={css.pageTop}>{top}</div>
       <div className={css.pageBody}>{body}</div>
     </div>

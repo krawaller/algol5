@@ -2,9 +2,10 @@
  * Used in the Next app as the main Index page for the app
  */
 
-import React, { FunctionComponent, Fragment } from "react";
-import { AppActions } from "../../../../types";
+import React, { Fragment } from "react";
+import { AlgolPage } from "../../../../types";
 import { list } from "../../../../games/dist/list";
+import { homeNav } from "../../../../common/nav/homeNav";
 import { Page } from "../Page";
 import base64TitlePic from "../../../dist/base64/title.png.proxy";
 import base64CoffeePic from "../../../dist/base64/buymeacoffee3.png.proxy";
@@ -12,11 +13,7 @@ import base64ForumPic from "../../../dist/base64/jointheforum3.png.proxy";
 import css from "./TitlePage.cssProxy";
 import { ButtonGroup } from "../ButtonGroup";
 
-type TitlePageProps = {
-  actions: AppActions;
-};
-
-export const TitlePage: FunctionComponent<TitlePageProps> = () => {
+export const TitlePage: AlgolPage = () => {
   return (
     <Page
       title="Welcome to Chessicals!"
@@ -51,5 +48,9 @@ export const TitlePage: FunctionComponent<TitlePageProps> = () => {
     />
   );
 };
+
+TitlePage.title = "Chessicals";
+TitlePage.nav = homeNav;
+TitlePage.mainImage = "/images/title.png";
 
 export default TitlePage;

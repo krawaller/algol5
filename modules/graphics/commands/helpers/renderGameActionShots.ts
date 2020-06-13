@@ -68,6 +68,10 @@ export const renderGameActionShots = async (gameId: string) => {
             path.join(target, `${noCodeFilename}_small.png`),
             smallPng
           );
+          await fs.copy(
+            path.join(target, `${fileName}.png`),
+            path.join(target, `${noCodeFilename}.png`)
+          );
         }
       }
       console.log("action shots rendered for", gameId, variant.desc);

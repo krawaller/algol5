@@ -22,9 +22,7 @@ export const Game: AlgolPage = props => {
 };
 
 Game.domain = "${gameId}";
-Game.mainImage = "/images/games/${gameId}/${gameId}_${
-    def.variants[0].code
-  }_active.png"
+Game.mainImage = "/images/games/${gameId}/${gameId}_active.png"
 Game.metaDesc = "Play the abstract board game ${
     def.meta.name
   } at Chessicals! ${punctuate(def.meta.tagline)}"

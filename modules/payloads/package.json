@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "robot": "npm run makeComposites && npm run buildRelations && npm run makeGamePayload && npm run exportAllGamePayloads && npm run makeListings && npm run makeArticles",
+    "robot": "npm run makeComposites && npm run buildRelations && npm run makeGamePayload && npm run exportAllGamePayloads && npm run makeListings && npm run makeArticles && npm run makeTitlePayload",
     "clean": "rm -rf dist",
     "makeComposites": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeComposites",
     "makeGamePayload": "node ./commands/makeGamePayload",
@@ -17,6 +17,7 @@
     "makeAboutArticle": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeAboutArticle",
     "makeListingIndexes": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeListingIndexes",
     "makeArticleIndexes": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeArticleIndexes",
+    "makeTitlePayload": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeTitlePayload",
     "exportAllGamePayloads": "node ./commands/exportAllGamePayloads",
     "buildRelations": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/buildRelations"
   },

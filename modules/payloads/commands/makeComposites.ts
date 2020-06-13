@@ -13,7 +13,7 @@ const toMake = [
   { name: "about", folder: "about" },
 ];
 
-const compositeSize = 160;
+const compositeSize = 80;
 
 async function makeComposite(opts) {
   const { name, folder } = opts;
@@ -44,7 +44,7 @@ async function makeComposite(opts) {
     .readdirSync(actionShotsFolder)
     .filter(f => f != ".DS_Store")
     .map(p => p.match(/([^/]*)$/)[0])
-    .map(gameId => path.join(actionShotsFolder, gameId, `${gameId}_small.jpg`));
+    .map(gameId => path.join(actionShotsFolder, gameId, `${gameId}_small.png`));
   await composite({
     name: "games",
     paths: actionShots,

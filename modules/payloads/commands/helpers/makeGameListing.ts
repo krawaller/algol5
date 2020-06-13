@@ -10,7 +10,7 @@ import { gameSlug } from "../../../common/utils";
 const outFolder = path.join(__dirname, "../../dist/listings/games");
 
 export const makeGameListing = (gameId: GameId) => {
-  const composite = gameCompositeMap[`${gameId}_small.jpg`];
+  const composite = gameCompositeMap[`${gameId}_small.png`];
   const listing: AlgolListing = {
     blurb: meta[gameId].tagline,
     preloads: [],

@@ -11,12 +11,21 @@ fs.ensureDirSync(out);
 const data = list.map(gameId => ({
   gameId,
   name: defs[gameId].meta.name,
-  arr: defs[gameId].variants[0].arr!,
+  setup: defs[gameId].variants[0].arr!.setup,
   graphics: graphics[gameId],
 }));
 
 const code = prettier.format(
-  `export const data = ${JSON.stringify(data)}; export default data`,
+  `import { AlgolSetupAnon, AlgolGameGraphics } from '../../types'
+
+export type TitleData = {
+  gameId: string
+  name: string
+  setup: AlgolSetupAnon
+  graphics: AlgolGameGraphics
+}
+  
+export const data: TitleData[] = ${JSON.stringify(data)}; export default data`,
   { filepath: "foo.ts" }
 );
 

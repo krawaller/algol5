@@ -22,4 +22,4 @@ Here's the list of things we hope to add, in semi-prioritised order!
 1. Dedicated UI for larger screens
 1. Bots for Slack, Messenger, Twitter, etc
 
-And, of course, moar games!
+And, of course - lots and lots more games!

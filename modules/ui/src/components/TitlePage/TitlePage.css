@@ -62,9 +62,15 @@
 
 .titlePageBlarb h4 {
   margin-top: 8px;
-  font-size: 1.5em;
+  font-size: 1.6em;
+}
+
+.titlePageBlarb h4:before,
+.titlePageBlarb h4:after {
+  content: " ... ";
 }
 
 .titlePageBlarb em {
-  font-size: 1.2em;
+  font-size: 1.4em;
+  font-style: normal;
 }

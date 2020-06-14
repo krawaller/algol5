@@ -65,7 +65,12 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
               <div className={classNames(navCss.navRow, navCss.navAlways)}>
                 <div className={navCss.navSideButtonContainer}></div>
                 {links.map(btn => (
-                  <NavButton key={btn.title} step={btn} actions={actions} />
+                  <NavButton
+                    key={btn.title}
+                    step={btn}
+                    actions={actions}
+                    highlight={btn.title === "Games"}
+                  />
                 ))}
                 <div className={navCss.navSideButtonContainer} />
               </div>

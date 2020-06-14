@@ -37,6 +37,24 @@
   width: 70px;
 }
 
+.navButtonHighlight {
+  position: relative;
+}
+
+.navButtonHighlight:before {
+  position: absolute;
+  height: 220px;
+  width: 80px;
+  content: " ";
+  bottom: 10px;
+  left: 10px;
+  background-image: url(/images/here.png);
+  z-index: 10;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+}
+
 .navFiller {
   flex: 1;
 }

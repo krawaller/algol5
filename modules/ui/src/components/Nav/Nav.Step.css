@@ -28,6 +28,9 @@
 .navStepTitle {
   margin-top: 0;
   margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .navStepDesc {

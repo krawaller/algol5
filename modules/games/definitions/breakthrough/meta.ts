@@ -2,6 +2,7 @@ import { BreakthroughDefinition } from "./_types";
 
 const breakthroughMeta: BreakthroughDefinition["meta"] = {
   id: "breakthrough",
+  author: "Dan Troyka",
   name: "Breakthrough",
   tags: [
     "troyka",

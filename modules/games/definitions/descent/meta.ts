@@ -2,6 +2,7 @@ import { DescentDefinition } from "./_types";
 
 const descentMeta: DescentDefinition["meta"] = {
   code: "c",
+  author: "Rey Alicea",
   id: "descent",
   name: "Descent",
   source: "https://www.boardgamegeek.com/boardgame/150586/descent",

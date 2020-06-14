@@ -1,6 +1,7 @@
 import { ChameleonDefinition } from "./_types";
 
 const chameleonMeta: ChameleonDefinition["meta"] = {
+  author: "Mitsuo Yamamoto",
   code: "E",
   id: "chameleon",
   name: "Chameleon",

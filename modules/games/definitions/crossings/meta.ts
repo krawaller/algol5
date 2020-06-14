@@ -2,6 +2,7 @@ import { CrossingsDefinition } from "./_types";
 
 const crossingsMeta: CrossingsDefinition["meta"] = {
   id: "crossings",
+  author: "Robert Abott",
   name: "Crossings",
   tags: ["gamut", "hundredother", "infiltration"],
   tagline: "March your opponent into the ground",

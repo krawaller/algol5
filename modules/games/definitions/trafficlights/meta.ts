@@ -3,6 +3,7 @@ import { TrafficlightsDefinition } from "./_types";
 const trafficlightsMeta: TrafficlightsDefinition["meta"] = {
   code: "F",
   id: "trafficlights",
+  author: "Alan Parr",
   name: "Traffic Lights",
   source: "http://www.di.fc.ul.pt/~jpn/gv/trafficlights.htm",
   tags: ["irreversible", "iggamecenter", "netobook", "formation"],

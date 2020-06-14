@@ -1,6 +1,7 @@
 import { AriesDefinition } from "./_types";
 
 const ariesMeta: AriesDefinition["meta"] = {
+  author: "Chris Huntoon",
   code: "p",
   id: "aries",
   name: "Aries",

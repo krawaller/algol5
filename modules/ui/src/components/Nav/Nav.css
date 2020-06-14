@@ -70,7 +70,7 @@
 }
 
 .navNever .navButtonHighlight:before {
-  animation-delay: 2s; /* Delay before hint shows initially */
+  animation-delay: 0.5s; /* Delay before hint shows initially */
 }
 
 @keyframes fadein {

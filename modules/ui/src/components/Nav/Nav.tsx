@@ -15,6 +15,8 @@ export type NavProps = {
   actions: AppActions;
 };
 
+const BACK_BUTTON = false;
+
 const prefetched: Record<string, boolean> = {};
 
 export const Nav: FunctionComponent<NavProps> = props => {
@@ -55,17 +57,18 @@ export const Nav: FunctionComponent<NavProps> = props => {
     [fullNav]
   );
   const backBtn = useMemo(
-    () => (
-      <NavButton
-        actions={actions}
-        step={{
-          desc: "Go back",
-          title: "←",
-          onClick: () => actions.back(),
-          links: [],
-        }}
-      />
-    ),
+    () =>
+      BACK_BUTTON ? (
+        <NavButton
+          actions={actions}
+          step={{
+            desc: "Go back",
+            title: "←",
+            onClick: () => actions.back(),
+            links: [],
+          }}
+        />
+      ) : null,
     [fullNav]
   );
   return (

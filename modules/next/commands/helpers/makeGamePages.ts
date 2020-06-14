@@ -18,7 +18,7 @@ export const makeGamePages = (gameId: string) => {
   const main = makeGameMainPage(def);
   fs.writeFileSync(path.join(gameFolder, "index.tsx"), main);
   const aboutArticle = aboutList.find(a => a.id === gameId);
-  const aboutPath = path.join(gameFolder, "about");
+  const aboutPath = path.join(gameFolder, "info");
   fs.ensureDirSync(aboutPath);
   const about = makeGameAboutPage(aboutArticle);
   fs.writeFileSync(path.join(aboutPath, "index.tsx"), about);

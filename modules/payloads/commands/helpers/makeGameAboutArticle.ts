@@ -28,9 +28,9 @@ ${tagIds
 
 const article: AlgolArticle = {
   id: "${gameId}",
-  blurb: "More information about ${meta.name}",
+  blurb: "All there is to know about ${meta.name}",
   slug: "${meta.slug}",
-  title: "About ${meta.name}",
+  title: "Info on ${meta.name}",
   mainImage: "/images/games/${gameId}/${gameId}_${def.variants[0].code}.png",
   updated: about.updated,
   relations: [

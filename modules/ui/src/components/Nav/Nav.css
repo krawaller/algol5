@@ -41,6 +41,10 @@
   position: relative;
 }
 
+.navFull .navButtonHighlight:before {
+  opacity: 0;
+}
+
 .navButtonHighlight:before {
   position: absolute;
   height: 220px;
@@ -53,6 +57,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom center;
+  transition: opacity 0.3s ease;
 }
 
 .navFiller {

@@ -50,9 +50,12 @@
 
 .navButtonHighlight:before {
   position: absolute;
-  height: 220px;
+  height: 180px;
   width: 80px;
-  content: " ";
+  content: "Fun starts here!";
+  color: red;
+  text-align: center;
+  font-family: sans-serif;
   bottom: 10px;
   left: 10px;
   background-image: url(/images/here.png);

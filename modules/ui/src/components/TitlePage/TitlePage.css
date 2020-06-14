@@ -26,6 +26,16 @@
   opacity: 0.8;
 }
 
+.titlePageButtonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.titlePageButtonContainer > :not(:first-child) {
+  margin-top: 10px;
+}
+
 .titlePageBoardContainer {
   opacity: 0.5;
 }

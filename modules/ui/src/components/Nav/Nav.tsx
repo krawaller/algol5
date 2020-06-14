@@ -20,7 +20,14 @@ const BACK_BUTTON = false;
 const prefetched: Record<string, boolean> = {};
 
 export const Nav: FunctionComponent<NavProps> = props => {
-  const [fullNav, setFullNav] = useState(false);
+  const [fullNav, _setFullNav] = useState(false);
+  const [neverNav, _setNeverNav] = useState(true);
+  const setFullNav = (bool: boolean) => {
+    if (bool && neverNav) {
+      _setNeverNav(false);
+    }
+    _setFullNav(bool);
+  };
   const { nav, actions } = props;
   if (!nav) return <div></div>;
   const { crumbs, me } = nav;
@@ -73,7 +80,11 @@ export const Nav: FunctionComponent<NavProps> = props => {
   );
   return (
     <div
-      className={classNames(css.navContainer, fullNav && css.navFull)}
+      className={classNames(
+        css.navContainer,
+        fullNav && css.navFull,
+        neverNav && css.navNever
+      )}
       // onClick={e => setFullNav(false)}
     >
       <div

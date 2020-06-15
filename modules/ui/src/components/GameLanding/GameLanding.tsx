@@ -70,7 +70,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
       <Modal
         isOpen={isSessionModalOpen}
         onClose={closeSessionModal}
-        title="Play locally"
+        title="Local pass-and-play"
       >
         <NewLocalSession
           actions={localSessionActions}

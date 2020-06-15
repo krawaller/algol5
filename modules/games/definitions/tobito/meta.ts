@@ -4,7 +4,7 @@ const tobitoMeta: TobitoDefinition["meta"] = {
   id: "tobito",
   author: "Mitsuo Yamamoto",
   name: "Tobito",
-  tags: ["logy"],
+  tags: ["logy", "infiltration"],
   tagline: "Relocate your opponent while racing to her base!",
   source: "http://some.url.to.rules",
   code: "J",

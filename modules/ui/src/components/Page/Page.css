@@ -36,7 +36,6 @@
   position: relative;
   min-height: 1px; /* otherwise flex-items uses content size as min-height  */
   padding: 10px;
-  padding-top: 20px;
   background-color: white;
 }
 

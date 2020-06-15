@@ -2,6 +2,7 @@ import { GowiththefloeDefinition } from "./_types";
 
 const gowiththefloeMeta: GowiththefloeDefinition["meta"] = {
   code: "N",
+  author: "Phillip L. Leduc",
   id: "gowiththefloe",
   name: "Go with the floe",
   tags: ["asymmetric", "philleduc", "nestorgames"],

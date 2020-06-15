@@ -3,8 +3,8 @@ import { AlgolGameBlobAnon, AlgolMeta, AlgolNavStep } from "../../types";
 export const makeGameAboutStep = (
   meta: AlgolMeta<AlgolGameBlobAnon>
 ): AlgolNavStep => ({
-  title: `About`,
+  title: `Info`,
   desc: `All about ${meta.name}`,
-  url: `/games/${meta.slug}/about`,
+  url: `/games/${meta.slug}/info`,
   links: [],
 });

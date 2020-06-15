@@ -3,6 +3,7 @@ import { UglyduckDefinition } from "./_types";
 const uglyduckMeta: UglyduckDefinition["meta"] = {
   code: "o",
   name: "Ugly Duck",
+  author: "Dan Troyka",
   id: "uglyduck",
   source: "http://www.di.fc.ul.pt/~jpn/gv/uglyduck.htm",
   tags: ["irreversible", "troyka", "infiltration"],

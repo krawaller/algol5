@@ -2,6 +2,7 @@ import { MadbishopsDefinition } from "./_types";
 
 const madbishopsMeta: MadbishopsDefinition["meta"] = {
   id: "madbishops",
+  author: "Mark Steere",
   name: "Mad Bishops",
   tags: ["iggamecenter"],
   tagline: "Mutually assured destruction",

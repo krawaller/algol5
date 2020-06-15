@@ -4,7 +4,7 @@ export const makeSessionHistoryStep = (
   battleNavActions: BattleNavActions
 ): AlgolNavStep => ({
   title: "History",
-  desc: "All moves in this session",
+  desc: "See previous moves in this session",
   onClick: battleNavActions.toHistory,
   links: [],
 });

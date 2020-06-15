@@ -2,6 +2,7 @@ import { GekitaiDefinition } from "./_types";
 
 const gekitaiMeta: GekitaiDefinition["meta"] = {
   id: "gekitai",
+  author: "Scott Brady",
   name: "Gekitai",
   tags: ["formation"],
   tagline: "Push your opponent as you race for dual win conditions",

@@ -1,6 +1,7 @@
 import { AllqueenschessDefinition } from "./_types";
 
 const allqueenschessMeta: AllqueenschessDefinition["meta"] = {
+  author: "Elliot Rudell",
   id: "allqueenschess",
   name: "All Queens Chess",
   tags: ["formation"],

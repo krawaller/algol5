@@ -2,6 +2,7 @@ import { DuckpondDefinition } from "./_types";
 
 const duckpondMeta: DuckpondDefinition["meta"] = {
   id: "duckpond",
+  author: "Dan Troyka",
   name: "Duck Pond",
   tags: ["troyka", "formation"],
   tagline: "Get your ducks in a row!",

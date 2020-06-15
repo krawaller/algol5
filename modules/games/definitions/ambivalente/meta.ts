@@ -2,6 +2,7 @@ import { AmbivalenteDefinition } from "./_types";
 
 const ambivalenteMeta: AmbivalenteDefinition["meta"] = {
   id: "ambivalente",
+  author: "Walter Joris",
   name: "Ambivalente",
   tags: ["irreversible", "walterjoris"],
   tagline: "Encircle and intrude in an ever-closer dance!",

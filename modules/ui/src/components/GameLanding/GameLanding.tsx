@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useMemo, Fragment } from "react";
+import { punctuate } from "../../../../common";
 import styles from "./GameLanding.cssProxy";
 import {
   AlgolMeta,
@@ -56,16 +57,20 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   );
   return (
     <Fragment>
+      <div className={styles.gameLandingQuote}>
+        A game {meta.author ? `by ${meta.author}` : "of unknown origin"}
+        {". "}
+        {punctuate(meta.tagline)}
+      </div>
       <ButtonGroup>
         <Button big onClick={openSessionModal}>
           Play {meta.name}!
         </Button>
       </ButtonGroup>
-      <div className={styles.gameLandingQuote}>{meta.tagline}</div>
       <Modal
         isOpen={isSessionModalOpen}
         onClose={closeSessionModal}
-        title="Play locally"
+        title="Local pass-and-play"
       >
         <NewLocalSession
           actions={localSessionActions}

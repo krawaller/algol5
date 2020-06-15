@@ -2,6 +2,7 @@ import { ScatterDefinition } from "./_types";
 
 const scatterMeta: ScatterDefinition["meta"] = {
   id: "scatter",
+  author: null,
   name: "Scatter",
   tags: [],
   tagline: "Who can scatter their units the fastest?",

@@ -11,15 +11,9 @@ export const makeSessionLobbyStep = (
   opts: MakeSessionLobbyStepOpts
 ): AlgolNavStep => {
   const { battleNavActions, session } = opts;
-  const desc =
-    session.turn === 1 && session.player === 1
-      ? `The battle has just begun!`
-      : session.endedBy
-      ? `Finished ${session.turn} turn battle, ${
-          session.player ? `plr${session.player} won` : "ended in draw"
-        }`
-      : `Ongoing battle, turn ${session.turn}, plr${session.player} to play`;
-
+  const desc = `Overview and handling of this ${
+    session.endedBy ? "finished" : "ongoing"
+  } session`;
   return {
     title: `Session ${session.id}`,
     desc,

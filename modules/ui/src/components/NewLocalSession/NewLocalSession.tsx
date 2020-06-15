@@ -31,8 +31,13 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
   const { actions, meta, graphics, previousSessionId, variants } = props;
   return (
     <div className={css.newLocalSession}>
+      <div className={css.newLocalSessionTopInstruction}>
+        Games are saved at turn end to the browser storage. Online play (and AI
+        opponents) are not available yet, but will hopefully be added in the
+        future!
+      </div>
       <VariantSelector variants={variants} actions={actions} />
-      <div className={css.newLocalSessionDivider} />
+      {/* <div className={css.newLocalSessionDivider} />
       <Button
         disabled={
           !previousSessionId && "No previous battle found for this game."
@@ -48,7 +53,7 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
       <div className={css.newLocalSessionDivider} />
       <Button disabled="AI is in the works, but remote play will be implemented first.">
         Versus AI
-      </Button>
+      </Button> */}
       <div className={css.newLocalSessionDivider} />
       <ImportBattle actions={actions} />
       <div className={css.newLocalSessionDivider} />

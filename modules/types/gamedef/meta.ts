@@ -2,7 +2,7 @@ import { GameId } from "../../games/dist/list";
 import { AlgolGameBlobAnon } from "../blob";
 
 export type AlgolMeta<Blob extends AlgolGameBlobAnon> = {
-  rules?: RuleDescription;
+  author: string | null;
   id: GameId;
   name: string;
   tagline: string;
@@ -10,30 +10,6 @@ export type AlgolMeta<Blob extends AlgolGameBlobAnon> = {
   [otherMeta: string]: any;
   code: string;
   slug: string;
-};
-
-export type RuleObject = {
-  who: (0 | 1 | 2)[];
-  rule: Content;
-};
-
-export type RuleDescription = {
-  flow: Content;
-  concepts?: {
-    [conceptName: string]: Content;
-  };
-  actions: {
-    [actionName: string]: RuleObject;
-  };
-  tiles: {
-    [tileName: string]: RuleObject;
-  };
-  goals: {
-    [goalName: string]: RuleObject;
-  };
-  units: {
-    [unitName: string]: RuleObject;
-  };
 };
 
 export type Content = ComplexContent | string[] | string | any; // | Line | UnitRef | TileRef | string;

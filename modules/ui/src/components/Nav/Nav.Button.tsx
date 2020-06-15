@@ -9,12 +9,13 @@ type NavButtonProps = {
   step: AlgolNavStep;
   active?: boolean;
   mute?: boolean;
+  highlight?: boolean;
 };
 
 const noop = () => {};
 
 export const NavButton: FunctionComponent<NavButtonProps> = props => {
-  const { actions, step, active, mute } = props;
+  const { actions, step, active, mute, highlight } = props;
   const { title, desc, url } = step;
   const handleClick = useNavHandler({ actions, step });
   return (
@@ -22,7 +23,8 @@ export const NavButton: FunctionComponent<NavButtonProps> = props => {
       className={classNames(
         css.navButton,
         active && css.navButtonActive,
-        mute && css.navMute
+        mute && css.navMute,
+        highlight && css.navButtonHighlight
       )}
     >
       <a

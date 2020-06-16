@@ -4,7 +4,7 @@ const campaignScripts: CampaignDefinition["scripts"] = [
   {
     desc: "basic",
     lines: [
-      { commands: ["f5", "deploy", "endTurn"] },
+      { commands: ["e2", "deploy", "endTurn"] },
       { commands: ["d6", "deploy", "endTurn"] },
       { commands: ["d4", "jump", "endTurn"] },
       { commands: ["e4", "jump", "endTurn"] },

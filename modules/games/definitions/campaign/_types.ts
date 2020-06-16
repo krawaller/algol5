@@ -4,7 +4,7 @@ import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 type CampaignBoardHeight = 10;
 type CampaignBoardWidth = 10;
 
-type CampaignTerrain = never;
+type CampaignTerrain = "center";
 type CampaignUnit = "knights" | "marks";
 type CampaignMark = "selectdeploytarget" | "selectjumptarget";
 type CampaignCommand = "deploy" | "jump";
@@ -28,8 +28,12 @@ type CampaignGenerator =
   | "findwinlineheads"
   | "findwinlines";
 type CampaignArtifactLayer = "jumptargets" | "winlineheads" | "winline";
-type CampaignTerrainLayer = never;
-type CampaignLayer = CommonLayer | CampaignUnitLayer | CampaignArtifactLayer;
+type CampaignTerrainLayer = "center" | "nocenter";
+type CampaignLayer =
+  | CommonLayer
+  | CampaignUnitLayer
+  | CampaignArtifactLayer
+  | CampaignTerrainLayer;
 type CampaignBattlePos = never;
 type CampaignBattleVar = never;
 type CampaignTurnPos = "jumpedfrom";

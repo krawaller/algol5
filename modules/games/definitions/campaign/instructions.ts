@@ -8,6 +8,14 @@ const campaignInstructions: CampaignDefinition["instructions"] = {
         line: [
           "Select where to deploy your",
           { unittype: ["knights", ["player"]] },
+          {
+            ifplayer: [
+              1,
+              {
+                line: ["(as 1st player you cannot use the 4 central squares)"],
+              },
+            ],
+          },
         ],
       },
       { line: ["Select where to move", { unitat: { onlyin: "myknights" } }] },

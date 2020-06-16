@@ -11,4 +11,4 @@ updated: "2020-06-14"
 
 {PIC:name=clown.jpg,cred=Render by LEGO,credurl=https://www.lego.com/product/birthday-clown-40348,title=Happy birthday to me!}
 
-Today {ME} is publicly available! Still beta, still not widely advertised. But, we're having a birthday party nonetheless!
+Today {ME} is publicly available! Still beta, still not widely advertised, still missing online play. But, we're having a birthday party nonetheless!

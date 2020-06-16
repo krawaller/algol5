@@ -22,8 +22,8 @@ Both {UNIT:at=a1,who=1} and {UNIT:at=a2,who=2} were pushed off board, and {UNIT:
 
 After a drop we check for the following in order:
 
-1. If your opponent has 3 {UNIT} in a row (including diagonals) you lose by {ENDGAME:name=suicide}.
-1. If you have deployed all 8 {UNIT} you win by {ENDGAME:name=allout}
 1. If you have 3 {UNIT} in a row you win by {ENDGAME:name=winline}
+1. If you have deployed all 8 {UNIT} you win by {ENDGAME:name=allout}
+1. If your opponent has 3 {UNIT} in a row (including diagonals) you lose by {ENDGAME:name=suicide}.
 
 Draws are not possible.

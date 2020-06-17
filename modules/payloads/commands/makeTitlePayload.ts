@@ -8,12 +8,14 @@ import graphics from "../../graphics/dist/svgDataURIs";
 const out = path.join(__dirname, "../dist");
 fs.ensureDirSync(out);
 
-const data = list.map(gameId => ({
-  gameId,
-  name: defs[gameId].meta.name,
-  setup: defs[gameId].variants[0].arr!.setup,
-  graphics: graphics[gameId],
-}));
+const data = list
+  .filter(gameId => !defs[gameId].meta.hidden)
+  .map(gameId => ({
+    gameId,
+    name: defs[gameId].meta.name,
+    setup: defs[gameId].variants[0].arr!.setup,
+    graphics: graphics[gameId],
+  }));
 
 const code = prettier.format(
   `import { AlgolSetupAnon, AlgolGameGraphics } from '../../types'

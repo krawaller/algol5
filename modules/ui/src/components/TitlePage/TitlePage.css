@@ -17,9 +17,16 @@
   text-decoration: none;
   border-radius: 5px;
   overflow: hidden;
-  width: 120px;
+  width: 90px;
   height: 30px;
   background-size: contain;
+  background-position: left center;
+  background-repeat: no-repeat;
+  padding-left: 34px;
+  line-height: 30px;
+  font-family: Cookie;
+  color: white;
+  background-color: #ff823e;
 }
 
 .titlePageLink:hover {

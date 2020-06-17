@@ -6,12 +6,17 @@ import React, { Fragment } from "react";
 import { AlgolPage } from "../../../../types";
 import { homeNav } from "../../../../common/nav/homeNav";
 import { Page } from "../Page";
-import base64CoffeePic from "../../../dist/base64/buymeacoffee3.png.proxy";
-import base64ForumPic from "../../../dist/base64/jointheforum3.png.proxy";
+import base64CoffeePic from "../../../dist/base64/coffee.png.proxy";
+import base64ChatPic from "../../../dist/base64/chat.png.proxy";
+import base64MailPic from "../../../dist/base64/email.png.proxy";
 import css from "./TitlePage.cssProxy";
 import { Board } from "../Board";
 import { useBoard } from "./TitlePage.useBoard";
 import { setup2army } from "../../../../common";
+
+// Valid until July 17th
+const slackInviteLink =
+  "https://join.slack.com/t/chessicals/shared_invite/zt-f5ztpbs5-n1IbFFjWv9qccsIfjEQSfw";
 
 export const TitlePage: AlgolPage = () => {
   const { graphics, setup, name } = useBoard();
@@ -40,18 +45,31 @@ export const TitlePage: AlgolPage = () => {
         <div className={css.titlePageButtonContainer}>
           <a
             className={css.titlePageLink}
-            href="https://forum.chessicals.com"
+            href={slackInviteLink}
             target="_blank"
             rel="noopener"
-            style={{ backgroundImage: `url(${base64ForumPic})` }}
-          />
+            style={{ backgroundImage: `url(${base64ChatPic})` }}
+          >
+            Join the Slack
+          </a>
+          <a
+            className={css.titlePageLink}
+            href="mailto:david@krawaller.se"
+            target="_blank"
+            rel="noopener"
+            style={{ backgroundImage: `url(${base64MailPic})` }}
+          >
+            Send an email
+          </a>
           <a
             className={css.titlePageLink}
             href="https://www.buymeacoffee.com/chessicals"
             target="_blank"
             rel="noopener"
             style={{ backgroundImage: `url(${base64CoffeePic})` }}
-          />
+          >
+            Buy me a coffee
+          </a>
         </div>
       }
     />

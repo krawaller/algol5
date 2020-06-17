@@ -21,7 +21,7 @@ export const ActionGallery: FunctionComponent<ActionGalleryProps> = props => {
           <div className={css.actionGalleryItemBox}>
             <img
               key={gameId}
-              src={`/images/games/${gameId}/${gameId}_${variantCode}${
+              src={`/images/games/${gameId}/${gameId}${
                 active ? "_active" : ""
               }.png`}
             />

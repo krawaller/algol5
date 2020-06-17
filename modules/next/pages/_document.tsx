@@ -26,6 +26,7 @@ export default class MyDocument extends Document {
         <Head>
           {gaScript}
           <link rel="stylesheet" href="/ui.css" />
+          <link rel="stylesheet" href="/fonts/fonts.css" />
           <meta property="og:site_name" content="Chessicals" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
         </Head>

@@ -1,9 +1,27 @@
 import { AppProps } from "next/app";
+import Router from "next/router";
 import Head from "next/head";
 import { useMemo, useState, useEffect, Fragment } from "react";
 import { Shell } from "../../ui/src/components/Shell";
 import { AlgolPage } from "../../types";
 import { useBattleNavActions, appActions } from "../helpers";
+
+const ref = { last: "" };
+const global = (typeof window === "undefined" ? {} : window) as Window &
+  typeof globalThis & { ga: (a1: string, a2: string, a3?: string) => void };
+
+Router.events.on("routeChangeStart", url => {
+  const canon = url
+    .replace(/sid=[^&]*|&|m=/g, "")
+    .replace(/\/?\?/, "/")
+    .replace(/\/$/, "")
+    .replace(/^$/, "/");
+  if (global.ga && ref.last !== canon) {
+    global.ga("set", "page", canon);
+    global.ga("send", "pageview");
+    ref.last = canon;
+  }
+});
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const Comp = Component as AlgolPage;

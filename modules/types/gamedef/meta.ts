@@ -7,6 +7,7 @@ export type AlgolMeta<Blob extends AlgolGameBlobAnon> = {
   name: string;
   tagline: string;
   tags: string[];
+  hidden?: boolean;
   [otherMeta: string]: any;
   code: string;
   slug: string;

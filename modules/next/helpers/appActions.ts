@@ -17,7 +17,6 @@ export const appActions = {
   back: () => Router.back(),
   logEvent: (evt: AlgolEvent) => {
     if (global.ga) {
-      console.log("LOG", evt);
       global.ga("send", {
         hitType: "event",
         eventCategory: evt.category,

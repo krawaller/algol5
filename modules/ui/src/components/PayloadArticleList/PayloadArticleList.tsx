@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useMemo } from "react";
+import React, { FunctionComponent, useMemo } from "react";
 import css from "./PayloadArticleList.cssProxy";
 import { PayloadArticleListItem } from "./PayloadArticleList.Item";
 import { AppActions, AlgolListingContainer } from "../../../../types";
@@ -14,6 +14,7 @@ export const PayloadArticleList: FunctionComponent<PayloadArticleListProps> = pr
   const listToRender = useMemo(() => {
     const ret = list.listings
       .slice()
+      .filter(l => !l.hidden)
       .sort((i1, i2) => (i1.sort < i2.sort ? -1 : 1));
     if (reverse) ret.reverse();
     return ret;

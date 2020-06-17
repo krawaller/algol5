@@ -60,7 +60,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
       <div className={styles.gameLandingQuote}>
         A game {meta.author ? `by ${meta.author}` : "of unknown origin"}
         {". "}
-        {punctuate(meta.tagline)}
+        {punctuate(meta.tagline, "!")}
       </div>
       <ButtonGroup>
         <Button big onClick={openSessionModal}>

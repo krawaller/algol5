@@ -16,6 +16,7 @@ export const makeGameListing = (gameId: GameId) => {
     preloads: [],
     url: `/games/${gameSlug(meta[gameId])}`,
     title: meta[gameId].name,
+    hidden: meta[gameId].hidden,
     sort: gameId,
     composite,
   };

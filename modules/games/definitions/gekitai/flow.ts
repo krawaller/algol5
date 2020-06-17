@@ -7,9 +7,9 @@ const gekitaiFlow: GekitaiDefinition["flow"] = {
       condition: { notempty: "loseline" },
       show: "loseline",
       who: ["otherplayer"],
-      prio: 1
+      prio: 3,
     },
-    winline: { condition: { notempty: "winline" }, show: "winline", prio: 3 }
+    winline: { condition: { notempty: "winline" }, show: "winline", prio: 1 },
   },
   startTurn: { link: "selectdroptarget" },
   commands: {
@@ -19,17 +19,17 @@ const gekitaiFlow: GekitaiDefinition["flow"] = {
       applyEffects: [
         { spawnat: ["selectdroptarget", "markers"] },
         { killin: "death" },
-        { pushin: ["push", { loopread: "pushdir" }] }
-      ]
-    }
+        { pushin: ["push", { loopread: "pushdir" }] },
+      ],
+    },
   },
   marks: {
     selectdroptarget: {
       from: { subtract: ["board", "units"] },
       runGenerator: "findpushconsequences",
-      link: "drop"
-    }
-  }
+      link: "drop",
+    },
+  },
 };
 
 export default gekitaiFlow;

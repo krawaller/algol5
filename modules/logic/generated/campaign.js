@@ -111,7 +111,11 @@ const game = {
       if (TURN === 1) {
         for (const pos of Object.keys(
           Object.keys(BOARD.board)
-            .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+            .filter(
+              k =>
+                !UNITLAYERS.units.hasOwnProperty(k) &&
+                !TERRAIN1.center.hasOwnProperty(k)
+            )
             .reduce((m, k) => {
               m[k] = emptyObj;
               return m;
@@ -555,7 +559,14 @@ const game = {
         ? collapseContent({
             line: [
               { text: "Select where to deploy your" },
-              { unittype: ["knight", 1] }
+              { unittype: ["knight", 1] },
+              collapseContent({
+                line: [
+                  {
+                    text: "(as 1st player you cannot use the 4 central squares)"
+                  }
+                ]
+              })
             ]
           })
         : collapseContent({
@@ -712,7 +723,9 @@ const game = {
     basic: {
       height: 10,
       width: 10,
-      terrain: {},
+      terrain: {
+        center: ["e5", "e6", "f5", "f6"]
+      },
       offset: "knight"
     }
   },

@@ -30,7 +30,12 @@ const campaignFlow: CampaignDefinition["flow"] = {
   },
   marks: {
     selectdeploytarget: {
-      from: { subtract: ["board", "units"] },
+      from: {
+        playercase: [
+          { subtract: ["board", "units", "center"] },
+          { subtract: ["board", "units"] },
+        ],
+      },
       link: "deploy",
     },
     selectjumptarget: {

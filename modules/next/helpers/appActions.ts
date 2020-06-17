@@ -1,4 +1,8 @@
 import Router from "next/router";
+import { AlgolEvent } from "../../types/page/events";
+
+const global = (typeof window === "undefined" ? {} : window) as Window &
+  typeof globalThis & { ga: (a1: string, a2: any) => void };
 
 export const appActions = {
   navTo: path => {
@@ -11,4 +15,15 @@ export const appActions = {
     Router.prefetch(path);
   },
   back: () => Router.back(),
+  logEvent: (evt: AlgolEvent) => {
+    if (global.ga) {
+      console.log("LOG", evt);
+      global.ga("send", {
+        hitType: "event",
+        eventCategory: evt.category,
+        eventAction: evt.action,
+        eventLabel: evt.label,
+      });
+    }
+  },
 };

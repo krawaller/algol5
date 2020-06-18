@@ -7,10 +7,11 @@ type NavCrumbsProps = {
   nav: AlgolNav;
   actions: AppActions;
   mute?: boolean;
+  hasBackBtn?: boolean;
 };
 
 export const NavCrumbs: FunctionComponent<NavCrumbsProps> = props => {
-  const { nav, actions, mute } = props;
+  const { nav, actions, mute, hasBackBtn } = props;
   const { me, crumbs } = nav;
   return (
     <Fragment>
@@ -19,11 +20,11 @@ export const NavCrumbs: FunctionComponent<NavCrumbsProps> = props => {
           <NavStepRow
             actions={actions}
             step={crumb}
-            back="none"
+            back={hasBackBtn && i === crumbs.length - 1 ? "this" : "none"}
             skipLink={i === crumbs.length - 1 ? me.title : crumbs[i + 1].title}
             mute={mute}
           />
-          <NavBetweenRow />
+          <NavBetweenRow hasBack={hasBackBtn && i === crumbs.length - 1} />
         </Fragment>
       ))}
     </Fragment>

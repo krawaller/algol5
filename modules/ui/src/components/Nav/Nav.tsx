@@ -15,7 +15,7 @@ export type NavProps = {
   actions: AppActions;
 };
 
-const BACK_BUTTON = false;
+const BACK_BUTTON = true;
 
 const prefetched: Record<string, boolean> = {};
 
@@ -32,6 +32,7 @@ export const Nav: FunctionComponent<NavProps> = props => {
   if (!nav) return <div></div>;
   const { crumbs, me } = nav;
   const hasCrumbs = Boolean(nav && crumbs.length > 0);
+  const hasUpBtn = BACK_BUTTON && hasCrumbs;
 
   useEffect(() => {
     setFullNav(false);
@@ -65,18 +66,19 @@ export const Nav: FunctionComponent<NavProps> = props => {
   );
   const backBtn = useMemo(
     () =>
-      BACK_BUTTON ? (
+      hasUpBtn ? (
         <NavButton
           actions={actions}
           step={{
-            desc: "Go back",
-            title: "←",
-            onClick: () => actions.back(),
+            desc: "Go Up",
+            title: "↑",
+            onClick: crumbs[crumbs.length - 1].onClick,
+            url: crumbs[crumbs.length - 1].url,
             links: [],
           }}
         />
       ) : null,
-    [fullNav]
+    [crumbs]
   );
   return (
     <div
@@ -102,15 +104,20 @@ export const Nav: FunctionComponent<NavProps> = props => {
         {hasCrumbs && <Arrow layout="northsouth" head="south" />}
       </div>
       <div>
-        <NavCrumbs actions={actions} nav={nav} mute={!fullNav} />
+        <NavCrumbs
+          actions={actions}
+          nav={nav}
+          mute={!fullNav}
+          hasBackBtn={hasUpBtn}
+        />
         <NavStepRow
           step={me}
-          back="none"
+          back={hasUpBtn ? "pipe" : "none"}
           current
           actions={actions}
           mute={!fullNav}
         />
-        <NavLinkArrowRow nbrOfLinks={me.links.length} />
+        <NavLinkArrowRow nbrOfLinks={me.links.length} hasBackBtn={hasUpBtn} />
         <NavBottomRow {...props} />
         <div
           className={classNames(

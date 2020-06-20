@@ -32,6 +32,20 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     () => ({ ...appActions, ...battleNavActions, setNav }),
     [battleNavActions]
   );
+  useEffect(() => {
+    if (global.document) {
+      global.document.body.addEventListener("click", e => {
+        const node = e.target as HTMLDivElement;
+        if (node.matches('a[href^="http"]')) {
+          actions.logEvent({
+            action: "linkclick",
+            category: "external",
+            label: node.getAttribute("href"),
+          });
+        }
+      });
+    }
+  }, []);
   const ctxt = useMemo(() => ({ sessionId, mode }), [sessionId, mode]);
   const preloads = useMemo(
     () =>

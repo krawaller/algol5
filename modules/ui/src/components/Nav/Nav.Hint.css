@@ -2,6 +2,7 @@
 .navHintYouAreHere,
 .navHintHome {
   position: relative;
+  pointer-events: none;
 }
 
 .navHintBack:before,
@@ -38,6 +39,7 @@
 .navHintBack:before {
   content: "go up one step";
   transform: rotate(-20deg);
+  top: -15px;
 }
 
 .navHintHome:before {

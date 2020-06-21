@@ -3,6 +3,7 @@ import {
   isNeighbourDef,
   isWalkerDef,
   isAlgolFilterDef,
+  isAlgolFloaterDef,
   GeneratorDefAnon,
   AlgolGenRefAnon,
   AlgolGenRefInnerAnon,
@@ -10,6 +11,7 @@ import {
 import executeNeighbours from "./generate.neighbours";
 import executeWalker from "./generate.walker";
 import executeFilter from "./generate.filter";
+import executeFloater from "./generate.floater";
 
 import { executeStatement } from "../../../executors";
 
@@ -47,6 +49,9 @@ function executeGeneratorInner(
   }
   if (isAlgolFilterDef(genDef)) {
     return executeFilter(gameDef, player, action, ruleset, genDef);
+  }
+  if (isAlgolFloaterDef(genDef)) {
+    return executeFloater(gameDef, player, action, ruleset, genDef);
   }
   throw "Unknown generator def: " + JSON.stringify(genDef);
 }

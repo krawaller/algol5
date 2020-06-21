@@ -17,18 +17,18 @@ export default function executeFloater(
     ? draw(gameDef, player, action, ruleset, def.draw.steps)
     : "";
   const drawBlock = def.draw.blocks
-    ? draw(gameDef, player, action, ruleset, def.draw.blocks, "next")
+    ? draw(gameDef, player, action, ruleset, def.draw.blocks)
     : "";
-  const tests = ["next", "!visited[next]"];
+  const tests = ["POS", "!visited[POS]"];
   let stepDef = "";
   let blockDef = "";
   if (def.steps) {
     stepDef = `const steps = ${parser.set(def.steps)}`;
-    tests.push("steps[next]");
+    tests.push("steps[POS]");
   }
   if (def.blocks) {
     blockDef = `const blocks = ${parser.set(def.blocks)}; `;
-    tests.push("!blocks[next]");
+    tests.push("!blocks[POS]");
     if (def.draw.blocks) {
       blockDef += `let seenBlocks = {}; `;
     }
@@ -39,15 +39,15 @@ export default function executeFloater(
     ${stepDef}
     ${blockDef}
     while (toCheck.length) {
-      const POS = toCheck.shift();
-      ${drawStep}
-      visited[POS] = true;
+      const from = toCheck.shift();
+      visited[from] = true;
       for (const DIR of ${parser.dirs(def.dirs)}) {
-        const next = connections[POS][DIR];
+        const POS = connections[from][DIR];
         if (${tests.join(" && ")}) {
-          toCheck.push(next);
+          toCheck.push(POS);
+          ${drawStep}
         }
-        ${def.draw.blocks ? `if (blocks[next]) { ${drawBlock} } ` : ""}
+        ${def.draw.blocks ? `if (blocks[POS]) { ${drawBlock} } ` : ""}
       }
     }
   `;

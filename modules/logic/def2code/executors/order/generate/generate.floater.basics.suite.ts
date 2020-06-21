@@ -53,7 +53,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               asserts: [
                 {
                   sample: "ARTIFACTS.floats",
-                  res: { a1: {}, b1: {}, c1: {} },
+                  res: { b1: {}, c1: {} },
                 },
                 {
                   sample: "ARTIFACTS.gnarps",

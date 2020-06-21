@@ -65,7 +65,18 @@ const hobbesFlow: HobbesDefinition["flow"] = {
         ifelse: [
           { truthy: { turnvar: "moved" } },
           "nearbystonesaftermove",
-          "nearbystonesnomove",
+          {
+            playercase: [
+              {
+                ifelse: [
+                  ["isFirstTurn"],
+                  { exceptpos: ["nearbystonesnomove", { onlyin: "pie" }] },
+                  "nearbystonesnomove",
+                ],
+              },
+              "nearbystonesnomove",
+            ],
+          },
         ],
       },
       runGenerators: ["findpulltargets", "findpushtargets"],

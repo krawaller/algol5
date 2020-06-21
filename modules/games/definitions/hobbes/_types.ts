@@ -4,7 +4,7 @@ import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 type HobbesBoardHeight = 5;
 type HobbesBoardWidth = 5;
 
-type HobbesTerrain = never;
+type HobbesTerrain = "pie";
 type HobbesUnit = "stones" | "kings";
 type HobbesMark =
   | "selectmovetarget"
@@ -39,8 +39,12 @@ type HobbesArtifactLayer =
   | "nearbystonesnomove"
   | "pushtargets"
   | "pulltargets";
-type HobbesTerrainLayer = never;
-type HobbesLayer = CommonLayer | HobbesUnitLayer | HobbesArtifactLayer;
+type HobbesTerrainLayer = "pie" | "nopie";
+type HobbesLayer =
+  | CommonLayer
+  | HobbesUnitLayer
+  | HobbesArtifactLayer
+  | HobbesTerrainLayer;
 type HobbesBattlePos = never;
 type HobbesBattleVar = never;
 type HobbesTurnPos = never;

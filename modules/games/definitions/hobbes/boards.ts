@@ -8,8 +8,10 @@ const hobbesBoardBook: HobbesDefinition["boards"] = {
   basic: {
     height: 5,
     width: 5,
-    terrain: {}
-  }
+    terrain: {
+      pie: ["c2"],
+    },
+  },
 };
 
 export default hobbesBoardBook;

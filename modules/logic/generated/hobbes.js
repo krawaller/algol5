@@ -83,6 +83,7 @@ const game = {
         commands: {}
       };
       let TURNVARS = {};
+      let TURN = step.TURN + 1;
       const visited = {};
       const toCheck = [Object.keys(UNITLAYERS.myunits)[0]];
       const blocks = UNITLAYERS.units;
@@ -130,6 +131,13 @@ const game = {
         for (const pos of Object.keys(
           !!TURNVARS["moved"]
             ? ARTIFACTS.nearbystonesaftermove
+            : TURN === 1
+            ? Object.keys(ARTIFACTS.nearbystonesnomove)
+                .filter(k => k !== Object.keys(TERRAIN1.pie)[0])
+                .reduce((m, k) => {
+                  m[k] = emptyObj;
+                  return m;
+                }, {})
             : ARTIFACTS.nearbystonesnomove
         )) {
           LINKS.marks[pos] = "selectstone_basic_1";
@@ -141,7 +149,7 @@ const game = {
         UNITLAYERS,
         ARTIFACTS,
         MARKS,
-        TURN: step.TURN + 1,
+        TURN,
         TURNVARS
       };
     },
@@ -506,6 +514,7 @@ const game = {
       let UNITLAYERS = step.UNITLAYERS;
       let TURNVARS = { ...step.TURNVARS };
       let UNITDATA = { ...step.UNITDATA };
+      let TURN = step.TURN;
       let MARKS = step.MARKS;
       delete UNITDATA[(UNITLAYERS.units[MARKS.selectmovetarget] || {}).id];
       {
@@ -556,6 +565,13 @@ const game = {
         for (const pos of Object.keys(
           !!TURNVARS["moved"]
             ? ARTIFACTS.nearbystonesaftermove
+            : TURN === 1
+            ? Object.keys(ARTIFACTS.nearbystonesnomove)
+                .filter(k => k !== Object.keys(TERRAIN1.pie)[0])
+                .reduce((m, k) => {
+                  m[k] = emptyObj;
+                  return m;
+                }, {})
             : ARTIFACTS.nearbystonesnomove
         )) {
           LINKS.marks[pos] = "selectstone_basic_1";
@@ -565,7 +581,7 @@ const game = {
         LINKS,
         MARKS: {},
         ARTIFACTS,
-        TURN: step.TURN,
+        TURN,
         UNITDATA,
         UNITLAYERS,
         TURNVARS
@@ -907,6 +923,7 @@ const game = {
   instruction: {
     startTurn_basic_1: step => {
       let ARTIFACTS = step.ARTIFACTS;
+      let TURN = step.TURN;
       return Object.keys(ARTIFACTS.vulnerable).length !== 0
         ? collapseContent({
             line: [
@@ -934,7 +951,16 @@ const game = {
               { select: "select" },
               { text: "a nearby" },
               { unittype: ["pawn", 0] },
-              { text: "to push or pull" }
+              { text: "to push or pull" },
+              TURN === 1
+                ? collapseContent({
+                    line: [
+                      { text: "(but you can't push" },
+                      { pos: Object.keys(TERRAIN1.pie)[0] },
+                      { text: "on the 1st turn)" }
+                    ]
+                  })
+                : undefined
             ]
           })
         : collapseContent({
@@ -1306,7 +1332,9 @@ const game = {
     basic: {
       height: 5,
       width: 5,
-      terrain: {}
+      terrain: {
+        pie: ["c2"]
+      }
     }
   },
   setups: {

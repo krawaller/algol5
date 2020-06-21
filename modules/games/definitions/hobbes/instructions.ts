@@ -101,6 +101,23 @@ const hobbesInstructions: HobbesDefinition["instructions"] = {
                   "a nearby",
                   { unittype: ["stones", 0] },
                   "to push or pull",
+                  {
+                    ifplayer: [
+                      1,
+                      {
+                        if: [
+                          ["isFirstTurn"],
+                          {
+                            line: [
+                              "(but you can't push",
+                              { pos: { onlyin: "pie" } },
+                              "on the 1st turn)",
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
                 ],
               },
               {

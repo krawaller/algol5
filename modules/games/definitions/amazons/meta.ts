@@ -9,7 +9,7 @@ const amazonsMeta: AmazonsDefinition["meta"] = {
   year: 1988,
   tagline:
     "Make sure your opponent is trapped first as you burn the board together",
-  tags: ["irreversible", "nestorgames", "iggamecenter", "aiai"],
+  tags: ["irreversible", "nestorgames", "iggamecenter", "aiai", "netobook"],
   slug: "amazons",
 };
 

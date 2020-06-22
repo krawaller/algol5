@@ -42,7 +42,18 @@ const tobitoInstructions: TobitoDefinition["instructions"] = {
       {
         line: [
           "Select a jumped",
-          { unittype: ["runners", ["otherplayer"]] },
+          {
+            unittype: [
+              "runners",
+              {
+                ifelse: [
+                  { isempty: "neutralunits" },
+                  ["otherplayer"],
+                  { playercase: ["02", "01"] },
+                ],
+              },
+            ],
+          },
           "to relocate",
         ],
       },
@@ -64,7 +75,18 @@ const tobitoInstructions: TobitoDefinition["instructions"] = {
       {
         line: [
           "Select another jumped",
-          { unittype: ["runners", ["otherplayer"]] },
+          {
+            unittype: [
+              "runners",
+              {
+                ifelse: [
+                  { isempty: "neutralunits" },
+                  ["otherplayer"],
+                  { playercase: ["02", "01"] },
+                ],
+              },
+            ],
+          },
           "to relocate",
         ],
       },
@@ -75,6 +97,18 @@ const tobitoInstructions: TobitoDefinition["instructions"] = {
       "Select an empty square to relocate",
       { unitat: "selectrelocatee" },
       "to",
+      {
+        if: [
+          { anyat: ["neutralrunners", "selectrelocatee"] },
+          {
+            line: [
+              "(except you can't place the neutral",
+              { unittype: ["runners", 0] },
+              "in either home row)",
+            ],
+          },
+        ],
+      },
     ],
   },
   selectrelocationtarget: {

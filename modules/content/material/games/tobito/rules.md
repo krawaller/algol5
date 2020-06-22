@@ -2,9 +2,14 @@
 updated: 2020-06-15
 ---
 
-{GAME} is played on a {DIM} board with the following setup:
+{GAME} is played on a {DIM} board with one of the following setups:
 
+<div class="md-2col">
 {SETUP}
+{SETUP:name=neutral}
+</div>
+
+Regular setup to the left, variant with neutral runner to the right.
 
 Players take turn to {CMND:name=move} one of their {UNIT:group=runners}, through either...
 
@@ -14,6 +19,8 @@ Players take turn to {CMND:name=move} one of their {UNIT:group=runners}, through
 Diagonals are allowed for both kinds of movement.
 
 If you jump over oppent {UNIT:group=runners} you must {CMND:name=relocate} them to any empty square.
+
+When using the neutral variant you must also {CMND:name=relocate} {UNIT:group=runners,who=0} when you jump it, but it may never be placed in either home row.
 
 A {UNIT:group=runners} that reaches the enemy base turns into {UNIT:group=finishers} and can no longer be moved or jumped.
 

@@ -20,24 +20,24 @@ const iconMapping = { runners: "pawn", finishers: "rook" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   runners: [
-    ["units"],
-    ["units", "myunits", "myrunners"],
-    ["units", "oppunits", "opprunners"]
+    ["units", "neutralunits", "runners", "neutralrunners"],
+    ["units", "myunits", "runners", "myrunners"],
+    ["units", "oppunits", "runners", "opprunners"]
   ],
   finishers: [
-    ["units"],
+    ["units", "neutralunits"],
     ["units", "myunits", "myfinishers"],
     ["units", "oppunits", "oppfinishers"]
   ]
 };
 const groupLayers2 = {
   runners: [
-    ["units"],
-    ["units", "oppunits", "opprunners"],
-    ["units", "myunits", "myrunners"]
+    ["units", "neutralunits", "runners", "neutralrunners"],
+    ["units", "oppunits", "runners", "opprunners"],
+    ["units", "myunits", "runners", "myrunners"]
   ],
   finishers: [
-    ["units"],
+    ["units", "neutralunits"],
     ["units", "oppunits", "oppfinishers"],
     ["units", "myunits", "myfinishers"]
   ]
@@ -61,8 +61,11 @@ const game = {
       units: {},
       myunits: {},
       oppunits: {},
+      neutralunits: {},
+      runners: {},
       myrunners: {},
       opprunners: {},
+      neutralrunners: {},
       myfinishers: {},
       oppfinishers: {}
     };
@@ -86,8 +89,11 @@ const game = {
         units: oldUnitLayers.units,
         myunits: oldUnitLayers.oppunits,
         oppunits: oldUnitLayers.myunits,
+        neutralunits: oldUnitLayers.neutralunits,
+        runners: oldUnitLayers.runners,
         myrunners: oldUnitLayers.opprunners,
         opprunners: oldUnitLayers.myrunners,
+        neutralrunners: oldUnitLayers.neutralrunners,
         myfinishers: oldUnitLayers.oppfinishers,
         oppfinishers: oldUnitLayers.myfinishers
       };
@@ -113,8 +119,11 @@ const game = {
         units: oldUnitLayers.units,
         myunits: oldUnitLayers.oppunits,
         oppunits: oldUnitLayers.myunits,
+        neutralunits: oldUnitLayers.neutralunits,
+        runners: oldUnitLayers.runners,
         myrunners: oldUnitLayers.opprunners,
         opprunners: oldUnitLayers.myrunners,
+        neutralrunners: oldUnitLayers.neutralrunners,
         myfinishers: oldUnitLayers.oppfinishers,
         oppfinishers: oldUnitLayers.myfinishers
       };
@@ -196,18 +205,33 @@ const game = {
         relocatees: step.ARTIFACTS.relocatees
       };
       let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectrelocatee: newMarkPos
+      };
       let UNITLAYERS = step.UNITLAYERS;
       for (const pos of Object.keys(
-        Object.keys(BOARD.board)
-          .filter(
-            k =>
-              !UNITLAYERS.units.hasOwnProperty(k) &&
-              !ARTIFACTS.relocatees.hasOwnProperty(k)
-          )
-          .reduce((m, k) => {
-            m[k] = emptyObj;
-            return m;
-          }, {})
+        UNITLAYERS.neutralrunners[MARKS.selectrelocatee]
+          ? Object.keys(BOARD.board)
+              .filter(
+                k =>
+                  !UNITLAYERS.units.hasOwnProperty(k) &&
+                  !ARTIFACTS.relocatees.hasOwnProperty(k) &&
+                  !TERRAIN1.base.hasOwnProperty(k)
+              )
+              .reduce((m, k) => {
+                m[k] = emptyObj;
+                return m;
+              }, {})
+          : Object.keys(BOARD.board)
+              .filter(
+                k =>
+                  !UNITLAYERS.units.hasOwnProperty(k) &&
+                  !ARTIFACTS.relocatees.hasOwnProperty(k)
+              )
+              .reduce((m, k) => {
+                m[k] = emptyObj;
+                return m;
+              }, {})
       )) {
         LINKS.marks[pos] = "selectrelocationtarget_basic_1";
       }
@@ -217,7 +241,7 @@ const game = {
         UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: { selectrelocatee: newMarkPos }
+        MARKS
       };
     },
     selectrelocationtarget_basic_1: (step, newMarkPos) => {
@@ -297,18 +321,33 @@ const game = {
         relocatees: step.ARTIFACTS.relocatees
       };
       let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectrelocatee: newMarkPos
+      };
       let UNITLAYERS = step.UNITLAYERS;
       for (const pos of Object.keys(
-        Object.keys(BOARD.board)
-          .filter(
-            k =>
-              !UNITLAYERS.units.hasOwnProperty(k) &&
-              !ARTIFACTS.relocatees.hasOwnProperty(k)
-          )
-          .reduce((m, k) => {
-            m[k] = emptyObj;
-            return m;
-          }, {})
+        UNITLAYERS.neutralrunners[MARKS.selectrelocatee]
+          ? Object.keys(BOARD.board)
+              .filter(
+                k =>
+                  !UNITLAYERS.units.hasOwnProperty(k) &&
+                  !ARTIFACTS.relocatees.hasOwnProperty(k) &&
+                  !TERRAIN2.base.hasOwnProperty(k)
+              )
+              .reduce((m, k) => {
+                m[k] = emptyObj;
+                return m;
+              }, {})
+          : Object.keys(BOARD.board)
+              .filter(
+                k =>
+                  !UNITLAYERS.units.hasOwnProperty(k) &&
+                  !ARTIFACTS.relocatees.hasOwnProperty(k)
+              )
+              .reduce((m, k) => {
+                m[k] = emptyObj;
+                return m;
+              }, {})
       )) {
         LINKS.marks[pos] = "selectrelocationtarget_basic_2";
       }
@@ -318,7 +357,7 @@ const game = {
         UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: { selectrelocatee: newMarkPos }
+        MARKS
       };
     },
     selectrelocationtarget_basic_2: (step, newMarkPos) => {
@@ -369,8 +408,11 @@ const game = {
         units: {},
         myunits: {},
         oppunits: {},
+        neutralunits: {},
+        runners: {},
         myrunners: {},
         opprunners: {},
+        neutralrunners: {},
         myfinishers: {},
         oppfinishers: {}
       };
@@ -393,7 +435,7 @@ const game = {
             ]) &&
           allowedsteps[POS]
         ) {
-          if (UNITLAYERS.opprunners[POS]) {
+          if (!UNITLAYERS.myrunners[POS] && UNITLAYERS.runners[POS]) {
             ARTIFACTS.relocatees[POS] = emptyObj;
           }
         }
@@ -448,7 +490,16 @@ const game = {
         for (const pos of Object.keys(
           Object.entries(
             Object.keys(ARTIFACTS.relocatees)
-              .concat(Object.keys(UNITLAYERS.oppunits))
+              .concat(
+                Object.keys(
+                  Object.keys(UNITLAYERS.runners)
+                    .filter(k => !UNITLAYERS.myunits.hasOwnProperty(k))
+                    .reduce((m, k) => {
+                      m[k] = emptyObj;
+                      return m;
+                    }, {})
+                )
+              )
               .reduce((mem, k) => {
                 mem[k] = (mem[k] || 0) + 1;
                 return mem;
@@ -505,8 +556,11 @@ const game = {
         units: {},
         myunits: {},
         oppunits: {},
+        neutralunits: {},
+        runners: {},
         myrunners: {},
         opprunners: {},
+        neutralrunners: {},
         myfinishers: {},
         oppfinishers: {}
       };
@@ -521,7 +575,16 @@ const game = {
         Object.keys(
           Object.entries(
             Object.keys(ARTIFACTS.relocatees)
-              .concat(Object.keys(UNITLAYERS.oppunits))
+              .concat(
+                Object.keys(
+                  Object.keys(UNITLAYERS.runners)
+                    .filter(k => !UNITLAYERS.myunits.hasOwnProperty(k))
+                    .reduce((m, k) => {
+                      m[k] = emptyObj;
+                      return m;
+                    }, {})
+                )
+              )
               .reduce((mem, k) => {
                 mem[k] = (mem[k] || 0) + 1;
                 return mem;
@@ -583,7 +646,16 @@ const game = {
         for (const pos of Object.keys(
           Object.entries(
             Object.keys(ARTIFACTS.relocatees)
-              .concat(Object.keys(UNITLAYERS.oppunits))
+              .concat(
+                Object.keys(
+                  Object.keys(UNITLAYERS.runners)
+                    .filter(k => !UNITLAYERS.myunits.hasOwnProperty(k))
+                    .reduce((m, k) => {
+                      m[k] = emptyObj;
+                      return m;
+                    }, {})
+                )
+              )
               .reduce((mem, k) => {
                 mem[k] = (mem[k] || 0) + 1;
                 return mem;
@@ -640,8 +712,11 @@ const game = {
         units: {},
         myunits: {},
         oppunits: {},
+        neutralunits: {},
+        runners: {},
         myrunners: {},
         opprunners: {},
+        neutralrunners: {},
         myfinishers: {},
         oppfinishers: {}
       };
@@ -664,7 +739,7 @@ const game = {
             ]) &&
           allowedsteps[POS]
         ) {
-          if (UNITLAYERS.opprunners[POS]) {
+          if (!UNITLAYERS.myrunners[POS] && UNITLAYERS.runners[POS]) {
             ARTIFACTS.relocatees[POS] = emptyObj;
           }
         }
@@ -719,7 +794,16 @@ const game = {
         for (const pos of Object.keys(
           Object.entries(
             Object.keys(ARTIFACTS.relocatees)
-              .concat(Object.keys(UNITLAYERS.oppunits))
+              .concat(
+                Object.keys(
+                  Object.keys(UNITLAYERS.runners)
+                    .filter(k => !UNITLAYERS.myunits.hasOwnProperty(k))
+                    .reduce((m, k) => {
+                      m[k] = emptyObj;
+                      return m;
+                    }, {})
+                )
+              )
               .reduce((mem, k) => {
                 mem[k] = (mem[k] || 0) + 1;
                 return mem;
@@ -776,8 +860,11 @@ const game = {
         units: {},
         myunits: {},
         oppunits: {},
+        neutralunits: {},
+        runners: {},
         myrunners: {},
         opprunners: {},
+        neutralrunners: {},
         myfinishers: {},
         oppfinishers: {}
       };
@@ -792,7 +879,16 @@ const game = {
         Object.keys(
           Object.entries(
             Object.keys(ARTIFACTS.relocatees)
-              .concat(Object.keys(UNITLAYERS.oppunits))
+              .concat(
+                Object.keys(
+                  Object.keys(UNITLAYERS.runners)
+                    .filter(k => !UNITLAYERS.myunits.hasOwnProperty(k))
+                    .reduce((m, k) => {
+                      m[k] = emptyObj;
+                      return m;
+                    }, {})
+                )
+              )
               .reduce((mem, k) => {
                 mem[k] = (mem[k] || 0) + 1;
                 return mem;
@@ -854,7 +950,16 @@ const game = {
         for (const pos of Object.keys(
           Object.entries(
             Object.keys(ARTIFACTS.relocatees)
-              .concat(Object.keys(UNITLAYERS.oppunits))
+              .concat(
+                Object.keys(
+                  Object.keys(UNITLAYERS.runners)
+                    .filter(k => !UNITLAYERS.myunits.hasOwnProperty(k))
+                    .reduce((m, k) => {
+                      m[k] = emptyObj;
+                      return m;
+                    }, {})
+                )
+              )
               .reduce((mem, k) => {
                 mem[k] = (mem[k] || 0) + 1;
                 return mem;
@@ -890,6 +995,7 @@ const game = {
       });
     },
     move_basic_1: step => {
+      let UNITLAYERS = step.UNITLAYERS;
       let LINKS = step.LINKS;
       return LINKS.endTurn || LINKS.endGame
         ? collapseContent({
@@ -903,12 +1009,18 @@ const game = {
         : collapseContent({
             line: [
               { text: "Select a jumped" },
-              { unittype: ["pawn", 2] },
+              {
+                unittype: [
+                  "pawn",
+                  Object.keys(UNITLAYERS.neutralunits).length === 0 ? 2 : "02"
+                ]
+              },
               { text: "to relocate" }
             ]
           });
     },
     relocate_basic_1: step => {
+      let UNITLAYERS = step.UNITLAYERS;
       let LINKS = step.LINKS;
       return LINKS.endTurn || LINKS.endGame
         ? collapseContent({
@@ -922,7 +1034,12 @@ const game = {
         : collapseContent({
             line: [
               { text: "Select another jumped" },
-              { unittype: ["pawn", 2] },
+              {
+                unittype: [
+                  "pawn",
+                  Object.keys(UNITLAYERS.neutralunits).length === 0 ? 2 : "02"
+                ]
+              },
               { text: "to relocate" }
             ]
           });
@@ -986,7 +1103,16 @@ const game = {
               MARKS.selectrelocatee
             ]
           },
-          { text: "to" }
+          { text: "to" },
+          UNITLAYERS.neutralrunners[MARKS.selectrelocatee]
+            ? collapseContent({
+                line: [
+                  { text: "(except you can't place the neutral" },
+                  { unittype: ["pawn", 0] },
+                  { text: "in either home row)" }
+                ]
+              })
+            : undefined
         ]
       });
     },
@@ -1022,6 +1148,7 @@ const game = {
       });
     },
     move_basic_2: step => {
+      let UNITLAYERS = step.UNITLAYERS;
       let LINKS = step.LINKS;
       return LINKS.endTurn || LINKS.endGame
         ? collapseContent({
@@ -1035,12 +1162,18 @@ const game = {
         : collapseContent({
             line: [
               { text: "Select a jumped" },
-              { unittype: ["pawn", 1] },
+              {
+                unittype: [
+                  "pawn",
+                  Object.keys(UNITLAYERS.neutralunits).length === 0 ? 1 : "01"
+                ]
+              },
               { text: "to relocate" }
             ]
           });
     },
     relocate_basic_2: step => {
+      let UNITLAYERS = step.UNITLAYERS;
       let LINKS = step.LINKS;
       return LINKS.endTurn || LINKS.endGame
         ? collapseContent({
@@ -1054,7 +1187,12 @@ const game = {
         : collapseContent({
             line: [
               { text: "Select another jumped" },
-              { unittype: ["pawn", 1] },
+              {
+                unittype: [
+                  "pawn",
+                  Object.keys(UNITLAYERS.neutralunits).length === 0 ? 1 : "01"
+                ]
+              },
               { text: "to relocate" }
             ]
           });
@@ -1118,7 +1256,16 @@ const game = {
               MARKS.selectrelocatee
             ]
           },
-          { text: "to" }
+          { text: "to" },
+          UNITLAYERS.neutralrunners[MARKS.selectrelocatee]
+            ? collapseContent({
+                line: [
+                  { text: "(except you can't place the neutral" },
+                  { unittype: ["pawn", 0] },
+                  { text: "in either home row)" }
+                ]
+              })
+            : undefined
         ]
       });
     },
@@ -1165,6 +1312,13 @@ const game = {
         marks: ["c3"],
         potentialMarks: ["b2", "b3", "c2", "d2", "e3"]
       }
+    },
+    {
+      ruleset: "basic",
+      board: "basic",
+      setup: "neutral",
+      desc: "with neutral unit",
+      code: "N"
     }
   ],
   boards: {
@@ -1182,6 +1336,13 @@ const game = {
   setups: {
     basic: {
       runners: {
+        "1": ["a1", "a2", "a3"],
+        "2": ["e1", "e2", "e3"]
+      }
+    },
+    neutral: {
+      runners: {
+        "0": ["c2"],
         "1": ["a1", "a2", "a3"],
         "2": ["e1", "e2", "e3"]
       }

@@ -41,7 +41,7 @@ type TobitoTurnPos = never;
 type TobitoTurnVar = never;
 
 type TobitoBoardName = "basic";
-type TobitoSetupName = "basic";
+type TobitoSetupName = "basic" | "neutral";
 type TobitoRulesetName = "basic";
 type TobitoVariantName = "regular";
 

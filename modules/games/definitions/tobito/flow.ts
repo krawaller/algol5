@@ -55,7 +55,11 @@ const tobitoFlow: TobitoDefinition["flow"] = {
       ],
       link: {
         ifelse: [
-          { isempty: { intersect: ["relocatees", "oppunits"] } },
+          {
+            isempty: {
+              intersect: ["relocatees", { subtract: ["runners", "myunits"] }],
+            },
+          },
           "endTurn",
           "selectrelocatee",
         ],
@@ -73,11 +77,17 @@ const tobitoFlow: TobitoDefinition["flow"] = {
       link: "move",
     },
     selectrelocatee: {
-      from: { intersect: ["relocatees", "oppunits"] },
+      from: { intersect: ["relocatees", { subtract: ["runners", "myunits"] }] },
       link: "selectrelocationtarget",
     },
     selectrelocationtarget: {
-      from: { subtract: ["board", "units", "relocatees"] },
+      from: {
+        ifelse: [
+          { anyat: ["neutralrunners", "selectrelocatee"] },
+          { subtract: ["board", "units", "relocatees", "base"] },
+          { subtract: ["board", "units", "relocatees"] },
+        ],
+      },
       link: "relocate",
     },
   },

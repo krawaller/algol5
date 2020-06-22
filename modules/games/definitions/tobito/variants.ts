@@ -21,6 +21,13 @@ const tobitoVariants: TobitoDefinition["variants"] = [
       potentialMarks: ["b2", "b3", "c2", "d2", "e3"],
     },
   },
+  {
+    ruleset: "basic",
+    board: "basic",
+    setup: "neutral",
+    desc: "with neutral unit",
+    code: "N",
+  },
 ];
 
 export default tobitoVariants;

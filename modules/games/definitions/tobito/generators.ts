@@ -28,7 +28,8 @@ const tobitoGenerators: TobitoDefinition["generators"] = {
     steps: "units",
     draw: {
       steps: {
-        ifover: "opprunners",
+        ifover: "runners",
+        unlessover: "myrunners",
         tolayer: "relocatees",
       },
     },

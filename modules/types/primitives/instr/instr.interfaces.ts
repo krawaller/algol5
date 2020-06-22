@@ -38,7 +38,10 @@ export interface AlgolInstrLine<Blob extends AlgolGameBlobAnon> {
 }
 
 export interface AlgolInstrUnitType<Blob extends AlgolGameBlobAnon> {
-  unittype: [AlgolVal<Blob, Blob["unit"]>, AlgolVal<Blob, 0 | 1 | 2 | 12>];
+  unittype: [
+    AlgolVal<Blob, Blob["unit"]>,
+    AlgolVal<Blob, 0 | 1 | 2 | 12 | "01" | "02">
+  ];
 }
 
 export interface AlgolInstrText {
@@ -56,7 +59,7 @@ export interface AlgolInstrUnitList<Blob extends AlgolGameBlobAnon> {
 export interface AlgolInstrUnitTypeSet<Blob extends AlgolGameBlobAnon> {
   unittypeset: [
     AlgolVal<Blob, Blob["unit"]>,
-    AlgolVal<Blob, 0 | 1 | 2 | 12>,
+    AlgolVal<Blob, 0 | 1 | 2 | 12 | "01" | "02">,
     AlgolSet<Blob>
   ];
 }
@@ -64,7 +67,7 @@ export interface AlgolInstrUnitTypeSet<Blob extends AlgolGameBlobAnon> {
 export interface AlgolInstrUnitTypePos<Blob extends AlgolGameBlobAnon> {
   unittypepos: [
     AlgolVal<Blob, Blob["unit"]>,
-    AlgolVal<Blob, 0 | 1 | 2 | 12>,
+    AlgolVal<Blob, 0 | 1 | 2 | 12 | "01" | "02">,
     AlgolPos<Blob>
   ];
 }

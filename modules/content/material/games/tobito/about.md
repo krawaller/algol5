@@ -15,3 +15,5 @@ At first glance {GAME} seems like a trivial racing game, but the ingenious reloc
 And, of course, the ceramic edition sold by LOGY games is splendidly beautiful. There is a {EXTLINK:text=Kickstarter campaign,url=https://www.kickstarter.com/projects/logygames/tobito} running from June 18th through 30th, so if you read this during this time, be sure to check it out!
 
 {PIC:name=keyrings.jpg,title=Kickstarter early bird gifts,cred=Photo by LOGY games,credurl=https://www.kickstarter.com/projects/logygames/tobito}
+
+{ME} also implements the neutral piece variant that was a stretch goal in the campaign.

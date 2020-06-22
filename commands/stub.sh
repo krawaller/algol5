@@ -28,6 +28,7 @@ npm run stubGame "$gameId";
 npm run writeGame "$gameId";
 
 cd ../payloads;
+npm run makeComposites;
 npm run makeGamePayload "$gameId";
 npm run exportAllGamePayloads;
 npm run makeGameListing "$gameId";

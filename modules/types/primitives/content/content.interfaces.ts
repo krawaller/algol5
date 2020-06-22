@@ -5,11 +5,11 @@ export interface AlgolContentPos<Pos> {
 }
 
 export interface AlgolContentUnit<Pos> {
-  unit: [AlgolIcon, 0 | 1 | 2, Pos];
+  unit: [AlgolIcon, 0 | 1 | 2 | 12, Pos];
 }
 
 export interface AlgolContentUnitType {
-  unittype: [AlgolIcon, 0 | 1 | 2];
+  unittype: [AlgolIcon, 0 | 1 | 2 | 12];
 }
 
 export interface AlgolContentCmnd<Cmnd> {

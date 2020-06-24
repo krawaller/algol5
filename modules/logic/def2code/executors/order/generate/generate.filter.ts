@@ -42,6 +42,7 @@ export default function executeFilter(
     )
     .join(" && ");
   return `
+  {
     let filtersourcelayer = ${parser.set(filterDef.layer)};
     ${!toLayerDependsOnTarget ? assignTargetLayerVar : ""}
     for (let POS in filtersourcelayer){
@@ -51,5 +52,6 @@ export default function executeFilter(
         filtertargetlayer[POS] = filterObj;
       ${conditions.length ? `}` : ""}
     }
+  }
   `;
 }

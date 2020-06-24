@@ -112,6 +112,10 @@ const game = {
   action: {
     startTurn_basic_1: step => {
       let ARTIFACTS = {
+        ownedcolumns: {},
+        myownedcolumns: {},
+        oppownedcolumns: {},
+        neutralownedcolumns: {},
         FOOBAR: {},
         sees1: {},
         sees2: {},
@@ -149,8 +153,10 @@ const game = {
       {
         for (let STARTPOS in UNITLAYERS.units) {
           for (let DIR of orthoDirs) {
+            let walkedsquares = [];
             let POS = STARTPOS;
             while ((POS = connections[POS][DIR])) {
+              walkedsquares.push(POS);
               {
                 ARTIFACTS[
                   ["FOOBAR", "sees1", "sees2", "sees3", "sees4", "sees5"][
@@ -225,6 +231,20 @@ const game = {
                 }
               }
             }
+            let WALKLENGTH = walkedsquares.length;
+            if (WALKLENGTH) {
+              if (DIR === 1 && !UNITLAYERS.neutralunits[STARTPOS]) {
+                let targetlayername = "ownedcolumns";
+                let artifact = {
+                  owner: (UNITLAYERS.units[STARTPOS] || {}).owner
+                };
+                ARTIFACTS[targetlayername][
+                  walkedsquares[WALKLENGTH - 1]
+                ] = ARTIFACTS[
+                  prefixes1[artifact.owner] + targetlayername
+                ] = artifact;
+              }
+            }
           }
         }
       }
@@ -250,6 +270,10 @@ const game = {
     },
     startTurn_basic_2: step => {
       let ARTIFACTS = {
+        ownedcolumns: {},
+        myownedcolumns: {},
+        oppownedcolumns: {},
+        neutralownedcolumns: {},
         FOOBAR: {},
         sees1: {},
         sees2: {},
@@ -287,8 +311,10 @@ const game = {
       {
         for (let STARTPOS in UNITLAYERS.units) {
           for (let DIR of orthoDirs) {
+            let walkedsquares = [];
             let POS = STARTPOS;
             while ((POS = connections[POS][DIR])) {
+              walkedsquares.push(POS);
               {
                 ARTIFACTS[
                   ["FOOBAR", "sees1", "sees2", "sees3", "sees4", "sees5"][
@@ -363,6 +389,20 @@ const game = {
                 }
               }
             }
+            let WALKLENGTH = walkedsquares.length;
+            if (WALKLENGTH) {
+              if (DIR === 1 && !UNITLAYERS.neutralunits[STARTPOS]) {
+                let targetlayername = "ownedcolumns";
+                let artifact = {
+                  owner: (UNITLAYERS.units[STARTPOS] || {}).owner
+                };
+                ARTIFACTS[targetlayername][
+                  walkedsquares[WALKLENGTH - 1]
+                ] = ARTIFACTS[
+                  prefixes2[artifact.owner] + targetlayername
+                ] = artifact;
+              }
+            }
           }
         }
       }
@@ -388,6 +428,10 @@ const game = {
     },
     selecttarget_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
+        ownedcolumns: step.ARTIFACTS.ownedcolumns,
+        myownedcolumns: step.ARTIFACTS.myownedcolumns,
+        oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
+        neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
         FOOBAR: step.ARTIFACTS.FOOBAR,
         sees1: step.ARTIFACTS.sees1,
         sees2: step.ARTIFACTS.sees2,
@@ -586,6 +630,10 @@ const game = {
     },
     selecttarget_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
+        ownedcolumns: step.ARTIFACTS.ownedcolumns,
+        myownedcolumns: step.ARTIFACTS.myownedcolumns,
+        oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
+        neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
         FOOBAR: step.ARTIFACTS.FOOBAR,
         sees1: step.ARTIFACTS.sees1,
         sees2: step.ARTIFACTS.sees2,
@@ -785,6 +833,10 @@ const game = {
     place1_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
+        ownedcolumns: step.ARTIFACTS.ownedcolumns,
+        myownedcolumns: step.ARTIFACTS.myownedcolumns,
+        oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
+        neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
         FOOBAR: step.ARTIFACTS.FOOBAR,
         sees1: step.ARTIFACTS.sees1,
         sees2: step.ARTIFACTS.sees2,
@@ -853,7 +905,29 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (
+        Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
+      ) {
+        LINKS.endGame = ["draw", "win", "lose"][
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+          Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 1
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 2
+            : 0
+        ];
+        LINKS.endedBy = "dominance";
+        LINKS.endMarks = Object.keys(
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+            Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.myunits
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.oppunits
+            : emptyObj
+        );
+      } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
       return {
@@ -869,6 +943,10 @@ const game = {
     place2_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
+        ownedcolumns: step.ARTIFACTS.ownedcolumns,
+        myownedcolumns: step.ARTIFACTS.myownedcolumns,
+        oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
+        neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
         FOOBAR: step.ARTIFACTS.FOOBAR,
         sees1: step.ARTIFACTS.sees1,
         sees2: step.ARTIFACTS.sees2,
@@ -937,7 +1015,29 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (
+        Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
+      ) {
+        LINKS.endGame = ["draw", "win", "lose"][
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+          Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 1
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 2
+            : 0
+        ];
+        LINKS.endedBy = "dominance";
+        LINKS.endMarks = Object.keys(
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+            Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.myunits
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.oppunits
+            : emptyObj
+        );
+      } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
       return {
@@ -953,6 +1053,10 @@ const game = {
     place3_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
+        ownedcolumns: step.ARTIFACTS.ownedcolumns,
+        myownedcolumns: step.ARTIFACTS.myownedcolumns,
+        oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
+        neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
         FOOBAR: step.ARTIFACTS.FOOBAR,
         sees1: step.ARTIFACTS.sees1,
         sees2: step.ARTIFACTS.sees2,
@@ -1021,7 +1125,29 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (
+        Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
+      ) {
+        LINKS.endGame = ["draw", "win", "lose"][
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+          Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 1
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 2
+            : 0
+        ];
+        LINKS.endedBy = "dominance";
+        LINKS.endMarks = Object.keys(
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+            Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.myunits
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.oppunits
+            : emptyObj
+        );
+      } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
       return {
@@ -1037,6 +1163,10 @@ const game = {
     place4_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
+        ownedcolumns: step.ARTIFACTS.ownedcolumns,
+        myownedcolumns: step.ARTIFACTS.myownedcolumns,
+        oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
+        neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
         FOOBAR: step.ARTIFACTS.FOOBAR,
         sees1: step.ARTIFACTS.sees1,
         sees2: step.ARTIFACTS.sees2,
@@ -1105,7 +1235,29 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (
+        Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
+      ) {
+        LINKS.endGame = ["draw", "win", "lose"][
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+          Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 1
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 2
+            : 0
+        ];
+        LINKS.endedBy = "dominance";
+        LINKS.endMarks = Object.keys(
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+            Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.myunits
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.oppunits
+            : emptyObj
+        );
+      } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
       return {
@@ -1121,6 +1273,10 @@ const game = {
     place5_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
+        ownedcolumns: step.ARTIFACTS.ownedcolumns,
+        myownedcolumns: step.ARTIFACTS.myownedcolumns,
+        oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
+        neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
         FOOBAR: step.ARTIFACTS.FOOBAR,
         sees1: step.ARTIFACTS.sees1,
         sees2: step.ARTIFACTS.sees2,
@@ -1189,7 +1345,29 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (
+        Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
+      ) {
+        LINKS.endGame = ["draw", "win", "lose"][
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+          Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 1
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 2
+            : 0
+        ];
+        LINKS.endedBy = "dominance";
+        LINKS.endMarks = Object.keys(
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+            Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.myunits
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.oppunits
+            : emptyObj
+        );
+      } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
       return {
@@ -1205,6 +1383,10 @@ const game = {
     place1_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
+        ownedcolumns: step.ARTIFACTS.ownedcolumns,
+        myownedcolumns: step.ARTIFACTS.myownedcolumns,
+        oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
+        neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
         FOOBAR: step.ARTIFACTS.FOOBAR,
         sees1: step.ARTIFACTS.sees1,
         sees2: step.ARTIFACTS.sees2,
@@ -1273,7 +1455,29 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (
+        Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
+      ) {
+        LINKS.endGame = ["draw", "lose", "win"][
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+          Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 2
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 1
+            : 0
+        ];
+        LINKS.endedBy = "dominance";
+        LINKS.endMarks = Object.keys(
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+            Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.myunits
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.oppunits
+            : emptyObj
+        );
+      } else {
         LINKS.endTurn = "startTurn_basic_1";
       }
       return {
@@ -1289,6 +1493,10 @@ const game = {
     place2_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
+        ownedcolumns: step.ARTIFACTS.ownedcolumns,
+        myownedcolumns: step.ARTIFACTS.myownedcolumns,
+        oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
+        neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
         FOOBAR: step.ARTIFACTS.FOOBAR,
         sees1: step.ARTIFACTS.sees1,
         sees2: step.ARTIFACTS.sees2,
@@ -1357,7 +1565,29 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (
+        Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
+      ) {
+        LINKS.endGame = ["draw", "lose", "win"][
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+          Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 2
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 1
+            : 0
+        ];
+        LINKS.endedBy = "dominance";
+        LINKS.endMarks = Object.keys(
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+            Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.myunits
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.oppunits
+            : emptyObj
+        );
+      } else {
         LINKS.endTurn = "startTurn_basic_1";
       }
       return {
@@ -1373,6 +1603,10 @@ const game = {
     place3_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
+        ownedcolumns: step.ARTIFACTS.ownedcolumns,
+        myownedcolumns: step.ARTIFACTS.myownedcolumns,
+        oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
+        neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
         FOOBAR: step.ARTIFACTS.FOOBAR,
         sees1: step.ARTIFACTS.sees1,
         sees2: step.ARTIFACTS.sees2,
@@ -1441,7 +1675,29 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (
+        Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
+      ) {
+        LINKS.endGame = ["draw", "lose", "win"][
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+          Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 2
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 1
+            : 0
+        ];
+        LINKS.endedBy = "dominance";
+        LINKS.endMarks = Object.keys(
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+            Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.myunits
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.oppunits
+            : emptyObj
+        );
+      } else {
         LINKS.endTurn = "startTurn_basic_1";
       }
       return {
@@ -1457,6 +1713,10 @@ const game = {
     place4_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
+        ownedcolumns: step.ARTIFACTS.ownedcolumns,
+        myownedcolumns: step.ARTIFACTS.myownedcolumns,
+        oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
+        neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
         FOOBAR: step.ARTIFACTS.FOOBAR,
         sees1: step.ARTIFACTS.sees1,
         sees2: step.ARTIFACTS.sees2,
@@ -1525,7 +1785,29 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (
+        Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
+      ) {
+        LINKS.endGame = ["draw", "lose", "win"][
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+          Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 2
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 1
+            : 0
+        ];
+        LINKS.endedBy = "dominance";
+        LINKS.endMarks = Object.keys(
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+            Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.myunits
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.oppunits
+            : emptyObj
+        );
+      } else {
         LINKS.endTurn = "startTurn_basic_1";
       }
       return {
@@ -1541,6 +1823,10 @@ const game = {
     place5_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
+        ownedcolumns: step.ARTIFACTS.ownedcolumns,
+        myownedcolumns: step.ARTIFACTS.myownedcolumns,
+        oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
+        neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
         FOOBAR: step.ARTIFACTS.FOOBAR,
         sees1: step.ARTIFACTS.sees1,
         sees2: step.ARTIFACTS.sees2,
@@ -1609,7 +1895,29 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (
+        Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
+      ) {
+        LINKS.endGame = ["draw", "lose", "win"][
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+          Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 2
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? 1
+            : 0
+        ];
+        LINKS.endedBy = "dominance";
+        LINKS.endMarks = Object.keys(
+          Object.keys(ARTIFACTS.myownedcolumns).length >
+            Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.myunits
+            : Object.keys(ARTIFACTS.myownedcolumns).length <
+              Object.keys(ARTIFACTS.oppownedcolumns).length
+            ? UNITLAYERS.oppunits
+            : emptyObj
+        );
+      } else {
         LINKS.endTurn = "startTurn_basic_1";
       }
       return {
@@ -1891,9 +2199,46 @@ const game = {
       desc: "regular",
       code: "r",
       arr: {
-        setup: {},
+        setup: {
+          lvl1: {
+            "1": ["c3"],
+            "2": ["b5"]
+          },
+          lvl2: {
+            "0": ["d4"]
+          },
+          lvl3: {
+            "0": ["d5"],
+            "2": ["b1"]
+          },
+          lvl4: {
+            "1": ["c4"],
+            "2": ["b3"]
+          },
+          lvl5: {
+            "1": ["c5"],
+            "2": ["b2"]
+          }
+        },
         marks: [],
-        potentialMarks: []
+        potentialMarks: [
+          "a1",
+          "a2",
+          "a3",
+          "a4",
+          "a5",
+          "b4",
+          "c1",
+          "c2",
+          "d1",
+          "d2",
+          "d3",
+          "e1",
+          "e2",
+          "e3",
+          "e4",
+          "e5"
+        ]
       }
     }
   ],

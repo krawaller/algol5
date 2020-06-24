@@ -1,6 +1,57 @@
 import { ErdoslatinoDefinition } from "./_types";
 
 const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
+  endGame: {
+    dominance: {
+      condition: { same: [{ sizeof: "board" }, { sizeof: "units" }] },
+      who: {
+        ifelse: [
+          {
+            morethan: [
+              { sizeof: "myownedcolumns" },
+              { sizeof: "oppownedcolumns" },
+            ],
+          },
+          ["player"],
+          {
+            ifelse: [
+              {
+                lessthan: [
+                  { sizeof: "myownedcolumns" },
+                  { sizeof: "oppownedcolumns" },
+                ],
+              },
+              ["otherplayer"],
+              0,
+            ],
+          },
+        ],
+      },
+      show: {
+        ifelse: [
+          {
+            morethan: [
+              { sizeof: "myownedcolumns" },
+              { sizeof: "oppownedcolumns" },
+            ],
+          },
+          "myunits",
+          {
+            ifelse: [
+              {
+                lessthan: [
+                  { sizeof: "myownedcolumns" },
+                  { sizeof: "oppownedcolumns" },
+                ],
+              },
+              "oppunits",
+              ["empty"],
+            ],
+          },
+        ],
+      },
+    },
+  },
   startTurn: {
     runGenerator: "findvisibilities",
     link: "selecttarget",

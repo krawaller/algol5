@@ -126,6 +126,18 @@ const erdoslatinoGenerators: ErdoslatinoDefinition["generators"] = {
     starts: "units",
     dirs: "ortho",
     draw: {
+      last: {
+        condition: {
+          and: [
+            { same: [["dir"], 1] },
+            { noneat: ["neutralunits", ["start"]] },
+          ],
+        },
+        tolayer: "ownedcolumns",
+        include: {
+          owner: { read: ["units", ["start"], "owner"] },
+        },
+      },
       steps: [
         {
           tolayer: {

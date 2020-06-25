@@ -63,7 +63,7 @@ function drawSingle(
     body = `
       let targetlayername=${parser.val(drawDef.tolayer)};
       let artifact=${artifactLiteral};
-      ARTIFACTS[targetlayername][${posVar}] = ARTIFACTS[${prefix} + targetlayername] = artifact;
+      ARTIFACTS[targetlayername][${posVar}] = ARTIFACTS[${prefix} + targetlayername][${posVar}] = artifact;
     `;
   } else {
     const name = parser.val(drawDef.tolayer) as string;

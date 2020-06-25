@@ -3,7 +3,9 @@ import { ErdoslatinoDefinition } from "./_types";
 const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
   endGame: {
     dominance: {
-      condition: { same: [{ sizeof: "board" }, { sizeof: "units" }] },
+      condition: {
+        same: [{ sizeof: "board" }, { sizeof: "units" }],
+      },
       who: {
         ifelse: [
           {
@@ -65,13 +67,19 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
             "lvl1",
             {
               ifelse: [
-                { anyat: ["conquerwith1", "selecttarget"] },
-                ["player"],
+                { anyat: ["takencolumn", "selecttarget"] },
+                { read: ["takencolumn", "selecttarget", "owner"] },
                 {
                   ifelse: [
-                    { anyat: ["takencolumn", "selecttarget"] },
-                    { read: ["takencolumn", "selecttarget", "owner"] },
-                    0,
+                    { anyat: ["conquerwith1", "selecttarget"] },
+                    ["player"],
+                    {
+                      ifelse: [
+                        { anyat: ["oppconquerwith1", "selecttarget"] },
+                        ["otherplayer"],
+                        0,
+                      ],
+                    },
                   ],
                 },
               ],
@@ -82,9 +90,15 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
           ],
         },
         {
-          if: [
+          ifelse: [
             { anyat: ["conquerwith1", "selecttarget"] },
             { adoptin: ["currentcolumn"] },
+            {
+              if: [
+                { anyat: ["oppconquerwith1", "selecttarget"] },
+                { adoptin: ["currentcolumn", ["otherplayer"]] },
+              ],
+            },
           ],
         },
       ],
@@ -98,13 +112,19 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
             "lvl2",
             {
               ifelse: [
-                { anyat: ["conquerwith2", "selecttarget"] },
-                ["player"],
+                { anyat: ["takencolumn", "selecttarget"] },
+                { read: ["takencolumn", "selecttarget", "owner"] },
                 {
                   ifelse: [
-                    { anyat: ["takencolumn", "selecttarget"] },
-                    { read: ["takencolumn", "selecttarget", "owner"] },
-                    0,
+                    { anyat: ["conquerwith2", "selecttarget"] },
+                    ["player"],
+                    {
+                      ifelse: [
+                        { anyat: ["oppconquerwith2", "selecttarget"] },
+                        ["otherplayer"],
+                        0,
+                      ],
+                    },
                   ],
                 },
               ],
@@ -115,9 +135,15 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
           ],
         },
         {
-          if: [
+          ifelse: [
             { anyat: ["conquerwith2", "selecttarget"] },
             { adoptin: ["currentcolumn"] },
+            {
+              if: [
+                { anyat: ["oppconquerwith2", "selecttarget"] },
+                { adoptin: ["currentcolumn", ["otherplayer"]] },
+              ],
+            },
           ],
         },
       ],
@@ -131,13 +157,19 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
             "lvl3",
             {
               ifelse: [
-                { anyat: ["conquerwith3", "selecttarget"] },
-                ["player"],
+                { anyat: ["takencolumn", "selecttarget"] },
+                { read: ["takencolumn", "selecttarget", "owner"] },
                 {
                   ifelse: [
-                    { anyat: ["takencolumn", "selecttarget"] },
-                    { read: ["takencolumn", "selecttarget", "owner"] },
-                    0,
+                    { anyat: ["conquerwith3", "selecttarget"] },
+                    ["player"],
+                    {
+                      ifelse: [
+                        { anyat: ["oppconquerwith3", "selecttarget"] },
+                        ["otherplayer"],
+                        0,
+                      ],
+                    },
                   ],
                 },
               ],
@@ -148,9 +180,15 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
           ],
         },
         {
-          if: [
+          ifelse: [
             { anyat: ["conquerwith3", "selecttarget"] },
             { adoptin: ["currentcolumn"] },
+            {
+              if: [
+                { anyat: ["oppconquerwith3", "selecttarget"] },
+                { adoptin: ["currentcolumn", ["otherplayer"]] },
+              ],
+            },
           ],
         },
       ],
@@ -164,13 +202,19 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
             "lvl4",
             {
               ifelse: [
-                { anyat: ["conquerwith4", "selecttarget"] },
-                ["player"],
+                { anyat: ["takencolumn", "selecttarget"] },
+                { read: ["takencolumn", "selecttarget", "owner"] },
                 {
                   ifelse: [
-                    { anyat: ["takencolumn", "selecttarget"] },
-                    { read: ["takencolumn", "selecttarget", "owner"] },
-                    0,
+                    { anyat: ["conquerwith4", "selecttarget"] },
+                    ["player"],
+                    {
+                      ifelse: [
+                        { anyat: ["oppconquerwith4", "selecttarget"] },
+                        ["otherplayer"],
+                        0,
+                      ],
+                    },
                   ],
                 },
               ],
@@ -181,9 +225,15 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
           ],
         },
         {
-          if: [
+          ifelse: [
             { anyat: ["conquerwith4", "selecttarget"] },
             { adoptin: ["currentcolumn"] },
+            {
+              if: [
+                { anyat: ["oppconquerwith4", "selecttarget"] },
+                { adoptin: ["currentcolumn", ["otherplayer"]] },
+              ],
+            },
           ],
         },
       ],
@@ -197,13 +247,19 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
             "lvl5",
             {
               ifelse: [
-                { anyat: ["conquerwith5", "selecttarget"] },
-                ["player"],
+                { anyat: ["takencolumn", "selecttarget"] },
+                { read: ["takencolumn", "selecttarget", "owner"] },
                 {
                   ifelse: [
-                    { anyat: ["takencolumn", "selecttarget"] },
-                    { read: ["takencolumn", "selecttarget", "owner"] },
-                    0,
+                    { anyat: ["conquerwith5", "selecttarget"] },
+                    ["player"],
+                    {
+                      ifelse: [
+                        { anyat: ["oppconquerwith5", "selecttarget"] },
+                        ["otherplayer"],
+                        0,
+                      ],
+                    },
                   ],
                 },
               ],
@@ -214,9 +270,15 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
           ],
         },
         {
-          if: [
+          ifelse: [
             { anyat: ["conquerwith5", "selecttarget"] },
             { adoptin: ["currentcolumn"] },
+            {
+              if: [
+                { anyat: ["oppconquerwith5", "selecttarget"] },
+                { adoptin: ["currentcolumn", ["otherplayer"]] },
+              ],
+            },
           ],
         },
       ],
@@ -238,6 +300,11 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
                 "findmiddle2",
                 "findmiddle3",
                 "findmiddle4",
+                "findoppupwardends",
+                "findoppdownwardends",
+                "findoppmiddle2",
+                "findoppmiddle3",
+                "findoppmiddle4",
               ],
             },
           ],

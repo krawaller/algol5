@@ -25,7 +25,15 @@ const erdoslatinoInstructions: ErdoslatinoDefinition["instructions"] = {
                             ifelse: [
                               { anyat: ["conquerwith1", "selecttarget"] },
                               ["player"],
-                              0,
+                              {
+                                ifelse: [
+                                  {
+                                    anyat: ["oppconquerwith1", "selecttarget"],
+                                  },
+                                  ["otherplayer"],
+                                  0,
+                                ],
+                              },
                             ],
                           },
                         ],
@@ -54,7 +62,15 @@ const erdoslatinoInstructions: ErdoslatinoDefinition["instructions"] = {
                             ifelse: [
                               { anyat: ["conquerwith2", "selecttarget"] },
                               ["player"],
-                              0,
+                              {
+                                ifelse: [
+                                  {
+                                    anyat: ["oppconquerwith2", "selecttarget"],
+                                  },
+                                  ["otherplayer"],
+                                  0,
+                                ],
+                              },
                             ],
                           },
                         ],
@@ -83,7 +99,15 @@ const erdoslatinoInstructions: ErdoslatinoDefinition["instructions"] = {
                             ifelse: [
                               { anyat: ["conquerwith3", "selecttarget"] },
                               ["player"],
-                              0,
+                              {
+                                ifelse: [
+                                  {
+                                    anyat: ["oppconquerwith3", "selecttarget"],
+                                  },
+                                  ["otherplayer"],
+                                  0,
+                                ],
+                              },
                             ],
                           },
                         ],
@@ -112,7 +136,15 @@ const erdoslatinoInstructions: ErdoslatinoDefinition["instructions"] = {
                             ifelse: [
                               { anyat: ["conquerwith4", "selecttarget"] },
                               ["player"],
-                              0,
+                              {
+                                ifelse: [
+                                  {
+                                    anyat: ["oppconquerwith4", "selecttarget"],
+                                  },
+                                  ["otherplayer"],
+                                  0,
+                                ],
+                              },
                             ],
                           },
                         ],
@@ -141,7 +173,15 @@ const erdoslatinoInstructions: ErdoslatinoDefinition["instructions"] = {
                             ifelse: [
                               { anyat: ["conquerwith5", "selecttarget"] },
                               ["player"],
-                              0,
+                              {
+                                ifelse: [
+                                  {
+                                    anyat: ["oppconquerwith5", "selecttarget"],
+                                  },
+                                  ["otherplayer"],
+                                  0,
+                                ],
+                              },
                             ],
                           },
                         ],

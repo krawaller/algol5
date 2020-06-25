@@ -137,7 +137,9 @@ const game = {
         opptakencolumn: {},
         neutraltakencolumn: {},
         upwards: {},
-        downwards: {}
+        oppupwards: {},
+        downwards: {},
+        oppdownwards: {}
       };
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
@@ -203,7 +205,7 @@ const game = {
                   };
                   ARTIFACTS[targetlayername][POS] = ARTIFACTS[
                     prefixes1[artifact.owner] + targetlayername
-                  ] = artifact;
+                  ][POS] = artifact;
                 }
               }
               {
@@ -222,6 +224,18 @@ const game = {
                 if (
                   DIR === 5 &&
                   UNITLAYERS.units[POS] &&
+                  (UNITLAYERS.units[POS] || {}).lvl >
+                    (UNITLAYERS.units[STARTPOS] || {}).lvl
+                ) {
+                  ARTIFACTS.oppupwards[POS] = {
+                    lvl: (UNITLAYERS.units[POS] || {}).lvl
+                  };
+                }
+              }
+              {
+                if (
+                  DIR === 5 &&
+                  UNITLAYERS.units[POS] &&
                   (UNITLAYERS.units[POS] || {}).lvl <
                     (UNITLAYERS.units[STARTPOS] || {}).lvl
                 ) {
@@ -230,18 +244,34 @@ const game = {
                   };
                 }
               }
+              {
+                if (
+                  DIR === 1 &&
+                  UNITLAYERS.units[POS] &&
+                  (UNITLAYERS.units[POS] || {}).lvl <
+                    (UNITLAYERS.units[STARTPOS] || {}).lvl
+                ) {
+                  ARTIFACTS.oppdownwards[POS] = {
+                    lvl: (UNITLAYERS.units[POS] || {}).lvl
+                  };
+                }
+              }
             }
             let WALKLENGTH = walkedsquares.length;
             if (WALKLENGTH) {
-              if (DIR === 1 && !UNITLAYERS.neutralunits[STARTPOS]) {
+              if (
+                DIR === 1 &&
+                !UNITLAYERS.neutralunits[STARTPOS] &&
+                !ARTIFACTS.ownedcolumns[walkedsquares[WALKLENGTH - 1]]
+              ) {
                 let targetlayername = "ownedcolumns";
                 let artifact = {
                   owner: (UNITLAYERS.units[STARTPOS] || {}).owner
                 };
                 ARTIFACTS[targetlayername][
                   walkedsquares[WALKLENGTH - 1]
-                ] = ARTIFACTS[
-                  prefixes1[artifact.owner] + targetlayername
+                ] = ARTIFACTS[prefixes1[artifact.owner] + targetlayername][
+                  walkedsquares[WALKLENGTH - 1]
                 ] = artifact;
               }
             }
@@ -295,7 +325,9 @@ const game = {
         opptakencolumn: {},
         neutraltakencolumn: {},
         upwards: {},
-        downwards: {}
+        oppupwards: {},
+        downwards: {},
+        oppdownwards: {}
       };
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
@@ -361,7 +393,7 @@ const game = {
                   };
                   ARTIFACTS[targetlayername][POS] = ARTIFACTS[
                     prefixes2[artifact.owner] + targetlayername
-                  ] = artifact;
+                  ][POS] = artifact;
                 }
               }
               {
@@ -380,6 +412,18 @@ const game = {
                 if (
                   DIR === 1 &&
                   UNITLAYERS.units[POS] &&
+                  (UNITLAYERS.units[POS] || {}).lvl >
+                    (UNITLAYERS.units[STARTPOS] || {}).lvl
+                ) {
+                  ARTIFACTS.oppupwards[POS] = {
+                    lvl: (UNITLAYERS.units[POS] || {}).lvl
+                  };
+                }
+              }
+              {
+                if (
+                  DIR === 1 &&
+                  UNITLAYERS.units[POS] &&
                   (UNITLAYERS.units[POS] || {}).lvl <
                     (UNITLAYERS.units[STARTPOS] || {}).lvl
                 ) {
@@ -388,18 +432,34 @@ const game = {
                   };
                 }
               }
+              {
+                if (
+                  DIR === 5 &&
+                  UNITLAYERS.units[POS] &&
+                  (UNITLAYERS.units[POS] || {}).lvl <
+                    (UNITLAYERS.units[STARTPOS] || {}).lvl
+                ) {
+                  ARTIFACTS.oppdownwards[POS] = {
+                    lvl: (UNITLAYERS.units[POS] || {}).lvl
+                  };
+                }
+              }
             }
             let WALKLENGTH = walkedsquares.length;
             if (WALKLENGTH) {
-              if (DIR === 1 && !UNITLAYERS.neutralunits[STARTPOS]) {
+              if (
+                DIR === 1 &&
+                !UNITLAYERS.neutralunits[STARTPOS] &&
+                !ARTIFACTS.ownedcolumns[walkedsquares[WALKLENGTH - 1]]
+              ) {
                 let targetlayername = "ownedcolumns";
                 let artifact = {
                   owner: (UNITLAYERS.units[STARTPOS] || {}).owner
                 };
                 ARTIFACTS[targetlayername][
                   walkedsquares[WALKLENGTH - 1]
-                ] = ARTIFACTS[
-                  prefixes2[artifact.owner] + targetlayername
+                ] = ARTIFACTS[prefixes2[artifact.owner] + targetlayername][
+                  walkedsquares[WALKLENGTH - 1]
                 ] = artifact;
               }
             }
@@ -453,13 +513,20 @@ const game = {
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
         upwards: step.ARTIFACTS.upwards,
+        oppupwards: step.ARTIFACTS.oppupwards,
         downwards: step.ARTIFACTS.downwards,
+        oppdownwards: step.ARTIFACTS.oppdownwards,
         currentcolumn: {},
         conquerwith3: {},
         conquerwith4: {},
         conquerwith5: {},
         conquerwith2: {},
-        conquerwith1: {}
+        conquerwith1: {},
+        oppconquerwith3: {},
+        oppconquerwith4: {},
+        oppconquerwith5: {},
+        oppconquerwith2: {},
+        oppconquerwith1: {}
       };
       let LINKS = { marks: {}, commands: {} };
       let MARKS = {
@@ -597,6 +664,132 @@ const game = {
                 ARTIFACTS.above2[POS] ||
                 ARTIFACTS.above3[POS]) &&
               ARTIFACTS.below5[POS]
+            ) {
+              filtertargetlayer[POS] = filterObj;
+            }
+          }
+        }
+        {
+          for (let STARTPOS in Object.entries(
+            Object.keys(ARTIFACTS.oppupwards)
+              .concat(Object.keys(ARTIFACTS.currentcolumn))
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})) {
+            let POS = STARTPOS;
+            while ((POS = connections[POS][5])) {
+              {
+                if (
+                  (UNITLAYERS.units[STARTPOS] || {}).lvl < 3 &&
+                  !UNITLAYERS.units[POS]
+                ) {
+                  ARTIFACTS.oppconquerwith3[POS] = emptyObj;
+                }
+              }
+              {
+                if (
+                  (UNITLAYERS.units[STARTPOS] || {}).lvl < 4 &&
+                  !UNITLAYERS.units[POS]
+                ) {
+                  ARTIFACTS.oppconquerwith4[POS] = emptyObj;
+                }
+              }
+              {
+                if (!UNITLAYERS.units[POS]) {
+                  ARTIFACTS.oppconquerwith5[POS] = emptyObj;
+                }
+              }
+            }
+          }
+        }
+        {
+          for (let STARTPOS in Object.entries(
+            Object.keys(ARTIFACTS.oppdownwards)
+              .concat(Object.keys(ARTIFACTS.currentcolumn))
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})) {
+            let POS = STARTPOS;
+            while ((POS = connections[POS][1])) {
+              {
+                if (
+                  (UNITLAYERS.units[STARTPOS] || {}).lvl > 3 &&
+                  !UNITLAYERS.units[POS]
+                ) {
+                  ARTIFACTS.oppconquerwith3[POS] = emptyObj;
+                }
+              }
+              {
+                if (
+                  (UNITLAYERS.units[STARTPOS] || {}).lvl > 2 &&
+                  !UNITLAYERS.units[POS]
+                ) {
+                  ARTIFACTS.oppconquerwith2[POS] = emptyObj;
+                }
+              }
+              {
+                if (!UNITLAYERS.units[POS]) {
+                  ARTIFACTS.oppconquerwith1[POS] = emptyObj;
+                }
+              }
+            }
+          }
+        }
+        {
+          let filtersourcelayer = ARTIFACTS.currentcolumn;
+          let filtertargetlayer = ARTIFACTS.oppconquerwith2;
+          for (let POS in filtersourcelayer) {
+            let filterObj = filtersourcelayer[POS];
+            if (
+              !UNITLAYERS.units[POS] &&
+              ARTIFACTS.below1[POS] &&
+              (ARTIFACTS.above3[POS] ||
+                ARTIFACTS.above4[POS] ||
+                ARTIFACTS.above5[POS])
+            ) {
+              filtertargetlayer[POS] = filterObj;
+            }
+          }
+        }
+        {
+          let filtersourcelayer = ARTIFACTS.currentcolumn;
+          let filtertargetlayer = ARTIFACTS.oppconquerwith3;
+          for (let POS in filtersourcelayer) {
+            let filterObj = filtersourcelayer[POS];
+            if (
+              !UNITLAYERS.units[POS] &&
+              (ARTIFACTS.below1[POS] || ARTIFACTS.below2[POS]) &&
+              (ARTIFACTS.above4[POS] || ARTIFACTS.above5[POS])
+            ) {
+              filtertargetlayer[POS] = filterObj;
+            }
+          }
+        }
+        {
+          let filtersourcelayer = ARTIFACTS.currentcolumn;
+          let filtertargetlayer = ARTIFACTS.oppconquerwith4;
+          for (let POS in filtersourcelayer) {
+            let filterObj = filtersourcelayer[POS];
+            if (
+              !UNITLAYERS.units[POS] &&
+              (ARTIFACTS.below1[POS] ||
+                ARTIFACTS.below2[POS] ||
+                ARTIFACTS.below3[POS]) &&
+              ARTIFACTS.above5[POS]
             ) {
               filtertargetlayer[POS] = filterObj;
             }
@@ -655,13 +848,20 @@ const game = {
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
         upwards: step.ARTIFACTS.upwards,
+        oppupwards: step.ARTIFACTS.oppupwards,
         downwards: step.ARTIFACTS.downwards,
+        oppdownwards: step.ARTIFACTS.oppdownwards,
         currentcolumn: {},
         conquerwith3: {},
         conquerwith4: {},
         conquerwith5: {},
         conquerwith2: {},
-        conquerwith1: {}
+        conquerwith1: {},
+        oppconquerwith3: {},
+        oppconquerwith4: {},
+        oppconquerwith5: {},
+        oppconquerwith2: {},
+        oppconquerwith1: {}
       };
       let LINKS = { marks: {}, commands: {} };
       let MARKS = {
@@ -799,6 +999,132 @@ const game = {
                 ARTIFACTS.above2[POS] ||
                 ARTIFACTS.above3[POS]) &&
               ARTIFACTS.below5[POS]
+            ) {
+              filtertargetlayer[POS] = filterObj;
+            }
+          }
+        }
+        {
+          for (let STARTPOS in Object.entries(
+            Object.keys(ARTIFACTS.oppupwards)
+              .concat(Object.keys(ARTIFACTS.currentcolumn))
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})) {
+            let POS = STARTPOS;
+            while ((POS = connections[POS][1])) {
+              {
+                if (
+                  (UNITLAYERS.units[STARTPOS] || {}).lvl < 3 &&
+                  !UNITLAYERS.units[POS]
+                ) {
+                  ARTIFACTS.oppconquerwith3[POS] = emptyObj;
+                }
+              }
+              {
+                if (
+                  (UNITLAYERS.units[STARTPOS] || {}).lvl < 4 &&
+                  !UNITLAYERS.units[POS]
+                ) {
+                  ARTIFACTS.oppconquerwith4[POS] = emptyObj;
+                }
+              }
+              {
+                if (!UNITLAYERS.units[POS]) {
+                  ARTIFACTS.oppconquerwith5[POS] = emptyObj;
+                }
+              }
+            }
+          }
+        }
+        {
+          for (let STARTPOS in Object.entries(
+            Object.keys(ARTIFACTS.oppdownwards)
+              .concat(Object.keys(ARTIFACTS.currentcolumn))
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})) {
+            let POS = STARTPOS;
+            while ((POS = connections[POS][5])) {
+              {
+                if (
+                  (UNITLAYERS.units[STARTPOS] || {}).lvl > 3 &&
+                  !UNITLAYERS.units[POS]
+                ) {
+                  ARTIFACTS.oppconquerwith3[POS] = emptyObj;
+                }
+              }
+              {
+                if (
+                  (UNITLAYERS.units[STARTPOS] || {}).lvl > 2 &&
+                  !UNITLAYERS.units[POS]
+                ) {
+                  ARTIFACTS.oppconquerwith2[POS] = emptyObj;
+                }
+              }
+              {
+                if (!UNITLAYERS.units[POS]) {
+                  ARTIFACTS.oppconquerwith1[POS] = emptyObj;
+                }
+              }
+            }
+          }
+        }
+        {
+          let filtersourcelayer = ARTIFACTS.currentcolumn;
+          let filtertargetlayer = ARTIFACTS.oppconquerwith2;
+          for (let POS in filtersourcelayer) {
+            let filterObj = filtersourcelayer[POS];
+            if (
+              !UNITLAYERS.units[POS] &&
+              ARTIFACTS.below1[POS] &&
+              (ARTIFACTS.above3[POS] ||
+                ARTIFACTS.above4[POS] ||
+                ARTIFACTS.above5[POS])
+            ) {
+              filtertargetlayer[POS] = filterObj;
+            }
+          }
+        }
+        {
+          let filtersourcelayer = ARTIFACTS.currentcolumn;
+          let filtertargetlayer = ARTIFACTS.oppconquerwith3;
+          for (let POS in filtersourcelayer) {
+            let filterObj = filtersourcelayer[POS];
+            if (
+              !UNITLAYERS.units[POS] &&
+              (ARTIFACTS.below1[POS] || ARTIFACTS.below2[POS]) &&
+              (ARTIFACTS.above4[POS] || ARTIFACTS.above5[POS])
+            ) {
+              filtertargetlayer[POS] = filterObj;
+            }
+          }
+        }
+        {
+          let filtersourcelayer = ARTIFACTS.currentcolumn;
+          let filtertargetlayer = ARTIFACTS.oppconquerwith4;
+          for (let POS in filtersourcelayer) {
+            let filterObj = filtersourcelayer[POS];
+            if (
+              !UNITLAYERS.units[POS] &&
+              (ARTIFACTS.below1[POS] ||
+                ARTIFACTS.below2[POS] ||
+                ARTIFACTS.below3[POS]) &&
+              ARTIFACTS.above5[POS]
             ) {
               filtertargetlayer[POS] = filterObj;
             }
@@ -858,13 +1184,20 @@ const game = {
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
         upwards: step.ARTIFACTS.upwards,
+        oppupwards: step.ARTIFACTS.oppupwards,
         downwards: step.ARTIFACTS.downwards,
+        oppdownwards: step.ARTIFACTS.oppdownwards,
         currentcolumn: step.ARTIFACTS.currentcolumn,
         conquerwith3: step.ARTIFACTS.conquerwith3,
         conquerwith4: step.ARTIFACTS.conquerwith4,
         conquerwith5: step.ARTIFACTS.conquerwith5,
         conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1
+        conquerwith1: step.ARTIFACTS.conquerwith1,
+        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
+        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
+        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
+        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
+        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -876,10 +1209,12 @@ const game = {
           pos: MARKS.selecttarget,
           id: newunitid,
           group: "lvl1",
-          owner: ARTIFACTS.conquerwith1[MARKS.selecttarget]
-            ? 1
-            : ARTIFACTS.takencolumn[MARKS.selecttarget]
+          owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
+            : ARTIFACTS.conquerwith1[MARKS.selecttarget]
+            ? 1
+            : ARTIFACTS.oppconquerwith1[MARKS.selecttarget]
+            ? 2
             : 0,
           lvl: 1
         };
@@ -893,6 +1228,20 @@ const game = {
                 ...UNITDATA[unitid],
                 owner: 1
               };
+            }
+          }
+        }
+      } else {
+        if (ARTIFACTS.oppconquerwith1[MARKS.selecttarget]) {
+          for (let LOOPPOS in ARTIFACTS.currentcolumn) {
+            {
+              let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+              if (unitid) {
+                UNITDATA[unitid] = {
+                  ...UNITDATA[unitid],
+                  owner: 2
+                };
+              }
             }
           }
         }
@@ -968,13 +1317,20 @@ const game = {
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
         upwards: step.ARTIFACTS.upwards,
+        oppupwards: step.ARTIFACTS.oppupwards,
         downwards: step.ARTIFACTS.downwards,
+        oppdownwards: step.ARTIFACTS.oppdownwards,
         currentcolumn: step.ARTIFACTS.currentcolumn,
         conquerwith3: step.ARTIFACTS.conquerwith3,
         conquerwith4: step.ARTIFACTS.conquerwith4,
         conquerwith5: step.ARTIFACTS.conquerwith5,
         conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1
+        conquerwith1: step.ARTIFACTS.conquerwith1,
+        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
+        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
+        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
+        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
+        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -986,10 +1342,12 @@ const game = {
           pos: MARKS.selecttarget,
           id: newunitid,
           group: "lvl2",
-          owner: ARTIFACTS.conquerwith2[MARKS.selecttarget]
-            ? 1
-            : ARTIFACTS.takencolumn[MARKS.selecttarget]
+          owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
+            : ARTIFACTS.conquerwith2[MARKS.selecttarget]
+            ? 1
+            : ARTIFACTS.oppconquerwith2[MARKS.selecttarget]
+            ? 2
             : 0,
           lvl: 2
         };
@@ -1003,6 +1361,20 @@ const game = {
                 ...UNITDATA[unitid],
                 owner: 1
               };
+            }
+          }
+        }
+      } else {
+        if (ARTIFACTS.oppconquerwith2[MARKS.selecttarget]) {
+          for (let LOOPPOS in ARTIFACTS.currentcolumn) {
+            {
+              let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+              if (unitid) {
+                UNITDATA[unitid] = {
+                  ...UNITDATA[unitid],
+                  owner: 2
+                };
+              }
             }
           }
         }
@@ -1078,13 +1450,20 @@ const game = {
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
         upwards: step.ARTIFACTS.upwards,
+        oppupwards: step.ARTIFACTS.oppupwards,
         downwards: step.ARTIFACTS.downwards,
+        oppdownwards: step.ARTIFACTS.oppdownwards,
         currentcolumn: step.ARTIFACTS.currentcolumn,
         conquerwith3: step.ARTIFACTS.conquerwith3,
         conquerwith4: step.ARTIFACTS.conquerwith4,
         conquerwith5: step.ARTIFACTS.conquerwith5,
         conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1
+        conquerwith1: step.ARTIFACTS.conquerwith1,
+        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
+        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
+        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
+        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
+        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -1096,10 +1475,12 @@ const game = {
           pos: MARKS.selecttarget,
           id: newunitid,
           group: "lvl3",
-          owner: ARTIFACTS.conquerwith3[MARKS.selecttarget]
-            ? 1
-            : ARTIFACTS.takencolumn[MARKS.selecttarget]
+          owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
+            : ARTIFACTS.conquerwith3[MARKS.selecttarget]
+            ? 1
+            : ARTIFACTS.oppconquerwith3[MARKS.selecttarget]
+            ? 2
             : 0,
           lvl: 3
         };
@@ -1113,6 +1494,20 @@ const game = {
                 ...UNITDATA[unitid],
                 owner: 1
               };
+            }
+          }
+        }
+      } else {
+        if (ARTIFACTS.oppconquerwith3[MARKS.selecttarget]) {
+          for (let LOOPPOS in ARTIFACTS.currentcolumn) {
+            {
+              let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+              if (unitid) {
+                UNITDATA[unitid] = {
+                  ...UNITDATA[unitid],
+                  owner: 2
+                };
+              }
             }
           }
         }
@@ -1188,13 +1583,20 @@ const game = {
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
         upwards: step.ARTIFACTS.upwards,
+        oppupwards: step.ARTIFACTS.oppupwards,
         downwards: step.ARTIFACTS.downwards,
+        oppdownwards: step.ARTIFACTS.oppdownwards,
         currentcolumn: step.ARTIFACTS.currentcolumn,
         conquerwith3: step.ARTIFACTS.conquerwith3,
         conquerwith4: step.ARTIFACTS.conquerwith4,
         conquerwith5: step.ARTIFACTS.conquerwith5,
         conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1
+        conquerwith1: step.ARTIFACTS.conquerwith1,
+        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
+        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
+        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
+        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
+        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -1206,10 +1608,12 @@ const game = {
           pos: MARKS.selecttarget,
           id: newunitid,
           group: "lvl4",
-          owner: ARTIFACTS.conquerwith4[MARKS.selecttarget]
-            ? 1
-            : ARTIFACTS.takencolumn[MARKS.selecttarget]
+          owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
+            : ARTIFACTS.conquerwith4[MARKS.selecttarget]
+            ? 1
+            : ARTIFACTS.oppconquerwith4[MARKS.selecttarget]
+            ? 2
             : 0,
           lvl: 4
         };
@@ -1223,6 +1627,20 @@ const game = {
                 ...UNITDATA[unitid],
                 owner: 1
               };
+            }
+          }
+        }
+      } else {
+        if (ARTIFACTS.oppconquerwith4[MARKS.selecttarget]) {
+          for (let LOOPPOS in ARTIFACTS.currentcolumn) {
+            {
+              let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+              if (unitid) {
+                UNITDATA[unitid] = {
+                  ...UNITDATA[unitid],
+                  owner: 2
+                };
+              }
             }
           }
         }
@@ -1298,13 +1716,20 @@ const game = {
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
         upwards: step.ARTIFACTS.upwards,
+        oppupwards: step.ARTIFACTS.oppupwards,
         downwards: step.ARTIFACTS.downwards,
+        oppdownwards: step.ARTIFACTS.oppdownwards,
         currentcolumn: step.ARTIFACTS.currentcolumn,
         conquerwith3: step.ARTIFACTS.conquerwith3,
         conquerwith4: step.ARTIFACTS.conquerwith4,
         conquerwith5: step.ARTIFACTS.conquerwith5,
         conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1
+        conquerwith1: step.ARTIFACTS.conquerwith1,
+        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
+        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
+        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
+        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
+        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -1316,10 +1741,12 @@ const game = {
           pos: MARKS.selecttarget,
           id: newunitid,
           group: "lvl5",
-          owner: ARTIFACTS.conquerwith5[MARKS.selecttarget]
-            ? 1
-            : ARTIFACTS.takencolumn[MARKS.selecttarget]
+          owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
+            : ARTIFACTS.conquerwith5[MARKS.selecttarget]
+            ? 1
+            : ARTIFACTS.oppconquerwith5[MARKS.selecttarget]
+            ? 2
             : 0,
           lvl: 5
         };
@@ -1333,6 +1760,20 @@ const game = {
                 ...UNITDATA[unitid],
                 owner: 1
               };
+            }
+          }
+        }
+      } else {
+        if (ARTIFACTS.oppconquerwith5[MARKS.selecttarget]) {
+          for (let LOOPPOS in ARTIFACTS.currentcolumn) {
+            {
+              let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+              if (unitid) {
+                UNITDATA[unitid] = {
+                  ...UNITDATA[unitid],
+                  owner: 2
+                };
+              }
             }
           }
         }
@@ -1408,13 +1849,20 @@ const game = {
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
         upwards: step.ARTIFACTS.upwards,
+        oppupwards: step.ARTIFACTS.oppupwards,
         downwards: step.ARTIFACTS.downwards,
+        oppdownwards: step.ARTIFACTS.oppdownwards,
         currentcolumn: step.ARTIFACTS.currentcolumn,
         conquerwith3: step.ARTIFACTS.conquerwith3,
         conquerwith4: step.ARTIFACTS.conquerwith4,
         conquerwith5: step.ARTIFACTS.conquerwith5,
         conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1
+        conquerwith1: step.ARTIFACTS.conquerwith1,
+        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
+        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
+        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
+        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
+        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -1426,10 +1874,12 @@ const game = {
           pos: MARKS.selecttarget,
           id: newunitid,
           group: "lvl1",
-          owner: ARTIFACTS.conquerwith1[MARKS.selecttarget]
-            ? 2
-            : ARTIFACTS.takencolumn[MARKS.selecttarget]
+          owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
+            : ARTIFACTS.conquerwith1[MARKS.selecttarget]
+            ? 2
+            : ARTIFACTS.oppconquerwith1[MARKS.selecttarget]
+            ? 1
             : 0,
           lvl: 1
         };
@@ -1443,6 +1893,20 @@ const game = {
                 ...UNITDATA[unitid],
                 owner: 2
               };
+            }
+          }
+        }
+      } else {
+        if (ARTIFACTS.oppconquerwith1[MARKS.selecttarget]) {
+          for (let LOOPPOS in ARTIFACTS.currentcolumn) {
+            {
+              let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+              if (unitid) {
+                UNITDATA[unitid] = {
+                  ...UNITDATA[unitid],
+                  owner: 1
+                };
+              }
             }
           }
         }
@@ -1518,13 +1982,20 @@ const game = {
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
         upwards: step.ARTIFACTS.upwards,
+        oppupwards: step.ARTIFACTS.oppupwards,
         downwards: step.ARTIFACTS.downwards,
+        oppdownwards: step.ARTIFACTS.oppdownwards,
         currentcolumn: step.ARTIFACTS.currentcolumn,
         conquerwith3: step.ARTIFACTS.conquerwith3,
         conquerwith4: step.ARTIFACTS.conquerwith4,
         conquerwith5: step.ARTIFACTS.conquerwith5,
         conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1
+        conquerwith1: step.ARTIFACTS.conquerwith1,
+        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
+        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
+        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
+        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
+        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -1536,10 +2007,12 @@ const game = {
           pos: MARKS.selecttarget,
           id: newunitid,
           group: "lvl2",
-          owner: ARTIFACTS.conquerwith2[MARKS.selecttarget]
-            ? 2
-            : ARTIFACTS.takencolumn[MARKS.selecttarget]
+          owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
+            : ARTIFACTS.conquerwith2[MARKS.selecttarget]
+            ? 2
+            : ARTIFACTS.oppconquerwith2[MARKS.selecttarget]
+            ? 1
             : 0,
           lvl: 2
         };
@@ -1553,6 +2026,20 @@ const game = {
                 ...UNITDATA[unitid],
                 owner: 2
               };
+            }
+          }
+        }
+      } else {
+        if (ARTIFACTS.oppconquerwith2[MARKS.selecttarget]) {
+          for (let LOOPPOS in ARTIFACTS.currentcolumn) {
+            {
+              let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+              if (unitid) {
+                UNITDATA[unitid] = {
+                  ...UNITDATA[unitid],
+                  owner: 1
+                };
+              }
             }
           }
         }
@@ -1628,13 +2115,20 @@ const game = {
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
         upwards: step.ARTIFACTS.upwards,
+        oppupwards: step.ARTIFACTS.oppupwards,
         downwards: step.ARTIFACTS.downwards,
+        oppdownwards: step.ARTIFACTS.oppdownwards,
         currentcolumn: step.ARTIFACTS.currentcolumn,
         conquerwith3: step.ARTIFACTS.conquerwith3,
         conquerwith4: step.ARTIFACTS.conquerwith4,
         conquerwith5: step.ARTIFACTS.conquerwith5,
         conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1
+        conquerwith1: step.ARTIFACTS.conquerwith1,
+        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
+        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
+        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
+        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
+        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -1646,10 +2140,12 @@ const game = {
           pos: MARKS.selecttarget,
           id: newunitid,
           group: "lvl3",
-          owner: ARTIFACTS.conquerwith3[MARKS.selecttarget]
-            ? 2
-            : ARTIFACTS.takencolumn[MARKS.selecttarget]
+          owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
+            : ARTIFACTS.conquerwith3[MARKS.selecttarget]
+            ? 2
+            : ARTIFACTS.oppconquerwith3[MARKS.selecttarget]
+            ? 1
             : 0,
           lvl: 3
         };
@@ -1663,6 +2159,20 @@ const game = {
                 ...UNITDATA[unitid],
                 owner: 2
               };
+            }
+          }
+        }
+      } else {
+        if (ARTIFACTS.oppconquerwith3[MARKS.selecttarget]) {
+          for (let LOOPPOS in ARTIFACTS.currentcolumn) {
+            {
+              let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+              if (unitid) {
+                UNITDATA[unitid] = {
+                  ...UNITDATA[unitid],
+                  owner: 1
+                };
+              }
             }
           }
         }
@@ -1738,13 +2248,20 @@ const game = {
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
         upwards: step.ARTIFACTS.upwards,
+        oppupwards: step.ARTIFACTS.oppupwards,
         downwards: step.ARTIFACTS.downwards,
+        oppdownwards: step.ARTIFACTS.oppdownwards,
         currentcolumn: step.ARTIFACTS.currentcolumn,
         conquerwith3: step.ARTIFACTS.conquerwith3,
         conquerwith4: step.ARTIFACTS.conquerwith4,
         conquerwith5: step.ARTIFACTS.conquerwith5,
         conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1
+        conquerwith1: step.ARTIFACTS.conquerwith1,
+        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
+        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
+        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
+        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
+        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -1756,10 +2273,12 @@ const game = {
           pos: MARKS.selecttarget,
           id: newunitid,
           group: "lvl4",
-          owner: ARTIFACTS.conquerwith4[MARKS.selecttarget]
-            ? 2
-            : ARTIFACTS.takencolumn[MARKS.selecttarget]
+          owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
+            : ARTIFACTS.conquerwith4[MARKS.selecttarget]
+            ? 2
+            : ARTIFACTS.oppconquerwith4[MARKS.selecttarget]
+            ? 1
             : 0,
           lvl: 4
         };
@@ -1773,6 +2292,20 @@ const game = {
                 ...UNITDATA[unitid],
                 owner: 2
               };
+            }
+          }
+        }
+      } else {
+        if (ARTIFACTS.oppconquerwith4[MARKS.selecttarget]) {
+          for (let LOOPPOS in ARTIFACTS.currentcolumn) {
+            {
+              let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+              if (unitid) {
+                UNITDATA[unitid] = {
+                  ...UNITDATA[unitid],
+                  owner: 1
+                };
+              }
             }
           }
         }
@@ -1848,13 +2381,20 @@ const game = {
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
         upwards: step.ARTIFACTS.upwards,
+        oppupwards: step.ARTIFACTS.oppupwards,
         downwards: step.ARTIFACTS.downwards,
+        oppdownwards: step.ARTIFACTS.oppdownwards,
         currentcolumn: step.ARTIFACTS.currentcolumn,
         conquerwith3: step.ARTIFACTS.conquerwith3,
         conquerwith4: step.ARTIFACTS.conquerwith4,
         conquerwith5: step.ARTIFACTS.conquerwith5,
         conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1
+        conquerwith1: step.ARTIFACTS.conquerwith1,
+        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
+        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
+        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
+        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
+        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -1866,10 +2406,12 @@ const game = {
           pos: MARKS.selecttarget,
           id: newunitid,
           group: "lvl5",
-          owner: ARTIFACTS.conquerwith5[MARKS.selecttarget]
-            ? 2
-            : ARTIFACTS.takencolumn[MARKS.selecttarget]
+          owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
+            : ARTIFACTS.conquerwith5[MARKS.selecttarget]
+            ? 2
+            : ARTIFACTS.oppconquerwith5[MARKS.selecttarget]
+            ? 1
             : 0,
           lvl: 5
         };
@@ -1883,6 +2425,20 @@ const game = {
                 ...UNITDATA[unitid],
                 owner: 2
               };
+            }
+          }
+        }
+      } else {
+        if (ARTIFACTS.oppconquerwith5[MARKS.selecttarget]) {
+          for (let LOOPPOS in ARTIFACTS.currentcolumn) {
+            {
+              let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+              if (unitid) {
+                UNITDATA[unitid] = {
+                  ...UNITDATA[unitid],
+                  owner: 1
+                };
+              }
             }
           }
         }
@@ -1964,6 +2520,8 @@ const game = {
                                 .owner
                             : ARTIFACTS.conquerwith1[MARKS.selecttarget]
                             ? 1
+                            : ARTIFACTS.oppconquerwith1[MARKS.selecttarget]
+                            ? 2
                             : 0
                         ]
                       }
@@ -1983,6 +2541,8 @@ const game = {
                                 .owner
                             : ARTIFACTS.conquerwith2[MARKS.selecttarget]
                             ? 1
+                            : ARTIFACTS.oppconquerwith2[MARKS.selecttarget]
+                            ? 2
                             : 0
                         ]
                       }
@@ -2002,6 +2562,8 @@ const game = {
                                 .owner
                             : ARTIFACTS.conquerwith3[MARKS.selecttarget]
                             ? 1
+                            : ARTIFACTS.oppconquerwith3[MARKS.selecttarget]
+                            ? 2
                             : 0
                         ]
                       }
@@ -2021,6 +2583,8 @@ const game = {
                                 .owner
                             : ARTIFACTS.conquerwith4[MARKS.selecttarget]
                             ? 1
+                            : ARTIFACTS.oppconquerwith4[MARKS.selecttarget]
+                            ? 2
                             : 0
                         ]
                       }
@@ -2040,6 +2604,8 @@ const game = {
                                 .owner
                             : ARTIFACTS.conquerwith5[MARKS.selecttarget]
                             ? 1
+                            : ARTIFACTS.oppconquerwith5[MARKS.selecttarget]
+                            ? 2
                             : 0
                         ]
                       }
@@ -2093,6 +2659,8 @@ const game = {
                                 .owner
                             : ARTIFACTS.conquerwith1[MARKS.selecttarget]
                             ? 2
+                            : ARTIFACTS.oppconquerwith1[MARKS.selecttarget]
+                            ? 1
                             : 0
                         ]
                       }
@@ -2112,6 +2680,8 @@ const game = {
                                 .owner
                             : ARTIFACTS.conquerwith2[MARKS.selecttarget]
                             ? 2
+                            : ARTIFACTS.oppconquerwith2[MARKS.selecttarget]
+                            ? 1
                             : 0
                         ]
                       }
@@ -2131,6 +2701,8 @@ const game = {
                                 .owner
                             : ARTIFACTS.conquerwith3[MARKS.selecttarget]
                             ? 2
+                            : ARTIFACTS.oppconquerwith3[MARKS.selecttarget]
+                            ? 1
                             : 0
                         ]
                       }
@@ -2150,6 +2722,8 @@ const game = {
                                 .owner
                             : ARTIFACTS.conquerwith4[MARKS.selecttarget]
                             ? 2
+                            : ARTIFACTS.oppconquerwith4[MARKS.selecttarget]
+                            ? 1
                             : 0
                         ]
                       }
@@ -2169,6 +2743,8 @@ const game = {
                                 .owner
                             : ARTIFACTS.conquerwith5[MARKS.selecttarget]
                             ? 2
+                            : ARTIFACTS.oppconquerwith5[MARKS.selecttarget]
+                            ? 1
                             : 0
                         ]
                       }

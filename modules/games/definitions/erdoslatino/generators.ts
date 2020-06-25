@@ -35,6 +35,24 @@ const erdoslatinoGenerators: ErdoslatinoDefinition["generators"] = {
     },
     tolayer: "conquerwith2",
   },
+  findoppmiddle2: {
+    type: "filter",
+    layer: "currentcolumn",
+    condition: {
+      and: [
+        { noneat: ["units", ["target"]] },
+        { anyat: ["below1", ["target"]] },
+        {
+          or: [
+            { anyat: ["above3", ["target"]] },
+            { anyat: ["above4", ["target"]] },
+            { anyat: ["above5", ["target"]] },
+          ],
+        },
+      ],
+    },
+    tolayer: "oppconquerwith2",
+  },
   findmiddle3: {
     type: "filter",
     layer: "currentcolumn",
@@ -57,6 +75,28 @@ const erdoslatinoGenerators: ErdoslatinoDefinition["generators"] = {
     },
     tolayer: "conquerwith3",
   },
+  findoppmiddle3: {
+    type: "filter",
+    layer: "currentcolumn",
+    condition: {
+      and: [
+        { noneat: ["units", ["target"]] },
+        {
+          or: [
+            { anyat: ["below1", ["target"]] },
+            { anyat: ["below2", ["target"]] },
+          ],
+        },
+        {
+          or: [
+            { anyat: ["above4", ["target"]] },
+            { anyat: ["above5", ["target"]] },
+          ],
+        },
+      ],
+    },
+    tolayer: "oppconquerwith3",
+  },
   findmiddle4: {
     type: "filter",
     layer: "currentcolumn",
@@ -74,6 +114,24 @@ const erdoslatinoGenerators: ErdoslatinoDefinition["generators"] = {
       ],
     },
     tolayer: "conquerwith4",
+  },
+  findoppmiddle4: {
+    type: "filter",
+    layer: "currentcolumn",
+    condition: {
+      and: [
+        { noneat: ["units", ["target"]] },
+        {
+          or: [
+            { anyat: ["below1", ["target"]] },
+            { anyat: ["below2", ["target"]] },
+            { anyat: ["below3", ["target"]] },
+          ],
+        },
+        { anyat: ["above5", ["target"]] },
+      ],
+    },
+    tolayer: "oppconquerwith4",
   },
   finddownwardends: {
     type: "walker",
@@ -94,6 +152,29 @@ const erdoslatinoGenerators: ErdoslatinoDefinition["generators"] = {
         {
           unlessover: "units",
           tolayer: "conquerwith1",
+        },
+      ],
+    },
+  },
+  findoppdownwardends: {
+    type: "walker",
+    starts: { intersect: ["oppdownwards", "currentcolumn"] },
+    dir: { playercase: [1, 5] },
+    draw: {
+      steps: [
+        {
+          unlessover: "units",
+          condition: { morethan: [{ read: ["units", ["start"], "lvl"] }, 3] },
+          tolayer: "oppconquerwith3",
+        },
+        {
+          unlessover: "units",
+          condition: { morethan: [{ read: ["units", ["start"], "lvl"] }, 2] },
+          tolayer: "oppconquerwith2",
+        },
+        {
+          unlessover: "units",
+          tolayer: "oppconquerwith1",
         },
       ],
     },
@@ -121,6 +202,29 @@ const erdoslatinoGenerators: ErdoslatinoDefinition["generators"] = {
       ],
     },
   },
+  findoppupwardends: {
+    type: "walker",
+    starts: { intersect: ["oppupwards", "currentcolumn"] },
+    dir: { playercase: [5, 1] },
+    draw: {
+      steps: [
+        {
+          unlessover: "units",
+          condition: { lessthan: [{ read: ["units", ["start"], "lvl"] }, 3] },
+          tolayer: "oppconquerwith3",
+        },
+        {
+          unlessover: "units",
+          condition: { lessthan: [{ read: ["units", ["start"], "lvl"] }, 4] },
+          tolayer: "oppconquerwith4",
+        },
+        {
+          unlessover: "units",
+          tolayer: "oppconquerwith5",
+        },
+      ],
+    },
+  },
   findvisibilities: {
     type: "walker",
     starts: "units",
@@ -133,6 +237,7 @@ const erdoslatinoGenerators: ErdoslatinoDefinition["generators"] = {
             { noneat: ["neutralunits", ["start"]] },
           ],
         },
+        unlessover: "ownedcolumns",
         tolayer: "ownedcolumns",
         include: {
           owner: { read: ["units", ["start"], "owner"] },
@@ -222,6 +327,24 @@ const erdoslatinoGenerators: ErdoslatinoDefinition["generators"] = {
               { same: [["dir"], { playercase: [5, 1] }] },
               { anyat: ["units", ["target"]] },
               {
+                morethan: [
+                  { read: ["units", ["target"], "lvl"] },
+                  { read: ["units", ["start"], "lvl"] },
+                ],
+              },
+            ],
+          },
+          tolayer: "oppupwards",
+          include: {
+            lvl: { read: ["units", ["target"], "lvl"] },
+          },
+        },
+        {
+          condition: {
+            and: [
+              { same: [["dir"], { playercase: [5, 1] }] },
+              { anyat: ["units", ["target"]] },
+              {
                 lessthan: [
                   { read: ["units", ["target"], "lvl"] },
                   { read: ["units", ["start"], "lvl"] },
@@ -230,6 +353,24 @@ const erdoslatinoGenerators: ErdoslatinoDefinition["generators"] = {
             ],
           },
           tolayer: "downwards",
+          include: {
+            lvl: { read: ["units", ["target"], "lvl"] },
+          },
+        },
+        {
+          condition: {
+            and: [
+              { same: [["dir"], { playercase: [1, 5] }] },
+              { anyat: ["units", ["target"]] },
+              {
+                lessthan: [
+                  { read: ["units", ["target"], "lvl"] },
+                  { read: ["units", ["start"], "lvl"] },
+                ],
+              },
+            ],
+          },
+          tolayer: "oppdownwards",
           include: {
             lvl: { read: ["units", ["target"], "lvl"] },
           },

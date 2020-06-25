@@ -38,18 +38,28 @@ type ErdoslatinoUnitLayer =
 type ErdoslatinoGenerator =
   | "findchosencolumn"
   | "findmiddle2"
+  | "findoppmiddle2"
   | "findmiddle3"
+  | "findoppmiddle3"
   | "findmiddle4"
+  | "findoppmiddle4"
   | "finddownwardends"
+  | "findoppdownwardends"
   | "findupwardends"
+  | "findoppupwardends"
   | "findvisibilities";
 type ErdoslatinoArtifactLayer =
   | "currentcolumn"
   | "conquerwith2"
+  | "oppconquerwith2"
   | "conquerwith3"
+  | "oppconquerwith3"
   | "conquerwith4"
+  | "oppconquerwith4"
   | "conquerwith1"
+  | "oppconquerwith1"
   | "conquerwith5"
+  | "oppconquerwith5"
   | "ownedcolumns"
   | "myownedcolumns"
   | "oppownedcolumns"
@@ -75,7 +85,9 @@ type ErdoslatinoArtifactLayer =
   | "opptakencolumn"
   | "neutraltakencolumn"
   | "upwards"
-  | "downwards";
+  | "oppupwards"
+  | "downwards"
+  | "oppdownwards";
 type ErdoslatinoTerrainLayer = never;
 type ErdoslatinoLayer =
   | CommonLayer

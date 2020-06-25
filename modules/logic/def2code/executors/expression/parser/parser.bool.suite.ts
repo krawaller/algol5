@@ -22,6 +22,8 @@ export const testSuite: AlgolExpressionSuite<
             { expr: { morethan: [{ value: 3 }, { value: 4 }] }, res: false },
             { expr: { morethan: [{ value: 3 }, { value: 3 }] }, res: false },
             { expr: { morethan: [{ value: 3 }, { value: 2 }] }, res: true },
+            { expr: { hascommonbits: [4, 1] }, res: false },
+            { expr: { hascommonbits: [5, 1] }, res: true },
             {
               expr: { indexlist: [{ minus: [2, 1] }, ["true"], ["false"]] },
               res: false,

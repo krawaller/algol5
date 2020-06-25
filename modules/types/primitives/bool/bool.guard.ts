@@ -172,7 +172,7 @@ export function isAlgolBoolFalsyPos(
   return (expr as AlgolBoolFalsyPosAnon).falsypos !== undefined;
 }
 
-export function isAlgolHasCommonBits(
+export function isAlgolBoolHasCommonBits(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolHasCommonBitsAnon {
   return (expr as AlgolBoolHasCommonBitsAnon).hascommonbits !== undefined;

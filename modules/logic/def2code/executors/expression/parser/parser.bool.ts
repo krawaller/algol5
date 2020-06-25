@@ -26,6 +26,7 @@ import {
   isAlgolBoolStoppedBecause,
   isAlgolBoolFalsyPos,
   isAlgolBoolTruthyPos,
+  isAlgolBoolHasCommonBits,
 } from "../../../../../types";
 
 import { makeParser } from "../";
@@ -183,4 +184,11 @@ export default function parseVal(
     const { diag: val } = expr;
     return `diagDirs.indexOf(${parser.val(val)}) !== -1`;
   }
+  if (isAlgolBoolHasCommonBits(expr)) {
+    const {
+      hascommonbits: [first, second],
+    } = expr;
+    return `Boolean(${parser.val(first)} & ${parser.val(second)})`;
+  }
+  throw new Error("Unknown bool expression: " + JSON.stringify(expr || {}));
 }

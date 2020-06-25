@@ -27,6 +27,10 @@ import {
   isAlgolBoolFalsyPos,
   isAlgolBoolTruthyPos,
   isAlgolBoolHasCommonBits,
+  isAlgolBoolUphill,
+  isAlgolBoolDownhill,
+  isAlgolBoolHorisontal,
+  isAlgolBoolVertical,
 } from "../../../../../types";
 
 import { makeParser } from "../";
@@ -183,6 +187,22 @@ export default function parseVal(
   if (isAlgolBoolDiag(expr)) {
     const { diag: val } = expr;
     return `diagDirs.indexOf(${parser.val(val)}) !== -1`;
+  }
+  if (isAlgolBoolUphill(expr)) {
+    const { uphill: val } = expr;
+    return `(${parser.val(val)} === 2 || ${parser.val(val)} === 6)`;
+  }
+  if (isAlgolBoolDownhill(expr)) {
+    const { downhill: val } = expr;
+    return `(${parser.val(val)} ===  8|| ${parser.val(val)} === 4)`;
+  }
+  if (isAlgolBoolHorisontal(expr)) {
+    const { horisontal: val } = expr;
+    return `(${parser.val(val)} ===  3|| ${parser.val(val)} === 7)`;
+  }
+  if (isAlgolBoolVertical(expr)) {
+    const { vertical: val } = expr;
+    return `(${parser.val(val)} ===  1|| ${parser.val(val)} === 5)`;
   }
   if (isAlgolBoolHasCommonBits(expr)) {
     const {

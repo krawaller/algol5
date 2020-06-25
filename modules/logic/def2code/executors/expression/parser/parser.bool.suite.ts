@@ -15,7 +15,9 @@ export const testSuite: AlgolExpressionSuite<
       action: "someaction",
       contexts: [
         {
-          context: {},
+          context: {
+            DIR: 2,
+          },
           tests: [
             { expr: ["true"], res: true },
             { expr: ["false"], res: false },
@@ -24,6 +26,13 @@ export const testSuite: AlgolExpressionSuite<
             { expr: { morethan: [{ value: 3 }, { value: 2 }] }, res: true },
             { expr: { hascommonbits: [4, 1] }, res: false },
             { expr: { hascommonbits: [5, 1] }, res: true },
+            { expr: { uphill: ["dir"] }, res: true },
+            { expr: { downhill: ["dir"] }, res: false },
+            { expr: { downhill: 8 }, res: true },
+            { expr: { downhill: 4 }, res: true },
+            { expr: { horisontal: 3 }, res: true },
+            { expr: { horisontal: 2 }, res: false },
+            { expr: { vertical: 1 }, res: true },
             {
               expr: { indexlist: [{ minus: [2, 1] }, ["true"], ["false"]] },
               res: false,

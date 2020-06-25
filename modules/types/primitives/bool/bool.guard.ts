@@ -25,6 +25,7 @@ import {
   AlgolBoolTruthyPosAnon,
   AlgolBoolFalsyPosAnon,
   AlgolBoolLessThanAnon,
+  AlgolBoolHasCommonBitsAnon,
 } from "./bool.anon";
 
 export function isAlgolBoolNot(expr: AlgolBoolAnon): expr is AlgolBoolNotAnon {
@@ -169,4 +170,10 @@ export function isAlgolBoolFalsyPos(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolFalsyPosAnon {
   return (expr as AlgolBoolFalsyPosAnon).falsypos !== undefined;
+}
+
+export function isAlgolHasCommonBits(
+  expr: AlgolBoolAnon
+): expr is AlgolBoolHasCommonBitsAnon {
+  return (expr as AlgolBoolHasCommonBitsAnon).hascommonbits !== undefined;
 }

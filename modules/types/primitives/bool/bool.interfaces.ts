@@ -104,3 +104,7 @@ export interface AlgolBoolTruthyPos<Blob extends AlgolGameBlobAnon> {
 export interface AlgolBoolFalsyPos<Blob extends AlgolGameBlobAnon> {
   falsypos: AlgolPos<Blob>;
 }
+
+export interface AlgolBoolHasCommonBits<Blob extends AlgolGameBlobAnon> {
+  hascommonbits: [AlgolVal<Blob, number>, AlgolVal<Blob, number>];
+}

@@ -93,6 +93,22 @@ export interface AlgolBoolDiag<Blob extends AlgolGameBlobAnon> {
   diag: AlgolVal<Blob, string | number>;
 }
 
+export interface AlgolBoolUphill<Blob extends AlgolGameBlobAnon> {
+  uphill: AlgolVal<Blob, string | number>;
+}
+
+export interface AlgolBoolDownhill<Blob extends AlgolGameBlobAnon> {
+  downhill: AlgolVal<Blob, string | number>;
+}
+
+export interface AlgolBoolHorisontal<Blob extends AlgolGameBlobAnon> {
+  horisontal: AlgolVal<Blob, string | number>;
+}
+
+export interface AlgolBoolVertical<Blob extends AlgolGameBlobAnon> {
+  vertical: AlgolVal<Blob, string | number>;
+}
+
 export interface AlgolBoolStoppedBecause<Blob extends AlgolGameBlobAnon> {
   stoppedBecause: AlgolVal<Blob, AlgolWalkerStop>;
 }

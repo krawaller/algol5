@@ -18,6 +18,7 @@ import {
   isAlgolValLoopRead,
   isAlgolValPosX,
   isAlgolValPosY,
+  isAlgolValAddTo,
 } from "../../../../../types";
 
 import { makeParser } from "../";
@@ -112,6 +113,14 @@ export default function parseVal(
       : `[${parsedProp}]`;
     return `(${parser.set(layer)}${posLookup}||{})${propLookup}`;
   }
+  if (isAlgolValAddTo(expr)) {
+    const {
+      addto: [layer, pos, prop, val],
+    } = expr;
+    return `(${parser.val({ read: [layer, pos, prop] })} || 0) + ${parser.val(
+      val
+    )}`;
+  }
   if (isAlgolValIdAt(expr)) {
     const { idat: pos } = expr;
     return parser.val({ read: ["units", pos, "id"] });
@@ -164,4 +173,5 @@ export default function parseVal(
     const { posy: pos } = expr;
     return `BOARD.board[${parser.pos(pos)}].y`;
   }
+  throw new Error("Unknown val expression: " + JSON.stringify(expr || ""));
 }

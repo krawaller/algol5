@@ -63,7 +63,11 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
             MARKS: { mymark: "a1" },
             UNITLAYERS: { units: { a1: { id: 666 } } },
           },
-          tests: [{ expr: { idat: "mymark" }, res: 666 }],
+          tests: [
+            { expr: { idat: "mymark" }, res: 666 },
+            { expr: { addto: ["units", "mymark", "id", 1] }, res: 667 },
+            { expr: { addto: ["units", "mymark", "poop", 7] }, res: 7 },
+          ],
         },
         {
           context: {

@@ -3,7 +3,7 @@ import { ErdoslatinoDefinition } from "./_types";
 const erdoslatinoMeta: ErdoslatinoDefinition["meta"] = {
   id: "erdoslatino",
   name: "Erdös Latino",
-  author: "Jorge Nuño Silva",
+  author: "Jorge Nuno Silva",
   tags: ["irreversible"],
   tagline: "Latin squares on the battlefield!",
   source:

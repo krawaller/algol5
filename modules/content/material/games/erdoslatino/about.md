@@ -2,7 +2,7 @@
 updated: 2020-06-24
 ---
 
-{GAME} was invented by Jorge Nuños Silva in 2011. It has been published by LuduScience.
+{GAME} was invented by Jorge Nuno Silva in 2011. It has been published by LuduScience.
 
 {PIC:name=erdosbook.jpg,title=From "The boy who loved math",cred=Pic by BoingBoing,credurl=https://boingboing.net/2013/06/25/the-boy-who-loved-math-th.html}
 

@@ -2,7 +2,7 @@ import { ErdoslatinoDefinition } from "./_types";
 
 const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
   endGame: {
-    dominance: {
+    columncount: {
       condition: {
         same: [{ sizeof: "board" }, { sizeof: "units" }],
       },

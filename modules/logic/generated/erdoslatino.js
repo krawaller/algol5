@@ -1266,7 +1266,7 @@ const game = {
             ? 2
             : 0
         ];
-        LINKS.endedBy = "dominance";
+        LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
           Object.keys(ARTIFACTS.myownedcolumns).length >
             Object.keys(ARTIFACTS.oppownedcolumns).length
@@ -1399,7 +1399,7 @@ const game = {
             ? 2
             : 0
         ];
-        LINKS.endedBy = "dominance";
+        LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
           Object.keys(ARTIFACTS.myownedcolumns).length >
             Object.keys(ARTIFACTS.oppownedcolumns).length
@@ -1532,7 +1532,7 @@ const game = {
             ? 2
             : 0
         ];
-        LINKS.endedBy = "dominance";
+        LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
           Object.keys(ARTIFACTS.myownedcolumns).length >
             Object.keys(ARTIFACTS.oppownedcolumns).length
@@ -1665,7 +1665,7 @@ const game = {
             ? 2
             : 0
         ];
-        LINKS.endedBy = "dominance";
+        LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
           Object.keys(ARTIFACTS.myownedcolumns).length >
             Object.keys(ARTIFACTS.oppownedcolumns).length
@@ -1798,7 +1798,7 @@ const game = {
             ? 2
             : 0
         ];
-        LINKS.endedBy = "dominance";
+        LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
           Object.keys(ARTIFACTS.myownedcolumns).length >
             Object.keys(ARTIFACTS.oppownedcolumns).length
@@ -1931,7 +1931,7 @@ const game = {
             ? 1
             : 0
         ];
-        LINKS.endedBy = "dominance";
+        LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
           Object.keys(ARTIFACTS.myownedcolumns).length >
             Object.keys(ARTIFACTS.oppownedcolumns).length
@@ -2064,7 +2064,7 @@ const game = {
             ? 1
             : 0
         ];
-        LINKS.endedBy = "dominance";
+        LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
           Object.keys(ARTIFACTS.myownedcolumns).length >
             Object.keys(ARTIFACTS.oppownedcolumns).length
@@ -2197,7 +2197,7 @@ const game = {
             ? 1
             : 0
         ];
-        LINKS.endedBy = "dominance";
+        LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
           Object.keys(ARTIFACTS.myownedcolumns).length >
             Object.keys(ARTIFACTS.oppownedcolumns).length
@@ -2330,7 +2330,7 @@ const game = {
             ? 1
             : 0
         ];
-        LINKS.endedBy = "dominance";
+        LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
           Object.keys(ARTIFACTS.myownedcolumns).length >
             Object.keys(ARTIFACTS.oppownedcolumns).length
@@ -2463,7 +2463,7 @@ const game = {
             ? 1
             : 0
         ];
-        LINKS.endedBy = "dominance";
+        LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
           Object.keys(ARTIFACTS.myownedcolumns).length >
             Object.keys(ARTIFACTS.oppownedcolumns).length

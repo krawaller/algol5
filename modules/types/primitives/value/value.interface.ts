@@ -12,6 +12,15 @@ export interface AlgolValRead<Blob extends AlgolGameBlobAnon> {
   read: [AlgolSet<Blob>, AlgolPos<Blob>, AlgolVal<Blob, string>];
 }
 
+export interface AlgolValAddTo<Blob extends AlgolGameBlobAnon> {
+  addto: [
+    AlgolSet<Blob>,
+    AlgolPos<Blob>,
+    AlgolVal<Blob, string>,
+    AlgolVal<Blob, number>
+  ];
+}
+
 export interface AlgolValLoopRead<Blob extends AlgolGameBlobAnon> {
   loopread: AlgolVal<Blob, string>;
 }

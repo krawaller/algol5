@@ -18,6 +18,7 @@ import {
   AlgolValLoopRead,
   AlgolValPosX,
   AlgolValPosY,
+  AlgolValAddTo,
 } from "./value.interface";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -44,3 +45,4 @@ export type AlgolValMinusAnon = AlgolValMinus<AlgolGameBlobAnon>;
 export type AlgolValLoopReadAnon = AlgolValLoopRead<AlgolGameBlobAnon>;
 export type AlgolValPosXAnon = AlgolValPosX<AlgolGameBlobAnon>;
 export type AlgolValPosYAnon = AlgolValPosY<AlgolGameBlobAnon>;
+export type AlgolValAddToAnon = AlgolValAddTo<AlgolGameBlobAnon>;

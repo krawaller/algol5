@@ -17,6 +17,7 @@ import {
   AlgolValLoopReadAnon,
   AlgolValPosXAnon,
   AlgolValPosYAnon,
+  AlgolValAddToAnon,
 } from "./value.anon";
 
 export function isAlgolValValue(expr: AlgolValAnon): expr is AlgolValValueAnon {
@@ -101,4 +102,8 @@ export function isAlgolValPosX(expr: AlgolValAnon): expr is AlgolValPosXAnon {
 
 export function isAlgolValPosY(expr: AlgolValAnon): expr is AlgolValPosYAnon {
   return (expr as AlgolValPosYAnon).posy !== undefined;
+}
+
+export function isAlgolValAddTo(expr: AlgolValAnon): expr is AlgolValAddToAnon {
+  return (expr as AlgolValAddToAnon).addto !== undefined;
 }

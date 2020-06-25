@@ -23,6 +23,7 @@ import {
   AlgolValPosX,
   AlgolValPosY,
   AlgolValAddTo,
+  AlgolValAddBitsTo,
 } from "./value.interface";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -65,4 +66,5 @@ type AlgolValInner<Blob extends AlgolGameBlobAnon, _T> =
   | AlgolValLoopRead<Blob>
   | AlgolValPosX<Blob>
   | AlgolValPosY<Blob>
-  | AlgolValAddTo<Blob>;
+  | AlgolValAddTo<Blob>
+  | AlgolValAddBitsTo<Blob>;

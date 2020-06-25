@@ -19,6 +19,7 @@ import {
   isAlgolValPosX,
   isAlgolValPosY,
   isAlgolValAddTo,
+  isAlgolValAddBitsTo,
 } from "../../../../../types";
 
 import { makeParser } from "../";
@@ -120,6 +121,12 @@ export default function parseVal(
     return `(${parser.val({ read: [layer, pos, prop] })} || 0) + ${parser.val(
       val
     )}`;
+  }
+  if (isAlgolValAddBitsTo(expr)) {
+    const {
+      addbitsto: [layer, pos, prop, val],
+    } = expr;
+    return `(${parser.val({ read: [layer, pos, prop] })} | ${parser.val(val)})`;
   }
   if (isAlgolValIdAt(expr)) {
     const { idat: pos } = expr;

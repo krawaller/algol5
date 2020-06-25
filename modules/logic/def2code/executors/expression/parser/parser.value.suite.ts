@@ -61,12 +61,14 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
         {
           context: {
             MARKS: { mymark: "a1" },
-            UNITLAYERS: { units: { a1: { id: 666 } } },
+            UNITLAYERS: { units: { a1: { id: 666, gnarp: 5 } } },
           },
           tests: [
             { expr: { idat: "mymark" }, res: 666 },
             { expr: { addto: ["units", "mymark", "id", 1] }, res: 667 },
             { expr: { addto: ["units", "mymark", "poop", 7] }, res: 7 },
+            { expr: { addbitsto: ["units", "mymark", "gnarp", 1] }, res: 5 },
+            { expr: { addbitsto: ["units", "mymark", "gnarp", 2] }, res: 7 },
           ],
         },
         {

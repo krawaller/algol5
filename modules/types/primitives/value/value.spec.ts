@@ -17,6 +17,7 @@ const tests: TestVal[] = [
   { playercase: ["FOO", "BAR"] },
   { read: ["mylayer", "mymark", "someProp"] },
   { addto: ["mylayer", "mymark", "someProp", 7] },
+  { addbitsto: ["mylayer", "mymark", "someProp", 7] },
   { loopread: "poo" },
   { battlevar: "mybattlev" },
   { turnvar: "myturnv" },

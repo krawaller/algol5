@@ -18,6 +18,7 @@ import {
   AlgolValPosXAnon,
   AlgolValPosYAnon,
   AlgolValAddToAnon,
+  AlgolValAddBitsToAnon,
 } from "./value.anon";
 
 export function isAlgolValValue(expr: AlgolValAnon): expr is AlgolValValueAnon {
@@ -106,4 +107,10 @@ export function isAlgolValPosY(expr: AlgolValAnon): expr is AlgolValPosYAnon {
 
 export function isAlgolValAddTo(expr: AlgolValAnon): expr is AlgolValAddToAnon {
   return (expr as AlgolValAddToAnon).addto !== undefined;
+}
+
+export function isAlgolValAddBitsTo(
+  expr: AlgolValAnon
+): expr is AlgolValAddBitsToAnon {
+  return (expr as AlgolValAddBitsToAnon).addbitsto !== undefined;
 }

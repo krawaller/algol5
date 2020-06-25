@@ -32,6 +32,8 @@ const groupLayers2 = {
     ["units", "myunits", "soldiers"]
   ]
 };
+const prefixes1 = ["neutral", "my", "opp"];
+const prefixes2 = ["neutral", "opp", "my"];
 const emptyArtifactLayers_basic = {
   FOOBAR: {},
   vertical: {},

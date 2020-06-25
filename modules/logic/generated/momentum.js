@@ -32,6 +32,8 @@ const groupLayers2 = {
     ["units", "myunits", "stones"]
   ]
 };
+const prefixes1 = ["neutral", "my", "opp"];
+const prefixes2 = ["neutral", "opp", "my"];
 const emptyArtifactLayers_basic = { doomed: {}, pushed: {} };
 const game = {
   gameId: "momentum",

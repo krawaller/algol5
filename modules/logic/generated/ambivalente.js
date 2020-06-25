@@ -32,6 +32,8 @@ const groupLayers2 = {
     ["units", "myunits", "pawns"]
   ]
 };
+const prefixes1 = ["neutral", "my", "opp"];
+const prefixes2 = ["neutral", "opp", "my"];
 const emptyArtifactLayers_basic = { touchedfoes: {}, victims: {} };
 const game = {
   gameId: "ambivalente",

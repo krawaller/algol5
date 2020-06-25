@@ -42,6 +42,8 @@ const groupLayers2 = {
     ["units", "myunits", "mysoldiers"]
   ]
 };
+const prefixes1 = ["neutral", "my", "opp"];
+const prefixes2 = ["neutral", "opp", "my"];
 const game = {
   gameId: "gogol",
   commands: { deploy: {}, move: {}, jump: {} },
@@ -387,15 +389,17 @@ const game = {
         selectunit: step.MARKS.selectunit,
         selectjumptarget: newMarkPos
       };
-      let filtersourcelayer = ARTIFACTS.willdie;
-      let filtertargetlayer = ARTIFACTS.splashed;
-      for (let POS in filtersourcelayer) {
-        let filterObj = filtersourcelayer[POS];
-        if (
-          filterObj.dir ===
-          (ARTIFACTS.jumptargets[MARKS.selectjumptarget] || {}).dir
-        ) {
-          filtertargetlayer[POS] = filterObj;
+      {
+        let filtersourcelayer = ARTIFACTS.willdie;
+        let filtertargetlayer = ARTIFACTS.splashed;
+        for (let POS in filtersourcelayer) {
+          let filterObj = filtersourcelayer[POS];
+          if (
+            filterObj.dir ===
+            (ARTIFACTS.jumptargets[MARKS.selectjumptarget] || {}).dir
+          ) {
+            filtertargetlayer[POS] = filterObj;
+          }
         }
       }
       LINKS.commands.jump = "jump_basic_1";
@@ -548,15 +552,17 @@ const game = {
         selectunit: step.MARKS.selectunit,
         selectjumptarget: newMarkPos
       };
-      let filtersourcelayer = ARTIFACTS.willdie;
-      let filtertargetlayer = ARTIFACTS.splashed;
-      for (let POS in filtersourcelayer) {
-        let filterObj = filtersourcelayer[POS];
-        if (
-          filterObj.dir ===
-          (ARTIFACTS.jumptargets[MARKS.selectjumptarget] || {}).dir
-        ) {
-          filtertargetlayer[POS] = filterObj;
+      {
+        let filtersourcelayer = ARTIFACTS.willdie;
+        let filtertargetlayer = ARTIFACTS.splashed;
+        for (let POS in filtersourcelayer) {
+          let filterObj = filtersourcelayer[POS];
+          if (
+            filterObj.dir ===
+            (ARTIFACTS.jumptargets[MARKS.selectjumptarget] || {}).dir
+          ) {
+            filtertargetlayer[POS] = filterObj;
+          }
         }
       }
       LINKS.commands.jump = "jump_basic_2";

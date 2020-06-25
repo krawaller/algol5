@@ -67,6 +67,8 @@ const groupLayers2 = {
     ["units", "myunits", "lvl0", "mylvl0"]
   ]
 };
+const prefixes1 = ["neutral", "my", "opp"];
+const prefixes2 = ["neutral", "opp", "my"];
 const emptyArtifactLayers_basic = {
   movetargets: {},
   digtargets: {},

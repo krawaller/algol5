@@ -42,6 +42,8 @@ const groupLayers2 = {
     ["units", "myunits", "marks"]
   ]
 };
+const prefixes1 = ["neutral", "my", "opp"];
+const prefixes2 = ["neutral", "opp", "my"];
 const game = {
   gameId: "campaign",
   commands: { deploy: {}, jump: {} },

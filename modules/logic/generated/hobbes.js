@@ -34,6 +34,8 @@ const groupLayers2 = {
   ],
   kings: [["units"], ["units", "oppunits"], ["units", "myunits"]]
 };
+const prefixes1 = ["neutral", "my", "opp"];
+const prefixes2 = ["neutral", "opp", "my"];
 const game = {
   gameId: "hobbes",
   commands: { move: {}, push: {}, pull: {} },

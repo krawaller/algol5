@@ -89,3 +89,11 @@ export interface AlgolValPosX<Blob extends AlgolGameBlobAnon> {
 export interface AlgolValPosY<Blob extends AlgolGameBlobAnon> {
   posy: AlgolPos<Blob>;
 }
+
+export interface AlgolValHighest<Blob extends AlgolGameBlobAnon> {
+  highest: AlgolVal<Blob, number>[];
+}
+
+export interface AlgolValLowest<Blob extends AlgolGameBlobAnon> {
+  lowest: AlgolVal<Blob, number>[];
+}

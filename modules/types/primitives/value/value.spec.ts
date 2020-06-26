@@ -52,4 +52,6 @@ const tests2: TestNumberVal[] = [
   { minus: [3, 4, ["totalcount"]] },
   { posx: "mymark" },
   { posy: "mymark" },
+  { highest: [5, { read: ["mylayer", "mymark", "someprop"] }, 7] },
+  { lowest: [5, { read: ["mylayer", "mymark", "someprop"] }, 2] },
 ];

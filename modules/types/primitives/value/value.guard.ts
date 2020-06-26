@@ -19,6 +19,8 @@ import {
   AlgolValPosYAnon,
   AlgolValAddToAnon,
   AlgolValAddBitsToAnon,
+  AlgolValHighestAnon,
+  AlgolValLowestAnon,
 } from "./value.anon";
 
 export function isAlgolValValue(expr: AlgolValAnon): expr is AlgolValValueAnon {
@@ -113,4 +115,16 @@ export function isAlgolValAddBitsTo(
   expr: AlgolValAnon
 ): expr is AlgolValAddBitsToAnon {
   return (expr as AlgolValAddBitsToAnon).addbitsto !== undefined;
+}
+
+export function isAlgolValHighest(
+  expr: AlgolValAnon
+): expr is AlgolValHighestAnon {
+  return (expr as AlgolValHighestAnon).highest !== undefined;
+}
+
+export function isAlgolValLowest(
+  expr: AlgolValAnon
+): expr is AlgolValLowestAnon {
+  return (expr as AlgolValLowestAnon).lowest !== undefined;
 }

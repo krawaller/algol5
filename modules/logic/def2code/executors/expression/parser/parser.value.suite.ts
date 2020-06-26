@@ -69,6 +69,28 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
             { expr: { addto: ["units", "mymark", "poop", 7] }, res: 7 },
             { expr: { addbitsto: ["units", "mymark", "gnarp", 1] }, res: 5 },
             { expr: { addbitsto: ["units", "mymark", "gnarp", 2] }, res: 7 },
+            {
+              expr: {
+                highest: [
+                  3,
+                  { read: ["units", "mymark", "gnarp"] },
+                  { read: ["units", "mymark", "nonexistent"] },
+                  4,
+                ],
+              },
+              res: 5,
+            },
+            {
+              expr: {
+                lowest: [
+                  3,
+                  { read: ["units", "mymark", "gnarp"] },
+                  { read: ["units", "mymark", "nonexistent"] },
+                  4,
+                ],
+              },
+              res: 3,
+            },
           ],
         },
         {

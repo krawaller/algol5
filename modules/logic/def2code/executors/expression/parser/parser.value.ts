@@ -20,6 +20,8 @@ import {
   isAlgolValPosY,
   isAlgolValAddTo,
   isAlgolValAddBitsTo,
+  isAlgolValHighest,
+  isAlgolValLowest,
 } from "../../../../../types";
 
 import { makeParser } from "../";
@@ -179,6 +181,16 @@ export default function parseVal(
   if (isAlgolValPosY(expr)) {
     const { posy: pos } = expr;
     return `BOARD.board[${parser.pos(pos)}].y`;
+  }
+  if (isAlgolValHighest(expr)) {
+    const { highest } = expr;
+    const nums = highest.map(n => parser.val(n)).join(", ");
+    return `Math.max.apply(null, [${nums}].filter(n => !isNaN(n)))`;
+  }
+  if (isAlgolValLowest(expr)) {
+    const { lowest } = expr;
+    const nums = lowest.map(n => parser.val(n)).join(", ");
+    return `Math.min.apply(null, [${nums}].filter(n => !isNaN(n)))`;
   }
   throw new Error("Unknown val expression: " + JSON.stringify(expr || ""));
 }

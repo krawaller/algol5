@@ -97,3 +97,15 @@ export interface AlgolValHighest<Blob extends AlgolGameBlobAnon> {
 export interface AlgolValLowest<Blob extends AlgolGameBlobAnon> {
   lowest: AlgolVal<Blob, number>[];
 }
+
+export interface AlgolValBitAnd<Blob extends AlgolGameBlobAnon> {
+  bitand: AlgolVal<Blob, number>[];
+}
+
+export interface AlgolValBitOr<Blob extends AlgolGameBlobAnon> {
+  bitor: AlgolVal<Blob, number>[];
+}
+
+export interface AlgolValBitDiff<Blob extends AlgolGameBlobAnon> {
+  bitdiff: AlgolVal<Blob, number>[];
+}

@@ -26,6 +26,9 @@ import {
   AlgolValAddBitsTo,
   AlgolValHighest,
   AlgolValLowest,
+  AlgolValBitAnd,
+  AlgolValBitDiff,
+  AlgolValBitOr,
 } from "./value.interface";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -71,4 +74,7 @@ type AlgolValInner<Blob extends AlgolGameBlobAnon, _T> =
   | AlgolValAddTo<Blob>
   | AlgolValAddBitsTo<Blob>
   | AlgolValHighest<Blob>
-  | AlgolValLowest<Blob>;
+  | AlgolValLowest<Blob>
+  | AlgolValBitAnd<Blob>
+  | AlgolValBitDiff<Blob>
+  | AlgolValBitOr<Blob>;

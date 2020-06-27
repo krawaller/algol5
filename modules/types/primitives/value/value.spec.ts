@@ -54,4 +54,7 @@ const tests2: TestNumberVal[] = [
   { posy: "mymark" },
   { highest: [5, { read: ["mylayer", "mymark", "someprop"] }, 7] },
   { lowest: [5, { read: ["mylayer", "mymark", "someprop"] }, 2] },
+  { bitand: [2, 3] },
+  { bitdiff: [2, 3] },
+  { bitor: [2, { sum: [1, 1] }] },
 ];

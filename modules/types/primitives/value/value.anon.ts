@@ -22,6 +22,9 @@ import {
   AlgolValAddBitsTo,
   AlgolValHighest,
   AlgolValLowest,
+  AlgolValBitAnd,
+  AlgolValBitDiff,
+  AlgolValBitOr,
 } from "./value.interface";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -52,3 +55,6 @@ export type AlgolValAddToAnon = AlgolValAddTo<AlgolGameBlobAnon>;
 export type AlgolValAddBitsToAnon = AlgolValAddBitsTo<AlgolGameBlobAnon>;
 export type AlgolValHighestAnon = AlgolValHighest<AlgolGameBlobAnon>;
 export type AlgolValLowestAnon = AlgolValLowest<AlgolGameBlobAnon>;
+export type AlgolValBitAndAnon = AlgolValBitAnd<AlgolGameBlobAnon>;
+export type AlgolValBitDiffAnon = AlgolValBitDiff<AlgolGameBlobAnon>;
+export type AlgolValBitOrAnon = AlgolValBitOr<AlgolGameBlobAnon>;

@@ -22,6 +22,9 @@ import {
   isAlgolValAddBitsTo,
   isAlgolValHighest,
   isAlgolValLowest,
+  isAlgolValBitAnd,
+  isAlgolValBitDiff,
+  isAlgolValBitOr,
 } from "../../../../../types";
 
 import { makeParser } from "../";
@@ -191,6 +194,21 @@ export default function parseVal(
     const { lowest } = expr;
     const nums = lowest.map(n => parser.val(n)).join(", ");
     return `Math.min.apply(null, [${nums}].filter(n => !isNaN(n)))`;
+  }
+  if (isAlgolValBitAnd(expr)) {
+    const { bitand } = expr;
+    const bits = bitand.map(n => parser.val(n)).join(" & ");
+    return `(${bits})`;
+  }
+  if (isAlgolValBitOr(expr)) {
+    const { bitor } = expr;
+    const bits = bitor.map(n => parser.val(n)).join(" | ");
+    return `(${bits})`;
+  }
+  if (isAlgolValBitDiff(expr)) {
+    const { bitdiff } = expr;
+    const bits = bitdiff.map(n => parser.val(n)).join(" & ~");
+    return `(${bits})`;
   }
   throw new Error("Unknown val expression: " + JSON.stringify(expr || ""));
 }

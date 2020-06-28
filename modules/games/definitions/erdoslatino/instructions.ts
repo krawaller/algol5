@@ -23,12 +23,26 @@ const erdoslatinoInstructions: ErdoslatinoDefinition["instructions"] = {
                           { read: ["takencolumn", "selecttarget", "owner"] },
                           {
                             ifelse: [
-                              { anyat: ["conquerwith1", "selecttarget"] },
+                              {
+                                hascommonbits: [
+                                  { read: ["conquer", "selecttarget", "by"] },
+                                  1,
+                                ],
+                              },
                               ["player"],
                               {
                                 ifelse: [
                                   {
-                                    anyat: ["oppconquerwith1", "selecttarget"],
+                                    hascommonbits: [
+                                      {
+                                        read: [
+                                          "oppconquer",
+                                          "selecttarget",
+                                          "by",
+                                        ],
+                                      },
+                                      1,
+                                    ],
                                   },
                                   ["otherplayer"],
                                   0,
@@ -60,12 +74,26 @@ const erdoslatinoInstructions: ErdoslatinoDefinition["instructions"] = {
                           { read: ["takencolumn", "selecttarget", "owner"] },
                           {
                             ifelse: [
-                              { anyat: ["conquerwith2", "selecttarget"] },
+                              {
+                                hascommonbits: [
+                                  { read: ["conquer", "selecttarget", "by"] },
+                                  2,
+                                ],
+                              },
                               ["player"],
                               {
                                 ifelse: [
                                   {
-                                    anyat: ["oppconquerwith2", "selecttarget"],
+                                    hascommonbits: [
+                                      {
+                                        read: [
+                                          "oppconquer",
+                                          "selecttarget",
+                                          "by",
+                                        ],
+                                      },
+                                      2,
+                                    ],
                                   },
                                   ["otherplayer"],
                                   0,
@@ -97,12 +125,26 @@ const erdoslatinoInstructions: ErdoslatinoDefinition["instructions"] = {
                           { read: ["takencolumn", "selecttarget", "owner"] },
                           {
                             ifelse: [
-                              { anyat: ["conquerwith3", "selecttarget"] },
+                              {
+                                hascommonbits: [
+                                  { read: ["conquer", "selecttarget", "by"] },
+                                  4,
+                                ],
+                              },
                               ["player"],
                               {
                                 ifelse: [
                                   {
-                                    anyat: ["oppconquerwith3", "selecttarget"],
+                                    hascommonbits: [
+                                      {
+                                        read: [
+                                          "oppconquer",
+                                          "selecttarget",
+                                          "by",
+                                        ],
+                                      },
+                                      4,
+                                    ],
                                   },
                                   ["otherplayer"],
                                   0,
@@ -134,12 +176,26 @@ const erdoslatinoInstructions: ErdoslatinoDefinition["instructions"] = {
                           { read: ["takencolumn", "selecttarget", "owner"] },
                           {
                             ifelse: [
-                              { anyat: ["conquerwith4", "selecttarget"] },
+                              {
+                                hascommonbits: [
+                                  { read: ["conquer", "selecttarget", "by"] },
+                                  8,
+                                ],
+                              },
                               ["player"],
                               {
                                 ifelse: [
                                   {
-                                    anyat: ["oppconquerwith4", "selecttarget"],
+                                    hascommonbits: [
+                                      {
+                                        read: [
+                                          "oppconquer",
+                                          "selecttarget",
+                                          "by",
+                                        ],
+                                      },
+                                      8,
+                                    ],
                                   },
                                   ["otherplayer"],
                                   0,
@@ -171,12 +227,26 @@ const erdoslatinoInstructions: ErdoslatinoDefinition["instructions"] = {
                           { read: ["takencolumn", "selecttarget", "owner"] },
                           {
                             ifelse: [
-                              { anyat: ["conquerwith5", "selecttarget"] },
+                              {
+                                hascommonbits: [
+                                  { read: ["conquer", "selecttarget", "by"] },
+                                  16,
+                                ],
+                              },
                               ["player"],
                               {
                                 ifelse: [
                                   {
-                                    anyat: ["oppconquerwith5", "selecttarget"],
+                                    hascommonbits: [
+                                      {
+                                        read: [
+                                          "oppconquer",
+                                          "selecttarget",
+                                          "by",
+                                        ],
+                                      },
+                                      16,
+                                    ],
                                   },
                                   ["otherplayer"],
                                   0,

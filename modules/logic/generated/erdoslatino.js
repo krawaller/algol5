@@ -116,30 +116,14 @@ const game = {
         myownedcolumns: {},
         oppownedcolumns: {},
         neutralownedcolumns: {},
-        FOOBAR: {},
-        sees1: {},
-        sees2: {},
-        sees3: {},
-        sees4: {},
-        sees5: {},
-        above1: {},
-        above2: {},
-        above3: {},
-        above4: {},
-        above5: {},
-        below1: {},
-        below2: {},
-        below3: {},
-        below4: {},
-        below5: {},
+        sees: {},
         takencolumn: {},
         mytakencolumn: {},
         opptakencolumn: {},
         neutraltakencolumn: {},
-        upwards: {},
-        oppupwards: {},
-        downwards: {},
-        oppdownwards: {}
+        almost: {},
+        conquer: {},
+        oppconquer: {}
       };
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
@@ -160,48 +144,43 @@ const game = {
             while ((POS = connections[POS][DIR])) {
               walkedsquares.push(POS);
               {
-                ARTIFACTS[
-                  ["FOOBAR", "sees1", "sees2", "sees3", "sees4", "sees5"][
-                    (UNITLAYERS.units[STARTPOS] || {}).lvl
-                  ]
-                ][POS] = emptyObj;
-              }
-              {
-                if (DIR === 1) {
-                  ARTIFACTS[
-                    [
-                      "FOOBAR",
-                      "above1",
-                      "above2",
-                      "above3",
-                      "above4",
-                      "above5"
-                    ][(UNITLAYERS.units[STARTPOS] || {}).lvl]
-                  ][POS] = emptyObj;
-                }
-              }
-              {
-                if (DIR === 5) {
-                  ARTIFACTS[
-                    [
-                      "FOOBAR",
-                      "below1",
-                      "below2",
-                      "below3",
-                      "below4",
-                      "below5"
-                    ][(UNITLAYERS.units[STARTPOS] || {}).lvl]
-                  ][POS] = emptyObj;
+                if (!UNITLAYERS.units[POS]) {
+                  ARTIFACTS.sees[POS] = {
+                    who:
+                      (ARTIFACTS.sees[POS] || {}).who |
+                      (UNITLAYERS.units[STARTPOS] || {}).bit,
+                    northof:
+                      DIR === 1
+                        ? Math.min.apply(
+                            null,
+                            [
+                              (ARTIFACTS.sees[POS] || {}).northof,
+                              (UNITLAYERS.units[STARTPOS] || {}).bottom
+                            ].filter(n => !isNaN(n))
+                          )
+                        : (ARTIFACTS.sees[POS] || {}).northof,
+                    southof:
+                      DIR === 5
+                        ? Math.max.apply(
+                            null,
+                            [
+                              (ARTIFACTS.sees[POS] || {}).southof,
+                              (UNITLAYERS.units[STARTPOS] || {}).top
+                            ].filter(n => !isNaN(n))
+                          )
+                        : (ARTIFACTS.sees[POS] || {}).southof
+                  };
                 }
               }
               {
                 if (
                   !UNITLAYERS.neutralunits[STARTPOS] &&
-                  (DIR === 1 || DIR === 5)
+                  (DIR === 1 || DIR === 5) &&
+                  !UNITLAYERS.units[POS]
                 ) {
                   let targetlayername = "takencolumn";
                   let artifact = {
-                    owner: UNITLAYERS.myunits[STARTPOS] ? 1 : 2
+                    owner: (UNITLAYERS.units[STARTPOS] || {}).owner
                   };
                   ARTIFACTS[targetlayername][POS] = ARTIFACTS[
                     prefixes1[artifact.owner] + targetlayername
@@ -210,49 +189,35 @@ const game = {
               }
               {
                 if (
-                  DIR === 1 &&
-                  UNITLAYERS.units[POS] &&
-                  (UNITLAYERS.units[POS] || {}).lvl >
-                    (UNITLAYERS.units[STARTPOS] || {}).lvl
+                  (DIR === 1 || DIR === 5) &&
+                  UNITLAYERS.neutralunits[POS] &&
+                  UNITLAYERS.neutralunits[STARTPOS]
                 ) {
-                  ARTIFACTS.upwards[POS] = {
-                    lvl: (UNITLAYERS.units[POS] || {}).lvl
-                  };
-                }
-              }
-              {
-                if (
-                  DIR === 5 &&
-                  UNITLAYERS.units[POS] &&
-                  (UNITLAYERS.units[POS] || {}).lvl >
-                    (UNITLAYERS.units[STARTPOS] || {}).lvl
-                ) {
-                  ARTIFACTS.oppupwards[POS] = {
-                    lvl: (UNITLAYERS.units[POS] || {}).lvl
-                  };
-                }
-              }
-              {
-                if (
-                  DIR === 5 &&
-                  UNITLAYERS.units[POS] &&
-                  (UNITLAYERS.units[POS] || {}).lvl <
-                    (UNITLAYERS.units[STARTPOS] || {}).lvl
-                ) {
-                  ARTIFACTS.downwards[POS] = {
-                    lvl: (UNITLAYERS.units[POS] || {}).lvl
-                  };
-                }
-              }
-              {
-                if (
-                  DIR === 1 &&
-                  UNITLAYERS.units[POS] &&
-                  (UNITLAYERS.units[POS] || {}).lvl <
-                    (UNITLAYERS.units[STARTPOS] || {}).lvl
-                ) {
-                  ARTIFACTS.oppdownwards[POS] = {
-                    lvl: (UNITLAYERS.units[POS] || {}).lvl
+                  ARTIFACTS.almost[POS] = {
+                    ascnorth:
+                      DIR === 1 &&
+                      (UNITLAYERS.units[POS] || {}).bit >
+                        (UNITLAYERS.units[STARTPOS] || {}).bit
+                        ? 1
+                        : (ARTIFACTS.almost[POS] || {}).ascnorth,
+                    descnorth:
+                      DIR === 1 &&
+                      (UNITLAYERS.units[POS] || {}).bit <
+                        (UNITLAYERS.units[STARTPOS] || {}).bit
+                        ? 1
+                        : (ARTIFACTS.almost[POS] || {}).descnorth,
+                    ascsouth:
+                      DIR === 5 &&
+                      (UNITLAYERS.units[POS] || {}).bit >
+                        (UNITLAYERS.units[STARTPOS] || {}).bit
+                        ? 1
+                        : (ARTIFACTS.almost[POS] || {}).ascsouth,
+                    descsouth:
+                      DIR === 5 &&
+                      (UNITLAYERS.units[POS] || {}).bit <
+                        (UNITLAYERS.units[STARTPOS] || {}).bit
+                        ? 1
+                        : (ARTIFACTS.almost[POS] || {}).descsouth
                   };
                 }
               }
@@ -273,6 +238,79 @@ const game = {
                 ] = ARTIFACTS[prefixes1[artifact.owner] + targetlayername][
                   walkedsquares[WALKLENGTH - 1]
                 ] = artifact;
+              }
+            }
+          }
+        }
+      }
+      {
+        for (let STARTPOS in ARTIFACTS.almost) {
+          for (let DIR of [1, 5]) {
+            let POS = STARTPOS;
+            while ((POS = connections[POS][DIR])) {
+              {
+                if (
+                  DIR === 5 &&
+                  !!(ARTIFACTS.sees[POS] || {}).northof &&
+                  !UNITLAYERS.units[POS]
+                ) {
+                  ARTIFACTS.conquer[POS] = {
+                    by:
+                      (ARTIFACTS.conquer[POS] || {}).by |
+                      (31 &
+                        ~(ARTIFACTS.sees[POS] || {}).northof &
+                        ~(UNITLAYERS.units[STARTPOS] || {}).top)
+                  };
+                }
+              }
+              {
+                if (
+                  DIR === 1 &&
+                  !!(ARTIFACTS.sees[POS] || {}).southof &&
+                  !UNITLAYERS.units[POS]
+                ) {
+                  ARTIFACTS.oppconquer[POS] = {
+                    by:
+                      (ARTIFACTS.oppconquer[POS] || {}).by |
+                      (31 &
+                        ~(ARTIFACTS.sees[POS] || {}).southof &
+                        ~(UNITLAYERS.units[STARTPOS] || {}).bottom)
+                  };
+                }
+              }
+              {
+                if (
+                  !!(ARTIFACTS.almost[STARTPOS] || {})[
+                    DIR === 1 ? "ascnorth" : "ascsouth"
+                  ] &&
+                  !UNITLAYERS.units[POS]
+                ) {
+                  ARTIFACTS[DIR === 1 ? "conquer" : "oppconquer"][POS] = {
+                    by:
+                      (
+                        (DIR === 1 ? ARTIFACTS.conquer : ARTIFACTS.oppconquer)[
+                          POS
+                        ] || {}
+                      ).by | (UNITLAYERS.units[STARTPOS] || {}).above
+                  };
+                }
+              }
+              {
+                if (
+                  !!(ARTIFACTS.almost[STARTPOS] || {})[
+                    DIR === 1 ? "descnorth" : "descsouth"
+                  ] &&
+                  !UNITLAYERS.units[POS]
+                ) {
+                  ARTIFACTS[DIR === 1 ? "oppconquer" : "conquer"][POS] = {
+                    by:
+                      (
+                        (DIR === 1 ? ARTIFACTS.oppconquer : ARTIFACTS.conquer)[
+                          POS
+                        ] || {}
+                      ).by | (UNITLAYERS.units[STARTPOS] || {}).below
+                  };
+                }
               }
             }
           }
@@ -304,30 +342,14 @@ const game = {
         myownedcolumns: {},
         oppownedcolumns: {},
         neutralownedcolumns: {},
-        FOOBAR: {},
-        sees1: {},
-        sees2: {},
-        sees3: {},
-        sees4: {},
-        sees5: {},
-        above1: {},
-        above2: {},
-        above3: {},
-        above4: {},
-        above5: {},
-        below1: {},
-        below2: {},
-        below3: {},
-        below4: {},
-        below5: {},
+        sees: {},
         takencolumn: {},
         mytakencolumn: {},
         opptakencolumn: {},
         neutraltakencolumn: {},
-        upwards: {},
-        oppupwards: {},
-        downwards: {},
-        oppdownwards: {}
+        almost: {},
+        conquer: {},
+        oppconquer: {}
       };
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
@@ -348,48 +370,43 @@ const game = {
             while ((POS = connections[POS][DIR])) {
               walkedsquares.push(POS);
               {
-                ARTIFACTS[
-                  ["FOOBAR", "sees1", "sees2", "sees3", "sees4", "sees5"][
-                    (UNITLAYERS.units[STARTPOS] || {}).lvl
-                  ]
-                ][POS] = emptyObj;
-              }
-              {
-                if (DIR === 5) {
-                  ARTIFACTS[
-                    [
-                      "FOOBAR",
-                      "above1",
-                      "above2",
-                      "above3",
-                      "above4",
-                      "above5"
-                    ][(UNITLAYERS.units[STARTPOS] || {}).lvl]
-                  ][POS] = emptyObj;
-                }
-              }
-              {
-                if (DIR === 1) {
-                  ARTIFACTS[
-                    [
-                      "FOOBAR",
-                      "below1",
-                      "below2",
-                      "below3",
-                      "below4",
-                      "below5"
-                    ][(UNITLAYERS.units[STARTPOS] || {}).lvl]
-                  ][POS] = emptyObj;
+                if (!UNITLAYERS.units[POS]) {
+                  ARTIFACTS.sees[POS] = {
+                    who:
+                      (ARTIFACTS.sees[POS] || {}).who |
+                      (UNITLAYERS.units[STARTPOS] || {}).bit,
+                    northof:
+                      DIR === 1
+                        ? Math.min.apply(
+                            null,
+                            [
+                              (ARTIFACTS.sees[POS] || {}).northof,
+                              (UNITLAYERS.units[STARTPOS] || {}).bottom
+                            ].filter(n => !isNaN(n))
+                          )
+                        : (ARTIFACTS.sees[POS] || {}).northof,
+                    southof:
+                      DIR === 5
+                        ? Math.max.apply(
+                            null,
+                            [
+                              (ARTIFACTS.sees[POS] || {}).southof,
+                              (UNITLAYERS.units[STARTPOS] || {}).top
+                            ].filter(n => !isNaN(n))
+                          )
+                        : (ARTIFACTS.sees[POS] || {}).southof
+                  };
                 }
               }
               {
                 if (
                   !UNITLAYERS.neutralunits[STARTPOS] &&
-                  (DIR === 1 || DIR === 5)
+                  (DIR === 1 || DIR === 5) &&
+                  !UNITLAYERS.units[POS]
                 ) {
                   let targetlayername = "takencolumn";
                   let artifact = {
-                    owner: UNITLAYERS.myunits[STARTPOS] ? 2 : 1
+                    owner: (UNITLAYERS.units[STARTPOS] || {}).owner
                   };
                   ARTIFACTS[targetlayername][POS] = ARTIFACTS[
                     prefixes2[artifact.owner] + targetlayername
@@ -398,49 +415,35 @@ const game = {
               }
               {
                 if (
-                  DIR === 5 &&
-                  UNITLAYERS.units[POS] &&
-                  (UNITLAYERS.units[POS] || {}).lvl >
-                    (UNITLAYERS.units[STARTPOS] || {}).lvl
+                  (DIR === 1 || DIR === 5) &&
+                  UNITLAYERS.neutralunits[POS] &&
+                  UNITLAYERS.neutralunits[STARTPOS]
                 ) {
-                  ARTIFACTS.upwards[POS] = {
-                    lvl: (UNITLAYERS.units[POS] || {}).lvl
-                  };
-                }
-              }
-              {
-                if (
-                  DIR === 1 &&
-                  UNITLAYERS.units[POS] &&
-                  (UNITLAYERS.units[POS] || {}).lvl >
-                    (UNITLAYERS.units[STARTPOS] || {}).lvl
-                ) {
-                  ARTIFACTS.oppupwards[POS] = {
-                    lvl: (UNITLAYERS.units[POS] || {}).lvl
-                  };
-                }
-              }
-              {
-                if (
-                  DIR === 1 &&
-                  UNITLAYERS.units[POS] &&
-                  (UNITLAYERS.units[POS] || {}).lvl <
-                    (UNITLAYERS.units[STARTPOS] || {}).lvl
-                ) {
-                  ARTIFACTS.downwards[POS] = {
-                    lvl: (UNITLAYERS.units[POS] || {}).lvl
-                  };
-                }
-              }
-              {
-                if (
-                  DIR === 5 &&
-                  UNITLAYERS.units[POS] &&
-                  (UNITLAYERS.units[POS] || {}).lvl <
-                    (UNITLAYERS.units[STARTPOS] || {}).lvl
-                ) {
-                  ARTIFACTS.oppdownwards[POS] = {
-                    lvl: (UNITLAYERS.units[POS] || {}).lvl
+                  ARTIFACTS.almost[POS] = {
+                    ascnorth:
+                      DIR === 1 &&
+                      (UNITLAYERS.units[POS] || {}).bit >
+                        (UNITLAYERS.units[STARTPOS] || {}).bit
+                        ? 1
+                        : (ARTIFACTS.almost[POS] || {}).ascnorth,
+                    descnorth:
+                      DIR === 1 &&
+                      (UNITLAYERS.units[POS] || {}).bit <
+                        (UNITLAYERS.units[STARTPOS] || {}).bit
+                        ? 1
+                        : (ARTIFACTS.almost[POS] || {}).descnorth,
+                    ascsouth:
+                      DIR === 5 &&
+                      (UNITLAYERS.units[POS] || {}).bit >
+                        (UNITLAYERS.units[STARTPOS] || {}).bit
+                        ? 1
+                        : (ARTIFACTS.almost[POS] || {}).ascsouth,
+                    descsouth:
+                      DIR === 5 &&
+                      (UNITLAYERS.units[POS] || {}).bit <
+                        (UNITLAYERS.units[STARTPOS] || {}).bit
+                        ? 1
+                        : (ARTIFACTS.almost[POS] || {}).descsouth
                   };
                 }
               }
@@ -461,6 +464,79 @@ const game = {
                 ] = ARTIFACTS[prefixes2[artifact.owner] + targetlayername][
                   walkedsquares[WALKLENGTH - 1]
                 ] = artifact;
+              }
+            }
+          }
+        }
+      }
+      {
+        for (let STARTPOS in ARTIFACTS.almost) {
+          for (let DIR of [1, 5]) {
+            let POS = STARTPOS;
+            while ((POS = connections[POS][DIR])) {
+              {
+                if (
+                  DIR === 5 &&
+                  !!(ARTIFACTS.sees[POS] || {}).northof &&
+                  !UNITLAYERS.units[POS]
+                ) {
+                  ARTIFACTS.conquer[POS] = {
+                    by:
+                      (ARTIFACTS.conquer[POS] || {}).by |
+                      (31 &
+                        ~(ARTIFACTS.sees[POS] || {}).northof &
+                        ~(UNITLAYERS.units[STARTPOS] || {}).top)
+                  };
+                }
+              }
+              {
+                if (
+                  DIR === 1 &&
+                  !!(ARTIFACTS.sees[POS] || {}).southof &&
+                  !UNITLAYERS.units[POS]
+                ) {
+                  ARTIFACTS.oppconquer[POS] = {
+                    by:
+                      (ARTIFACTS.oppconquer[POS] || {}).by |
+                      (31 &
+                        ~(ARTIFACTS.sees[POS] || {}).southof &
+                        ~(UNITLAYERS.units[STARTPOS] || {}).bottom)
+                  };
+                }
+              }
+              {
+                if (
+                  !!(ARTIFACTS.almost[STARTPOS] || {})[
+                    DIR === 1 ? "ascnorth" : "ascsouth"
+                  ] &&
+                  !UNITLAYERS.units[POS]
+                ) {
+                  ARTIFACTS[DIR === 1 ? "oppconquer" : "conquer"][POS] = {
+                    by:
+                      (
+                        (DIR === 1 ? ARTIFACTS.oppconquer : ARTIFACTS.conquer)[
+                          POS
+                        ] || {}
+                      ).by | (UNITLAYERS.units[STARTPOS] || {}).above
+                  };
+                }
+              }
+              {
+                if (
+                  !!(ARTIFACTS.almost[STARTPOS] || {})[
+                    DIR === 1 ? "descnorth" : "descsouth"
+                  ] &&
+                  !UNITLAYERS.units[POS]
+                ) {
+                  ARTIFACTS[DIR === 1 ? "conquer" : "oppconquer"][POS] = {
+                    by:
+                      (
+                        (DIR === 1 ? ARTIFACTS.conquer : ARTIFACTS.oppconquer)[
+                          POS
+                        ] || {}
+                      ).by | (UNITLAYERS.units[STARTPOS] || {}).below
+                  };
+                }
               }
             }
           }
@@ -492,329 +568,48 @@ const game = {
         myownedcolumns: step.ARTIFACTS.myownedcolumns,
         oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
         neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
-        FOOBAR: step.ARTIFACTS.FOOBAR,
-        sees1: step.ARTIFACTS.sees1,
-        sees2: step.ARTIFACTS.sees2,
-        sees3: step.ARTIFACTS.sees3,
-        sees4: step.ARTIFACTS.sees4,
-        sees5: step.ARTIFACTS.sees5,
-        above1: step.ARTIFACTS.above1,
-        above2: step.ARTIFACTS.above2,
-        above3: step.ARTIFACTS.above3,
-        above4: step.ARTIFACTS.above4,
-        above5: step.ARTIFACTS.above5,
-        below1: step.ARTIFACTS.below1,
-        below2: step.ARTIFACTS.below2,
-        below3: step.ARTIFACTS.below3,
-        below4: step.ARTIFACTS.below4,
-        below5: step.ARTIFACTS.below5,
+        sees: step.ARTIFACTS.sees,
         takencolumn: step.ARTIFACTS.takencolumn,
         mytakencolumn: step.ARTIFACTS.mytakencolumn,
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
-        upwards: step.ARTIFACTS.upwards,
-        oppupwards: step.ARTIFACTS.oppupwards,
-        downwards: step.ARTIFACTS.downwards,
-        oppdownwards: step.ARTIFACTS.oppdownwards,
-        currentcolumn: {},
-        conquerwith3: {},
-        conquerwith4: {},
-        conquerwith5: {},
-        conquerwith2: {},
-        conquerwith1: {},
-        oppconquerwith3: {},
-        oppconquerwith4: {},
-        oppconquerwith5: {},
-        oppconquerwith2: {},
-        oppconquerwith1: {}
+        almost: step.ARTIFACTS.almost,
+        conquer: step.ARTIFACTS.conquer,
+        oppconquer: step.ARTIFACTS.oppconquer,
+        currentcolumn: {}
       };
       let LINKS = { marks: {}, commands: {} };
       let MARKS = {
         selecttarget: newMarkPos
       };
-      let UNITLAYERS = step.UNITLAYERS;
-      if (!ARTIFACTS.takencolumn[MARKS.selecttarget]) {
-        {
-          for (let DIR of [1, 5]) {
-            let POS = "faux";
-            connections.faux[DIR] = MARKS.selecttarget;
-            while ((POS = connections[POS][DIR])) {
-              ARTIFACTS.currentcolumn[POS] = emptyObj;
-            }
-          }
-        }
-        {
-          for (let STARTPOS in Object.entries(
-            Object.keys(ARTIFACTS.upwards)
-              .concat(Object.keys(ARTIFACTS.currentcolumn))
-              .reduce((mem, k) => {
-                mem[k] = (mem[k] || 0) + 1;
-                return mem;
-              }, {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => {
-              mem[key] = emptyObj;
-              return mem;
-            }, {})) {
-            let POS = STARTPOS;
-            while ((POS = connections[POS][1])) {
-              {
-                if (
-                  (UNITLAYERS.units[STARTPOS] || {}).lvl < 3 &&
-                  !UNITLAYERS.units[POS]
-                ) {
-                  ARTIFACTS.conquerwith3[POS] = emptyObj;
-                }
-              }
-              {
-                if (
-                  (UNITLAYERS.units[STARTPOS] || {}).lvl < 4 &&
-                  !UNITLAYERS.units[POS]
-                ) {
-                  ARTIFACTS.conquerwith4[POS] = emptyObj;
-                }
-              }
-              {
-                if (!UNITLAYERS.units[POS]) {
-                  ARTIFACTS.conquerwith5[POS] = emptyObj;
-                }
-              }
-            }
-          }
-        }
-        {
-          for (let STARTPOS in Object.entries(
-            Object.keys(ARTIFACTS.downwards)
-              .concat(Object.keys(ARTIFACTS.currentcolumn))
-              .reduce((mem, k) => {
-                mem[k] = (mem[k] || 0) + 1;
-                return mem;
-              }, {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => {
-              mem[key] = emptyObj;
-              return mem;
-            }, {})) {
-            let POS = STARTPOS;
-            while ((POS = connections[POS][5])) {
-              {
-                if (
-                  (UNITLAYERS.units[STARTPOS] || {}).lvl > 3 &&
-                  !UNITLAYERS.units[POS]
-                ) {
-                  ARTIFACTS.conquerwith3[POS] = emptyObj;
-                }
-              }
-              {
-                if (
-                  (UNITLAYERS.units[STARTPOS] || {}).lvl > 2 &&
-                  !UNITLAYERS.units[POS]
-                ) {
-                  ARTIFACTS.conquerwith2[POS] = emptyObj;
-                }
-              }
-              {
-                if (!UNITLAYERS.units[POS]) {
-                  ARTIFACTS.conquerwith1[POS] = emptyObj;
-                }
-              }
-            }
-          }
-        }
-        {
-          let filtersourcelayer = ARTIFACTS.currentcolumn;
-          let filtertargetlayer = ARTIFACTS.conquerwith2;
-          for (let POS in filtersourcelayer) {
-            let filterObj = filtersourcelayer[POS];
-            if (
-              !UNITLAYERS.units[POS] &&
-              ARTIFACTS.above1[POS] &&
-              (ARTIFACTS.below3[POS] ||
-                ARTIFACTS.below4[POS] ||
-                ARTIFACTS.below5[POS])
-            ) {
-              filtertargetlayer[POS] = filterObj;
-            }
-          }
-        }
-        {
-          let filtersourcelayer = ARTIFACTS.currentcolumn;
-          let filtertargetlayer = ARTIFACTS.conquerwith3;
-          for (let POS in filtersourcelayer) {
-            let filterObj = filtersourcelayer[POS];
-            if (
-              !UNITLAYERS.units[POS] &&
-              (ARTIFACTS.above1[POS] || ARTIFACTS.above2[POS]) &&
-              (ARTIFACTS.below4[POS] || ARTIFACTS.below5[POS])
-            ) {
-              filtertargetlayer[POS] = filterObj;
-            }
-          }
-        }
-        {
-          let filtersourcelayer = ARTIFACTS.currentcolumn;
-          let filtertargetlayer = ARTIFACTS.conquerwith4;
-          for (let POS in filtersourcelayer) {
-            let filterObj = filtersourcelayer[POS];
-            if (
-              !UNITLAYERS.units[POS] &&
-              (ARTIFACTS.above1[POS] ||
-                ARTIFACTS.above2[POS] ||
-                ARTIFACTS.above3[POS]) &&
-              ARTIFACTS.below5[POS]
-            ) {
-              filtertargetlayer[POS] = filterObj;
-            }
-          }
-        }
-        {
-          for (let STARTPOS in Object.entries(
-            Object.keys(ARTIFACTS.oppupwards)
-              .concat(Object.keys(ARTIFACTS.currentcolumn))
-              .reduce((mem, k) => {
-                mem[k] = (mem[k] || 0) + 1;
-                return mem;
-              }, {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => {
-              mem[key] = emptyObj;
-              return mem;
-            }, {})) {
-            let POS = STARTPOS;
-            while ((POS = connections[POS][5])) {
-              {
-                if (
-                  (UNITLAYERS.units[STARTPOS] || {}).lvl < 3 &&
-                  !UNITLAYERS.units[POS]
-                ) {
-                  ARTIFACTS.oppconquerwith3[POS] = emptyObj;
-                }
-              }
-              {
-                if (
-                  (UNITLAYERS.units[STARTPOS] || {}).lvl < 4 &&
-                  !UNITLAYERS.units[POS]
-                ) {
-                  ARTIFACTS.oppconquerwith4[POS] = emptyObj;
-                }
-              }
-              {
-                if (!UNITLAYERS.units[POS]) {
-                  ARTIFACTS.oppconquerwith5[POS] = emptyObj;
-                }
-              }
-            }
-          }
-        }
-        {
-          for (let STARTPOS in Object.entries(
-            Object.keys(ARTIFACTS.oppdownwards)
-              .concat(Object.keys(ARTIFACTS.currentcolumn))
-              .reduce((mem, k) => {
-                mem[k] = (mem[k] || 0) + 1;
-                return mem;
-              }, {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => {
-              mem[key] = emptyObj;
-              return mem;
-            }, {})) {
-            let POS = STARTPOS;
-            while ((POS = connections[POS][1])) {
-              {
-                if (
-                  (UNITLAYERS.units[STARTPOS] || {}).lvl > 3 &&
-                  !UNITLAYERS.units[POS]
-                ) {
-                  ARTIFACTS.oppconquerwith3[POS] = emptyObj;
-                }
-              }
-              {
-                if (
-                  (UNITLAYERS.units[STARTPOS] || {}).lvl > 2 &&
-                  !UNITLAYERS.units[POS]
-                ) {
-                  ARTIFACTS.oppconquerwith2[POS] = emptyObj;
-                }
-              }
-              {
-                if (!UNITLAYERS.units[POS]) {
-                  ARTIFACTS.oppconquerwith1[POS] = emptyObj;
-                }
-              }
-            }
-          }
-        }
-        {
-          let filtersourcelayer = ARTIFACTS.currentcolumn;
-          let filtertargetlayer = ARTIFACTS.oppconquerwith2;
-          for (let POS in filtersourcelayer) {
-            let filterObj = filtersourcelayer[POS];
-            if (
-              !UNITLAYERS.units[POS] &&
-              ARTIFACTS.below1[POS] &&
-              (ARTIFACTS.above3[POS] ||
-                ARTIFACTS.above4[POS] ||
-                ARTIFACTS.above5[POS])
-            ) {
-              filtertargetlayer[POS] = filterObj;
-            }
-          }
-        }
-        {
-          let filtersourcelayer = ARTIFACTS.currentcolumn;
-          let filtertargetlayer = ARTIFACTS.oppconquerwith3;
-          for (let POS in filtersourcelayer) {
-            let filterObj = filtersourcelayer[POS];
-            if (
-              !UNITLAYERS.units[POS] &&
-              (ARTIFACTS.below1[POS] || ARTIFACTS.below2[POS]) &&
-              (ARTIFACTS.above4[POS] || ARTIFACTS.above5[POS])
-            ) {
-              filtertargetlayer[POS] = filterObj;
-            }
-          }
-        }
-        {
-          let filtersourcelayer = ARTIFACTS.currentcolumn;
-          let filtertargetlayer = ARTIFACTS.oppconquerwith4;
-          for (let POS in filtersourcelayer) {
-            let filterObj = filtersourcelayer[POS];
-            if (
-              !UNITLAYERS.units[POS] &&
-              (ARTIFACTS.below1[POS] ||
-                ARTIFACTS.below2[POS] ||
-                ARTIFACTS.below3[POS]) &&
-              ARTIFACTS.above5[POS]
-            ) {
-              filtertargetlayer[POS] = filterObj;
-            }
+      {
+        for (let DIR of [1, 5]) {
+          let POS = "faux";
+          connections.faux[DIR] = MARKS.selecttarget;
+          while ((POS = connections[POS][DIR])) {
+            ARTIFACTS.currentcolumn[POS] = emptyObj;
           }
         }
       }
-      if (!ARTIFACTS.sees1[MARKS.selecttarget]) {
+      if (!Boolean((ARTIFACTS.sees[MARKS.selecttarget] || {}).who & 1)) {
         LINKS.commands.place1 = "place1_basic_1";
       }
-      if (!ARTIFACTS.sees2[MARKS.selecttarget]) {
+      if (!Boolean((ARTIFACTS.sees[MARKS.selecttarget] || {}).who & 2)) {
         LINKS.commands.place2 = "place2_basic_1";
       }
-      if (!ARTIFACTS.sees3[MARKS.selecttarget]) {
+      if (!Boolean((ARTIFACTS.sees[MARKS.selecttarget] || {}).who & 4)) {
         LINKS.commands.place3 = "place3_basic_1";
       }
-      if (!ARTIFACTS.sees4[MARKS.selecttarget]) {
+      if (!Boolean((ARTIFACTS.sees[MARKS.selecttarget] || {}).who & 8)) {
         LINKS.commands.place4 = "place4_basic_1";
       }
-      if (!ARTIFACTS.sees5[MARKS.selecttarget]) {
+      if (!Boolean((ARTIFACTS.sees[MARKS.selecttarget] || {}).who & 16)) {
         LINKS.commands.place5 = "place5_basic_1";
       }
       return {
         LINKS,
         ARTIFACTS,
-        UNITLAYERS,
+        UNITLAYERS: step.UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
         MARKS,
@@ -827,329 +622,48 @@ const game = {
         myownedcolumns: step.ARTIFACTS.myownedcolumns,
         oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
         neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
-        FOOBAR: step.ARTIFACTS.FOOBAR,
-        sees1: step.ARTIFACTS.sees1,
-        sees2: step.ARTIFACTS.sees2,
-        sees3: step.ARTIFACTS.sees3,
-        sees4: step.ARTIFACTS.sees4,
-        sees5: step.ARTIFACTS.sees5,
-        above1: step.ARTIFACTS.above1,
-        above2: step.ARTIFACTS.above2,
-        above3: step.ARTIFACTS.above3,
-        above4: step.ARTIFACTS.above4,
-        above5: step.ARTIFACTS.above5,
-        below1: step.ARTIFACTS.below1,
-        below2: step.ARTIFACTS.below2,
-        below3: step.ARTIFACTS.below3,
-        below4: step.ARTIFACTS.below4,
-        below5: step.ARTIFACTS.below5,
+        sees: step.ARTIFACTS.sees,
         takencolumn: step.ARTIFACTS.takencolumn,
         mytakencolumn: step.ARTIFACTS.mytakencolumn,
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
-        upwards: step.ARTIFACTS.upwards,
-        oppupwards: step.ARTIFACTS.oppupwards,
-        downwards: step.ARTIFACTS.downwards,
-        oppdownwards: step.ARTIFACTS.oppdownwards,
-        currentcolumn: {},
-        conquerwith3: {},
-        conquerwith4: {},
-        conquerwith5: {},
-        conquerwith2: {},
-        conquerwith1: {},
-        oppconquerwith3: {},
-        oppconquerwith4: {},
-        oppconquerwith5: {},
-        oppconquerwith2: {},
-        oppconquerwith1: {}
+        almost: step.ARTIFACTS.almost,
+        conquer: step.ARTIFACTS.conquer,
+        oppconquer: step.ARTIFACTS.oppconquer,
+        currentcolumn: {}
       };
       let LINKS = { marks: {}, commands: {} };
       let MARKS = {
         selecttarget: newMarkPos
       };
-      let UNITLAYERS = step.UNITLAYERS;
-      if (!ARTIFACTS.takencolumn[MARKS.selecttarget]) {
-        {
-          for (let DIR of [1, 5]) {
-            let POS = "faux";
-            connections.faux[DIR] = MARKS.selecttarget;
-            while ((POS = connections[POS][DIR])) {
-              ARTIFACTS.currentcolumn[POS] = emptyObj;
-            }
-          }
-        }
-        {
-          for (let STARTPOS in Object.entries(
-            Object.keys(ARTIFACTS.upwards)
-              .concat(Object.keys(ARTIFACTS.currentcolumn))
-              .reduce((mem, k) => {
-                mem[k] = (mem[k] || 0) + 1;
-                return mem;
-              }, {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => {
-              mem[key] = emptyObj;
-              return mem;
-            }, {})) {
-            let POS = STARTPOS;
-            while ((POS = connections[POS][5])) {
-              {
-                if (
-                  (UNITLAYERS.units[STARTPOS] || {}).lvl < 3 &&
-                  !UNITLAYERS.units[POS]
-                ) {
-                  ARTIFACTS.conquerwith3[POS] = emptyObj;
-                }
-              }
-              {
-                if (
-                  (UNITLAYERS.units[STARTPOS] || {}).lvl < 4 &&
-                  !UNITLAYERS.units[POS]
-                ) {
-                  ARTIFACTS.conquerwith4[POS] = emptyObj;
-                }
-              }
-              {
-                if (!UNITLAYERS.units[POS]) {
-                  ARTIFACTS.conquerwith5[POS] = emptyObj;
-                }
-              }
-            }
-          }
-        }
-        {
-          for (let STARTPOS in Object.entries(
-            Object.keys(ARTIFACTS.downwards)
-              .concat(Object.keys(ARTIFACTS.currentcolumn))
-              .reduce((mem, k) => {
-                mem[k] = (mem[k] || 0) + 1;
-                return mem;
-              }, {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => {
-              mem[key] = emptyObj;
-              return mem;
-            }, {})) {
-            let POS = STARTPOS;
-            while ((POS = connections[POS][1])) {
-              {
-                if (
-                  (UNITLAYERS.units[STARTPOS] || {}).lvl > 3 &&
-                  !UNITLAYERS.units[POS]
-                ) {
-                  ARTIFACTS.conquerwith3[POS] = emptyObj;
-                }
-              }
-              {
-                if (
-                  (UNITLAYERS.units[STARTPOS] || {}).lvl > 2 &&
-                  !UNITLAYERS.units[POS]
-                ) {
-                  ARTIFACTS.conquerwith2[POS] = emptyObj;
-                }
-              }
-              {
-                if (!UNITLAYERS.units[POS]) {
-                  ARTIFACTS.conquerwith1[POS] = emptyObj;
-                }
-              }
-            }
-          }
-        }
-        {
-          let filtersourcelayer = ARTIFACTS.currentcolumn;
-          let filtertargetlayer = ARTIFACTS.conquerwith2;
-          for (let POS in filtersourcelayer) {
-            let filterObj = filtersourcelayer[POS];
-            if (
-              !UNITLAYERS.units[POS] &&
-              ARTIFACTS.above1[POS] &&
-              (ARTIFACTS.below3[POS] ||
-                ARTIFACTS.below4[POS] ||
-                ARTIFACTS.below5[POS])
-            ) {
-              filtertargetlayer[POS] = filterObj;
-            }
-          }
-        }
-        {
-          let filtersourcelayer = ARTIFACTS.currentcolumn;
-          let filtertargetlayer = ARTIFACTS.conquerwith3;
-          for (let POS in filtersourcelayer) {
-            let filterObj = filtersourcelayer[POS];
-            if (
-              !UNITLAYERS.units[POS] &&
-              (ARTIFACTS.above1[POS] || ARTIFACTS.above2[POS]) &&
-              (ARTIFACTS.below4[POS] || ARTIFACTS.below5[POS])
-            ) {
-              filtertargetlayer[POS] = filterObj;
-            }
-          }
-        }
-        {
-          let filtersourcelayer = ARTIFACTS.currentcolumn;
-          let filtertargetlayer = ARTIFACTS.conquerwith4;
-          for (let POS in filtersourcelayer) {
-            let filterObj = filtersourcelayer[POS];
-            if (
-              !UNITLAYERS.units[POS] &&
-              (ARTIFACTS.above1[POS] ||
-                ARTIFACTS.above2[POS] ||
-                ARTIFACTS.above3[POS]) &&
-              ARTIFACTS.below5[POS]
-            ) {
-              filtertargetlayer[POS] = filterObj;
-            }
-          }
-        }
-        {
-          for (let STARTPOS in Object.entries(
-            Object.keys(ARTIFACTS.oppupwards)
-              .concat(Object.keys(ARTIFACTS.currentcolumn))
-              .reduce((mem, k) => {
-                mem[k] = (mem[k] || 0) + 1;
-                return mem;
-              }, {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => {
-              mem[key] = emptyObj;
-              return mem;
-            }, {})) {
-            let POS = STARTPOS;
-            while ((POS = connections[POS][1])) {
-              {
-                if (
-                  (UNITLAYERS.units[STARTPOS] || {}).lvl < 3 &&
-                  !UNITLAYERS.units[POS]
-                ) {
-                  ARTIFACTS.oppconquerwith3[POS] = emptyObj;
-                }
-              }
-              {
-                if (
-                  (UNITLAYERS.units[STARTPOS] || {}).lvl < 4 &&
-                  !UNITLAYERS.units[POS]
-                ) {
-                  ARTIFACTS.oppconquerwith4[POS] = emptyObj;
-                }
-              }
-              {
-                if (!UNITLAYERS.units[POS]) {
-                  ARTIFACTS.oppconquerwith5[POS] = emptyObj;
-                }
-              }
-            }
-          }
-        }
-        {
-          for (let STARTPOS in Object.entries(
-            Object.keys(ARTIFACTS.oppdownwards)
-              .concat(Object.keys(ARTIFACTS.currentcolumn))
-              .reduce((mem, k) => {
-                mem[k] = (mem[k] || 0) + 1;
-                return mem;
-              }, {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => {
-              mem[key] = emptyObj;
-              return mem;
-            }, {})) {
-            let POS = STARTPOS;
-            while ((POS = connections[POS][5])) {
-              {
-                if (
-                  (UNITLAYERS.units[STARTPOS] || {}).lvl > 3 &&
-                  !UNITLAYERS.units[POS]
-                ) {
-                  ARTIFACTS.oppconquerwith3[POS] = emptyObj;
-                }
-              }
-              {
-                if (
-                  (UNITLAYERS.units[STARTPOS] || {}).lvl > 2 &&
-                  !UNITLAYERS.units[POS]
-                ) {
-                  ARTIFACTS.oppconquerwith2[POS] = emptyObj;
-                }
-              }
-              {
-                if (!UNITLAYERS.units[POS]) {
-                  ARTIFACTS.oppconquerwith1[POS] = emptyObj;
-                }
-              }
-            }
-          }
-        }
-        {
-          let filtersourcelayer = ARTIFACTS.currentcolumn;
-          let filtertargetlayer = ARTIFACTS.oppconquerwith2;
-          for (let POS in filtersourcelayer) {
-            let filterObj = filtersourcelayer[POS];
-            if (
-              !UNITLAYERS.units[POS] &&
-              ARTIFACTS.below1[POS] &&
-              (ARTIFACTS.above3[POS] ||
-                ARTIFACTS.above4[POS] ||
-                ARTIFACTS.above5[POS])
-            ) {
-              filtertargetlayer[POS] = filterObj;
-            }
-          }
-        }
-        {
-          let filtersourcelayer = ARTIFACTS.currentcolumn;
-          let filtertargetlayer = ARTIFACTS.oppconquerwith3;
-          for (let POS in filtersourcelayer) {
-            let filterObj = filtersourcelayer[POS];
-            if (
-              !UNITLAYERS.units[POS] &&
-              (ARTIFACTS.below1[POS] || ARTIFACTS.below2[POS]) &&
-              (ARTIFACTS.above4[POS] || ARTIFACTS.above5[POS])
-            ) {
-              filtertargetlayer[POS] = filterObj;
-            }
-          }
-        }
-        {
-          let filtersourcelayer = ARTIFACTS.currentcolumn;
-          let filtertargetlayer = ARTIFACTS.oppconquerwith4;
-          for (let POS in filtersourcelayer) {
-            let filterObj = filtersourcelayer[POS];
-            if (
-              !UNITLAYERS.units[POS] &&
-              (ARTIFACTS.below1[POS] ||
-                ARTIFACTS.below2[POS] ||
-                ARTIFACTS.below3[POS]) &&
-              ARTIFACTS.above5[POS]
-            ) {
-              filtertargetlayer[POS] = filterObj;
-            }
+      {
+        for (let DIR of [1, 5]) {
+          let POS = "faux";
+          connections.faux[DIR] = MARKS.selecttarget;
+          while ((POS = connections[POS][DIR])) {
+            ARTIFACTS.currentcolumn[POS] = emptyObj;
           }
         }
       }
-      if (!ARTIFACTS.sees1[MARKS.selecttarget]) {
+      if (!Boolean((ARTIFACTS.sees[MARKS.selecttarget] || {}).who & 1)) {
         LINKS.commands.place1 = "place1_basic_2";
       }
-      if (!ARTIFACTS.sees2[MARKS.selecttarget]) {
+      if (!Boolean((ARTIFACTS.sees[MARKS.selecttarget] || {}).who & 2)) {
         LINKS.commands.place2 = "place2_basic_2";
       }
-      if (!ARTIFACTS.sees3[MARKS.selecttarget]) {
+      if (!Boolean((ARTIFACTS.sees[MARKS.selecttarget] || {}).who & 4)) {
         LINKS.commands.place3 = "place3_basic_2";
       }
-      if (!ARTIFACTS.sees4[MARKS.selecttarget]) {
+      if (!Boolean((ARTIFACTS.sees[MARKS.selecttarget] || {}).who & 8)) {
         LINKS.commands.place4 = "place4_basic_2";
       }
-      if (!ARTIFACTS.sees5[MARKS.selecttarget]) {
+      if (!Boolean((ARTIFACTS.sees[MARKS.selecttarget] || {}).who & 16)) {
         LINKS.commands.place5 = "place5_basic_2";
       }
       return {
         LINKS,
         ARTIFACTS,
-        UNITLAYERS,
+        UNITLAYERS: step.UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
         MARKS,
@@ -1163,41 +677,15 @@ const game = {
         myownedcolumns: step.ARTIFACTS.myownedcolumns,
         oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
         neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
-        FOOBAR: step.ARTIFACTS.FOOBAR,
-        sees1: step.ARTIFACTS.sees1,
-        sees2: step.ARTIFACTS.sees2,
-        sees3: step.ARTIFACTS.sees3,
-        sees4: step.ARTIFACTS.sees4,
-        sees5: step.ARTIFACTS.sees5,
-        above1: step.ARTIFACTS.above1,
-        above2: step.ARTIFACTS.above2,
-        above3: step.ARTIFACTS.above3,
-        above4: step.ARTIFACTS.above4,
-        above5: step.ARTIFACTS.above5,
-        below1: step.ARTIFACTS.below1,
-        below2: step.ARTIFACTS.below2,
-        below3: step.ARTIFACTS.below3,
-        below4: step.ARTIFACTS.below4,
-        below5: step.ARTIFACTS.below5,
+        sees: step.ARTIFACTS.sees,
         takencolumn: step.ARTIFACTS.takencolumn,
         mytakencolumn: step.ARTIFACTS.mytakencolumn,
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
-        upwards: step.ARTIFACTS.upwards,
-        oppupwards: step.ARTIFACTS.oppupwards,
-        downwards: step.ARTIFACTS.downwards,
-        oppdownwards: step.ARTIFACTS.oppdownwards,
-        currentcolumn: step.ARTIFACTS.currentcolumn,
-        conquerwith3: step.ARTIFACTS.conquerwith3,
-        conquerwith4: step.ARTIFACTS.conquerwith4,
-        conquerwith5: step.ARTIFACTS.conquerwith5,
-        conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1,
-        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
-        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
-        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
-        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
-        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
+        almost: step.ARTIFACTS.almost,
+        conquer: step.ARTIFACTS.conquer,
+        oppconquer: step.ARTIFACTS.oppconquer,
+        currentcolumn: step.ARTIFACTS.currentcolumn
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -1211,15 +699,20 @@ const game = {
           group: "lvl1",
           owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
-            : ARTIFACTS.conquerwith1[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 1)
             ? 1
-            : ARTIFACTS.oppconquerwith1[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 1)
             ? 2
             : 0,
-          lvl: 1
+          lvl: 1,
+          bit: 1,
+          bottom: 1,
+          below: 0,
+          top: 31,
+          above: 0
         };
       }
-      if (ARTIFACTS.conquerwith1[MARKS.selecttarget]) {
+      if (Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 1)) {
         for (let LOOPPOS in ARTIFACTS.currentcolumn) {
           {
             let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -1232,7 +725,7 @@ const game = {
           }
         }
       } else {
-        if (ARTIFACTS.oppconquerwith1[MARKS.selecttarget]) {
+        if (Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 1)) {
           for (let LOOPPOS in ARTIFACTS.currentcolumn) {
             {
               let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -1296,41 +789,15 @@ const game = {
         myownedcolumns: step.ARTIFACTS.myownedcolumns,
         oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
         neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
-        FOOBAR: step.ARTIFACTS.FOOBAR,
-        sees1: step.ARTIFACTS.sees1,
-        sees2: step.ARTIFACTS.sees2,
-        sees3: step.ARTIFACTS.sees3,
-        sees4: step.ARTIFACTS.sees4,
-        sees5: step.ARTIFACTS.sees5,
-        above1: step.ARTIFACTS.above1,
-        above2: step.ARTIFACTS.above2,
-        above3: step.ARTIFACTS.above3,
-        above4: step.ARTIFACTS.above4,
-        above5: step.ARTIFACTS.above5,
-        below1: step.ARTIFACTS.below1,
-        below2: step.ARTIFACTS.below2,
-        below3: step.ARTIFACTS.below3,
-        below4: step.ARTIFACTS.below4,
-        below5: step.ARTIFACTS.below5,
+        sees: step.ARTIFACTS.sees,
         takencolumn: step.ARTIFACTS.takencolumn,
         mytakencolumn: step.ARTIFACTS.mytakencolumn,
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
-        upwards: step.ARTIFACTS.upwards,
-        oppupwards: step.ARTIFACTS.oppupwards,
-        downwards: step.ARTIFACTS.downwards,
-        oppdownwards: step.ARTIFACTS.oppdownwards,
-        currentcolumn: step.ARTIFACTS.currentcolumn,
-        conquerwith3: step.ARTIFACTS.conquerwith3,
-        conquerwith4: step.ARTIFACTS.conquerwith4,
-        conquerwith5: step.ARTIFACTS.conquerwith5,
-        conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1,
-        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
-        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
-        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
-        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
-        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
+        almost: step.ARTIFACTS.almost,
+        conquer: step.ARTIFACTS.conquer,
+        oppconquer: step.ARTIFACTS.oppconquer,
+        currentcolumn: step.ARTIFACTS.currentcolumn
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -1344,15 +811,20 @@ const game = {
           group: "lvl2",
           owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
-            : ARTIFACTS.conquerwith2[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 2)
             ? 1
-            : ARTIFACTS.oppconquerwith2[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 2)
             ? 2
             : 0,
-          lvl: 2
+          lvl: 2,
+          bit: 2,
+          bottom: 3,
+          below: 1,
+          top: 30,
+          above: 28
         };
       }
-      if (ARTIFACTS.conquerwith2[MARKS.selecttarget]) {
+      if (Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 2)) {
         for (let LOOPPOS in ARTIFACTS.currentcolumn) {
           {
             let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -1365,7 +837,7 @@ const game = {
           }
         }
       } else {
-        if (ARTIFACTS.oppconquerwith2[MARKS.selecttarget]) {
+        if (Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 2)) {
           for (let LOOPPOS in ARTIFACTS.currentcolumn) {
             {
               let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -1429,41 +901,15 @@ const game = {
         myownedcolumns: step.ARTIFACTS.myownedcolumns,
         oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
         neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
-        FOOBAR: step.ARTIFACTS.FOOBAR,
-        sees1: step.ARTIFACTS.sees1,
-        sees2: step.ARTIFACTS.sees2,
-        sees3: step.ARTIFACTS.sees3,
-        sees4: step.ARTIFACTS.sees4,
-        sees5: step.ARTIFACTS.sees5,
-        above1: step.ARTIFACTS.above1,
-        above2: step.ARTIFACTS.above2,
-        above3: step.ARTIFACTS.above3,
-        above4: step.ARTIFACTS.above4,
-        above5: step.ARTIFACTS.above5,
-        below1: step.ARTIFACTS.below1,
-        below2: step.ARTIFACTS.below2,
-        below3: step.ARTIFACTS.below3,
-        below4: step.ARTIFACTS.below4,
-        below5: step.ARTIFACTS.below5,
+        sees: step.ARTIFACTS.sees,
         takencolumn: step.ARTIFACTS.takencolumn,
         mytakencolumn: step.ARTIFACTS.mytakencolumn,
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
-        upwards: step.ARTIFACTS.upwards,
-        oppupwards: step.ARTIFACTS.oppupwards,
-        downwards: step.ARTIFACTS.downwards,
-        oppdownwards: step.ARTIFACTS.oppdownwards,
-        currentcolumn: step.ARTIFACTS.currentcolumn,
-        conquerwith3: step.ARTIFACTS.conquerwith3,
-        conquerwith4: step.ARTIFACTS.conquerwith4,
-        conquerwith5: step.ARTIFACTS.conquerwith5,
-        conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1,
-        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
-        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
-        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
-        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
-        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
+        almost: step.ARTIFACTS.almost,
+        conquer: step.ARTIFACTS.conquer,
+        oppconquer: step.ARTIFACTS.oppconquer,
+        currentcolumn: step.ARTIFACTS.currentcolumn
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -1477,15 +923,20 @@ const game = {
           group: "lvl3",
           owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
-            : ARTIFACTS.conquerwith3[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 4)
             ? 1
-            : ARTIFACTS.oppconquerwith3[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 4)
             ? 2
             : 0,
-          lvl: 3
+          lvl: 3,
+          bit: 4,
+          bottom: 7,
+          below: 3,
+          top: 28,
+          above: 24
         };
       }
-      if (ARTIFACTS.conquerwith3[MARKS.selecttarget]) {
+      if (Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 4)) {
         for (let LOOPPOS in ARTIFACTS.currentcolumn) {
           {
             let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -1498,7 +949,7 @@ const game = {
           }
         }
       } else {
-        if (ARTIFACTS.oppconquerwith3[MARKS.selecttarget]) {
+        if (Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 4)) {
           for (let LOOPPOS in ARTIFACTS.currentcolumn) {
             {
               let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -1562,41 +1013,15 @@ const game = {
         myownedcolumns: step.ARTIFACTS.myownedcolumns,
         oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
         neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
-        FOOBAR: step.ARTIFACTS.FOOBAR,
-        sees1: step.ARTIFACTS.sees1,
-        sees2: step.ARTIFACTS.sees2,
-        sees3: step.ARTIFACTS.sees3,
-        sees4: step.ARTIFACTS.sees4,
-        sees5: step.ARTIFACTS.sees5,
-        above1: step.ARTIFACTS.above1,
-        above2: step.ARTIFACTS.above2,
-        above3: step.ARTIFACTS.above3,
-        above4: step.ARTIFACTS.above4,
-        above5: step.ARTIFACTS.above5,
-        below1: step.ARTIFACTS.below1,
-        below2: step.ARTIFACTS.below2,
-        below3: step.ARTIFACTS.below3,
-        below4: step.ARTIFACTS.below4,
-        below5: step.ARTIFACTS.below5,
+        sees: step.ARTIFACTS.sees,
         takencolumn: step.ARTIFACTS.takencolumn,
         mytakencolumn: step.ARTIFACTS.mytakencolumn,
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
-        upwards: step.ARTIFACTS.upwards,
-        oppupwards: step.ARTIFACTS.oppupwards,
-        downwards: step.ARTIFACTS.downwards,
-        oppdownwards: step.ARTIFACTS.oppdownwards,
-        currentcolumn: step.ARTIFACTS.currentcolumn,
-        conquerwith3: step.ARTIFACTS.conquerwith3,
-        conquerwith4: step.ARTIFACTS.conquerwith4,
-        conquerwith5: step.ARTIFACTS.conquerwith5,
-        conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1,
-        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
-        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
-        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
-        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
-        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
+        almost: step.ARTIFACTS.almost,
+        conquer: step.ARTIFACTS.conquer,
+        oppconquer: step.ARTIFACTS.oppconquer,
+        currentcolumn: step.ARTIFACTS.currentcolumn
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -1610,15 +1035,20 @@ const game = {
           group: "lvl4",
           owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
-            : ARTIFACTS.conquerwith4[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 8)
             ? 1
-            : ARTIFACTS.oppconquerwith4[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 8)
             ? 2
             : 0,
-          lvl: 4
+          lvl: 4,
+          bit: 8,
+          bottom: 15,
+          below: 7,
+          top: 24,
+          above: 16
         };
       }
-      if (ARTIFACTS.conquerwith4[MARKS.selecttarget]) {
+      if (Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 8)) {
         for (let LOOPPOS in ARTIFACTS.currentcolumn) {
           {
             let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -1631,7 +1061,7 @@ const game = {
           }
         }
       } else {
-        if (ARTIFACTS.oppconquerwith4[MARKS.selecttarget]) {
+        if (Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 8)) {
           for (let LOOPPOS in ARTIFACTS.currentcolumn) {
             {
               let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -1695,41 +1125,15 @@ const game = {
         myownedcolumns: step.ARTIFACTS.myownedcolumns,
         oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
         neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
-        FOOBAR: step.ARTIFACTS.FOOBAR,
-        sees1: step.ARTIFACTS.sees1,
-        sees2: step.ARTIFACTS.sees2,
-        sees3: step.ARTIFACTS.sees3,
-        sees4: step.ARTIFACTS.sees4,
-        sees5: step.ARTIFACTS.sees5,
-        above1: step.ARTIFACTS.above1,
-        above2: step.ARTIFACTS.above2,
-        above3: step.ARTIFACTS.above3,
-        above4: step.ARTIFACTS.above4,
-        above5: step.ARTIFACTS.above5,
-        below1: step.ARTIFACTS.below1,
-        below2: step.ARTIFACTS.below2,
-        below3: step.ARTIFACTS.below3,
-        below4: step.ARTIFACTS.below4,
-        below5: step.ARTIFACTS.below5,
+        sees: step.ARTIFACTS.sees,
         takencolumn: step.ARTIFACTS.takencolumn,
         mytakencolumn: step.ARTIFACTS.mytakencolumn,
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
-        upwards: step.ARTIFACTS.upwards,
-        oppupwards: step.ARTIFACTS.oppupwards,
-        downwards: step.ARTIFACTS.downwards,
-        oppdownwards: step.ARTIFACTS.oppdownwards,
-        currentcolumn: step.ARTIFACTS.currentcolumn,
-        conquerwith3: step.ARTIFACTS.conquerwith3,
-        conquerwith4: step.ARTIFACTS.conquerwith4,
-        conquerwith5: step.ARTIFACTS.conquerwith5,
-        conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1,
-        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
-        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
-        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
-        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
-        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
+        almost: step.ARTIFACTS.almost,
+        conquer: step.ARTIFACTS.conquer,
+        oppconquer: step.ARTIFACTS.oppconquer,
+        currentcolumn: step.ARTIFACTS.currentcolumn
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -1743,15 +1147,20 @@ const game = {
           group: "lvl5",
           owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
-            : ARTIFACTS.conquerwith5[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 16)
             ? 1
-            : ARTIFACTS.oppconquerwith5[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 16)
             ? 2
             : 0,
-          lvl: 5
+          lvl: 5,
+          bit: 16,
+          bottom: 31,
+          below: 0,
+          top: 16,
+          above: 0
         };
       }
-      if (ARTIFACTS.conquerwith5[MARKS.selecttarget]) {
+      if (Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 16)) {
         for (let LOOPPOS in ARTIFACTS.currentcolumn) {
           {
             let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -1764,7 +1173,7 @@ const game = {
           }
         }
       } else {
-        if (ARTIFACTS.oppconquerwith5[MARKS.selecttarget]) {
+        if (Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 16)) {
           for (let LOOPPOS in ARTIFACTS.currentcolumn) {
             {
               let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -1828,41 +1237,15 @@ const game = {
         myownedcolumns: step.ARTIFACTS.myownedcolumns,
         oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
         neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
-        FOOBAR: step.ARTIFACTS.FOOBAR,
-        sees1: step.ARTIFACTS.sees1,
-        sees2: step.ARTIFACTS.sees2,
-        sees3: step.ARTIFACTS.sees3,
-        sees4: step.ARTIFACTS.sees4,
-        sees5: step.ARTIFACTS.sees5,
-        above1: step.ARTIFACTS.above1,
-        above2: step.ARTIFACTS.above2,
-        above3: step.ARTIFACTS.above3,
-        above4: step.ARTIFACTS.above4,
-        above5: step.ARTIFACTS.above5,
-        below1: step.ARTIFACTS.below1,
-        below2: step.ARTIFACTS.below2,
-        below3: step.ARTIFACTS.below3,
-        below4: step.ARTIFACTS.below4,
-        below5: step.ARTIFACTS.below5,
+        sees: step.ARTIFACTS.sees,
         takencolumn: step.ARTIFACTS.takencolumn,
         mytakencolumn: step.ARTIFACTS.mytakencolumn,
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
-        upwards: step.ARTIFACTS.upwards,
-        oppupwards: step.ARTIFACTS.oppupwards,
-        downwards: step.ARTIFACTS.downwards,
-        oppdownwards: step.ARTIFACTS.oppdownwards,
-        currentcolumn: step.ARTIFACTS.currentcolumn,
-        conquerwith3: step.ARTIFACTS.conquerwith3,
-        conquerwith4: step.ARTIFACTS.conquerwith4,
-        conquerwith5: step.ARTIFACTS.conquerwith5,
-        conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1,
-        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
-        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
-        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
-        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
-        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
+        almost: step.ARTIFACTS.almost,
+        conquer: step.ARTIFACTS.conquer,
+        oppconquer: step.ARTIFACTS.oppconquer,
+        currentcolumn: step.ARTIFACTS.currentcolumn
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -1876,15 +1259,20 @@ const game = {
           group: "lvl1",
           owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
-            : ARTIFACTS.conquerwith1[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 1)
             ? 2
-            : ARTIFACTS.oppconquerwith1[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 1)
             ? 1
             : 0,
-          lvl: 1
+          lvl: 1,
+          bit: 1,
+          bottom: 1,
+          below: 0,
+          top: 31,
+          above: 0
         };
       }
-      if (ARTIFACTS.conquerwith1[MARKS.selecttarget]) {
+      if (Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 1)) {
         for (let LOOPPOS in ARTIFACTS.currentcolumn) {
           {
             let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -1897,7 +1285,7 @@ const game = {
           }
         }
       } else {
-        if (ARTIFACTS.oppconquerwith1[MARKS.selecttarget]) {
+        if (Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 1)) {
           for (let LOOPPOS in ARTIFACTS.currentcolumn) {
             {
               let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -1961,41 +1349,15 @@ const game = {
         myownedcolumns: step.ARTIFACTS.myownedcolumns,
         oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
         neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
-        FOOBAR: step.ARTIFACTS.FOOBAR,
-        sees1: step.ARTIFACTS.sees1,
-        sees2: step.ARTIFACTS.sees2,
-        sees3: step.ARTIFACTS.sees3,
-        sees4: step.ARTIFACTS.sees4,
-        sees5: step.ARTIFACTS.sees5,
-        above1: step.ARTIFACTS.above1,
-        above2: step.ARTIFACTS.above2,
-        above3: step.ARTIFACTS.above3,
-        above4: step.ARTIFACTS.above4,
-        above5: step.ARTIFACTS.above5,
-        below1: step.ARTIFACTS.below1,
-        below2: step.ARTIFACTS.below2,
-        below3: step.ARTIFACTS.below3,
-        below4: step.ARTIFACTS.below4,
-        below5: step.ARTIFACTS.below5,
+        sees: step.ARTIFACTS.sees,
         takencolumn: step.ARTIFACTS.takencolumn,
         mytakencolumn: step.ARTIFACTS.mytakencolumn,
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
-        upwards: step.ARTIFACTS.upwards,
-        oppupwards: step.ARTIFACTS.oppupwards,
-        downwards: step.ARTIFACTS.downwards,
-        oppdownwards: step.ARTIFACTS.oppdownwards,
-        currentcolumn: step.ARTIFACTS.currentcolumn,
-        conquerwith3: step.ARTIFACTS.conquerwith3,
-        conquerwith4: step.ARTIFACTS.conquerwith4,
-        conquerwith5: step.ARTIFACTS.conquerwith5,
-        conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1,
-        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
-        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
-        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
-        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
-        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
+        almost: step.ARTIFACTS.almost,
+        conquer: step.ARTIFACTS.conquer,
+        oppconquer: step.ARTIFACTS.oppconquer,
+        currentcolumn: step.ARTIFACTS.currentcolumn
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -2009,15 +1371,20 @@ const game = {
           group: "lvl2",
           owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
-            : ARTIFACTS.conquerwith2[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 2)
             ? 2
-            : ARTIFACTS.oppconquerwith2[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 2)
             ? 1
             : 0,
-          lvl: 2
+          lvl: 2,
+          bit: 2,
+          bottom: 3,
+          below: 1,
+          top: 30,
+          above: 28
         };
       }
-      if (ARTIFACTS.conquerwith2[MARKS.selecttarget]) {
+      if (Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 2)) {
         for (let LOOPPOS in ARTIFACTS.currentcolumn) {
           {
             let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -2030,7 +1397,7 @@ const game = {
           }
         }
       } else {
-        if (ARTIFACTS.oppconquerwith2[MARKS.selecttarget]) {
+        if (Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 2)) {
           for (let LOOPPOS in ARTIFACTS.currentcolumn) {
             {
               let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -2094,41 +1461,15 @@ const game = {
         myownedcolumns: step.ARTIFACTS.myownedcolumns,
         oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
         neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
-        FOOBAR: step.ARTIFACTS.FOOBAR,
-        sees1: step.ARTIFACTS.sees1,
-        sees2: step.ARTIFACTS.sees2,
-        sees3: step.ARTIFACTS.sees3,
-        sees4: step.ARTIFACTS.sees4,
-        sees5: step.ARTIFACTS.sees5,
-        above1: step.ARTIFACTS.above1,
-        above2: step.ARTIFACTS.above2,
-        above3: step.ARTIFACTS.above3,
-        above4: step.ARTIFACTS.above4,
-        above5: step.ARTIFACTS.above5,
-        below1: step.ARTIFACTS.below1,
-        below2: step.ARTIFACTS.below2,
-        below3: step.ARTIFACTS.below3,
-        below4: step.ARTIFACTS.below4,
-        below5: step.ARTIFACTS.below5,
+        sees: step.ARTIFACTS.sees,
         takencolumn: step.ARTIFACTS.takencolumn,
         mytakencolumn: step.ARTIFACTS.mytakencolumn,
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
-        upwards: step.ARTIFACTS.upwards,
-        oppupwards: step.ARTIFACTS.oppupwards,
-        downwards: step.ARTIFACTS.downwards,
-        oppdownwards: step.ARTIFACTS.oppdownwards,
-        currentcolumn: step.ARTIFACTS.currentcolumn,
-        conquerwith3: step.ARTIFACTS.conquerwith3,
-        conquerwith4: step.ARTIFACTS.conquerwith4,
-        conquerwith5: step.ARTIFACTS.conquerwith5,
-        conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1,
-        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
-        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
-        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
-        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
-        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
+        almost: step.ARTIFACTS.almost,
+        conquer: step.ARTIFACTS.conquer,
+        oppconquer: step.ARTIFACTS.oppconquer,
+        currentcolumn: step.ARTIFACTS.currentcolumn
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -2142,15 +1483,20 @@ const game = {
           group: "lvl3",
           owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
-            : ARTIFACTS.conquerwith3[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 4)
             ? 2
-            : ARTIFACTS.oppconquerwith3[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 4)
             ? 1
             : 0,
-          lvl: 3
+          lvl: 3,
+          bit: 4,
+          bottom: 7,
+          below: 3,
+          top: 28,
+          above: 24
         };
       }
-      if (ARTIFACTS.conquerwith3[MARKS.selecttarget]) {
+      if (Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 4)) {
         for (let LOOPPOS in ARTIFACTS.currentcolumn) {
           {
             let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -2163,7 +1509,7 @@ const game = {
           }
         }
       } else {
-        if (ARTIFACTS.oppconquerwith3[MARKS.selecttarget]) {
+        if (Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 4)) {
           for (let LOOPPOS in ARTIFACTS.currentcolumn) {
             {
               let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -2227,41 +1573,15 @@ const game = {
         myownedcolumns: step.ARTIFACTS.myownedcolumns,
         oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
         neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
-        FOOBAR: step.ARTIFACTS.FOOBAR,
-        sees1: step.ARTIFACTS.sees1,
-        sees2: step.ARTIFACTS.sees2,
-        sees3: step.ARTIFACTS.sees3,
-        sees4: step.ARTIFACTS.sees4,
-        sees5: step.ARTIFACTS.sees5,
-        above1: step.ARTIFACTS.above1,
-        above2: step.ARTIFACTS.above2,
-        above3: step.ARTIFACTS.above3,
-        above4: step.ARTIFACTS.above4,
-        above5: step.ARTIFACTS.above5,
-        below1: step.ARTIFACTS.below1,
-        below2: step.ARTIFACTS.below2,
-        below3: step.ARTIFACTS.below3,
-        below4: step.ARTIFACTS.below4,
-        below5: step.ARTIFACTS.below5,
+        sees: step.ARTIFACTS.sees,
         takencolumn: step.ARTIFACTS.takencolumn,
         mytakencolumn: step.ARTIFACTS.mytakencolumn,
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
-        upwards: step.ARTIFACTS.upwards,
-        oppupwards: step.ARTIFACTS.oppupwards,
-        downwards: step.ARTIFACTS.downwards,
-        oppdownwards: step.ARTIFACTS.oppdownwards,
-        currentcolumn: step.ARTIFACTS.currentcolumn,
-        conquerwith3: step.ARTIFACTS.conquerwith3,
-        conquerwith4: step.ARTIFACTS.conquerwith4,
-        conquerwith5: step.ARTIFACTS.conquerwith5,
-        conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1,
-        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
-        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
-        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
-        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
-        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
+        almost: step.ARTIFACTS.almost,
+        conquer: step.ARTIFACTS.conquer,
+        oppconquer: step.ARTIFACTS.oppconquer,
+        currentcolumn: step.ARTIFACTS.currentcolumn
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -2275,15 +1595,20 @@ const game = {
           group: "lvl4",
           owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
-            : ARTIFACTS.conquerwith4[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 8)
             ? 2
-            : ARTIFACTS.oppconquerwith4[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 8)
             ? 1
             : 0,
-          lvl: 4
+          lvl: 4,
+          bit: 8,
+          bottom: 15,
+          below: 7,
+          top: 24,
+          above: 16
         };
       }
-      if (ARTIFACTS.conquerwith4[MARKS.selecttarget]) {
+      if (Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 8)) {
         for (let LOOPPOS in ARTIFACTS.currentcolumn) {
           {
             let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -2296,7 +1621,7 @@ const game = {
           }
         }
       } else {
-        if (ARTIFACTS.oppconquerwith4[MARKS.selecttarget]) {
+        if (Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 8)) {
           for (let LOOPPOS in ARTIFACTS.currentcolumn) {
             {
               let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -2360,41 +1685,15 @@ const game = {
         myownedcolumns: step.ARTIFACTS.myownedcolumns,
         oppownedcolumns: step.ARTIFACTS.oppownedcolumns,
         neutralownedcolumns: step.ARTIFACTS.neutralownedcolumns,
-        FOOBAR: step.ARTIFACTS.FOOBAR,
-        sees1: step.ARTIFACTS.sees1,
-        sees2: step.ARTIFACTS.sees2,
-        sees3: step.ARTIFACTS.sees3,
-        sees4: step.ARTIFACTS.sees4,
-        sees5: step.ARTIFACTS.sees5,
-        above1: step.ARTIFACTS.above1,
-        above2: step.ARTIFACTS.above2,
-        above3: step.ARTIFACTS.above3,
-        above4: step.ARTIFACTS.above4,
-        above5: step.ARTIFACTS.above5,
-        below1: step.ARTIFACTS.below1,
-        below2: step.ARTIFACTS.below2,
-        below3: step.ARTIFACTS.below3,
-        below4: step.ARTIFACTS.below4,
-        below5: step.ARTIFACTS.below5,
+        sees: step.ARTIFACTS.sees,
         takencolumn: step.ARTIFACTS.takencolumn,
         mytakencolumn: step.ARTIFACTS.mytakencolumn,
         opptakencolumn: step.ARTIFACTS.opptakencolumn,
         neutraltakencolumn: step.ARTIFACTS.neutraltakencolumn,
-        upwards: step.ARTIFACTS.upwards,
-        oppupwards: step.ARTIFACTS.oppupwards,
-        downwards: step.ARTIFACTS.downwards,
-        oppdownwards: step.ARTIFACTS.oppdownwards,
-        currentcolumn: step.ARTIFACTS.currentcolumn,
-        conquerwith3: step.ARTIFACTS.conquerwith3,
-        conquerwith4: step.ARTIFACTS.conquerwith4,
-        conquerwith5: step.ARTIFACTS.conquerwith5,
-        conquerwith2: step.ARTIFACTS.conquerwith2,
-        conquerwith1: step.ARTIFACTS.conquerwith1,
-        oppconquerwith3: step.ARTIFACTS.oppconquerwith3,
-        oppconquerwith4: step.ARTIFACTS.oppconquerwith4,
-        oppconquerwith5: step.ARTIFACTS.oppconquerwith5,
-        oppconquerwith2: step.ARTIFACTS.oppconquerwith2,
-        oppconquerwith1: step.ARTIFACTS.oppconquerwith1
+        almost: step.ARTIFACTS.almost,
+        conquer: step.ARTIFACTS.conquer,
+        oppconquer: step.ARTIFACTS.oppconquer,
+        currentcolumn: step.ARTIFACTS.currentcolumn
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -2408,15 +1707,20 @@ const game = {
           group: "lvl5",
           owner: ARTIFACTS.takencolumn[MARKS.selecttarget]
             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {}).owner
-            : ARTIFACTS.conquerwith5[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 16)
             ? 2
-            : ARTIFACTS.oppconquerwith5[MARKS.selecttarget]
+            : Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 16)
             ? 1
             : 0,
-          lvl: 5
+          lvl: 5,
+          bit: 16,
+          bottom: 31,
+          below: 0,
+          top: 16,
+          above: 0
         };
       }
-      if (ARTIFACTS.conquerwith5[MARKS.selecttarget]) {
+      if (Boolean((ARTIFACTS.conquer[MARKS.selecttarget] || {}).by & 16)) {
         for (let LOOPPOS in ARTIFACTS.currentcolumn) {
           {
             let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -2429,7 +1733,7 @@ const game = {
           }
         }
       } else {
-        if (ARTIFACTS.oppconquerwith5[MARKS.selecttarget]) {
+        if (Boolean((ARTIFACTS.oppconquer[MARKS.selecttarget] || {}).by & 16)) {
           for (let LOOPPOS in ARTIFACTS.currentcolumn) {
             {
               let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -2518,9 +1822,15 @@ const game = {
                           ARTIFACTS.takencolumn[MARKS.selecttarget]
                             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {})
                                 .owner
-                            : ARTIFACTS.conquerwith1[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.conquer[MARKS.selecttarget] || {})
+                                  .by & 1
+                              )
                             ? 1
-                            : ARTIFACTS.oppconquerwith1[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.oppconquer[MARKS.selecttarget] || {})
+                                  .by & 1
+                              )
                             ? 2
                             : 0
                         ]
@@ -2539,9 +1849,15 @@ const game = {
                           ARTIFACTS.takencolumn[MARKS.selecttarget]
                             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {})
                                 .owner
-                            : ARTIFACTS.conquerwith2[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.conquer[MARKS.selecttarget] || {})
+                                  .by & 2
+                              )
                             ? 1
-                            : ARTIFACTS.oppconquerwith2[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.oppconquer[MARKS.selecttarget] || {})
+                                  .by & 2
+                              )
                             ? 2
                             : 0
                         ]
@@ -2560,9 +1876,15 @@ const game = {
                           ARTIFACTS.takencolumn[MARKS.selecttarget]
                             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {})
                                 .owner
-                            : ARTIFACTS.conquerwith3[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.conquer[MARKS.selecttarget] || {})
+                                  .by & 4
+                              )
                             ? 1
-                            : ARTIFACTS.oppconquerwith3[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.oppconquer[MARKS.selecttarget] || {})
+                                  .by & 4
+                              )
                             ? 2
                             : 0
                         ]
@@ -2581,9 +1903,15 @@ const game = {
                           ARTIFACTS.takencolumn[MARKS.selecttarget]
                             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {})
                                 .owner
-                            : ARTIFACTS.conquerwith4[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.conquer[MARKS.selecttarget] || {})
+                                  .by & 8
+                              )
                             ? 1
-                            : ARTIFACTS.oppconquerwith4[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.oppconquer[MARKS.selecttarget] || {})
+                                  .by & 8
+                              )
                             ? 2
                             : 0
                         ]
@@ -2602,9 +1930,15 @@ const game = {
                           ARTIFACTS.takencolumn[MARKS.selecttarget]
                             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {})
                                 .owner
-                            : ARTIFACTS.conquerwith5[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.conquer[MARKS.selecttarget] || {})
+                                  .by & 16
+                              )
                             ? 1
-                            : ARTIFACTS.oppconquerwith5[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.oppconquer[MARKS.selecttarget] || {})
+                                  .by & 16
+                              )
                             ? 2
                             : 0
                         ]
@@ -2657,9 +1991,15 @@ const game = {
                           ARTIFACTS.takencolumn[MARKS.selecttarget]
                             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {})
                                 .owner
-                            : ARTIFACTS.conquerwith1[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.conquer[MARKS.selecttarget] || {})
+                                  .by & 1
+                              )
                             ? 2
-                            : ARTIFACTS.oppconquerwith1[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.oppconquer[MARKS.selecttarget] || {})
+                                  .by & 1
+                              )
                             ? 1
                             : 0
                         ]
@@ -2678,9 +2018,15 @@ const game = {
                           ARTIFACTS.takencolumn[MARKS.selecttarget]
                             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {})
                                 .owner
-                            : ARTIFACTS.conquerwith2[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.conquer[MARKS.selecttarget] || {})
+                                  .by & 2
+                              )
                             ? 2
-                            : ARTIFACTS.oppconquerwith2[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.oppconquer[MARKS.selecttarget] || {})
+                                  .by & 2
+                              )
                             ? 1
                             : 0
                         ]
@@ -2699,9 +2045,15 @@ const game = {
                           ARTIFACTS.takencolumn[MARKS.selecttarget]
                             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {})
                                 .owner
-                            : ARTIFACTS.conquerwith3[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.conquer[MARKS.selecttarget] || {})
+                                  .by & 4
+                              )
                             ? 2
-                            : ARTIFACTS.oppconquerwith3[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.oppconquer[MARKS.selecttarget] || {})
+                                  .by & 4
+                              )
                             ? 1
                             : 0
                         ]
@@ -2720,9 +2072,15 @@ const game = {
                           ARTIFACTS.takencolumn[MARKS.selecttarget]
                             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {})
                                 .owner
-                            : ARTIFACTS.conquerwith4[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.conquer[MARKS.selecttarget] || {})
+                                  .by & 8
+                              )
                             ? 2
-                            : ARTIFACTS.oppconquerwith4[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.oppconquer[MARKS.selecttarget] || {})
+                                  .by & 8
+                              )
                             ? 1
                             : 0
                         ]
@@ -2741,9 +2099,15 @@ const game = {
                           ARTIFACTS.takencolumn[MARKS.selecttarget]
                             ? (ARTIFACTS.takencolumn[MARKS.selecttarget] || {})
                                 .owner
-                            : ARTIFACTS.conquerwith5[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.conquer[MARKS.selecttarget] || {})
+                                  .by & 16
+                              )
                             ? 2
-                            : ARTIFACTS.oppconquerwith5[MARKS.selecttarget]
+                            : Boolean(
+                                (ARTIFACTS.oppconquer[MARKS.selecttarget] || {})
+                                  .by & 16
+                              )
                             ? 1
                             : 0
                         ]

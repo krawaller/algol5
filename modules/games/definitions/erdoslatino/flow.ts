@@ -55,7 +55,7 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
     },
   },
   startTurn: {
-    runGenerator: "findvisibilities",
+    runGenerators: ["findvisibilities", "findconquests"],
     link: "selecttarget",
   },
   commands: {
@@ -71,11 +71,21 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
                 { read: ["takencolumn", "selecttarget", "owner"] },
                 {
                   ifelse: [
-                    { anyat: ["conquerwith1", "selecttarget"] },
+                    {
+                      hascommonbits: [
+                        { read: ["conquer", "selecttarget", "by"] },
+                        1,
+                      ],
+                    },
                     ["player"],
                     {
                       ifelse: [
-                        { anyat: ["oppconquerwith1", "selecttarget"] },
+                        {
+                          hascommonbits: [
+                            { read: ["oppconquer", "selecttarget", "by"] },
+                            1,
+                          ],
+                        },
                         ["otherplayer"],
                         0,
                       ],
@@ -86,16 +96,28 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
             },
             {
               lvl: 1,
+              bit: 1,
+              bottom: 1,
+              below: 0,
+              top: 31,
+              above: 0,
             },
           ],
         },
         {
           ifelse: [
-            { anyat: ["conquerwith1", "selecttarget"] },
+            {
+              hascommonbits: [{ read: ["conquer", "selecttarget", "by"] }, 1],
+            },
             { adoptin: ["currentcolumn"] },
             {
               if: [
-                { anyat: ["oppconquerwith1", "selecttarget"] },
+                {
+                  hascommonbits: [
+                    { read: ["oppconquer", "selecttarget", "by"] },
+                    1,
+                  ],
+                },
                 { adoptin: ["currentcolumn", ["otherplayer"]] },
               ],
             },
@@ -116,11 +138,21 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
                 { read: ["takencolumn", "selecttarget", "owner"] },
                 {
                   ifelse: [
-                    { anyat: ["conquerwith2", "selecttarget"] },
+                    {
+                      hascommonbits: [
+                        { read: ["conquer", "selecttarget", "by"] },
+                        2,
+                      ],
+                    },
                     ["player"],
                     {
                       ifelse: [
-                        { anyat: ["oppconquerwith2", "selecttarget"] },
+                        {
+                          hascommonbits: [
+                            { read: ["oppconquer", "selecttarget", "by"] },
+                            2,
+                          ],
+                        },
                         ["otherplayer"],
                         0,
                       ],
@@ -131,16 +163,28 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
             },
             {
               lvl: 2,
+              bit: 2,
+              bottom: 3,
+              below: 1,
+              top: 30,
+              above: 28,
             },
           ],
         },
         {
           ifelse: [
-            { anyat: ["conquerwith2", "selecttarget"] },
+            {
+              hascommonbits: [{ read: ["conquer", "selecttarget", "by"] }, 2],
+            },
             { adoptin: ["currentcolumn"] },
             {
               if: [
-                { anyat: ["oppconquerwith2", "selecttarget"] },
+                {
+                  hascommonbits: [
+                    { read: ["oppconquer", "selecttarget", "by"] },
+                    2,
+                  ],
+                },
                 { adoptin: ["currentcolumn", ["otherplayer"]] },
               ],
             },
@@ -149,6 +193,7 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
       ],
       link: "endTurn",
     },
+
     place3: {
       applyEffects: [
         {
@@ -161,11 +206,21 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
                 { read: ["takencolumn", "selecttarget", "owner"] },
                 {
                   ifelse: [
-                    { anyat: ["conquerwith3", "selecttarget"] },
+                    {
+                      hascommonbits: [
+                        { read: ["conquer", "selecttarget", "by"] },
+                        4,
+                      ],
+                    },
                     ["player"],
                     {
                       ifelse: [
-                        { anyat: ["oppconquerwith3", "selecttarget"] },
+                        {
+                          hascommonbits: [
+                            { read: ["oppconquer", "selecttarget", "by"] },
+                            4,
+                          ],
+                        },
                         ["otherplayer"],
                         0,
                       ],
@@ -176,16 +231,28 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
             },
             {
               lvl: 3,
+              bit: 4,
+              bottom: 7,
+              below: 3,
+              top: 28,
+              above: 24,
             },
           ],
         },
         {
           ifelse: [
-            { anyat: ["conquerwith3", "selecttarget"] },
+            {
+              hascommonbits: [{ read: ["conquer", "selecttarget", "by"] }, 4],
+            },
             { adoptin: ["currentcolumn"] },
             {
               if: [
-                { anyat: ["oppconquerwith3", "selecttarget"] },
+                {
+                  hascommonbits: [
+                    { read: ["oppconquer", "selecttarget", "by"] },
+                    4,
+                  ],
+                },
                 { adoptin: ["currentcolumn", ["otherplayer"]] },
               ],
             },
@@ -206,11 +273,21 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
                 { read: ["takencolumn", "selecttarget", "owner"] },
                 {
                   ifelse: [
-                    { anyat: ["conquerwith4", "selecttarget"] },
+                    {
+                      hascommonbits: [
+                        { read: ["conquer", "selecttarget", "by"] },
+                        8,
+                      ],
+                    },
                     ["player"],
                     {
                       ifelse: [
-                        { anyat: ["oppconquerwith4", "selecttarget"] },
+                        {
+                          hascommonbits: [
+                            { read: ["oppconquer", "selecttarget", "by"] },
+                            8,
+                          ],
+                        },
                         ["otherplayer"],
                         0,
                       ],
@@ -221,16 +298,28 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
             },
             {
               lvl: 4,
+              bit: 8,
+              bottom: 15,
+              below: 7,
+              top: 24,
+              above: 16,
             },
           ],
         },
         {
           ifelse: [
-            { anyat: ["conquerwith4", "selecttarget"] },
+            {
+              hascommonbits: [{ read: ["conquer", "selecttarget", "by"] }, 8],
+            },
             { adoptin: ["currentcolumn"] },
             {
               if: [
-                { anyat: ["oppconquerwith4", "selecttarget"] },
+                {
+                  hascommonbits: [
+                    { read: ["oppconquer", "selecttarget", "by"] },
+                    8,
+                  ],
+                },
                 { adoptin: ["currentcolumn", ["otherplayer"]] },
               ],
             },
@@ -251,11 +340,21 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
                 { read: ["takencolumn", "selecttarget", "owner"] },
                 {
                   ifelse: [
-                    { anyat: ["conquerwith5", "selecttarget"] },
+                    {
+                      hascommonbits: [
+                        { read: ["conquer", "selecttarget", "by"] },
+                        16,
+                      ],
+                    },
                     ["player"],
                     {
                       ifelse: [
-                        { anyat: ["oppconquerwith5", "selecttarget"] },
+                        {
+                          hascommonbits: [
+                            { read: ["oppconquer", "selecttarget", "by"] },
+                            16,
+                          ],
+                        },
                         ["otherplayer"],
                         0,
                       ],
@@ -266,16 +365,28 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
             },
             {
               lvl: 5,
+              bit: 16,
+              bottom: 31,
+              below: 0,
+              top: 16,
+              above: 0,
             },
           ],
         },
         {
           ifelse: [
-            { anyat: ["conquerwith5", "selecttarget"] },
+            {
+              hascommonbits: [{ read: ["conquer", "selecttarget", "by"] }, 16],
+            },
             { adoptin: ["currentcolumn"] },
             {
               if: [
-                { anyat: ["oppconquerwith5", "selecttarget"] },
+                {
+                  hascommonbits: [
+                    { read: ["oppconquer", "selecttarget", "by"] },
+                    16,
+                  ],
+                },
                 { adoptin: ["currentcolumn", ["otherplayer"]] },
               ],
             },
@@ -288,34 +399,58 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
   marks: {
     selecttarget: {
       from: { subtract: ["board", "units"] },
-      runGenerators: [
+      runGenerators: ["findchosencolumn"],
+      links: [
         {
           if: [
-            { noneat: ["takencolumn", "selecttarget"] },
             {
-              multi: [
-                "findchosencolumn",
-                "findupwardends",
-                "finddownwardends",
-                "findmiddle2",
-                "findmiddle3",
-                "findmiddle4",
-                "findoppupwardends",
-                "findoppdownwardends",
-                "findoppmiddle2",
-                "findoppmiddle3",
-                "findoppmiddle4",
-              ],
+              not: {
+                hascommonbits: [{ read: ["sees", "selecttarget", "who"] }, 1],
+              },
             },
+            "place1",
           ],
         },
-      ],
-      links: [
-        { if: [{ noneat: ["sees1", "selecttarget"] }, "place1"] },
-        { if: [{ noneat: ["sees2", "selecttarget"] }, "place2"] },
-        { if: [{ noneat: ["sees3", "selecttarget"] }, "place3"] },
-        { if: [{ noneat: ["sees4", "selecttarget"] }, "place4"] },
-        { if: [{ noneat: ["sees5", "selecttarget"] }, "place5"] },
+        {
+          if: [
+            {
+              not: {
+                hascommonbits: [{ read: ["sees", "selecttarget", "who"] }, 2],
+              },
+            },
+            "place2",
+          ],
+        },
+        {
+          if: [
+            {
+              not: {
+                hascommonbits: [{ read: ["sees", "selecttarget", "who"] }, 4],
+              },
+            },
+            "place3",
+          ],
+        },
+        {
+          if: [
+            {
+              not: {
+                hascommonbits: [{ read: ["sees", "selecttarget", "who"] }, 8],
+              },
+            },
+            "place4",
+          ],
+        },
+        {
+          if: [
+            {
+              not: {
+                hascommonbits: [{ read: ["sees", "selecttarget", "who"] }, 16],
+              },
+            },
+            "place5",
+          ],
+        },
       ],
     },
   },

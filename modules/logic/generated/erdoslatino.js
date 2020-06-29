@@ -149,26 +149,46 @@ const game = {
                     who:
                       (ARTIFACTS.sees[POS] || {}).who |
                       (UNITLAYERS.units[STARTPOS] || {}).bit,
-                    northof:
+                    minbelow:
                       DIR === 1
                         ? Math.min.apply(
                             null,
                             [
-                              (ARTIFACTS.sees[POS] || {}).northof,
+                              (ARTIFACTS.sees[POS] || {}).minbelow,
                               (UNITLAYERS.units[STARTPOS] || {}).bottom
                             ].filter(n => !isNaN(n))
                           )
-                        : (ARTIFACTS.sees[POS] || {}).northof,
-                    southof:
+                        : (ARTIFACTS.sees[POS] || {}).minbelow,
+                    maxbelow:
+                      DIR === 1
+                        ? Math.max.apply(
+                            null,
+                            [
+                              (ARTIFACTS.sees[POS] || {}).maxbelow,
+                              (UNITLAYERS.units[STARTPOS] || {}).top
+                            ].filter(n => !isNaN(n))
+                          )
+                        : (ARTIFACTS.sees[POS] || {}).maxbelow,
+                    minabove:
+                      DIR === 5
+                        ? Math.min.apply(
+                            null,
+                            [
+                              (ARTIFACTS.sees[POS] || {}).minabove,
+                              (UNITLAYERS.units[STARTPOS] || {}).bottom
+                            ].filter(n => !isNaN(n))
+                          )
+                        : (ARTIFACTS.sees[POS] || {}).minabove,
+                    maxabove:
                       DIR === 5
                         ? Math.max.apply(
                             null,
                             [
-                              (ARTIFACTS.sees[POS] || {}).southof,
+                              (ARTIFACTS.sees[POS] || {}).maxabove,
                               (UNITLAYERS.units[STARTPOS] || {}).top
                             ].filter(n => !isNaN(n))
                           )
-                        : (ARTIFACTS.sees[POS] || {}).southof
+                        : (ARTIFACTS.sees[POS] || {}).maxabove
                   };
                 }
               }
@@ -251,14 +271,14 @@ const game = {
               {
                 if (
                   DIR === 5 &&
-                  !!(ARTIFACTS.sees[POS] || {}).northof &&
+                  !!(ARTIFACTS.sees[POS] || {}).minbelow &&
                   !UNITLAYERS.units[POS]
                 ) {
                   ARTIFACTS.conquer[POS] = {
                     by:
                       (ARTIFACTS.conquer[POS] || {}).by |
                       (31 &
-                        ~(ARTIFACTS.sees[POS] || {}).northof &
+                        ~(ARTIFACTS.sees[POS] || {}).minbelow &
                         ~(UNITLAYERS.units[STARTPOS] || {}).top)
                   };
                 }
@@ -266,15 +286,15 @@ const game = {
               {
                 if (
                   DIR === 1 &&
-                  !!(ARTIFACTS.sees[POS] || {}).southof &&
+                  !!(ARTIFACTS.sees[POS] || {}).minabove &&
                   !UNITLAYERS.units[POS]
                 ) {
                   ARTIFACTS.oppconquer[POS] = {
                     by:
                       (ARTIFACTS.oppconquer[POS] || {}).by |
                       (31 &
-                        ~(ARTIFACTS.sees[POS] || {}).southof &
-                        ~(UNITLAYERS.units[STARTPOS] || {}).bottom)
+                        ~(ARTIFACTS.sees[POS] || {}).minabove &
+                        ~(UNITLAYERS.units[STARTPOS] || {}).top)
                   };
                 }
               }
@@ -375,26 +395,46 @@ const game = {
                     who:
                       (ARTIFACTS.sees[POS] || {}).who |
                       (UNITLAYERS.units[STARTPOS] || {}).bit,
-                    northof:
+                    minbelow:
                       DIR === 1
                         ? Math.min.apply(
                             null,
                             [
-                              (ARTIFACTS.sees[POS] || {}).northof,
+                              (ARTIFACTS.sees[POS] || {}).minbelow,
                               (UNITLAYERS.units[STARTPOS] || {}).bottom
                             ].filter(n => !isNaN(n))
                           )
-                        : (ARTIFACTS.sees[POS] || {}).northof,
-                    southof:
+                        : (ARTIFACTS.sees[POS] || {}).minbelow,
+                    maxbelow:
+                      DIR === 1
+                        ? Math.max.apply(
+                            null,
+                            [
+                              (ARTIFACTS.sees[POS] || {}).maxbelow,
+                              (UNITLAYERS.units[STARTPOS] || {}).top
+                            ].filter(n => !isNaN(n))
+                          )
+                        : (ARTIFACTS.sees[POS] || {}).maxbelow,
+                    minabove:
+                      DIR === 5
+                        ? Math.min.apply(
+                            null,
+                            [
+                              (ARTIFACTS.sees[POS] || {}).minabove,
+                              (UNITLAYERS.units[STARTPOS] || {}).bottom
+                            ].filter(n => !isNaN(n))
+                          )
+                        : (ARTIFACTS.sees[POS] || {}).minabove,
+                    maxabove:
                       DIR === 5
                         ? Math.max.apply(
                             null,
                             [
-                              (ARTIFACTS.sees[POS] || {}).southof,
+                              (ARTIFACTS.sees[POS] || {}).maxabove,
                               (UNITLAYERS.units[STARTPOS] || {}).top
                             ].filter(n => !isNaN(n))
                           )
-                        : (ARTIFACTS.sees[POS] || {}).southof
+                        : (ARTIFACTS.sees[POS] || {}).maxabove
                   };
                 }
               }
@@ -477,29 +517,29 @@ const game = {
               {
                 if (
                   DIR === 5 &&
-                  !!(ARTIFACTS.sees[POS] || {}).northof &&
+                  !!(ARTIFACTS.sees[POS] || {}).maxbelow &&
                   !UNITLAYERS.units[POS]
                 ) {
                   ARTIFACTS.conquer[POS] = {
                     by:
                       (ARTIFACTS.conquer[POS] || {}).by |
                       (31 &
-                        ~(ARTIFACTS.sees[POS] || {}).northof &
-                        ~(UNITLAYERS.units[STARTPOS] || {}).top)
+                        ~(ARTIFACTS.sees[POS] || {}).maxbelow &
+                        ~(UNITLAYERS.units[STARTPOS] || {}).bottom)
                   };
                 }
               }
               {
                 if (
                   DIR === 1 &&
-                  !!(ARTIFACTS.sees[POS] || {}).southof &&
+                  !!(ARTIFACTS.sees[POS] || {}).maxabove &&
                   !UNITLAYERS.units[POS]
                 ) {
                   ARTIFACTS.oppconquer[POS] = {
                     by:
                       (ARTIFACTS.oppconquer[POS] || {}).by |
                       (31 &
-                        ~(ARTIFACTS.sees[POS] || {}).southof &
+                        ~(ARTIFACTS.sees[POS] || {}).maxabove &
                         ~(UNITLAYERS.units[STARTPOS] || {}).bottom)
                   };
                 }

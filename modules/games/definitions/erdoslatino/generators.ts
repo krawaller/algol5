@@ -28,7 +28,15 @@ const erdoslatinoGenerators: ErdoslatinoDefinition["generators"] = {
           condition: {
             and: [
               { same: [["dir"], 5] },
-              { truthy: { read: ["sees", ["target"], "northof"] } },
+              {
+                truthy: {
+                  read: [
+                    "sees",
+                    ["target"],
+                    { playercase: ["minbelow", "maxbelow"] },
+                  ],
+                },
+              },
             ],
           },
           tolayer: "conquer",
@@ -41,8 +49,20 @@ const erdoslatinoGenerators: ErdoslatinoDefinition["generators"] = {
                 {
                   bitdiff: [
                     31,
-                    { read: ["sees", ["target"], "northof"] },
-                    { read: ["units", ["start"], "top"] },
+                    {
+                      read: [
+                        "sees",
+                        ["target"],
+                        { playercase: ["minbelow", "maxbelow"] },
+                      ],
+                    },
+                    {
+                      read: [
+                        "units",
+                        ["start"],
+                        { playercase: ["top", "bottom"] },
+                      ],
+                    },
                   ],
                 },
               ],
@@ -54,7 +74,15 @@ const erdoslatinoGenerators: ErdoslatinoDefinition["generators"] = {
           condition: {
             and: [
               { same: [["dir"], 1] },
-              { truthy: { read: ["sees", ["target"], "southof"] } },
+              {
+                truthy: {
+                  read: [
+                    "sees",
+                    ["target"],
+                    { playercase: ["minabove", "maxabove"] },
+                  ],
+                },
+              },
             ],
           },
           tolayer: "oppconquer",
@@ -67,8 +95,20 @@ const erdoslatinoGenerators: ErdoslatinoDefinition["generators"] = {
                 {
                   bitdiff: [
                     31,
-                    { read: ["sees", ["target"], "southof"] },
-                    { read: ["units", ["start"], "bottom"] },
+                    {
+                      read: [
+                        "sees",
+                        ["target"],
+                        { playercase: ["minabove", "maxabove"] },
+                      ],
+                    },
+                    {
+                      read: [
+                        "units",
+                        ["start"],
+                        { playercase: ["top", "bottom"] },
+                      ],
+                    },
                   ],
                 },
               ],
@@ -179,28 +219,52 @@ const erdoslatinoGenerators: ErdoslatinoDefinition["generators"] = {
                 { read: ["units", ["start"], "bit"] },
               ],
             },
-            northof: {
+            minbelow: {
               ifelse: [
                 { same: [["dir"], 1] },
                 {
                   lowest: [
-                    { read: ["sees", ["target"], "northof"] },
+                    { read: ["sees", ["target"], "minbelow"] },
                     { read: ["units", ["start"], "bottom"] },
                   ],
                 },
-                { read: ["sees", ["target"], "northof"] },
+                { read: ["sees", ["target"], "minbelow"] },
               ],
             },
-            southof: {
+            maxbelow: {
+              ifelse: [
+                { same: [["dir"], 1] },
+                {
+                  highest: [
+                    { read: ["sees", ["target"], "maxbelow"] },
+                    { read: ["units", ["start"], "top"] },
+                  ],
+                },
+                { read: ["sees", ["target"], "maxbelow"] },
+              ],
+            },
+            minabove: {
+              ifelse: [
+                { same: [["dir"], 5] },
+                {
+                  lowest: [
+                    { read: ["sees", ["target"], "minabove"] },
+                    { read: ["units", ["start"], "bottom"] },
+                  ],
+                },
+                { read: ["sees", ["target"], "minabove"] },
+              ],
+            },
+            maxabove: {
               ifelse: [
                 { same: [["dir"], 5] },
                 {
                   highest: [
-                    { read: ["sees", ["target"], "southof"] },
+                    { read: ["sees", ["target"], "maxabove"] },
                     { read: ["units", ["start"], "top"] },
                   ],
                 },
-                { read: ["sees", ["target"], "southof"] },
+                { read: ["sees", ["target"], "maxabove"] },
               ],
             },
           },

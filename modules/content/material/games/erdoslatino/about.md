@@ -8,4 +8,4 @@ updated: 2020-06-24
 
 The name comes from Latin Squares and Paul Erdös. For more on the latter, read the brilliant book "The Boy who Loved Math"! For more on the former, play a Sudoku...
 
-Silva's game is quite the achievement! He leverages the mathematics of latin squares, and combines it with ingenious rules for column dominance to produce a really clever game that plays like no other.
+Silva's game is quite the achievement! He leverages the mathematics of latin squares, and combines it with ingenious rules for column dominance to produce a really clever game with distinct play.

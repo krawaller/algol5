@@ -18,6 +18,13 @@ import {
   isAlgolValLoopRead,
   isAlgolValPosX,
   isAlgolValPosY,
+  isAlgolValAddTo,
+  isAlgolValAddBitsTo,
+  isAlgolValHighest,
+  isAlgolValLowest,
+  isAlgolValBitAnd,
+  isAlgolValBitDiff,
+  isAlgolValBitOr,
 } from "../../../../../types";
 
 import { makeParser } from "../";
@@ -112,6 +119,20 @@ export default function parseVal(
       : `[${parsedProp}]`;
     return `(${parser.set(layer)}${posLookup}||{})${propLookup}`;
   }
+  if (isAlgolValAddTo(expr)) {
+    const {
+      addto: [layer, pos, prop, val],
+    } = expr;
+    return `(${parser.val({ read: [layer, pos, prop] })} || 0) + ${parser.val(
+      val
+    )}`;
+  }
+  if (isAlgolValAddBitsTo(expr)) {
+    const {
+      addbitsto: [layer, pos, prop, val],
+    } = expr;
+    return `(${parser.val({ read: [layer, pos, prop] })} | ${parser.val(val)})`;
+  }
   if (isAlgolValIdAt(expr)) {
     const { idat: pos } = expr;
     return parser.val({ read: ["units", pos, "id"] });
@@ -164,4 +185,30 @@ export default function parseVal(
     const { posy: pos } = expr;
     return `BOARD.board[${parser.pos(pos)}].y`;
   }
+  if (isAlgolValHighest(expr)) {
+    const { highest } = expr;
+    const nums = highest.map(n => parser.val(n)).join(", ");
+    return `Math.max.apply(null, [${nums}].filter(n => !isNaN(n)))`;
+  }
+  if (isAlgolValLowest(expr)) {
+    const { lowest } = expr;
+    const nums = lowest.map(n => parser.val(n)).join(", ");
+    return `Math.min.apply(null, [${nums}].filter(n => !isNaN(n)))`;
+  }
+  if (isAlgolValBitAnd(expr)) {
+    const { bitand } = expr;
+    const bits = bitand.map(n => parser.val(n)).join(" & ");
+    return `(${bits})`;
+  }
+  if (isAlgolValBitOr(expr)) {
+    const { bitor } = expr;
+    const bits = bitor.map(n => parser.val(n)).join(" | ");
+    return `(${bits})`;
+  }
+  if (isAlgolValBitDiff(expr)) {
+    const { bitdiff } = expr;
+    const bits = bitdiff.map(n => parser.val(n)).join(" & ~");
+    return `(${bits})`;
+  }
+  throw new Error("Unknown val expression: " + JSON.stringify(expr || ""));
 }

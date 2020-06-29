@@ -58,12 +58,12 @@ function drawSingle(
     } else if (typeof owner === "number") {
       prefix = '"opp"';
     } else {
-      prefix = "ownernames[artifact.owner]";
+      prefix = `prefixes${player}[artifact.owner]`;
     }
     body = `
       let targetlayername=${parser.val(drawDef.tolayer)};
       let artifact=${artifactLiteral};
-      ARTIFACTS[targetlayername][${posVar}] = ARTIFACTS[${prefix} + targetlayername] = artifact;
+      ARTIFACTS[targetlayername][${posVar}] = ARTIFACTS[${prefix} + targetlayername][${posVar}] = artifact;
     `;
   } else {
     const name = parser.val(drawDef.tolayer) as string;

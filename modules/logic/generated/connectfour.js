@@ -32,6 +32,8 @@ const groupLayers2 = {
     ["units", "myunits", "markers"]
   ]
 };
+const prefixes1 = ["neutral", "my", "opp"];
+const prefixes2 = ["neutral", "opp", "my"];
 const game = {
   gameId: "connectfour",
   commands: { drop: {} },

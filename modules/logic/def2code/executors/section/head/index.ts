@@ -30,5 +30,8 @@ export function executeHead(
     groupLayersForPlayer(gameDef, 2)
   )}; `;
 
+  ret += `const prefixes1 = ['neutral', 'my', 'opp']; `;
+  ret += `const prefixes2 = ['neutral', 'opp', 'my']; `;
+
   return ret;
 }

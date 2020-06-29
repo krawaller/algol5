@@ -28,6 +28,11 @@ import {
   AlgolBoolFalsyPos,
   AlgolBoolTruthyPos,
   AlgolBoolLessThan,
+  AlgolBoolHasCommonBits,
+  AlgolBoolDownhill,
+  AlgolBoolHorisontal,
+  AlgolBoolUphill,
+  AlgolBoolVertical,
 } from "./bool.interfaces";
 
 import { AlgolExpression } from "../../";
@@ -67,4 +72,9 @@ type AlgolBoolInner<Blob extends AlgolGameBlobAnon> =
   | AlgolBoolDiag<Blob>
   | AlgolBoolStoppedBecause<Blob>
   | AlgolBoolFalsyPos<Blob>
-  | AlgolBoolTruthyPos<Blob>;
+  | AlgolBoolTruthyPos<Blob>
+  | AlgolBoolHasCommonBits<Blob>
+  | AlgolBoolUphill<Blob>
+  | AlgolBoolDownhill<Blob>
+  | AlgolBoolHorisontal<Blob>
+  | AlgolBoolVertical<Blob>;

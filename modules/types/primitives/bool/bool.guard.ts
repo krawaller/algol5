@@ -25,6 +25,11 @@ import {
   AlgolBoolTruthyPosAnon,
   AlgolBoolFalsyPosAnon,
   AlgolBoolLessThanAnon,
+  AlgolBoolHasCommonBitsAnon,
+  AlgolBoolDownhillAnon,
+  AlgolBoolHorisontalAnon,
+  AlgolBoolUphillAnon,
+  AlgolBoolVerticalAnon,
 } from "./bool.anon";
 
 export function isAlgolBoolNot(expr: AlgolBoolAnon): expr is AlgolBoolNotAnon {
@@ -169,4 +174,34 @@ export function isAlgolBoolFalsyPos(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolFalsyPosAnon {
   return (expr as AlgolBoolFalsyPosAnon).falsypos !== undefined;
+}
+
+export function isAlgolBoolHasCommonBits(
+  expr: AlgolBoolAnon
+): expr is AlgolBoolHasCommonBitsAnon {
+  return (expr as AlgolBoolHasCommonBitsAnon).hascommonbits !== undefined;
+}
+
+export function isAlgolBoolUphill(
+  expr: AlgolBoolAnon
+): expr is AlgolBoolUphillAnon {
+  return (expr as AlgolBoolUphillAnon).uphill !== undefined;
+}
+
+export function isAlgolBoolDownhill(
+  expr: AlgolBoolAnon
+): expr is AlgolBoolDownhillAnon {
+  return (expr as AlgolBoolDownhillAnon).downhill !== undefined;
+}
+
+export function isAlgolBoolHorisontal(
+  expr: AlgolBoolAnon
+): expr is AlgolBoolHorisontalAnon {
+  return (expr as AlgolBoolHorisontalAnon).horisontal !== undefined;
+}
+
+export function isAlgolBoolVertical(
+  expr: AlgolBoolAnon
+): expr is AlgolBoolVerticalAnon {
+  return (expr as AlgolBoolVerticalAnon).vertical !== undefined;
 }

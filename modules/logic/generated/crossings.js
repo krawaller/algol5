@@ -42,6 +42,8 @@ const groupLayers2 = {
     ["units", "myunits", "mytowers"]
   ]
 };
+const prefixes1 = ["neutral", "my", "opp"];
+const prefixes2 = ["neutral", "opp", "my"];
 const emptyArtifactLayers_basic = {
   steptargets: {},
   heads: {},

@@ -16,6 +16,8 @@ const tests: TestVal[] = [
   },
   { playercase: ["FOO", "BAR"] },
   { read: ["mylayer", "mymark", "someProp"] },
+  { addto: ["mylayer", "mymark", "someProp", 7] },
+  { addbitsto: ["mylayer", "mymark", "someProp", 7] },
   { loopread: "poo" },
   { battlevar: "mybattlev" },
   { turnvar: "myturnv" },
@@ -50,4 +52,9 @@ const tests2: TestNumberVal[] = [
   { minus: [3, 4, ["totalcount"]] },
   { posx: "mymark" },
   { posy: "mymark" },
+  { highest: [5, { read: ["mylayer", "mymark", "someprop"] }, 7] },
+  { lowest: [5, { read: ["mylayer", "mymark", "someprop"] }, 2] },
+  { bitand: [2, 3] },
+  { bitdiff: [2, 3] },
+  { bitor: [2, { sum: [1, 1] }] },
 ];

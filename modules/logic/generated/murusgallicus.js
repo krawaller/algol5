@@ -52,6 +52,8 @@ const groupLayers2 = {
     ["units", "myunits", "catapults", "mycatapults"]
   ]
 };
+const prefixes1 = ["neutral", "my", "opp"];
+const prefixes2 = ["neutral", "opp", "my"];
 const emptyArtifactLayers_basic = {
   firetargets: {},
   movetargets: {},

@@ -48,4 +48,9 @@ const tests: AlgolBool<AlgolTestBlob>[] = [
   { truthypos: "mymark" },
   { falsypos: "mymark" },
   { lessthan: [2, 3] },
+  { hascommonbits: [2, { sum: [2, 3] }] },
+  { horisontal: 2 },
+  { vertical: ["dir"] },
+  { uphill: 3 },
+  { downhill: 7 },
 ];

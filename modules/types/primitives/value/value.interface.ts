@@ -12,6 +12,24 @@ export interface AlgolValRead<Blob extends AlgolGameBlobAnon> {
   read: [AlgolSet<Blob>, AlgolPos<Blob>, AlgolVal<Blob, string>];
 }
 
+export interface AlgolValAddTo<Blob extends AlgolGameBlobAnon> {
+  addto: [
+    AlgolSet<Blob>,
+    AlgolPos<Blob>,
+    AlgolVal<Blob, string>,
+    AlgolVal<Blob, number>
+  ];
+}
+
+export interface AlgolValAddBitsTo<Blob extends AlgolGameBlobAnon> {
+  addbitsto: [
+    AlgolSet<Blob>,
+    AlgolPos<Blob>,
+    AlgolVal<Blob, string>,
+    AlgolVal<Blob, number>
+  ];
+}
+
 export interface AlgolValLoopRead<Blob extends AlgolGameBlobAnon> {
   loopread: AlgolVal<Blob, string>;
 }
@@ -70,4 +88,24 @@ export interface AlgolValPosX<Blob extends AlgolGameBlobAnon> {
 
 export interface AlgolValPosY<Blob extends AlgolGameBlobAnon> {
   posy: AlgolPos<Blob>;
+}
+
+export interface AlgolValHighest<Blob extends AlgolGameBlobAnon> {
+  highest: AlgolVal<Blob, number>[];
+}
+
+export interface AlgolValLowest<Blob extends AlgolGameBlobAnon> {
+  lowest: AlgolVal<Blob, number>[];
+}
+
+export interface AlgolValBitAnd<Blob extends AlgolGameBlobAnon> {
+  bitand: AlgolVal<Blob, number>[];
+}
+
+export interface AlgolValBitOr<Blob extends AlgolGameBlobAnon> {
+  bitor: AlgolVal<Blob, number>[];
+}
+
+export interface AlgolValBitDiff<Blob extends AlgolGameBlobAnon> {
+  bitdiff: AlgolVal<Blob, number>[];
 }

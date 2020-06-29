@@ -44,6 +44,8 @@ const groupLayers2 = {
   ],
   piases: [["units"], ["units", "oppunits"], ["units", "myunits"]]
 };
+const prefixes1 = ["neutral", "my", "opp"];
+const prefixes2 = ["neutral", "opp", "my"];
 const emptyArtifactLayers_basic = {
   swap2step: {},
   swap1steps: {},

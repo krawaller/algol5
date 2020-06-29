@@ -53,6 +53,8 @@ const groupLayers2 = {
     ["units", "myunits", "kings"]
   ]
 };
+const prefixes1 = ["neutral", "my", "opp"];
+const prefixes2 = ["neutral", "opp", "my"];
 const game = {
   gameId: "scatter",
   commands: { move: {}, north: {}, east: {}, south: {}, west: {} },

@@ -78,6 +78,8 @@ const groupLayers2 = {
     ["units", "myunits", "leaderdiag", "myleaderdiag"]
   ]
 };
+const prefixes1 = ["neutral", "my", "opp"];
+const prefixes2 = ["neutral", "opp", "my"];
 const emptyArtifactLayers_basic = { movetargets: {} };
 const game = {
   gameId: "kachitknight",

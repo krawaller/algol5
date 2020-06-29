@@ -17,6 +17,13 @@ import {
   AlgolValLoopReadAnon,
   AlgolValPosXAnon,
   AlgolValPosYAnon,
+  AlgolValAddToAnon,
+  AlgolValAddBitsToAnon,
+  AlgolValHighestAnon,
+  AlgolValLowestAnon,
+  AlgolValBitAndAnon,
+  AlgolValBitDiffAnon,
+  AlgolValBitOrAnon,
 } from "./value.anon";
 
 export function isAlgolValValue(expr: AlgolValAnon): expr is AlgolValValueAnon {
@@ -101,4 +108,42 @@ export function isAlgolValPosX(expr: AlgolValAnon): expr is AlgolValPosXAnon {
 
 export function isAlgolValPosY(expr: AlgolValAnon): expr is AlgolValPosYAnon {
   return (expr as AlgolValPosYAnon).posy !== undefined;
+}
+
+export function isAlgolValAddTo(expr: AlgolValAnon): expr is AlgolValAddToAnon {
+  return (expr as AlgolValAddToAnon).addto !== undefined;
+}
+
+export function isAlgolValAddBitsTo(
+  expr: AlgolValAnon
+): expr is AlgolValAddBitsToAnon {
+  return (expr as AlgolValAddBitsToAnon).addbitsto !== undefined;
+}
+
+export function isAlgolValHighest(
+  expr: AlgolValAnon
+): expr is AlgolValHighestAnon {
+  return (expr as AlgolValHighestAnon).highest !== undefined;
+}
+
+export function isAlgolValLowest(
+  expr: AlgolValAnon
+): expr is AlgolValLowestAnon {
+  return (expr as AlgolValLowestAnon).lowest !== undefined;
+}
+
+export function isAlgolValBitAnd(
+  expr: AlgolValAnon
+): expr is AlgolValBitAndAnon {
+  return (expr as AlgolValBitAndAnon).bitand !== undefined;
+}
+
+export function isAlgolValBitDiff(
+  expr: AlgolValAnon
+): expr is AlgolValBitDiffAnon {
+  return (expr as AlgolValBitDiffAnon).bitdiff !== undefined;
+}
+
+export function isAlgolValBitOr(expr: AlgolValAnon): expr is AlgolValBitOrAnon {
+  return (expr as AlgolValBitOrAnon).bitor !== undefined;
 }

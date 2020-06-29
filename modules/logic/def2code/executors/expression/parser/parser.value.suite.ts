@@ -36,6 +36,9 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
             { expr: { sum: [1, 2, { value: 4 }] }, res: 7 },
             { expr: { reldir: [1, 3] }, res: 3 },
             { expr: { reldir: [2, 1] }, res: 2 },
+            { expr: { bitor: [1, { sum: [1, 1] }, 2, 8] }, res: 11 },
+            { expr: { bitdiff: [7, 9] }, res: 6 },
+            { expr: { bitand: [1, 3] }, res: 1 },
           ],
         },
         { context: { DIR: 666 }, tests: [{ expr: ["dir"], res: 666 }] },
@@ -61,9 +64,37 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
         {
           context: {
             MARKS: { mymark: "a1" },
-            UNITLAYERS: { units: { a1: { id: 666 } } },
+            UNITLAYERS: { units: { a1: { id: 666, gnarp: 5 } } },
           },
-          tests: [{ expr: { idat: "mymark" }, res: 666 }],
+          tests: [
+            { expr: { idat: "mymark" }, res: 666 },
+            { expr: { addto: ["units", "mymark", "id", 1] }, res: 667 },
+            { expr: { addto: ["units", "mymark", "poop", 7] }, res: 7 },
+            { expr: { addbitsto: ["units", "mymark", "gnarp", 1] }, res: 5 },
+            { expr: { addbitsto: ["units", "mymark", "gnarp", 2] }, res: 7 },
+            {
+              expr: {
+                highest: [
+                  3,
+                  { read: ["units", "mymark", "gnarp"] },
+                  { read: ["units", "mymark", "nonexistent"] },
+                  4,
+                ],
+              },
+              res: 5,
+            },
+            {
+              expr: {
+                lowest: [
+                  3,
+                  { read: ["units", "mymark", "gnarp"] },
+                  { read: ["units", "mymark", "nonexistent"] },
+                  4,
+                ],
+              },
+              res: 3,
+            },
+          ],
         },
         {
           context: {

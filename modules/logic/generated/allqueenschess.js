@@ -24,6 +24,8 @@ const groupLayers1 = {
 const groupLayers2 = {
   queens: [["units"], ["units", "oppunits"], ["units", "myunits"]]
 };
+const prefixes1 = ["neutral", "my", "opp"];
+const prefixes2 = ["neutral", "opp", "my"];
 const emptyArtifactLayers_basic = { movetargets: {}, winline: {} };
 const game = {
   gameId: "allqueenschess",

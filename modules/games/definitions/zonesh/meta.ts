@@ -3,11 +3,13 @@ import { ZoneshDefinition } from "./_types";
 const zoneshMeta: ZoneshDefinition["meta"] = {
   id: "zonesh",
   name: "Zonesh",
-  tags: [],
-  tagline: "An awesome game!",
-  source: "http://some.url.to.rules",
+  author: "Dan Troyka",
+  tags: ["troyka", "infiltration"],
+  tagline: "Where zones dictate movement and winner",
+  source:
+    "http://www.zillions-of-games.com/cgi-bin/zilligames/submissions.cgi/64903?do=show;id=425",
   code: "h",
-  slug: "zonesh"
+  slug: "zonesh",
 };
 
 export default zoneshMeta;

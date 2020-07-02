@@ -40,8 +40,8 @@ type ZoneshBattleVar = never;
 type ZoneshTurnPos = never;
 type ZoneshTurnVar = never;
 
-type ZoneshBoardName = "basic";
-type ZoneshSetupName = "basic";
+type ZoneshBoardName = "basic" | "mini";
+type ZoneshSetupName = "basic" | "mini";
 type ZoneshRulesetName = "basic";
 type ZoneshVariantName = "regular";
 

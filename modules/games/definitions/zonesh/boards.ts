@@ -23,6 +23,20 @@ const zoneshBoardBook: ZoneshDefinition["boards"] = {
       },
     },
   },
+  mini: {
+    height: 5,
+    width: 5,
+    terrain: {
+      throne: {
+        1: ["a1"],
+        2: ["e5"],
+      },
+      base: {
+        1: ["a2", "a3", "b1", "b2", "c1"],
+        2: ["c5", "d4", "d5", "e3", "e4"],
+      },
+    },
+  },
 };
 
 export default zoneshBoardBook;

@@ -53,4 +53,5 @@ const tests: AlgolBool<AlgolTestBlob>[] = [
   { vertical: ["dir"] },
   { uphill: 3 },
   { downhill: 7 },
+  { bitcontains: [2, { sum: [1, 2] }] },
 ];

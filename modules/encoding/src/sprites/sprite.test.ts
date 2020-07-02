@@ -22,6 +22,10 @@ const tests: Test[] = [
       { pos: "a8", unit: { icon: "knight", owner: 2 }, mark: "mark" },
     ],
   },
+  {
+    desc: "with double characters",
+    entities: [{ pos: "a11", mark: "pot" }],
+  },
 ];
 
 describe("encoding board entities", () => {

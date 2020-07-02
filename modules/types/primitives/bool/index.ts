@@ -33,6 +33,7 @@ import {
   AlgolBoolHorisontal,
   AlgolBoolUphill,
   AlgolBoolVertical,
+  AlgolBoolBitContains,
 } from "./bool.interfaces";
 
 import { AlgolExpression } from "../../";
@@ -77,4 +78,5 @@ type AlgolBoolInner<Blob extends AlgolGameBlobAnon> =
   | AlgolBoolUphill<Blob>
   | AlgolBoolDownhill<Blob>
   | AlgolBoolHorisontal<Blob>
-  | AlgolBoolVertical<Blob>;
+  | AlgolBoolVertical<Blob>
+  | AlgolBoolBitContains<Blob>;

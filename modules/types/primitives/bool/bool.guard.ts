@@ -30,6 +30,7 @@ import {
   AlgolBoolHorisontalAnon,
   AlgolBoolUphillAnon,
   AlgolBoolVerticalAnon,
+  AlgolBoolBitContainsAnon,
 } from "./bool.anon";
 
 export function isAlgolBoolNot(expr: AlgolBoolAnon): expr is AlgolBoolNotAnon {
@@ -204,4 +205,10 @@ export function isAlgolBoolVertical(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolVerticalAnon {
   return (expr as AlgolBoolVerticalAnon).vertical !== undefined;
+}
+
+export function isAlgolBoolBitContains(
+  expr: AlgolBoolAnon
+): expr is AlgolBoolBitContainsAnon {
+  return (expr as AlgolBoolBitContainsAnon).bitcontains !== undefined;
 }

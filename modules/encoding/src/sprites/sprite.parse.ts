@@ -6,7 +6,11 @@ export const parseSprites = (str: string): AlgolSprite[] => {
   let x = 1;
   let y = 1;
   const ret: AlgolSprite[] = [];
-  const reprs = str.split("").map(c => codes[c]);
+  const reprs = str
+    .replace(/([^€])/g, "$1#")
+    .split("#")
+    .slice(0, -1) // because last is empty now
+    .map(c => codes[c]);
   let previous: AlgolSpriteCode | null = null;
   for (const code of reprs) {
     let pos = coords2pos({ x, y });

@@ -8,8 +8,8 @@ import { AlgolOffset } from "./offset";
 import { AlgolGameBlobAnon } from "../../blob";
 
 export type AlgolBoard<Blob extends AlgolGameBlobAnon> = {
-  height: 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-  width: 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+  height: 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+  width: 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
   offsets?: AlgolOffset[];
   offset?: AlgolOffset;
   terrain?: { [terrain in Blob["terrain"]]: TerrainDef<Blob> };

@@ -31,6 +31,7 @@ import {
   isAlgolBoolDownhill,
   isAlgolBoolHorisontal,
   isAlgolBoolVertical,
+  isAlgolBoolBitContains,
 } from "../../../../../types";
 
 import { makeParser } from "../";
@@ -209,6 +210,14 @@ export default function parseVal(
       hascommonbits: [first, second],
     } = expr;
     return `Boolean(${parser.val(first)} & ${parser.val(second)})`;
+  }
+  if (isAlgolBoolBitContains(expr)) {
+    const {
+      bitcontains: [haystack, needle],
+    } = expr;
+    return `((${parser.val(haystack)} & ${parser.val(needle)}) === ${parser.val(
+      needle
+    )})`;
   }
   throw new Error("Unknown bool expression: " + JSON.stringify(expr || {}));
 }

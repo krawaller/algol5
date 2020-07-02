@@ -17,18 +17,37 @@ const tunnelerInstructions: TunnelerDefinition["instructions"] = {
     line: [
       "Press",
       "move",
-      "to move",
-      { unitat: "selectunit" },
       "to",
       {
         ifelse: [
           { anyat: ["rocks", "selectmovetarget"] },
-          { line: ["dig", { unitat: "selectmovetarget" }] },
+          {
+            line: [
+              "make",
+              { unitat: "selectunit" },
+              "dig",
+              { unitat: "selectmovetarget" },
+            ],
+          },
           {
             ifelse: [
               { anyat: ["oppunits", "selectmovetarget"] },
-              { line: ["capture", { unitat: "selectmovetarget" }] },
-              "selectmovetarget",
+              {
+                line: [
+                  "make",
+                  { unitat: "selectunit" },
+                  "capture",
+                  { unitat: "selectmovetarget" },
+                ],
+              },
+              {
+                line: [
+                  { text: "move" },
+                  { unitat: "selectunit" },
+                  "to",
+                  "selectmovetarget",
+                ],
+              },
             ],
           },
         ],

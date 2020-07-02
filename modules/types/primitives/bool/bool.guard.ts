@@ -205,6 +205,7 @@ export function isAlgolBoolVertical(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolVerticalAnon {
   return (expr as AlgolBoolVerticalAnon).vertical !== undefined;
+}
 
 export function isAlgolBoolBitContains(
   expr: AlgolBoolAnon

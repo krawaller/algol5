@@ -491,18 +491,20 @@ const game = {
         line: [
           { text: "Press" },
           { command: "move" },
-          { text: "to move" },
-          {
-            unit: [
-              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
-              MARKS.selectunit
-            ]
-          },
           { text: "to" },
           UNITLAYERS.rocks[MARKS.selectmovetarget]
             ? collapseContent({
                 line: [
+                  { text: "make" },
+                  {
+                    unit: [
+                      iconMapping[
+                        (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                      ],
+                      (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                      MARKS.selectunit
+                    ]
+                  },
                   { text: "dig" },
                   {
                     unit: [
@@ -518,6 +520,16 @@ const game = {
             : UNITLAYERS.oppunits[MARKS.selectmovetarget]
             ? collapseContent({
                 line: [
+                  { text: "make" },
+                  {
+                    unit: [
+                      iconMapping[
+                        (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                      ],
+                      (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                      MARKS.selectunit
+                    ]
+                  },
                   { text: "capture" },
                   {
                     unit: [
@@ -530,7 +542,22 @@ const game = {
                   }
                 ]
               })
-            : { pos: MARKS.selectmovetarget }
+            : collapseContent({
+                line: [
+                  { text: "move" },
+                  {
+                    unit: [
+                      iconMapping[
+                        (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                      ],
+                      (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                      MARKS.selectunit
+                    ]
+                  },
+                  { text: "to" },
+                  { pos: MARKS.selectmovetarget }
+                ]
+              })
         ]
       });
     },
@@ -570,18 +597,20 @@ const game = {
         line: [
           { text: "Press" },
           { command: "move" },
-          { text: "to move" },
-          {
-            unit: [
-              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
-              MARKS.selectunit
-            ]
-          },
           { text: "to" },
           UNITLAYERS.rocks[MARKS.selectmovetarget]
             ? collapseContent({
                 line: [
+                  { text: "make" },
+                  {
+                    unit: [
+                      iconMapping[
+                        (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                      ],
+                      (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                      MARKS.selectunit
+                    ]
+                  },
                   { text: "dig" },
                   {
                     unit: [
@@ -597,6 +626,16 @@ const game = {
             : UNITLAYERS.oppunits[MARKS.selectmovetarget]
             ? collapseContent({
                 line: [
+                  { text: "make" },
+                  {
+                    unit: [
+                      iconMapping[
+                        (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                      ],
+                      (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                      MARKS.selectunit
+                    ]
+                  },
                   { text: "capture" },
                   {
                     unit: [
@@ -609,7 +648,22 @@ const game = {
                   }
                 ]
               })
-            : { pos: MARKS.selectmovetarget }
+            : collapseContent({
+                line: [
+                  { text: "move" },
+                  {
+                    unit: [
+                      iconMapping[
+                        (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                      ],
+                      (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                      MARKS.selectunit
+                    ]
+                  },
+                  { text: "to" },
+                  { pos: MARKS.selectmovetarget }
+                ]
+              })
         ]
       });
     }

@@ -87,6 +87,8 @@ export const testSuite: AlgolExpressionSuite<
             { expr: { or: [["false"], ["false"], ["true"]] }, res: true },
             { expr: { not: ["true"] }, res: false },
             { expr: { not: ["false"] }, res: true },
+            { expr: { bitcontains: [3, { sum: [1, 1] }] }, res: true },
+            { expr: { bitcontains: [4, { sum: [1, 1] }] }, res: false },
           ],
         },
         {

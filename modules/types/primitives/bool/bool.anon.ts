@@ -31,6 +31,7 @@ import {
   AlgolBoolHorisontal,
   AlgolBoolDownhill,
   AlgolBoolUphill,
+  AlgolBoolBitContains,
 } from "./bool.interfaces";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -76,3 +77,4 @@ export type AlgolBoolUphillAnon = AlgolBoolUphill<AlgolGameBlobAnon>;
 export type AlgolBoolDownhillAnon = AlgolBoolDownhill<AlgolGameBlobAnon>;
 export type AlgolBoolHorisontalAnon = AlgolBoolHorisontal<AlgolGameBlobAnon>;
 export type AlgolBoolVerticalAnon = AlgolBoolVertical<AlgolGameBlobAnon>;
+export type AlgolBoolBitContainsAnon = AlgolBoolBitContains<AlgolGameBlobAnon>;

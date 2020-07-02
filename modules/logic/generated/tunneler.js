@@ -52,6 +52,8 @@ const groupLayers2 = {
     ["units", "myunits", "rocks"]
   ]
 };
+const prefixes1 = ["neutral", "my", "opp"];
+const prefixes2 = ["neutral", "opp", "my"];
 const emptyArtifactLayers_basic = { bitsum: {}, movetargets: {} };
 const game = {
   gameId: "tunneler",
@@ -676,9 +678,80 @@ const game = {
       desc: "regular",
       code: "r",
       arr: {
-        setup: {},
-        marks: [],
-        potentialMarks: []
+        setup: {
+          rocks: {
+            "0": [
+              {
+                holerect: [
+                  "a1",
+                  "k11",
+                  "c2",
+                  "e2",
+                  "g2",
+                  "h2",
+                  "i2",
+                  "g3",
+                  "i3",
+                  "d4",
+                  "e4",
+                  "g4",
+                  "h4",
+                  "i4",
+                  "j4",
+                  "k4",
+                  "c5",
+                  "d5",
+                  "i5",
+                  "k5",
+                  "c6",
+                  "e6",
+                  "f6",
+                  "g6",
+                  "h6",
+                  "i6",
+                  "k6",
+                  "b7",
+                  "c7",
+                  "e7",
+                  "k7",
+                  "b8",
+                  "e8",
+                  "g8",
+                  "h8",
+                  "i8",
+                  "k8",
+                  "b9",
+                  "c9",
+                  "g9",
+                  "i9",
+                  "j9",
+                  "k9",
+                  "c10",
+                  "e10",
+                  "g10",
+                  "i10",
+                  "c11",
+                  "d11",
+                  "e11",
+                  "f11",
+                  "g11",
+                  "h11",
+                  "i11"
+                ]
+              }
+            ]
+          },
+          foremen: {
+            "1": ["c2", "h2"],
+            "2": ["i8", "i10"]
+          },
+          tunnelers: {
+            "1": ["e2", "g3", "j9"],
+            "2": ["e10", "g11", "i3"]
+          }
+        },
+        marks: ["i3"],
+        potentialMarks: ["i2", "i1", "i4", "i5", "i6", "i7"]
       }
     }
   ],

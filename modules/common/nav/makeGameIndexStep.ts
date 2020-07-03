@@ -1,11 +1,11 @@
 import { AlgolNavStep } from "../../types";
-import { tagIndexStep } from "./tagIndexStep";
+import { makeTagIndexStep } from "./makeTagIndexStep";
 import { gameCount } from "../utils";
 
-export const gameIndexStep: AlgolNavStep = {
+export const makeGameIndexStep = (): AlgolNavStep => ({
   id: "gameindex",
   title: "Games",
   desc: `List of all ${gameCount()} games`,
   url: "/games",
-  links: [tagIndexStep],
-};
+  links: [makeTagIndexStep()],
+});

@@ -1,9 +1,9 @@
 import { AlgolNav } from "../../types";
 import { gameIndexNav } from "./gameIndexNav";
-import { tagIndexStep } from "./tagIndexStep";
+import { makeTagIndexStep } from "./makeTagIndexStep";
 
 export const tagIndexNav: AlgolNav = {
   key: "tagindexnav",
   crumbs: gameIndexNav.crumbs.concat(gameIndexNav.me),
-  me: tagIndexStep,
+  me: makeTagIndexStep(),
 };

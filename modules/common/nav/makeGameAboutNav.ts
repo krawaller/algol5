@@ -1,7 +1,7 @@
 import { AlgolGameBlobAnon, AlgolMeta, AlgolNav } from "../../types";
 import { makeGameAboutStep } from "./makeGameAboutStep";
-import { homeStep } from "./homeStep";
-import { gameIndexStep } from "./gameIndexStep";
+import { makeHomeStep } from "./makeHomeStep";
+import { makeGameIndexStep } from "./makeGameIndexStep";
 import { makeGameStep } from "./makeGameStep";
 
 export const makeGameAboutNav = (
@@ -9,5 +9,5 @@ export const makeGameAboutNav = (
 ): AlgolNav => ({
   key: `game-about-${meta.id}`,
   me: makeGameAboutStep(meta),
-  crumbs: [homeStep, gameIndexStep, makeGameStep(meta)],
+  crumbs: [makeHomeStep(), makeGameIndexStep(), makeGameStep(meta)],
 });

@@ -1,10 +1,17 @@
 import { BattleNavActions, AlgolNavStep } from "../../types";
 
+type MakeSessionHistoryOpts = {
+  battleNavActions: BattleNavActions;
+  sessionId?: string;
+  gameId: string;
+};
+
 export const makeSessionHistoryStep = (
-  battleNavActions: BattleNavActions
+  opts: MakeSessionHistoryOpts
 ): AlgolNavStep => ({
+  id: `game-${opts.gameId}-session-${opts.sessionId}-history`,
   title: "History",
   desc: "See previous moves in this session",
-  onClick: battleNavActions.toHistory,
+  onClick: opts.battleNavActions.toHistory,
   links: [],
 });

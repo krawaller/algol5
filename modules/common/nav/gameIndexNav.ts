@@ -1,9 +1,9 @@
 import { AlgolNav } from "../../types";
-import { homeStep } from "./homeStep";
-import { gameIndexStep } from "./gameIndexStep";
+import { makeHomeStep } from "./makeHomeStep";
+import { makeGameIndexStep } from "./makeGameIndexStep";
 
 export const gameIndexNav: AlgolNav = {
   key: "gameindexnav",
-  crumbs: [homeStep],
-  me: gameIndexStep,
+  crumbs: [makeHomeStep()],
+  me: makeGameIndexStep(),
 };

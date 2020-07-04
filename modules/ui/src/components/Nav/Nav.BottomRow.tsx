@@ -1,4 +1,10 @@
-import React, { FunctionComponent, useState, useEffect, useMemo } from "react";
+import React, {
+  FunctionComponent,
+  useState,
+  useEffect,
+  useMemo,
+  Fragment,
+} from "react";
 import classNames from "classnames";
 import { TransitionGroup } from "react-transition-group";
 import Transition, {
@@ -8,6 +14,7 @@ import { AlgolNav, AppActions } from "../../../../types";
 import navCss from "./Nav.cssProxy";
 import navBottomCss from "./Nav.Bottom.cssProxy";
 import { NavButton } from "./Nav.Button";
+import { Arrow } from "../Arrow";
 
 type Dir = "up" | "down" | "same";
 type Pos = "nearer" | "further" | "same";
@@ -17,6 +24,7 @@ export type NavBottomRowProps = {
   actions: AppActions;
   fullNav?: boolean;
   onToggle?: () => void;
+  hasBackBtn?: boolean;
 };
 
 type NavBottomRowState = {
@@ -29,7 +37,7 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
     depth: -1,
     dir: "same",
   });
-  const { nav, actions, onToggle, fullNav } = props;
+  const { nav, actions, onToggle, fullNav, hasBackBtn } = props;
   const { crumbs, key, me } =
     nav ||
     (({
@@ -38,6 +46,10 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
       key: Math.random(),
     } as unknown) as AlgolNav);
   const { links } = me;
+  const showLinks = useMemo(
+    () => (crumbs.length ? crumbs.slice(-1) : []).concat(links),
+    [links, crumbs]
+  );
   const count = crumbs.length;
   useEffect(
     () =>
@@ -63,14 +75,21 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
           return (
             <div className={whatsMyClass(status, pos)}>
               <div className={classNames(navCss.navRow, navCss.navAlways)}>
-                <div className={navCss.navSideButtonContainer}></div>
-                {links.map(btn => (
-                  <NavButton
-                    key={btn.title}
-                    step={btn}
-                    actions={actions}
-                    highlight={btn.title === "Games"}
-                  />
+                <div className={navCss.navSideButtonContainer}>
+                  {hasBackBtn && fullNav && <Arrow layout="northeast" />}
+                </div>
+                <div className={navCss.navFiller}>
+                  {hasBackBtn && fullNav && <Arrow layout="eastwest" />}
+                </div>
+                {showLinks.map((btn, n) => (
+                  <Fragment key={btn.title}>
+                    <NavButton
+                      step={btn}
+                      actions={actions}
+                      type={hasBackBtn && n === 0 ? "back" : "normal"}
+                    />
+                    <div className={navCss.navFiller}></div>
+                  </Fragment>
                 ))}
                 <div className={navCss.navSideButtonContainer} />
               </div>

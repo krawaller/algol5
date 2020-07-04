@@ -12,7 +12,7 @@ type NavLinkArrowRowProps = {
 
 export const NavLinkArrowRow: FunctionComponent<NavLinkArrowRowProps> = props => {
   const { nbrOfLinks, hasBackBtn } = props;
-  const pieceCount = nbrOfLinks ? nbrOfLinks * 2 + 1 : 0;
+  const pieceCount = nbrOfLinks ? nbrOfLinks * 2 + (hasBackBtn ? 3 : 1) : 0;
   const middle = Math.ceil(pieceCount / 2);
   const pieces = [];
   for (let i = 1; i <= pieceCount; i++) {
@@ -21,8 +21,12 @@ export const NavLinkArrowRow: FunctionComponent<NavLinkArrowRowProps> = props =>
       pieces.push(
         <div key={i} className={navCss.navFiller}>
           {i === middle ? (
-            <ArrowMulti northwest northeast />
-          ) : i > 1 && i < pieceCount ? (
+            hasBackBtn ? (
+              <Arrow layout="northeast" />
+            ) : (
+              <ArrowMulti northwest northeast />
+            )
+          ) : i > 1 && i < pieceCount && !(i < middle && hasBackBtn) ? (
             <Arrow layout="eastwest" />
           ) : null}
         </div>
@@ -32,7 +36,7 @@ export const NavLinkArrowRow: FunctionComponent<NavLinkArrowRowProps> = props =>
       pieces.push(
         <div key={i} className={navCss.navButton}>
           {i < middle ? (
-            i === 2 ? (
+            hasBackBtn ? null : i === 2 ? (
               <Arrow layout="southeast" head="south" />
             ) : (
               <ArrowMulti southeast eastwest head="south" />
@@ -41,7 +45,12 @@ export const NavLinkArrowRow: FunctionComponent<NavLinkArrowRowProps> = props =>
             nbrOfLinks === 1 ? (
               <Arrow layout="northsouth" head="south" />
             ) : (
-              <ArrowMulti head="south" northsouth northeast northwest />
+              <ArrowMulti
+                head="south"
+                northsouth
+                northeast
+                northwest={!hasBackBtn}
+              />
             )
           ) : i === pieceCount - 1 ? (
             <Arrow layout="southwest" head="south" />

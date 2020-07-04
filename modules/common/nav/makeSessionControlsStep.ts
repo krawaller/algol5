@@ -1,19 +1,27 @@
 import { BattleNavActions, AlgolNavStep } from "../../types";
 
+type MakeSessionControlsOpts = {
+  battleNavActions: BattleNavActions;
+  sessionId?: string;
+  gameId: string;
+  isNew?: boolean;
+};
+
 export const makeSessionControlsStep = (
-  battleNavActions: BattleNavActions,
-  isNew?: boolean
+  opts: MakeSessionControlsOpts
 ): AlgolNavStep =>
-  isNew
+  opts.isNew
     ? {
+        id: `game-${opts.gameId}-new`,
         title: "New battle",
         desc: "This battle just begun!",
-        onClick: battleNavActions.toBattleControls,
+        onClick: opts.battleNavActions.toBattleControls,
         links: [],
       }
     : {
+        id: `game-${opts.gameId}-session-${opts.sessionId}-play`,
         title: "Play",
         desc: "Make a move",
-        onClick: battleNavActions.toBattleControls,
+        onClick: opts.battleNavActions.toBattleControls,
         links: [],
       };

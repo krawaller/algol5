@@ -25,9 +25,22 @@ export const makeSessionNav = (opts: MakeSessionNavOpts): AlgolNav => {
   gameNav.me.onClick = battleNavActions.toGameLobby;
   delete gameNav.me.url;
   const crumbs = gameNav.crumbs.concat(gameNav.me);
-  const lobbyStep = makeSessionLobbyStep(opts);
-  const historyStep = makeSessionHistoryStep(battleNavActions);
-  const controlsStep = makeSessionControlsStep(battleNavActions, isNew);
+  const lobbyStep = makeSessionLobbyStep({
+    session,
+    gameId: meta.id,
+    battleNavActions,
+  });
+  const historyStep = makeSessionHistoryStep({
+    gameId: meta.id,
+    battleNavActions,
+    sessionId: session.id,
+  });
+  const controlsStep = makeSessionControlsStep({
+    battleNavActions,
+    isNew,
+    gameId: meta.id,
+    sessionId: session.id,
+  });
 
   switch (mode) {
     case "battlelobby":

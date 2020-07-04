@@ -1,8 +1,8 @@
 import { AlgolNav } from "../../types";
-import { homeStep } from "./homeStep";
+import { makeHomeStep } from "./makeHomeStep";
 
 export const homeNav: AlgolNav = {
   key: "home",
   crumbs: [],
-  me: homeStep,
+  me: makeHomeStep(),
 };

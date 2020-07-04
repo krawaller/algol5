@@ -10,13 +10,14 @@ type NavButtonProps = {
   active?: boolean;
   mute?: boolean;
   highlight?: boolean;
+  type?: "back" | "sibling" | "normal";
 };
 
 const noop = () => {};
 
 export const NavButton: FunctionComponent<NavButtonProps> = props => {
-  const { actions, step, active, mute, highlight } = props;
-  const { title, desc, url } = step;
+  const { actions, step, active, mute, highlight, type = "normal" } = props;
+  const { title, shortTitle, desc, url } = step;
   const handleClick = useNavHandler({ actions, step });
   return (
     <div
@@ -33,7 +34,7 @@ export const NavButton: FunctionComponent<NavButtonProps> = props => {
         title={desc}
         onClick={mute ? noop : handleClick}
       >
-        {title}
+        {shortTitle || title}
       </a>
     </div>
   );

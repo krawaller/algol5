@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, Fragment } from "react";
 import { AlgolNavStep, AppActions } from "../../../../types";
 
 import navCss from "./Nav.cssProxy";
@@ -42,14 +42,18 @@ export const NavStepRow: FunctionComponent<NavStepRowProps> = props => {
         />
       </div>
       <div className={classNames(navCss.navFiller, navStepCss.navStepLinkBox)}>
+        <div className={navCss.navFiller} />
         {!current &&
           step.links
             .filter(l => l.title != skipLink)
             .map(l => (
-              <div className={navStepCss.navStepLinkEntry} key={l.title}>
-                <Arrow head="east" layout="eastwest" />
-                <NavButton step={l} actions={actions} mute={mute} />
-              </div>
+              <Fragment key={l.title}>
+                <div className={navStepCss.navStepLinkEntry}>
+                  <Arrow head="east" layout="eastwest" />
+                  <NavButton step={l} actions={actions} mute={mute} />
+                </div>
+                <div className={navCss.navFiller} />
+              </Fragment>
             ))}
       </div>
     </div>

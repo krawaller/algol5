@@ -55,6 +55,7 @@ export const Nav: FunctionComponent<NavProps> = props => {
         actions={actions}
         active={fullNav}
         step={{
+          id: "toggleNav",
           desc: fullNav ? "Hide full nav" : "Show full nav",
           title: "N",
           onClick: () => setFullNav(!fullNav),
@@ -63,22 +64,6 @@ export const Nav: FunctionComponent<NavProps> = props => {
       />
     ),
     [fullNav]
-  );
-  const backBtn = useMemo(
-    () =>
-      hasUpBtn ? (
-        <NavButton
-          actions={actions}
-          step={{
-            desc: "Go Up",
-            title: "↑",
-            onClick: crumbs[crumbs.length - 1].onClick,
-            url: crumbs[crumbs.length - 1].url,
-            links: [],
-          }}
-        />
-      ) : null,
-    [crumbs]
   );
   return (
     <div
@@ -118,7 +103,7 @@ export const Nav: FunctionComponent<NavProps> = props => {
           mute={!fullNav}
         />
         <NavLinkArrowRow nbrOfLinks={me.links.length} hasBackBtn={hasUpBtn} />
-        <NavBottomRow {...props} />
+        <NavBottomRow {...props} hasBackBtn={hasUpBtn} fullNav={fullNav} />
         <div
           className={classNames(
             css.navCompassBtnContainer,
@@ -126,14 +111,6 @@ export const Nav: FunctionComponent<NavProps> = props => {
           )}
         >
           {mapBtn}
-        </div>
-        <div
-          className={classNames(
-            css.navBackButtonContainer,
-            css.navSideButtonContainer
-          )}
-        >
-          {backBtn}
         </div>
       </div>
     </div>

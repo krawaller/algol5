@@ -7,6 +7,7 @@ export type AlgolNav = {
 export type AlgolNavStep = {
   id: string;
   title: string;
+  shortTitle?: string;
   desc: string;
   url?: string;
   links: AlgolNavStep[];

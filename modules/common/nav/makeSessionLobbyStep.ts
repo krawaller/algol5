@@ -18,6 +18,7 @@ export const makeSessionLobbyStep = (
   return {
     id: `game-${gameId}-session-${session.id}-history`,
     title: `Session ${session.id}`,
+    shortTitle: "Manage",
     desc,
     onClick: battleNavActions.toBattleLobby,
     links: [

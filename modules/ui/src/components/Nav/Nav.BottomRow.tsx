@@ -86,8 +86,7 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
                     <NavButton
                       step={btn}
                       actions={actions}
-                      prefix={hasBackBtn && n === 0 ? "↑" : null}
-                      // highlight={btn.title === "Games"}
+                      type={hasBackBtn && n === 0 ? "back" : "normal"}
                     />
                     <div className={navCss.navFiller}></div>
                   </Fragment>

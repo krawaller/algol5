@@ -24,3 +24,18 @@
 .navBottomNearer {
   transform: translate3d(0, 40px, 0) scale(1.5, 1.5);
 }
+
+.navBottomBackHintContainer {
+  position: relative;
+  --hint-breadth: 11px;
+}
+
+.navBottomBackHint {
+  bottom: calc(-1 * var(--hint-breadth));
+  position: absolute;
+  right: 0;
+  width: 33px;
+  top: calc(-1 * var(--hint-breadth));
+  transform: scale(0.8, 0.8);
+  transform-origin: right;
+}

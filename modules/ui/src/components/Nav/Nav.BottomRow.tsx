@@ -78,8 +78,20 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
                 <div className={navCss.navSideButtonContainer}>
                   {hasBackBtn && fullNav && <Arrow layout="northeast" />}
                 </div>
-                <div className={navCss.navFiller}>
-                  {hasBackBtn && fullNav && <Arrow layout="eastwest" />}
+                <div
+                  className={classNames(
+                    navCss.navFiller,
+                    navBottomCss.navBottomBackHintContainer
+                  )}
+                >
+                  {hasBackBtn &&
+                    (fullNav ? (
+                      <Arrow layout="eastwest" />
+                    ) : (
+                      <div className={navBottomCss.navBottomBackHint}>
+                        <Arrow layout="northeast" head="north" />
+                      </div>
+                    ))}
                 </div>
                 {showLinks.map((btn, n) => (
                   <Fragment key={btn.title}>

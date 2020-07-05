@@ -96,6 +96,7 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
                 {showLinks.map((btn, n) => (
                   <Fragment key={btn.title}>
                     <NavButton
+                      key={btn.id}
                       step={btn}
                       actions={actions}
                       type={hasBackBtn && n === 0 ? "back" : "normal"}

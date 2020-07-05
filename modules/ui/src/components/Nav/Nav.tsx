@@ -1,5 +1,11 @@
 import classNames from "classnames";
-import React, { FunctionComponent, useMemo, useState, useEffect } from "react";
+import React, {
+  FunctionComponent,
+  useMemo,
+  useState,
+  useEffect,
+  Fragment,
+} from "react";
 import { AlgolNav, AppActions } from "../../../../types";
 import css from "./Nav.cssProxy";
 import { NavBottomRow } from "./Nav.BottomRow";
@@ -66,53 +72,56 @@ export const Nav: FunctionComponent<NavProps> = props => {
     [fullNav]
   );
   return (
-    <div
-      className={classNames(
-        css.navContainer,
-        fullNav && css.navFull,
-        neverNav && css.navNever
-      )}
-      // onClick={e => setFullNav(false)}
-    >
+    <Fragment>
+      <div className={css.navShadeBottom}></div>
       <div
         className={classNames(
-          css.navHomeBtnContainer,
-          css.navSideButtonContainer
+          css.navContainer,
+          fullNav && css.navFull,
+          neverNav && css.navNever
         )}
+        // onClick={e => setFullNav(false)}
       >
-        {crumbs.length > 0 && (
-          <NavButton step={{ ...crumbs[0], title: "H" }} actions={actions} />
-        )}
-      </div>
-      <NavTopRow fullNav={fullNav && crumbs.length > 0} />
-      <div className={classNames(css.navRow, css.navFiller)}>
-        {hasCrumbs && <Arrow layout="northsouth" head="south" />}
-      </div>
-      <div>
-        <NavCrumbs
-          actions={actions}
-          nav={nav}
-          mute={!fullNav}
-          hasBackBtn={hasUpBtn}
-        />
-        <NavStepRow
-          step={me}
-          back={hasUpBtn ? "pipe" : "none"}
-          current
-          actions={actions}
-          mute={!fullNav}
-        />
-        <NavLinkArrowRow nbrOfLinks={me.links.length} hasBackBtn={hasUpBtn} />
-        <NavBottomRow {...props} hasBackBtn={hasUpBtn} fullNav={fullNav} />
         <div
           className={classNames(
-            css.navCompassBtnContainer,
+            css.navHomeBtnContainer,
             css.navSideButtonContainer
           )}
         >
-          {mapBtn}
+          {crumbs.length > 0 && (
+            <NavButton step={{ ...crumbs[0], title: "H" }} actions={actions} />
+          )}
+        </div>
+        <NavTopRow fullNav={fullNav && crumbs.length > 0} />
+        <div className={classNames(css.navRow, css.navFiller)}>
+          {hasCrumbs && <Arrow layout="northsouth" head="south" />}
+        </div>
+        <div>
+          <NavCrumbs
+            actions={actions}
+            nav={nav}
+            mute={!fullNav}
+            hasBackBtn={hasUpBtn}
+          />
+          <NavStepRow
+            step={me}
+            back={hasUpBtn ? "pipe" : "none"}
+            current
+            actions={actions}
+            mute={!fullNav}
+          />
+          <NavLinkArrowRow nbrOfLinks={me.links.length} hasBackBtn={hasUpBtn} />
+          <NavBottomRow {...props} hasBackBtn={hasUpBtn} fullNav={fullNav} />
+          <div
+            className={classNames(
+              css.navCompassBtnContainer,
+              css.navSideButtonContainer
+            )}
+          >
+            {mapBtn}
+          </div>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 };

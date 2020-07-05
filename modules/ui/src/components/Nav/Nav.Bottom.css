@@ -36,6 +36,6 @@
   right: 0;
   width: 33px;
   top: calc(-1 * var(--hint-breadth));
-  transform: scale(0.8, 0.8);
+  transform: scale(0.65, 0.65);
   transform-origin: right;
 }

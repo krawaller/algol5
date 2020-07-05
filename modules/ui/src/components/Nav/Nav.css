@@ -154,7 +154,7 @@
   top: 5px;
   left: 5px;
   height: 21px;
-  z-index: 5px; /* to be above toprow */
+  z-index: 5; /* to be above toprow */
 }
 
 .navMapButtonContainer {
@@ -191,4 +191,13 @@
 .navMute {
   pointer-events: none !important;
   cursor: inherit;
+}
+
+.navShadeBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  background-color: sandybrown;
 }

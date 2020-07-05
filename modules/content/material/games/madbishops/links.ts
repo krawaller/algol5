@@ -4,4 +4,6 @@ export const links = {
   "Board Game Geek entry":
     "https://boardgamegeek.com/boardgame/69322/mad-bishops",
   "IG Game Center entry": "http://www.iggamecenter.com/info/en/madbishops.html",
+  "Super Duper Games entry":
+    "http://superdupergames.org/gameinfo.html?game=mad",
 };

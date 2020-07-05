@@ -7,6 +7,8 @@ export const links = {
     "http://www.zillionsofgames.com/cgi-bin/zilligames/submissions.cgi?do=show;id=35",
   "IG Game Center entry":
     "http://www.iggamecenter.com/info/en/breakthrough.html",
+  "Super Duper Games entry":
+    "http://superdupergames.org/gameinfo.html?game=break",
   "Wikipedia entry":
     "https://en.wikipedia.org/wiki/Breakthrough_%28board_game%29",
   "Little Golem entry":

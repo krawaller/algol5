@@ -2,6 +2,7 @@ import React, { FunctionComponent, useCallback } from "react";
 import { useFirebaseUser } from "../../../../firebase/src/useFirebaseUser";
 import { useFirebaseLoginRenderer } from "../../../../firebase/src/useFirebaseLoginRenderer";
 import { useFirebaseApp } from "../../../../firebase/src/useFirebaseApp";
+import { Button } from "../Button";
 
 type AuthGuardProps = {
   content: () => React.ReactNode;
@@ -17,7 +18,7 @@ export const AuthGuard: FunctionComponent<AuthGuardProps> = props => {
     <div>
       <p>
         Logged in as {user.displayName}!{" "}
-        <button onClick={signOut}>Sign out</button>
+        <Button onClick={signOut}>Sign out</Button>
       </p>
       <hr />
       {props.content()}

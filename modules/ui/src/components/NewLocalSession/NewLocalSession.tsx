@@ -32,9 +32,7 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
   return (
     <div className={css.newLocalSession}>
       <div className={css.newLocalSessionTopInstruction}>
-        Games are saved at turn end to the browser storage. Online play (and AI
-        opponents) are not available yet, but will hopefully be added in the
-        future!
+        Games are saved at turn end to the browser storage.
       </div>
       <VariantSelector variants={variants} actions={actions} />
       {/* <div className={css.newLocalSessionDivider} />

@@ -1,6 +1,12 @@
 import React from "react";
 
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import dynamic from "../../next/node_modules/next/dynamic";
+
+const StyledFirebaseAuth = dynamic(
+  () => import("react-firebaseui/StyledFirebaseAuth"),
+  { ssr: false }
+);
+
 import { useFirebaseApp } from "./useFirebaseApp";
 import firebaseUiConfig from "./firebaseUiConfig";
 

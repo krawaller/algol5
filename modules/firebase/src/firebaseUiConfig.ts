@@ -1,7 +1,8 @@
-import firebase from "firebase";
-import * as firebaseui from "firebaseui";
+import * as firebase from "firebase/app";
+import "firebase/auth";
+// import * as firebaseui from "firebaseui";
 
-export const firebaseUiConfig: firebaseui.auth.Config = {
+export const firebaseUiConfig = {
   signInOptions: [
     firebase.auth.EmailAuthProvider.PROVIDER_ID,
     //firebase.auth.FacebookAuthProvider.PROVIDER_ID,
@@ -17,7 +18,7 @@ export const firebaseUiConfig: firebaseui.auth.Config = {
       return Promise.resolve();
     },
   },
-  credentialHelper: firebaseui.auth.CredentialHelper.NONE,
+  credentialHelper: "none", //firebaseui.auth.CredentialHelper.NONE,
 };
 
 export default firebaseUiConfig;

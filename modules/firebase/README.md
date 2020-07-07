@@ -14,3 +14,74 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 ```
+
+### Database structure
+
+```javascript
+const db = {
+  webapp: {
+    stats: {
+      "<gameid>": {
+        "<variantcode>": {
+          plr1wins: number,
+          plr2wins: number,
+          draws: number,
+        },
+      },
+    },
+    invites: {
+      "<inviteid>": {
+        inviter: "<userid>",
+        gameid: "<gameid>",
+        variant: "<variantcode>",
+        wantstobe: 1 | 2 | "random",
+        created: "<timestamp>",
+      },
+    },
+  },
+  users: {
+    "<userid>": {
+      webapp: {
+        stats: {
+          "<gameid>": {
+            "<variantcode>": {
+              "<asplr1|2>": {
+                wins: number,
+                draws: number,
+                losses: number,
+              },
+            },
+          },
+        },
+        sessions: {
+          "<gameid>": {
+            "<sessionid>": {
+              queue: string | null,
+              data: {
+                plr1: "<userid>",
+                plr2: "<userid>",
+                plr1name: string,
+                plr2name: string,
+                who: 1 | 2,
+                endedBy: string | null,
+                turn: int,
+                screenshot: string,
+                updated: "<timestamp>",
+                save: string,
+              },
+            },
+          },
+        },
+        invites: {
+          "<gameid>": {
+            "<webinviteid>": {
+              variant: "<variantcode>",
+              wantstobe: 1 | 2 | "random",
+            },
+          },
+        },
+      },
+    },
+  },
+};
+```

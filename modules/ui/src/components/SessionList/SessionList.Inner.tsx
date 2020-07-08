@@ -62,9 +62,6 @@ export const SessionListInner: React.FunctionComponent<SessionListInnerProps> = 
 
   return (
     <div>
-      <div className={css.sessionListInstruction}>
-        Click a previous session below to load it!
-      </div>
       {sessionInfo.sessions.length === 0 ? (
         <div className={css.sessionListEmpty}>No saved sessions found</div>
       ) : (

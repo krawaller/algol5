@@ -4,7 +4,7 @@
 }
 
 .newLocalSessionDivider:after {
-  content: "or";
+  content: "";
   height: 2em;
   display: block;
   line-height: 2em;
@@ -16,5 +16,9 @@
 }
 
 .newLocalSessionTopInstruction {
-  margin-bottom: 3em;
+  margin-bottom: 2em;
+  display: inline-block;
+  padding: 3px;
+  background-color: lightblue;
+  border-radius: 3px;
 }

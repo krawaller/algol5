@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState, Fragment } from "react";
 import css from "./NewLocalSession.cssProxy";
 import {
   AlgolGameGraphics,
@@ -29,12 +29,26 @@ type NewLocalSessionProps = {
 
 export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props => {
   const { actions, meta, graphics, previousSessionId, variants } = props;
+  const [variant, setVariant] = useState(variants[0].code);
   return (
     <div className={css.newLocalSession}>
       <div className={css.newLocalSessionTopInstruction}>
         Games are saved at turn end to the browser storage.
       </div>
-      <VariantSelector variants={variants} actions={actions} />
+      <fieldset>
+        <legend>New local session</legend>
+        {variants.length > 1 && (
+          <Fragment>
+            <VariantSelector
+              variants={variants}
+              current={variant}
+              onSelect={setVariant}
+            />
+            <br />
+          </Fragment>
+        )}
+        <Button onClick={() => actions.newLocalBattle(variant)} text="Create" />
+      </fieldset>
       {/* <div className={css.newLocalSessionDivider} />
       <Button
         disabled={
@@ -47,20 +61,22 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
         onError={actions.reportError}
       >
         Load last battle
-      </Button>
-      <div className={css.newLocalSessionDivider} />
-      <Button disabled="AI is in the works, but remote play will be implemented first.">
-        Versus AI
       </Button> */}
       <div className={css.newLocalSessionDivider} />
-      <ImportBattle actions={actions} />
+      <fieldset>
+        <legend>Load previous session</legend>
+        <SessionList
+          meta={meta}
+          graphics={graphics}
+          actions={actions}
+          variants={variants}
+        />
+      </fieldset>
       <div className={css.newLocalSessionDivider} />
-      <SessionList
-        meta={meta}
-        graphics={graphics}
-        actions={actions}
-        variants={variants}
-      />
+      <fieldset>
+        <legend>Import session</legend>
+        <ImportBattle actions={actions} />
+      </fieldset>
     </div>
   );
 };

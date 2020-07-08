@@ -1,3 +1,10 @@
 .newRemoteSessionContainer {
+}
 
+.newRemoteSessionTopInstruction {
+  margin-bottom: 2em;
+  display: inline-block;
+  padding: 3px;
+  background-color: lightblue;
+  border-radius: 3px;
 }

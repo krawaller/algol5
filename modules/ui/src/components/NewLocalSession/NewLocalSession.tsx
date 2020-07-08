@@ -10,6 +10,7 @@ import {
 import { Button } from "../Button";
 import { SessionList } from "../SessionList";
 import { ImportBattle } from "../ImportBattle";
+import { Box } from "../Box";
 import { VariantSelector } from "./NewLocalSession.VariantSelector";
 
 export interface NewLocalSessionActions {
@@ -35,20 +36,25 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
       <div className={css.newLocalSessionTopInstruction}>
         Games are saved at turn end to the browser storage.
       </div>
-      <fieldset>
-        <legend>New local session</legend>
-        {variants.length > 1 && (
-          <Fragment>
-            <VariantSelector
-              variants={variants}
-              current={variant}
-              onSelect={setVariant}
-            />
-            <br />
-          </Fragment>
-        )}
-        <Button onClick={() => actions.newLocalBattle(variant)} text="Create" />
-      </fieldset>
+      <Box title="New local session">
+        <Fragment>
+          {variants.length > 1 && (
+            <Fragment>
+              <VariantSelector
+                variants={variants}
+                current={variant}
+                onSelect={setVariant}
+              />
+              <br />
+            </Fragment>
+          )}
+          <Button
+            big
+            onClick={() => actions.newLocalBattle(variant)}
+            text="Create"
+          />
+        </Fragment>
+      </Box>
       {/* <div className={css.newLocalSessionDivider} />
       <Button
         disabled={
@@ -63,20 +69,18 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
         Load last battle
       </Button> */}
       <div className={css.newLocalSessionDivider} />
-      <fieldset>
-        <legend>Load previous session</legend>
+      <Box title="Load previous session">
         <SessionList
           meta={meta}
           graphics={graphics}
           actions={actions}
           variants={variants}
         />
-      </fieldset>
+      </Box>
       <div className={css.newLocalSessionDivider} />
-      <fieldset>
-        <legend>Import session</legend>
+      <Box title="Import session">
         <ImportBattle actions={actions} />
-      </fieldset>
+      </Box>
     </div>
   );
 };

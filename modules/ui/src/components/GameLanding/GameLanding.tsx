@@ -65,8 +65,10 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         {punctuate(meta.tagline, "!")}
       </div>
       <ButtonGroup>
-        <Button onClick={openSessionModal}>Local</Button>
-        <Button onClick={openRemoteModal}>Remote</Button>
+        <Button big onClick={openSessionModal}>
+          Local
+        </Button>
+        <Button onClick={openRemoteModal}>Online (WIP)</Button>
       </ButtonGroup>
       <Modal
         isOpen={isRemoteModalOpen}

@@ -6,8 +6,11 @@
 import { DesdemonaDefinition } from "./_types";
 
 const desdemonaGraphics: DesdemonaDefinition["graphics"] = {
-  icons: {},
-  tiles: {}
+  icons: {
+    amazons: "queen",
+    stones: "pawn",
+  },
+  tiles: {},
 };
 
 export default desdemonaGraphics;

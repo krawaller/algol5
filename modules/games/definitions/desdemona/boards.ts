@@ -6,10 +6,10 @@ import { DesdemonaDefinition } from "./_types";
 
 const desdemonaBoardBook: DesdemonaDefinition["boards"] = {
   basic: {
-    height: 5,
-    width: 5,
-    terrain: {}
-  }
+    height: 7,
+    width: 7,
+    terrain: {},
+  },
 };
 
 export default desdemonaBoardBook;

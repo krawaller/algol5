@@ -10,6 +10,8 @@
 
 import { DesdemonaDefinition } from "./_types";
 
-const desdemonaAnim: DesdemonaDefinition["anim"] = {};
+const desdemonaAnim: DesdemonaDefinition["anim"] = {
+  fire: [{ enterfrom: ["selectfiretarget", { turnpos: "movedto" }] }],
+};
 
 export default desdemonaAnim;

@@ -1,3 +1,3 @@
 ### Chessicals
 
-Published live at https://chessicals.netlify.com/ from the `deploy` branch.
+Published live at https://chessicals.com/ from the `deploy` branch.

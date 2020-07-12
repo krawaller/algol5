@@ -68,12 +68,14 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         <Button big onClick={openSessionModal}>
           Local
         </Button>
-        <Button onClick={openRemoteModal}>Online (WIP)</Button>
+        <Button big onClick={openRemoteModal}>
+          Online
+        </Button>
       </ButtonGroup>
       <Modal
         isOpen={isRemoteModalOpen}
         onClose={closeRemoteModal}
-        title="Online play"
+        title="Online play (WIP)"
       >
         <NewRemoteSession />
       </Modal>

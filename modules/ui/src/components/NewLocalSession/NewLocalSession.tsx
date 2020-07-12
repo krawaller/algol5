@@ -55,7 +55,7 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
           />
         </Fragment>
       </Box>
-      {/* <div className={css.newLocalSessionDivider} />
+      {/*
       <Button
         disabled={
           !previousSessionId && "No previous battle found for this game."
@@ -68,7 +68,6 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
       >
         Load last battle
       </Button> */}
-      <div className={css.newLocalSessionDivider} />
       <Box title="Load previous session">
         <SessionList
           meta={meta}
@@ -77,7 +76,6 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
           variants={variants}
         />
       </Box>
-      <div className={css.newLocalSessionDivider} />
       <Box title="Import session">
         <ImportBattle actions={actions} />
       </Box>

@@ -18,7 +18,9 @@ On their turn a player will do two things in order:
    - across any number of empty squares (just like in {GAME:id=amazons})
    - across any number of enemy {UNIT:group=stones}, landing on an empty square behind them. This **flips** all the jumped {UNIT:group=stones} (sort of like in Othello)
 
-The game ends when one player is unable to move, and the winner is the player controlling the most {UNIT:group=stones}.
+After your turn, if your opponent is unable to move, you get to move again.
+
+The game ends when both players are unable to move, and the winner is the player controlling the most {UNIT:group=stones}!
 
 <div class="md-example">
 

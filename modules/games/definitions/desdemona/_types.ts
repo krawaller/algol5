@@ -8,7 +8,7 @@ type DesdemonaTerrain = never;
 type DesdemonaUnit = "amazons" | "stones";
 type DesdemonaMark = "selectunit" | "selectmovetarget" | "selectfiretarget";
 type DesdemonaCommand = "move" | "fire";
-type DesdemonaPhaseCommand = "move";
+type DesdemonaPhaseCommand = "move" | "fire";
 type DesdemonaPhase = "startTurn" | DesdemonaMark | DesdemonaPhaseCommand;
 type DesdemonaUnitLayer =
   | "units"
@@ -27,12 +27,15 @@ type DesdemonaGenerator =
   | "findmovetargets"
   | "findspawntargets"
   | "findcapturetargets"
-  | "findvictims";
+  | "findvictims"
+  | "findmovers";
 type DesdemonaArtifactLayer =
   | "movetargets"
   | "firetargets"
   | "capturespot"
-  | "victims";
+  | "victims"
+  | "mymovers"
+  | "oppmovers";
 type DesdemonaTerrainLayer = never;
 type DesdemonaLayer = CommonLayer | DesdemonaUnitLayer | DesdemonaArtifactLayer;
 type DesdemonaBattlePos = never;

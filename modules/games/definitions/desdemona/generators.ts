@@ -64,6 +64,20 @@ const desdemonaGenerators: DesdemonaDefinition["generators"] = {
       },
     },
   },
+  findmovers: {
+    type: "neighbour",
+    dirs: "rose",
+    condition: { noneat: ["units", ["target"]] },
+    starts: "amazons",
+    draw: {
+      start: {
+        condition: { truthy: ["neighbourcount"] },
+        tolayer: {
+          ifelse: [{ anyat: ["myunits", ["start"]] }, "mymovers", "oppmovers"],
+        },
+      },
+    },
+  },
 };
 
 export default desdemonaGenerators;

@@ -77,6 +77,7 @@ const db = {
             "<webinviteid>": {
               variant: "<variantcode>",
               wantstobe: 1 | 2 | "random",
+              created: "<timestamp>",
             },
           },
         },

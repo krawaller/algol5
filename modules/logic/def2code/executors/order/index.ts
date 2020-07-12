@@ -6,6 +6,7 @@ import {
   isAlgolOrderDoEffects,
   isAlgolOrderRunGenerators,
   isAlgolOrderAnims,
+  isAlgolOrderPurge,
 } from "../../../../types";
 
 import { executeStatement } from "../";
@@ -15,6 +16,7 @@ import { executeGenerator } from "./generate";
 import { executeLink } from "./link";
 import { executeEffect } from "./effect";
 import { updateUnitLayers } from "./updateUnitLayers";
+import { executePurge } from "./purge";
 
 export function executeOrder(
   gameDef: FullDefAnon,
@@ -66,6 +68,11 @@ function executeOrderInner(
   if (isAlgolOrderAnims(order)) {
     return executeAnim(gameDef, player, action, ruleset, {
       multi: order.anims,
+    });
+  }
+  if (isAlgolOrderPurge(order)) {
+    return executePurge(gameDef, player, action, ruleset, {
+      multi: order.purge,
     });
   }
   throw new Error("Unknown order: " + JSON.stringify(order));

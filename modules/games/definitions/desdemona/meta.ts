@@ -9,7 +9,7 @@ const desdemonaMeta: DesdemonaDefinition["meta"] = {
   source: "http://some.url.to.rules",
   code: "g",
   slug: "desdemona",
-  hidden: true,
+  hidden: false,
 };
 
 export default desdemonaMeta;

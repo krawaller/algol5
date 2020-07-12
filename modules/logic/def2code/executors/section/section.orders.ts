@@ -35,6 +35,7 @@ export function executeOrderSection(
 
   const orders: AlgolOrderAnon[] = [];
   const anims: AlgolAnimAnon[] = gameDef.anim[action] || [];
+  if (def.purge) orders.push({ purge: def.purge });
   if (anims.length) {
     orders.push({ anims });
   }

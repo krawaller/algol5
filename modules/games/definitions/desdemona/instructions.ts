@@ -30,6 +30,28 @@ const desdemonaInstructions: DesdemonaDefinition["instructions"] = {
       },
     ],
   },
+  fire: {
+    ifelse: [
+      { and: [{ notempty: "mymovers" }, { isempty: "oppmovers" }] },
+      {
+        line: [
+          "Since your opponent is blocked you get to move again! Select",
+          "amazons",
+          "to move",
+        ],
+      },
+      {
+        line: [
+          { text: "Press " },
+          "endTurn",
+          {
+            text: ` to submit your moves and hand over to `,
+          },
+          ["otherplayer"],
+        ],
+      },
+    ],
+  },
 };
 
 export default desdemonaInstructions;

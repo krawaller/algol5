@@ -50,12 +50,19 @@ const desdemonaFlow: DesdemonaDefinition["flow"] = {
         { spawnat: ["selectfiretarget", "stones"] },
         { adoptin: ["victims"] },
       ],
-      link: "endTurn",
+      runGenerator: "findmovers",
+      link: {
+        ifelse: [
+          { and: [{ notempty: "mymovers" }, { isempty: "oppmovers" }] },
+          "selectunit",
+          "endTurn",
+        ],
+      },
     },
   },
   marks: {
     selectunit: {
-      from: "myamazons",
+      from: { ifelse: [{ notempty: "mymovers" }, "mymovers", "myamazons"] },
       runGenerator: "findmovetargets",
       link: "selectmovetarget",
     },

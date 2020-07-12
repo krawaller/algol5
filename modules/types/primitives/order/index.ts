@@ -7,6 +7,7 @@ import {
   AlgolOrderDoEffects,
   AlgolOrderLinks,
   AlgolOrderAnims,
+  AlgolOrderPurge,
 } from "./order.interfaces";
 
 import { AlgolStatement } from "../../";
@@ -22,4 +23,5 @@ export type AlgolOrderInner<Blob extends AlgolGameBlobAnon> =
   | AlgolOrderRunGenerators<Blob>
   | AlgolOrderDoEffects<Blob>
   | AlgolOrderLinks<Blob>
-  | AlgolOrderAnims<Blob>;
+  | AlgolOrderAnims<Blob>
+  | AlgolOrderPurge<Blob>;

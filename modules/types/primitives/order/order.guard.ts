@@ -3,7 +3,8 @@ import {
   AlgolOrderRunGeneratorsAnon,
   AlgolOrderDoEffectsAnon,
   AlgolOrderLinksAnon,
-  AlgolOrderAnimsAnon
+  AlgolOrderAnimsAnon,
+  AlgolOrderPurgeAnon,
 } from "./order.anon";
 
 export function isAlgolOrderRunGenerators(
@@ -28,4 +29,10 @@ export function isAlgolOrderAnims(
   expr: AlgolOrderAnon
 ): expr is AlgolOrderAnimsAnon {
   return (expr as AlgolOrderAnimsAnon).anims !== undefined;
+}
+
+export function isAlgolOrderPurge(
+  expr: AlgolOrderAnon
+): expr is AlgolOrderPurgeAnon {
+  return (expr as AlgolOrderPurgeAnon).purge !== undefined;
 }

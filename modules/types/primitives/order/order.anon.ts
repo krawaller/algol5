@@ -5,6 +5,7 @@ import {
   AlgolOrderDoEffects,
   AlgolOrderLinks,
   AlgolOrderAnims,
+  AlgolOrderPurge,
 } from "./order.interfaces";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -23,3 +24,5 @@ export type AlgolOrderDoEffectsAnon = AlgolOrderDoEffects<AlgolGameBlobAnon>;
 export type AlgolOrderLinksAnon = AlgolOrderLinks<AlgolGameBlobAnon>;
 
 export type AlgolOrderAnimsAnon = AlgolOrderAnims<AlgolGameBlobAnon>;
+
+export type AlgolOrderPurgeAnon = AlgolOrderPurge<AlgolGameBlobAnon>;

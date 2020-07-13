@@ -8,20 +8,20 @@ const sizeOf = require("image-size");
 
 export const pic: TokenHandler = opts => {
   const { args, picSourcePath, picRefPath } = opts;
-  let { name, inline, title, cred, credurl } = args;
+  let { name, inline, title, cred, credurl, naked } = args;
   if (!name) {
     throw new Error("Have to provide picture filename");
   }
   if (!fs.existsSync(picSourcePath)) {
     throw new Error("Could not find " + picSourcePath);
   }
-  if (!cred) {
+  if (!cred && !naked) {
     throw new Error("Must provide cred for image " + name);
   }
-  if (!title) {
+  if (!title && !naked) {
     throw new Error("Must provide title for image " + name);
   }
-  title = title.replace(/COMMA/g, ",");
+  title = naked ? "" : title.replace(/COMMA/g, ",");
   let src;
   if (inline) {
     src = encodePic(path.join(picSourcePath, name));
@@ -47,5 +47,9 @@ export const pic: TokenHandler = opts => {
     : `<span>${cred}</span>`;
   return `<div class="md-img${
     !inline ? " md-img-with-placeholder" : ""
-  }"><img ${imgAttrs} alt="${title}" title="${title}" /><div class="md-img-info"><span>${title}</span>${CredText}</div></div>`;
+  }"><img ${imgAttrs} alt="${title}" title="${title}" />${
+    naked
+      ? ""
+      : `<div class="md-img-info"><span>${title}</span>${CredText}</div>`
+  }</div>`;
 };

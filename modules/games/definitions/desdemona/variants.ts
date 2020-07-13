@@ -35,6 +35,13 @@ const desdemonaVariants: DesdemonaDefinition["variants"] = [
       ],
     },
   },
+  {
+    ruleset: "basic",
+    board: "xl",
+    setup: "xl",
+    desc: "XL",
+    code: "x",
+  },
 ];
 
 export default desdemonaVariants;

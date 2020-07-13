@@ -1,47 +1,25 @@
-import React, { FunctionComponent } from "react";
-import { AlgolErrorReporter, AlgolVariantAnon } from "../../../../types";
-import { Button } from "../Button";
-import { ButtonGroup } from "../ButtonGroup";
-
-export interface VariantSelectorActions {
-  newLocalBattle: (code: string) => void;
-  reportError: AlgolErrorReporter;
-}
+import React, { FunctionComponent, useMemo } from "react";
+import { AlgolVariantAnon } from "../../../../types";
+import { RadioSelector } from "../RadioSelector";
 
 type VariantSelectorProps = {
-  actions: VariantSelectorActions;
+  onSelect: (v: string) => void;
   variants: AlgolVariantAnon[];
+  current: string;
 };
 
 export const VariantSelector: FunctionComponent<VariantSelectorProps> = props => {
-  const { actions, variants } = props;
-  if (variants.length === 1) {
-    return (
-      <Button
-        big
-        onClick={() => actions.newLocalBattle(variants[0].code)}
-        onError={actions.reportError}
-        controlId="new-local-session-button"
-      >
-        New local session
-      </Button>
-    );
-  }
+  const { onSelect, variants, current } = props;
+  const opts = useMemo(
+    () => variants.map(v => ({ value: v.code, desc: v.desc })),
+    [variants]
+  );
   return (
-    <ButtonGroup noBottomMargin>
-      {variants.map((v, n) => (
-        <Button
-          key={v.code}
-          big={n === 0}
-          onClick={() => actions.newLocalBattle(v.code)}
-          onError={actions.reportError}
-          controlId="new-local-session-button"
-        >
-          {n
-            ? v.desc[0].toUpperCase() + v.desc.slice(1)
-            : `New ${v.desc} session`}
-        </Button>
-      ))}
-    </ButtonGroup>
+    <RadioSelector
+      options={opts}
+      onSelect={onSelect}
+      value={current}
+      group="variant"
+    />
   );
 };

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState, Fragment } from "react";
 import css from "./NewLocalSession.cssProxy";
 import {
   AlgolGameGraphics,
@@ -10,6 +10,7 @@ import {
 import { Button } from "../Button";
 import { SessionList } from "../SessionList";
 import { ImportBattle } from "../ImportBattle";
+import { Box } from "../Box";
 import { VariantSelector } from "./NewLocalSession.VariantSelector";
 
 export interface NewLocalSessionActions {
@@ -29,15 +30,32 @@ type NewLocalSessionProps = {
 
 export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props => {
   const { actions, meta, graphics, previousSessionId, variants } = props;
+  const [variant, setVariant] = useState(variants[0].code);
   return (
     <div className={css.newLocalSession}>
       <div className={css.newLocalSessionTopInstruction}>
-        Games are saved at turn end to the browser storage. Online play (and AI
-        opponents) are not available yet, but will hopefully be added in the
-        future!
+        Games are saved at turn end to the browser storage.
       </div>
-      <VariantSelector variants={variants} actions={actions} />
-      {/* <div className={css.newLocalSessionDivider} />
+      <Box title="New local session">
+        <Fragment>
+          {variants.length > 1 && (
+            <Fragment>
+              <VariantSelector
+                variants={variants}
+                current={variant}
+                onSelect={setVariant}
+              />
+              <br />
+            </Fragment>
+          )}
+          <Button
+            big
+            onClick={() => actions.newLocalBattle(variant)}
+            text="Create"
+          />
+        </Fragment>
+      </Box>
+      {/*
       <Button
         disabled={
           !previousSessionId && "No previous battle found for this game."
@@ -49,20 +67,18 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
         onError={actions.reportError}
       >
         Load last battle
-      </Button>
-      <div className={css.newLocalSessionDivider} />
-      <Button disabled="AI is in the works, but remote play will be implemented first.">
-        Versus AI
       </Button> */}
-      <div className={css.newLocalSessionDivider} />
-      <ImportBattle actions={actions} />
-      <div className={css.newLocalSessionDivider} />
-      <SessionList
-        meta={meta}
-        graphics={graphics}
-        actions={actions}
-        variants={variants}
-      />
+      <Box title="Load previous session">
+        <SessionList
+          meta={meta}
+          graphics={graphics}
+          actions={actions}
+          variants={variants}
+        />
+      </Box>
+      <Box title="Import session">
+        <ImportBattle actions={actions} />
+      </Box>
     </div>
   );
 };

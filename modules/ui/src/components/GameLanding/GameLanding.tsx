@@ -11,6 +11,7 @@ import {
 import { Modal } from "../Modal";
 import { Button } from "../Button";
 import { NewLocalSession, NewLocalSessionActions } from "../NewLocalSession";
+import { NewRemoteSession } from "../NewRemoteSession";
 import { useModal } from "../../helpers";
 import { ButtonGroup } from "../ButtonGroup";
 
@@ -35,6 +36,7 @@ type GameLandingProps = {
 export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   const { meta, actions, graphics, previousSessionId, variants } = props;
   const [isSessionModalOpen, openSessionModal, closeSessionModal] = useModal();
+  const [isRemoteModalOpen, openRemoteModal, closeRemoteModal] = useModal();
 
   // hack actions to close game modal when chosen a game
   const localSessionActions = useMemo(
@@ -64,9 +66,19 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
       </div>
       <ButtonGroup>
         <Button big onClick={openSessionModal}>
-          Play {meta.name}!
+          Local
+        </Button>
+        <Button big onClick={openRemoteModal}>
+          Online
         </Button>
       </ButtonGroup>
+      <Modal
+        isOpen={isRemoteModalOpen}
+        onClose={closeRemoteModal}
+        title="Online play (WIP)"
+      >
+        <NewRemoteSession />
+      </Modal>
       <Modal
         isOpen={isSessionModalOpen}
         onClose={closeSessionModal}

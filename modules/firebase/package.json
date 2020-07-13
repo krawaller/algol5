@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "robot": "echo 'firebase robot is a noop'",
+    "clean": "echo 'firebase clean is a noop'",
+    "postinstall": "node ./postinstall"
+  },
+  "dependencies": {
+    "firebase": "^7.15.5",
+    "firebaseui": "^4.5.1",
+    "google-auth-library": "^6.0.3",
+    "react-firebaseui": "^4.1.0"
+  }
+}

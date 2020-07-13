@@ -2,11 +2,16 @@
 updated: 2020-07-09
 ---
 
-{GAME} is played on a {DIM} board with the following setup:
+{GAME} is played on a {DIM:board=basic} or {DIM:board=xl} board with these setups:
 
-{SETUP}
+<div class="md-2col">
+{SETUP:name=basic,board=basic}
+{SETUP:name=xl,board=xl}
+</div>
 
-There are two types of units:
+Regular variant shown to the left, XL variant to the right.
+
+There are two types of units in {GAME}:
 
 - A {UNIT:group=amazons} can move and shoot out a {UNIT:group=stones} of the same colour.
 - A {UNIT:group=stones} will never move, but can be **flipped** to become the opponent colour.

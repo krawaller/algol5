@@ -1053,12 +1053,24 @@ const game = {
           "g7"
         ]
       }
+    },
+    {
+      ruleset: "basic",
+      board: "xl",
+      setup: "xl",
+      desc: "XL",
+      code: "x"
     }
   ],
   boards: {
     basic: {
       height: 7,
       width: 7,
+      terrain: {}
+    },
+    xl: {
+      height: 8,
+      width: 8,
       terrain: {}
     }
   },
@@ -1067,6 +1079,12 @@ const game = {
       amazons: {
         "1": ["a1", "g7"],
         "2": ["a7", "g1"]
+      }
+    },
+    xl: {
+      amazons: {
+        "1": ["a1", "h8"],
+        "2": ["a8", "h1"]
       }
     }
   }

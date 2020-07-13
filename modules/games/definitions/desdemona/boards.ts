@@ -10,6 +10,11 @@ const desdemonaBoardBook: DesdemonaDefinition["boards"] = {
     width: 7,
     terrain: {},
   },
+  xl: {
+    height: 8,
+    width: 8,
+    terrain: {},
+  },
 };
 
 export default desdemonaBoardBook;

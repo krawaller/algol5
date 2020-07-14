@@ -16,7 +16,7 @@ import {
   ringTwoDirs
 } from "../../common";
 const emptyObj = {};
-const iconMapping = { soldiers: "rook", kings: "queen" };
+const iconMapping = { soldiers: "rook", kings: "queen", projectiles: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   soldiers: [
@@ -28,6 +28,11 @@ const groupLayers1 = {
     ["units"],
     ["units", "myunits", "mykings"],
     ["units", "oppunits", "oppkings"]
+  ],
+  projectiles: [
+    ["units", "projectiles"],
+    ["units", "myunits", "projectiles"],
+    ["units", "oppunits", "projectiles"]
   ]
 };
 const groupLayers2 = {
@@ -40,6 +45,11 @@ const groupLayers2 = {
     ["units"],
     ["units", "oppunits", "oppkings"],
     ["units", "myunits", "mykings"]
+  ],
+  projectiles: [
+    ["units", "projectiles"],
+    ["units", "oppunits", "projectiles"],
+    ["units", "myunits", "projectiles"]
   ]
 };
 const prefixes1 = ["neutral", "my", "opp"];
@@ -70,7 +80,8 @@ const game = {
       mysoldiers: {},
       oppsoldiers: {},
       mykings: {},
-      oppkings: {}
+      oppkings: {},
+      projectiles: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -95,7 +106,8 @@ const game = {
         mysoldiers: oldUnitLayers.oppsoldiers,
         oppsoldiers: oldUnitLayers.mysoldiers,
         mykings: oldUnitLayers.oppkings,
-        oppkings: oldUnitLayers.mykings
+        oppkings: oldUnitLayers.mykings,
+        projectiles: oldUnitLayers.projectiles
       };
       let LINKS = {
         marks: {},
@@ -122,7 +134,8 @@ const game = {
         mysoldiers: oldUnitLayers.oppsoldiers,
         oppsoldiers: oldUnitLayers.mysoldiers,
         mykings: oldUnitLayers.oppkings,
-        oppkings: oldUnitLayers.mykings
+        oppkings: oldUnitLayers.mykings,
+        projectiles: oldUnitLayers.projectiles
       };
       let LINKS = {
         marks: {},
@@ -184,7 +197,13 @@ const game = {
         selectmovetarget: newMarkPos
       };
       let UNITLAYERS = step.UNITLAYERS;
-      if (!UNITLAYERS.mykings[MARKS.selectunit]) {
+      if (
+        !UNITLAYERS.mykings[MARKS.selectunit] &&
+        BOARD.board[MARKS.selectmovetarget].x !==
+          BOARD.board[Object.keys(UNITLAYERS.mykings)[0]].x &&
+        BOARD.board[MARKS.selectmovetarget].y !==
+          BOARD.board[Object.keys(UNITLAYERS.mykings)[0]].y
+      ) {
         {
           for (let STARTPOS in {
             ...UNITLAYERS.mykings,
@@ -262,7 +281,13 @@ const game = {
         selectmovetarget: newMarkPos
       };
       let UNITLAYERS = step.UNITLAYERS;
-      if (!UNITLAYERS.mykings[MARKS.selectunit]) {
+      if (
+        !UNITLAYERS.mykings[MARKS.selectunit] &&
+        BOARD.board[MARKS.selectmovetarget].x !==
+          BOARD.board[Object.keys(UNITLAYERS.mykings)[0]].x &&
+        BOARD.board[MARKS.selectmovetarget].y !==
+          BOARD.board[Object.keys(UNITLAYERS.mykings)[0]].y
+      ) {
         {
           for (let STARTPOS in {
             ...UNITLAYERS.mykings,
@@ -298,6 +323,7 @@ const game = {
     },
     move_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
+      let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
         intersection: step.ARTIFACTS.intersection,
@@ -306,6 +332,17 @@ const game = {
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
+      for (let LOOPPOS in ARTIFACTS.intersection) {
+        anim.ghosts.push([MARKS.selectmovetarget, LOOPPOS, "pawn", 0]);
+      }
+      for (let LOOPPOS in ARTIFACTS.intersection) {
+        anim.ghosts.push([
+          Object.keys(UNITLAYERS.mykings)[0],
+          LOOPPOS,
+          "pawn",
+          0
+        ]);
+      }
       for (let LOOPPOS in ARTIFACTS.intersection) {
         delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
       }
@@ -325,7 +362,8 @@ const game = {
         mysoldiers: {},
         oppsoldiers: {},
         mykings: {},
-        oppkings: {}
+        oppkings: {},
+        projectiles: {}
       };
       for (let unitid in UNITDATA) {
         const currentunit = UNITDATA[unitid];
@@ -347,11 +385,13 @@ const game = {
         ARTIFACTS,
         TURN: step.TURN,
         UNITDATA,
-        UNITLAYERS
+        UNITLAYERS,
+        anim
       };
     },
     move_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
+      let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
         intersection: step.ARTIFACTS.intersection,
@@ -360,6 +400,17 @@ const game = {
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
+      for (let LOOPPOS in ARTIFACTS.intersection) {
+        anim.ghosts.push([MARKS.selectmovetarget, LOOPPOS, "pawn", 0]);
+      }
+      for (let LOOPPOS in ARTIFACTS.intersection) {
+        anim.ghosts.push([
+          Object.keys(UNITLAYERS.mykings)[0],
+          LOOPPOS,
+          "pawn",
+          0
+        ]);
+      }
       for (let LOOPPOS in ARTIFACTS.intersection) {
         delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
       }
@@ -379,7 +430,8 @@ const game = {
         mysoldiers: {},
         oppsoldiers: {},
         mykings: {},
-        oppkings: {}
+        oppkings: {},
+        projectiles: {}
       };
       for (let unitid in UNITDATA) {
         const currentunit = UNITDATA[unitid];
@@ -401,7 +453,8 @@ const game = {
         ARTIFACTS,
         TURN: step.TURN,
         UNITDATA,
-        UNITLAYERS
+        UNITLAYERS,
+        anim
       };
     }
   },
@@ -567,9 +620,43 @@ const game = {
       desc: "regular",
       code: "r",
       arr: {
-        setup: {},
-        marks: [],
-        potentialMarks: []
+        setup: {
+          kings: {
+            "1": ["h5"],
+            "2": ["d8"]
+          },
+          soldiers: {
+            "1": [
+              "a2",
+              "a3",
+              "b2",
+              "b3",
+              "b4",
+              "c3",
+              "c4",
+              "e2",
+              "e4",
+              "f1",
+              "h2"
+            ],
+            "2": [
+              "a4",
+              "b8",
+              "c8",
+              "e6",
+              "f5",
+              "f6",
+              "f7",
+              "g3",
+              "g6",
+              "g7",
+              "h6",
+              "h7"
+            ]
+          }
+        },
+        marks: ["e2"],
+        potentialMarks: ["c2", "d2", "e1", "e3", "f2", "g2"]
       }
     }
   ],

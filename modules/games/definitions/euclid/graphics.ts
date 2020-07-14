@@ -9,6 +9,7 @@ const euclidGraphics: EuclidDefinition["graphics"] = {
   icons: {
     soldiers: "rook",
     kings: "queen",
+    projectiles: "pawn",
   },
   tiles: {},
 };

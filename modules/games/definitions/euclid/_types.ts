@@ -5,7 +5,7 @@ type EuclidBoardHeight = 8;
 type EuclidBoardWidth = 8;
 
 type EuclidTerrain = never;
-type EuclidUnit = "soldiers" | "kings";
+type EuclidUnit = "soldiers" | "kings" | "projectiles";
 type EuclidMark = "selectunit" | "selectmovetarget";
 type EuclidCommand = "move";
 type EuclidPhaseCommand = never;
@@ -22,9 +22,13 @@ type EuclidUnitLayer =
   | "kings"
   | "mykings"
   | "oppkings"
-  | "neutralkings";
+  | "neutralkings"
+  | "projectiles"
+  | "myprojectiles"
+  | "oppprojectiles"
+  | "neutralprojectiles";
 type EuclidGenerator = "findmovetargets" | "findintersections";
-type EuclidArtifactLayer = "movetargets" | "lines" | "intersection";
+type EuclidArtifactLayer = "movetargets" | "intersection" | "lines";
 type EuclidTerrainLayer = never;
 type EuclidLayer = CommonLayer | EuclidUnitLayer | EuclidArtifactLayer;
 type EuclidBattlePos = never;

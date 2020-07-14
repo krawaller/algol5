@@ -28,7 +28,26 @@ const euclidFlow: EuclidDefinition["flow"] = {
     selectmovetarget: {
       from: "movetargets",
       runGenerator: {
-        if: [{ noneat: ["mykings", "selectunit"] }, "findintersections"],
+        if: [
+          {
+            and: [
+              { noneat: ["mykings", "selectunit"] },
+              {
+                different: [
+                  { posx: "selectmovetarget" },
+                  { posx: { onlyin: "mykings" } },
+                ],
+              },
+              {
+                different: [
+                  { posy: "selectmovetarget" },
+                  { posy: { onlyin: "mykings" } },
+                ],
+              },
+            ],
+          },
+          "findintersections",
+        ],
       },
       link: "move",
     },

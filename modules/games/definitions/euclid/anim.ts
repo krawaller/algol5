@@ -10,6 +10,11 @@
 
 import { EuclidDefinition } from "./_types";
 
-const euclidAnim: EuclidDefinition["anim"] = {};
+const euclidAnim: EuclidDefinition["anim"] = {
+  move: [
+    { ghosttoin: ["intersection", "selectmovetarget", "projectiles", 0] },
+    { ghosttoin: ["intersection", { onlyin: "mykings" }, "projectiles", 0] },
+  ],
+};
 
 export default euclidAnim;

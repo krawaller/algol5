@@ -3,11 +3,11 @@ import { AlgolStatement } from "./";
 import { AlgolGameBlobAnon } from "../../blob";
 
 export interface AlgolStatementForPosIn<Blob extends AlgolGameBlobAnon, _T> {
-  forposin: [AlgolSet<Blob>, _T];
+  forposin: [AlgolSet<Blob>, AlgolStatement<Blob, _T>];
 }
 
 export interface AlgolStatementForIdIn<Blob extends AlgolGameBlobAnon, _T> {
-  foridin: [AlgolSet<Blob>, _T];
+  foridin: [AlgolSet<Blob>, AlgolStatement<Blob, _T>];
 }
 
 export interface AlgolStatementMulti<Blob extends AlgolGameBlobAnon, _T> {

@@ -2,7 +2,7 @@ import { DesdemonaDefinition } from "./_types";
 
 const desdemonaVariants: DesdemonaDefinition["variants"] = [
   {
-    ruleset: "basic",
+    ruleset: "pie",
     board: "basic",
     setup: "basic",
     desc: "regular",
@@ -36,7 +36,7 @@ const desdemonaVariants: DesdemonaDefinition["variants"] = [
     },
   },
   {
-    ruleset: "basic",
+    ruleset: "pie",
     board: "xl",
     setup: "xl",
     desc: "XL",

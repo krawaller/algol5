@@ -45,8 +45,8 @@ type DesdemonaTurnVar = "movedto";
 
 type DesdemonaBoardName = "basic" | "xl";
 type DesdemonaSetupName = "basic" | "xl" | "basic_OLD" | "xl_OLD";
-type DesdemonaRulesetName = "basic";
-type DesdemonaVariantName = "regular" | "XL";
+type DesdemonaRulesetName = "pie" | "basic";
+type DesdemonaVariantName = "regular" | "XL" | "regular (OLD)" | "XL (OLD)";
 
 type DesdemonaGrid = never;
 

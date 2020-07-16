@@ -1025,7 +1025,7 @@ const game = {
       board: "basic",
       setup: "basic",
       desc: "regular",
-      code: "r",
+      code: "n",
       arr: {
         setup: {
           amazons: {
@@ -1059,7 +1059,23 @@ const game = {
       board: "xl",
       setup: "xl",
       desc: "XL",
-      code: "x"
+      code: "p"
+    },
+    {
+      ruleset: "basic",
+      board: "basic",
+      setup: "basic_OLD",
+      desc: "regular (OLD)",
+      code: "r",
+      hidden: true
+    },
+    {
+      ruleset: "basic",
+      board: "xl",
+      setup: "xl_OLD",
+      desc: "XL (OLD)",
+      code: "x",
+      hidden: true
     }
   ],
   boards: {
@@ -1077,11 +1093,23 @@ const game = {
   setups: {
     basic: {
       amazons: {
+        "1": ["b2", "f2"],
+        "2": ["b6", "f6"]
+      }
+    },
+    xl: {
+      amazons: {
+        "1": ["b2", "g2", "a4"],
+        "2": ["b7", "g7", "h5"]
+      }
+    },
+    basic_OLD: {
+      amazons: {
         "1": ["a1", "g7"],
         "2": ["a7", "g1"]
       }
     },
-    xl: {
+    xl_OLD: {
       amazons: {
         "1": ["a1", "h8"],
         "2": ["a8", "h1"]

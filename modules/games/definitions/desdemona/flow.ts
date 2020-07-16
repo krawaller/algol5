@@ -43,7 +43,12 @@ const desdemonaFlow: DesdemonaDefinition["flow"] = {
         { moveat: ["selectunit", "selectmovetarget"] },
       ],
       runGenerators: ["findspawntargets", "findcapturetargets"],
-      link: "selectfiretarget",
+      link: {
+        playercase: [
+          { ifelse: [["isFirstTurn"], "endTurn", "selectfiretarget"] },
+          "selectfiretarget",
+        ],
+      },
     },
     fire: {
       applyEffects: [

@@ -12,6 +12,7 @@ const breakthroughMeta: BreakthroughDefinition["meta"] = {
     "hundredother",
     "infiltration",
     "superdupergames",
+    "huntoon",
   ],
   tagline: "Break through the enemy defences",
   source: "http://www.di.fc.ul.pt/~jpn/gv/breakthrough.htm",

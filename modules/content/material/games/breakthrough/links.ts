@@ -5,6 +5,8 @@ export const links = {
     "https://boardgamegeek.com/boardgame/3825/breakthrough",
   "Zillions of Games entry":
     "http://www.zillionsofgames.com/cgi-bin/zilligames/submissions.cgi?do=show;id=35",
+  "Zillions entry for Siege variant":
+    "http://www.zillionsofgames.com/cgi-bin/zilligames/submissions.cgi?do=show;id=2100",
   "IG Game Center entry":
     "http://www.iggamecenter.com/info/en/breakthrough.html",
   "Super Duper Games entry":

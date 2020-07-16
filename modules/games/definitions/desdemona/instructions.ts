@@ -14,7 +14,35 @@ const desdemonaInstructions: DesdemonaDefinition["instructions"] = {
     ],
   },
   move: {
-    line: ["Select where to fire with", { unitat: { turnpos: "movedto" } }],
+    playercase: [
+      {
+        ifelse: [
+          ["isFirstTurn"],
+          {
+            line: [
+              { text: "Press " },
+              "endTurn",
+              {
+                text: ` to submit your moves and hand over to `,
+              },
+              ["otherplayer"],
+              {
+                text: `(you don't get to fire the first turn)`,
+              },
+            ],
+          },
+          {
+            line: [
+              "Select where to fire with",
+              { unitat: { turnpos: "movedto" } },
+            ],
+          },
+        ],
+      },
+      {
+        line: ["Select where to fire with", { unitat: { turnpos: "movedto" } }],
+      },
+    ],
   },
   selectfiretarget: {
     line: [

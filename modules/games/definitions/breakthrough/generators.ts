@@ -10,14 +10,36 @@ const breakthroughGenerators: BreakthroughDefinition["generators"] = {
     type: "neighbour",
     start: "selectunit",
     dirs: {
-      playercase: [
-        [8, 1, 2],
-        [4, 5, 6],
+      ifrulesetelse: [
+        "siege",
+        {
+          playercase: [
+            [7, 8, 1],
+            [3, 4, 5],
+          ],
+        },
+        {
+          playercase: [
+            [8, 1, 2],
+            [4, 5, 6],
+          ],
+        },
       ],
     },
     condition: {
       ifelse: [
-        { or: [{ same: [["dir"], 1] }, { same: [["dir"], 5] }] },
+        {
+          same: [
+            ["dir"],
+            {
+              ifrulesetelse: [
+                "siege",
+                { playercase: [8, 4] },
+                { playercase: [1, 5] },
+              ],
+            },
+          ],
+        },
         { noneat: ["units", ["target"]] },
         { noneat: ["myunits", ["target"]] },
       ],

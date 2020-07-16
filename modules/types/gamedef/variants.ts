@@ -8,6 +8,7 @@ export type AlgolVariant<Blob extends AlgolGameBlobAnon> = {
   desc: string;
   code: string;
   arr?: AlgolArrangement<Blob>;
+  hidden?: boolean;
 };
 
 export type AlgolVariantAnon = AlgolVariant<AlgolGameBlobAnon>;

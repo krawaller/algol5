@@ -61,6 +61,18 @@ const breakthroughVariants: BreakthroughDefinition["variants"] = [
       potentialMarks: [],
     },
   },
+  {
+    ruleset: "siege",
+    board: "siege",
+    setup: "siege",
+    desc: "siege",
+    code: "S",
+    arr: {
+      setup: {},
+      marks: [],
+      potentialMarks: [],
+    },
+  },
 ];
 
 export default breakthroughVariants;

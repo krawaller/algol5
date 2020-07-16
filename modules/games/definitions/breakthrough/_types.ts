@@ -32,10 +32,10 @@ type BreakthroughBattleVar = never;
 type BreakthroughTurnPos = never;
 type BreakthroughTurnVar = never;
 
-type BreakthroughBoardName = "basic" | "mini";
-type BreakthroughSetupName = "basic" | "mini";
-type BreakthroughRulesetName = "basic";
-type BreakthroughVariantName = "regular" | "mini";
+type BreakthroughBoardName = "basic" | "mini" | "siege";
+type BreakthroughSetupName = "basic" | "mini" | "siege";
+type BreakthroughRulesetName = "basic" | "siege";
+type BreakthroughVariantName = "regular" | "mini" | "siege";
 
 type BreakthroughGrid = never;
 

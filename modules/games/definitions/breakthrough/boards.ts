@@ -25,6 +25,13 @@ const breakthroughBoardBook: BreakthroughDefinition["boards"] = {
       },
     },
   },
+  siege: {
+    height: 8,
+    width: 8,
+    terrain: {
+      base: { 1: ["h1"], 2: ["a8"] },
+    },
+  },
 };
 
 export default breakthroughBoardBook;

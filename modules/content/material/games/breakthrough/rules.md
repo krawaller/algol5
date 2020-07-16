@@ -2,13 +2,16 @@
 updated: 2020-05-13
 ---
 
-{GAME} is played on a {DIM:board=basic} (regular variant) or {DIM:board=mini} (mini variant) board with the following setups:
+{GAME} is played on one of the following boards and setups:
 
-<div class="md-2col">
+<div class="md-3col">
 {SETUP:board=basic,name=basic}
 {SETUP:board=mini,name=mini}
+{SETUP:board=siege,name=siege}
 </div>
 
-Players take turn to {CMND} their {UNIT} one step closer towards the opponent base, straight forward or diagonally. Diagonal moves can capture by replacement.
+Regular {GAME} to the left, Mini variant in the middle and Siege variant to the right.
+
+Players take turn to {CMND} their {UNIT} one step closer towards the opponent base, orthogonally or diagonally. Diagonal moves can capture by replacement, except in the Siege variant where it is orthogonal moves that capture.
 
 First to have a {UNIT} reach the opponent base wins!

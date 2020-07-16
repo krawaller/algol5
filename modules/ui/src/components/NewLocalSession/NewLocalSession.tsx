@@ -30,7 +30,8 @@ type NewLocalSessionProps = {
 
 export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props => {
   const { actions, meta, graphics, previousSessionId, variants } = props;
-  const [variant, setVariant] = useState(variants[0].code);
+  const filteredVariants = variants.filter(v => !v.hidden);
+  const [variant, setVariant] = useState(filteredVariants[0].code);
   return (
     <div className={css.newLocalSession}>
       <div className={css.newLocalSessionTopInstruction}>
@@ -38,10 +39,10 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
       </div>
       <Box title="New local session">
         <Fragment>
-          {variants.length > 1 && (
+          {filteredVariants.length > 1 && (
             <Fragment>
               <VariantSelector
-                variants={variants}
+                variants={filteredVariants}
                 current={variant}
                 onSelect={setVariant}
               />

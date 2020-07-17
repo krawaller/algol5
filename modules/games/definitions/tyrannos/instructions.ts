@@ -28,6 +28,12 @@ const tyrannosInstructions: TyrannosDefinition["instructions"] = {
       { unitat: "selectunit" },
       "to",
       "selectmovetarget",
+      {
+        if: [
+          { anyat: ["oppbase", "selectmovetarget"] },
+          { line: ["and turn it into", { unittype: ["heroes", ["player"]] }] },
+        ],
+      },
     ],
   },
 };

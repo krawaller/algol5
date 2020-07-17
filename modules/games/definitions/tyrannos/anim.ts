@@ -12,7 +12,14 @@ import { TyrannosDefinition } from "./_types";
 
 const tyrannosAnim: TyrannosDefinition["anim"] = {
   attack: [
-    { ghost: ["selectunit", "selectattacktarget", "warriors", ["player"]] },
+    {
+      ghost: [
+        "selectunit",
+        "selectattacktarget",
+        { read: ["units", "selectunit", "group"] },
+        0,
+      ],
+    },
   ],
 };
 

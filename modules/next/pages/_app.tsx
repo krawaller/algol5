@@ -5,6 +5,9 @@ import { useMemo, useState, useEffect, Fragment } from "react";
 import { Shell } from "../../ui/src/components/Shell";
 import { AlgolPage } from "../../types";
 import { useBattleNavActions, appActions } from "../helpers";
+import compositeId from "../../payloads/dist/compositeId";
+
+const compositePrefix = `/images/composites/`;
 
 const ref = { last: "" };
 const global = (typeof window === "undefined" ? {} : window) as Window &
@@ -69,10 +72,26 @@ function MyApp({ Component, pageProps, router }: AppProps) {
             <meta property="og:title" content={Comp.metaTitle || Comp.title} />
           ))}
         {preloads.length > 0 && preloads}
-        <link rel="preload" as="image" href="/images/composites/about.png" />
-        <link rel="preload" as="image" href="/images/composites/news.png" />
-        <link rel="preload" as="image" href="/images/composites/tags.png" />
-        <link rel="preload" as="image" href="/images/composites/games.png" />
+        <link
+          rel="preload"
+          as="image"
+          href={`${compositePrefix}about_${compositeId}.png`}
+        />
+        <link
+          rel="preload"
+          as="image"
+          href={`${compositePrefix}news_${compositeId}.png`}
+        />
+        <link
+          rel="preload"
+          as="image"
+          href={`${compositePrefix}tags_${compositeId}.png`}
+        />
+        <link
+          rel="preload"
+          as="image"
+          href={`${compositePrefix}games_${compositeId}.png`}
+        />
         <link
           rel="apple-touch-icon"
           sizes="180x180"

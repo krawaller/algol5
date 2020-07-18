@@ -4,7 +4,7 @@ const bombardmentMeta: BombardmentDefinition["meta"] = {
   id: "bombardment",
   author: "Chris Huntoon",
   name: "Bombardment",
-  tags: ["irreversible", "infiltration", "huntoon"],
+  tags: ["irreversible", "infiltration", "huntoon", "superdupergames"],
   tagline: "Bomb your way to victory!",
   source: "https://bodogemu.com/en/games/bombardment",
   code: "f",

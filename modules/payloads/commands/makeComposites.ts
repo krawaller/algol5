@@ -5,7 +5,8 @@ const prettier = require("prettier");
 const composite = require("../../graphics/composite");
 
 const content = path.join(__dirname, "../../content/dist");
-const root = path.join(__dirname, "../dist/composites");
+const compositeId = require("../dist/compositeId");
+const root = path.join(__dirname, `../dist/composites`);
 
 const toMake = [
   { name: "tags", folder: "tags" },
@@ -29,7 +30,13 @@ async function makeComposite(opts) {
       )).listing;
       return path.join(content, folder, t, "pics", thumbnail);
     });
-  await composite({ paths, size: compositeSize, name, root });
+  await composite({
+    paths,
+    size: compositeSize,
+    name,
+    root,
+    imageSuffix: `_${compositeId}`,
+  });
 }
 
 (async function() {
@@ -50,5 +57,6 @@ async function makeComposite(opts) {
     paths: actionShots,
     size: compositeSize,
     root,
+    imageSuffix: `_${compositeId}`,
   });
 })();

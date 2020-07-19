@@ -21,25 +21,25 @@ let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   soldiers: [
     ["units", "soldiers"],
-    ["units", "soldiers"],
-    ["units", "soldiers"]
+    ["units", "myunits", "soldiers"],
+    ["units", "oppunits", "soldiers"]
   ],
   kings: [
     ["units", "kings"],
-    ["units", "kings", "mykings"],
-    ["units", "kings", "oppkings"]
+    ["units", "myunits", "kings", "mykings"],
+    ["units", "oppunits", "kings", "oppkings"]
   ]
 };
 const groupLayers2 = {
   soldiers: [
     ["units", "soldiers"],
-    ["units", "soldiers"],
-    ["units", "soldiers"]
+    ["units", "oppunits", "soldiers"],
+    ["units", "myunits", "soldiers"]
   ],
   kings: [
     ["units", "kings"],
-    ["units", "kings", "oppkings"],
-    ["units", "kings", "mykings"]
+    ["units", "oppunits", "kings", "oppkings"],
+    ["units", "myunits", "kings", "mykings"]
   ]
 };
 const prefixes1 = ["neutral", "my", "opp"];
@@ -65,6 +65,8 @@ const game = {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
       units: {},
+      myunits: {},
+      oppunits: {},
       soldiers: {},
       kings: {},
       mykings: {},
@@ -88,6 +90,8 @@ const game = {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
+        myunits: oldUnitLayers.oppunits,
+        oppunits: oldUnitLayers.myunits,
         soldiers: oldUnitLayers.soldiers,
         kings: oldUnitLayers.kings,
         mykings: oldUnitLayers.oppkings,
@@ -97,7 +101,7 @@ const game = {
         marks: {},
         commands: {}
       };
-      for (const pos of Object.keys(UNITLAYERS.units)) {
+      for (const pos of Object.keys(UNITLAYERS.myunits)) {
         LINKS.marks[pos] = "selectunit_basic_1";
       }
       return {
@@ -113,6 +117,8 @@ const game = {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
+        myunits: oldUnitLayers.oppunits,
+        oppunits: oldUnitLayers.myunits,
         soldiers: oldUnitLayers.soldiers,
         kings: oldUnitLayers.kings,
         mykings: oldUnitLayers.oppkings,
@@ -122,7 +128,7 @@ const game = {
         marks: {},
         commands: {}
       };
-      for (const pos of Object.keys(UNITLAYERS.units)) {
+      for (const pos of Object.keys(UNITLAYERS.myunits)) {
         LINKS.marks[pos] = "selectunit_basic_2";
       }
       return {
@@ -362,6 +368,8 @@ const game = {
       }
       UNITLAYERS = {
         units: {},
+        myunits: {},
+        oppunits: {},
         soldiers: {},
         kings: {},
         mykings: {},
@@ -427,6 +435,8 @@ const game = {
       }
       UNITLAYERS = {
         units: {},
+        myunits: {},
+        oppunits: {},
         soldiers: {},
         kings: {},
         mykings: {},
@@ -501,6 +511,8 @@ const game = {
       }
       UNITLAYERS = {
         units: {},
+        myunits: {},
+        oppunits: {},
         soldiers: {},
         kings: {},
         mykings: {},
@@ -566,6 +578,8 @@ const game = {
       }
       UNITLAYERS = {
         units: {},
+        myunits: {},
+        oppunits: {},
         soldiers: {},
         kings: {},
         mykings: {},
@@ -779,9 +793,18 @@ const game = {
       desc: "regular",
       code: "r",
       arr: {
-        setup: {},
-        marks: [],
-        potentialMarks: []
+        setup: {
+          kings: {
+            "1": ["b3", "c2"],
+            "2": ["b5"]
+          },
+          soldiers: {
+            "1": ["c3", "d2", "e3", "f3"],
+            "2": ["b4", "c4", "c5", "d4", "e4"]
+          }
+        },
+        marks: ["b5"],
+        potentialMarks: ["a4", "c6", "d5"]
       }
     }
   ],

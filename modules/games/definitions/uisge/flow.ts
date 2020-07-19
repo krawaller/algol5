@@ -34,7 +34,7 @@ const uisgeFlow: UisgeDefinition["flow"] = {
   },
   marks: {
     selectunit: {
-      from: "units",
+      from: "myunits",
       runGenerators: [
         "findmjumptargets",
         { if: [{ anyat: ["kings", "selectunit"] }, "findsteptargets"] },

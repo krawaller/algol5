@@ -4,7 +4,7 @@ const yonmoqueMeta: YonmoqueDefinition["meta"] = {
   id: "yonmoque",
   author: "Mitsuo Yamamoto",
   name: "Yonmoque",
-  tags: ["asymmetric", "logy", "formation"],
+  tags: ["asymmetric", "logy", "formation", "bloodshed"],
   tagline: "Change powers as you traverse the board!",
   source: "http://www.logygames.com/english/yonmoque.html",
   code: "B",

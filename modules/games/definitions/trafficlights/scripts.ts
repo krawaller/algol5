@@ -2,6 +2,27 @@ import { TrafficlightsDefinition } from "./_types";
 
 const trafficlightsScripts: TrafficlightsDefinition["scripts"] = [
   {
+    desc: "nicegame",
+    lines: [
+      { commands: ["b2", "deploy", "endTurn"] },
+      { commands: ["b2", "promote", "endTurn"] },
+      { commands: ["c2", "deploy", "endTurn"] },
+      { commands: ["d2", "deploy", "endTurn"] },
+      { commands: ["b2", "promote", "endTurn"] },
+      { commands: ["c2", "promote", "endTurn"] },
+      { commands: ["b1", "deploy", "endTurn"] },
+      { commands: ["d2", "promote", "endTurn"] },
+      { commands: ["d3", "deploy", "endTurn"] },
+      { commands: ["a2", "deploy", "endTurn"] },
+      { commands: ["a2", "promote", "endTurn"] },
+      { commands: ["a3", "deploy", "endTurn"] },
+      { commands: ["a3", "promote", "endTurn"] },
+      { commands: ["a3", "promote", "endTurn"] },
+      { commands: ["d1", "deploy", "endTurn"] },
+      { commands: ["c1", "deploy", "endTurn"] },
+    ],
+  },
+  {
     desc: "quickWin",
     lines: [
       {

@@ -6,6 +6,7 @@ const { createCanvas, loadImage } = require("canvas");
  * @typedef {Object} CompositeOpts
  * @property {string[]} paths List of paths to square images with unique names
  * @property {string} name Name for composite
+ * @property {string} imageSuffix cache-busting suffix for images
  * @property {number} size Square side length
  * @property {string} root Root folder to create resources in
  */
@@ -15,7 +16,7 @@ const { createCanvas, loadImage } = require("canvas");
  * @param {CompositeOpts} opts
  */
 const composite = async opts => {
-  const { size, paths, name, root } = opts;
+  const { size, paths, name, root, imageSuffix = "" } = opts;
   paths.sort((p1, p2) => (path.basename(p1) < path.basename(p2) ? -1 : 1));
   const perRow = 5;
   const rows = Math.ceil(paths.length / perRow);
@@ -42,7 +43,9 @@ const composite = async opts => {
   const pngStream = canvas.createPNGStream();
   const outFolder = path.join(root, name);
   await fs.ensureDir(outFolder);
-  const outStream = fs.createWriteStream(path.join(outFolder, `${name}.png`));
+  const outStream = fs.createWriteStream(
+    path.join(outFolder, `${name}${imageSuffix}.png`)
+  );
   await new Promise(resolve => {
     outStream.on("finish", resolve);
     pngStream.pipe(outStream);

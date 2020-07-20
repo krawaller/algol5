@@ -5,4 +5,6 @@ export const links = {
     "http://www.di.fc.ul.pt/~jpn/gv/semaphor.htm",
   "IG GameCenter entry":
     "http://www.iggamecenter.com/info/en/trafficlights.html",
+  "Board Game Geek entry":
+    "https://boardgamegeek.com/boardgame/1893/traffic-lights",
 };

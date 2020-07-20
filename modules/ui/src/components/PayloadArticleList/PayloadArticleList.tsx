@@ -2,6 +2,7 @@ import React, { FunctionComponent, useMemo } from "react";
 import css from "./PayloadArticleList.cssProxy";
 import { PayloadArticleListItem } from "./PayloadArticleList.Item";
 import { AppActions, AlgolListingContainer } from "../../../../types";
+import compositeId from "../../../../payloads/dist/compositeId";
 
 export type PayloadArticleListProps = {
   actions: AppActions;
@@ -26,7 +27,10 @@ export const PayloadArticleList: FunctionComponent<PayloadArticleListProps> = pr
           key={listing.url}
           actions={actions}
           listing={listing}
-          compositeName={list.composite}
+          compositeName={list.composite.replace(
+            ".png",
+            "_" + compositeId + ".png"
+          )}
         />
       ))}
     </div>

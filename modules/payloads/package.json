@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "robot": "npm run makeComposites && npm run buildRelations && npm run makeGamePayload && npm run exportAllGamePayloads && npm run makeListings && npm run makeArticles && npm run makeTitlePayload",
+    "robot": "npm run updateCompositeId && npm run makeComposites && npm run buildRelations && npm run makeGamePayload && npm run exportAllGamePayloads && npm run makeListings && npm run makeArticles && npm run makeTitlePayload",
     "clean": "rm -rf dist",
+    "updateCompositeId": "node ./commands/updateCompositeId",
     "makeComposites": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/payloads/commands/makeComposites",
     "makeGamePayload": "node ./commands/makeGamePayload",
     "makeListings": "npm run makeGameListing && npm run makeTagListing && npm run makeNewsListing && npm run makeAboutListing && npm run makeListingIndexes",

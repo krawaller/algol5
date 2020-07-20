@@ -4,7 +4,7 @@ const madbishopsMeta: MadbishopsDefinition["meta"] = {
   id: "madbishops",
   author: "Mark Steere",
   name: "Mad Bishops",
-  tags: ["iggamecenter", "superdupergames"],
+  tags: ["iggamecenter", "superdupergames", "bloodshed"],
   tagline: "Mutually assured destruction",
   source: "http://www.marksteeregames.com/Mad_Bishops_rules.pdf",
   code: "M",

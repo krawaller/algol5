@@ -1,11 +1,11 @@
 ---
 id: "bloodshed"
-title: "bloodshed"
+title: "Bloodshed"
 slug: "bloodshed"
 blurb: "Games where you get to kill your opponent"
 thumbnail: "thumb.jpg"
 mainImage: "actionoverlava.jpg"
-sort: "games with capture"
+sort: "bloodshed"
 updated: 2020-07-20
 ---
 

@@ -84,9 +84,6 @@ const desdemonaGenerators: DesdemonaDefinition["generators"] = {
     draw: {
       steps: {
         tolayer: "reachablesquares",
-        include: {
-          dir: ["dir"],
-        },
       },
     },
   },
@@ -103,16 +100,13 @@ const desdemonaGenerators: DesdemonaDefinition["generators"] = {
           and: [{ truthy: ["walklength"] }, { stoppedBecause: "hitblock" }],
         },
         tolayer: "capturestarts",
-        include: {
-          dir: { read: ["reachablesquares", ["start"], "dir"] },
-        },
       },
     },
   },
   findcapturers: {
     type: "walker",
     starts: "capturestarts",
-    dir: { reldir: [{ read: ["capturestarts", ["start"], "dir"] }, 5] },
+    dirs: "rose",
     blocks: "myamazons",
     draw: {
       block: {

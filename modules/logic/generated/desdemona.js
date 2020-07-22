@@ -247,16 +247,12 @@ const game = {
         {
           let BLOCKS = UNITLAYERS.myamazons;
           for (let STARTPOS in ARTIFACTS.capturestarts) {
-            let POS = STARTPOS;
-            while (
-              (POS =
-                connections[POS][
-                  relativeDirs[(ARTIFACTS.capturestarts[STARTPOS] || {}).dir][5]
-                ]) &&
-              !BLOCKS[POS]
-            ) {}
-            if (BLOCKS[POS]) {
-              ARTIFACTS.capturers[POS] = emptyObj;
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+              if (BLOCKS[POS]) {
+                ARTIFACTS.capturers[POS] = emptyObj;
+              }
             }
           }
         }
@@ -289,9 +285,7 @@ const game = {
               let WALKLENGTH = walkedsquares.length;
               POS = STARTPOS;
               if (!!WALKLENGTH && STOPREASON === "hitblock") {
-                ARTIFACTS.capturestarts[POS] = {
-                  dir: (ARTIFACTS.reachablesquares[STARTPOS] || {}).dir
-                };
+                ARTIFACTS.capturestarts[POS] = emptyObj;
               }
             }
           }
@@ -465,16 +459,12 @@ const game = {
         {
           let BLOCKS = UNITLAYERS.myamazons;
           for (let STARTPOS in ARTIFACTS.capturestarts) {
-            let POS = STARTPOS;
-            while (
-              (POS =
-                connections[POS][
-                  relativeDirs[(ARTIFACTS.capturestarts[STARTPOS] || {}).dir][5]
-                ]) &&
-              !BLOCKS[POS]
-            ) {}
-            if (BLOCKS[POS]) {
-              ARTIFACTS.capturers[POS] = emptyObj;
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+              if (BLOCKS[POS]) {
+                ARTIFACTS.capturers[POS] = emptyObj;
+              }
             }
           }
         }
@@ -507,9 +497,7 @@ const game = {
               let WALKLENGTH = walkedsquares.length;
               POS = STARTPOS;
               if (!!WALKLENGTH && STOPREASON === "hitblock") {
-                ARTIFACTS.capturestarts[POS] = {
-                  dir: (ARTIFACTS.reachablesquares[STARTPOS] || {}).dir
-                };
+                ARTIFACTS.capturestarts[POS] = emptyObj;
               }
             }
           }
@@ -683,16 +671,12 @@ const game = {
         {
           let BLOCKS = UNITLAYERS.myamazons;
           for (let STARTPOS in ARTIFACTS.capturestarts) {
-            let POS = STARTPOS;
-            while (
-              (POS =
-                connections[POS][
-                  relativeDirs[(ARTIFACTS.capturestarts[STARTPOS] || {}).dir][5]
-                ]) &&
-              !BLOCKS[POS]
-            ) {}
-            if (BLOCKS[POS]) {
-              ARTIFACTS.capturers[POS] = emptyObj;
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+              if (BLOCKS[POS]) {
+                ARTIFACTS.capturers[POS] = emptyObj;
+              }
             }
           }
         }
@@ -725,9 +709,7 @@ const game = {
               let WALKLENGTH = walkedsquares.length;
               POS = STARTPOS;
               if (!!WALKLENGTH && STOPREASON === "hitblock") {
-                ARTIFACTS.capturestarts[POS] = {
-                  dir: (ARTIFACTS.reachablesquares[STARTPOS] || {}).dir
-                };
+                ARTIFACTS.capturestarts[POS] = emptyObj;
               }
             }
           }
@@ -901,16 +883,12 @@ const game = {
         {
           let BLOCKS = UNITLAYERS.myamazons;
           for (let STARTPOS in ARTIFACTS.capturestarts) {
-            let POS = STARTPOS;
-            while (
-              (POS =
-                connections[POS][
-                  relativeDirs[(ARTIFACTS.capturestarts[STARTPOS] || {}).dir][5]
-                ]) &&
-              !BLOCKS[POS]
-            ) {}
-            if (BLOCKS[POS]) {
-              ARTIFACTS.capturers[POS] = emptyObj;
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+              if (BLOCKS[POS]) {
+                ARTIFACTS.capturers[POS] = emptyObj;
+              }
             }
           }
         }
@@ -943,9 +921,7 @@ const game = {
               let WALKLENGTH = walkedsquares.length;
               POS = STARTPOS;
               if (!!WALKLENGTH && STOPREASON === "hitblock") {
-                ARTIFACTS.capturestarts[POS] = {
-                  dir: (ARTIFACTS.reachablesquares[STARTPOS] || {}).dir
-                };
+                ARTIFACTS.capturestarts[POS] = emptyObj;
               }
             }
           }
@@ -1300,7 +1276,7 @@ const game = {
             for (let DIR of roseDirs) {
               let POS = STARTPOS;
               while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-                ARTIFACTS.reachablesquares[POS] = { dir: DIR };
+                ARTIFACTS.reachablesquares[POS] = emptyObj;
               }
             }
           }
@@ -1332,9 +1308,7 @@ const game = {
               let WALKLENGTH = walkedsquares.length;
               POS = STARTPOS;
               if (!!WALKLENGTH && STOPREASON === "hitblock") {
-                ARTIFACTS.capturestarts[POS] = {
-                  dir: (ARTIFACTS.reachablesquares[STARTPOS] || {}).dir
-                };
+                ARTIFACTS.capturestarts[POS] = emptyObj;
               }
             }
           }
@@ -1342,16 +1316,12 @@ const game = {
         {
           let BLOCKS = UNITLAYERS.myamazons;
           for (let STARTPOS in ARTIFACTS.capturestarts) {
-            let POS = STARTPOS;
-            while (
-              (POS =
-                connections[POS][
-                  relativeDirs[(ARTIFACTS.capturestarts[STARTPOS] || {}).dir][5]
-                ]) &&
-              !BLOCKS[POS]
-            ) {}
-            if (BLOCKS[POS]) {
-              ARTIFACTS.capturers[POS] = emptyObj;
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+              if (BLOCKS[POS]) {
+                ARTIFACTS.capturers[POS] = emptyObj;
+              }
             }
           }
         }
@@ -1578,7 +1548,7 @@ const game = {
             for (let DIR of roseDirs) {
               let POS = STARTPOS;
               while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-                ARTIFACTS.reachablesquares[POS] = { dir: DIR };
+                ARTIFACTS.reachablesquares[POS] = emptyObj;
               }
             }
           }
@@ -1610,9 +1580,7 @@ const game = {
               let WALKLENGTH = walkedsquares.length;
               POS = STARTPOS;
               if (!!WALKLENGTH && STOPREASON === "hitblock") {
-                ARTIFACTS.capturestarts[POS] = {
-                  dir: (ARTIFACTS.reachablesquares[STARTPOS] || {}).dir
-                };
+                ARTIFACTS.capturestarts[POS] = emptyObj;
               }
             }
           }
@@ -1620,16 +1588,12 @@ const game = {
         {
           let BLOCKS = UNITLAYERS.myamazons;
           for (let STARTPOS in ARTIFACTS.capturestarts) {
-            let POS = STARTPOS;
-            while (
-              (POS =
-                connections[POS][
-                  relativeDirs[(ARTIFACTS.capturestarts[STARTPOS] || {}).dir][5]
-                ]) &&
-              !BLOCKS[POS]
-            ) {}
-            if (BLOCKS[POS]) {
-              ARTIFACTS.capturers[POS] = emptyObj;
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+              if (BLOCKS[POS]) {
+                ARTIFACTS.capturers[POS] = emptyObj;
+              }
             }
           }
         }
@@ -1856,7 +1820,7 @@ const game = {
             for (let DIR of roseDirs) {
               let POS = STARTPOS;
               while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-                ARTIFACTS.reachablesquares[POS] = { dir: DIR };
+                ARTIFACTS.reachablesquares[POS] = emptyObj;
               }
             }
           }
@@ -1888,9 +1852,7 @@ const game = {
               let WALKLENGTH = walkedsquares.length;
               POS = STARTPOS;
               if (!!WALKLENGTH && STOPREASON === "hitblock") {
-                ARTIFACTS.capturestarts[POS] = {
-                  dir: (ARTIFACTS.reachablesquares[STARTPOS] || {}).dir
-                };
+                ARTIFACTS.capturestarts[POS] = emptyObj;
               }
             }
           }
@@ -1898,16 +1860,12 @@ const game = {
         {
           let BLOCKS = UNITLAYERS.myamazons;
           for (let STARTPOS in ARTIFACTS.capturestarts) {
-            let POS = STARTPOS;
-            while (
-              (POS =
-                connections[POS][
-                  relativeDirs[(ARTIFACTS.capturestarts[STARTPOS] || {}).dir][5]
-                ]) &&
-              !BLOCKS[POS]
-            ) {}
-            if (BLOCKS[POS]) {
-              ARTIFACTS.capturers[POS] = emptyObj;
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+              if (BLOCKS[POS]) {
+                ARTIFACTS.capturers[POS] = emptyObj;
+              }
             }
           }
         }
@@ -2134,7 +2092,7 @@ const game = {
             for (let DIR of roseDirs) {
               let POS = STARTPOS;
               while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-                ARTIFACTS.reachablesquares[POS] = { dir: DIR };
+                ARTIFACTS.reachablesquares[POS] = emptyObj;
               }
             }
           }
@@ -2166,9 +2124,7 @@ const game = {
               let WALKLENGTH = walkedsquares.length;
               POS = STARTPOS;
               if (!!WALKLENGTH && STOPREASON === "hitblock") {
-                ARTIFACTS.capturestarts[POS] = {
-                  dir: (ARTIFACTS.reachablesquares[STARTPOS] || {}).dir
-                };
+                ARTIFACTS.capturestarts[POS] = emptyObj;
               }
             }
           }
@@ -2176,16 +2132,12 @@ const game = {
         {
           let BLOCKS = UNITLAYERS.myamazons;
           for (let STARTPOS in ARTIFACTS.capturestarts) {
-            let POS = STARTPOS;
-            while (
-              (POS =
-                connections[POS][
-                  relativeDirs[(ARTIFACTS.capturestarts[STARTPOS] || {}).dir][5]
-                ]) &&
-              !BLOCKS[POS]
-            ) {}
-            if (BLOCKS[POS]) {
-              ARTIFACTS.capturers[POS] = emptyObj;
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+              if (BLOCKS[POS]) {
+                ARTIFACTS.capturers[POS] = emptyObj;
+              }
             }
           }
         }

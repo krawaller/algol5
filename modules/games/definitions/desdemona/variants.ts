@@ -45,6 +45,13 @@ const desdemonaVariants: DesdemonaDefinition["variants"] = [
   {
     ruleset: "basic",
     board: "basic",
+    setup: "blocktest",
+    desc: "blocktest",
+    code: "B",
+  },
+  {
+    ruleset: "basic",
+    board: "basic",
     setup: "basic_OLD",
     desc: "regular (OLD)",
     code: "r",

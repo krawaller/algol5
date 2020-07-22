@@ -25,6 +25,16 @@ const desdemonaSetupBook: DesdemonaDefinition["setups"] = {
       2: ["a8", "h1"],
     },
   },
+  blocktest: {
+    amazons: {
+      1: ["b2", "f2", "g1"],
+      2: ["a7"],
+    },
+    stones: {
+      1: ["a6", "c2"],
+      2: ["c4", "e6"],
+    },
+  },
 };
 
 export default desdemonaSetupBook;

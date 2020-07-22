@@ -6,7 +6,12 @@ type DesdemonaBoardWidth = 8;
 
 type DesdemonaTerrain = never;
 type DesdemonaUnit = "amazons" | "stones";
-type DesdemonaMark = "selectunit" | "selectmovetarget" | "selectfiretarget";
+type DesdemonaMark =
+  | "selectunit"
+  | "selectmovetarget"
+  | "selectfiretarget"
+  | "selectcapturer"
+  | "selectcapturestart";
 type DesdemonaCommand = "move" | "fire";
 type DesdemonaPhaseCommand = "move" | "fire";
 type DesdemonaPhase = "startTurn" | DesdemonaMark | DesdemonaPhaseCommand;
@@ -28,14 +33,19 @@ type DesdemonaGenerator =
   | "findspawntargets"
   | "findcapturetargets"
   | "findvictims"
-  | "findmovers";
+  | "findoppmovers"
+  | "findreachablesquares"
+  | "findcapturestarts"
+  | "findcapturers";
 type DesdemonaArtifactLayer =
+  | "capturers"
+  | "capturestarts"
   | "movetargets"
   | "firetargets"
   | "capturespot"
   | "victims"
-  | "mymovers"
-  | "oppmovers";
+  | "oppmovers"
+  | "reachablesquares";
 type DesdemonaTerrainLayer = never;
 type DesdemonaLayer = CommonLayer | DesdemonaUnitLayer | DesdemonaArtifactLayer;
 type DesdemonaBattlePos = never;
@@ -44,9 +54,14 @@ type DesdemonaTurnPos = "movedto";
 type DesdemonaTurnVar = "movedto";
 
 type DesdemonaBoardName = "basic" | "xl";
-type DesdemonaSetupName = "basic" | "xl" | "basic_OLD" | "xl_OLD";
+type DesdemonaSetupName = "basic" | "xl" | "basic_OLD" | "xl_OLD" | "blocktest";
 type DesdemonaRulesetName = "pie" | "basic";
-type DesdemonaVariantName = "regular" | "XL" | "regular (OLD)" | "XL (OLD)";
+type DesdemonaVariantName =
+  | "regular"
+  | "XL"
+  | "blocktest"
+  | "regular (OLD)"
+  | "XL (OLD)";
 
 type DesdemonaGrid = never;
 

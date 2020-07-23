@@ -41,7 +41,7 @@ const emptyArtifactLayers_basic = {
 };
 const game = {
   gameId: "squava",
-  commands: { drop: {} },
+  commands: { drop: {}, pie: {} },
   iconMap: iconMapping,
   setBoard: board => {
     TERRAIN1 = terrainLayers(board.height, board.width, board.terrain, 1);
@@ -113,6 +113,7 @@ const game = {
         marks: {},
         commands: {}
       };
+      let TURN = step.TURN;
       for (const pos of Object.keys(
         Object.keys(BOARD.board)
           .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
@@ -123,13 +124,16 @@ const game = {
       )) {
         LINKS.marks[pos] = "selectspace_basic_2";
       }
+      if (TURN === 1) {
+        LINKS.commands.pie = "pie_basic_2";
+      }
       return {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
         ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
-        TURN: step.TURN,
+        TURN,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
@@ -143,7 +147,8 @@ const game = {
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
         MARKS: { selectspace: newMarkPos },
-        NEXTSPAWNID: step.NEXTSPAWNID
+        NEXTSPAWNID: step.NEXTSPAWNID,
+        canAlwaysEnd: true
       };
     },
     selectspace_basic_2: (step, newMarkPos) => {
@@ -156,7 +161,8 @@ const game = {
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
         MARKS: { selectspace: newMarkPos },
-        NEXTSPAWNID: step.NEXTSPAWNID
+        NEXTSPAWNID: step.NEXTSPAWNID,
+        canAlwaysEnd: true
       };
     },
     drop_basic_1: step => {
@@ -358,6 +364,40 @@ const game = {
         UNITLAYERS,
         NEXTSPAWNID
       };
+    },
+    pie_basic_2: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let UNITLAYERS = step.UNITLAYERS;
+      let UNITDATA = { ...step.UNITDATA };
+      for (let LOOPPOS in UNITLAYERS.oppunits) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              owner: 2
+            };
+          }
+        }
+      }
+      UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, markers: {} };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers2[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      LINKS.endTurn = "startTurn_basic_1";
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS: step.ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
     }
   },
   instruction: {
@@ -379,11 +419,46 @@ const game = {
       });
     },
     startTurn_basic_2: step => {
+      let UNITLAYERS = step.UNITLAYERS;
+      let TURN = step.TURN;
       return collapseContent({
-        line: [{ text: "Select where to drop a" }, { unittype: ["pawn", 2] }]
+        line: [
+          { text: "Select where to drop a" },
+          { unittype: ["pawn", 2] },
+          TURN === 1
+            ? collapseContent({
+                line: [
+                  { text: "or invoke" },
+                  { command: "pie" },
+                  { text: "to steal" },
+                  collapseContent({
+                    line: Object.keys(UNITLAYERS.oppunits)
+                      .filter(p => UNITLAYERS.units[p])
+                      .map(p => ({
+                        unit: [
+                          iconMapping[UNITLAYERS.units[p].group],
+                          UNITLAYERS.units[p].owner,
+                          p
+                        ]
+                      }))
+                      .reduce((mem, i, n, list) => {
+                        mem.push(i);
+                        if (n === list.length - 2) {
+                          mem.push({ text: " and " });
+                        } else if (n < list.length - 2) {
+                          mem.push({ text: ", " });
+                        }
+                        return mem;
+                      }, [])
+                  })
+                ]
+              })
+            : undefined
+        ]
       });
     },
     drop_basic_2: () => defaultInstruction(2),
+    pie_basic_2: () => defaultInstruction(2),
     selectspace_basic_2: step => {
       let MARKS = step.MARKS;
       return collapseContent({

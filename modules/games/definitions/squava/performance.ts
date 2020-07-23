@@ -1,9 +1,9 @@
 import { SquavaDefinition } from "./_types";
 
 const squavaPerformance: SquavaDefinition["performance"] = {
-  canAlwaysEnd: {},
+  canAlwaysEnd: { selectspace: true },
   massiveTree: {},
-  noEndGameCheck: []
+  noEndGameCheck: ["pie"],
 };
 
 export default squavaPerformance;

@@ -18,12 +18,16 @@ const squavaFlow: SquavaDefinition["flow"] = {
     },
   },
   startTurn: {
-    link: "selectspace",
+    links: ["selectspace", { ifplayer: [2, { if: [["isFirstTurn"], "pie"] }] }],
   },
   commands: {
     drop: {
       applyEffect: { spawnat: ["selectspace", "markers"] },
       runGenerators: ["findlinebeginnings", "findendlines"],
+      link: "endTurn",
+    },
+    pie: {
+      applyEffect: { adoptin: ["oppunits"] },
       link: "endTurn",
     },
   },

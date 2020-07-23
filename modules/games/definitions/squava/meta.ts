@@ -2,7 +2,7 @@ import { SquavaDefinition } from "./_types";
 
 const squavaMeta: SquavaDefinition["meta"] = {
   id: "squava",
-  author: "Nestor Romeral Andres",
+  author: "Néstor Romeral Andrés",
   name: "Squava",
   tags: ["formation", "nestorgames", "irreversible"],
   tagline: "4 is better than 3!",

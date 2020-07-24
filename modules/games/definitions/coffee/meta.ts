@@ -10,7 +10,6 @@ const coffeeMeta: CoffeeDefinition["meta"] = {
   author: "Néstor Romeral Andrés",
   tagline: "Take over units to form a line and limit your opponent's options",
   slug: "coffee",
-  hidden: true,
 };
 
 export default coffeeMeta;

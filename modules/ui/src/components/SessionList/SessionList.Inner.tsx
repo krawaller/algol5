@@ -57,8 +57,7 @@ export const SessionListInner: React.FunctionComponent<SessionListInnerProps> = 
     );
   }
 
-  const hasErrorLines =
-    sessionInfo.sessions.filter(isSessionLoadFail).length > 0;
+  let hasErrorLines = false;
 
   return (
     <div>
@@ -67,12 +66,30 @@ export const SessionListInner: React.FunctionComponent<SessionListInnerProps> = 
       ) : (
         sessionInfo.sessions.map(session => {
           if (isSessionLoadFail(session)) {
+            hasErrorLines = true;
             return (
               <SessionListLineError
                 key={session.id}
                 actions={actions}
                 graphics={graphics}
                 fail={session}
+                meta={meta}
+              />
+            );
+          }
+          const variant = variants.find(v => v.code === session.variantCode);
+          if (!variant) {
+            hasErrorLines = true;
+            return (
+              <SessionListLineError
+                key={session.id}
+                actions={actions}
+                graphics={graphics}
+                fail={{
+                  error: new Error("Unknown variant"),
+                  id: session.id,
+                  str: "",
+                }}
                 meta={meta}
               />
             );

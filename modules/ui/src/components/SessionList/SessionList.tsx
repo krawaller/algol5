@@ -60,7 +60,14 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
   useEffect(readSessions, [readSessions]);
 
   const errorIds = useMemo(
-    () => sessionInfo.sessions.filter(isSessionLoadFail).map(fail => fail.id),
+    () =>
+      sessionInfo.sessions
+        .filter(
+          s =>
+            isSessionLoadFail(s) ||
+            !variants.find(v => v.code === s.variantCode)
+        )
+        .map(fail => fail.id),
     [sessionInfo]
   );
 

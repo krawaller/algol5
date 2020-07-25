@@ -31,10 +31,18 @@ type GameLandingProps = {
   graphics: AlgolGameGraphics;
   variants: AlgolVariantAnon[];
   previousSessionId?: string | null;
+  corruptSessions: Record<string, string>;
 };
 
 export const GameLanding: FunctionComponent<GameLandingProps> = props => {
-  const { meta, actions, graphics, previousSessionId, variants } = props;
+  const {
+    meta,
+    actions,
+    graphics,
+    previousSessionId,
+    variants,
+    corruptSessions,
+  } = props;
   const [isSessionModalOpen, openSessionModal, closeSessionModal] = useModal();
   const [isRemoteModalOpen, openRemoteModal, closeRemoteModal] = useModal();
 
@@ -90,6 +98,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
           graphics={graphics}
           previousSessionId={previousSessionId}
           variants={variants}
+          corruptSessions={corruptSessions}
         />
       </Modal>
     </Fragment>

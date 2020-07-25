@@ -28,6 +28,7 @@ type SessionListInnerProps = {
   actions: SessionListInnerActions;
   meta: AlgolMeta<AlgolGameBlobAnon>;
   sessionInfo: SessionInfo;
+  corruptSessions: Record<string, string>;
   variants: AlgolVariantAnon[];
 };
 
@@ -43,6 +44,7 @@ export const SessionListInner: React.FunctionComponent<SessionListInnerProps> = 
   meta,
   sessionInfo,
   variants,
+  corruptSessions,
 }) => {
   if (sessionInfo.status === "initial") {
     return null;
@@ -94,6 +96,9 @@ export const SessionListInner: React.FunctionComponent<SessionListInnerProps> = 
               />
             );
           }
+          if (corruptSessions[session.id]) {
+            hasErrorLines = true;
+          }
           return (
             <SessionListItem
               key={session.id}
@@ -101,6 +106,7 @@ export const SessionListInner: React.FunctionComponent<SessionListInnerProps> = 
               graphics={graphics}
               actions={actions}
               variant={variants.find(v => v.code === session.variantCode)!}
+              corrupt={corruptSessions[session.id]}
             />
           );
         })

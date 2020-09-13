@@ -10,7 +10,7 @@ import * as jdp from "jsondiffpatch";
 
 const identifyMark = /^[a-z][0-9]+$/;
 
-export function makeDemo(
+export function makeDemoFromScript(
   API: AlgolStatefulGameAPI,
   script: AlgolScriptLine<AlgolGameBlobAnon>[] = []
 ): AlgolDemo {

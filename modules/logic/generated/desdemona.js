@@ -20,9 +20,9 @@ const iconMapping = { amazons: "queen", stones: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   amazons: [
-    ["units", "amazons"],
-    ["units", "myunits", "amazons", "myamazons"],
-    ["units", "oppunits", "amazons", "oppamazons"]
+    ["units"],
+    ["units", "myunits", "myamazons"],
+    ["units", "oppunits", "oppamazons"]
   ],
   stones: [
     ["units", "stones"],
@@ -32,9 +32,9 @@ const groupLayers1 = {
 };
 const groupLayers2 = {
   amazons: [
-    ["units", "amazons"],
-    ["units", "oppunits", "amazons", "oppamazons"],
-    ["units", "myunits", "amazons", "myamazons"]
+    ["units"],
+    ["units", "oppunits", "oppamazons"],
+    ["units", "myunits", "myamazons"]
   ],
   stones: [
     ["units", "stones"],
@@ -49,16 +49,20 @@ const emptyArtifactLayers_pie = {
   firetargets: {},
   capturespot: {},
   victims: {},
-  mymovers: {},
-  oppmovers: {}
+  oppmovers: {},
+  reachablesquares: {},
+  capturestarts: {},
+  capturers: {}
 };
 const emptyArtifactLayers_basic = {
   movetargets: {},
   firetargets: {},
   capturespot: {},
   victims: {},
-  mymovers: {},
-  oppmovers: {}
+  oppmovers: {},
+  reachablesquares: {},
+  capturestarts: {},
+  capturers: {}
 };
 const game = {
   gameId: "desdemona",
@@ -78,7 +82,6 @@ const game = {
       units: {},
       myunits: {},
       oppunits: {},
-      amazons: {},
       myamazons: {},
       oppamazons: {},
       stones: {},
@@ -101,13 +104,11 @@ const game = {
   },
   action: {
     startTurn_pie_1: step => {
-      let ARTIFACTS = emptyArtifactLayers_pie;
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
         myunits: oldUnitLayers.oppunits,
         oppunits: oldUnitLayers.myunits,
-        amazons: oldUnitLayers.amazons,
         myamazons: oldUnitLayers.oppamazons,
         oppamazons: oldUnitLayers.myamazons,
         stones: oldUnitLayers.stones,
@@ -118,18 +119,14 @@ const game = {
         marks: {},
         commands: {}
       };
-      for (const pos of Object.keys(
-        Object.keys(ARTIFACTS.mymovers).length !== 0
-          ? ARTIFACTS.mymovers
-          : UNITLAYERS.myamazons
-      )) {
+      for (const pos of Object.keys(UNITLAYERS.myamazons)) {
         LINKS.marks[pos] = "selectunit_pie_1";
       }
       return {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS,
+        ARTIFACTS: emptyArtifactLayers_pie,
         MARKS: {},
         TURN: step.TURN + 1,
         NEXTSPAWNID: step.NEXTSPAWNID,
@@ -137,13 +134,11 @@ const game = {
       };
     },
     startTurn_pie_2: step => {
-      let ARTIFACTS = emptyArtifactLayers_pie;
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
         myunits: oldUnitLayers.oppunits,
         oppunits: oldUnitLayers.myunits,
-        amazons: oldUnitLayers.amazons,
         myamazons: oldUnitLayers.oppamazons,
         oppamazons: oldUnitLayers.myamazons,
         stones: oldUnitLayers.stones,
@@ -154,18 +149,14 @@ const game = {
         marks: {},
         commands: {}
       };
-      for (const pos of Object.keys(
-        Object.keys(ARTIFACTS.mymovers).length !== 0
-          ? ARTIFACTS.mymovers
-          : UNITLAYERS.myamazons
-      )) {
+      for (const pos of Object.keys(UNITLAYERS.myamazons)) {
         LINKS.marks[pos] = "selectunit_pie_2";
       }
       return {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS,
+        ARTIFACTS: emptyArtifactLayers_pie,
         MARKS: {},
         TURN: step.TURN,
         NEXTSPAWNID: step.NEXTSPAWNID,
@@ -173,13 +164,11 @@ const game = {
       };
     },
     startTurn_basic_1: step => {
-      let ARTIFACTS = emptyArtifactLayers_basic;
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
         myunits: oldUnitLayers.oppunits,
         oppunits: oldUnitLayers.myunits,
-        amazons: oldUnitLayers.amazons,
         myamazons: oldUnitLayers.oppamazons,
         oppamazons: oldUnitLayers.myamazons,
         stones: oldUnitLayers.stones,
@@ -190,18 +179,14 @@ const game = {
         marks: {},
         commands: {}
       };
-      for (const pos of Object.keys(
-        Object.keys(ARTIFACTS.mymovers).length !== 0
-          ? ARTIFACTS.mymovers
-          : UNITLAYERS.myamazons
-      )) {
+      for (const pos of Object.keys(UNITLAYERS.myamazons)) {
         LINKS.marks[pos] = "selectunit_basic_1";
       }
       return {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1,
         NEXTSPAWNID: step.NEXTSPAWNID,
@@ -209,13 +194,11 @@ const game = {
       };
     },
     startTurn_basic_2: step => {
-      let ARTIFACTS = emptyArtifactLayers_basic;
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
         myunits: oldUnitLayers.oppunits,
         oppunits: oldUnitLayers.myunits,
-        amazons: oldUnitLayers.amazons,
         myamazons: oldUnitLayers.oppamazons,
         oppamazons: oldUnitLayers.myamazons,
         stones: oldUnitLayers.stones,
@@ -226,18 +209,14 @@ const game = {
         marks: {},
         commands: {}
       };
-      for (const pos of Object.keys(
-        Object.keys(ARTIFACTS.mymovers).length !== 0
-          ? ARTIFACTS.mymovers
-          : UNITLAYERS.myamazons
-      )) {
+      for (const pos of Object.keys(UNITLAYERS.myamazons)) {
         LINKS.marks[pos] = "selectunit_basic_2";
       }
       return {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN,
         NEXTSPAWNID: step.NEXTSPAWNID,
@@ -246,7 +225,9 @@ const game = {
     },
     selectunit_pie_1: (step, newMarkPos) => {
       let ARTIFACTS = {
-        movetargets: {}
+        movetargets: {},
+        capturers: {},
+        capturestarts: {}
       };
       let LINKS = { marks: {}, commands: {} };
       let MARKS = {
@@ -256,9 +237,57 @@ const game = {
       {
         let BLOCKS = UNITLAYERS.units;
         for (let DIR of roseDirs) {
-          let POS = MARKS.selectunit;
+          let POS = MARKS.selectunit || MARKS.selectcapturer;
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
             ARTIFACTS.movetargets[POS] = emptyObj;
+          }
+        }
+      }
+      if (false) {
+        {
+          let BLOCKS = UNITLAYERS.myamazons;
+          for (let STARTPOS in ARTIFACTS.capturestarts) {
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+              if (BLOCKS[POS]) {
+                ARTIFACTS.capturers[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (false) {
+        {
+          let allowedsteps = UNITLAYERS.oppstones;
+          let BLOCKS = Object.keys(BOARD.board)
+            .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {});
+          for (let STARTPOS in ARTIFACTS.reachablesquares) {
+            for (let DIR of roseDirs) {
+              let walkedsquares = [];
+              let STOPREASON = "";
+              let POS = STARTPOS;
+              while (
+                !(STOPREASON = !(POS = connections[POS][DIR])
+                  ? "outofbounds"
+                  : BLOCKS[POS]
+                  ? "hitblock"
+                  : !allowedsteps[POS]
+                  ? "nomoresteps"
+                  : null)
+              ) {
+                walkedsquares.push(POS);
+              }
+              let WALKLENGTH = walkedsquares.length;
+              POS = STARTPOS;
+              if (!!WALKLENGTH && STOPREASON === "hitblock") {
+                ARTIFACTS.capturestarts[POS] = emptyObj;
+              }
+            }
           }
         }
       }
@@ -297,6 +326,8 @@ const game = {
     selectfiretarget_pie_1: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
+        capturers: step.ARTIFACTS.capturers,
+        capturestarts: step.ARTIFACTS.capturestarts,
         firetargets: step.ARTIFACTS.firetargets,
         capturespot: step.ARTIFACTS.capturespot,
         victims: {}
@@ -334,9 +365,81 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
+    selectcapturer_pie_1: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        movetargets: { ...step.ARTIFACTS.movetargets },
+        capturers: step.ARTIFACTS.capturers,
+        capturestarts: step.ARTIFACTS.capturestarts,
+        firetargets: step.ARTIFACTS.firetargets,
+        capturespot: step.ARTIFACTS.capturespot,
+        victims: step.ARTIFACTS.victims,
+        oppmovers: step.ARTIFACTS.oppmovers,
+        reachablesquares: step.ARTIFACTS.reachablesquares
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectcapturer: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        let BLOCKS = UNITLAYERS.units;
+        for (let DIR of roseDirs) {
+          let POS = MARKS.selectunit || MARKS.selectcapturer;
+          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            ARTIFACTS.movetargets[POS] = emptyObj;
+          }
+        }
+      }
+      for (const pos of Object.keys(
+        Object.entries(
+          Object.keys(ARTIFACTS.capturestarts)
+            .concat(Object.keys(ARTIFACTS.movetargets))
+            .reduce((mem, k) => {
+              mem[k] = (mem[k] || 0) + 1;
+              return mem;
+            }, {})
+        )
+          .filter(([key, n]) => n === 2)
+          .reduce((mem, [key]) => {
+            mem[key] = emptyObj;
+            return mem;
+          }, {})
+      )) {
+        LINKS.marks[pos] = "selectcapturestart_pie_1";
+      }
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS,
+        TURNVARS: step.TURNVARS,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
+    selectcapturestart_pie_1: (step, newMarkPos) => {
+      let LINKS = { marks: {}, commands: {} };
+      LINKS.commands.move = "move_pie_1";
+      return {
+        LINKS,
+        ARTIFACTS: step.ARTIFACTS,
+        UNITLAYERS: step.UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS: {
+          selectcapturer: step.MARKS.selectcapturer,
+          selectcapturestart: newMarkPos
+        },
+        TURNVARS: step.TURNVARS,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
     selectunit_pie_2: (step, newMarkPos) => {
       let ARTIFACTS = {
-        movetargets: {}
+        movetargets: {},
+        capturers: {},
+        capturestarts: {}
       };
       let LINKS = { marks: {}, commands: {} };
       let MARKS = {
@@ -346,9 +449,57 @@ const game = {
       {
         let BLOCKS = UNITLAYERS.units;
         for (let DIR of roseDirs) {
-          let POS = MARKS.selectunit;
+          let POS = MARKS.selectunit || MARKS.selectcapturer;
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
             ARTIFACTS.movetargets[POS] = emptyObj;
+          }
+        }
+      }
+      if (false) {
+        {
+          let BLOCKS = UNITLAYERS.myamazons;
+          for (let STARTPOS in ARTIFACTS.capturestarts) {
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+              if (BLOCKS[POS]) {
+                ARTIFACTS.capturers[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (false) {
+        {
+          let allowedsteps = UNITLAYERS.oppstones;
+          let BLOCKS = Object.keys(BOARD.board)
+            .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {});
+          for (let STARTPOS in ARTIFACTS.reachablesquares) {
+            for (let DIR of roseDirs) {
+              let walkedsquares = [];
+              let STOPREASON = "";
+              let POS = STARTPOS;
+              while (
+                !(STOPREASON = !(POS = connections[POS][DIR])
+                  ? "outofbounds"
+                  : BLOCKS[POS]
+                  ? "hitblock"
+                  : !allowedsteps[POS]
+                  ? "nomoresteps"
+                  : null)
+              ) {
+                walkedsquares.push(POS);
+              }
+              let WALKLENGTH = walkedsquares.length;
+              POS = STARTPOS;
+              if (!!WALKLENGTH && STOPREASON === "hitblock") {
+                ARTIFACTS.capturestarts[POS] = emptyObj;
+              }
+            }
           }
         }
       }
@@ -387,6 +538,8 @@ const game = {
     selectfiretarget_pie_2: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
+        capturers: step.ARTIFACTS.capturers,
+        capturestarts: step.ARTIFACTS.capturestarts,
         firetargets: step.ARTIFACTS.firetargets,
         capturespot: step.ARTIFACTS.capturespot,
         victims: {}
@@ -424,9 +577,81 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
+    selectcapturer_pie_2: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        movetargets: { ...step.ARTIFACTS.movetargets },
+        capturers: step.ARTIFACTS.capturers,
+        capturestarts: step.ARTIFACTS.capturestarts,
+        firetargets: step.ARTIFACTS.firetargets,
+        capturespot: step.ARTIFACTS.capturespot,
+        victims: step.ARTIFACTS.victims,
+        oppmovers: step.ARTIFACTS.oppmovers,
+        reachablesquares: step.ARTIFACTS.reachablesquares
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectcapturer: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        let BLOCKS = UNITLAYERS.units;
+        for (let DIR of roseDirs) {
+          let POS = MARKS.selectunit || MARKS.selectcapturer;
+          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            ARTIFACTS.movetargets[POS] = emptyObj;
+          }
+        }
+      }
+      for (const pos of Object.keys(
+        Object.entries(
+          Object.keys(ARTIFACTS.capturestarts)
+            .concat(Object.keys(ARTIFACTS.movetargets))
+            .reduce((mem, k) => {
+              mem[k] = (mem[k] || 0) + 1;
+              return mem;
+            }, {})
+        )
+          .filter(([key, n]) => n === 2)
+          .reduce((mem, [key]) => {
+            mem[key] = emptyObj;
+            return mem;
+          }, {})
+      )) {
+        LINKS.marks[pos] = "selectcapturestart_pie_2";
+      }
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS,
+        TURNVARS: step.TURNVARS,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
+    selectcapturestart_pie_2: (step, newMarkPos) => {
+      let LINKS = { marks: {}, commands: {} };
+      LINKS.commands.move = "move_pie_2";
+      return {
+        LINKS,
+        ARTIFACTS: step.ARTIFACTS,
+        UNITLAYERS: step.UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS: {
+          selectcapturer: step.MARKS.selectcapturer,
+          selectcapturestart: newMarkPos
+        },
+        TURNVARS: step.TURNVARS,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
     selectunit_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
-        movetargets: {}
+        movetargets: {},
+        capturers: {},
+        capturestarts: {}
       };
       let LINKS = { marks: {}, commands: {} };
       let MARKS = {
@@ -436,9 +661,57 @@ const game = {
       {
         let BLOCKS = UNITLAYERS.units;
         for (let DIR of roseDirs) {
-          let POS = MARKS.selectunit;
+          let POS = MARKS.selectunit || MARKS.selectcapturer;
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
             ARTIFACTS.movetargets[POS] = emptyObj;
+          }
+        }
+      }
+      if (false) {
+        {
+          let BLOCKS = UNITLAYERS.myamazons;
+          for (let STARTPOS in ARTIFACTS.capturestarts) {
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+              if (BLOCKS[POS]) {
+                ARTIFACTS.capturers[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (false) {
+        {
+          let allowedsteps = UNITLAYERS.oppstones;
+          let BLOCKS = Object.keys(BOARD.board)
+            .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {});
+          for (let STARTPOS in ARTIFACTS.reachablesquares) {
+            for (let DIR of roseDirs) {
+              let walkedsquares = [];
+              let STOPREASON = "";
+              let POS = STARTPOS;
+              while (
+                !(STOPREASON = !(POS = connections[POS][DIR])
+                  ? "outofbounds"
+                  : BLOCKS[POS]
+                  ? "hitblock"
+                  : !allowedsteps[POS]
+                  ? "nomoresteps"
+                  : null)
+              ) {
+                walkedsquares.push(POS);
+              }
+              let WALKLENGTH = walkedsquares.length;
+              POS = STARTPOS;
+              if (!!WALKLENGTH && STOPREASON === "hitblock") {
+                ARTIFACTS.capturestarts[POS] = emptyObj;
+              }
+            }
           }
         }
       }
@@ -477,6 +750,8 @@ const game = {
     selectfiretarget_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
+        capturers: step.ARTIFACTS.capturers,
+        capturestarts: step.ARTIFACTS.capturestarts,
         firetargets: step.ARTIFACTS.firetargets,
         capturespot: step.ARTIFACTS.capturespot,
         victims: {}
@@ -514,9 +789,81 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
+    selectcapturer_basic_1: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        movetargets: { ...step.ARTIFACTS.movetargets },
+        capturers: step.ARTIFACTS.capturers,
+        capturestarts: step.ARTIFACTS.capturestarts,
+        firetargets: step.ARTIFACTS.firetargets,
+        capturespot: step.ARTIFACTS.capturespot,
+        victims: step.ARTIFACTS.victims,
+        oppmovers: step.ARTIFACTS.oppmovers,
+        reachablesquares: step.ARTIFACTS.reachablesquares
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectcapturer: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        let BLOCKS = UNITLAYERS.units;
+        for (let DIR of roseDirs) {
+          let POS = MARKS.selectunit || MARKS.selectcapturer;
+          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            ARTIFACTS.movetargets[POS] = emptyObj;
+          }
+        }
+      }
+      for (const pos of Object.keys(
+        Object.entries(
+          Object.keys(ARTIFACTS.capturestarts)
+            .concat(Object.keys(ARTIFACTS.movetargets))
+            .reduce((mem, k) => {
+              mem[k] = (mem[k] || 0) + 1;
+              return mem;
+            }, {})
+        )
+          .filter(([key, n]) => n === 2)
+          .reduce((mem, [key]) => {
+            mem[key] = emptyObj;
+            return mem;
+          }, {})
+      )) {
+        LINKS.marks[pos] = "selectcapturestart_basic_1";
+      }
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS,
+        TURNVARS: step.TURNVARS,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
+    selectcapturestart_basic_1: (step, newMarkPos) => {
+      let LINKS = { marks: {}, commands: {} };
+      LINKS.commands.move = "move_basic_1";
+      return {
+        LINKS,
+        ARTIFACTS: step.ARTIFACTS,
+        UNITLAYERS: step.UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS: {
+          selectcapturer: step.MARKS.selectcapturer,
+          selectcapturestart: newMarkPos
+        },
+        TURNVARS: step.TURNVARS,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
     selectunit_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
-        movetargets: {}
+        movetargets: {},
+        capturers: {},
+        capturestarts: {}
       };
       let LINKS = { marks: {}, commands: {} };
       let MARKS = {
@@ -526,9 +873,57 @@ const game = {
       {
         let BLOCKS = UNITLAYERS.units;
         for (let DIR of roseDirs) {
-          let POS = MARKS.selectunit;
+          let POS = MARKS.selectunit || MARKS.selectcapturer;
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
             ARTIFACTS.movetargets[POS] = emptyObj;
+          }
+        }
+      }
+      if (false) {
+        {
+          let BLOCKS = UNITLAYERS.myamazons;
+          for (let STARTPOS in ARTIFACTS.capturestarts) {
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+              if (BLOCKS[POS]) {
+                ARTIFACTS.capturers[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (false) {
+        {
+          let allowedsteps = UNITLAYERS.oppstones;
+          let BLOCKS = Object.keys(BOARD.board)
+            .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {});
+          for (let STARTPOS in ARTIFACTS.reachablesquares) {
+            for (let DIR of roseDirs) {
+              let walkedsquares = [];
+              let STOPREASON = "";
+              let POS = STARTPOS;
+              while (
+                !(STOPREASON = !(POS = connections[POS][DIR])
+                  ? "outofbounds"
+                  : BLOCKS[POS]
+                  ? "hitblock"
+                  : !allowedsteps[POS]
+                  ? "nomoresteps"
+                  : null)
+              ) {
+                walkedsquares.push(POS);
+              }
+              let WALKLENGTH = walkedsquares.length;
+              POS = STARTPOS;
+              if (!!WALKLENGTH && STOPREASON === "hitblock") {
+                ARTIFACTS.capturestarts[POS] = emptyObj;
+              }
+            }
           }
         }
       }
@@ -567,6 +962,8 @@ const game = {
     selectfiretarget_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
+        capturers: step.ARTIFACTS.capturers,
+        capturestarts: step.ARTIFACTS.capturestarts,
         firetargets: step.ARTIFACTS.firetargets,
         capturespot: step.ARTIFACTS.capturespot,
         victims: {}
@@ -604,10 +1001,82 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
+    selectcapturer_basic_2: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        movetargets: { ...step.ARTIFACTS.movetargets },
+        capturers: step.ARTIFACTS.capturers,
+        capturestarts: step.ARTIFACTS.capturestarts,
+        firetargets: step.ARTIFACTS.firetargets,
+        capturespot: step.ARTIFACTS.capturespot,
+        victims: step.ARTIFACTS.victims,
+        oppmovers: step.ARTIFACTS.oppmovers,
+        reachablesquares: step.ARTIFACTS.reachablesquares
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectcapturer: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        let BLOCKS = UNITLAYERS.units;
+        for (let DIR of roseDirs) {
+          let POS = MARKS.selectunit || MARKS.selectcapturer;
+          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            ARTIFACTS.movetargets[POS] = emptyObj;
+          }
+        }
+      }
+      for (const pos of Object.keys(
+        Object.entries(
+          Object.keys(ARTIFACTS.capturestarts)
+            .concat(Object.keys(ARTIFACTS.movetargets))
+            .reduce((mem, k) => {
+              mem[k] = (mem[k] || 0) + 1;
+              return mem;
+            }, {})
+        )
+          .filter(([key, n]) => n === 2)
+          .reduce((mem, [key]) => {
+            mem[key] = emptyObj;
+            return mem;
+          }, {})
+      )) {
+        LINKS.marks[pos] = "selectcapturestart_basic_2";
+      }
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS,
+        TURNVARS: step.TURNVARS,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
+    selectcapturestart_basic_2: (step, newMarkPos) => {
+      let LINKS = { marks: {}, commands: {} };
+      LINKS.commands.move = "move_basic_2";
+      return {
+        LINKS,
+        ARTIFACTS: step.ARTIFACTS,
+        UNITLAYERS: step.UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS: {
+          selectcapturer: step.MARKS.selectcapturer,
+          selectcapturestart: newMarkPos
+        },
+        TURNVARS: step.TURNVARS,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
     move_pie_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
+        capturers: step.ARTIFACTS.capturers,
+        capturestarts: step.ARTIFACTS.capturestarts,
         firetargets: {},
         capturespot: {}
       };
@@ -616,13 +1085,15 @@ const game = {
       let UNITDATA = { ...step.UNITDATA };
       let TURN = step.TURN;
       let MARKS = step.MARKS;
-      TURNVARS.movedto = MARKS.selectmovetarget;
+      TURNVARS.movedto = MARKS.selectcapturestart || MARKS.selectmovetarget;
       {
-        let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
+        let unitid = (
+          UNITLAYERS.units[MARKS.selectcapturer || MARKS.selectunit] || {}
+        ).id;
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: MARKS.selectmovetarget
+            pos: MARKS.selectcapturestart || MARKS.selectmovetarget
           };
         }
       }
@@ -630,7 +1101,6 @@ const game = {
         units: {},
         myunits: {},
         oppunits: {},
-        amazons: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -644,13 +1114,15 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
-        let BLOCKS = UNITLAYERS.units;
-        for (let DIR of roseDirs) {
-          let POS = TURNVARS["movedto"];
-          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-            {
-              ARTIFACTS.firetargets[POS] = emptyObj;
+      if (Object.keys(ARTIFACTS.capturers).length === 0) {
+        {
+          let BLOCKS = UNITLAYERS.units;
+          for (let DIR of roseDirs) {
+            let POS = TURNVARS["movedto"];
+            while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+              {
+                ARTIFACTS.firetargets[POS] = emptyObj;
+              }
             }
           }
         }
@@ -728,18 +1200,23 @@ const game = {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
+        capturers: { ...step.ARTIFACTS.capturers },
+        capturestarts: { ...step.ARTIFACTS.capturestarts },
         movetargets: step.ARTIFACTS.movetargets,
         firetargets: step.ARTIFACTS.firetargets,
         capturespot: step.ARTIFACTS.capturespot,
         victims: step.ARTIFACTS.victims,
-        mymovers: {},
-        oppmovers: {}
+        oppmovers: {},
+        reachablesquares: {}
       };
       let UNITLAYERS = step.UNITLAYERS;
       let TURNVARS = step.TURNVARS;
       let UNITDATA = { ...step.UNITDATA };
       let NEXTSPAWNID = step.NEXTSPAWNID;
       let MARKS = step.MARKS;
+      ARTIFACTS.capturers = {};
+      ARTIFACTS.capturestarts = {};
+      ARTIFACTS.movetargets = {};
       anim.enterFrom[MARKS.selectfiretarget] = TURNVARS["movedto"];
       {
         let newunitid = "spawn" + NEXTSPAWNID++;
@@ -765,7 +1242,6 @@ const game = {
         units: {},
         myunits: {},
         oppunits: {},
-        amazons: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -779,7 +1255,7 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      for (let STARTPOS in UNITLAYERS.amazons) {
+      for (let STARTPOS in UNITLAYERS.oppamazons) {
         let foundneighbours = [];
         let startconnections = connections[STARTPOS];
         for (let DIR of roseDirs) {
@@ -790,21 +1266,72 @@ const game = {
         }
         let NEIGHBOURCOUNT = foundneighbours.length;
         if (!!NEIGHBOURCOUNT) {
-          ARTIFACTS[UNITLAYERS.myunits[STARTPOS] ? "mymovers" : "oppmovers"][
-            STARTPOS
-          ] = emptyObj;
+          ARTIFACTS.oppmovers[STARTPOS] = emptyObj;
+        }
+      }
+      if (Object.keys(ARTIFACTS.oppmovers).length === 0) {
+        {
+          let BLOCKS = UNITLAYERS.units;
+          for (let STARTPOS in UNITLAYERS.myunits) {
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+                ARTIFACTS.reachablesquares[POS] = emptyObj;
+              }
+            }
+          }
+        }
+        {
+          let allowedsteps = UNITLAYERS.oppstones;
+          let BLOCKS = Object.keys(BOARD.board)
+            .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {});
+          for (let STARTPOS in ARTIFACTS.reachablesquares) {
+            for (let DIR of roseDirs) {
+              let walkedsquares = [];
+              let STOPREASON = "";
+              let POS = STARTPOS;
+              while (
+                !(STOPREASON = !(POS = connections[POS][DIR])
+                  ? "outofbounds"
+                  : BLOCKS[POS]
+                  ? "hitblock"
+                  : !allowedsteps[POS]
+                  ? "nomoresteps"
+                  : null)
+              ) {
+                walkedsquares.push(POS);
+              }
+              let WALKLENGTH = walkedsquares.length;
+              POS = STARTPOS;
+              if (!!WALKLENGTH && STOPREASON === "hitblock") {
+                ARTIFACTS.capturestarts[POS] = emptyObj;
+              }
+            }
+          }
+        }
+        {
+          let BLOCKS = UNITLAYERS.myamazons;
+          for (let STARTPOS in ARTIFACTS.capturestarts) {
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+              if (BLOCKS[POS]) {
+                ARTIFACTS.capturers[POS] = emptyObj;
+              }
+            }
+          }
         }
       }
       if (
-        Object.keys(ARTIFACTS.mymovers).length !== 0 &&
+        Object.keys(ARTIFACTS.capturers).length !== 0 &&
         Object.keys(ARTIFACTS.oppmovers).length === 0
       ) {
-        for (const pos of Object.keys(
-          Object.keys(ARTIFACTS.mymovers).length !== 0
-            ? ARTIFACTS.mymovers
-            : UNITLAYERS.myamazons
-        )) {
-          LINKS.marks[pos] = "selectunit_pie_1";
+        for (const pos of Object.keys(ARTIFACTS.capturers)) {
+          LINKS.marks[pos] = "selectcapturer_pie_1";
         }
       } else {
         if (true) {
@@ -850,6 +1377,8 @@ const game = {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
+        capturers: step.ARTIFACTS.capturers,
+        capturestarts: step.ARTIFACTS.capturestarts,
         firetargets: {},
         capturespot: {}
       };
@@ -857,13 +1386,15 @@ const game = {
       let TURNVARS = { ...step.TURNVARS };
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
-      TURNVARS.movedto = MARKS.selectmovetarget;
+      TURNVARS.movedto = MARKS.selectcapturestart || MARKS.selectmovetarget;
       {
-        let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
+        let unitid = (
+          UNITLAYERS.units[MARKS.selectcapturer || MARKS.selectunit] || {}
+        ).id;
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: MARKS.selectmovetarget
+            pos: MARKS.selectcapturestart || MARKS.selectmovetarget
           };
         }
       }
@@ -871,7 +1402,6 @@ const game = {
         units: {},
         myunits: {},
         oppunits: {},
-        amazons: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -885,13 +1415,15 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
-        let BLOCKS = UNITLAYERS.units;
-        for (let DIR of roseDirs) {
-          let POS = TURNVARS["movedto"];
-          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-            {
-              ARTIFACTS.firetargets[POS] = emptyObj;
+      if (Object.keys(ARTIFACTS.capturers).length === 0) {
+        {
+          let BLOCKS = UNITLAYERS.units;
+          for (let DIR of roseDirs) {
+            let POS = TURNVARS["movedto"];
+            while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+              {
+                ARTIFACTS.firetargets[POS] = emptyObj;
+              }
             }
           }
         }
@@ -940,18 +1472,23 @@ const game = {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
+        capturers: { ...step.ARTIFACTS.capturers },
+        capturestarts: { ...step.ARTIFACTS.capturestarts },
         movetargets: step.ARTIFACTS.movetargets,
         firetargets: step.ARTIFACTS.firetargets,
         capturespot: step.ARTIFACTS.capturespot,
         victims: step.ARTIFACTS.victims,
-        mymovers: {},
-        oppmovers: {}
+        oppmovers: {},
+        reachablesquares: {}
       };
       let UNITLAYERS = step.UNITLAYERS;
       let TURNVARS = step.TURNVARS;
       let UNITDATA = { ...step.UNITDATA };
       let NEXTSPAWNID = step.NEXTSPAWNID;
       let MARKS = step.MARKS;
+      ARTIFACTS.capturers = {};
+      ARTIFACTS.capturestarts = {};
+      ARTIFACTS.movetargets = {};
       anim.enterFrom[MARKS.selectfiretarget] = TURNVARS["movedto"];
       {
         let newunitid = "spawn" + NEXTSPAWNID++;
@@ -977,7 +1514,6 @@ const game = {
         units: {},
         myunits: {},
         oppunits: {},
-        amazons: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -991,7 +1527,7 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      for (let STARTPOS in UNITLAYERS.amazons) {
+      for (let STARTPOS in UNITLAYERS.oppamazons) {
         let foundneighbours = [];
         let startconnections = connections[STARTPOS];
         for (let DIR of roseDirs) {
@@ -1002,21 +1538,72 @@ const game = {
         }
         let NEIGHBOURCOUNT = foundneighbours.length;
         if (!!NEIGHBOURCOUNT) {
-          ARTIFACTS[UNITLAYERS.myunits[STARTPOS] ? "mymovers" : "oppmovers"][
-            STARTPOS
-          ] = emptyObj;
+          ARTIFACTS.oppmovers[STARTPOS] = emptyObj;
+        }
+      }
+      if (Object.keys(ARTIFACTS.oppmovers).length === 0) {
+        {
+          let BLOCKS = UNITLAYERS.units;
+          for (let STARTPOS in UNITLAYERS.myunits) {
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+                ARTIFACTS.reachablesquares[POS] = emptyObj;
+              }
+            }
+          }
+        }
+        {
+          let allowedsteps = UNITLAYERS.oppstones;
+          let BLOCKS = Object.keys(BOARD.board)
+            .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {});
+          for (let STARTPOS in ARTIFACTS.reachablesquares) {
+            for (let DIR of roseDirs) {
+              let walkedsquares = [];
+              let STOPREASON = "";
+              let POS = STARTPOS;
+              while (
+                !(STOPREASON = !(POS = connections[POS][DIR])
+                  ? "outofbounds"
+                  : BLOCKS[POS]
+                  ? "hitblock"
+                  : !allowedsteps[POS]
+                  ? "nomoresteps"
+                  : null)
+              ) {
+                walkedsquares.push(POS);
+              }
+              let WALKLENGTH = walkedsquares.length;
+              POS = STARTPOS;
+              if (!!WALKLENGTH && STOPREASON === "hitblock") {
+                ARTIFACTS.capturestarts[POS] = emptyObj;
+              }
+            }
+          }
+        }
+        {
+          let BLOCKS = UNITLAYERS.myamazons;
+          for (let STARTPOS in ARTIFACTS.capturestarts) {
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+              if (BLOCKS[POS]) {
+                ARTIFACTS.capturers[POS] = emptyObj;
+              }
+            }
+          }
         }
       }
       if (
-        Object.keys(ARTIFACTS.mymovers).length !== 0 &&
+        Object.keys(ARTIFACTS.capturers).length !== 0 &&
         Object.keys(ARTIFACTS.oppmovers).length === 0
       ) {
-        for (const pos of Object.keys(
-          Object.keys(ARTIFACTS.mymovers).length !== 0
-            ? ARTIFACTS.mymovers
-            : UNITLAYERS.myamazons
-        )) {
-          LINKS.marks[pos] = "selectunit_pie_2";
+        for (const pos of Object.keys(ARTIFACTS.capturers)) {
+          LINKS.marks[pos] = "selectcapturer_pie_2";
         }
       } else {
         if (true) {
@@ -1062,21 +1649,24 @@ const game = {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
+        capturers: step.ARTIFACTS.capturers,
+        capturestarts: step.ARTIFACTS.capturestarts,
         firetargets: {},
         capturespot: {}
       };
       let UNITLAYERS = step.UNITLAYERS;
       let TURNVARS = { ...step.TURNVARS };
       let UNITDATA = { ...step.UNITDATA };
-      let TURN = step.TURN;
       let MARKS = step.MARKS;
-      TURNVARS.movedto = MARKS.selectmovetarget;
+      TURNVARS.movedto = MARKS.selectcapturestart || MARKS.selectmovetarget;
       {
-        let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
+        let unitid = (
+          UNITLAYERS.units[MARKS.selectcapturer || MARKS.selectunit] || {}
+        ).id;
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: MARKS.selectmovetarget
+            pos: MARKS.selectcapturestart || MARKS.selectmovetarget
           };
         }
       }
@@ -1084,7 +1674,6 @@ const game = {
         units: {},
         myunits: {},
         oppunits: {},
-        amazons: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -1098,13 +1687,15 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
-        let BLOCKS = UNITLAYERS.units;
-        for (let DIR of roseDirs) {
-          let POS = TURNVARS["movedto"];
-          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-            {
-              ARTIFACTS.firetargets[POS] = emptyObj;
+      if (Object.keys(ARTIFACTS.capturers).length === 0) {
+        {
+          let BLOCKS = UNITLAYERS.units;
+          for (let DIR of roseDirs) {
+            let POS = TURNVARS["movedto"];
+            while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+              {
+                ARTIFACTS.firetargets[POS] = emptyObj;
+              }
             }
           }
         }
@@ -1135,43 +1726,14 @@ const game = {
           }
         }
       }
-      if (TURN === 1) {
-        if (true) {
-          LINKS.starvation = {
-            endGame: ["draw", "win", "lose"][
-              Object.keys(UNITLAYERS.mystones).length >
-              Object.keys(UNITLAYERS.oppstones).length
-                ? 1
-                : Object.keys(UNITLAYERS.oppstones).length >
-                  Object.keys(UNITLAYERS.mystones).length
-                ? 2
-                : 0
-            ],
-            endedBy: "dominance",
-            endMarks: Object.keys(
-              Object.keys(UNITLAYERS.mystones).length >
-                Object.keys(UNITLAYERS.oppstones).length
-                ? UNITLAYERS.mystones
-                : Object.keys(UNITLAYERS.oppstones).length >
-                  Object.keys(UNITLAYERS.mystones).length
-                ? UNITLAYERS.oppstones
-                : emptyObj
-            )
-          };
-          LINKS.endTurn = "startTurn_basic_2";
-        } else {
-          LINKS.endTurn = "startTurn_basic_2";
-        }
-      } else {
-        for (const pos of Object.keys(ARTIFACTS.firetargets)) {
-          LINKS.marks[pos] = "selectfiretarget_basic_1";
-        }
+      for (const pos of Object.keys(ARTIFACTS.firetargets)) {
+        LINKS.marks[pos] = "selectfiretarget_basic_1";
       }
       return {
         LINKS,
         MARKS: {},
         ARTIFACTS,
-        TURN,
+        TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
         TURNVARS,
@@ -1182,18 +1744,23 @@ const game = {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
+        capturers: { ...step.ARTIFACTS.capturers },
+        capturestarts: { ...step.ARTIFACTS.capturestarts },
         movetargets: step.ARTIFACTS.movetargets,
         firetargets: step.ARTIFACTS.firetargets,
         capturespot: step.ARTIFACTS.capturespot,
         victims: step.ARTIFACTS.victims,
-        mymovers: {},
-        oppmovers: {}
+        oppmovers: {},
+        reachablesquares: {}
       };
       let UNITLAYERS = step.UNITLAYERS;
       let TURNVARS = step.TURNVARS;
       let UNITDATA = { ...step.UNITDATA };
       let NEXTSPAWNID = step.NEXTSPAWNID;
       let MARKS = step.MARKS;
+      ARTIFACTS.capturers = {};
+      ARTIFACTS.capturestarts = {};
+      ARTIFACTS.movetargets = {};
       anim.enterFrom[MARKS.selectfiretarget] = TURNVARS["movedto"];
       {
         let newunitid = "spawn" + NEXTSPAWNID++;
@@ -1219,7 +1786,6 @@ const game = {
         units: {},
         myunits: {},
         oppunits: {},
-        amazons: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -1233,7 +1799,7 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      for (let STARTPOS in UNITLAYERS.amazons) {
+      for (let STARTPOS in UNITLAYERS.oppamazons) {
         let foundneighbours = [];
         let startconnections = connections[STARTPOS];
         for (let DIR of roseDirs) {
@@ -1244,21 +1810,72 @@ const game = {
         }
         let NEIGHBOURCOUNT = foundneighbours.length;
         if (!!NEIGHBOURCOUNT) {
-          ARTIFACTS[UNITLAYERS.myunits[STARTPOS] ? "mymovers" : "oppmovers"][
-            STARTPOS
-          ] = emptyObj;
+          ARTIFACTS.oppmovers[STARTPOS] = emptyObj;
+        }
+      }
+      if (Object.keys(ARTIFACTS.oppmovers).length === 0) {
+        {
+          let BLOCKS = UNITLAYERS.units;
+          for (let STARTPOS in UNITLAYERS.myunits) {
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+                ARTIFACTS.reachablesquares[POS] = emptyObj;
+              }
+            }
+          }
+        }
+        {
+          let allowedsteps = UNITLAYERS.oppstones;
+          let BLOCKS = Object.keys(BOARD.board)
+            .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {});
+          for (let STARTPOS in ARTIFACTS.reachablesquares) {
+            for (let DIR of roseDirs) {
+              let walkedsquares = [];
+              let STOPREASON = "";
+              let POS = STARTPOS;
+              while (
+                !(STOPREASON = !(POS = connections[POS][DIR])
+                  ? "outofbounds"
+                  : BLOCKS[POS]
+                  ? "hitblock"
+                  : !allowedsteps[POS]
+                  ? "nomoresteps"
+                  : null)
+              ) {
+                walkedsquares.push(POS);
+              }
+              let WALKLENGTH = walkedsquares.length;
+              POS = STARTPOS;
+              if (!!WALKLENGTH && STOPREASON === "hitblock") {
+                ARTIFACTS.capturestarts[POS] = emptyObj;
+              }
+            }
+          }
+        }
+        {
+          let BLOCKS = UNITLAYERS.myamazons;
+          for (let STARTPOS in ARTIFACTS.capturestarts) {
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+              if (BLOCKS[POS]) {
+                ARTIFACTS.capturers[POS] = emptyObj;
+              }
+            }
+          }
         }
       }
       if (
-        Object.keys(ARTIFACTS.mymovers).length !== 0 &&
+        Object.keys(ARTIFACTS.capturers).length !== 0 &&
         Object.keys(ARTIFACTS.oppmovers).length === 0
       ) {
-        for (const pos of Object.keys(
-          Object.keys(ARTIFACTS.mymovers).length !== 0
-            ? ARTIFACTS.mymovers
-            : UNITLAYERS.myamazons
-        )) {
-          LINKS.marks[pos] = "selectunit_basic_1";
+        for (const pos of Object.keys(ARTIFACTS.capturers)) {
+          LINKS.marks[pos] = "selectcapturer_basic_1";
         }
       } else {
         if (true) {
@@ -1304,6 +1921,8 @@ const game = {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
+        capturers: step.ARTIFACTS.capturers,
+        capturestarts: step.ARTIFACTS.capturestarts,
         firetargets: {},
         capturespot: {}
       };
@@ -1311,13 +1930,15 @@ const game = {
       let TURNVARS = { ...step.TURNVARS };
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
-      TURNVARS.movedto = MARKS.selectmovetarget;
+      TURNVARS.movedto = MARKS.selectcapturestart || MARKS.selectmovetarget;
       {
-        let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
+        let unitid = (
+          UNITLAYERS.units[MARKS.selectcapturer || MARKS.selectunit] || {}
+        ).id;
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: MARKS.selectmovetarget
+            pos: MARKS.selectcapturestart || MARKS.selectmovetarget
           };
         }
       }
@@ -1325,7 +1946,6 @@ const game = {
         units: {},
         myunits: {},
         oppunits: {},
-        amazons: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -1339,13 +1959,15 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
-        let BLOCKS = UNITLAYERS.units;
-        for (let DIR of roseDirs) {
-          let POS = TURNVARS["movedto"];
-          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-            {
-              ARTIFACTS.firetargets[POS] = emptyObj;
+      if (Object.keys(ARTIFACTS.capturers).length === 0) {
+        {
+          let BLOCKS = UNITLAYERS.units;
+          for (let DIR of roseDirs) {
+            let POS = TURNVARS["movedto"];
+            while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+              {
+                ARTIFACTS.firetargets[POS] = emptyObj;
+              }
             }
           }
         }
@@ -1394,18 +2016,23 @@ const game = {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
+        capturers: { ...step.ARTIFACTS.capturers },
+        capturestarts: { ...step.ARTIFACTS.capturestarts },
         movetargets: step.ARTIFACTS.movetargets,
         firetargets: step.ARTIFACTS.firetargets,
         capturespot: step.ARTIFACTS.capturespot,
         victims: step.ARTIFACTS.victims,
-        mymovers: {},
-        oppmovers: {}
+        oppmovers: {},
+        reachablesquares: {}
       };
       let UNITLAYERS = step.UNITLAYERS;
       let TURNVARS = step.TURNVARS;
       let UNITDATA = { ...step.UNITDATA };
       let NEXTSPAWNID = step.NEXTSPAWNID;
       let MARKS = step.MARKS;
+      ARTIFACTS.capturers = {};
+      ARTIFACTS.capturestarts = {};
+      ARTIFACTS.movetargets = {};
       anim.enterFrom[MARKS.selectfiretarget] = TURNVARS["movedto"];
       {
         let newunitid = "spawn" + NEXTSPAWNID++;
@@ -1431,7 +2058,6 @@ const game = {
         units: {},
         myunits: {},
         oppunits: {},
-        amazons: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -1445,7 +2071,7 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      for (let STARTPOS in UNITLAYERS.amazons) {
+      for (let STARTPOS in UNITLAYERS.oppamazons) {
         let foundneighbours = [];
         let startconnections = connections[STARTPOS];
         for (let DIR of roseDirs) {
@@ -1456,21 +2082,72 @@ const game = {
         }
         let NEIGHBOURCOUNT = foundneighbours.length;
         if (!!NEIGHBOURCOUNT) {
-          ARTIFACTS[UNITLAYERS.myunits[STARTPOS] ? "mymovers" : "oppmovers"][
-            STARTPOS
-          ] = emptyObj;
+          ARTIFACTS.oppmovers[STARTPOS] = emptyObj;
+        }
+      }
+      if (Object.keys(ARTIFACTS.oppmovers).length === 0) {
+        {
+          let BLOCKS = UNITLAYERS.units;
+          for (let STARTPOS in UNITLAYERS.myunits) {
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+                ARTIFACTS.reachablesquares[POS] = emptyObj;
+              }
+            }
+          }
+        }
+        {
+          let allowedsteps = UNITLAYERS.oppstones;
+          let BLOCKS = Object.keys(BOARD.board)
+            .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {});
+          for (let STARTPOS in ARTIFACTS.reachablesquares) {
+            for (let DIR of roseDirs) {
+              let walkedsquares = [];
+              let STOPREASON = "";
+              let POS = STARTPOS;
+              while (
+                !(STOPREASON = !(POS = connections[POS][DIR])
+                  ? "outofbounds"
+                  : BLOCKS[POS]
+                  ? "hitblock"
+                  : !allowedsteps[POS]
+                  ? "nomoresteps"
+                  : null)
+              ) {
+                walkedsquares.push(POS);
+              }
+              let WALKLENGTH = walkedsquares.length;
+              POS = STARTPOS;
+              if (!!WALKLENGTH && STOPREASON === "hitblock") {
+                ARTIFACTS.capturestarts[POS] = emptyObj;
+              }
+            }
+          }
+        }
+        {
+          let BLOCKS = UNITLAYERS.myamazons;
+          for (let STARTPOS in ARTIFACTS.capturestarts) {
+            for (let DIR of roseDirs) {
+              let POS = STARTPOS;
+              while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+              if (BLOCKS[POS]) {
+                ARTIFACTS.capturers[POS] = emptyObj;
+              }
+            }
+          }
         }
       }
       if (
-        Object.keys(ARTIFACTS.mymovers).length !== 0 &&
+        Object.keys(ARTIFACTS.capturers).length !== 0 &&
         Object.keys(ARTIFACTS.oppmovers).length === 0
       ) {
-        for (const pos of Object.keys(
-          Object.keys(ARTIFACTS.mymovers).length !== 0
-            ? ARTIFACTS.mymovers
-            : UNITLAYERS.myamazons
-        )) {
-          LINKS.marks[pos] = "selectunit_basic_2";
+        for (const pos of Object.keys(ARTIFACTS.capturers)) {
+          LINKS.marks[pos] = "selectcapturer_basic_2";
         }
       } else {
         if (true) {
@@ -1554,16 +2231,16 @@ const game = {
     },
     fire_pie_1: step => {
       let ARTIFACTS = step.ARTIFACTS;
-      return Object.keys(ARTIFACTS.mymovers).length !== 0 &&
+      return Object.keys(ARTIFACTS.capturers).length !== 0 &&
         Object.keys(ARTIFACTS.oppmovers).length === 0
         ? collapseContent({
             line: [
               {
                 text:
-                  "Since your opponent is blocked you get to move again! Select"
+                  "Since your opponent is blocked you get to make a free capture move! Select"
               },
               { unittype: ["queen", 1] },
-              { text: "to move" }
+              { text: "to make it with" }
             ]
           })
         : collapseContent({
@@ -1651,6 +2328,43 @@ const game = {
         ]
       });
     },
+    selectcapturer_pie_1: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Select where to move" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectcapturer] || {}).group],
+              (UNITLAYERS.units[MARKS.selectcapturer] || {}).owner,
+              MARKS.selectcapturer
+            ]
+          },
+          { text: "to make a free capture" }
+        ]
+      });
+    },
+    selectcapturestart_pie_1: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "move" },
+          { text: "to move" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectcapturer] || {}).group],
+              (UNITLAYERS.units[MARKS.selectcapturer] || {}).owner,
+              MARKS.selectcapturer
+            ]
+          },
+          { text: "to" },
+          { pos: MARKS.selectcapturestart }
+        ]
+      });
+    },
     startTurn_pie_2: step => {
       return collapseContent({
         line: [
@@ -1678,16 +2392,16 @@ const game = {
     },
     fire_pie_2: step => {
       let ARTIFACTS = step.ARTIFACTS;
-      return Object.keys(ARTIFACTS.mymovers).length !== 0 &&
+      return Object.keys(ARTIFACTS.capturers).length !== 0 &&
         Object.keys(ARTIFACTS.oppmovers).length === 0
         ? collapseContent({
             line: [
               {
                 text:
-                  "Since your opponent is blocked you get to move again! Select"
+                  "Since your opponent is blocked you get to make a free capture move! Select"
               },
               { unittype: ["queen", 2] },
-              { text: "to move" }
+              { text: "to make it with" }
             ]
           })
         : collapseContent({
@@ -1775,6 +2489,43 @@ const game = {
         ]
       });
     },
+    selectcapturer_pie_2: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Select where to move" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectcapturer] || {}).group],
+              (UNITLAYERS.units[MARKS.selectcapturer] || {}).owner,
+              MARKS.selectcapturer
+            ]
+          },
+          { text: "to make a free capture" }
+        ]
+      });
+    },
+    selectcapturestart_pie_2: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "move" },
+          { text: "to move" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectcapturer] || {}).group],
+              (UNITLAYERS.units[MARKS.selectcapturer] || {}).owner,
+              MARKS.selectcapturer
+            ]
+          },
+          { text: "to" },
+          { pos: MARKS.selectcapturestart }
+        ]
+      });
+    },
     startTurn_basic_1: step => {
       return collapseContent({
         line: [
@@ -1787,44 +2538,31 @@ const game = {
     move_basic_1: step => {
       let TURNVARS = step.TURNVARS;
       let UNITLAYERS = step.UNITLAYERS;
-      let TURN = step.TURN;
-      return TURN === 1
-        ? collapseContent({
-            line: [
-              { text: "Press " },
-              { endTurn: "end turn" },
-              { text: " to submit your moves and hand over to " },
-              { player: 2 },
-              { text: "(you don't get to fire the first turn)" }
+      return collapseContent({
+        line: [
+          { text: "Select where to fire with" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[TURNVARS["movedto"]] || {}).group],
+              (UNITLAYERS.units[TURNVARS["movedto"]] || {}).owner,
+              TURNVARS["movedto"]
             ]
-          })
-        : collapseContent({
-            line: [
-              { text: "Select where to fire with" },
-              {
-                unit: [
-                  iconMapping[
-                    (UNITLAYERS.units[TURNVARS["movedto"]] || {}).group
-                  ],
-                  (UNITLAYERS.units[TURNVARS["movedto"]] || {}).owner,
-                  TURNVARS["movedto"]
-                ]
-              }
-            ]
-          });
+          }
+        ]
+      });
     },
     fire_basic_1: step => {
       let ARTIFACTS = step.ARTIFACTS;
-      return Object.keys(ARTIFACTS.mymovers).length !== 0 &&
+      return Object.keys(ARTIFACTS.capturers).length !== 0 &&
         Object.keys(ARTIFACTS.oppmovers).length === 0
         ? collapseContent({
             line: [
               {
                 text:
-                  "Since your opponent is blocked you get to move again! Select"
+                  "Since your opponent is blocked you get to make a free capture move! Select"
               },
               { unittype: ["queen", 1] },
-              { text: "to move" }
+              { text: "to make it with" }
             ]
           })
         : collapseContent({
@@ -1912,6 +2650,43 @@ const game = {
         ]
       });
     },
+    selectcapturer_basic_1: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Select where to move" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectcapturer] || {}).group],
+              (UNITLAYERS.units[MARKS.selectcapturer] || {}).owner,
+              MARKS.selectcapturer
+            ]
+          },
+          { text: "to make a free capture" }
+        ]
+      });
+    },
+    selectcapturestart_basic_1: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "move" },
+          { text: "to move" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectcapturer] || {}).group],
+              (UNITLAYERS.units[MARKS.selectcapturer] || {}).owner,
+              MARKS.selectcapturer
+            ]
+          },
+          { text: "to" },
+          { pos: MARKS.selectcapturestart }
+        ]
+      });
+    },
     startTurn_basic_2: step => {
       return collapseContent({
         line: [
@@ -1939,16 +2714,16 @@ const game = {
     },
     fire_basic_2: step => {
       let ARTIFACTS = step.ARTIFACTS;
-      return Object.keys(ARTIFACTS.mymovers).length !== 0 &&
+      return Object.keys(ARTIFACTS.capturers).length !== 0 &&
         Object.keys(ARTIFACTS.oppmovers).length === 0
         ? collapseContent({
             line: [
               {
                 text:
-                  "Since your opponent is blocked you get to move again! Select"
+                  "Since your opponent is blocked you get to make a free capture move! Select"
               },
               { unittype: ["queen", 2] },
-              { text: "to move" }
+              { text: "to make it with" }
             ]
           })
         : collapseContent({
@@ -2033,6 +2808,43 @@ const game = {
                 ]
               })
             : undefined
+        ]
+      });
+    },
+    selectcapturer_basic_2: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Select where to move" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectcapturer] || {}).group],
+              (UNITLAYERS.units[MARKS.selectcapturer] || {}).owner,
+              MARKS.selectcapturer
+            ]
+          },
+          { text: "to make a free capture" }
+        ]
+      });
+    },
+    selectcapturestart_basic_2: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "move" },
+          { text: "to move" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectcapturer] || {}).group],
+              (UNITLAYERS.units[MARKS.selectcapturer] || {}).owner,
+              MARKS.selectcapturer
+            ]
+          },
+          { text: "to" },
+          { pos: MARKS.selectcapturestart }
         ]
       });
     }
@@ -2131,6 +2943,16 @@ const game = {
       amazons: {
         "1": ["a1", "h8"],
         "2": ["a8", "h1"]
+      }
+    },
+    blocktest: {
+      amazons: {
+        "1": ["b2", "f2", "g1"],
+        "2": ["a7"]
+      },
+      stones: {
+        "1": ["a6", "c2"],
+        "2": ["c4", "e6"]
       }
     }
   }

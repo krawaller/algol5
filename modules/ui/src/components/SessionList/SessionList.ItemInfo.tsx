@@ -6,11 +6,13 @@ import { SessionStatus } from "../SessionStatus";
 type SessionItemInfoProps = {
   session: AlgolLocalBattle;
   variant: AlgolVariantAnon;
+  corrupt?: string;
 };
 
 export const SessionItemInfo: FunctionComponent<SessionItemInfoProps> = ({
   session,
   variant,
+  corrupt,
 }) => {
   return (
     <div className={css.sessionListInfo}>
@@ -30,7 +32,11 @@ export const SessionItemInfo: FunctionComponent<SessionItemInfoProps> = ({
           <br />
         </Fragment>
       )}
-      <SessionStatus session={session} />
+      {corrupt ? (
+        <div className={css.sessionListItemErrorInfo}>{corrupt}</div>
+      ) : (
+        <SessionStatus session={session} />
+      )}
     </div>
   );
 };

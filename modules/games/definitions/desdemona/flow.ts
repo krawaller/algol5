@@ -39,13 +39,32 @@ const desdemonaFlow: DesdemonaDefinition["flow"] = {
   commands: {
     move: {
       applyEffects: [
-        { setturnpos: ["movedto", "selectmovetarget"] },
-        { moveat: ["selectunit", "selectmovetarget"] },
+        {
+          setturnpos: [
+            "movedto",
+            { firsttruthy: ["selectcapturestart", "selectmovetarget"] },
+          ],
+        },
+        {
+          moveat: [
+            { firsttruthy: ["selectcapturer", "selectunit"] },
+            { firsttruthy: ["selectcapturestart", "selectmovetarget"] },
+          ],
+        },
       ],
-      runGenerators: ["findspawntargets", "findcapturetargets"],
+      runGenerators: [
+        { if: [{ isempty: "capturers" }, "findspawntargets"] },
+        "findcapturetargets",
+      ],
       link: {
-        playercase: [
-          { ifelse: [["isFirstTurn"], "endTurn", "selectfiretarget"] },
+        ifrulesetelse: [
+          "pie",
+          {
+            playercase: [
+              { ifelse: [["isFirstTurn"], "endTurn", "selectfiretarget"] },
+              "selectfiretarget",
+            ],
+          },
           "selectfiretarget",
         ],
       },
@@ -55,11 +74,26 @@ const desdemonaFlow: DesdemonaDefinition["flow"] = {
         { spawnat: ["selectfiretarget", "stones"] },
         { adoptin: ["victims"] },
       ],
-      runGenerator: "findmovers",
+      purge: ["capturers", "capturestarts", "movetargets"],
+      runGenerators: [
+        "findoppmovers",
+        {
+          if: [
+            { isempty: "oppmovers" },
+            {
+              multi: [
+                "findreachablesquares",
+                "findcapturestarts",
+                "findcapturers",
+              ],
+            },
+          ],
+        },
+      ],
       link: {
         ifelse: [
-          { and: [{ notempty: "mymovers" }, { isempty: "oppmovers" }] },
-          "selectunit",
+          { and: [{ notempty: "capturers" }, { isempty: "oppmovers" }] },
+          "selectcapturer",
           "endTurn",
         ],
       },
@@ -67,8 +101,12 @@ const desdemonaFlow: DesdemonaDefinition["flow"] = {
   },
   marks: {
     selectunit: {
-      from: { ifelse: [{ notempty: "mymovers" }, "mymovers", "myamazons"] },
-      runGenerator: "findmovetargets",
+      from: "myamazons",
+      runGenerators: [
+        "findmovetargets",
+        { if: [["false"], "findcapturers"] },
+        { if: [["false"], "findcapturestarts"] },
+      ],
       link: "selectmovetarget",
     },
     selectmovetarget: {
@@ -81,6 +119,15 @@ const desdemonaFlow: DesdemonaDefinition["flow"] = {
         if: [{ anyat: ["capturespot", "selectfiretarget"] }, "findvictims"],
       },
       link: "fire",
+    },
+    selectcapturer: {
+      from: "capturers",
+      runGenerator: "findmovetargets",
+      link: "selectcapturestart",
+    },
+    selectcapturestart: {
+      from: { intersect: ["capturestarts", "movetargets"] },
+      link: "move",
     },
   },
 };

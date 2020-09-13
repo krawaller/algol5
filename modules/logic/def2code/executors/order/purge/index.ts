@@ -33,7 +33,7 @@ function executePurgeInner(
 ): string {
   const parser = makeParser(gameDef, player, action, ruleset);
   if (typeof layer === "string") {
-    return `ARTIFACTLAYERS.${layer} = {}; `;
+    return `ARTIFACTS.${layer} = {}; `;
   }
-  return `ARTIFACTLAYERS[${parser.val(layer)}] = {}; `;
+  return `ARTIFACTS[${parser.val(layer)}] = {}; `;
 }

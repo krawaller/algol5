@@ -1,7 +1,7 @@
 #!/bin/bash 
 gameId="$1"
 what="$2"
-opts=("analyze" "compile" "graphics" "demo" "content" "pics" "pages" "link")
+opts=("analyze" "compile" "graphics" "demo" "content" "pics" "pages" "link" "list")
 allOpts=$( IFS=/ ; echo "<${opts[*]}>" )
 
 if [ "$gameId" = "" ]; then
@@ -28,7 +28,7 @@ else
     npm run makeGameGraphics "$gameId";
     npm run renderGameActionShots "$gameId";
     cd ../payloads;
-    npm run makeGameListing "$gameId";
+    npm run makeComposites;
   fi
 
   if [ "$what" = "link" ] || [ "$what" = "" ]; then
@@ -49,9 +49,17 @@ else
     npm run makeGameRulesArticle "$gameId"
   fi
 
-  if [ "$what" = "pics" ] || [ "$what" = "graphics" ] || [ "$what" = "" ]; then
+  if [ "$what" = "list" ] || [ "$what" = "graphics" ] ||[ "$what" = "" ]; then
+    cd ../payloads;
+    npm run updateCompositeId;
+    npm run makeComposites;
+    npm run makeGameListing; # have to update all game listings when we mess with composite 
+  fi
+
+  if [ "$what" = "pics" ] || [ "$what" = "graphics" ] || [ "$what" = "list" ] || [ "$what" = "" ]; then
     cd ../ui;
     npm run importGameImages "$gameId";
+    npm run importCompositeImages;
     cd ../next;
     npm run getStatic;
   fi

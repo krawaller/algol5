@@ -54,6 +54,7 @@ storiesOf("SessionList", module)
           actions={actions}
           meta={meta[gameId]}
           variants={variants}
+          corruptSessions={{}}
         />
       </Fragment>
     );
@@ -88,6 +89,7 @@ storiesOf("SessionList", module)
         graphics={dataURIs.atrium}
         sessionInfo={sessionInfo}
         variants={variants}
+        corruptSessions={{}}
       />
     );
   })
@@ -104,6 +106,7 @@ storiesOf("SessionList", module)
         graphics={dataURIs.atrium}
         sessionInfo={sessionInfo}
         variants={variants}
+        corruptSessions={{}}
       />
     );
   });

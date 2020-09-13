@@ -26,10 +26,18 @@ type NewLocalSessionProps = {
   previousSessionId?: string | null;
   meta: AlgolMeta<AlgolGameBlobAnon>;
   variants: AlgolVariantAnon[];
+  corruptSessions: Record<string, string>;
 };
 
 export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props => {
-  const { actions, meta, graphics, previousSessionId, variants } = props;
+  const {
+    actions,
+    meta,
+    graphics,
+    previousSessionId,
+    variants,
+    corruptSessions,
+  } = props;
   const filteredVariants = variants.filter(v => !v.hidden);
   const [variant, setVariant] = useState(filteredVariants[0].code);
   return (
@@ -75,6 +83,7 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
           graphics={graphics}
           actions={actions}
           variants={variants}
+          corruptSessions={corruptSessions}
         />
       </Box>
       <Box title="Import session">

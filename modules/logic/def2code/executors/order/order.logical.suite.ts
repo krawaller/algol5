@@ -17,7 +17,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
             newStepId: "foo",
             UNITDATA: { unit1: {} },
             LINKS: {},
-            ARTIFACTLAYERS: {
+            ARTIFACTS: {
               gnurps: { a1: {} },
               flurps: { b2: {} },
             },
@@ -26,15 +26,15 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
             {
               expr: { purge: ["gnurps"] },
               asserts: [
-                { sample: "ARTIFACTLAYERS.gnurps", res: {} },
-                { sample: "ARTIFACTLAYERS.flurps", res: { b2: {} } },
+                { sample: "ARTIFACTS.gnurps", res: {} },
+                { sample: "ARTIFACTS.flurps", res: { b2: {} } },
               ],
             },
             {
               expr: { purge: ["gnurps", { if: [["true"], "flurps"] }] },
               asserts: [
-                { sample: "ARTIFACTLAYERS.gnurps", res: {} },
-                { sample: "ARTIFACTLAYERS.flurps", res: {} },
+                { sample: "ARTIFACTS.gnurps", res: {} },
+                { sample: "ARTIFACTS.flurps", res: {} },
               ],
             },
             {

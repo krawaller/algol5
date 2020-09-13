@@ -35,11 +35,10 @@ export const GamePage = (props: GamePageProps) => {
   const { actions: pageActions, gamePayload, ctxt } = props;
   const { mode: givenMode = "gamelobby", sessionId } = ctxt;
   const { api, graphics, meta, demo, rules } = gamePayload;
-  const [{ battle, frame, session }, battleActions] = useBattle(
-    api,
-    sessionId as string,
-    pageActions.toSession
-  );
+  const [
+    { battle, frame, session, corruptSessions },
+    battleActions,
+  ] = useBattle(api, sessionId as string, pageActions.toSession);
   const [errorReport, setErrorReport] = useState<AlgolErrorReport>();
   const actions = useActions({
     pageActions,
@@ -100,6 +99,7 @@ export const GamePage = (props: GamePageProps) => {
         graphics={graphics}
         previousSessionId={previousSessionId}
         variants={api.variants}
+        corruptSessions={corruptSessions}
       />
     );
   }

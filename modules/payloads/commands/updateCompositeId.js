@@ -6,7 +6,7 @@ const guid = Math.random()
   .toString()
   .slice(2);
 
-const code = `module.exports = ${guid};
+const code = `module.exports = '${guid}';
 `;
 
 fs.ensureDirSync(out);

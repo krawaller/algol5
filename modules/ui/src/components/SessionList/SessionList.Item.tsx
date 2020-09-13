@@ -19,12 +19,13 @@ type SessionListItemProps = {
   actions: SessionListItemActions;
   graphics: AlgolGameGraphics;
   variant: AlgolVariantAnon;
+  corrupt?: string;
 };
 
 const EMPTYARR: string[] = [];
 
 export const SessionListItem: FunctionComponent<SessionListItemProps> = props => {
-  const { session, actions, graphics, variant } = props;
+  const { session, actions, graphics, variant, corrupt } = props;
   const board = sprites2board(session.sprites);
   return (
     <div
@@ -42,7 +43,7 @@ export const SessionListItem: FunctionComponent<SessionListItemProps> = props =>
           name={variant.board}
         />
       </div>
-      <SessionItemInfo session={session} variant={variant} />
+      <SessionItemInfo session={session} variant={variant} corrupt={corrupt} />
     </div>
   );
 };

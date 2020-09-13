@@ -25,7 +25,10 @@ On their turn a player will do two things in order:
 
 On the very first turn of the game {PLR:who=1} will only {CMND:name=move} and not {CMND:name=fire}.
 
-After your turn, if your opponent is unable to move, you get to move again.
+After your turn, if your opponent is unable to move, you get to make a free bonus move - but only if you **flip** opponents! This continues until either...
+
+- the opponent is unblocked, then turn passes to her
+- you cannot **flip** more opponents, then the game ends
 
 The game ends when both players are unable to move, and the winner is the player controlling the most {UNIT:group=stones}!
 

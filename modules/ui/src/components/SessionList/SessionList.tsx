@@ -24,6 +24,7 @@ type SessionListProps = {
   actions: SessionListActions;
   meta: AlgolMeta<AlgolGameBlobAnon>;
   variants: AlgolVariantAnon[];
+  corruptSessions: Record<string, string>;
 };
 
 /**
@@ -34,6 +35,7 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
   graphics,
   meta,
   variants,
+  corruptSessions,
 }) => {
   const [sessionInfo, setSessionInfo] = useState<SessionInfo>({
     sessions: [],
@@ -60,7 +62,15 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
   useEffect(readSessions, [readSessions]);
 
   const errorIds = useMemo(
-    () => sessionInfo.sessions.filter(isSessionLoadFail).map(fail => fail.id),
+    () =>
+      sessionInfo.sessions
+        .filter(
+          s =>
+            isSessionLoadFail(s) ||
+            !variants.find(v => v.code === s.variantCode) ||
+            corruptSessions[s.id]
+        )
+        .map(fail => fail.id),
     [sessionInfo]
   );
 
@@ -87,6 +97,7 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
       meta={meta}
       sessionInfo={sessionInfo}
       variants={variants}
+      corruptSessions={corruptSessions}
     />
   );
 };

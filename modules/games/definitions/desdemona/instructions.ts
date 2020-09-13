@@ -13,21 +13,49 @@ const desdemonaInstructions: DesdemonaDefinition["instructions"] = {
       "selectmovetarget",
     ],
   },
+  selectcapturer: {
+    line: [
+      "Select where to move",
+      { unitat: "selectcapturer" },
+      "to make a free capture",
+    ],
+  },
+  selectcapturestart: {
+    line: [
+      "Press",
+      "move",
+      "to move",
+      { unitat: "selectcapturer" },
+      "to",
+      "selectcapturestart",
+    ],
+  },
   move: {
-    playercase: [
+    ifrulesetelse: [
+      "pie",
       {
-        ifelse: [
-          ["isFirstTurn"],
+        playercase: [
           {
-            line: [
-              { text: "Press " },
-              "endTurn",
+            ifelse: [
+              ["isFirstTurn"],
               {
-                text: ` to submit your moves and hand over to `,
+                line: [
+                  { text: "Press " },
+                  "endTurn",
+                  {
+                    text: ` to submit your moves and hand over to `,
+                  },
+                  ["otherplayer"],
+                  {
+                    text: `(you don't get to fire the first turn)`,
+                  },
+                ],
               },
-              ["otherplayer"],
               {
-                text: `(you don't get to fire the first turn)`,
+                line: [
+                  "Select where to fire with",
+                  { unitat: { turnpos: "movedto" } },
+                ],
               },
             ],
           },
@@ -60,12 +88,12 @@ const desdemonaInstructions: DesdemonaDefinition["instructions"] = {
   },
   fire: {
     ifelse: [
-      { and: [{ notempty: "mymovers" }, { isempty: "oppmovers" }] },
+      { and: [{ notempty: "capturers" }, { isempty: "oppmovers" }] },
       {
         line: [
-          "Since your opponent is blocked you get to move again! Select",
+          "Since your opponent is blocked you get to make a free capture move! Select",
           "amazons",
-          "to move",
+          "to make it with",
         ],
       },
       {

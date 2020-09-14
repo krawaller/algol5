@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/tobito/boards";
+import setups from "../../games/definitions/tobito/setups";
+import variants from "../../games/definitions/tobito/variants";
 const emptyObj = {};
 const iconMapping = { runners: "pawn", finishers: "rook" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -1294,61 +1297,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          runners: {
-            "1": ["a1", "c3", "d1"],
-            "2": ["d3", "e2"]
-          },
-          finishers: {
-            "2": ["a3"]
-          }
-        },
-        marks: ["c3"],
-        potentialMarks: ["b2", "b3", "c2", "d2", "e3"]
-      }
-    },
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "neutral",
-      desc: "with neutral unit",
-      code: "N"
-    }
-  ],
-  boards: {
-    basic: {
-      height: 3,
-      width: 5,
-      terrain: {
-        base: {
-          "1": ["a1", "a2", "a3"],
-          "2": ["e1", "e2", "e3"]
-        }
-      }
-    }
-  },
-  setups: {
-    basic: {
-      runners: {
-        "1": ["a1", "a2", "a3"],
-        "2": ["e1", "e2", "e3"]
-      }
-    },
-    neutral: {
-      runners: {
-        "0": ["c2"],
-        "1": ["a1", "a2", "a3"],
-        "2": ["e1", "e2", "e3"]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

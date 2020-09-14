@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/serauqs/boards";
+import setups from "../../games/definitions/serauqs/setups";
+import variants from "../../games/definitions/serauqs/variants";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn", wild: "king" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -708,70 +711,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "c",
-      arr: {
-        marks: ["b3"],
-        potentialMarks: ["a2", "c2", "b4", "c4"],
-        setup: {
-          soldiers: {
-            "1": ["b1", "a3", "b3"],
-            "2": ["b2", "c3", "d3"]
-          },
-          wild: {
-            "1": ["c1"],
-            "2": ["a4"]
-          }
-        }
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 4,
-      width: 4,
-      terrain: {
-        base: {
-          "1": [
-            {
-              rect: ["a1", "d1"]
-            }
-          ],
-          "2": [
-            {
-              rect: ["a4", "d4"]
-            }
-          ]
-        },
-        corners: ["a1", "a4", "d1", "d4"],
-        middle: [
-          {
-            rect: ["b2", "c3"]
-          }
-        ]
-      }
-    }
-  },
-  setups: {
-    basic: {
-      soldiers: {
-        "1": [
-          {
-            rect: ["a1", "d1"]
-          }
-        ],
-        "2": [
-          {
-            rect: ["a4", "d4"]
-          }
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

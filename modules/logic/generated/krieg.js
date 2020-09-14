@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/krieg/boards";
+import setups from "../../games/definitions/krieg/setups";
+import variants from "../../games/definitions/krieg/variants";
 const emptyObj = {};
 const iconMapping = { notfrozens: "pawn", frozens: "rook" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -657,54 +660,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "j",
-      arr: {
-        marks: ["a3"],
-        potentialMarks: ["a2", "a4"],
-        setup: {
-          notfrozens: {
-            "1": ["a3", "c3", "b4"],
-            "2": ["b1", "d1", "c2"]
-          },
-          frozens: {
-            "1": ["b3"],
-            "2": ["d3"]
-          }
-        }
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      width: 4,
-      height: 4,
-      terrain: {
-        southeast: ["a4", "c2"],
-        northwest: ["b3", "d1"],
-        corners: {
-          "1": ["a4"],
-          "2": ["d1"]
-        },
-        bases: {
-          "1": ["b4", "a3", "b3"],
-          "2": ["c2", "d2", "c1"]
-        }
-      }
-    }
-  },
-  setups: {
-    basic: {
-      notfrozens: {
-        "1": ["a4", "b4", "a3", "b3"],
-        "2": ["c2", "c1", "d2", "d1"]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

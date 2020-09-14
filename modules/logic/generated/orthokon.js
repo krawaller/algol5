@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/orthokon/boards";
+import setups from "../../games/definitions/orthokon/setups";
+import variants from "../../games/definitions/orthokon/variants";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -489,47 +492,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "e",
-      arr: {
-        marks: ["c1"],
-        potentialMarks: ["a1", "d1", "b2", "d2", "c3"],
-        setup: {
-          soldiers: {
-            "1": ["c1", "b3", "b4", "d4"],
-            "2": ["a2", "a3", "a4", "c4"]
-          }
-        }
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 4,
-      width: 4,
-      terrain: {}
-    }
-  },
-  setups: {
-    basic: {
-      soldiers: {
-        "1": [
-          {
-            rect: ["a1", "d1"]
-          }
-        ],
-        "2": [
-          {
-            rect: ["a4", "d4"]
-          }
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

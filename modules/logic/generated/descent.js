@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/descent/boards";
+import setups from "../../games/definitions/descent/setups";
+import variants from "../../games/definitions/descent/variants";
 const emptyObj = {};
 const iconMapping = {
   lvl3: "queen",
@@ -1116,58 +1119,8 @@ const game = {
           });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "m",
-      arr: {
-        marks: ["b3"],
-        potentialMarks: ["a2", "c3", "a4"],
-        setup: {
-          lvl3: {
-            "0": ["a1", "c1", "d1", "a2", "d2", "a4", "d4"],
-            "2": ["b1"]
-          },
-          lvl1: {
-            "0": ["c3", "d3"],
-            "1": ["c2"],
-            "2": ["b2"]
-          },
-          lvl0: {
-            "0": ["a3"]
-          },
-          lvl2: {
-            "1": ["b3", "c4"],
-            "2": ["b4"]
-          }
-        }
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 4,
-      width: 4,
-      terrain: {}
-    }
-  },
-  setups: {
-    basic: {
-      lvl3: {
-        "0": [
-          {
-            rect: ["a2", "d3"]
-          },
-          "b4",
-          "c1"
-        ],
-        "1": ["a1", "c4", "d1"],
-        "2": ["a4", "b1", "d4"]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

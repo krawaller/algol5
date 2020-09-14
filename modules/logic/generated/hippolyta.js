@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/hippolyta/boards";
+import setups from "../../games/definitions/hippolyta/setups";
+import variants from "../../games/definitions/hippolyta/variants";
 const emptyObj = {};
 const iconMapping = { amazons: "queen", projectile: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -349,119 +352,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          amazons: {
-            "1": [
-              {
-                rect: ["a8", "h8"]
-              },
-              {
-                rect: ["h2", "h7"]
-              },
-              {
-                rect: ["b2", "g2"]
-              },
-              {
-                rect: ["b3", "b6"]
-              },
-              {
-                rect: ["c6", "f6"]
-              },
-              "f5",
-              "f4",
-              "e4",
-              "d4"
-            ],
-            "2": [
-              {
-                rect: ["a1", "h1"]
-              },
-              {
-                rect: ["a2", "a7"]
-              },
-              {
-                rect: ["b7", "g7"]
-              },
-              {
-                rect: ["g3", "g6"]
-              },
-              {
-                rect: ["c3", "f3"]
-              },
-              "c4",
-              "c5",
-              "d5",
-              "e5"
-            ]
-          }
-        },
-        marks: [],
-        potentialMarks: []
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 8,
-      width: 8,
-      terrain: {}
-    }
-  },
-  setups: {
-    basic: {
-      amazons: {
-        "1": [
-          {
-            rect: ["a8", "h8"]
-          },
-          {
-            rect: ["h2", "h7"]
-          },
-          {
-            rect: ["b2", "g2"]
-          },
-          {
-            rect: ["b3", "b6"]
-          },
-          {
-            rect: ["c6", "f6"]
-          },
-          "f5",
-          "f4",
-          "e4",
-          "d4"
-        ],
-        "2": [
-          {
-            rect: ["a1", "h1"]
-          },
-          {
-            rect: ["a2", "a7"]
-          },
-          {
-            rect: ["b7", "g7"]
-          },
-          {
-            rect: ["g3", "g6"]
-          },
-          {
-            rect: ["c3", "f3"]
-          },
-          "c4",
-          "c5",
-          "d5",
-          "e5"
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

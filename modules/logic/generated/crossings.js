@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/crossings/boards";
+import setups from "../../games/definitions/crossings/setups";
+import variants from "../../games/definitions/crossings/variants";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn", towers: "rook" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -1231,92 +1234,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          soldiers: {
-            "1": [
-              "a1",
-              "a2",
-              "b2",
-              "c1",
-              "d3",
-              "d4",
-              "e1",
-              "e2",
-              "e3",
-              "e4",
-              "f1",
-              "f2",
-              "g2",
-              "h1",
-              "h2"
-            ],
-            "2": [
-              "a7",
-              "a8",
-              "b7",
-              "b8",
-              "c7",
-              "d8",
-              "e6",
-              "e7",
-              "e8",
-              "f5",
-              "f6",
-              "g7",
-              "g8",
-              "h7",
-              "h8"
-            ]
-          }
-        },
-        marks: [],
-        potentialMarks: []
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 8,
-      width: 8,
-      terrain: {
-        base: {
-          "1": [
-            {
-              rect: ["a1", "h1"]
-            }
-          ],
-          "2": [
-            {
-              rect: ["a8", "h8"]
-            }
-          ]
-        }
-      }
-    }
-  },
-  setups: {
-    basic: {
-      soldiers: {
-        "1": [
-          {
-            rect: ["a1", "h2"]
-          }
-        ],
-        "2": [
-          {
-            rect: ["a7", "h8"]
-          }
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

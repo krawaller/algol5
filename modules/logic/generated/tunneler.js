@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/tunneler/boards";
+import setups from "../../games/definitions/tunneler/setups";
+import variants from "../../games/definitions/tunneler/variants";
 const emptyObj = {};
 const iconMapping = { foremen: "king", tunnelers: "rook", rocks: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -670,131 +673,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          rocks: {
-            "0": [
-              {
-                holerect: [
-                  "a1",
-                  "k11",
-                  "c2",
-                  "e2",
-                  "g2",
-                  "h2",
-                  "i2",
-                  "g3",
-                  "i3",
-                  "d4",
-                  "e4",
-                  "g4",
-                  "h4",
-                  "i4",
-                  "j4",
-                  "k4",
-                  "c5",
-                  "d5",
-                  "i5",
-                  "k5",
-                  "c6",
-                  "e6",
-                  "f6",
-                  "g6",
-                  "h6",
-                  "i6",
-                  "k6",
-                  "b7",
-                  "c7",
-                  "e7",
-                  "k7",
-                  "b8",
-                  "e8",
-                  "g8",
-                  "h8",
-                  "i8",
-                  "k8",
-                  "b9",
-                  "c9",
-                  "g9",
-                  "i9",
-                  "j9",
-                  "k9",
-                  "c10",
-                  "e10",
-                  "g10",
-                  "i10",
-                  "c11",
-                  "d11",
-                  "e11",
-                  "f11",
-                  "g11",
-                  "h11",
-                  "i11"
-                ]
-              }
-            ]
-          },
-          foremen: {
-            "1": ["c2", "h2"],
-            "2": ["i8", "i10"]
-          },
-          tunnelers: {
-            "1": ["e2", "g3", "j9"],
-            "2": ["e10", "g11", "i3"]
-          }
-        },
-        marks: ["i3"],
-        potentialMarks: ["i2", "i1", "i4", "i5", "i6", "i7"]
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 11,
-      width: 11,
-      terrain: {}
-    }
-  },
-  setups: {
-    basic: {
-      foremen: {
-        "1": ["c2", "i2"],
-        "2": ["c10", "i10"]
-      },
-      tunnelers: {
-        "1": ["e2", "e4", "g4", "g2"],
-        "2": ["e10", "e8", "g8", "g10"]
-      },
-      rocks: {
-        "0": [
-          {
-            holerect: [
-              "a1",
-              "k11",
-              "c2",
-              "i2",
-              "c10",
-              "i10",
-              "e2",
-              "e4",
-              "g4",
-              "g2",
-              "e10",
-              "e8",
-              "g8",
-              "g10"
-            ]
-          }
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

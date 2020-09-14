@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/trafficlights/boards";
+import setups from "../../games/definitions/trafficlights/setups";
+import variants from "../../games/definitions/trafficlights/variants";
 const emptyObj = {};
 const iconMapping = { kings: "king", pawns: "pawn", bishops: "bishop" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -618,51 +621,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "b",
-      arr: {
-        marks: [],
-        potentialMarks: [
-          "a1",
-          "b1",
-          "c1",
-          "d1",
-          "a2",
-          "b2",
-          "d2",
-          "a3",
-          "b3",
-          "c3",
-          "d3"
-        ],
-        setup: {
-          bishops: {
-            "0": ["b1", "b2"]
-          },
-          pawns: {
-            "0": ["a2", "c3"]
-          },
-          kings: {
-            "0": ["c2"]
-          }
-        }
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      width: 4,
-      height: 3,
-      terrain: {}
-    }
-  },
-  setups: {
-    basic: {}
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/hobbes/boards";
+import setups from "../../games/definitions/hobbes/setups";
+import variants from "../../games/definitions/hobbes/variants";
 const emptyObj = {};
 const iconMapping = { stones: "pawn", kings: "king" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -1308,54 +1311,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          kings: {
-            "1": ["d2"],
-            "2": ["b4"]
-          },
-          stones: {
-            "0": ["a4", "b1", "b2", "b5", "c2", "c3", "d3", "d4", "d5", "e1"]
-          }
-        },
-        marks: [],
-        potentialMarks: ["c1", "c2", "d1", "d3", "e2", "e4", "e5"]
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 5,
-      width: 5,
-      terrain: {
-        pie: ["c2"]
-      }
-    }
-  },
-  setups: {
-    basic: {
-      stones: {
-        "0": [
-          {
-            holerect: ["b1", "d2", "c1"]
-          },
-          {
-            holerect: ["b4", "d5", "c5"]
-          }
-        ]
-      },
-      kings: {
-        "1": ["c1"],
-        "2": ["c5"]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

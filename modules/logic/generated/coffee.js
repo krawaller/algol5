@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/coffee/boards";
+import setups from "../../games/definitions/coffee/setups";
+import variants from "../../games/definitions/coffee/variants";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -1281,35 +1284,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "z",
-      arr: {
-        marks: [],
-        potentialMarks: ["b2", "b3", "b4", "b5"],
-        setup: {
-          soldiers: {
-            "0": ["b2", "b3", "b4", "b5"],
-            "1": ["d1", "c3", "e5"],
-            "2": ["b1", "e3", "d4"]
-          }
-        }
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 5,
-      width: 5,
-      terrain: {}
-    }
-  },
-  setups: {
-    basic: {}
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

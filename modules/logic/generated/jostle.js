@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/jostle/boards";
+import setups from "../../games/definitions/jostle/setups";
+import variants from "../../games/definitions/jostle/variants";
 const emptyObj = {};
 const iconMapping = { checkers: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -573,107 +576,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "w",
-      arr: {
-        marks: [],
-        potentialMarks: ["f3", "h5", "c6", "g6", "i6", "e8"],
-        setup: {
-          checkers: {
-            "1": [
-              "f3",
-              "h3",
-              "c4",
-              "d4",
-              "h4",
-              "d5",
-              "e5",
-              "h5",
-              "c6",
-              "f6",
-              "g6",
-              "i6",
-              "e7",
-              "b8",
-              "e8",
-              "g8"
-            ],
-            "2": [
-              "g2",
-              "d3",
-              "e3",
-              "e4",
-              "f4",
-              "i4",
-              "c5",
-              "g5",
-              "d6",
-              "e6",
-              "c7",
-              "f7",
-              "h7",
-              "d8",
-              "f8",
-              "h9"
-            ]
-          }
-        }
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 10,
-      width: 10,
-      terrain: {}
-    }
-  },
-  setups: {
-    basic: {
-      checkers: {
-        "1": [
-          "c4",
-          "c6",
-          "c8",
-          "d3",
-          "d5",
-          "d7",
-          "e4",
-          "e8",
-          "f3",
-          "f7",
-          "g4",
-          "g6",
-          "g8",
-          "h3",
-          "h5",
-          "h7"
-        ],
-        "2": [
-          "c3",
-          "c5",
-          "c7",
-          "d4",
-          "d6",
-          "d8",
-          "e3",
-          "e7",
-          "f4",
-          "f8",
-          "g3",
-          "g5",
-          "g7",
-          "h4",
-          "h6",
-          "h8"
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

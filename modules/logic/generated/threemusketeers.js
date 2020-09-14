@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/threemusketeers/boards";
+import setups from "../../games/definitions/threemusketeers/setups";
+import variants from "../../games/definitions/threemusketeers/variants";
 const emptyObj = {};
 const iconMapping = { pawns: "pawn", kings: "king" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -480,65 +483,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "t",
-      arr: {
-        marks: ["c3"],
-        potentialMarks: ["c2", "d3", "c4"],
-        setup: {
-          pawns: {
-            "2": [
-              "a1",
-              "b1",
-              "c1",
-              "d1",
-              "e1",
-              "c2",
-              "d2",
-              "e2",
-              "a3",
-              "d3",
-              "e3",
-              "a4",
-              "b4",
-              "c4",
-              "a5",
-              "c5",
-              "d5"
-            ]
-          },
-          kings: {
-            "1": ["b2", "c3", "e4"]
-          }
-        }
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 5,
-      width: 5,
-      terrain: {}
-    }
-  },
-  setups: {
-    basic: {
-      kings: {
-        "1": ["a1", "c3", "e5"]
-      },
-      pawns: {
-        "2": [
-          {
-            holerect: ["a1", "e5", "a1", "c3", "e5"]
-          }
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

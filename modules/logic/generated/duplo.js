@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/duplo/boards";
+import setups from "../../games/definitions/duplo/setups";
+import variants from "../../games/definitions/duplo/variants";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -945,35 +948,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "u",
-      arr: {
-        marks: ["c4"],
-        potentialMarks: ["b3", "d3", "b5", "c6"],
-        setup: {
-          soldiers: {
-            "0": ["e4", "d5", "e5"],
-            "1": ["a1", "b2", "c3", "a4", "b4", "c4", "d4"],
-            "2": ["g4", "f5", "d6", "e6", "d7", "e7", "d8"]
-          }
-        }
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 8,
-      width: 8,
-      terrain: {}
-    }
-  },
-  setups: {
-    basic: {}
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

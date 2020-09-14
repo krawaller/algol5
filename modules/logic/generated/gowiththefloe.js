@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/gowiththefloe/boards";
+import setups from "../../games/definitions/gowiththefloe/setups";
+import variants from "../../games/definitions/gowiththefloe/variants";
 const emptyObj = {};
 const iconMapping = { seals: "king", bears: "queen", holes: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -1139,75 +1142,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "s",
-      arr: {
-        marks: ["c7"],
-        potentialMarks: ["a5", "c5", "e5", "c6", "d6", "c8", "d8"],
-        setup: {
-          holes: {
-            "0": [
-              "b2",
-              "g2",
-              "c3",
-              "f3",
-              "b4",
-              "c4",
-              "d4",
-              "b6",
-              "b7",
-              "d7",
-              "e7",
-              "f7",
-              "g7"
-            ]
-          },
-          seals: {
-            "1": ["d2", "b5"]
-          },
-          bears: {
-            "2": ["e4", "c7"]
-          }
-        }
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 8,
-      width: 8,
-      terrain: {
-        water: [
-          "a1",
-          "a2",
-          "a7",
-          "a8",
-          "b1",
-          "b8",
-          "g1",
-          "g8",
-          "h1",
-          "h2",
-          "h7",
-          "h8"
-        ]
-      }
-    }
-  },
-  setups: {
-    basic: {
-      seals: {
-        "1": ["b2", "b7"]
-      },
-      bears: {
-        "2": ["g2", "g7"]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

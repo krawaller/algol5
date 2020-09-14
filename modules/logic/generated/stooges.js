@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/stooges/boards";
+import setups from "../../games/definitions/stooges/setups";
+import variants from "../../games/definitions/stooges/variants";
 const emptyObj = {};
 const iconMapping = { singles: "pawn", doubles: "rook" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -761,62 +764,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          singles: {
-            "1": ["a3", "c1", "c5", "e2"],
-            "2": ["b2", "b3", "c2", "d1", "d2", "d5", "e3", "e4"]
-          },
-          doubles: {
-            "1": ["b4", "c3", "d4"],
-            "2": ["c4", "d3", "f3"]
-          }
-        },
-        marks: ["d3"],
-        potentialMarks: ["c2", "d2", "e3", "e4"]
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 5,
-      width: 6,
-      terrain: {
-        corners: [
-          "a1",
-          "a2",
-          "b1",
-          "a4",
-          "a5",
-          "b5",
-          "e1",
-          "f1",
-          "f2",
-          "e5",
-          "f4",
-          "f5"
-        ]
-      }
-    }
-  },
-  setups: {
-    basic: {
-      singles: {
-        "1": ["b2", "b4", "c1", "c5", "d2", "d4"],
-        "2": ["c2", "c4", "d1", "d5", "e2", "e4"]
-      },
-      doubles: {
-        "1": ["a3", "c3", "e3"],
-        "2": ["b3", "d3", "f3"]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

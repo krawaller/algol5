@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/duckpond/boards";
+import setups from "../../games/definitions/duckpond/setups";
+import variants from "../../games/definitions/duckpond/variants";
 const emptyObj = {};
 const iconMapping = { ducks: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -419,39 +422,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          ducks: {
-            "1": ["b2", "c2", "d3", "d5"],
-            "2": ["b3", "b5", "c4", "e2"]
-          }
-        },
-        marks: ["b3"],
-        potentialMarks: ["a2", "a3", "a4", "b1", "b4", "c3", "d1"]
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 5,
-      width: 5,
-      terrain: {}
-    }
-  },
-  setups: {
-    basic: {
-      ducks: {
-        "1": ["a2", "b1", "d5", "e4"],
-        "2": ["a4", "b5", "d1", "e2"]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

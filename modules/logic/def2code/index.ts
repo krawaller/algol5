@@ -84,6 +84,10 @@ import {offsetPos, boardConnections, makeRelativeDirs, setup2army, coords2pos, b
     hasGrids ? ", makeGrids" : ""
   }} from '../../common'
 
+import boards from '../../games/definitions/${gameDef.meta.id}/boards'
+import setups from '../../games/definitions/${gameDef.meta.id}/setups'
+import variants from '../../games/definitions/${gameDef.meta.id}/variants'
+
 ${executeSection(gameDef, 1, "head", "allRulesets", "head")}
 
 ${ruleNames
@@ -108,9 +112,9 @@ const game = {
   instruction: {
     ${instructions.join(", ")}
   },
-  variants: ${JSON.stringify(gameDef.variants, null, 2)},
-  boards: ${JSON.stringify(gameDef.boards, null, 2)},
-  setups: ${JSON.stringify(gameDef.setups, null, 2)}
+  variants,
+  boards,
+  setups
 };
 
 export default game; 

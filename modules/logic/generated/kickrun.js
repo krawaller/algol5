@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/kickrun/boards";
+import setups from "../../games/definitions/kickrun/setups";
+import variants from "../../games/definitions/kickrun/variants";
 const emptyObj = {};
 const iconMapping = { runners: "bishop", sidekickers: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -582,52 +585,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "m",
-      arr: {
-        marks: ["e3"],
-        potentialMarks: ["c1", "e1", "d2", "e2", "d3"],
-        setup: {
-          sidekickers: {
-            "1": ["b1", "d1", "b3"],
-            "2": ["c3", "c4", "e4"]
-          },
-          runners: {
-            "1": ["c2", "c5"],
-            "2": ["e3", "d5"]
-          }
-        }
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 5,
-      width: 5,
-      terrain: {
-        corners: {
-          "1": ["a1"],
-          "2": ["e5"]
-        }
-      }
-    }
-  },
-  setups: {
-    basic: {
-      runners: {
-        "1": ["a2", "b1"],
-        "2": ["d5", "e4"]
-      },
-      sidekickers: {
-        "1": ["a1", "c1", "a3"],
-        "2": ["c5", "e5", "e3"]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

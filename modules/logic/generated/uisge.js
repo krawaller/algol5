@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/uisge/boards";
+import setups from "../../games/definitions/uisge/setups";
+import variants from "../../games/definitions/uisge/variants";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn", kings: "king" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -785,51 +788,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          kings: {
-            "1": ["b3", "c2"],
-            "2": ["b5"]
-          },
-          soldiers: {
-            "1": ["c3", "d2", "e3", "f3"],
-            "2": ["b4", "c4", "c5", "d4", "e4"]
-          }
-        },
-        marks: ["b5"],
-        potentialMarks: ["a4", "c6", "d5"]
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 6,
-      width: 7,
-      terrain: {}
-    }
-  },
-  setups: {
-    basic: {
-      soldiers: {
-        "1": [
-          {
-            holerect: ["c2", "f3", "c2", "f2"]
-          }
-        ],
-        "2": [
-          {
-            holerect: ["b4", "e5", "b5", "e5"]
-          }
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

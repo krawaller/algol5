@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/desdemona/boards";
+import setups from "../../games/definitions/desdemona/setups";
+import variants from "../../games/definitions/desdemona/variants";
 const emptyObj = {};
 const iconMapping = { amazons: "queen", stones: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -2849,112 +2852,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "pie",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "n",
-      arr: {
-        setup: {
-          amazons: {
-            "1": ["b7", "c4"],
-            "2": ["a5", "d4"]
-          },
-          stones: {
-            "1": ["a3", "b4", "c6", "d5", "d6", "e4"],
-            "2": ["b5", "b6", "c5"]
-          }
-        },
-        marks: ["d4"],
-        potentialMarks: [
-          "a1",
-          "b2",
-          "c3",
-          "d1",
-          "d2",
-          "d3",
-          "e3",
-          "e5",
-          "f2",
-          "f6",
-          "g1",
-          "g7"
-        ]
-      }
-    },
-    {
-      ruleset: "pie",
-      board: "xl",
-      setup: "xl",
-      desc: "XL",
-      code: "p"
-    },
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic_OLD",
-      desc: "regular (OLD)",
-      code: "r",
-      hidden: true
-    },
-    {
-      ruleset: "basic",
-      board: "xl",
-      setup: "xl_OLD",
-      desc: "XL (OLD)",
-      code: "x",
-      hidden: true
-    }
-  ],
-  boards: {
-    basic: {
-      height: 7,
-      width: 7,
-      terrain: {}
-    },
-    xl: {
-      height: 8,
-      width: 8,
-      terrain: {}
-    }
-  },
-  setups: {
-    basic: {
-      amazons: {
-        "1": ["b2", "f2"],
-        "2": ["b6", "f6"]
-      }
-    },
-    xl: {
-      amazons: {
-        "1": ["b2", "g2", "a4"],
-        "2": ["b7", "g7", "h5"]
-      }
-    },
-    basic_OLD: {
-      amazons: {
-        "1": ["a1", "g7"],
-        "2": ["a7", "g1"]
-      }
-    },
-    xl_OLD: {
-      amazons: {
-        "1": ["a1", "h8"],
-        "2": ["a8", "h1"]
-      }
-    },
-    blocktest: {
-      amazons: {
-        "1": ["b2", "f2", "g1"],
-        "2": ["a7"]
-      },
-      stones: {
-        "1": ["a6", "c2"],
-        "2": ["c4", "e6"]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

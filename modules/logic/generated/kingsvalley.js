@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/kingsvalley/boards";
+import setups from "../../games/definitions/kingsvalley/setups";
+import variants from "../../games/definitions/kingsvalley/variants";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn", kings: "king" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -583,92 +586,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        marks: ["c1"],
-        potentialMarks: ["b1", "b2", "c4", "e3"],
-        setup: {
-          soldiers: {
-            "1": ["a1", "b4", "d1", "d4"],
-            "2": ["a3", "a5", "d5", "e5"]
-          },
-          kings: {
-            "1": ["c5"],
-            "2": ["c1"]
-          }
-        }
-      }
-    },
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "retrieve",
-      desc: "retrieve",
-      code: "e"
-    },
-    {
-      ruleset: "basic",
-      board: "labyrinth",
-      setup: "labyrinth",
-      desc: "labyrinth",
-      code: "k"
-    }
-  ],
-  boards: {
-    basic: {
-      height: 5,
-      width: 5,
-      terrain: {
-        goal: ["c3"],
-        water: []
-      }
-    },
-    labyrinth: {
-      height: 7,
-      width: 7,
-      terrain: {
-        goal: ["d4"],
-        water: ["b3", "b5", "f3", "f5"]
-      }
-    }
-  },
-  setups: {
-    basic: {
-      kings: {
-        "1": ["c1"],
-        "2": ["c5"]
-      },
-      soldiers: {
-        "1": ["a1", "b1", "d1", "e1"],
-        "2": ["a5", "b5", "d5", "e5"]
-      }
-    },
-    retrieve: {
-      kings: {
-        "1": ["c5"],
-        "2": ["c1"]
-      },
-      soldiers: {
-        "1": ["a1", "b1", "d1", "e1"],
-        "2": ["a5", "b5", "d5", "e5"]
-      }
-    },
-    labyrinth: {
-      kings: {
-        "1": ["d7"],
-        "2": ["d1"]
-      },
-      soldiers: {
-        "1": ["a1", "b1", "c1", "e1", "f1", "g1"],
-        "2": ["a7", "b7", "c7", "e7", "f7", "g7"]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/speedsoccolot/boards";
+import setups from "../../games/definitions/speedsoccolot/setups";
+import variants from "../../games/definitions/speedsoccolot/variants";
 const emptyObj = {};
 const iconMapping = { ball: "pawn", players: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -1156,113 +1159,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "speed",
-      code: "r",
-      arr: {
-        setup: {
-          ball: {
-            "0": ["e3"]
-          },
-          players: {
-            "1": ["b2", "c2", "d1", "f2", "f3"],
-            "2": ["c3", "c6", "d6", "e6", "f5"]
-          }
-        },
-        marks: [],
-        potentialMarks: []
-      }
-    },
-    {
-      ruleset: "basic",
-      board: "original",
-      setup: "original",
-      desc: "original",
-      code: "o",
-      arr: {
-        setup: {},
-        marks: [],
-        potentialMarks: []
-      }
-    }
-  ],
-  boards: {
-    original: {
-      height: 8,
-      width: 8,
-      terrain: {
-        base: {
-          "1": [
-            {
-              rect: ["a1", "h1"]
-            }
-          ],
-          "2": [
-            {
-              rect: ["a8", "h8"]
-            }
-          ]
-        }
-      }
-    },
-    basic: {
-      height: 7,
-      width: 7,
-      terrain: {
-        base: {
-          "1": [
-            {
-              rect: ["a1", "g1"]
-            }
-          ],
-          "2": [
-            {
-              rect: ["a7", "g7"]
-            }
-          ]
-        }
-      }
-    }
-  },
-  setups: {
-    original: {
-      ball: {
-        "0": ["d4"]
-      },
-      players: {
-        "1": [
-          {
-            rect: ["b1", "g1"]
-          }
-        ],
-        "2": [
-          {
-            rect: ["b8", "g8"]
-          }
-        ]
-      }
-    },
-    basic: {
-      ball: {
-        "0": ["d4"]
-      },
-      players: {
-        "1": [
-          {
-            rect: ["b2", "f2"]
-          }
-        ],
-        "2": [
-          {
-            rect: ["b6", "f6"]
-          }
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

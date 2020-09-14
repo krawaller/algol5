@@ -16,6 +16,9 @@ import {
   ringTwoDirs,
   makeGrids
 } from "../../common";
+import boards from "../../games/definitions/scatter/boards";
+import setups from "../../games/definitions/scatter/setups";
+import variants from "../../games/definitions/scatter/variants";
 const emptyObj = {};
 const iconMapping = { pawns: "pawn", nobles: "king", kings: "king" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions, GRIDS;
@@ -1153,92 +1156,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          kings: {
-            "0": ["e1", "e2", "f1", "f2"]
-          },
-          pawns: {
-            "1": ["b1", "c2", "d1", "e4", "b6", "c5", "d5", "d6"],
-            "2": ["a3", "a4", "b2", "b4", "c3", "c4", "d4", "e3"]
-          }
-        },
-        marks: ["b4"],
-        potentialMarks: ["b3", "b5"]
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 6,
-      width: 6,
-      terrain: {
-        odd: [
-          {
-            holerect: ["a5", "f6", "c5", "c6", "d5", "d6"]
-          },
-          {
-            holerect: ["a1", "f2", "c1", "c2", "d1", "d2"]
-          },
-          {
-            rect: ["c3", "d4"]
-          }
-        ]
-      },
-      offsets: [
-        ["ortho", 2, 0],
-        ["ortho", 2, -1],
-        ["ortho", 2, 1],
-        ["ortho", 3, 0],
-        ["ortho", 3, 1],
-        ["ortho", 3, -1]
-      ],
-      grids: {
-        binary: [
-          [1, 1, 2, 2, 4, 4],
-          [1, 1, 2, 2, 4, 4],
-          [8, 8, 16, 16, 32, 32],
-          [8, 8, 16, 16, 32, 32],
-          [64, 64, 128, 128, 256, 256],
-          [64, 64, 128, 128, 256, 256]
-        ]
-      }
-    }
-  },
-  setups: {
-    basic: {
-      nobles: {
-        "0": ["c3", "d3", "d4"]
-      },
-      kings: {
-        "0": ["c4"]
-      },
-      pawns: {
-        "1": [
-          {
-            rect: ["c1", "d2"]
-          },
-          {
-            rect: ["c5", "d6"]
-          }
-        ],
-        "2": [
-          {
-            rect: ["a3", "b4"]
-          },
-          {
-            rect: ["e3", "f4"]
-          }
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

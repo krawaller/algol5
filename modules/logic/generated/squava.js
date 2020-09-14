@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/squava/boards";
+import setups from "../../games/definitions/squava/setups";
+import variants from "../../games/definitions/squava/variants";
 const emptyObj = {};
 const iconMapping = { markers: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -471,34 +474,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          markers: {
-            "1": ["b2", "b4", "b5", "c4", "e2"],
-            "2": ["a1", "c3", "d3", "d4"]
-          }
-        },
-        marks: ["b3"],
-        potentialMarks: []
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 5,
-      width: 5,
-      terrain: {}
-    }
-  },
-  setups: {
-    basic: {}
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

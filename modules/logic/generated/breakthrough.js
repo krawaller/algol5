@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/breakthrough/boards";
+import setups from "../../games/definitions/breakthrough/setups";
+import variants from "../../games/definitions/breakthrough/variants";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -912,175 +915,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          soldiers: {
-            "1": [
-              "b1",
-              "b4",
-              "c3",
-              "c4",
-              "d3",
-              "d4",
-              "e3",
-              "e4",
-              "f1",
-              "f3",
-              "f4",
-              "g1",
-              "g2",
-              "h4"
-            ],
-            "2": [
-              "b5",
-              "b6",
-              "b7",
-              "c5",
-              "c7",
-              "d5",
-              "d6",
-              "e5",
-              "e6",
-              "f5",
-              "f6",
-              "f8",
-              "g4",
-              "g7",
-              "h5"
-            ]
-          }
-        },
-        marks: ["f4"],
-        potentialMarks: ["e5", "g5"]
-      }
-    },
-    {
-      ruleset: "basic",
-      board: "mini",
-      setup: "mini",
-      desc: "mini",
-      code: "M",
-      arr: {
-        setup: {},
-        marks: [],
-        potentialMarks: []
-      }
-    },
-    {
-      ruleset: "siege",
-      board: "siege",
-      setup: "siege",
-      desc: "siege",
-      code: "S",
-      arr: {
-        setup: {},
-        marks: [],
-        potentialMarks: []
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 8,
-      width: 8,
-      terrain: {
-        base: {
-          "1": [
-            {
-              rect: ["a1", "h1"]
-            }
-          ],
-          "2": [
-            {
-              rect: ["a8", "h8"]
-            }
-          ]
-        }
-      }
-    },
-    mini: {
-      height: 5,
-      width: 5,
-      terrain: {
-        base: {
-          "1": [
-            {
-              rect: ["a1", "e1"]
-            }
-          ],
-          "2": [
-            {
-              rect: ["a5", "e5"]
-            }
-          ]
-        }
-      }
-    },
-    siege: {
-      height: 8,
-      width: 8,
-      terrain: {
-        base: {
-          "1": ["h1"],
-          "2": ["a8"]
-        }
-      }
-    }
-  },
-  setups: {
-    basic: {
-      soldiers: {
-        "1": [
-          {
-            rect: ["a1", "h2"]
-          }
-        ],
-        "2": [
-          {
-            rect: ["a7", "h8"]
-          }
-        ]
-      }
-    },
-    mini: {
-      soldiers: {
-        "1": [
-          {
-            rect: ["a1", "e2"]
-          }
-        ],
-        "2": [
-          {
-            rect: ["a4", "e5"]
-          }
-        ]
-      }
-    },
-    siege: {
-      soldiers: {
-        "1": [
-          {
-            holerect: ["e1", "h4", "e3", "e4", "f4", "h1"]
-          },
-          "d1",
-          "h5"
-        ],
-        "2": [
-          {
-            holerect: ["a5", "d8", "c5", "d5", "d6", "a8"]
-          },
-          "a4",
-          "e8"
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

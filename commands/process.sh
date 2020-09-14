@@ -56,6 +56,11 @@ else
     npm run makeGameListing; # have to update all game listings when we mess with composite 
   fi
 
+  if [ "$what" = "list" ] || [ "$what" = "" ]; then
+    cd ../payloads;
+    npm run makeTagArticle; # to get game included in all tag articles 
+  fi
+
   if [ "$what" = "pics" ] || [ "$what" = "graphics" ] || [ "$what" = "list" ] || [ "$what" = "" ]; then
     cd ../ui;
     npm run importGameImages "$gameId";

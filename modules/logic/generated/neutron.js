@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/neutron/boards";
+import setups from "../../games/definitions/neutron/setups";
+import variants from "../../games/definitions/neutron/variants";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -1729,113 +1732,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          soldiers: {
-            "0": ["a3"],
-            "1": ["a4", "b4", "b3", "c1", "e1"],
-            "2": ["a1", "a5", "c5", "d5", "e2"]
-          }
-        },
-        marks: [],
-        potentialMarks: []
-      }
-    },
-    {
-      ruleset: "paperneutron",
-      board: "paperneutron",
-      setup: "paperneutron",
-      desc: "paper neutron",
-      code: "p",
-      arr: {
-        setup: {
-          soldiers: {
-            "0": ["a2", "d2"],
-            "1": ["a1", "b1", "c3", "d3"],
-            "2": ["a4", "b2", "c4", "d4"]
-          }
-        },
-        marks: [],
-        potentialMarks: []
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 5,
-      width: 5,
-      terrain: {
-        base: {
-          "1": [
-            {
-              rect: ["a1", "e1"]
-            }
-          ],
-          "2": [
-            {
-              rect: ["a5", "e5"]
-            }
-          ]
-        }
-      }
-    },
-    paperneutron: {
-      height: 4,
-      width: 4,
-      terrain: {
-        base: {
-          "1": [
-            {
-              rect: ["a1", "d1"]
-            }
-          ],
-          "2": [
-            {
-              rect: ["a4", "d4"]
-            }
-          ]
-        }
-      }
-    }
-  },
-  setups: {
-    basic: {
-      soldiers: {
-        "0": ["c3"],
-        "1": [
-          {
-            rect: ["a1", "e1"]
-          }
-        ],
-        "2": [
-          {
-            rect: ["a5", "e5"]
-          }
-        ]
-      }
-    },
-    paperneutron: {
-      soldiers: {
-        "0": ["b3", "c2"],
-        "1": [
-          {
-            rect: ["a1", "d1"]
-          }
-        ],
-        "2": [
-          {
-            rect: ["a4", "d4"]
-          }
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

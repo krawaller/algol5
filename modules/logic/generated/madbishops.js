@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/madbishops/boards";
+import setups from "../../games/definitions/madbishops/setups";
+import variants from "../../games/definitions/madbishops/variants";
 const emptyObj = {};
 const iconMapping = { bishops: "bishop" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -539,130 +542,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          bishops: {
-            "1": [
-              "a1",
-              "a5",
-              "b6",
-              "b8",
-              "c3",
-              "c7",
-              "c9",
-              "d10",
-              "e1",
-              "e7",
-              "f8",
-              "g3",
-              "g9",
-              "h10",
-              "i1",
-              "i3",
-              "i5",
-              "i7",
-              "j4",
-              "j8"
-            ],
-            "2": [
-              "a3",
-              "a7",
-              "b10",
-              "c5",
-              "d6",
-              "d8",
-              "e9",
-              "f4",
-              "f10",
-              "g1",
-              "g5",
-              "h4",
-              "h8",
-              "i9",
-              "j2",
-              "j6",
-              "j10"
-            ]
-          }
-        },
-        marks: ["h8"],
-        potentialMarks: ["c3", "g9", "i7"]
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 10,
-      width: 10,
-      terrain: {}
-    }
-  },
-  setups: {
-    basic: {
-      bishops: {
-        "1": [
-          "a1",
-          "a5",
-          "a9",
-          "b2",
-          "b6",
-          "c3",
-          "c7",
-          "c9",
-          "d4",
-          "d10",
-          "e1",
-          "e5",
-          "e7",
-          "f2",
-          "f8",
-          "g3",
-          "g5",
-          "g9",
-          "h6",
-          "h10",
-          "i1",
-          "i3",
-          "i7",
-          "j4",
-          "j8"
-        ],
-        "2": [
-          "a3",
-          "a7",
-          "b4",
-          "b8",
-          "b10",
-          "c1",
-          "c5",
-          "d2",
-          "d6",
-          "d8",
-          "e3",
-          "e9",
-          "f4",
-          "f6",
-          "f10",
-          "g1",
-          "g7",
-          "h2",
-          "h4",
-          "h8",
-          "i5",
-          "i9",
-          "j2",
-          "j6",
-          "j10"
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

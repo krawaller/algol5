@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/kachitknight/boards";
+import setups from "../../games/definitions/kachitknight/setups";
+import variants from "../../games/definitions/kachitknight/variants";
 const emptyObj = {};
 const iconMapping = {
   leader: "pawn",
@@ -1344,59 +1347,8 @@ const game = {
           });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          leader: {
-            "2": ["a4"]
-          },
-          leaderortho: {
-            "1": ["c3"]
-          },
-          knightortho: {
-            "1": ["d3"],
-            "2": ["a2", "b4"]
-          },
-          knightdiag: {
-            "1": ["c2"],
-            "2": ["b3"]
-          }
-        },
-        marks: [],
-        potentialMarks: []
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 4,
-      width: 4,
-      terrain: {
-        base: {
-          "1": ["b1", "c1", "c2", "d2", "d3"],
-          "2": ["a2", "a3", "b3", "b4", "c4"]
-        },
-        throne: {
-          "1": ["d1"],
-          "2": ["a4"]
-        },
-        promotion: ["a1", "b2", "c3", "d4"]
-      }
-    }
-  },
-  setups: {
-    basic: {
-      leader: {
-        "1": ["d1"],
-        "2": ["a4"]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

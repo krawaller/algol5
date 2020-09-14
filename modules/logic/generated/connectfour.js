@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/connectfour/boards";
+import setups from "../../games/definitions/connectfour/setups";
+import variants from "../../games/definitions/connectfour/variants";
 const emptyObj = {};
 const iconMapping = { markers: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -385,40 +388,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          markers: {
-            "1": ["c1", "d1", "d2", "d3", "e3"],
-            "2": ["b1", "c2", "e1", "e2"]
-          }
-        },
-        marks: [],
-        potentialMarks: ["a1", "b2", "c3", "d4", "e4", "f1", "g1"]
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 6,
-      width: 7,
-      terrain: {
-        edge: [
-          {
-            rect: ["a6", "g6"]
-          }
-        ]
-      }
-    }
-  },
-  setups: {
-    basic: {}
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

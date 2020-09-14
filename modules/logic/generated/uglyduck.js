@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/uglyduck/boards";
+import setups from "../../games/definitions/uglyduck/setups";
+import variants from "../../games/definitions/uglyduck/variants";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn", kings: "king" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -659,63 +662,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "y",
-      arr: {
-        marks: ["b4"],
-        potentialMarks: ["a3", "c3"],
-        setup: {
-          soldiers: {
-            "1": ["c1", "d1", "b2", "b3"],
-            "2": ["d3", "e3", "a4", "b4", "d5"]
-          },
-          kings: {
-            "1": ["c5"]
-          }
-        }
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 5,
-      width: 5,
-      terrain: {
-        homerow: {
-          "1": [
-            {
-              rect: ["a1", "e1"]
-            }
-          ],
-          "2": [
-            {
-              rect: ["a5", "e5"]
-            }
-          ]
-        }
-      }
-    }
-  },
-  setups: {
-    basic: {
-      soldiers: {
-        "1": [
-          {
-            rect: ["a1", "e1"]
-          }
-        ],
-        "2": [
-          {
-            rect: ["a5", "e5"]
-          }
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

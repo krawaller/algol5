@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/aries/boards";
+import setups from "../../games/definitions/aries/setups";
+import variants from "../../games/definitions/aries/variants";
 const emptyObj = {};
 const iconMapping = { soldiers: "rook" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -708,52 +711,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "e",
-      arr: {
-        marks: ["c7"],
-        potentialMarks: ["c4", "c5", "c6", "a7", "b7", "d7", "e7", "c8"],
-        setup: {
-          soldiers: {
-            "1": ["a1", "b1", "a2", "a3", "c3", "a4", "b4", "c7", "d8"],
-            "2": ["g1", "b5", "f6", "h6", "e7", "f7", "h7", "f8", "h8"]
-          }
-        }
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 8,
-      width: 8,
-      terrain: {
-        corner: {
-          "1": ["a1"],
-          "2": ["h8"]
-        }
-      }
-    }
-  },
-  setups: {
-    basic: {
-      soldiers: {
-        "1": [
-          {
-            rect: ["a1", "d4"]
-          }
-        ],
-        "2": [
-          {
-            rect: ["e5", "h8"]
-          }
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

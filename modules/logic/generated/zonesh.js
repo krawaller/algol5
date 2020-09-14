@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/zonesh/boards";
+import setups from "../../games/definitions/zonesh/setups";
+import variants from "../../games/definitions/zonesh/variants";
 const emptyObj = {};
 const iconMapping = { soldiers: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -491,96 +494,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          soldiers: {
-            "1": ["a1", "a2", "a3", "a5", "b1", "b2", "c2", "c3", "d1", "e1"],
-            "2": ["c5", "c6", "d5", "e3", "e4", "e6", "f3", "f4", "f5", "f6"]
-          }
-        },
-        marks: ["c3"],
-        potentialMarks: ["b3", "b4", "c4", "d2", "d3", "d4"]
-      }
-    },
-    {
-      ruleset: "basic",
-      board: "mini",
-      setup: "mini",
-      desc: "mini",
-      code: "m",
-      arr: {
-        setup: {},
-        marks: [],
-        potentialMarks: []
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 6,
-      width: 6,
-      terrain: {
-        throne: {
-          "1": ["a1"],
-          "2": ["f6"]
-        },
-        base: {
-          "1": [
-            {
-              holerect: ["a1", "d4", "a1", "b4", "c3", "c4", "d2", "d3", "d4"]
-            }
-          ],
-          "2": [
-            {
-              holerect: ["c3", "f6", "f6", "c3", "c4", "c5", "d3", "d4", "e3"]
-            }
-          ]
-        }
-      }
-    },
-    mini: {
-      height: 5,
-      width: 5,
-      terrain: {
-        throne: {
-          "1": ["a1"],
-          "2": ["e5"]
-        },
-        base: {
-          "1": ["a2", "a3", "b1", "b2", "c1"],
-          "2": ["c5", "d4", "d5", "e3", "e4"]
-        }
-      }
-    }
-  },
-  setups: {
-    basic: {
-      soldiers: {
-        "1": [
-          {
-            holerect: ["a1", "d4", "b4", "c3", "c4", "d2", "d3", "d4"]
-          }
-        ],
-        "2": [
-          {
-            holerect: ["c3", "f6", "c3", "c4", "c5", "d3", "d4", "e3"]
-          }
-        ]
-      }
-    },
-    mini: {
-      soldiers: {
-        "1": ["a1", "a2", "a3", "b1", "b2", "c1"],
-        "2": ["c5", "d4", "d5", "e3", "e4", "e5"]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/campaign/boards";
+import setups from "../../games/definitions/campaign/setups";
+import variants from "../../games/definitions/campaign/variants";
 const emptyObj = {};
 const iconMapping = { knights: "knight", marks: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -698,41 +701,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          knights: {
-            "1": ["d5"],
-            "2": ["e4"]
-          },
-          marks: {
-            "1": ["d4", "e6", "f4", "f5"],
-            "2": ["c5", "d3", "d6", "e4"]
-          }
-        },
-        marks: [],
-        potentialMarks: []
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 10,
-      width: 10,
-      terrain: {
-        center: ["e5", "e6", "f5", "f6"]
-      },
-      offset: "knight"
-    }
-  },
-  setups: {
-    basic: {}
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

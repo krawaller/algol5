@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/transet/boards";
+import setups from "../../games/definitions/transet/setups";
+import variants from "../../games/definitions/transet/variants";
 const emptyObj = {};
 const iconMapping = { pinets: "pawn", piokers: "bishop", piases: "king" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -1225,68 +1228,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        marks: ["c5"],
-        potentialMarks: ["d3", "a4", "b4", "c4", "d4", "b5"],
-        setup: {
-          piokers: {
-            "1": ["b1", "e2"],
-            "2": ["d3", "b5"]
-          },
-          pinets: {
-            "1": ["e1", "a2"],
-            "2": ["a4", "e5"]
-          },
-          piases: {
-            "1": ["c3"],
-            "2": ["c5"]
-          }
-        }
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 5,
-      width: 5,
-      terrain: {
-        base: {
-          "1": [
-            {
-              rect: ["a1", "e1"]
-            }
-          ],
-          "2": [
-            {
-              rect: ["a5", "e5"]
-            }
-          ]
-        }
-      }
-    }
-  },
-  setups: {
-    basic: {
-      pinets: {
-        "1": ["a1", "e1"],
-        "2": ["a5", "e5"]
-      },
-      piokers: {
-        "1": ["b1", "d1"],
-        "2": ["b5", "d5"]
-      },
-      piases: {
-        "1": ["c1"],
-        "2": ["c5"]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

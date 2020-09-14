@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/chameleon/boards";
+import setups from "../../games/definitions/chameleon/setups";
+import variants from "../../games/definitions/chameleon/variants";
 const emptyObj = {};
 const iconMapping = { knights: "knight", bishops: "bishop" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -814,76 +817,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "w",
-      arr: {
-        marks: ["d4"],
-        potentialMarks: [
-          "a1",
-          "b2",
-          "c3",
-          "d3",
-          "e3",
-          "c4",
-          "e4",
-          "c5",
-          "d5",
-          "e5"
-        ],
-        setup: {
-          knights: {
-            "1": ["a1", "c4"],
-            "2": ["b4", "a5"]
-          },
-          bishops: {
-            "1": ["c2", "d2"],
-            "2": ["d4"]
-          }
-        }
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 5,
-      width: 5,
-      terrain: {
-        base: {
-          "1": [
-            {
-              rect: ["a1", "e1"]
-            }
-          ],
-          "2": [
-            {
-              rect: ["a5", "e5"]
-            }
-          ]
-        }
-      },
-      offset: "knight"
-    }
-  },
-  setups: {
-    basic: {
-      knights: {
-        "1": [
-          {
-            rect: ["a1", "e1"]
-          }
-        ],
-        "2": [
-          {
-            rect: ["a5", "e5"]
-          }
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

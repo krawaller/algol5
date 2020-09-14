@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/bombardment/boards";
+import setups from "../../games/definitions/bombardment/setups";
+import variants from "../../games/definitions/bombardment/variants";
 const emptyObj = {};
 const iconMapping = { rockets: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -585,60 +588,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          rockets: {
-            "1": ["a2", "g2", "g5", "h1"],
-            "2": ["e4", "e8", "f6", "f8", "g8"]
-          }
-        },
-        marks: ["e4"],
-        potentialMarks: ["d3", "e3", "f3"]
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 8,
-      width: 8,
-      terrain: {
-        base: {
-          "1": [
-            {
-              rect: ["a1", "h1"]
-            }
-          ],
-          "2": [
-            {
-              rect: ["a8", "h8"]
-            }
-          ]
-        }
-      }
-    }
-  },
-  setups: {
-    basic: {
-      rockets: {
-        "1": [
-          {
-            rect: ["a1", "h2"]
-          }
-        ],
-        "2": [
-          {
-            rect: ["a7", "h8"]
-          }
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

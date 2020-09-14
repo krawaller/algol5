@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/atrium/boards";
+import setups from "../../games/definitions/atrium/setups";
+import variants from "../../games/definitions/atrium/variants";
 const emptyObj = {};
 const iconMapping = { kings: "king", queens: "queen" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -800,47 +803,8 @@ const game = {
           });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "x",
-      arr: {
-        marks: ["b2"],
-        potentialMarks: ["a2", "c2"],
-        setup: {
-          kings: {
-            "1": ["b2", "d2", "c4"],
-            "2": ["b1", "d3", "b4"]
-          },
-          queens: {
-            "1": ["d1", "b3", "d5"],
-            "2": ["c3", "a4", "e4"]
-          }
-        }
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 5,
-      width: 5,
-      terrain: {}
-    }
-  },
-  setups: {
-    basic: {
-      kings: {
-        "1": ["a2", "c5", "e2"],
-        "2": ["b1", "b5", "e3"]
-      },
-      queens: {
-        "1": ["a3", "d5", "d1"],
-        "2": ["a4", "c1", "e4"]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

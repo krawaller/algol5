@@ -15,6 +15,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
+import boards from "../../games/definitions/euclid/boards";
+import setups from "../../games/definitions/euclid/setups";
+import variants from "../../games/definitions/euclid/variants";
 const emptyObj = {};
 const iconMapping = { soldiers: "rook", kings: "queen", projectiles: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -612,80 +615,8 @@ const game = {
       });
     }
   },
-  variants: [
-    {
-      ruleset: "basic",
-      board: "basic",
-      setup: "basic",
-      desc: "regular",
-      code: "r",
-      arr: {
-        setup: {
-          kings: {
-            "1": ["h5"],
-            "2": ["d8"]
-          },
-          soldiers: {
-            "1": [
-              "a2",
-              "a3",
-              "b2",
-              "b3",
-              "b4",
-              "c3",
-              "c4",
-              "e2",
-              "e4",
-              "f1",
-              "h2"
-            ],
-            "2": [
-              "a4",
-              "b8",
-              "c8",
-              "e6",
-              "f5",
-              "f6",
-              "f7",
-              "g3",
-              "g6",
-              "g7",
-              "h6",
-              "h7"
-            ]
-          }
-        },
-        marks: ["e2"],
-        potentialMarks: ["c2", "d2", "e1", "e3", "f2", "g2"]
-      }
-    }
-  ],
-  boards: {
-    basic: {
-      height: 8,
-      width: 8,
-      terrain: {}
-    }
-  },
-  setups: {
-    basic: {
-      kings: {
-        "1": ["a1"],
-        "2": ["h8"]
-      },
-      soldiers: {
-        "1": [
-          {
-            holerect: ["a1", "d4", "a1"]
-          }
-        ],
-        "2": [
-          {
-            holerect: ["e5", "h8", "h8"]
-          }
-        ]
-      }
-    }
-  }
+  variants,
+  boards,
+  setups
 };
 export default game;

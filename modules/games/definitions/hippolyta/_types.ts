@@ -32,8 +32,8 @@ type HippolytaBattleVar = never;
 type HippolytaTurnPos = never;
 type HippolytaTurnVar = never;
 
-type HippolytaBoardName = "basic";
-type HippolytaSetupName = "basic";
+type HippolytaBoardName = "basic" | "mini";
+type HippolytaSetupName = "mini" | "basic";
 type HippolytaRulesetName = "basic";
 type HippolytaVariantName = "regular";
 

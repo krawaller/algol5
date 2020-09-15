@@ -1,6 +1,28 @@
 import { HippolytaDefinition } from "./_types";
 
 const hippolytaSetupBook: HippolytaDefinition["setups"] = {
+  mini: {
+    amazons: {
+      1: [
+        { rect: ["a1", "f1"] },
+        { rect: ["a2", "a5"] },
+        { rect: ["b5", "e5"] },
+        "e4",
+        "e3",
+        "d3",
+        "c3",
+      ],
+      2: [
+        { rect: ["a6", "f6"] },
+        { rect: ["f2", "f5"] },
+        { rect: ["b2", "e2"] },
+        "b3",
+        "b4",
+        "c4",
+        "d4",
+      ],
+    },
+  },
   basic: {
     amazons: {
       1: [

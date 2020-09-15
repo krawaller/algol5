@@ -40,6 +40,7 @@
     "fs-extra": "^8.1.0",
     "immer": "^3.1.2",
     "jest": "^25.1.0",
+    "mini-svg-data-uri": "^1.2.3",
     "prettier": "^1.19.1",
     "typescript": "^3.8.3"
   },

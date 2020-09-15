@@ -14,11 +14,11 @@
     "makeTagIndex": "node ./commands/makeTagIndex"
   },
   "dependencies": {
-    "front-matter": "^4.0.2",
     "image-size": "^0.8.3",
     "marked": "^0.8.0"
   },
   "devDependencies": {
-    "@types/marked": "^0.7.2"
+    "@types/marked": "^0.7.2",
+    "front-matter": "^4.0.2"
   }
 }

@@ -40,6 +40,13 @@ const hippolytaVariants: HippolytaDefinition["variants"] = [
       potentialMarks: [],
     },
   },
+  {
+    ruleset: "basic",
+    board: "mini",
+    setup: "mini",
+    desc: "mini",
+    code: "m",
+  },
 ];
 
 export default hippolytaVariants;

@@ -10,6 +10,11 @@ const hippolytaBoardBook: HippolytaDefinition["boards"] = {
     width: 8,
     terrain: {},
   },
+  mini: {
+    height: 6,
+    width: 6,
+    terrain: {},
+  },
 };
 
 export default hippolytaBoardBook;

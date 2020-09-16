@@ -1,15 +1,24 @@
 import allMeta from "../../dist/meta";
 
-const codes = "ABCDEFGHIJKLMNOPRSTUVWXYZabcdefghijklmnopqrstuvxyz";
+const chars = "ABCDEFGHIJKLMNOPRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789".split(
+  ""
+);
+const codes = chars.reduce(
+  (memo, char) =>
+    memo.concat(
+      // single letter code
+      char,
+      // double letter code
+      ...chars.map(otherChar => char + otherChar)
+    ),
+  []
+);
 
 export const newCode = () => {
   const usedCodes = Object.values(allMeta)
     .map(meta => meta.code)
     .sort();
-  const unusedCodes = codes
-    .split("")
-    .filter(c => usedCodes.includes(c) === false)
-    .sort();
+  const unusedCodes = codes.filter(c => usedCodes.includes(c) === false).sort();
   if (!unusedCodes.length) {
     throw new Error("Failed to find unused code");
   }

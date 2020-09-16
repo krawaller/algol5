@@ -10,7 +10,6 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "mini-svg-data-uri": "^1.2.3",
     "resize-img": "^2.0.0",
     "xml-formatter": "^1.2.0"
   }

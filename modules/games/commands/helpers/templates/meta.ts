@@ -6,6 +6,7 @@ export default function templateMeta(gameId: string) {
 
 const ${gameId}Meta: ${capId}Definition['meta'] = {
   id: "${gameId}",
+  author: "John Doe",
   name: "${capId}",
   tags: [],
   tagline: "An awesome game!",

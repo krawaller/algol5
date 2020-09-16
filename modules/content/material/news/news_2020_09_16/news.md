@@ -1,6 +1,6 @@
 ---
 id: "news_2020_09_16"
-title: "2020-09-16 - 50 games and counting"
+title: "2020-09-16 — 50 games and counting"
 slug: "50_games_and_counting"
 blurb: "The Chessicals library has now reached 50 games!"
 thumbnail: "price_thumb.png"

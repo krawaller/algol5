@@ -1,6 +1,8 @@
 {
   "rules": {
     ".read": true,
-    ".write": true
+    "gnarp": {
+      ".write": true
+    }
   }
 }

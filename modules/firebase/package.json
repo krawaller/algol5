@@ -3,6 +3,7 @@
     "robot": "echo 'firebase robot is a noop'",
     "clean": "echo 'firebase clean is a noop'",
     "deployFunc": "cd functions; firebase deploy --only functions",
+    "deployRules": "firebase deploy --only database",
     "postinstall": "node ./postinstall"
   },
   "dependencies": {

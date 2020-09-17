@@ -10,6 +10,8 @@ export const colours = {
   grassDark: "#48a748",
   water: "lightblue",
   waterDark: "#9fc7d4",
+  player0base: "#ffe359",
+  player0baseDark: "#fbd932",
   player1base: "#ff908f",
   player1baseDark: "#ff6c6a",
   player2base: "#857bff",

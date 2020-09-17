@@ -16,6 +16,8 @@ import { castle } from "./castle";
 import { castleDark } from "./castle-dark";
 import { grass } from "./grass";
 import { grassDark } from "./grass-dark";
+import { player0base } from "./player0base";
+import { player0baseDark } from "./player0base-dark";
 import { player1base } from "./player1base";
 import { player1baseDark } from "./player1base-dark";
 import { player2base } from "./player2base";
@@ -30,6 +32,8 @@ export const allTiles = {
   castleDark,
   grass,
   grassDark,
+  player0base,
+  player0baseDark,
   player1base,
   player1baseDark,
   player2base,

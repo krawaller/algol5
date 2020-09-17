@@ -4,8 +4,4 @@ import "firebase/database";
 
 import { firebaseConfig } from "./firebaseConfig";
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-export const useFirebaseApp = () => {
-  return firebaseApp;
-};
+export const firebaseApp = firebase.initializeApp(firebaseConfig);

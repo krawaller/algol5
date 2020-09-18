@@ -4,29 +4,17 @@ const desdemonaFlow: DesdemonaDefinition["flow"] = {
   endGame: {
     dominance: {
       who: {
-        ifelse: [
-          { morethan: [{ sizeof: "mystones" }, { sizeof: "oppstones" }] },
-          ["player"],
-          {
-            ifelse: [
-              { morethan: [{ sizeof: "oppstones" }, { sizeof: "mystones" }] },
-              ["otherplayer"],
-              0,
-            ],
-          },
+        playercase: [
+          { compareSets: ["mystones", "oppstones"] },
+          { compareSets: ["oppstones", "mystones"] },
         ],
       },
       show: {
-        ifelse: [
-          { morethan: [{ sizeof: "mystones" }, { sizeof: "oppstones" }] },
+        indexlist: [
+          { compareSets: ["mystones", "oppstones"] },
+          ["empty"],
           "mystones",
-          {
-            ifelse: [
-              { morethan: [{ sizeof: "oppstones" }, { sizeof: "mystones" }] },
-              "oppstones",
-              ["empty"],
-            ],
-          },
+          "oppstones",
         ],
       },
       whenStarvation: true,

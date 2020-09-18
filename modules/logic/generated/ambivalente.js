@@ -379,23 +379,19 @@ const game = {
       }
       if (Object.keys(UNITLAYERS.units).length === 36) {
         LINKS.endGame = ["draw", "win", "lose"][
-          Object.keys(UNITLAYERS.myunits).length >
-          Object.keys(UNITLAYERS.oppunits).length
-            ? 1
-            : Object.keys(UNITLAYERS.oppunits).length >
-              Object.keys(UNITLAYERS.myunits).length
-            ? 2
-            : 0
+          whoWins(
+            Object.keys(UNITLAYERS.myunits).length,
+            Object.keys(UNITLAYERS.oppunits).length
+          )
         ];
         LINKS.endedBy = "filledboard";
         LINKS.endMarks = Object.keys(
-          Object.keys(UNITLAYERS.myunits).length >
-            Object.keys(UNITLAYERS.oppunits).length
-            ? UNITLAYERS.myunits
-            : Object.keys(UNITLAYERS.oppunits).length >
-              Object.keys(UNITLAYERS.myunits).length
-            ? UNITLAYERS.oppunits
-            : emptyObj
+          [emptyObj, UNITLAYERS.myunits, UNITLAYERS.oppunits][
+            whoWins(
+              Object.keys(UNITLAYERS.myunits).length,
+              Object.keys(UNITLAYERS.oppunits).length
+            )
+          ]
         );
       } else {
         LINKS.endTurn = "startTurn_basic_2";
@@ -450,23 +446,19 @@ const game = {
       }
       if (Object.keys(UNITLAYERS.units).length === 36) {
         LINKS.endGame = ["draw", "lose", "win"][
-          Object.keys(UNITLAYERS.myunits).length >
-          Object.keys(UNITLAYERS.oppunits).length
-            ? 2
-            : Object.keys(UNITLAYERS.oppunits).length >
-              Object.keys(UNITLAYERS.myunits).length
-            ? 1
-            : 0
+          whoWins(
+            Object.keys(UNITLAYERS.oppunits).length,
+            Object.keys(UNITLAYERS.myunits).length
+          )
         ];
         LINKS.endedBy = "filledboard";
         LINKS.endMarks = Object.keys(
-          Object.keys(UNITLAYERS.myunits).length >
-            Object.keys(UNITLAYERS.oppunits).length
-            ? UNITLAYERS.myunits
-            : Object.keys(UNITLAYERS.oppunits).length >
-              Object.keys(UNITLAYERS.myunits).length
-            ? UNITLAYERS.oppunits
-            : emptyObj
+          [emptyObj, UNITLAYERS.myunits, UNITLAYERS.oppunits][
+            whoWins(
+              Object.keys(UNITLAYERS.myunits).length,
+              Object.keys(UNITLAYERS.oppunits).length
+            )
+          ]
         );
       } else {
         LINKS.endTurn = "startTurn_basic_1";

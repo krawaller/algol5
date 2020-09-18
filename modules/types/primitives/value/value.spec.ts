@@ -57,4 +57,6 @@ const tests2: TestNumberVal[] = [
   { bitand: [2, 3] },
   { bitdiff: [2, 3] },
   { bitor: [2, { sum: [1, 1] }] },
+  { compareVals: [2, { sum: [3, 1] }] },
+  { compareSets: ["mylayer", "mylayer"] },
 ];

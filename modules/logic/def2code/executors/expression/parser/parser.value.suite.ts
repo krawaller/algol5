@@ -189,10 +189,14 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
         {
           context: {
             TERRAIN1: { flurp: { a1: { wee: 5 }, b2: { wee: 2 } } },
+            UNITLAYERS: { units: { a1: { id: 666, gnarp: 5 } } },
           },
           tests: [
             { expr: { harvest: ["flurp", { value: "wee" }] }, res: 7 },
             { expr: { sizeof: "flurp" }, res: 2 },
+            { expr: { compareSets: ["flurp", "units"] }, res: 1 },
+            { expr: { compareSets: ["units", "flurp"] }, res: 2 },
+            { expr: { compareSets: ["units", "units"] }, res: 0 },
           ],
         },
         {

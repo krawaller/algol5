@@ -632,15 +632,20 @@ const game = {
       }
       if (Object.keys(UNITLAYERS.units).length === 64) {
         LINKS.endGame = ["draw", "win", "lose"][
-          Object.keys(UNITLAYERS.myunits).length >
-          Object.keys(UNITLAYERS.oppunits).length
-            ? 1
-            : Object.keys(UNITLAYERS.oppunits).length ===
-              Object.keys(UNITLAYERS.myunits).length
-            ? 0
-            : 2
+          whoWins(
+            Object.keys(UNITLAYERS.myunits).length,
+            Object.keys(UNITLAYERS.oppunits).length
+          )
         ];
         LINKS.endedBy = "boardfull";
+        LINKS.endMarks = Object.keys(
+          [emptyObj, UNITLAYERS.myunits, UNITLAYERS.oppunits][
+            whoWins(
+              Object.keys(UNITLAYERS.myunits).length,
+              Object.keys(UNITLAYERS.oppunits).length
+            )
+          ]
+        );
       } else if (true) {
         LINKS.starvation = {
           endGame: ["draw", "win", "lose"][
@@ -785,15 +790,20 @@ const game = {
       }
       if (Object.keys(UNITLAYERS.units).length === 64) {
         LINKS.endGame = ["draw", "lose", "win"][
-          Object.keys(UNITLAYERS.myunits).length >
-          Object.keys(UNITLAYERS.oppunits).length
-            ? 2
-            : Object.keys(UNITLAYERS.oppunits).length ===
-              Object.keys(UNITLAYERS.myunits).length
-            ? 0
-            : 1
+          whoWins(
+            Object.keys(UNITLAYERS.oppunits).length,
+            Object.keys(UNITLAYERS.myunits).length
+          )
         ];
         LINKS.endedBy = "boardfull";
+        LINKS.endMarks = Object.keys(
+          [emptyObj, UNITLAYERS.myunits, UNITLAYERS.oppunits][
+            whoWins(
+              Object.keys(UNITLAYERS.myunits).length,
+              Object.keys(UNITLAYERS.oppunits).length
+            )
+          ]
+        );
       } else if (true) {
         LINKS.starvation = {
           endGame: ["draw", "lose", "win"][

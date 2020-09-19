@@ -8,29 +8,17 @@ const ambivalenteFlow: AmbivalenteDefinition["flow"] = {
     filledboard: {
       condition: { same: [{ sizeof: "units" }, 36] },
       who: {
-        ifelse: [
-          { morethan: [{ sizeof: "myunits" }, { sizeof: "oppunits" }] },
-          ["player"],
-          {
-            ifelse: [
-              { morethan: [{ sizeof: "oppunits" }, { sizeof: "myunits" }] },
-              ["otherplayer"],
-              0,
-            ],
-          },
+        playercase: [
+          { compareSets: ["myunits", "oppunits"] },
+          { compareSets: ["oppunits", "myunits"] },
         ],
       },
       show: {
-        ifelse: [
-          { morethan: [{ sizeof: "myunits" }, { sizeof: "oppunits" }] },
+        indexlist: [
+          { compareSets: ["myunits", "oppunits"] },
+          ["empty"],
           "myunits",
-          {
-            ifelse: [
-              { morethan: [{ sizeof: "oppunits" }, { sizeof: "myunits" }] },
-              "oppunits",
-              ["empty"],
-            ],
-          },
+          "oppunits",
         ],
       },
     },

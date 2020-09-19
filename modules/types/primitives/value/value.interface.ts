@@ -109,3 +109,11 @@ export interface AlgolValBitOr<Blob extends AlgolGameBlobAnon> {
 export interface AlgolValBitDiff<Blob extends AlgolGameBlobAnon> {
   bitdiff: AlgolVal<Blob, number>[];
 }
+
+export interface AlgolValCompareVals<Blob extends AlgolGameBlobAnon> {
+  compareVals: [AlgolVal<Blob, number>, AlgolVal<Blob, number>];
+}
+
+export interface AlgolValCompareSets<Blob extends AlgolGameBlobAnon> {
+  compareSets: [AlgolSet<Blob>, AlgolSet<Blob>];
+}

@@ -24,6 +24,8 @@ import {
   AlgolValBitAndAnon,
   AlgolValBitDiffAnon,
   AlgolValBitOrAnon,
+  AlgolValCompareValsAnon,
+  AlgolValCompareSetsAnon,
 } from "./value.anon";
 
 export function isAlgolValValue(expr: AlgolValAnon): expr is AlgolValValueAnon {
@@ -146,4 +148,16 @@ export function isAlgolValBitDiff(
 
 export function isAlgolValBitOr(expr: AlgolValAnon): expr is AlgolValBitOrAnon {
   return (expr as AlgolValBitOrAnon).bitor !== undefined;
+}
+
+export function isAlgolValCompareVals(
+  expr: AlgolValAnon
+): expr is AlgolValCompareValsAnon {
+  return (expr as AlgolValCompareValsAnon).compareVals !== undefined;
+}
+
+export function isAlgolValCompareSets(
+  expr: AlgolValAnon
+): expr is AlgolValCompareSetsAnon {
+  return (expr as AlgolValCompareSetsAnon).compareSets !== undefined;
 }

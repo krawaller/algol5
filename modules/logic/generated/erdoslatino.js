@@ -1,5 +1,6 @@
 import {
   offsetPos,
+  whoWins,
   boardConnections,
   makeRelativeDirs,
   setup2army,
@@ -794,23 +795,19 @@ const game = {
         Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
       ) {
         LINKS.endGame = ["draw", "win", "lose"][
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-          Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 1
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
-              Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 2
-            : 0
+          whoWins(
+            Object.keys(ARTIFACTS.myownedcolumns).length,
+            Object.keys(ARTIFACTS.oppownedcolumns).length
+          )
         ];
         LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-            Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.myunits
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
+          [emptyObj, UNITLAYERS.myunits, UNITLAYERS.oppunits][
+            whoWins(
+              Object.keys(ARTIFACTS.myownedcolumns).length,
               Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.oppunits
-            : emptyObj
+            )
+          ]
         );
       } else {
         LINKS.endTurn = "startTurn_basic_2";
@@ -906,23 +903,19 @@ const game = {
         Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
       ) {
         LINKS.endGame = ["draw", "win", "lose"][
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-          Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 1
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
-              Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 2
-            : 0
+          whoWins(
+            Object.keys(ARTIFACTS.myownedcolumns).length,
+            Object.keys(ARTIFACTS.oppownedcolumns).length
+          )
         ];
         LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-            Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.myunits
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
+          [emptyObj, UNITLAYERS.myunits, UNITLAYERS.oppunits][
+            whoWins(
+              Object.keys(ARTIFACTS.myownedcolumns).length,
               Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.oppunits
-            : emptyObj
+            )
+          ]
         );
       } else {
         LINKS.endTurn = "startTurn_basic_2";
@@ -1018,23 +1011,19 @@ const game = {
         Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
       ) {
         LINKS.endGame = ["draw", "win", "lose"][
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-          Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 1
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
-              Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 2
-            : 0
+          whoWins(
+            Object.keys(ARTIFACTS.myownedcolumns).length,
+            Object.keys(ARTIFACTS.oppownedcolumns).length
+          )
         ];
         LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-            Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.myunits
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
+          [emptyObj, UNITLAYERS.myunits, UNITLAYERS.oppunits][
+            whoWins(
+              Object.keys(ARTIFACTS.myownedcolumns).length,
               Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.oppunits
-            : emptyObj
+            )
+          ]
         );
       } else {
         LINKS.endTurn = "startTurn_basic_2";
@@ -1130,23 +1119,19 @@ const game = {
         Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
       ) {
         LINKS.endGame = ["draw", "win", "lose"][
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-          Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 1
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
-              Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 2
-            : 0
+          whoWins(
+            Object.keys(ARTIFACTS.myownedcolumns).length,
+            Object.keys(ARTIFACTS.oppownedcolumns).length
+          )
         ];
         LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-            Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.myunits
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
+          [emptyObj, UNITLAYERS.myunits, UNITLAYERS.oppunits][
+            whoWins(
+              Object.keys(ARTIFACTS.myownedcolumns).length,
               Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.oppunits
-            : emptyObj
+            )
+          ]
         );
       } else {
         LINKS.endTurn = "startTurn_basic_2";
@@ -1242,23 +1227,19 @@ const game = {
         Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
       ) {
         LINKS.endGame = ["draw", "win", "lose"][
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-          Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 1
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
-              Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 2
-            : 0
+          whoWins(
+            Object.keys(ARTIFACTS.myownedcolumns).length,
+            Object.keys(ARTIFACTS.oppownedcolumns).length
+          )
         ];
         LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-            Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.myunits
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
+          [emptyObj, UNITLAYERS.myunits, UNITLAYERS.oppunits][
+            whoWins(
+              Object.keys(ARTIFACTS.myownedcolumns).length,
               Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.oppunits
-            : emptyObj
+            )
+          ]
         );
       } else {
         LINKS.endTurn = "startTurn_basic_2";
@@ -1354,23 +1335,19 @@ const game = {
         Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
       ) {
         LINKS.endGame = ["draw", "lose", "win"][
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-          Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 2
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
-              Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 1
-            : 0
+          whoWins(
+            Object.keys(ARTIFACTS.oppownedcolumns).length,
+            Object.keys(ARTIFACTS.myownedcolumns).length
+          )
         ];
         LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-            Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.myunits
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
+          [emptyObj, UNITLAYERS.myunits, UNITLAYERS.oppunits][
+            whoWins(
+              Object.keys(ARTIFACTS.myownedcolumns).length,
               Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.oppunits
-            : emptyObj
+            )
+          ]
         );
       } else {
         LINKS.endTurn = "startTurn_basic_1";
@@ -1466,23 +1443,19 @@ const game = {
         Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
       ) {
         LINKS.endGame = ["draw", "lose", "win"][
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-          Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 2
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
-              Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 1
-            : 0
+          whoWins(
+            Object.keys(ARTIFACTS.oppownedcolumns).length,
+            Object.keys(ARTIFACTS.myownedcolumns).length
+          )
         ];
         LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-            Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.myunits
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
+          [emptyObj, UNITLAYERS.myunits, UNITLAYERS.oppunits][
+            whoWins(
+              Object.keys(ARTIFACTS.myownedcolumns).length,
               Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.oppunits
-            : emptyObj
+            )
+          ]
         );
       } else {
         LINKS.endTurn = "startTurn_basic_1";
@@ -1578,23 +1551,19 @@ const game = {
         Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
       ) {
         LINKS.endGame = ["draw", "lose", "win"][
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-          Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 2
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
-              Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 1
-            : 0
+          whoWins(
+            Object.keys(ARTIFACTS.oppownedcolumns).length,
+            Object.keys(ARTIFACTS.myownedcolumns).length
+          )
         ];
         LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-            Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.myunits
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
+          [emptyObj, UNITLAYERS.myunits, UNITLAYERS.oppunits][
+            whoWins(
+              Object.keys(ARTIFACTS.myownedcolumns).length,
               Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.oppunits
-            : emptyObj
+            )
+          ]
         );
       } else {
         LINKS.endTurn = "startTurn_basic_1";
@@ -1690,23 +1659,19 @@ const game = {
         Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
       ) {
         LINKS.endGame = ["draw", "lose", "win"][
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-          Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 2
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
-              Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 1
-            : 0
+          whoWins(
+            Object.keys(ARTIFACTS.oppownedcolumns).length,
+            Object.keys(ARTIFACTS.myownedcolumns).length
+          )
         ];
         LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-            Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.myunits
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
+          [emptyObj, UNITLAYERS.myunits, UNITLAYERS.oppunits][
+            whoWins(
+              Object.keys(ARTIFACTS.myownedcolumns).length,
               Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.oppunits
-            : emptyObj
+            )
+          ]
         );
       } else {
         LINKS.endTurn = "startTurn_basic_1";
@@ -1802,23 +1767,19 @@ const game = {
         Object.keys(BOARD.board).length === Object.keys(UNITLAYERS.units).length
       ) {
         LINKS.endGame = ["draw", "lose", "win"][
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-          Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 2
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
-              Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? 1
-            : 0
+          whoWins(
+            Object.keys(ARTIFACTS.oppownedcolumns).length,
+            Object.keys(ARTIFACTS.myownedcolumns).length
+          )
         ];
         LINKS.endedBy = "columncount";
         LINKS.endMarks = Object.keys(
-          Object.keys(ARTIFACTS.myownedcolumns).length >
-            Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.myunits
-            : Object.keys(ARTIFACTS.myownedcolumns).length <
+          [emptyObj, UNITLAYERS.myunits, UNITLAYERS.oppunits][
+            whoWins(
+              Object.keys(ARTIFACTS.myownedcolumns).length,
               Object.keys(ARTIFACTS.oppownedcolumns).length
-            ? UNITLAYERS.oppunits
-            : emptyObj
+            )
+          ]
         );
       } else {
         LINKS.endTurn = "startTurn_basic_1";

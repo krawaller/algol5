@@ -25,6 +25,8 @@ import {
   isAlgolValBitAnd,
   isAlgolValBitDiff,
   isAlgolValBitOr,
+  isAlgolValCompareVals,
+  isAlgolValCompareSets,
 } from "../../../../../types";
 
 import { makeParser } from "../";
@@ -209,6 +211,20 @@ export default function parseVal(
     const { bitdiff } = expr;
     const bits = bitdiff.map(n => parser.val(n)).join(" & ~");
     return `(${bits})`;
+  }
+  if (isAlgolValCompareVals(expr)) {
+    const {
+      compareVals: [first, second],
+    } = expr;
+    const one = parser.val(first);
+    const two = parser.val(second);
+    return `whoWins(${parser.val(first)},${parser.val(second)})`;
+  }
+  if (isAlgolValCompareSets(expr)) {
+    const {
+      compareSets: [first, second],
+    } = expr;
+    return parser.val({ compareVals: [{ sizeof: first }, { sizeof: second }] });
   }
   throw new Error("Unknown val expression: " + JSON.stringify(expr || ""));
 }

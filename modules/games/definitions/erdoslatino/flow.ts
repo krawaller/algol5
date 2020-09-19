@@ -7,49 +7,17 @@ const erdoslatinoFlow: ErdoslatinoDefinition["flow"] = {
         same: [{ sizeof: "board" }, { sizeof: "units" }],
       },
       who: {
-        ifelse: [
-          {
-            morethan: [
-              { sizeof: "myownedcolumns" },
-              { sizeof: "oppownedcolumns" },
-            ],
-          },
-          ["player"],
-          {
-            ifelse: [
-              {
-                lessthan: [
-                  { sizeof: "myownedcolumns" },
-                  { sizeof: "oppownedcolumns" },
-                ],
-              },
-              ["otherplayer"],
-              0,
-            ],
-          },
+        playercase: [
+          { compareSets: ["myownedcolumns", "oppownedcolumns"] },
+          { compareSets: ["oppownedcolumns", "myownedcolumns"] },
         ],
       },
       show: {
-        ifelse: [
-          {
-            morethan: [
-              { sizeof: "myownedcolumns" },
-              { sizeof: "oppownedcolumns" },
-            ],
-          },
+        indexlist: [
+          { compareSets: ["myownedcolumns", "oppownedcolumns"] },
+          ["empty"],
           "myunits",
-          {
-            ifelse: [
-              {
-                lessthan: [
-                  { sizeof: "myownedcolumns" },
-                  { sizeof: "oppownedcolumns" },
-                ],
-              },
-              "oppunits",
-              ["empty"],
-            ],
-          },
+          "oppunits",
         ],
       },
     },

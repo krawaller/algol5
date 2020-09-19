@@ -39,6 +39,9 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
             { expr: { bitor: [1, { sum: [1, 1] }, 2, 8] }, res: 11 },
             { expr: { bitdiff: [7, 9] }, res: 6 },
             { expr: { bitand: [1, 3] }, res: 1 },
+            { expr: { compareVals: [3, 4] }, res: 2 },
+            { expr: { compareVals: [4, 3] }, res: 1 },
+            { expr: { compareVals: [2, 2] }, res: 0 },
           ],
         },
         { context: { DIR: 666 }, tests: [{ expr: ["dir"], res: 666 }] },
@@ -186,10 +189,14 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
         {
           context: {
             TERRAIN1: { flurp: { a1: { wee: 5 }, b2: { wee: 2 } } },
+            UNITLAYERS: { units: { a1: { id: 666, gnarp: 5 } } },
           },
           tests: [
             { expr: { harvest: ["flurp", { value: "wee" }] }, res: 7 },
             { expr: { sizeof: "flurp" }, res: 2 },
+            { expr: { compareSets: ["flurp", "units"] }, res: 1 },
+            { expr: { compareSets: ["units", "flurp"] }, res: 2 },
+            { expr: { compareSets: ["units", "units"] }, res: 0 },
           ],
         },
         {

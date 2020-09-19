@@ -1,5 +1,6 @@
 import {
   offsetPos,
+  whoWins,
   boardConnections,
   makeRelativeDirs,
   setup2army,
@@ -1160,23 +1161,19 @@ const game = {
         if (true) {
           LINKS.starvation = {
             endGame: ["draw", "win", "lose"][
-              Object.keys(UNITLAYERS.mystones).length >
-              Object.keys(UNITLAYERS.oppstones).length
-                ? 1
-                : Object.keys(UNITLAYERS.oppstones).length >
-                  Object.keys(UNITLAYERS.mystones).length
-                ? 2
-                : 0
+              whoWins(
+                Object.keys(UNITLAYERS.mystones).length,
+                Object.keys(UNITLAYERS.oppstones).length
+              )
             ],
             endedBy: "dominance",
             endMarks: Object.keys(
-              Object.keys(UNITLAYERS.mystones).length >
-                Object.keys(UNITLAYERS.oppstones).length
-                ? UNITLAYERS.mystones
-                : Object.keys(UNITLAYERS.oppstones).length >
-                  Object.keys(UNITLAYERS.mystones).length
-                ? UNITLAYERS.oppstones
-                : emptyObj
+              [emptyObj, UNITLAYERS.mystones, UNITLAYERS.oppstones][
+                whoWins(
+                  Object.keys(UNITLAYERS.mystones).length,
+                  Object.keys(UNITLAYERS.oppstones).length
+                )
+              ]
             )
           };
           LINKS.endTurn = "startTurn_pie_2";
@@ -1340,23 +1337,19 @@ const game = {
         if (true) {
           LINKS.starvation = {
             endGame: ["draw", "win", "lose"][
-              Object.keys(UNITLAYERS.mystones).length >
-              Object.keys(UNITLAYERS.oppstones).length
-                ? 1
-                : Object.keys(UNITLAYERS.oppstones).length >
-                  Object.keys(UNITLAYERS.mystones).length
-                ? 2
-                : 0
+              whoWins(
+                Object.keys(UNITLAYERS.mystones).length,
+                Object.keys(UNITLAYERS.oppstones).length
+              )
             ],
             endedBy: "dominance",
             endMarks: Object.keys(
-              Object.keys(UNITLAYERS.mystones).length >
-                Object.keys(UNITLAYERS.oppstones).length
-                ? UNITLAYERS.mystones
-                : Object.keys(UNITLAYERS.oppstones).length >
-                  Object.keys(UNITLAYERS.mystones).length
-                ? UNITLAYERS.oppstones
-                : emptyObj
+              [emptyObj, UNITLAYERS.mystones, UNITLAYERS.oppstones][
+                whoWins(
+                  Object.keys(UNITLAYERS.mystones).length,
+                  Object.keys(UNITLAYERS.oppstones).length
+                )
+              ]
             )
           };
           LINKS.endTurn = "startTurn_pie_2";
@@ -1612,23 +1605,19 @@ const game = {
         if (true) {
           LINKS.starvation = {
             endGame: ["draw", "lose", "win"][
-              Object.keys(UNITLAYERS.mystones).length >
-              Object.keys(UNITLAYERS.oppstones).length
-                ? 2
-                : Object.keys(UNITLAYERS.oppstones).length >
-                  Object.keys(UNITLAYERS.mystones).length
-                ? 1
-                : 0
+              whoWins(
+                Object.keys(UNITLAYERS.oppstones).length,
+                Object.keys(UNITLAYERS.mystones).length
+              )
             ],
             endedBy: "dominance",
             endMarks: Object.keys(
-              Object.keys(UNITLAYERS.mystones).length >
-                Object.keys(UNITLAYERS.oppstones).length
-                ? UNITLAYERS.mystones
-                : Object.keys(UNITLAYERS.oppstones).length >
-                  Object.keys(UNITLAYERS.mystones).length
-                ? UNITLAYERS.oppstones
-                : emptyObj
+              [emptyObj, UNITLAYERS.mystones, UNITLAYERS.oppstones][
+                whoWins(
+                  Object.keys(UNITLAYERS.mystones).length,
+                  Object.keys(UNITLAYERS.oppstones).length
+                )
+              ]
             )
           };
           LINKS.endTurn = "startTurn_pie_1";
@@ -1884,23 +1873,19 @@ const game = {
         if (true) {
           LINKS.starvation = {
             endGame: ["draw", "win", "lose"][
-              Object.keys(UNITLAYERS.mystones).length >
-              Object.keys(UNITLAYERS.oppstones).length
-                ? 1
-                : Object.keys(UNITLAYERS.oppstones).length >
-                  Object.keys(UNITLAYERS.mystones).length
-                ? 2
-                : 0
+              whoWins(
+                Object.keys(UNITLAYERS.mystones).length,
+                Object.keys(UNITLAYERS.oppstones).length
+              )
             ],
             endedBy: "dominance",
             endMarks: Object.keys(
-              Object.keys(UNITLAYERS.mystones).length >
-                Object.keys(UNITLAYERS.oppstones).length
-                ? UNITLAYERS.mystones
-                : Object.keys(UNITLAYERS.oppstones).length >
-                  Object.keys(UNITLAYERS.mystones).length
-                ? UNITLAYERS.oppstones
-                : emptyObj
+              [emptyObj, UNITLAYERS.mystones, UNITLAYERS.oppstones][
+                whoWins(
+                  Object.keys(UNITLAYERS.mystones).length,
+                  Object.keys(UNITLAYERS.oppstones).length
+                )
+              ]
             )
           };
           LINKS.endTurn = "startTurn_basic_2";
@@ -2156,23 +2141,19 @@ const game = {
         if (true) {
           LINKS.starvation = {
             endGame: ["draw", "lose", "win"][
-              Object.keys(UNITLAYERS.mystones).length >
-              Object.keys(UNITLAYERS.oppstones).length
-                ? 2
-                : Object.keys(UNITLAYERS.oppstones).length >
-                  Object.keys(UNITLAYERS.mystones).length
-                ? 1
-                : 0
+              whoWins(
+                Object.keys(UNITLAYERS.oppstones).length,
+                Object.keys(UNITLAYERS.mystones).length
+              )
             ],
             endedBy: "dominance",
             endMarks: Object.keys(
-              Object.keys(UNITLAYERS.mystones).length >
-                Object.keys(UNITLAYERS.oppstones).length
-                ? UNITLAYERS.mystones
-                : Object.keys(UNITLAYERS.oppstones).length >
-                  Object.keys(UNITLAYERS.mystones).length
-                ? UNITLAYERS.oppstones
-                : emptyObj
+              [emptyObj, UNITLAYERS.mystones, UNITLAYERS.oppstones][
+                whoWins(
+                  Object.keys(UNITLAYERS.mystones).length,
+                  Object.keys(UNITLAYERS.oppstones).length
+                )
+              ]
             )
           };
           LINKS.endTurn = "startTurn_basic_1";

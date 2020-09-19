@@ -9,3 +9,4 @@ export * from "./rulesetNames";
 export * from "./punctuate";
 export * from "./gameSlug";
 export * from "./gameCount";
+export * from "./whoWins";

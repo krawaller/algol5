@@ -1,5 +1,6 @@
 import {
   offsetPos,
+  whoWins,
   boardConnections,
   makeRelativeDirs,
   setup2army,

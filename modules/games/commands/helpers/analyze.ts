@@ -139,6 +139,7 @@ export default async function analyze(def: FullDefAnon | string) {
         (mem, find) => mem.concat(possibilities(find.value.incbattlevar[0])),
         [] as string[]
       ),
+      ...Object.keys(def.flow.battleVars || {}),
     ])
   ).concat(battlepos);
 

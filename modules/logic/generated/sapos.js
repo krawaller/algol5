@@ -757,11 +757,14 @@ const game = {
     },
     spawn_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
+      let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let UNITLAYERS = step.UNITLAYERS;
+      let TURNVARS = step.TURNVARS;
       let BATTLEVARS = { ...step.BATTLEVARS };
       let UNITDATA = { ...step.UNITDATA };
       let NEXTSPAWNID = step.NEXTSPAWNID;
       let MARKS = step.MARKS;
+      anim.enterFrom[MARKS.selectspawntarget] = TURNVARS["skippedto"];
       {
         let newunitid = "spawn" + NEXTSPAWNID++;
         UNITDATA[newunitid] = {
@@ -790,9 +793,10 @@ const game = {
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
-        TURNVARS: step.TURNVARS,
+        TURNVARS,
         BATTLEVARS,
-        NEXTSPAWNID
+        NEXTSPAWNID,
+        anim
       };
     },
     hop_basic_2: step => {
@@ -1021,11 +1025,14 @@ const game = {
     },
     spawn_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
+      let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let UNITLAYERS = step.UNITLAYERS;
+      let TURNVARS = step.TURNVARS;
       let BATTLEVARS = { ...step.BATTLEVARS };
       let UNITDATA = { ...step.UNITDATA };
       let NEXTSPAWNID = step.NEXTSPAWNID;
       let MARKS = step.MARKS;
+      anim.enterFrom[MARKS.selectspawntarget] = TURNVARS["skippedto"];
       {
         let newunitid = "spawn" + NEXTSPAWNID++;
         UNITDATA[newunitid] = {
@@ -1054,9 +1061,10 @@ const game = {
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
-        TURNVARS: step.TURNVARS,
+        TURNVARS,
         BATTLEVARS,
-        NEXTSPAWNID
+        NEXTSPAWNID,
+        anim
       };
     }
   },

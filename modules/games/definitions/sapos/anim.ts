@@ -10,6 +10,8 @@
 
 import { SaposDefinition } from "./_types";
 
-const saposAnim: SaposDefinition["anim"] = {};
+const saposAnim: SaposDefinition["anim"] = {
+  spawn: [{ enterfrom: ["selectspawntarget", { turnpos: "skippedto" }] }],
+};
 
 export default saposAnim;

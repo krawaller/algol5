@@ -10,7 +10,7 @@ const saposMeta: SaposDefinition["meta"] = {
   code: "Lz",
   slug: "sapos",
   hidden: true,
-  demo: "Lz0Gr7|mNBh5b1cb1anigHdlaLa0",
+  demo: "Lz0Grc|3A3z4gg2ha1ercamddbbNmeaaha1dgrj1aaFc0",
 };
 
 export default saposMeta;

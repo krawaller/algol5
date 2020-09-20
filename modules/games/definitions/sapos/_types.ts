@@ -39,7 +39,7 @@ type SaposArtifactLayer =
 type SaposTerrainLayer = never;
 type SaposLayer = CommonLayer | SaposUnitLayer | SaposArtifactLayer;
 type SaposBattlePos = never;
-type SaposBattleVar = "plr1" | "plr2";
+type SaposBattleVar = "peace" | "plr1" | "plr2";
 type SaposTurnPos = "skippedto";
 type SaposTurnVar = "skippedto";
 

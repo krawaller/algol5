@@ -4,6 +4,20 @@ const saposFlow: SaposDefinition["flow"] = {
   battleVars: {
     plr1: 12,
     plr2: 12,
+    peace: 1,
+  },
+  endGame: {
+    cheese: {
+      ifPlayer: 2,
+      who: 1,
+      show: "oppunits",
+      condition: {
+        and: [
+          { truthy: { battlevar: "peace" } },
+          { same: [{ battlevar: "plr2" }, 1] },
+        ],
+      },
+    },
   },
   startTurn: {
     runGenerator: "findknots",
@@ -48,6 +62,7 @@ const saposFlow: SaposDefinition["flow"] = {
         },
         { incbattlevar: [{ playercase: ["plr1", "plr2"] }, 1] },
         { incbattlevar: [{ playercase: ["plr2", "plr1"] }, -1] },
+        { setbattlevar: ["peace", 0] },
         { setturnpos: ["skippedto", "selectjumptarget"] },
       ],
       purge: ["jumptargets"],

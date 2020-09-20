@@ -22,10 +22,6 @@ There are some rules for the flow of a turn:
 - Once you make a {CMND:name=jump} you may no longer {CMND:name=hop}
 - If you don't make a {CMND:name=jump} you must end your turn with a {CMND:name=spawn}
 
-Win by rendering your opponent unable to finish her turn!
-
-This win condition means that if you have 0 in reserve at the start of your turn then you must {CMND:name=jump}, since you otherwise cannot affort to {CMND:name=spawn}.
-
 <div class="md-example">
 Here are some examples of valid turns:
 <ul>
@@ -36,3 +32,11 @@ Here are some examples of valid turns:
 </ul>
 
 </div>
+
+If your opponent would be unable to finish her next turn, you win by {ENDGAME:name=starvation}!
+
+<div class="md-example">
+This win condition means that if you have 0 in reserve at the start of your turn then you must {CMND:name=jump}, since you otherwise cannot affort to {CMND:name=spawn}.
+</div>
+
+Theoretically, if {PLR:who=2} plays super defensively, she will win since {PLR:who=1} will be the first to run out of reserve. To prevent this there is a rule that if no captures have been made when {PLR:who=2} reaches a reserve of 1, then {PLR:who=1} wins by {ENDGAME:name=cheese}.

@@ -5,7 +5,7 @@ const saposMeta: SaposDefinition["meta"] = {
   author: "Rey Alicea",
   name: "Sapos",
   tags: ["bloodshed"],
-  tagline: "The Battletoads abstract!",
+  tagline: "Don't get your toads in a knot!",
   source: "https://boardgamegeek.com/boardgame/132411/sapos",
   code: "Lz",
   slug: "sapos",

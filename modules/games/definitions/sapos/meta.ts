@@ -4,7 +4,7 @@ const saposMeta: SaposDefinition["meta"] = {
   id: "sapos",
   author: "Rey Alicea",
   name: "Sapos",
-  tags: ["bloodshed"],
+  tags: ["bloodshed", "reyalicea"],
   tagline: "Don't get your toads in a knot!",
   source: "https://boardgamegeek.com/boardgame/132411/sapos",
   code: "Lz",

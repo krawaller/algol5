@@ -4,7 +4,7 @@ const desdemonaMeta: DesdemonaDefinition["meta"] = {
   id: "desdemona",
   name: "Desdemona",
   author: "Rey Alicea",
-  tags: ["irreversible"],
+  tags: ["irreversible", "reyalicea"],
   tagline: "An Amazons-Othello lovechild",
   source: "http://some.url.to.rules",
   code: "g",

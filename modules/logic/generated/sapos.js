@@ -62,7 +62,7 @@ const game = {
     }
     return game.action[`startTurn_${ruleset}_1`]({
       NEXTSPAWNID: 1,
-      BATTLEVARS: { plr1: 12, plr2: 12 },
+      BATTLEVARS: { plr1: 12, plr2: 12, peace: 1 },
       TURN: 0,
       UNITDATA,
       UNITLAYERS
@@ -695,6 +695,7 @@ const game = {
       ];
       BATTLEVARS.plr1 = (BATTLEVARS.plr1 || 0) + 1;
       BATTLEVARS.plr2 = (BATTLEVARS.plr2 || 0) + -1;
+      BATTLEVARS.peace = 0;
       TURNVARS.skippedto = MARKS.selectjumptarget;
       UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, toads: {} };
       for (let unitid in UNITDATA) {
@@ -963,6 +964,7 @@ const game = {
       ];
       BATTLEVARS.plr2 = (BATTLEVARS.plr2 || 0) + 1;
       BATTLEVARS.plr1 = (BATTLEVARS.plr1 || 0) + -1;
+      BATTLEVARS.peace = 0;
       TURNVARS.skippedto = MARKS.selectjumptarget;
       UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, toads: {} };
       for (let unitid in UNITDATA) {
@@ -1008,7 +1010,11 @@ const game = {
       for (const pos of Object.keys(ARTIFACTS.jumptargets)) {
         LINKS.marks[pos] = "selectjumptarget_basic_2";
       }
-      {
+      if (!!BATTLEVARS["peace"] && BATTLEVARS["plr2"] === 1) {
+        LINKS.endGame = "lose";
+        LINKS.endedBy = "cheese";
+        LINKS.endMarks = Object.keys(UNITLAYERS.oppunits);
+      } else {
         LINKS.endTurn = "startTurn_basic_1";
       }
       return {
@@ -1051,7 +1057,11 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (!!BATTLEVARS["peace"] && BATTLEVARS["plr2"] === 1) {
+        LINKS.endGame = "lose";
+        LINKS.endedBy = "cheese";
+        LINKS.endMarks = Object.keys(UNITLAYERS.oppunits);
+      } else {
         LINKS.endTurn = "startTurn_basic_1";
       }
       return {

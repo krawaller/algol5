@@ -1,8 +1,8 @@
 ---
 id: "reyalicea"
-title: "reyalicea"
+title: "Rey Alicea"
 slug: "rey_alicea"
-blurb: "Add short description here!"
+blurb: "Games by Rey Alicea"
 thumbnail: "thumbartist.jpg"
 mainImage: "reyformula.jpg"
 sort: "rey alicea"

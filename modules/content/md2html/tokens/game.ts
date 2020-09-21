@@ -22,6 +22,8 @@ export const game: TokenHandler = opts => {
   const name = def.meta.name;
   if (gameId === thisGameId)
     return `<span class="md-game-selfref">${name}</span>`;
+  if (lib[gameId].meta.hidden)
+    return `<span class="md-game-hiddenref">${name}</span>`;
   return intlink({
     ...opts,
     args: {

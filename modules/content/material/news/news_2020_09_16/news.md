@@ -13,6 +13,6 @@ From somewhat humble beginnings, a deluge of new games added over the summer has
 
 {PIC:name=price.png,cred=Medal by AusTrophy,credurl=https://austrophy.com.au/product/medal-50-games-alpha-series/,title=50 games and counting!}
 
-Some of the new additions include the {TAG:id=troyka} masterpiece {GAME:id=tunneler}, {TAG:id=huntoon}'s lovely {GAME:id=bombardment} and {GAME:id=euclid}, and Rey Alicea's brilliant {GAME:id=desdemona}.
+Some of the new additions include the {TAG:id=troyka} masterpiece {GAME:id=tunneler}, {TAG:id=huntoon}'s lovely {GAME:id=bombardment} and {GAME:id=euclid}, and {TAG:id=reyalicea}'s brilliant {GAME:id=desdemona}.
 
 Going forward we will of course keep adding new games - join the slack if you want to take part, link on the front page! - but focus will be on finally finishing online play. More on that to follow, hopefully soon!

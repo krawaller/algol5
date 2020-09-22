@@ -179,7 +179,7 @@ export default function parseVal(
   }
   if (isAlgolBoolNot(expr)) {
     const { not: cond } = expr;
-    return `!${parser.bool(cond)}`;
+    return `!(${parser.bool(cond)})`;
   }
   if (isAlgolBoolOrtho(expr)) {
     const { ortho: val } = expr;

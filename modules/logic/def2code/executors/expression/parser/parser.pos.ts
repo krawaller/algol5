@@ -54,11 +54,11 @@ export default function parsePos(
   }
   if (isAlgolPosOffset(expr)) {
     const {
-      offset: [pos, dir, forw, right],
+      offset: [pos, dir, forw = 1, right = 0],
     } = expr;
     return `offsetPos(${parser.pos(pos)}, ${parser.val(dir)}, ${parser.val(
-      forw || 1
-    )}, ${parser.val(right || 0)})`;
+      forw
+    )}, ${parser.val(right)})`;
   }
   if (isAlgolPosFromXY(expr)) {
     const {

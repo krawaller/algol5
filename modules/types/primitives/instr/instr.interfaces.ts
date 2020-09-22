@@ -71,3 +71,7 @@ export interface AlgolInstrUnitTypePos<Blob extends AlgolGameBlobAnon> {
     AlgolPos<Blob>
   ];
 }
+
+export interface AlgolInstrPlayer<Blob extends AlgolGameBlobAnon> {
+  player: AlgolVal<Blob, 1 | 2>;
+}

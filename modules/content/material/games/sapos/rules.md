@@ -21,14 +21,23 @@ There are some rules for the flow of a turn:
 - You can {CMND:name=hop} and {CMND:name=jump} multiple times
 - Once you make a {CMND:name=jump} you may no longer {CMND:name=hop}
 - If you don't make a {CMND:name=jump} you must end your turn with a {CMND:name=spawn}
+- After {PLR:who=2}'s first turn she must immediately move again. Neither sequence may contain {CMND:name=jump}.
 
 <div class="md-example">
+
 Here are some examples of valid turns:
+
 <ul>
   <li>{CMND:name=hop} {CMND:name=spawn}</li>
   <li>{CMND:name=hop} {CMND:name=hop} {CMND:name=hop} {CMND:name=spawn}</li>
   <li>{CMND:name=jump}</li>
   <li>{CMND:name=hop} {CMND:name=hop} {CMND:name=jump} {CMND:name=jump}</li>
+</ul>
+
+And {PLR:who=2}'s first turn likely looks like this:
+
+<ul>
+  <li>{CMND:name=hop} {CMND:name=spawn} {CMND:name=hop} {CMND:name=spawn}</li>
 </ul>
 
 </div>
@@ -38,5 +47,3 @@ If your opponent would be unable to finish her next turn, you win by {ENDGAME:na
 <div class="md-example">
 This win condition means that if you have 0 in reserve at the start of your turn then you must {CMND:name=jump}, since you otherwise cannot affort to {CMND:name=spawn}.
 </div>
-
-Theoretically, if {PLR:who=2} plays super defensively, she will win since {PLR:who=1} will be the first to run out of reserve. To prevent this there is a rule that if no captures have been made when {PLR:who=2} reaches a reserve of 1, then {PLR:who=1} wins by {ENDGAME:name=cheese}.

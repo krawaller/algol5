@@ -355,7 +355,8 @@ const game = {
         MARKS,
         TURNVARS: step.TURNVARS,
         BATTLEVARS: step.BATTLEVARS,
-        NEXTSPAWNID: step.NEXTSPAWNID
+        NEXTSPAWNID: step.NEXTSPAWNID,
+        canAlwaysEnd: true
       };
     },
     selectspawntarget_basic_1: (step, newMarkPos) => {
@@ -535,7 +536,8 @@ const game = {
         MARKS,
         TURNVARS: step.TURNVARS,
         BATTLEVARS: step.BATTLEVARS,
-        NEXTSPAWNID: step.NEXTSPAWNID
+        NEXTSPAWNID: step.NEXTSPAWNID,
+        canAlwaysEnd: true
       };
     },
     selectspawntarget_basic_2: (step, newMarkPos) => {

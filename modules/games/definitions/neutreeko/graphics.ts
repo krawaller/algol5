@@ -7,7 +7,7 @@ import { NeutreekoDefinition } from "./_types";
 
 const neutreekoGraphics: NeutreekoDefinition["graphics"] = {
   icons: {
-      pieces: "rook"
+      pieces: "queen"
   },
   tiles: {}
 };

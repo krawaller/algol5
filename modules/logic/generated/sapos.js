@@ -62,7 +62,7 @@ const game = {
     }
     return game.action[`startTurn_${ruleset}_1`]({
       NEXTSPAWNID: 1,
-      BATTLEVARS: { plr1: 12, plr2: 12, peace: 1 },
+      BATTLEVARS: { plr1: 12, plr2: 12 },
       TURN: 0,
       UNITDATA,
       UNITLAYERS
@@ -210,6 +210,8 @@ const game = {
       };
       let TURNVARS = step.TURNVARS;
       let UNITLAYERS = step.UNITLAYERS;
+      ARTIFACTS.knot = {};
+      ARTIFACTS.hoptargets = {};
       {
         let allowedsteps = UNITLAYERS.myunits;
         let BLOCKS = Object.keys(BOARD.board)
@@ -377,6 +379,9 @@ const game = {
       };
       let TURNVARS = step.TURNVARS;
       let UNITLAYERS = step.UNITLAYERS;
+      let TURN = step.TURN;
+      ARTIFACTS.knot = {};
+      ARTIFACTS.hoptargets = {};
       {
         let allowedsteps = UNITLAYERS.myunits;
         let BLOCKS = Object.keys(BOARD.board)
@@ -408,34 +413,36 @@ const game = {
           }
         }
       }
-      {
-        let allowedsteps = UNITLAYERS.oppunits;
-        let BLOCKS = Object.keys(BOARD.board)
-          .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-          .reduce((m, k) => {
-            m[k] = emptyObj;
-            return m;
-          }, {});
-        for (let DIR of orthoDirs) {
-          let walkedsquares = [];
-          let STOPREASON = "";
-          let POS = TURNVARS["skippedto"] || MARKS.selectunit;
-          while (
-            !(STOPREASON = !(POS = connections[POS][DIR])
-              ? "outofbounds"
-              : BLOCKS[POS]
-              ? "hitblock"
-              : !allowedsteps[POS]
-              ? "nomoresteps"
-              : null)
-          ) {
-            walkedsquares.push(POS);
-          }
-          let WALKLENGTH = walkedsquares.length;
-          if (BLOCKS[POS]) {
-            {
-              if (WALKLENGTH === 1) {
-                ARTIFACTS.jumptargets[POS] = { dir: DIR };
+      if (!(TURN === 1)) {
+        {
+          let allowedsteps = UNITLAYERS.oppunits;
+          let BLOCKS = Object.keys(BOARD.board)
+            .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {});
+          for (let DIR of orthoDirs) {
+            let walkedsquares = [];
+            let STOPREASON = "";
+            let POS = TURNVARS["skippedto"] || MARKS.selectunit;
+            while (
+              !(STOPREASON = !(POS = connections[POS][DIR])
+                ? "outofbounds"
+                : BLOCKS[POS]
+                ? "hitblock"
+                : !allowedsteps[POS]
+                ? "nomoresteps"
+                : null)
+            ) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            if (BLOCKS[POS]) {
+              {
+                if (WALKLENGTH === 1) {
+                  ARTIFACTS.jumptargets[POS] = { dir: DIR };
+                }
               }
             }
           }
@@ -452,7 +459,7 @@ const game = {
         ARTIFACTS,
         UNITLAYERS,
         UNITDATA: step.UNITDATA,
-        TURN: step.TURN,
+        TURN,
         MARKS,
         TURNVARS,
         BATTLEVARS: step.BATTLEVARS,
@@ -548,7 +555,7 @@ const game = {
       ARTIFACTS.hoptargets = {};
       {
         let unitid = (
-          UNITLAYERS.units[TURNVARS["skippedto"] || MARKS.selectunit] || {}
+          UNITLAYERS.units[MARKS.selectunit || TURNVARS["skippedto"]] || {}
         ).id;
         if (unitid) {
           UNITDATA[unitid] = {
@@ -681,7 +688,7 @@ const game = {
       ARTIFACTS.jumptargets = {};
       {
         let unitid = (
-          UNITLAYERS.units[TURNVARS["skippedto"] || MARKS.selectunit] || {}
+          UNITLAYERS.units[MARKS.selectunit || TURNVARS["skippedto"]] || {}
         ).id;
         if (unitid) {
           UNITDATA[unitid] = {
@@ -695,7 +702,6 @@ const game = {
       ];
       BATTLEVARS.plr1 = (BATTLEVARS.plr1 || 0) + 1;
       BATTLEVARS.plr2 = (BATTLEVARS.plr2 || 0) + -1;
-      BATTLEVARS.peace = 0;
       TURNVARS.skippedto = MARKS.selectjumptarget;
       UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, toads: {} };
       for (let unitid in UNITDATA) {
@@ -759,12 +765,23 @@ const game = {
     spawn_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
+      let ARTIFACTS = {
+        knot: step.ARTIFACTS.knot,
+        forbidden: step.ARTIFACTS.forbidden,
+        hoptargets: step.ARTIFACTS.hoptargets,
+        jumptargets: step.ARTIFACTS.jumptargets,
+        spawns: step.ARTIFACTS.spawns
+      };
       let UNITLAYERS = step.UNITLAYERS;
       let TURNVARS = step.TURNVARS;
       let BATTLEVARS = { ...step.BATTLEVARS };
       let UNITDATA = { ...step.UNITDATA };
       let NEXTSPAWNID = step.NEXTSPAWNID;
       let MARKS = step.MARKS;
+      ARTIFACTS.jumptargets = {};
+      ARTIFACTS.knot = {};
+      ARTIFACTS.hoptargets = {};
+      ARTIFACTS.forbidden = {};
       anim.enterFrom[MARKS.selectspawntarget] = TURNVARS["skippedto"];
       {
         let newunitid = "spawn" + NEXTSPAWNID++;
@@ -790,7 +807,7 @@ const game = {
       return {
         LINKS,
         MARKS: {},
-        ARTIFACTS: step.ARTIFACTS,
+        ARTIFACTS,
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
@@ -813,11 +830,12 @@ const game = {
       let TURNVARS = { ...step.TURNVARS };
       let BATTLEVARS = step.BATTLEVARS;
       let UNITDATA = { ...step.UNITDATA };
+      let TURN = step.TURN;
       let MARKS = step.MARKS;
       ARTIFACTS.hoptargets = {};
       {
         let unitid = (
-          UNITLAYERS.units[TURNVARS["skippedto"] || MARKS.selectunit] || {}
+          UNITLAYERS.units[MARKS.selectunit || TURNVARS["skippedto"]] || {}
         ).id;
         if (unitid) {
           UNITDATA[unitid] = {
@@ -918,14 +936,16 @@ const game = {
       for (const pos of Object.keys(ARTIFACTS.hoptargets)) {
         LINKS.marks[pos] = "selecthoptarget_basic_2";
       }
-      for (const pos of Object.keys(ARTIFACTS.jumptargets)) {
-        LINKS.marks[pos] = "selectjumptarget_basic_2";
+      if (!(TURN === 1)) {
+        for (const pos of Object.keys(ARTIFACTS.jumptargets)) {
+          LINKS.marks[pos] = "selectjumptarget_basic_2";
+        }
       }
       return {
         LINKS,
         MARKS: {},
         ARTIFACTS,
-        TURN: step.TURN,
+        TURN,
         UNITDATA,
         UNITLAYERS,
         TURNVARS,
@@ -950,7 +970,7 @@ const game = {
       ARTIFACTS.jumptargets = {};
       {
         let unitid = (
-          UNITLAYERS.units[TURNVARS["skippedto"] || MARKS.selectunit] || {}
+          UNITLAYERS.units[MARKS.selectunit || TURNVARS["skippedto"]] || {}
         ).id;
         if (unitid) {
           UNITDATA[unitid] = {
@@ -964,7 +984,6 @@ const game = {
       ];
       BATTLEVARS.plr2 = (BATTLEVARS.plr2 || 0) + 1;
       BATTLEVARS.plr1 = (BATTLEVARS.plr1 || 0) + -1;
-      BATTLEVARS.peace = 0;
       TURNVARS.skippedto = MARKS.selectjumptarget;
       UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, toads: {} };
       for (let unitid in UNITDATA) {
@@ -1010,11 +1029,7 @@ const game = {
       for (const pos of Object.keys(ARTIFACTS.jumptargets)) {
         LINKS.marks[pos] = "selectjumptarget_basic_2";
       }
-      if (!!BATTLEVARS["peace"] && BATTLEVARS["plr2"] === 1) {
-        LINKS.endGame = "lose";
-        LINKS.endedBy = "cheese";
-        LINKS.endMarks = Object.keys(UNITLAYERS.oppunits);
-      } else {
+      {
         LINKS.endTurn = "startTurn_basic_1";
       }
       return {
@@ -1032,12 +1047,24 @@ const game = {
     spawn_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
+      let ARTIFACTS = {
+        knot: step.ARTIFACTS.knot,
+        forbidden: step.ARTIFACTS.forbidden,
+        hoptargets: step.ARTIFACTS.hoptargets,
+        jumptargets: step.ARTIFACTS.jumptargets,
+        spawns: step.ARTIFACTS.spawns
+      };
       let UNITLAYERS = step.UNITLAYERS;
-      let TURNVARS = step.TURNVARS;
+      let TURNVARS = { ...step.TURNVARS };
       let BATTLEVARS = { ...step.BATTLEVARS };
       let UNITDATA = { ...step.UNITDATA };
       let NEXTSPAWNID = step.NEXTSPAWNID;
+      let TURN = step.TURN;
       let MARKS = step.MARKS;
+      ARTIFACTS.jumptargets = {};
+      ARTIFACTS.knot = {};
+      ARTIFACTS.hoptargets = {};
+      ARTIFACTS.forbidden = {};
       anim.enterFrom[MARKS.selectspawntarget] = TURNVARS["skippedto"];
       {
         let newunitid = "spawn" + NEXTSPAWNID++;
@@ -1049,6 +1076,8 @@ const game = {
         };
       }
       BATTLEVARS.plr2 = (BATTLEVARS.plr2 || 0) + -1;
+      TURNVARS.spawns = (TURNVARS.spawns || 0) + 1;
+      TURNVARS.skippedto = 0;
       UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, toads: {} };
       for (let unitid in UNITDATA) {
         const currentunit = UNITDATA[unitid];
@@ -1057,18 +1086,24 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      if (!!BATTLEVARS["peace"] && BATTLEVARS["plr2"] === 1) {
-        LINKS.endGame = "lose";
-        LINKS.endedBy = "cheese";
-        LINKS.endMarks = Object.keys(UNITLAYERS.oppunits);
+      if (TURN === 1 && TURNVARS["spawns"] === 1) {
+        for (const pos of Object.keys(
+          Object.keys(ARTIFACTS.knot).length === 0
+            ? UNITLAYERS.myunits
+            : ARTIFACTS.knot
+        )) {
+          LINKS.marks[pos] = "selectunit_basic_2";
+        }
       } else {
-        LINKS.endTurn = "startTurn_basic_1";
+        {
+          LINKS.endTurn = "startTurn_basic_1";
+        }
       }
       return {
         LINKS,
         MARKS: {},
-        ARTIFACTS: step.ARTIFACTS,
-        TURN: step.TURN,
+        ARTIFACTS,
+        TURN,
         UNITDATA,
         UNITLAYERS,
         TURNVARS,
@@ -1098,16 +1133,20 @@ const game = {
           Object.keys(ARTIFACTS.knot).length === 0
             ? collapseContent({
                 line: [
-                  { text: "Select any" },
+                  { text: "Select a" },
                   { unittype: ["pawn", 1] },
-                  { text: "to hop or jump with" }
+                  { text: "to hop" },
+                  { text: "or jump" },
+                  { text: "with" }
                 ]
               })
             : collapseContent({
                 line: [
                   { text: "Select a" },
                   { unittype: ["pawn", 1] },
-                  { text: "to hop or jump out of the knot" }
+                  { text: "in the knot to hop" },
+                  { text: "or jump" },
+                  { text: "with" }
                 ]
               })
         ]
@@ -1169,7 +1208,16 @@ const game = {
             ]
           });
     },
-    spawn_basic_1: () => defaultInstruction(1),
+    spawn_basic_1: step => {
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { endTurn: "end turn" },
+          { text: "to submit your moves and hand over to" },
+          { player: 2 }
+        ]
+      });
+    },
     selectunit_basic_1: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
@@ -1287,6 +1335,7 @@ const game = {
     startTurn_basic_2: step => {
       let BATTLEVARS = step.BATTLEVARS;
       let ARTIFACTS = step.ARTIFACTS;
+      let TURN = step.TURN;
       return collapseContent({
         line: [
           collapseContent({
@@ -1303,16 +1352,20 @@ const game = {
           Object.keys(ARTIFACTS.knot).length === 0
             ? collapseContent({
                 line: [
-                  { text: "Select any" },
+                  { text: "Select a" },
                   { unittype: ["pawn", 2] },
-                  { text: "to hop or jump with" }
+                  { text: "to hop" },
+                  !(TURN === 1) ? { text: "or jump" } : undefined,
+                  { text: "with" }
                 ]
               })
             : collapseContent({
                 line: [
                   { text: "Select a" },
                   { unittype: ["pawn", 2] },
-                  { text: "to hop or jump out of the knot" }
+                  { text: "in the knot to hop" },
+                  !(TURN === 1) ? { text: "or jump" } : undefined,
+                  { text: "with" }
                 ]
               })
         ]
@@ -1320,6 +1373,7 @@ const game = {
     },
     hop_basic_2: step => {
       let ARTIFACTS = step.ARTIFACTS;
+      let TURN = step.TURN;
       return collapseContent({
         line: [
           { select: "Select" },
@@ -1328,7 +1382,7 @@ const game = {
               Object.keys(ARTIFACTS.hoptargets).length !== 0
                 ? { text: "a subsequent hop" }
                 : undefined,
-              Object.keys(ARTIFACTS.jumptargets).length !== 0
+              !(TURN === 1) && Object.keys(ARTIFACTS.jumptargets).length !== 0
                 ? { text: "a jump" }
                 : undefined,
               Object.keys(ARTIFACTS.spawns).length !== 0
@@ -1374,27 +1428,63 @@ const game = {
             ]
           });
     },
-    spawn_basic_2: () => defaultInstruction(2),
+    spawn_basic_2: step => {
+      let TURNVARS = step.TURNVARS;
+      let TURN = step.TURN;
+      return TURNVARS["spawns"] === 1 && TURN === 1
+        ? collapseContent({
+            line: [
+              { text: "In the first turn" },
+              { player: 2 },
+              { text: "has to hop again!" }
+            ]
+          })
+        : collapseContent({
+            line: [
+              { text: "Press" },
+              { endTurn: "end turn" },
+              { text: "to submit your moves and hand over to" },
+              { player: 1 }
+            ]
+          });
+    },
     selectunit_basic_2: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
-      return collapseContent({
-        line: [
-          { text: "Select a" },
-          { unittype: ["pawn", 2] },
-          { text: "or" },
-          { unittype: ["pawn", 1] },
-          { text: "for" },
-          {
-            unit: [
-              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
-              MARKS.selectunit
+      let TURN = step.TURN;
+      return TURN === 1
+        ? collapseContent({
+            line: [
+              { text: "Select a" },
+              { unittype: ["pawn", 2] },
+              { text: "for" },
+              {
+                unit: [
+                  iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+                  (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                  MARKS.selectunit
+                ]
+              },
+              { text: "to hop over" }
             ]
-          },
-          { text: "to hop or jump over" }
-        ]
-      });
+          })
+        : collapseContent({
+            line: [
+              { text: "Select a" },
+              { unittype: ["pawn", 2] },
+              { text: "or" },
+              { unittype: ["pawn", 1] },
+              { text: "for" },
+              {
+                unit: [
+                  iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+                  (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                  MARKS.selectunit
+                ]
+              },
+              { text: "to hop or jump over" }
+            ]
+          });
     },
     selecthoptarget_basic_2: step => {
       let TURNVARS = step.TURNVARS;

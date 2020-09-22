@@ -17,21 +17,76 @@ const saposInstructions: SaposDefinition["instructions"] = {
       {
         ifelse: [
           { isempty: "knot" },
-          { line: ["Select any", "toads", "to hop or jump with"] },
-          { line: ["Select a", "toads", "to hop or jump out of the knot"] },
+          {
+            line: [
+              "Select a",
+              "toads",
+              "to hop",
+              {
+                playercase: [
+                  "or jump",
+                  { if: [{ not: ["isFirstTurn"] }, "or jump"] },
+                ],
+              },
+              "with",
+            ],
+          },
+          {
+            line: [
+              "Select a",
+              "toads",
+              "in the knot to hop",
+              {
+                playercase: [
+                  "or jump",
+                  { if: [{ not: ["isFirstTurn"] }, "or jump"] },
+                ],
+              },
+              "with",
+            ],
+          },
         ],
       },
     ],
   },
   selectunit: {
-    line: [
-      "Select a",
-      "toads",
-      "or",
-      { unittype: ["toads", ["otherplayer"]] },
-      "for",
-      { unitat: "selectunit" },
-      "to hop or jump over",
+    playercase: [
+      {
+        line: [
+          "Select a",
+          "toads",
+          "or",
+          { unittype: ["toads", ["otherplayer"]] },
+          "for",
+          { unitat: "selectunit" },
+          "to hop or jump over",
+        ],
+      },
+      {
+        ifelse: [
+          ["isFirstTurn"],
+          {
+            line: [
+              "Select a",
+              "toads",
+              "for",
+              { unitat: "selectunit" },
+              "to hop over",
+            ],
+          },
+          {
+            line: [
+              "Select a",
+              "toads",
+              "or",
+              { unittype: ["toads", ["otherplayer"]] },
+              "for",
+              { unitat: "selectunit" },
+              "to hop or jump over",
+            ],
+          },
+        ],
+      },
     ],
   },
   selecthoptarget: {
@@ -50,11 +105,61 @@ const saposInstructions: SaposDefinition["instructions"] = {
       {
         orlist: [
           { if: [{ notempty: "hoptargets" }, "a subsequent hop"] },
-          { if: [{ notempty: "jumptargets" }, "a jump"] },
+          {
+            playercase: [
+              { if: [{ notempty: "jumptargets" }, "a jump"] },
+              {
+                if: [
+                  {
+                    and: [
+                      { not: ["isFirstTurn"] },
+                      { notempty: "jumptargets" },
+                    ],
+                  },
+                  "a jump",
+                ],
+              },
+            ],
+          },
           {
             if: [
               { notempty: "spawns" },
               { line: ["where to spawn a new", "toads"] },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  spawn: {
+    playercase: [
+      {
+        line: [
+          "Press",
+          "endTurn",
+          "to submit your moves and hand over to",
+          ["otherplayer"],
+        ],
+      },
+      {
+        ifelse: [
+          {
+            and: [
+              {
+                same: [{ turnvar: "spawns" }, 1],
+              },
+              ["isFirstTurn"],
+            ],
+          },
+          {
+            line: ["In the first turn", { player: 2 }, "has to hop again!"],
+          },
+          {
+            line: [
+              "Press",
+              "endTurn",
+              "to submit your moves and hand over to",
+              ["otherplayer"],
             ],
           },
         ],

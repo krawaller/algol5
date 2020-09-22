@@ -4,20 +4,6 @@ const saposFlow: SaposDefinition["flow"] = {
   battleVars: {
     plr1: 12,
     plr2: 12,
-    peace: 1,
-  },
-  endGame: {
-    cheese: {
-      ifPlayer: 2,
-      who: 1,
-      show: "oppunits",
-      condition: {
-        and: [
-          { truthy: { battlevar: "peace" } },
-          { same: [{ battlevar: "plr2" }, 1] },
-        ],
-      },
-    },
   },
   startTurn: {
     runGenerator: "findknots",
@@ -28,7 +14,7 @@ const saposFlow: SaposDefinition["flow"] = {
       applyEffects: [
         {
           moveat: [
-            { firsttruthy: [{ turnpos: "skippedto" }, "selectunit"] },
+            { firsttruthy: ["selectunit", { turnpos: "skippedto" }] },
             "selecthoptarget",
           ],
         },
@@ -44,14 +30,19 @@ const saposFlow: SaposDefinition["flow"] = {
           ],
         },
         "selecthoptarget",
-        "selectjumptarget",
+        {
+          playercase: [
+            "selectjumptarget",
+            { if: [{ not: ["isFirstTurn"] }, "selectjumptarget"] },
+          ],
+        },
       ],
     },
     jump: {
       applyEffects: [
         {
           moveat: [
-            { firsttruthy: [{ turnpos: "skippedto" }, "selectunit"] },
+            { firsttruthy: ["selectunit", { turnpos: "skippedto" }] },
             "selectjumptarget",
           ],
         },
@@ -62,25 +53,63 @@ const saposFlow: SaposDefinition["flow"] = {
         },
         { incbattlevar: [{ playercase: ["plr1", "plr2"] }, 1] },
         { incbattlevar: [{ playercase: ["plr2", "plr1"] }, -1] },
-        { setbattlevar: ["peace", 0] },
         { setturnpos: ["skippedto", "selectjumptarget"] },
       ],
       purge: ["jumptargets"],
-      runGenerator: "findjumptargets",
+      runGenerators: ["findjumptargets"],
       links: ["selectjumptarget", "endTurn"],
     },
     spawn: {
       applyEffects: [
         { spawnat: ["selectspawntarget", "toads"] },
         { incbattlevar: [{ playercase: ["plr1", "plr2"] }, -1] },
+        {
+          ifplayer: [
+            2,
+            {
+              multi: [
+                { incturnvar: ["spawns"] },
+                { setturnvar: ["skippedto", 0] },
+              ],
+            },
+          ],
+        },
       ],
-      link: "endTurn",
+      purge: ["jumptargets", "knot", "hoptargets", "forbidden"],
+      link: {
+        playercase: [
+          "endTurn",
+          {
+            ifelse: [
+              {
+                and: [
+                  ["isFirstTurn"],
+                  {
+                    same: [{ turnvar: "spawns" }, 1],
+                  },
+                ],
+              },
+              "selectunit",
+              "endTurn",
+            ],
+          },
+        ],
+      },
     },
   },
   marks: {
     selectunit: {
       from: { ifelse: [{ isempty: "knot" }, "myunits", "knot"] },
-      runGenerators: ["findhoptargets", "findjumptargets"],
+      runGenerators: [
+        "findhoptargets",
+        {
+          playercase: [
+            "findjumptargets",
+            { if: [{ not: ["isFirstTurn"] }, "findjumptargets"] },
+          ],
+        },
+      ],
+      purge: ["knot", "hoptargets"],
       links: ["selecthoptarget", "selectjumptarget"],
     },
     selecthoptarget: {

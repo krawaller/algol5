@@ -12,7 +12,7 @@ type SaposMark =
   | "selectjumptarget"
   | "selectspawntarget";
 type SaposCommand = "hop" | "jump" | "spawn";
-type SaposPhaseCommand = "hop" | "jump";
+type SaposPhaseCommand = "hop" | "jump" | "spawn";
 type SaposPhase = "startTurn" | SaposMark | SaposPhaseCommand;
 type SaposUnitLayer =
   | "units"
@@ -39,9 +39,9 @@ type SaposArtifactLayer =
 type SaposTerrainLayer = never;
 type SaposLayer = CommonLayer | SaposUnitLayer | SaposArtifactLayer;
 type SaposBattlePos = never;
-type SaposBattleVar = "peace" | "plr1" | "plr2";
+type SaposBattleVar = "plr1" | "plr2";
 type SaposTurnPos = "skippedto";
-type SaposTurnVar = "skippedto";
+type SaposTurnVar = "skippedto" | "spawns" | "skippedto";
 
 type SaposBoardName = "basic";
 type SaposSetupName = "basic";

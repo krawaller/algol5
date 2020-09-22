@@ -16,6 +16,7 @@ import {
   isAlgolInstrUnitList,
   isAlgolInstrUnitTypeSet,
   isAlgolInstrUnitTypePos,
+  isAlgolInstrPlayer,
 } from "../../../../types";
 
 import { iconRef } from "../../utils";
@@ -207,6 +208,10 @@ function executeInstructionInner(
       }
       return mem;
     }, []) })`;
+  }
+  if (isAlgolInstrPlayer(instr)) {
+    const { player } = instr;
+    return `{ player: ${exprParser.val(player)} }`;
   }
   throw new Error("Unknown instruction: " + JSON.stringify(instr));
   return "";

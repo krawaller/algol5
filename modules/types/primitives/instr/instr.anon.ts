@@ -13,6 +13,7 @@ import {
   AlgolInstrUnitList,
   AlgolInstrUnitTypeSet,
   AlgolInstrUnitTypePos,
+  AlgolInstrPlayer,
 } from "./instr.interfaces";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -38,3 +39,4 @@ export type AlgolInstrUnitTypeSetAnon = AlgolInstrUnitTypeSet<
 export type AlgolInstrUnitTypePosAnon = AlgolInstrUnitTypePos<
   AlgolGameBlobAnon
 >;
+export type AlgolInstrPlayerAnon = AlgolInstrPlayer<AlgolGameBlobAnon>;

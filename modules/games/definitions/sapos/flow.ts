@@ -114,6 +114,7 @@ const saposFlow: SaposDefinition["flow"] = {
     },
     selecthoptarget: {
       from: "hoptargets",
+      purge: ["jumpvictims", "jumptargets"],
       link: "hop",
     },
     selectjumptarget: {

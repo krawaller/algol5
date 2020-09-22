@@ -295,11 +295,19 @@ const game = {
       };
     },
     selecthoptarget_basic_1: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        knot: step.ARTIFACTS.knot,
+        forbidden: step.ARTIFACTS.forbidden,
+        hoptargets: step.ARTIFACTS.hoptargets,
+        jumptargets: step.ARTIFACTS.jumptargets
+      };
       let LINKS = { marks: {}, commands: {} };
+      ARTIFACTS.jumpvictims = {};
+      ARTIFACTS.jumptargets = {};
       LINKS.commands.hop = "hop_basic_1";
       return {
         LINKS,
-        ARTIFACTS: step.ARTIFACTS,
+        ARTIFACTS,
         UNITLAYERS: step.UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
@@ -467,11 +475,19 @@ const game = {
       };
     },
     selecthoptarget_basic_2: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        knot: step.ARTIFACTS.knot,
+        forbidden: step.ARTIFACTS.forbidden,
+        hoptargets: step.ARTIFACTS.hoptargets,
+        jumptargets: step.ARTIFACTS.jumptargets
+      };
       let LINKS = { marks: {}, commands: {} };
+      ARTIFACTS.jumpvictims = {};
+      ARTIFACTS.jumptargets = {};
       LINKS.commands.hop = "hop_basic_2";
       return {
         LINKS,
-        ARTIFACTS: step.ARTIFACTS,
+        ARTIFACTS,
         UNITLAYERS: step.UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,

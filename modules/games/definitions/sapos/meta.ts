@@ -9,7 +9,6 @@ const saposMeta: SaposDefinition["meta"] = {
   source: "https://boardgamegeek.com/boardgame/132411/sapos",
   code: "Lz",
   slug: "sapos",
-  hidden: true,
   demo: "Lz0Gr4|2i1bghg3g4m3ra2h",
 };
 

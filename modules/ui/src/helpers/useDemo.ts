@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { AlgolDemo, AlgolHydratedDemo, AlgolDemoPatch } from "../../../types";
-import { hydrateDemoFrame, emptyDemo } from "../../../common";
+import { hydrateDemoFrame, emptyDemo, hydrateDemoBase } from "../../../common";
 
 const FRAME_LENGTH_MS = 1500;
+const WIN_FRAME_FACTOR = 5;
 
 type UseDemoOptions = {
   demo: AlgolDemo;
@@ -31,10 +32,7 @@ export const useDemo = (opts: UseDemoOptions) => {
     setTimeout(() => {
       setHydrInfo({
         ...hydrInfo,
-        demo: {
-          anims: demo.anims,
-          positions: [demo.initial],
-        },
+        demo: hydrateDemoBase(demo),
       });
     }, 0);
   }, [demo]);
@@ -66,7 +64,7 @@ export const useDemo = (opts: UseDemoOptions) => {
             }),
             count: (hydrInfo.count + 1) % frameCount,
           });
-        }, FRAME_LENGTH_MS);
+        }, FRAME_LENGTH_MS * (hydrInfo.count === frameCount - 1 ? WIN_FRAME_FACTOR : 1));
       }
     }
     return () => {

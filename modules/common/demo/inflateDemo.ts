@@ -10,5 +10,10 @@ export function inflateDemo(demo: AlgolDemo): AlgolHydratedDemo {
       (current = jdp.patch(JSON.parse(JSON.stringify(current)), delta))
     );
   }
-  return { positions, anims: demo.anims };
+  return {
+    positions,
+    anims: demo.anims,
+    finalFrame: positions.length,
+    ...(demo.endHighlight && { endHighlight: demo.endHighlight }),
+  };
 }

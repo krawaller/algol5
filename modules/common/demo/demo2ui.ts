@@ -9,7 +9,7 @@ export function demo2ui(demo: AlgolHydratedDemo, frame: number): AlgolBattleUI {
         ...emptyAnim,
         ...demo.anims[frame],
       },
-      marks: [],
+      marks: (frame === demo.finalFrame && demo.endHighlight) || [],
       potentialMarks: [],
       units: demo.positions[frame],
     },

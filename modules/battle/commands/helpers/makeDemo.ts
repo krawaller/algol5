@@ -28,17 +28,19 @@ export async function makeDemo(gameId: GameId) {
     demo = makeDemoFromScript(API, script);
   }
 
-  const { anims, initial, patches } = demo;
+  const { anims, initial, patches, endHighlight } = demo;
 
   await fs.ensureDir(out);
 
   const fileContent = `import { AlgolDemo } from "../../../types";
-  export const ${gameId}Demo: AlgolDemo = {
-    initial: ${JSON.stringify(initial)},
-    patches: ${JSON.stringify(patches)},
-    anims: ${JSON.stringify(anims)}
-  };
-  export default ${gameId}Demo;
+export const ${gameId}Demo: AlgolDemo = {
+  initial: ${JSON.stringify(initial)},
+  patches: ${JSON.stringify(patches)},
+  anims: ${JSON.stringify(anims)}${
+    endHighlight ? `,\n  endHighlight: ${JSON.stringify(endHighlight)}` : ""
+  }
+};
+export default ${gameId}Demo;
   `;
   await fs.writeFile(path.join(out, `${gameId}.ts`), fileContent);
   console.log("Demo written for", gameId);

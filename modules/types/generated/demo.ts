@@ -17,4 +17,5 @@ export type AlgolHydratedDemo = {
   positions: AlgolArmy[];
   anims: { [patchNum: string]: Partial<AlgolAnimCompiled> };
   endHighlight?: string[];
+  finalFrame: number;
 };

@@ -3,15 +3,16 @@ import React, { FunctionComponent } from "react";
 import navCss from "./Nav.cssProxy";
 import hintCss from "./Nav.Hint.cssProxy";
 import { Arrow } from "../Arrow";
-import { ArrowMulti } from "../Arrow/Arrow.Multi";
+import { ArrowMulti, ArrowMultiProps } from "../Arrow/Arrow.Multi";
 
 type NavLinkArrowRowProps = {
   nbrOfLinks: number;
   hasBackBtn?: boolean;
+  hasShortcut?: boolean;
 };
 
 export const NavLinkArrowRow: FunctionComponent<NavLinkArrowRowProps> = props => {
-  const { nbrOfLinks, hasBackBtn } = props;
+  const { nbrOfLinks, hasBackBtn, hasShortcut } = props;
   const pieceCount = nbrOfLinks ? nbrOfLinks * 2 + (hasBackBtn ? 3 : 1) : 0;
   const middle = Math.ceil(pieceCount / 2);
   const pieces = [];
@@ -21,11 +22,9 @@ export const NavLinkArrowRow: FunctionComponent<NavLinkArrowRowProps> = props =>
       pieces.push(
         <div key={i} className={navCss.navFiller}>
           {i === middle ? (
-            hasBackBtn ? (
-              <Arrow layout="northeast" />
-            ) : (
-              <ArrowMulti northwest northeast />
-            )
+            <ArrowMulti
+              {...middleArrows(nbrOfLinks, hasBackBtn, hasShortcut)}
+            />
           ) : i > 1 && i < pieceCount && !(i < middle && hasBackBtn) ? (
             <Arrow layout="eastwest" />
           ) : null}
@@ -42,16 +41,9 @@ export const NavLinkArrowRow: FunctionComponent<NavLinkArrowRowProps> = props =>
               <ArrowMulti southeast eastwest head="south" />
             )
           ) : i === middle ? (
-            nbrOfLinks === 1 ? (
-              <Arrow layout="northsouth" head="south" />
-            ) : (
-              <ArrowMulti
-                head="south"
-                northsouth
-                northeast
-                northwest={!hasBackBtn}
-              />
-            )
+            <ArrowMulti
+              {...middleArrows(nbrOfLinks, hasBackBtn, hasShortcut)}
+            />
           ) : i === pieceCount - 1 ? (
             <Arrow layout="southwest" head="south" />
           ) : (
@@ -75,4 +67,20 @@ export const NavLinkArrowRow: FunctionComponent<NavLinkArrowRowProps> = props =>
       <div className={navCss.navSideButtonContainer}></div>
     </div>
   );
+};
+
+const middleArrows = (
+  nbrOfLinks: number,
+  hasBackBtn?: boolean,
+  hasShortcut?: boolean
+): ArrowMultiProps => {
+  const count = nbrOfLinks + (hasBackBtn ? 1 : 0);
+  const odd = Boolean(count % 2);
+  const result: ArrowMultiProps = {
+    head: odd ? "south" : undefined,
+    northsouth: odd,
+    northeast: count > 1,
+    northwest: count > 1 && !hasBackBtn,
+  };
+  return result;
 };

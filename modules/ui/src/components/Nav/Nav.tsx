@@ -15,6 +15,7 @@ import { Arrow } from "../Arrow";
 import { NavTopRow } from "./Nav.TopRow";
 import { NavCrumbs } from "./Nav.Crumbs";
 import { NavButton } from "./Nav.Button";
+import { findShortcut } from "../../../../common/nav/findShortcut";
 
 export type NavProps = {
   nav?: AlgolNav;
@@ -39,6 +40,7 @@ export const Nav: FunctionComponent<NavProps> = props => {
   const { crumbs, me } = nav;
   const hasCrumbs = Boolean(nav && crumbs.length > 0);
   const hasUpBtn = BACK_BUTTON && hasCrumbs;
+  const hasShortcut = useMemo(() => Boolean(findShortcut(nav)), [nav]);
 
   useEffect(() => {
     setFullNav(false);
@@ -110,7 +112,11 @@ export const Nav: FunctionComponent<NavProps> = props => {
             actions={actions}
             mute={!fullNav}
           />
-          <NavLinkArrowRow nbrOfLinks={me.links.length} hasBackBtn={hasUpBtn} />
+          <NavLinkArrowRow
+            nbrOfLinks={me.links.length}
+            hasBackBtn={hasUpBtn}
+            hasShortcut={hasShortcut}
+          />
           <NavBottomRow
             nav={nav}
             actions={actions}

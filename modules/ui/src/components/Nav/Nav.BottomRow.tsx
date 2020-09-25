@@ -57,7 +57,7 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
         depth: count,
         dir: count > depth ? "down" : count < depth ? "up" : "same",
       }),
-    [count]
+    [crumbs]
   );
   return (
     <TransitionGroup
@@ -131,4 +131,5 @@ const whatsMyClass = (status: TransitionStatus, pos: Pos) =>
     [navBottomCss.navBottomDuringExiting]: status === "exiting",
     [navBottomCss.navBottomFurther]: pos === "further",
     [navBottomCss.navBottomNearer]: pos === "nearer",
+    [navBottomCss.navBottomSame]: pos === "same",
   });

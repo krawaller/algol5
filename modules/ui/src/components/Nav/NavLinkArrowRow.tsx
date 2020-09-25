@@ -45,8 +45,12 @@ export const NavLinkArrowRow: FunctionComponent<NavLinkArrowRowProps> = props =>
       </div>
       <div className={navCss.navFiller} />
       {pieces}
-      <div className={navCss.navFiller} />
-      <div className={navCss.navSideButtonContainer}></div>
+      <div className={navCss.navFiller}>
+        {hasShortcut && <Arrow layout="southeast" />}
+      </div>
+      <div className={navCss.navSideButtonContainer}>
+        {hasShortcut && <Arrow layout="northwest" />}
+      </div>
     </div>
   );
 };

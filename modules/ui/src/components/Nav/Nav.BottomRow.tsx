@@ -125,7 +125,9 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
                           >
                             <Arrow layout="eastwest" head="east" />
                           </div>
-                        ) : null)}
+                        ) : (
+                          <Arrow layout="northwest" />
+                        ))}
                     </div>
                   </Fragment>
                 ))}

@@ -11,6 +11,7 @@ import Transition, {
   TransitionStatus,
 } from "react-transition-group/Transition";
 import { AlgolNav, AppActions } from "../../../../types";
+import { findShortcut } from "../../../../common/nav/findShortcut";
 import navCss from "./Nav.cssProxy";
 import navBottomCss from "./Nav.Bottom.cssProxy";
 import { NavButton } from "./Nav.Button";
@@ -46,15 +47,7 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
       key: Math.random(),
     } as unknown) as AlgolNav);
   const { links } = me;
-  const shortCut = useMemo(
-    () =>
-      links.length &&
-      crumbs.length &&
-      crumbs[crumbs.length - 1].links.find(
-        l => l.id === links[links.length - 1].id
-      ),
-    [links, crumbs]
-  );
+  const shortCut = useMemo(() => findShortcut(nav), [nav]);
   const showLinks = useMemo(
     () => (crumbs.length ? crumbs.slice(-1) : []).concat(links),
     [links, crumbs]

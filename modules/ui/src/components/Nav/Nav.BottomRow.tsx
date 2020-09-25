@@ -46,6 +46,15 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
       key: Math.random(),
     } as unknown) as AlgolNav);
   const { links } = me;
+  const shortCut = useMemo(
+    () =>
+      links.length &&
+      crumbs.length &&
+      crumbs[crumbs.length - 1].links.find(
+        l => l.id === links[links.length - 1].id
+      ),
+    [links, crumbs]
+  );
   const showLinks = useMemo(
     () => (crumbs.length ? crumbs.slice(-1) : []).concat(links),
     [links, crumbs]
@@ -81,14 +90,19 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
                 <div
                   className={classNames(
                     navCss.navFiller,
-                    navBottomCss.navBottomBackHintContainer
+                    navBottomCss.navBottomHintContainer
                   )}
                 >
                   {hasBackBtn &&
                     (fullNav ? (
                       <Arrow layout="eastwest" />
                     ) : (
-                      <div className={navBottomCss.navBottomBackHint}>
+                      <div
+                        className={classNames(
+                          navBottomCss.navBottomHint,
+                          navBottomCss.navBottomBackHint
+                        )}
+                      >
                         <Arrow layout="northeast" head="north" />
                       </div>
                     ))}
@@ -101,7 +115,25 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
                       actions={actions}
                       type={hasBackBtn && n === 0 ? "back" : "normal"}
                     />
-                    <div className={navCss.navFiller}></div>
+                    <div
+                      className={classNames(
+                        navCss.navFiller,
+                        navBottomCss.navBottomHintContainer
+                      )}
+                    >
+                      {shortCut &&
+                        n === showLinks.length - 1 &&
+                        (!fullNav ? (
+                          <div
+                            className={classNames(
+                              navBottomCss.navBottomHint,
+                              navBottomCss.navBottomShortcutHint
+                            )}
+                          >
+                            <Arrow layout="eastwest" head="east" />
+                          </div>
+                        ) : null)}
+                    </div>
                   </Fragment>
                 ))}
                 <div className={navCss.navSideButtonContainer} />

@@ -111,7 +111,12 @@ export const Nav: FunctionComponent<NavProps> = props => {
             mute={!fullNav}
           />
           <NavLinkArrowRow nbrOfLinks={me.links.length} hasBackBtn={hasUpBtn} />
-          <NavBottomRow {...props} hasBackBtn={hasUpBtn} fullNav={fullNav} />
+          <NavBottomRow
+            nav={nav}
+            actions={actions}
+            hasBackBtn={hasUpBtn}
+            fullNav={fullNav}
+          />
           <div
             className={classNames(
               css.navCompassBtnContainer,

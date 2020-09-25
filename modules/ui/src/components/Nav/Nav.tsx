@@ -104,10 +104,12 @@ export const Nav: FunctionComponent<NavProps> = props => {
             nav={nav}
             mute={!fullNav}
             hasBackBtn={hasUpBtn}
+            hasShortcut={hasShortcut}
           />
           <NavStepRow
             step={me}
             back={hasUpBtn ? "pipe" : "none"}
+            shortcut={hasShortcut ? "pipe" : "none"}
             current
             actions={actions}
             mute={!fullNav}

@@ -10,6 +10,7 @@ import { NavButton } from "./Nav.Button";
 
 type NavStepRowProps = {
   back: "pipe" | "this" | "none";
+  shortcut: "pipe" | "this" | "none";
   step: AlgolNavStep;
   current?: boolean;
   mute?: boolean;
@@ -18,7 +19,7 @@ type NavStepRowProps = {
 };
 
 export const NavStepRow: FunctionComponent<NavStepRowProps> = props => {
-  const { back, step, current, skipLink, actions, mute } = props;
+  const { back, step, current, skipLink, actions, mute, shortcut } = props;
   return (
     <div className={navCss.navRow}>
       <div className={classNames(navCss.navFiller, navCss.navFlexLeft)}>
@@ -41,21 +42,42 @@ export const NavStepRow: FunctionComponent<NavStepRowProps> = props => {
           mute={mute}
         />
       </div>
-      <div className={classNames(navCss.navFiller, navStepCss.navStepLinkBox)}>
-        <div className={navCss.navFiller} />
-        {!current &&
-          step.links
-            .filter(l => l.title != skipLink)
-            .map(l => (
-              <Fragment key={l.title}>
-                <div className={navStepCss.navStepLinkEntry}>
-                  <Arrow head="east" layout="eastwest" />
-                  <NavButton step={l} actions={actions} mute={mute} />
-                </div>
-                <div className={navCss.navFiller} />
-              </Fragment>
-            ))}
-      </div>
+      {shortcut === "pipe" ? (
+        <div className={classNames(navCss.navFiller, navCss.navFlexRight)}>
+          <div className={navCss.navSideButtonContainer}>
+            <Arrow layout="northsouth" />
+          </div>
+        </div>
+      ) : (
+        <div
+          className={classNames(navCss.navFiller, navStepCss.navStepLinkBox)}
+        >
+          <div className={navCss.navFiller} />
+          {!current &&
+            step.links
+              .filter(l => l.title != skipLink)
+              .map(l => (
+                <Fragment key={l.title}>
+                  <div className={navStepCss.navStepLinkEntry}>
+                    <Arrow head="east" layout="eastwest" />
+                    <NavButton step={l} actions={actions} mute={mute} />
+                  </div>
+                  <div
+                    className={classNames(
+                      navCss.navFiller,
+                      shortcut === "this" && navCss.navFlexRight
+                    )}
+                  >
+                    {shortcut === "this" && (
+                      <div className={navCss.navSideButtonContainer}>
+                        <Arrow layout="northsouth" head="north" />
+                      </div>
+                    )}
+                  </div>
+                </Fragment>
+              ))}
+        </div>
+      )}
     </div>
   );
 };

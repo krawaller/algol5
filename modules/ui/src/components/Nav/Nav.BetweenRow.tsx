@@ -5,10 +5,12 @@ import { Arrow } from "../Arrow";
 
 type NavBetweenRowProps = {
   hasBack?: boolean;
+  hasShort?: boolean;
 };
 
 export const NavBetweenRow: FunctionComponent<NavBetweenRowProps> = ({
   hasBack,
+  hasShort,
 }) => (
   <div className={classNames(css.navRow, css.navBetweenRow)}>
     <div className={css.navSideButtonContainer}>
@@ -17,7 +19,9 @@ export const NavBetweenRow: FunctionComponent<NavBetweenRowProps> = ({
     <div className={css.navSideButtonContainer}>
       <Arrow layout="northsouth" head="south" />
     </div>
-    <div className={css.navSideButtonContainer} />
+    <div className={css.navSideButtonContainer}>
+      {hasShort && <Arrow layout="northsouth" />}
+    </div>
   </div>
 );
 

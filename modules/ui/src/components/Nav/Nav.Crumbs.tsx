@@ -8,10 +8,11 @@ type NavCrumbsProps = {
   actions: AppActions;
   mute?: boolean;
   hasBackBtn?: boolean;
+  hasShortcut?: boolean;
 };
 
 export const NavCrumbs: FunctionComponent<NavCrumbsProps> = props => {
-  const { nav, actions, mute, hasBackBtn } = props;
+  const { nav, actions, mute, hasBackBtn, hasShortcut } = props;
   const { me, crumbs } = nav;
   return (
     <Fragment>
@@ -21,10 +22,14 @@ export const NavCrumbs: FunctionComponent<NavCrumbsProps> = props => {
             actions={actions}
             step={crumb}
             back={hasBackBtn && i === crumbs.length - 1 ? "this" : "none"}
+            shortcut={hasShortcut && i === crumbs.length - 1 ? "this" : "none"}
             skipLink={i === crumbs.length - 1 ? me.title : crumbs[i + 1].title}
             mute={mute}
           />
-          <NavBetweenRow hasBack={hasBackBtn && i === crumbs.length - 1} />
+          <NavBetweenRow
+            hasBack={hasBackBtn && i === crumbs.length - 1}
+            hasShort={hasShortcut && i === crumbs.length - 1}
+          />
         </Fragment>
       ))}
     </Fragment>

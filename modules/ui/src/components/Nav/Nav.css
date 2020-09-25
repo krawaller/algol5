@@ -101,6 +101,12 @@
   align-items: stretch;
 }
 
+.navFlexRight {
+  justify-content: flex-end;
+  display: flex;
+  align-items: stretch;
+}
+
 .navButtonInner {
   pointer-events: all;
   padding: 0 3px;

@@ -42,6 +42,13 @@
   width: 100%;
 }
 
+.arrowDashed:after {
+  border-style: dashed;
+}
+.arrowDashed:before {
+  border-style: dashed;
+}
+
 .arrowNorthSouth:after {
   border-left-width: 1px;
   align-self: flex-end;

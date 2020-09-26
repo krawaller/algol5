@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React, { FunctionComponent, Fragment } from "react";
 import { AlgolNavStep, AppActions } from "../../../../types";
+import { DASHED_SHORTCUTS } from "./Nav.constants";
 
 import navCss from "./Nav.cssProxy";
 import navStepCss from "./Nav.Step.cssProxy";
@@ -25,12 +26,15 @@ export const NavStepRow: FunctionComponent<NavStepRowProps> = props => {
       <div className={classNames(navCss.navFiller, navCss.navFlexLeft)}>
         <div className={navCss.navSideButtonContainer}>
           {back !== "none" && (
-            <Arrow layout={back === "this" ? "southeast" : "northsouth"} />
+            <Arrow
+              layout={back === "this" ? "southeast" : "northsouth"}
+              dashed={DASHED_SHORTCUTS}
+            />
           )}
         </div>
         {back === "this" && (
           <div className={navCss.navFiller}>
-            <Arrow layout="eastwest" head="east" />
+            <Arrow layout="eastwest" head="east" dashed={DASHED_SHORTCUTS} />
           </div>
         )}
       </div>
@@ -45,7 +49,7 @@ export const NavStepRow: FunctionComponent<NavStepRowProps> = props => {
       {shortcut === "pipe" ? (
         <div className={classNames(navCss.navFiller, navCss.navFlexRight)}>
           <div className={navCss.navSideButtonContainer}>
-            <Arrow layout="northsouth" />
+            <Arrow layout="northsouth" dashed />
           </div>
         </div>
       ) : (
@@ -70,7 +74,11 @@ export const NavStepRow: FunctionComponent<NavStepRowProps> = props => {
                   >
                     {shortcut === "this" && (
                       <div className={navCss.navSideButtonContainer}>
-                        <Arrow layout="northsouth" head="north" />
+                        <Arrow
+                          layout="northsouth"
+                          head="north"
+                          dashed={DASHED_SHORTCUTS}
+                        />
                       </div>
                     )}
                   </div>

@@ -16,6 +16,7 @@ import navCss from "./Nav.cssProxy";
 import navBottomCss from "./Nav.Bottom.cssProxy";
 import { NavButton } from "./Nav.Button";
 import { Arrow } from "../Arrow";
+import { DASHED_SHORTCUTS } from "./Nav.constants";
 
 type Dir = "up" | "down" | "same";
 type Pos = "nearer" | "further" | "same";
@@ -78,7 +79,9 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
             <div className={whatsMyClass(status, pos)}>
               <div className={classNames(navCss.navRow, navCss.navAlways)}>
                 <div className={navCss.navSideButtonContainer}>
-                  {hasBackBtn && fullNav && <Arrow layout="northeast" />}
+                  {hasBackBtn && fullNav && (
+                    <Arrow layout="northeast" dashed={DASHED_SHORTCUTS} />
+                  )}
                 </div>
                 <div
                   className={classNames(
@@ -88,7 +91,7 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
                 >
                   {hasBackBtn &&
                     (fullNav ? (
-                      <Arrow layout="eastwest" />
+                      <Arrow layout="eastwest" dashed={DASHED_SHORTCUTS} />
                     ) : (
                       <div
                         className={classNames(
@@ -126,7 +129,7 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
                             <Arrow layout="eastwest" head="east" />
                           </div>
                         ) : (
-                          <Arrow layout="northwest" />
+                          <Arrow layout="northwest" dashed={DASHED_SHORTCUTS} />
                         ))}
                     </div>
                   </Fragment>

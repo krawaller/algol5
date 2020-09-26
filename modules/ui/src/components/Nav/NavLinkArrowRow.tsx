@@ -4,6 +4,7 @@ import navCss from "./Nav.cssProxy";
 import hintCss from "./Nav.Hint.cssProxy";
 import { Arrow } from "../Arrow";
 import { ArrowMulti, ArrowMultiProps } from "../Arrow/Arrow.Multi";
+import { DASHED_SHORTCUTS } from "./Nav.constants";
 
 type NavLinkArrowRowProps = {
   nbrOfLinks: number;
@@ -41,15 +42,15 @@ export const NavLinkArrowRow: FunctionComponent<NavLinkArrowRowProps> = props =>
           hasBackBtn && hintCss.navHintBack
         )}
       >
-        {hasBackBtn && <Arrow layout="northsouth" />}
+        {hasBackBtn && <Arrow layout="northsouth" dashed={DASHED_SHORTCUTS} />}
       </div>
       <div className={navCss.navFiller} />
       {pieces}
       <div className={navCss.navFiller}>
-        {hasShortcut && <Arrow layout="southeast" />}
+        {hasShortcut && <Arrow layout="southeast" dashed={DASHED_SHORTCUTS} />}
       </div>
       <div className={navCss.navSideButtonContainer}>
-        {hasShortcut && <Arrow layout="northwest" />}
+        {hasShortcut && <Arrow layout="northwest" dashed={DASHED_SHORTCUTS} />}
       </div>
     </div>
   );

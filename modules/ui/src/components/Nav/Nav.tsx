@@ -16,6 +16,7 @@ import { NavTopRow } from "./Nav.TopRow";
 import { NavCrumbs } from "./Nav.Crumbs";
 import { NavButton } from "./Nav.Button";
 import { findShortcut } from "../../../../common/nav/findShortcut";
+import { DASHED_SHORTCUTS } from "./Nav.constants";
 
 export type NavProps = {
   nav?: AlgolNav;
@@ -96,7 +97,9 @@ export const Nav: FunctionComponent<NavProps> = props => {
         </div>
         <NavTopRow fullNav={fullNav && crumbs.length > 0} />
         <div className={classNames(css.navRow, css.navFiller)}>
-          {hasCrumbs && <Arrow layout="northsouth" head="south" />}
+          {hasCrumbs && (
+            <Arrow layout="northsouth" head="south" dashed={DASHED_SHORTCUTS} />
+          )}
         </div>
         <div>
           <NavCrumbs

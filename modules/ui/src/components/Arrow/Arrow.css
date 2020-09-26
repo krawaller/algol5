@@ -156,3 +156,10 @@
 .arrowFlushTop.arrowHeadWest:before {
   top: calc(var(--arrow-size) * -1);
 }
+
+.arrowDashed.arrowHeadNorth:before,
+.arrowDashed.arrowHeadEast:before,
+.arrowDashed.arrowHeadSouth:before,
+.arrowDashed.arrowHeadWest:before {
+  opacity: 0.5;
+}

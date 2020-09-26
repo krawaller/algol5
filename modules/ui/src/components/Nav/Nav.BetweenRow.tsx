@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React, { FunctionComponent } from "react";
 import css from "./Nav.cssProxy";
 import { Arrow } from "../Arrow";
+import { DASHED_SHORTCUTS } from "./Nav.constants";
 
 type NavBetweenRowProps = {
   hasBack?: boolean;
@@ -14,13 +15,13 @@ export const NavBetweenRow: FunctionComponent<NavBetweenRowProps> = ({
 }) => (
   <div className={classNames(css.navRow, css.navBetweenRow)}>
     <div className={css.navSideButtonContainer}>
-      {hasBack && <Arrow layout="northsouth" />}
+      {hasBack && <Arrow layout="northsouth" dashed={DASHED_SHORTCUTS} />}
     </div>
     <div className={css.navSideButtonContainer}>
       <Arrow layout="northsouth" head="south" />
     </div>
     <div className={css.navSideButtonContainer}>
-      {hasShort && <Arrow layout="northsouth" />}
+      {hasShort && <Arrow layout="northsouth" dashed={DASHED_SHORTCUTS} />}
     </div>
   </div>
 );

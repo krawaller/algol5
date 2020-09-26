@@ -1,6 +1,6 @@
-import { AlgolNav } from "../../types";
+import { AlgolNav, AlgolNavStep } from "../../types";
 
-export const findShortcut = (nav?: AlgolNav): string | null => {
+export const findShortcut = (nav?: AlgolNav): AlgolNavStep | null => {
   if (nav) {
     const {
       crumbs,
@@ -10,7 +10,7 @@ export const findShortcut = (nav?: AlgolNav): string | null => {
       const shortcut = crumbs[crumbs.length - 1].links.find(
         l => l.id === links[links.length - 1].id
       );
-      return shortcut ? shortcut.id : null;
+      return shortcut || null;
     }
   }
   return null;

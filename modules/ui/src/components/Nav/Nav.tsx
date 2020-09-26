@@ -41,7 +41,7 @@ export const Nav: FunctionComponent<NavProps> = props => {
   const { crumbs, me } = nav;
   const hasCrumbs = Boolean(nav && crumbs.length > 0);
   const hasUpBtn = BACK_BUTTON && hasCrumbs;
-  const hasShortcut = useMemo(() => Boolean(findShortcut(nav)), [nav]);
+  const shortcut = useMemo(() => findShortcut(nav), [nav]);
 
   useEffect(() => {
     setFullNav(false);
@@ -106,28 +106,27 @@ export const Nav: FunctionComponent<NavProps> = props => {
             actions={actions}
             nav={nav}
             mute={!fullNav}
-            hasBackBtn={hasUpBtn}
-            hasShortcut={hasShortcut}
+            shortcut={shortcut}
           />
           <NavStepRow
             step={me}
-            back={hasUpBtn ? "pipe" : "none"}
-            shortcut={hasShortcut ? "pipe" : "none"}
-            current
+            hasBackBtn={hasUpBtn}
+            shortcut={shortcut}
+            position="current"
             actions={actions}
             mute={!fullNav}
           />
           <NavLinkArrowRow
             nbrOfLinks={me.links.length}
             hasBackBtn={hasUpBtn}
-            hasShortcut={hasShortcut}
+            hasShortcut={!!shortcut}
           />
           <NavBottomRow
             nav={nav}
             actions={actions}
             hasBackBtn={hasUpBtn}
             fullNav={fullNav}
-            hasShortcut={hasShortcut}
+            hasShortcut={!!shortcut}
           />
           <div
             className={classNames(

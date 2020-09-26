@@ -27,6 +27,7 @@ export type NavBottomRowProps = {
   fullNav?: boolean;
   onToggle?: () => void;
   hasBackBtn?: boolean;
+  hasShortcut?: boolean;
 };
 
 type NavBottomRowState = {
@@ -39,7 +40,7 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
     depth: -1,
     dir: "same",
   });
-  const { nav, actions, onToggle, fullNav, hasBackBtn } = props;
+  const { nav, actions, onToggle, fullNav, hasBackBtn, hasShortcut } = props;
   const { crumbs, key, me } =
     nav ||
     (({
@@ -109,7 +110,14 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
                       key={btn.id}
                       step={btn}
                       actions={actions}
-                      type={hasBackBtn && n === 0 ? "back" : "normal"}
+                      fullNav={fullNav}
+                      type={
+                        hasBackBtn && n === 0
+                          ? "back"
+                          : n === showLinks.length - 1 && hasShortcut
+                          ? "sibling"
+                          : "normal"
+                      }
                     />
                     <div
                       className={classNames(

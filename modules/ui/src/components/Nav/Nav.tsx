@@ -127,6 +127,7 @@ export const Nav: FunctionComponent<NavProps> = props => {
             actions={actions}
             hasBackBtn={hasUpBtn}
             fullNav={fullNav}
+            hasShortcut={hasShortcut}
           />
           <div
             className={classNames(

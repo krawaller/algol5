@@ -122,6 +122,10 @@
   display: block;
 }
 
+.navButtonShortcut {
+  border-style: dashed;
+}
+
 .navSideButtonContainer,
 .navSideButtonContainer .navButton {
   width: 35px;

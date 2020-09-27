@@ -92,7 +92,12 @@ export const Nav: FunctionComponent<NavProps> = props => {
           )}
         >
           {crumbs.length > 0 && (
-            <NavButton step={{ ...crumbs[0], title: "H" }} actions={actions} />
+            <NavButton
+              type="back"
+              fullNav={fullNav}
+              step={{ ...crumbs[0], title: "H" }}
+              actions={actions}
+            />
           )}
         </div>
         <NavTopRow fullNav={fullNav && crumbs.length > 0} />

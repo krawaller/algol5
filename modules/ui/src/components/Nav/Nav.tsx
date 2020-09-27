@@ -17,6 +17,7 @@ import { NavCrumbs } from "./Nav.Crumbs";
 import { NavButton } from "./Nav.Button";
 import { findShortcut } from "../../../../common/nav/findShortcut";
 import { DASHED_SHORTCUTS } from "./Nav.constants";
+import { NavHomeButton } from "./Nav.HomeButton";
 
 export type NavProps = {
   nav?: AlgolNav;
@@ -85,21 +86,7 @@ export const Nav: FunctionComponent<NavProps> = props => {
         )}
         // onClick={e => setFullNav(false)}
       >
-        <div
-          className={classNames(
-            css.navHomeBtnContainer,
-            css.navSideButtonContainer
-          )}
-        >
-          {crumbs.length > 0 && (
-            <NavButton
-              type="back"
-              fullNav={fullNav}
-              step={{ ...crumbs[0], title: "H" }}
-              actions={actions}
-            />
-          )}
-        </div>
+        <NavHomeButton fullNav={fullNav} crumbs={crumbs} actions={actions} />
         <NavTopRow fullNav={fullNav && crumbs.length > 0} />
         <div className={classNames(css.navRow, css.navFiller)}>
           {hasCrumbs && (

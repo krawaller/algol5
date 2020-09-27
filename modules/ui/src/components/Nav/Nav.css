@@ -159,14 +159,6 @@
   height: 21px;
 }
 
-.navHomeBtnContainer {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  height: 21px;
-  z-index: 5; /* to be above toprow */
-}
-
 .navMapButtonContainer {
   position: absolute;
   bottom: 5px;
@@ -179,7 +171,6 @@
   left: 5px;
 }
 
-.navHomeBtnContainer > .navButton,
 .navCompassBtnContainer > .navButton,
 .navBackBtnContainer > .navButton {
   height: 21px;

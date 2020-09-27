@@ -6,8 +6,7 @@ const jostleMeta: JostleDefinition["meta"] = {
   name: "Jostle",
   source: "http://www.marksteeregames.com/Jostle_Go_rules.pdf",
   tags: ["superdupergames"],
-  tagline:
-    "Be the last one to make a valid move which can only be to a more valuable position",
+  tagline: "Jostle for ever-better positions!",
   author: "Mark Steere",
   year: 2010,
   slug: "jostle",

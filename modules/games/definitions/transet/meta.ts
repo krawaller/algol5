@@ -8,8 +8,7 @@ const transetMeta: TransetDefinition["meta"] = {
   source: "http://sagme.blogspot.se/2013/05/transet.html",
   links: ["http://sagme.blogspot.se/2013/05/transet.html"],
   tags: ["infiltration"],
-  tagline:
-    "Catch your opponent off guard through swapping your units as you seek access to her base",
+  tagline: "Trick your opponent by swapping units!",
   slug: "transet",
   added: "GENESIS",
 };

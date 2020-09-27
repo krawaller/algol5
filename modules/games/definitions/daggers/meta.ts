@@ -8,8 +8,7 @@ const daggersMeta: DaggersDefinition["meta"] = {
   slug: "daggers",
   tags: ["asymmetric", "regicide", "infiltration", "multiwin", "bloodshed"],
   source: "http://www.di.fc.ul.pt/~jpn/gv/daggers.htm",
-  tagline:
-    "Will the superior position at the top of the hill beat overwhelming numbers?",
+  tagline: "Can the superior position beat overwhelming numbers?",
   added: "GENESIS",
 };
 

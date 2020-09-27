@@ -3,6 +3,7 @@ import React, { FunctionComponent } from "react";
 import navCss from "./Nav.cssProxy";
 import hintCss from "./Nav.Hint.cssProxy";
 import { Arrow } from "../Arrow";
+import { DASHED_SHORTCUTS } from "./Nav.constants";
 
 type NavTopRowProps = {
   fullNav?: boolean;
@@ -21,10 +22,10 @@ export const NavTopRow: FunctionComponent<NavTopRowProps> = props => {
         )}
       />
       <div className={navCss.navFiller}>
-        <Arrow layout="eastwest" />
+        <Arrow layout="eastwest" dashed={DASHED_SHORTCUTS} />
       </div>
       <div className={navCss.navSideButtonContainer}>
-        <Arrow layout="southwest" />
+        <Arrow layout="southwest" dashed={DASHED_SHORTCUTS} />
       </div>
       <div className={navCss.navFiller}></div>
       <div className={navCss.navSideButtonContainer} />

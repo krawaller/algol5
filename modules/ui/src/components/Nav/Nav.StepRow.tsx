@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React, { FunctionComponent, Fragment } from "react";
 import { AlgolNavStep, AppActions } from "../../../../types";
+import { DASHED_SHORTCUTS, SHORTCUT_STRATEGY } from "./Nav.constants";
 
 import navCss from "./Nav.cssProxy";
 import navStepCss from "./Nav.Step.cssProxy";
@@ -9,53 +10,138 @@ import { Arrow } from "../Arrow";
 import { NavButton } from "./Nav.Button";
 
 type NavStepRowProps = {
-  back: "pipe" | "this" | "none";
+  hasBackBtn?: boolean;
+  shortcut?: AlgolNavStep | null;
   step: AlgolNavStep;
-  current?: boolean;
   mute?: boolean;
   skipLink?: string;
+  position: "current" | "prior" | "other";
   actions: AppActions;
 };
 
 export const NavStepRow: FunctionComponent<NavStepRowProps> = props => {
-  const { back, step, current, skipLink, actions, mute } = props;
+  const { step, actions, mute, position } = props;
   return (
     <div className={navCss.navRow}>
-      <div className={classNames(navCss.navFiller, navCss.navFlexLeft)}>
-        <div className={navCss.navSideButtonContainer}>
-          {back !== "none" && (
-            <Arrow layout={back === "this" ? "southeast" : "northsouth"} />
-          )}
-        </div>
-        {back === "this" && (
-          <div className={navCss.navFiller}>
-            <Arrow layout="eastwest" head="east" />
-          </div>
-        )}
-      </div>
+      <LeftSide {...props} />
       <div className={navCss.navRowStepContainer}>
         <NavStep
           step={step}
-          isCurrent={current}
+          isCurrent={position === "current"}
           actions={actions}
           mute={mute}
         />
       </div>
-      <div className={classNames(navCss.navFiller, navStepCss.navStepLinkBox)}>
-        <div className={navCss.navFiller} />
-        {!current &&
-          step.links
-            .filter(l => l.title != skipLink)
-            .map(l => (
-              <Fragment key={l.title}>
-                <div className={navStepCss.navStepLinkEntry}>
-                  <Arrow head="east" layout="eastwest" />
-                  <NavButton step={l} actions={actions} mute={mute} />
-                </div>
-                <div className={navCss.navFiller} />
-              </Fragment>
-            ))}
+      <RightSide {...props} />
+    </div>
+  );
+};
+
+const LeftSide = ({ hasBackBtn, position }: NavStepRowProps) => (
+  <div className={classNames(navCss.navFiller, navCss.navFlexLeft)}>
+    <div className={navCss.navSideButtonContainer}>
+      {hasBackBtn && position !== "other" && (
+        <Arrow
+          layout={position === "prior" ? "southeast" : "northsouth"}
+          dashed={DASHED_SHORTCUTS}
+        />
+      )}
+    </div>
+    {hasBackBtn && position === "prior" && (
+      <div className={navCss.navFiller}>
+        <Arrow layout="eastwest" head="east" dashed={DASHED_SHORTCUTS} />
       </div>
+    )}
+  </div>
+);
+
+const RightSide = ({
+  shortcut,
+  position,
+  skipLink,
+  actions,
+  mute,
+  step,
+}: NavStepRowProps) => {
+  if (shortcut && position === "current" && SHORTCUT_STRATEGY === "top") {
+    return (
+      <div className={classNames(navCss.navFiller, navCss.navFlexRight)}>
+        <div className={navCss.navSideButtonContainer}>
+          <Arrow layout="northsouth" dashed />
+        </div>
+      </div>
+    );
+  }
+  if (shortcut && position === "prior" && SHORTCUT_STRATEGY === "middle") {
+    return (
+      <div className={classNames(navCss.navFiller, navCss.navFlexRight)}>
+        <div className={navCss.navFiller}>
+          <Arrow layout="eastwest" />
+        </div>
+        <div className={navCss.navSideButtonContainer}>
+          <Arrow layout="southwest" />
+        </div>
+      </div>
+    );
+  }
+  if (shortcut && position === "current" && SHORTCUT_STRATEGY === "middle") {
+    return (
+      <div className={classNames(navCss.navFiller, navStepCss.navStepLinkBox)}>
+        <div className={classNames(navCss.navFiller, navCss.navFlexRight)}>
+          <div className={navCss.navSideButtonContainer}>
+            <Arrow layout="northsouth" head="south" />
+          </div>
+        </div>
+        <div
+          className={classNames(
+            navStepCss.navStepLinkEntry,
+            navCss.navFlexRight
+          )}
+        >
+          <div className="arrowContainer" />
+          <NavButton step={shortcut} actions={actions} mute={mute} />
+        </div>
+        <div className={classNames(navCss.navFiller, navCss.navFlexRight)}>
+          <div className={navCss.navSideButtonContainer}>
+            <Arrow layout="northsouth" head="north" dashed={DASHED_SHORTCUTS} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={classNames(navCss.navFiller, navStepCss.navStepLinkBox)}>
+      <div className={navCss.navFiller} />
+      {position !== "current" &&
+        step.links
+          .filter(l => l.title != skipLink)
+          .map(l => (
+            <Fragment key={l.title}>
+              <div className={navStepCss.navStepLinkEntry}>
+                <Arrow head="east" layout="eastwest" />
+                <NavButton step={l} actions={actions} mute={mute} />
+              </div>
+              <div
+                className={classNames(
+                  navCss.navFiller,
+                  shortcut && position === "prior" && navCss.navFlexRight
+                )}
+              >
+                {shortcut &&
+                  position === "prior" &&
+                  SHORTCUT_STRATEGY === "top" && (
+                    <div className={navCss.navSideButtonContainer}>
+                      <Arrow
+                        layout="northsouth"
+                        head="north"
+                        dashed={DASHED_SHORTCUTS}
+                      />
+                    </div>
+                  )}
+              </div>
+            </Fragment>
+          ))}
     </div>
   );
 };

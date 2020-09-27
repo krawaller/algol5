@@ -11,10 +11,12 @@ import Transition, {
   TransitionStatus,
 } from "react-transition-group/Transition";
 import { AlgolNav, AppActions } from "../../../../types";
+import { findShortcut } from "../../../../common/nav/findShortcut";
 import navCss from "./Nav.cssProxy";
 import navBottomCss from "./Nav.Bottom.cssProxy";
 import { NavButton } from "./Nav.Button";
 import { Arrow } from "../Arrow";
+import { DASHED_SHORTCUTS } from "./Nav.constants";
 
 type Dir = "up" | "down" | "same";
 type Pos = "nearer" | "further" | "same";
@@ -25,6 +27,7 @@ export type NavBottomRowProps = {
   fullNav?: boolean;
   onToggle?: () => void;
   hasBackBtn?: boolean;
+  hasShortcut?: boolean;
 };
 
 type NavBottomRowState = {
@@ -37,7 +40,7 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
     depth: -1,
     dir: "same",
   });
-  const { nav, actions, onToggle, fullNav, hasBackBtn } = props;
+  const { nav, actions, onToggle, fullNav, hasBackBtn, hasShortcut } = props;
   const { crumbs, key, me } =
     nav ||
     (({
@@ -46,6 +49,7 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
       key: Math.random(),
     } as unknown) as AlgolNav);
   const { links } = me;
+  const shortCut = useMemo(() => findShortcut(nav), [nav]);
   const showLinks = useMemo(
     () => (crumbs.length ? crumbs.slice(-1) : []).concat(links),
     [links, crumbs]
@@ -57,7 +61,7 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
         depth: count,
         dir: count > depth ? "down" : count < depth ? "up" : "same",
       }),
-    [count]
+    [crumbs]
   );
   return (
     <TransitionGroup
@@ -76,19 +80,26 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
             <div className={whatsMyClass(status, pos)}>
               <div className={classNames(navCss.navRow, navCss.navAlways)}>
                 <div className={navCss.navSideButtonContainer}>
-                  {hasBackBtn && fullNav && <Arrow layout="northeast" />}
+                  {hasBackBtn && fullNav && (
+                    <Arrow layout="northeast" dashed={DASHED_SHORTCUTS} />
+                  )}
                 </div>
                 <div
                   className={classNames(
                     navCss.navFiller,
-                    navBottomCss.navBottomBackHintContainer
+                    navBottomCss.navBottomHintContainer
                   )}
                 >
                   {hasBackBtn &&
                     (fullNav ? (
-                      <Arrow layout="eastwest" />
+                      <Arrow layout="eastwest" dashed={DASHED_SHORTCUTS} />
                     ) : (
-                      <div className={navBottomCss.navBottomBackHint}>
+                      <div
+                        className={classNames(
+                          navBottomCss.navBottomHint,
+                          navBottomCss.navBottomBackHint
+                        )}
+                      >
                         <Arrow layout="northeast" head="north" />
                       </div>
                     ))}
@@ -99,9 +110,36 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
                       key={btn.id}
                       step={btn}
                       actions={actions}
-                      type={hasBackBtn && n === 0 ? "back" : "normal"}
+                      fullNav={fullNav}
+                      type={
+                        hasBackBtn && n === 0
+                          ? "back"
+                          : n === showLinks.length - 1 && hasShortcut
+                          ? "sibling"
+                          : "normal"
+                      }
                     />
-                    <div className={navCss.navFiller}></div>
+                    <div
+                      className={classNames(
+                        navCss.navFiller,
+                        navBottomCss.navBottomHintContainer
+                      )}
+                    >
+                      {shortCut &&
+                        n === showLinks.length - 1 &&
+                        (!fullNav ? (
+                          <div
+                            className={classNames(
+                              navBottomCss.navBottomHint,
+                              navBottomCss.navBottomShortcutHint
+                            )}
+                          >
+                            <Arrow layout="eastwest" head="east" />
+                          </div>
+                        ) : (
+                          <Arrow layout="northwest" dashed={DASHED_SHORTCUTS} />
+                        ))}
+                    </div>
                   </Fragment>
                 ))}
                 <div className={navCss.navSideButtonContainer} />
@@ -131,4 +169,5 @@ const whatsMyClass = (status: TransitionStatus, pos: Pos) =>
     [navBottomCss.navBottomDuringExiting]: status === "exiting",
     [navBottomCss.navBottomFurther]: pos === "further",
     [navBottomCss.navBottomNearer]: pos === "nearer",
+    [navBottomCss.navBottomSame]: pos === "same",
   });

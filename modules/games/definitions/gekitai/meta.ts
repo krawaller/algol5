@@ -9,6 +9,7 @@ const gekitaiMeta: GekitaiDefinition["meta"] = {
   source: "http://some.url.to.rules",
   code: "x",
   slug: "gekitai",
+  added: "2020-02-15",
 };
 
 export default gekitaiMeta;

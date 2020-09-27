@@ -10,6 +10,7 @@ const trafficlightsMeta: TrafficlightsDefinition["meta"] = {
   tagline:
     "Position and promote neutral units to form a line before your opponent",
   slug: "traffic_lights",
+  added: "2020-02-29",
 };
 
 export default trafficlightsMeta;

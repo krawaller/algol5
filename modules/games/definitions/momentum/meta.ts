@@ -9,6 +9,7 @@ const momentumMeta: MomentumDefinition["meta"] = {
   source: "http://some.url.to.rules",
   code: "j",
   slug: "momentum",
+  added: "2020-02-19",
 };
 
 export default momentumMeta;

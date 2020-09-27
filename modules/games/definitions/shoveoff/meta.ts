@@ -9,6 +9,7 @@ const shoveoffMeta: ShoveoffDefinition["meta"] = {
   tags: ["formation"],
   tagline: "Shove the others off the board to form a line in your colour",
   slug: "shove_off",
+  added: "GENESIS",
 };
 
 export default shoveoffMeta;

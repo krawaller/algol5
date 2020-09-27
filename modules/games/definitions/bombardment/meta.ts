@@ -15,6 +15,7 @@ const bombardmentMeta: BombardmentDefinition["meta"] = {
   source: "https://bodogemu.com/en/games/bombardment",
   code: "f",
   slug: "bombardment",
+  added: "2020-07-14",
 };
 
 export default bombardmentMeta;

@@ -10,6 +10,7 @@ const orthokonMeta: OrthokonDefinition["meta"] = {
   year: 2001,
   tagline: "Take over your opponent's army before she steals yours",
   slug: "orthokon",
+  added: "GENESIS",
 };
 
 export default orthokonMeta;

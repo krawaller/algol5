@@ -19,6 +19,7 @@ const breakthroughMeta: BreakthroughDefinition["meta"] = {
   source: "http://www.di.fc.ul.pt/~jpn/gv/breakthrough.htm",
   code: "K",
   slug: "breakthrough",
+  added: "2020-05-13",
 };
 
 export default breakthroughMeta;

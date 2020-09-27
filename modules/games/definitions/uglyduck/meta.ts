@@ -9,6 +9,7 @@ const uglyduckMeta: UglyduckDefinition["meta"] = {
   tags: ["irreversible", "troyka", "infiltration"],
   tagline: "Be the first to bring your ugly duck home as a swan!",
   slug: "ugly_duck",
+  added: "GENESIS",
 };
 
 export default uglyduckMeta;

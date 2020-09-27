@@ -11,6 +11,7 @@ const jostleMeta: JostleDefinition["meta"] = {
   author: "Mark Steere",
   year: 2010,
   slug: "jostle",
+  added: "GENESIS",
 };
 
 export default jostleMeta;

@@ -9,6 +9,7 @@ const neutronMeta: NeutronDefinition["meta"] = {
   source: "http://some.url.to.rules",
   code: "L",
   slug: "neutron",
+  added: "2020-04-23",
 };
 
 export default neutronMeta;

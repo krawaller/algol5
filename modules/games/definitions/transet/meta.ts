@@ -11,6 +11,7 @@ const transetMeta: TransetDefinition["meta"] = {
   tagline:
     "Catch your opponent off guard through swapping your units as you seek access to her base",
   slug: "transet",
+  added: "GENESIS",
 };
 
 export default transetMeta;

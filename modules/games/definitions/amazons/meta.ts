@@ -18,6 +18,7 @@ const amazonsMeta: AmazonsDefinition["meta"] = {
     "superdupergames",
   ],
   slug: "amazons",
+  added: "GENESIS",
 };
 
 export default amazonsMeta;

@@ -9,6 +9,7 @@ const murusgallicusMeta: MurusgallicusDefinition["meta"] = {
   tagline:
     "Topple your towers in a battle of wits where the forces stay balanced throughout the game",
   slug: "murus_gallicus",
+  added: "GENESIS",
 };
 
 export default murusgallicusMeta;

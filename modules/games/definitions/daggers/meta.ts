@@ -10,6 +10,7 @@ const daggersMeta: DaggersDefinition["meta"] = {
   source: "http://www.di.fc.ul.pt/~jpn/gv/daggers.htm",
   tagline:
     "Will the superior position at the top of the hill beat overwhelming numbers?",
+  added: "GENESIS",
 };
 
 export default daggersMeta;

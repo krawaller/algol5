@@ -9,6 +9,7 @@ const squavaMeta: SquavaDefinition["meta"] = {
   source: "https://nestorgames.com/#squava_detail",
   code: "q",
   slug: "squava",
+  added: "2020-09-13",
 };
 
 export default squavaMeta;

@@ -9,6 +9,7 @@ const threemusketeersMeta: ThreemusketeersDefinition["meta"] = {
   tagline: "Will the three musketeers escape the soldiers out to get them?",
   tags: ["irreversible", "asymmetric", "iggamecenter", "gamut"],
   slug: "three_musketeers",
+  added: "GENESIS",
 };
 
 export default threemusketeersMeta;

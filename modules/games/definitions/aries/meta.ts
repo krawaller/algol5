@@ -9,6 +9,7 @@ const ariesMeta: AriesDefinition["meta"] = {
   tags: ["infiltration", "superdupergames", "huntoon"],
   tagline: "Push your opponent's rooks off the board and invade her corner",
   slug: "aries",
+  added: "GENESIS",
 };
 
 export default ariesMeta;

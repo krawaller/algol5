@@ -11,6 +11,7 @@ const serauqsMeta: SerauqsDefinition["meta"] = {
   tagline:
     "Form a winning pattern without helping your opponent to do the same",
   slug: "serauqs",
+  added: "GENESIS",
 };
 
 export default serauqsMeta;

@@ -14,10 +14,10 @@ import { NavStepRow } from "./Nav.StepRow";
 import { Arrow } from "../Arrow";
 import { NavTopRow } from "./Nav.TopRow";
 import { NavCrumbs } from "./Nav.Crumbs";
-import { NavButton } from "./Nav.Button";
 import { findShortcut } from "../../../../common/nav/findShortcut";
 import { DASHED_SHORTCUTS } from "./Nav.constants";
 import { NavHomeButton } from "./Nav.HomeButton";
+import { NavToggleButton } from "./Nav.ToggleButton";
 
 export type NavProps = {
   nav?: AlgolNav;
@@ -37,7 +37,14 @@ export const Nav: FunctionComponent<NavProps> = props => {
     }
     _setFullNav(bool);
   };
-  const { nav, actions } = props;
+  const { nav, actions: _actions } = props;
+  const actions = useMemo(
+    () => ({
+      ..._actions,
+      setFullNav,
+    }),
+    [_actions, setFullNav, neverNav]
+  );
   if (!nav) return <div></div>;
   const { crumbs, me } = nav;
   const hasCrumbs = Boolean(nav && crumbs.length > 0);
@@ -59,22 +66,6 @@ export const Nav: FunctionComponent<NavProps> = props => {
       }
     }
   }, [nav]);
-  const mapBtn = useMemo(
-    () => (
-      <NavButton
-        actions={actions}
-        active={fullNav}
-        step={{
-          id: "toggleNav",
-          desc: fullNav ? "Hide full nav" : "Show full nav",
-          title: "N",
-          onClick: () => setFullNav(!fullNav),
-          links: [],
-        }}
-      />
-    ),
-    [fullNav]
-  );
   return (
     <Fragment>
       <div className={css.navShadeBottom}></div>
@@ -120,14 +111,7 @@ export const Nav: FunctionComponent<NavProps> = props => {
             fullNav={fullNav}
             hasShortcut={!!shortcut}
           />
-          <div
-            className={classNames(
-              css.navCompassBtnContainer,
-              css.navSideButtonContainer
-            )}
-          >
-            {mapBtn}
-          </div>
+          <NavToggleButton fullNav={fullNav} actions={actions} />
         </div>
       </div>
     </Fragment>

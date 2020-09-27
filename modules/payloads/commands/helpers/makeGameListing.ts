@@ -5,14 +5,22 @@ import { GameId } from "../../../games/dist/list";
 import meta from "../../../games/dist/meta";
 import gameCompositeMap from "../../../payloads/dist/composites/games/games";
 import { AlgolListing } from "../../../types";
-import { gameSlug } from "../../../common/utils";
+import { gameSlug, punctuate } from "../../../common/utils";
 
 const outFolder = path.join(__dirname, "../../dist/listings/games");
 
 export const makeGameListing = (gameId: GameId) => {
   const composite = gameCompositeMap[`${gameId}_small.png`];
   const listing: AlgolListing = {
-    blurb: meta[gameId].tagline,
+    blurb:
+      punctuate(meta[gameId].tagline) +
+      "\nBy " +
+      (meta[gameId].author || "unknown") +
+      (meta[gameId].added === "GENESIS"
+        ? "."
+        : ", added " +
+          new Date(meta[gameId].added).toString().substr(4, 11) +
+          "."),
     preloads: [],
     url: `/games/${gameSlug(meta[gameId])}`,
     title: meta[gameId].name,

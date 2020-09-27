@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { FunctionComponent, useMemo, Fragment } from "react";
+import React, { Fragment } from "react";
 import { AlgolNav, AppActions } from "../../../../types";
 import css from "./Nav.cssProxy";
 import { NavBottomRow } from "./Nav.BottomRow";
@@ -8,7 +8,6 @@ import { NavStepRow } from "./Nav.StepRow";
 import { Arrow } from "../Arrow";
 import { NavTopRow } from "./Nav.TopRow";
 import { NavCrumbs } from "./Nav.Crumbs";
-import { findShortcut } from "../../../../common/nav/findShortcut";
 import { DASHED_SHORTCUTS } from "./Nav.constants";
 import { NavHomeButton } from "./Nav.HomeButton";
 import { NavToggleButton } from "./Nav.ToggleButton";
@@ -20,17 +19,19 @@ export type NavProps = {
   actions: AppActions;
 };
 
-const BACK_BUTTON = true;
-
-export const Nav: FunctionComponent<NavProps> = props => {
-  const { nav, actions: _actions } = props;
-  const { actions, fullNav, neverNav } = useNavState(_actions);
+export const Nav = (props: NavProps) => {
+  const { nav } = props;
+  const {
+    actions,
+    fullNav,
+    neverNav,
+    hasCrumbs,
+    hasUpBtn,
+    shortcut,
+  } = useNavState(props);
   useNavPrefetch({ actions, nav });
   if (!nav) return <div></div>;
   const { crumbs, me } = nav;
-  const hasCrumbs = Boolean(nav && crumbs.length > 0);
-  const hasUpBtn = BACK_BUTTON && hasCrumbs;
-  const shortcut = useMemo(() => findShortcut(nav), [nav]);
 
   return (
     <Fragment>

@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { FunctionComponent, useMemo, useEffect, Fragment } from "react";
+import React, { FunctionComponent, useMemo, Fragment } from "react";
 import { AlgolNav, AppActions } from "../../../../types";
 import css from "./Nav.cssProxy";
 import { NavBottomRow } from "./Nav.BottomRow";
@@ -13,6 +13,7 @@ import { DASHED_SHORTCUTS } from "./Nav.constants";
 import { NavHomeButton } from "./Nav.HomeButton";
 import { NavToggleButton } from "./Nav.ToggleButton";
 import { useNavState } from "./Nav.useNavSetup";
+import { useNavPrefetch } from "./Nav.useNavPrefetch.";
 
 export type NavProps = {
   nav?: AlgolNav;
@@ -21,32 +22,16 @@ export type NavProps = {
 
 const BACK_BUTTON = true;
 
-const prefetched: Record<string, boolean> = {};
-
 export const Nav: FunctionComponent<NavProps> = props => {
   const { nav, actions: _actions } = props;
   const { actions, fullNav, neverNav } = useNavState(_actions);
+  useNavPrefetch({ actions, nav });
   if (!nav) return <div></div>;
   const { crumbs, me } = nav;
   const hasCrumbs = Boolean(nav && crumbs.length > 0);
   const hasUpBtn = BACK_BUTTON && hasCrumbs;
   const shortcut = useMemo(() => findShortcut(nav), [nav]);
 
-  useEffect(() => {
-    actions.setFullNav(false);
-    if (nav) {
-      const allSteps = nav.crumbs.concat(nav.me).flatMap(s => [s, ...s.links]);
-      if (nav.me.url) {
-        prefetched[nav.me.url] = true;
-      }
-      for (const s of allSteps) {
-        if (s.url && s !== nav.me && !prefetched[s.url]) {
-          actions.prefetch(s.url);
-          prefetched[s.url] = true;
-        }
-      }
-    }
-  }, [nav]);
   return (
     <Fragment>
       <div className={css.navShadeBottom}></div>

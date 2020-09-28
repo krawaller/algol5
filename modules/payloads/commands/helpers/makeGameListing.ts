@@ -16,7 +16,7 @@ export const makeGameListing = (gameId: GameId) => {
       punctuate(meta[gameId].tagline) +
       "\nBy " +
       (meta[gameId].author || "unknown") +
-      (meta[gameId].added === "GENESIS"
+      (meta[gameId].added === "GENESIS" || true
         ? "."
         : ", added " +
           new Date(meta[gameId].added).toString().substr(4, 11) +

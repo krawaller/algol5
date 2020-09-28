@@ -9,6 +9,7 @@ const ataxxMeta: AtaxxDefinition["meta"] = {
   source: "https://en.wikipedia.org/wiki/Ataxx",
   code: "v",
   slug: "ataxx",
+  added: "2020-05-09",
 };
 
 export default ataxxMeta;

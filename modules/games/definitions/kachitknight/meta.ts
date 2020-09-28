@@ -9,6 +9,7 @@ const kachitknightMeta: KachitknightDefinition["meta"] = {
   source: "http://some.url.to.rules",
   code: "G",
   slug: "kachit_knight",
+  added: "2020-05-18",
 };
 
 export default kachitknightMeta;

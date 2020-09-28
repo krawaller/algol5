@@ -9,6 +9,7 @@ const kriegMeta: KriegDefinition["meta"] = {
   tags: ["multiwin", "infiltration"],
   tagline: "Outmanouver your opponent to gain access to her corner",
   slug: "krieg",
+  added: "GENESIS",
 };
 
 export default kriegMeta;

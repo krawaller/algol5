@@ -9,6 +9,7 @@ const uisgeMeta: UisgeDefinition["meta"] = {
   source: "http://some.url.to.rules",
   code: "m",
   slug: "uisge",
+  added: "2020-07-20",
 };
 
 export default uisgeMeta;

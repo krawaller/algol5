@@ -9,6 +9,7 @@ const euclidMeta: EuclidDefinition["meta"] = {
   source: "http://www.di.fc.ul.pt/~jpn/gv/euclid.htm",
   code: "X",
   slug: "euclid",
+  added: "2020-07-15",
 };
 
 export default euclidMeta;

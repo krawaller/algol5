@@ -11,6 +11,7 @@ const hippolytaMeta: HippolytaDefinition["meta"] = {
   code: "t",
   slug: "hippolyta",
   demo: "t0Lr7|Y2Yt5Zt4,17,0,13,0Y3,9,0Zb4X0",
+  added: "2020-09-13",
 };
 
 export default hippolytaMeta;

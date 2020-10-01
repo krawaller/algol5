@@ -9,6 +9,7 @@ const crossingsMeta: CrossingsDefinition["meta"] = {
   source: "",
   code: "i",
   slug: "crossings",
+  added: "2020-05-12",
 };
 
 export default crossingsMeta;

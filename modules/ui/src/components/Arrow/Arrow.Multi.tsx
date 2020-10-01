@@ -3,12 +3,12 @@ import classNames from "classnames";
 import css from "./Arrow.cssProxy";
 import { ArrowFlush, ArrowLayout, ArrowHead, Arrow } from "./Arrow";
 
-export type ArrowMulti = {
+export type ArrowMultiProps = {
   head?: ArrowHead;
   flush?: ArrowFlush;
 } & Partial<{ [layout in ArrowLayout]: boolean }>;
 
-export const ArrowMulti: FunctionComponent<ArrowMulti> = props => {
+export const ArrowMulti: FunctionComponent<ArrowMultiProps> = props => {
   const {
     head,
     flush,

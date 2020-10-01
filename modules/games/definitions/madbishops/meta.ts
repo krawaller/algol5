@@ -9,6 +9,7 @@ const madbishopsMeta: MadbishopsDefinition["meta"] = {
   source: "http://www.marksteeregames.com/Mad_Bishops_rules.pdf",
   code: "M",
   slug: "mad_bishops",
+  added: "2020-05-07",
 };
 
 export default madbishopsMeta;

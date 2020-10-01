@@ -7,8 +7,9 @@ const gogolMeta: GogolDefinition["meta"] = {
   name: "Gogol",
   source: "http://www.di.fc.ul.pt/~jpn/gv/gogol.htm",
   tags: ["netobook", "regicide", "multiwin", "infiltration", "bloodshed"],
-  tagline: "Use your units that can move anywhere to hunt down the enemy king",
+  tagline: "Move anywhere!",
   slug: "gogol",
+  added: "GENESIS",
 };
 
 export default gogolMeta;

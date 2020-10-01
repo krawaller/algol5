@@ -6,9 +6,10 @@ const descentMeta: DescentDefinition["meta"] = {
   id: "descent",
   name: "Descent",
   source: "https://www.boardgamegeek.com/boardgame/150586/descent",
-  tags: ["irreversible", "formation"],
-  tagline: "Form a line while you and your opponent dig the board away",
+  tags: ["irreversible", "formation", "reyalicea"],
+  tagline: "Dig the board away!",
   slug: "descent",
+  added: "GENESIS",
 };
 
 export default descentMeta;

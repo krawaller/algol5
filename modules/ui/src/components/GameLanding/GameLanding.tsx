@@ -80,6 +80,11 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
           Online
         </Button>
       </ButtonGroup>
+      {/* <div className={styles.gameLandingQuote}>
+        {meta.added === "GENESIS"
+          ? meta.name + " has been included in Chessicals since the beginning."
+          : meta.name + " was added to Chessicals " + meta.added + "."}
+      </div> */}
       <Modal
         isOpen={isRemoteModalOpen}
         onClose={closeRemoteModal}
@@ -104,3 +109,8 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
     </Fragment>
   );
 };
+
+//   (date === "GENESIS"
+//     ? meta[gameId].name +
+//       " has been included in Chessicals since the beginning."
+//     : meta[gameId].name + " was added to Chessicals " + date + ".");

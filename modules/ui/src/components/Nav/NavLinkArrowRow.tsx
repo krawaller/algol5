@@ -3,60 +3,33 @@ import React, { FunctionComponent } from "react";
 import navCss from "./Nav.cssProxy";
 import hintCss from "./Nav.Hint.cssProxy";
 import { Arrow } from "../Arrow";
-import { ArrowMulti } from "../Arrow/Arrow.Multi";
+import { ArrowMulti, ArrowMultiProps } from "../Arrow/Arrow.Multi";
+import { DASHED_SHORTCUTS } from "./Nav.constants";
 
 type NavLinkArrowRowProps = {
   nbrOfLinks: number;
   hasBackBtn?: boolean;
+  hasShortcut?: boolean;
 };
 
 export const NavLinkArrowRow: FunctionComponent<NavLinkArrowRowProps> = props => {
-  const { nbrOfLinks, hasBackBtn } = props;
-  const pieceCount = nbrOfLinks ? nbrOfLinks * 2 + (hasBackBtn ? 3 : 1) : 0;
+  const { nbrOfLinks, hasBackBtn, hasShortcut } = props;
+  const buttonCount = nbrOfLinks + (hasBackBtn ? 1 : 0);
+  const pieceCount = buttonCount * 2 - 1;
   const middle = Math.ceil(pieceCount / 2);
   const pieces = [];
   for (let i = 1; i <= pieceCount; i++) {
+    const side = i < middle ? "left" : i > middle ? "right" : "middle";
     if (i % 2) {
-      // filler
       pieces.push(
-        <div key={i} className={navCss.navFiller}>
-          {i === middle ? (
-            hasBackBtn ? (
-              <Arrow layout="northeast" />
-            ) : (
-              <ArrowMulti northwest northeast />
-            )
-          ) : i > 1 && i < pieceCount && !(i < middle && hasBackBtn) ? (
-            <Arrow layout="eastwest" />
-          ) : null}
+        <div key={i} className={navCss.navButton}>
+          {aboveButtonArrows(side, buttonCount, hasBackBtn, hasShortcut)}
         </div>
       );
     } else {
-      // above button
       pieces.push(
-        <div key={i} className={navCss.navButton}>
-          {i < middle ? (
-            hasBackBtn ? null : i === 2 ? (
-              <Arrow layout="southeast" head="south" />
-            ) : (
-              <ArrowMulti southeast eastwest head="south" />
-            )
-          ) : i === middle ? (
-            nbrOfLinks === 1 ? (
-              <Arrow layout="northsouth" head="south" />
-            ) : (
-              <ArrowMulti
-                head="south"
-                northsouth
-                northeast
-                northwest={!hasBackBtn}
-              />
-            )
-          ) : i === pieceCount - 1 ? (
-            <Arrow layout="southwest" head="south" />
-          ) : (
-            <ArrowMulti southwest eastwest head="south" />
-          )}
+        <div key={i} className={navCss.navFiller}>
+          {spaceArrows(side, buttonCount, hasBackBtn, hasShortcut)}
         </div>
       );
     }
@@ -69,10 +42,54 @@ export const NavLinkArrowRow: FunctionComponent<NavLinkArrowRowProps> = props =>
           hasBackBtn && hintCss.navHintBack
         )}
       >
-        {hasBackBtn && <Arrow layout="northsouth" />}
+        {hasBackBtn && <Arrow layout="northsouth" dashed={DASHED_SHORTCUTS} />}
       </div>
+      <div className={navCss.navFiller} />
       {pieces}
-      <div className={navCss.navSideButtonContainer}></div>
+      <div className={navCss.navFiller}>
+        {hasShortcut && <Arrow layout="southeast" dashed={DASHED_SHORTCUTS} />}
+      </div>
+      <div className={navCss.navSideButtonContainer}>
+        {hasShortcut && <Arrow layout="northwest" dashed={DASHED_SHORTCUTS} />}
+      </div>
     </div>
   );
 };
+
+const spaceArrows = (
+  side: "left" | "middle" | "right",
+  buttonCount: number,
+  hasBackBtn?: boolean,
+  hasShortcut?: boolean
+) => (
+  <ArrowMulti
+    northwest={side === "middle" && buttonCount > 1 && !hasBackBtn}
+    northeast={side === "middle" && buttonCount > 1 && !hasShortcut}
+    eastwest={
+      (side === "left" && buttonCount > 1 && !hasBackBtn) ||
+      (side === "right" && buttonCount > 1 && !hasShortcut)
+    }
+  />
+);
+
+const aboveButtonArrows = (
+  side: "left" | "middle" | "right",
+  buttonCount: number,
+  hasBackBtn?: boolean,
+  hasShortcut?: boolean
+) => (
+  <ArrowMulti
+    head={
+      (side === "middle" && (!hasBackBtn || buttonCount > 1)) ||
+      (side === "right" && !hasShortcut) ||
+      (side === "left" && !hasBackBtn)
+        ? "south"
+        : undefined
+    }
+    northsouth={side === "middle" && (!hasBackBtn || buttonCount > 1)}
+    northeast={side === "middle" && buttonCount > 1 && !hasShortcut}
+    northwest={side === "middle" && buttonCount > 1 && !hasBackBtn}
+    southeast={side === "left" && !hasBackBtn}
+    southwest={side === "right" && !hasShortcut}
+  />
+);

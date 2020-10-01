@@ -9,6 +9,7 @@ const kingsvalleyMeta: KingsvalleyDefinition["meta"] = {
   source: "http://www.logygames.com/english/kingsvalley.html",
   code: "O",
   slug: "kings_valley",
+  added: "2020-03-28",
 };
 
 export default kingsvalleyMeta;

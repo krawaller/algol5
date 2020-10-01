@@ -13,4 +13,5 @@ const tests: AlgolInstr<AlgolTestBlob>[] = [
   { ifaction: ["mycmnd", { line: ["hello"] }] },
   ["defaultEndTurnInstruction"],
   ["otherplayer"],
+  { player: 1 },
 ];

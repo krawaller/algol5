@@ -31,7 +31,7 @@ type BattleMoveProps = {
 
 export const BattleMove: FunctionComponent<BattleMoveProps> = props => {
   const { ui, rules, actions } = props;
-  const [showHelp, setShowHelp] = useState(false);
+  const [showHelp, setShowHelp] = useState(true);
   const [isRulesModalOpen, openRulesModal, closeRulesModal] = useModal();
   return (
     <>

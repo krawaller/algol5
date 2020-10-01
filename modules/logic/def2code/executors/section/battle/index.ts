@@ -17,7 +17,13 @@ export function executeNewBattle(
     `return game.action[\`startTurn_\${ruleset}_1\`]({
     ${usesSpawn(gameDef) ? "NEXTSPAWNID: 1," : ""}
     ${
-      referencesBattleVars(gameDef) ? "BATTLEVARS: {}, " : ""
+      gameDef.flow.battleVars
+        ? `BATTLEVARS: { ${Object.entries(gameDef.flow.battleVars)
+            .map(([key, val]) => `${key}: ${val}`)
+            .join(", ")} }, `
+        : referencesBattleVars(gameDef)
+        ? "BATTLEVARS: {}, "
+        : ""
     } TURN: 0, UNITDATA, UNITLAYERS
   });`
   );

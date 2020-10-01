@@ -1,6 +1,7 @@
 import { AlgolStartTurnDef, AlgolCommandDef, AlgolMarkDef } from "./actions";
 import { EndGameDef } from "./endGame";
 import { AlgolGameBlobAnon } from "../../blob";
+import { AlgolVal } from "../../primitives";
 
 export * from "./actions";
 
@@ -17,5 +18,8 @@ export type Flow<Blob extends AlgolGameBlobAnon> = {
   };
   marks: {
     [markname in Blob["mrk"]]: AlgolMarkDef<Blob>;
+  };
+  battleVars?: {
+    [battlevar in Blob["btlv"]]: AlgolVal<Blob, string | number>;
   };
 };

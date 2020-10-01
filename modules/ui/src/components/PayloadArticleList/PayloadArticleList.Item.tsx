@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from "react";
+import React, { Fragment, FunctionComponent, useCallback } from "react";
 import css from "./PayloadArticleList.cssProxy";
 import { Link } from "../Link";
 import { AlgolListing, AppActions } from "../../../../types";
@@ -33,7 +33,12 @@ export const PayloadArticleListItem: FunctionComponent<PayloadArticleListItemPro
         </div>
         <div className={css.payloadArticleListInfoBox}>
           <h4 className={css.payloadArticleListInfoTitle}>{title}</h4>
-          {blurb}
+          {blurb.split("\n").map((t, n) => (
+            <Fragment key={n}>
+              {t}
+              <br />
+            </Fragment>
+          ))}
         </div>
       </div>
     </Link>

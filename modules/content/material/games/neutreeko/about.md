@@ -2,9 +2,8 @@
 updated: 2020-09-16
 ---
 {GAME} is a simple game played on a board with 5×5 squares.
-The name is a portmanteau of Neutron and Teeko, two games on which it is based.
+The game is based of the Neutron and Teeko games.
 
 {PIC:name=physicalneutreeko.jpg,cred=Image by Niecodziennik,credurl=https://rygalo.com/2013/02/04/neutreeko/,title=Physical Neutreeko board}
 
-Neutreeko is a highly tactical game with little room for long-term strategic planning. But if neither side
-has an attack coming up, it can often be a good idea to immobilize your opponent by forcing him into a corner.
+{GAME} is a tactical game, with both players trying to outsmart each other. The game is fast phased, with little room for errors. This makes it challenging to plan ahead. As a rule of thumb, you should avoid getting stuck in the corners. 

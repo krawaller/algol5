@@ -10,12 +10,12 @@ const neutreekoVariants: NeutreekoDefinition["variants"] = [
     arr: {
       setup: {
         pieces: {
-          1: ["b1", "c4", "d1"],
+          1: ["b1", "e4", "d1"],
           2: ["b5", "c2", "d5"]
         }
       },
-      marks: [],
-      potentialMarks: []
+      marks: ["b5"],
+      potentialMarks: ["a5", "c5", "a4", "b2", "e2"]
     }
   }
 ];

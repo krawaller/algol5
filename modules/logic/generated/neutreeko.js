@@ -1,5 +1,6 @@
 import {
   offsetPos,
+  whoWins,
   boardConnections,
   makeRelativeDirs,
   setup2army,
@@ -19,7 +20,7 @@ import boards from "../../games/definitions/neutreeko/boards";
 import setups from "../../games/definitions/neutreeko/setups";
 import variants from "../../games/definitions/neutreeko/variants";
 const emptyObj = {};
-const iconMapping = { pieces: "rook" };
+const iconMapping = { pieces: "queen" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   pieces: [["units"], ["units", "myunits"], ["units", "oppunits"]]
@@ -335,7 +336,7 @@ const game = {
       return collapseContent({
         line: [
           { select: "Select" },
-          { unittype: ["rook", 1] },
+          { unittype: ["queen", 1] },
           { text: "to move" }
         ]
       });
@@ -382,7 +383,7 @@ const game = {
       return collapseContent({
         line: [
           { select: "Select" },
-          { unittype: ["rook", 2] },
+          { unittype: ["queen", 2] },
           { text: "to move" }
         ]
       });

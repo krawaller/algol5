@@ -1,4 +1,5 @@
 import { GameId } from "../../../games/dist/list";
+import meta from "../../../games/dist/meta";
 import { md2html } from "../../md2html";
 import path from "path";
 import fs, { readFileSync, writeFileSync } from "fs-extra";
@@ -32,6 +33,13 @@ export const writeGame = async (gameId: GameId) => {
             )
             .join("\n");
       }
+      // const date = meta[gameId].added;
+      // md +=
+      //   "\n\n" +
+      //   (date === "GENESIS"
+      //     ? meta[gameId].name +
+      //       " has been included in Chessicals since the beginning."
+      //     : meta[gameId].name + " was added to Chessicals " + date + ".");
     }
     const picRefPath = `/images/games/${gameId}/`;
     const { html, preloads, updated } = md2html({
@@ -54,8 +62,5 @@ export const writeGame = async (gameId: GameId) => {
     path.join(out, "preloads.ts"),
     `export const preloads = ${JSON.stringify(allGamePreloads)};\n`
   );
-  fs.copySync(
-    picSourcePath,
-    path.join(out, "pics")
-  )
+  fs.copySync(picSourcePath, path.join(out, "pics"));
 };

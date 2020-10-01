@@ -16,6 +16,7 @@ import {
   AlgolInstrUnitList,
   AlgolInstrUnitTypeSet,
   AlgolInstrUnitTypePos,
+  AlgolInstrPlayer,
 } from "./instr.interfaces";
 
 import { AlgolIfableExpression } from "../../";
@@ -45,4 +46,5 @@ export type AlgolInstrInner<Blob extends AlgolGameBlobAnon> =
   | AlgolInstrUnitList<Blob>
   | AlgolInstrUnitTypeSet<Blob>
   | AlgolInstrUnitTypePos<Blob>
-  | AlgolInstrText;
+  | AlgolInstrText
+  | AlgolInstrPlayer<Blob>;

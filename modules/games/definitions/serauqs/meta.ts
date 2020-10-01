@@ -8,9 +8,9 @@ const serauqsMeta: SerauqsDefinition["meta"] = {
   name: "Serauqs",
   source: "https://boardgamegeek.com/image/274401/serauqs",
   tags: ["formation", "multiwin"],
-  tagline:
-    "Form a winning pattern without helping your opponent to do the same",
+  tagline: "Trick your opponent to help you win!",
   slug: "serauqs",
+  added: "GENESIS",
 };
 
 export default serauqsMeta;

@@ -10,6 +10,7 @@ const chameleonMeta: ChameleonDefinition["meta"] = {
   source:
     "https://www.kickstarter.com/projects/logygames/chameleon-a-modern-version-of-chess",
   slug: "chameleon",
+  added: "2019-12-28",
 };
 
 export default chameleonMeta;

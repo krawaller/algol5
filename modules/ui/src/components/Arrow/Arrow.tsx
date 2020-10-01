@@ -10,6 +10,7 @@ export type ArrowProps = {
   layout: ArrowLayout;
   head?: ArrowHead;
   flush?: ArrowFlush;
+  dashed?: boolean;
 };
 
 const layoutClassMap = {
@@ -41,14 +42,15 @@ export const arrowFlush = ["none"].concat(
 ) as ArrowFlush[];
 
 export const Arrow: FunctionComponent<ArrowProps> = props => {
-  const { layout, head, flush } = props;
+  const { layout, head, flush, dashed } = props;
   return (
     <div
       className={classNames(
         css.arrowContainer,
         layoutClassMap[layout],
         head && headClassMap[head],
-        flush && flushClassMap[flush]
+        flush && flushClassMap[flush],
+        dashed && css.arrowDashed
       )}
     ></div>
   );

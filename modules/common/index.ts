@@ -1,5 +1,3 @@
-import { AlgolAnimCompiled } from "../types";
-
 export * from "./analysis";
 export * from "./positions";
 export * from "./layers";

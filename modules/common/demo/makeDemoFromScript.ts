@@ -75,5 +75,10 @@ export function makeDemoFromScript(
     {}
   );
 
+  if (ui.winner !== undefined) {
+    const endHighlight = ui.board.marks;
+    return { initial, patches, anims, endHighlight };
+  }
+
   return { initial, patches, anims };
 }

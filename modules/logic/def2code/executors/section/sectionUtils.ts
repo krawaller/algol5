@@ -51,7 +51,11 @@ export function readsBattleVars(search: FullDefAnon | any): boolean {
 }
 
 export function referencesBattleVars(search: any): boolean {
-  return readsBattleVars(search) || mutatesBattleVars(search);
+  return (
+    readsBattleVars(search) ||
+    mutatesBattleVars(search) ||
+    (search && search.battleVars)
+  );
 }
 
 export function usesSpawn(search: FullDefAnon | any): boolean {

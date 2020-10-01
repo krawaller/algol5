@@ -9,6 +9,7 @@ const scatterMeta: ScatterDefinition["meta"] = {
   source: "http://some.url.to.rules",
   code: "D",
   slug: "scatter",
+  added: "2020-04-27",
 };
 
 export default scatterMeta;

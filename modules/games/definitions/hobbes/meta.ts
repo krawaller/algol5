@@ -9,6 +9,7 @@ const hobbesMeta: HobbesDefinition["meta"] = {
   source: "http://some.url.to.rules",
   code: "S",
   slug: "hobbes",
+  added: "2020-06-21",
 };
 
 export default hobbesMeta;

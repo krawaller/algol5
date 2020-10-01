@@ -68,5 +68,40 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         },
       ],
     },
+    {
+      def: {
+        ...emptyFullDef,
+        flow: {
+          ...emptyFullDef.flow,
+          battleVars: {
+            foo: 7,
+            bar: 3,
+          },
+        },
+      },
+      player: 1,
+      action: "battle",
+      ruleset: "meeprulez",
+      contexts: [
+        {
+          context: {
+            setup: {},
+          },
+          envelope: "let game = { action: { startTurn_meeprulez_1: a => a } };",
+          tests: [
+            {
+              expr: "newBattle",
+              asserts: [
+                {
+                  sample: "returnVal.BATTLEVARS",
+                  res: { foo: 7, bar: 3 },
+                  desc: "game has preseeded battlevars which we initiate",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

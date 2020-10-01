@@ -10,6 +10,7 @@ const duploMeta: DuploDefinition["meta"] = {
   tags: ["irreversible", "walterjoris"],
   tagline: "A fierce battle of extending lines",
   slug: "duplo",
+  added: "GENESIS",
 };
 
 export default duploMeta;

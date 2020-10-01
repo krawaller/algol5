@@ -2,7 +2,7 @@
 updated: 2020-07-09
 ---
 
-{GAME} was invented by {GAME:id=descent} mastermind Rey Alicea in 2020.
+{GAME} was invented by {GAME:id=descent} mastermind {TAG:id=reyalicea} in 2020.
 
 {PIC:name=ladyofthelore.jpg,cred=Album Cover by Desdemona,credurl=https://www.metal-archives.com/albums/Desdemona/Lady_of_the_Lore/9034,title=A suitable soundtrack?}
 

@@ -9,6 +9,7 @@ const campaignMeta: CampaignDefinition["meta"] = {
   source: "http://some.url.to.rules",
   code: "A",
   slug: "campaign",
+  added: "2020-05-04",
 };
 
 export default campaignMeta;

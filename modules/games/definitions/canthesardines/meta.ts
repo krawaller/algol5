@@ -9,6 +9,7 @@ const canthesardinesMeta: CanthesardinesDefinition["meta"] = {
   source: "http://www.di.fc.ul.pt/~jpn/gv/can_sardines.htm",
   code: "k8",
   slug: "canthesardines",
+  added: "2020-10-01",
 };
 
 export default canthesardinesMeta;

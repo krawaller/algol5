@@ -10,6 +10,7 @@ const tyrannosMeta: TyrannosDefinition["meta"] = {
     "http://www.zillionsofgames.com/cgi-bin/zilligames/submissions.cgi?do=show;id=1729",
   code: "y",
   slug: "tyrannos",
+  added: "2020-07-18",
 };
 
 export default tyrannosMeta;

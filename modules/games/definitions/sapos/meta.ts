@@ -10,6 +10,7 @@ const saposMeta: SaposDefinition["meta"] = {
   code: "Lz",
   slug: "sapos",
   demo: "Lz0Gr4|2i1bghg3g4m3ra2h",
+  added: "2020-09-22",
 };
 
 export default saposMeta;

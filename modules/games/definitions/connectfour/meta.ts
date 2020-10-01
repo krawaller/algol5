@@ -9,6 +9,7 @@ const connectfourMeta: ConnectfourDefinition["meta"] = {
   source: "http://some.url.to.rules",
   code: "T",
   slug: "connect_four",
+  added: "2020-06-08",
 };
 
 export default connectfourMeta;

@@ -1,4 +1,5 @@
 import { BattleNavActions, AlgolNavStep } from "../../types";
+import { makeSessionHistoryStep } from "./makeSessionHistoryStep";
 
 type MakeSessionControlsOpts = {
   battleNavActions: BattleNavActions;
@@ -8,7 +9,8 @@ type MakeSessionControlsOpts = {
 };
 
 export const makeSessionControlsStep = (
-  opts: MakeSessionControlsOpts
+  opts: MakeSessionControlsOpts,
+  naked?: boolean
 ): AlgolNavStep =>
   opts.isNew
     ? {
@@ -23,5 +25,5 @@ export const makeSessionControlsStep = (
         title: "Play",
         desc: "Make a move",
         onClick: opts.battleNavActions.toBattleControls,
-        links: [],
+        links: naked ? [] : [makeSessionHistoryStep(opts, true)],
       };

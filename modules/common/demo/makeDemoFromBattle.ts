@@ -33,5 +33,9 @@ export function makeDemoFromBattle(battle: AlgolBattle): AlgolDemo {
     }
     current = frame.board.units;
   }
-  return { initial, anims, patches };
+  const demo: AlgolDemo = { initial, anims, patches };
+  if (battle.gameEndedBy) {
+    demo.endHighlight = battle.state.board.marks;
+  }
+  return demo;
 }

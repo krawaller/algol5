@@ -9,6 +9,7 @@ const speedsoccolotMeta: SpeedsoccolotDefinition["meta"] = {
   source: "http://some.url.to.rules",
   code: "W",
   slug: "speed_soccolot",
+  added: "2020-05-05",
 };
 
 export default speedsoccolotMeta;

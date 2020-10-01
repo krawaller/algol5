@@ -9,6 +9,7 @@ const gowiththefloeMeta: GowiththefloeDefinition["meta"] = {
   tagline: "Can the seals escape the polar bears?",
   source: "https://nestorgames.com/rulebooks/gowiththefloe_EN.pdf",
   slug: "go_with_the_floe",
+  added: "GENESIS",
 };
 
 export default gowiththefloeMeta;

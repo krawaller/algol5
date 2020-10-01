@@ -9,6 +9,7 @@ const kickrunMeta: KickrunDefinition["meta"] = {
   tags: ["irreversible", "infiltration"],
   tagline: "A quick and fierce battle to invade the opposite corner",
   slug: "kick_and_run",
+  added: "GENESIS",
 };
 
 export default kickrunMeta;

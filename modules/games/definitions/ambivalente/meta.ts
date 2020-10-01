@@ -9,6 +9,7 @@ const ambivalenteMeta: AmbivalenteDefinition["meta"] = {
   source: "http://some.url.to.rules",
   code: "d",
   slug: "ambivalente",
+  added: "2020-05-04",
 };
 
 export default ambivalenteMeta;

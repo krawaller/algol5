@@ -9,6 +9,7 @@ const yonmoqueMeta: YonmoqueDefinition["meta"] = {
   source: "http://www.logygames.com/english/yonmoque.html",
   code: "B",
   slug: "yonmoque",
+  added: "2020-05-01",
 };
 
 export default yonmoqueMeta;

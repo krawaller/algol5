@@ -10,6 +10,7 @@ const atriumMeta: AtriumDefinition["meta"] = {
   year: 2004,
   tagline: "Be the first to form a line with one of your unit types",
   slug: "atrium",
+  added: "GENESIS",
 };
 
 export default atriumMeta;

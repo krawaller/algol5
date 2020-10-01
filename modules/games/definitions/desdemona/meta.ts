@@ -12,6 +12,7 @@ const desdemonaMeta: DesdemonaDefinition["meta"] = {
   hidden: false,
   demo:
     "g0Gn12|0Yh7f8,1,9gUAaAegY2e2b4abMj5;3b6i6R9alaag2bSh2g2R5i9eb4qeeFcvb3qb3lb3g",
+  added: "2020-07-11",
 };
 
 export default desdemonaMeta;

@@ -10,6 +10,7 @@ const neutreekoMeta: NeutreekoDefinition["meta"] = {
   code: "4",
   slug: "neutreeko",
   demo: "40Lr5|b2hag1cmg",
+  added: "2020-10-01",
   addedBy: "Lucas Wiener"
 };
 

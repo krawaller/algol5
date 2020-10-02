@@ -13,7 +13,7 @@ export type AlgolMeta<Blob extends AlgolGameBlobAnon> = {
   slug: string;
   demo?: string;
   added: string;
-  addedBy: string;
+  addedBy?: string;
 };
 
 export type Content = ComplexContent | string[] | string | any; // | Line | UnitRef | TileRef | string;

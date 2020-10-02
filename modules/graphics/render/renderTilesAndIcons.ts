@@ -31,8 +31,8 @@ export function renderTilesAndIcons(opts: RenderTilesAndIconsOpts) {
     sprites = [],
     definitionStrategy,
   } = opts;
-  const { height, width, terrain } = board;
-  const layers = terrainLayers(height, width, terrain!);
+  const { height, width } = board;
+  const layers = terrainLayers(board);
 
   const spritesPerPos = sprites.reduce(
     (memo, sprite) => ({

@@ -5,7 +5,7 @@ import { boardPositions, pos2coords } from "../";
 Calculates the three BOARD layers (board,light,dark) and returns them.
 */
 export function boardLayers(board: AlgolBoardAnon) {
-  return boardPositions(board.height, board.width).reduce(
+  return boardPositions(board).reduce(
     function(mem, pos) {
       var coords = pos2coords(pos);
       var colour = ["dark", "light"][(coords.x + (coords.y % 2)) % 2];

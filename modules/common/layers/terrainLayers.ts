@@ -9,7 +9,7 @@ export function terrainLayers(
   board: AlgolBoardAnon,
   forplayer?: 1 | 2
 ): LayerCollection {
-  const { terrain: terrainDef = {}, height, width } = board;
+  const { terrain: terrainDef = {} } = board;
   if (!Object.keys(terrainDef).length) {
     return {};
   }
@@ -47,7 +47,7 @@ export function terrainLayers(
       let t = terrain[name];
       let noname = "no" + name;
       mem[noname] = {};
-      boardPositions(height, width).forEach(pos => {
+      boardPositions(board).forEach(pos => {
         if (!t[pos]) {
           mem[noname][pos] = processEntity(pos)[0];
         }

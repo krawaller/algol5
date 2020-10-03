@@ -11,7 +11,8 @@ import {
   isAlgolEffectSetTurnVar,
   isAlgolEffectSetBattleVar,
   isAlgolEffectIncreaseTurnVar,
-  isAlgolEffectIncreaseBattleVar,, AlgolBoardAnon
+  isAlgolEffectIncreaseBattleVar,
+  AlgolBoardAnon,
 } from "../../../types";
 import {
   boardPositions,
@@ -42,7 +43,10 @@ export default async function analyze(def: FullDefAnon | string) {
     }),
     { maxHeight: 0, maxWidth: 0 }
   );
-  const maxBoard = { height: maxHeight, width: maxWidth } as unknown as AlgolBoardAnon
+  const maxBoard = ({
+    height: maxHeight,
+    width: maxWidth,
+  } as unknown) as AlgolBoardAnon;
   const terrains = Array.from(
     new Set(
       Object.values(boards).flatMap(board => Object.keys(board.terrain || {}))

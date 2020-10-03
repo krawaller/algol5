@@ -3,6 +3,7 @@ export * from "./boardPositions";
 export * from "./coords2pos";
 export * from "./offsetPos";
 export * from "./griddef2grid";
+export * from "./boardHoles";
 
 export const colname2number = "ZabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXY"
   .split("")

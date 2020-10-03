@@ -1,11 +1,11 @@
 import { coords2pos } from "../";
 import { AlgolBoardAnon } from "../../types";
-import { processEntity } from "../entities";
+import { boardHoles } from "./boardHoles";
 
 export function boardPositions(board: AlgolBoardAnon) {
   const { height, width } = board;
   const ret = [];
-  const holes = (board.holes || []).flatMap(processEntity).map(coords2pos);
+  const holes = boardHoles(board);
   for (let y = 1; y <= height; y++) {
     for (let x = 1; x <= width; x++) {
       const pos = coords2pos({ x: x, y: y });

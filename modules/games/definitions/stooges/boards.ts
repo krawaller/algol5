@@ -8,22 +8,20 @@ const stoogesBoardBook: StoogesDefinition["boards"] = {
   basic: {
     height: 5,
     width: 6,
-    terrain: {
-      corners: [
-        "a1",
-        "a2",
-        "b1",
-        "a4",
-        "a5",
-        "b5",
-        "e1",
-        "f1",
-        "f2",
-        "e5",
-        "f4",
-        "f5",
-      ],
-    },
+    holes: [
+      "a1",
+      "a2",
+      "b1",
+      "a4",
+      "a5",
+      "b5",
+      "e1",
+      "f1",
+      "f2",
+      "e5",
+      "f4",
+      "f5",
+    ],
   },
 };
 

@@ -8,8 +8,8 @@ export function executeSetBoard(
 ): string {
   const hasGrids = !!Object.values(gameDef.boards).find(b => b.grids);
   return `
-    TERRAIN1 = terrainLayers(board.height, board.width, board.terrain, 1);
-    TERRAIN2 = terrainLayers(board.height, board.width, board.terrain, 2);
+    TERRAIN1 = terrainLayers(board, 1);
+    TERRAIN2 = terrainLayers(board, 2);
     dimensions = { height: board.height, width: board.width };
     BOARD = boardLayers(dimensions);
     connections = boardConnections(board);

@@ -23,4 +23,9 @@ describe("common/boardConnections", () => {
     expect(res.b3["d5f2r-1"]).toBe("c1");
     expect(res.b3["d5f2r1"]).toBe("a1");
   });
+  test("wont link to holes", () => {
+    const res = boardConnections({ height: 3, width: 3, holes: ["a3"] });
+    expect(res.a3).toBeUndefined();
+    expect(res.a2[1]).toBeUndefined();
+  });
 });

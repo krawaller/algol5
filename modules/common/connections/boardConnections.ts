@@ -6,7 +6,7 @@ import { AlgolBoardAnon } from "../../types";
 Calculates the connections object
 */
 export function boardConnections(board: AlgolBoardAnon) {
-  return boardPositions(board.height, board.width).reduce(
+  return boardPositions(board).reduce(
     function(mem, pos) {
       mem[pos] = posConnections(pos, board);
       return mem;

@@ -9,6 +9,8 @@ export * from "./player2base-dark";
 export * from "./empty";
 export * from "./empty-dark";
 export * from "./water";
+export * from "./hole";
+export * from "./hole-dark";
 export * from "./water-dark";
 export * from "../_constants";
 
@@ -26,6 +28,8 @@ import { empty } from "./empty";
 import { emptyDark } from "./empty-dark";
 import { water } from "./water";
 import { waterDark } from "./water-dark";
+import { hole } from "./hole";
+import { holeDark } from "./hole-dark";
 
 export const allTiles = {
   castle,
@@ -42,4 +46,6 @@ export const allTiles = {
   emptyDark,
   water,
   waterDark,
+  hole,
+  holeDark,
 };

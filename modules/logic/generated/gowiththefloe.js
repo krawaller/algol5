@@ -167,12 +167,7 @@ const game = {
       };
       let UNITLAYERS = step.UNITLAYERS;
       {
-        let BLOCKS = {
-          ...UNITLAYERS.seals,
-          ...UNITLAYERS.bears,
-          ...TERRAIN1.water,
-          ...UNITLAYERS.holes
-        };
+        let BLOCKS = UNITLAYERS.units;
         for (let DIR of roseDirs) {
           let MAX = 2;
           let POS = MARKS.selectunit;
@@ -190,12 +185,7 @@ const game = {
       {
         let allowedsteps = UNITLAYERS.holes;
         let BLOCKS = Object.keys(BOARD.board)
-          .filter(
-            k =>
-              !UNITLAYERS.units.hasOwnProperty(k) &&
-              !TERRAIN1.water.hasOwnProperty(k) &&
-              !UNITLAYERS.holes.hasOwnProperty(k)
-          )
+          .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
           .reduce((m, k) => {
             m[k] = emptyObj;
             return m;
@@ -313,12 +303,7 @@ const game = {
       };
       let UNITLAYERS = step.UNITLAYERS;
       {
-        let BLOCKS = {
-          ...UNITLAYERS.seals,
-          ...UNITLAYERS.bears,
-          ...TERRAIN2.water,
-          ...UNITLAYERS.holes
-        };
+        let BLOCKS = UNITLAYERS.units;
         for (let DIR of roseDirs) {
           let MAX = 2;
           let POS = MARKS.selectunit;
@@ -336,12 +321,7 @@ const game = {
       {
         let allowedsteps = UNITLAYERS.holes;
         let BLOCKS = Object.keys(BOARD.board)
-          .filter(
-            k =>
-              !UNITLAYERS.units.hasOwnProperty(k) &&
-              !TERRAIN2.water.hasOwnProperty(k) &&
-              !UNITLAYERS.holes.hasOwnProperty(k)
-          )
+          .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
           .reduce((m, k) => {
             m[k] = emptyObj;
             return m;
@@ -529,7 +509,7 @@ const game = {
           for (let DIR of roseDirs) {
             let MAX = 2;
             let POS = STARTPOS;
-            let walkpositionstocount = Object.keys(TERRAIN1.nowater)
+            let walkpositionstocount = Object.keys(BOARD.board)
               .filter(k => !UNITLAYERS.holes.hasOwnProperty(k))
               .reduce((m, k) => {
                 m[k] = emptyObj;
@@ -628,7 +608,7 @@ const game = {
           for (let DIR of roseDirs) {
             let MAX = 2;
             let POS = STARTPOS;
-            let walkpositionstocount = Object.keys(TERRAIN1.nowater)
+            let walkpositionstocount = Object.keys(BOARD.board)
               .filter(k => !UNITLAYERS.holes.hasOwnProperty(k))
               .reduce((m, k) => {
                 m[k] = emptyObj;
@@ -731,7 +711,7 @@ const game = {
           for (let DIR of roseDirs) {
             let MAX = 2;
             let POS = STARTPOS;
-            let walkpositionstocount = Object.keys(TERRAIN2.nowater)
+            let walkpositionstocount = Object.keys(BOARD.board)
               .filter(k => !UNITLAYERS.holes.hasOwnProperty(k))
               .reduce((m, k) => {
                 m[k] = emptyObj;
@@ -831,7 +811,7 @@ const game = {
           for (let DIR of roseDirs) {
             let MAX = 2;
             let POS = STARTPOS;
-            let walkpositionstocount = Object.keys(TERRAIN2.nowater)
+            let walkpositionstocount = Object.keys(BOARD.board)
               .filter(k => !UNITLAYERS.holes.hasOwnProperty(k))
               .reduce((m, k) => {
                 m[k] = emptyObj;
@@ -916,7 +896,7 @@ const game = {
           for (let DIR of roseDirs) {
             let MAX = 2;
             let POS = STARTPOS;
-            let walkpositionstocount = Object.keys(TERRAIN2.nowater)
+            let walkpositionstocount = Object.keys(BOARD.board)
               .filter(k => !UNITLAYERS.holes.hasOwnProperty(k))
               .reduce((m, k) => {
                 m[k] = emptyObj;

@@ -6,8 +6,8 @@
 import { GowiththefloeDefinition } from "./_types";
 
 const gowiththefloeGraphics: GowiththefloeDefinition["graphics"] = {
-  tiles: { water: "water" },
-  icons: { seals: "king", bears: "queen", holes: "pawn" }
+  tiles: {},
+  icons: { seals: "king", bears: "queen", holes: "pawn" },
 };
 
 export default gowiththefloeGraphics;

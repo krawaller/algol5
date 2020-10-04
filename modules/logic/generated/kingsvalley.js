@@ -156,7 +156,7 @@ const game = {
       };
       let UNITLAYERS = step.UNITLAYERS;
       {
-        let BLOCKS = { ...TERRAIN1.water, ...UNITLAYERS.units };
+        let BLOCKS = UNITLAYERS.units;
         let STARTPOS = MARKS.selectunit;
         for (let DIR of roseDirs) {
           let walkedsquares = [];
@@ -210,7 +210,7 @@ const game = {
       };
       let UNITLAYERS = step.UNITLAYERS;
       {
-        let BLOCKS = { ...TERRAIN2.water, ...UNITLAYERS.units };
+        let BLOCKS = UNITLAYERS.units;
         let STARTPOS = MARKS.selectunit;
         for (let DIR of roseDirs) {
           let walkedsquares = [];

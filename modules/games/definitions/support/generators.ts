@@ -8,7 +8,7 @@ import { SupportDefinition } from "./_types";
 const supportGenerators: SupportDefinition["generators"] = {
   findpushtargets: {
     type: "walker",
-    start: "selectedge",
+    start: "selectorigin",
     dirs: "rose",
     blocks: { subtract: ["board", "mysoldiers"] },
     startasstep: true,
@@ -29,11 +29,38 @@ const supportGenerators: SupportDefinition["generators"] = {
   },
   findpushees: {
     type: "walker",
-    start: "selectpushtarget",
-    dir: { reldir: [{ read: ["pushtargets", "selectpushtarget", "dir"] }, 5] },
+    start: "selectdestination",
+    dir: { reldir: [{ read: ["pushtargets", "selectdestination", "dir"] }, 5] },
     draw: {
       steps: {
         tolayer: "pushees",
+      },
+    },
+  },
+  findconnected: {
+    type: "floater",
+    start: "selectorigin",
+    dirs: "rose",
+    steps: "myunits",
+    draw: {
+      steps: {
+        tolayer: "connected",
+      },
+    },
+  },
+  findmovetargets: {
+    type: "neighbour",
+    starts: "connected",
+    dirs: "rose",
+    draw: {
+      neighbours: {
+        condition: {
+          and: [
+            { noneat: ["myunits", ["target"]] },
+            { noneat: ["bases", ["target"]] },
+          ],
+        },
+        tolayer: "movetargets",
       },
     },
   },

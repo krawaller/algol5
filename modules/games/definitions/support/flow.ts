@@ -2,45 +2,71 @@ import { SupportDefinition } from "./_types";
 
 const supportFlow: SupportDefinition["flow"] = {
   startTurn: {
-    link: "selectedge",
+    link: "selectorigin",
   },
   commands: {
+    move: {
+      applyEffects: [
+        {
+          stompat: ["selectorigin", "selectdestination"],
+        },
+      ],
+      link: "endTurn",
+    },
     insert: {
       applyEffects: [
         {
-          killat: "selectpushtarget",
+          killat: "selectdestination",
         },
         {
           pushin: [
             "pushees",
-            { read: ["pushtargets", "selectpushtarget", "dir"] },
+            { read: ["pushtargets", "selectdestination", "dir"] },
           ],
         },
         {
-          spawnat: ["selectedge", "soldiers"],
+          spawnat: ["selectorigin", "soldiers"],
         },
       ],
       link: "endTurn",
     },
   },
   marks: {
-    selectedge: {
-      from: { subtract: ["edge", "oppunits"] },
-      runGenerator: {
-        if: [{ anyat: ["mysoldiers", "selectedge"] }, "findpushtargets"],
-      },
+    selectorigin: {
+      from: { union: ["mysoldiers", { subtract: ["edge", "oppunits"] }] },
+      runGenerators: [
+        {
+          if: [
+            { anyat: ["mysoldiers", "selectorigin"] },
+            {
+              multi: [
+                "findconnected",
+                "findmovetargets",
+                {
+                  if: [{ anyat: ["edge", "selectorigin"] }, "findpushtargets"],
+                },
+              ],
+            },
+          ],
+        },
+      ],
       link: {
         ifelse: [
-          { anyat: ["mysoldiers", "selectedge"] },
-          "selectpushtarget",
+          { noneat: ["mysoldiers", "selectorigin"] },
           "insert",
+          "selectdestination",
         ],
       },
     },
-    selectpushtarget: {
-      from: "pushtargets",
-      runGenerator: "findpushees",
-      link: "insert",
+    selectdestination: {
+      from: { union: ["movetargets", "pushtargets"] },
+      runGenerator: {
+        if: [{ anyat: ["pushtargets", "selectdestination"] }, "findpushees"],
+      },
+      links: [
+        { if: [{ anyat: ["movetargets", "selectdestination"] }, "move"] },
+        { if: [{ anyat: ["pushtargets", "selectdestination"] }, "insert"] },
+      ],
     },
   },
 };

@@ -14,19 +14,19 @@ const supportAnim: SupportDefinition["anim"] = {
   insert: [
     {
       enterfrom: [
-        "selectedge",
+        "selectorigin",
         {
           offset: [
-            "selectedge",
+            "selectorigin",
             {
               ifelse: [
-                { same: [{ posx: "selectedge" }, 1] },
+                { same: [{ posx: "selectorigin" }, 1] },
                 7,
                 {
                   ifelse: [
-                    { same: [{ posx: "selectedge" }, 9] },
+                    { same: [{ posx: "selectorigin" }, 9] },
                     3,
-                    { ifelse: [{ same: [{ posy: "selectedge" }, 1] }, 5, 1] },
+                    { ifelse: [{ same: [{ posy: "selectorigin" }, 1] }, 5, 1] },
                   ],
                 },
               ],

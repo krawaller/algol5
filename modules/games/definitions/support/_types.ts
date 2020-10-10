@@ -6,8 +6,8 @@ type SupportBoardWidth = 9;
 
 type SupportTerrain = "edge" | "center";
 type SupportUnit = "bases" | "soldiers";
-type SupportMark = "selectedge" | "selectpushtarget";
-type SupportCommand = "insert";
+type SupportMark = "selectorigin" | "selectdestination";
+type SupportCommand = "move" | "insert";
 type SupportPhaseCommand = never;
 type SupportPhase = "startTurn" | SupportMark;
 type SupportUnitLayer =
@@ -23,8 +23,16 @@ type SupportUnitLayer =
   | "mysoldiers"
   | "oppsoldiers"
   | "neutralsoldiers";
-type SupportGenerator = "findpushtargets" | "findpushees";
-type SupportArtifactLayer = "pushtargets" | "pushees";
+type SupportGenerator =
+  | "findpushtargets"
+  | "findpushees"
+  | "findconnected"
+  | "findmovetargets";
+type SupportArtifactLayer =
+  | "pushtargets"
+  | "pushees"
+  | "connected"
+  | "movetargets";
 type SupportTerrainLayer =
   | "edge"
   | "center"

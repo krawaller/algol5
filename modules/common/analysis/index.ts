@@ -99,6 +99,8 @@ export function analyseGame(gameDef: FullDefAnon): AnalysisBook {
         }
 
         for (const link of links) {
+          // TODO - if we already have the analysis, we should augment it!
+          // Alternatively, we need to add referredArtifacts as well.
           if (link !== "endTurn" && !plrAnalysis[link]) {
             toCheck.push([link, action]);
           }

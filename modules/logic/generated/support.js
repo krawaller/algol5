@@ -48,12 +48,6 @@ const groupLayers2 = {
 };
 const prefixes1 = ["neutral", "my", "opp"];
 const prefixes2 = ["neutral", "opp", "my"];
-const emptyArtifactLayers_basic = {
-  pushtargets: {},
-  pushees: {},
-  connected: {},
-  movetargets: {}
-};
 const game = {
   gameId: "support",
   commands: { move: {}, insert: {} },
@@ -93,6 +87,9 @@ const game = {
   },
   action: {
     startTurn_basic_1: step => {
+      let ARTIFACTS = {
+        pushees: {}
+      };
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -103,10 +100,26 @@ const game = {
         mysoldiers: oldUnitLayers.oppsoldiers,
         oppsoldiers: oldUnitLayers.mysoldiers
       };
+      let MARKS = {};
       let LINKS = {
         marks: {},
         commands: {}
       };
+      if (false) {
+        {
+          let POS = MARKS.selectdestination;
+          while (
+            (POS =
+              connections[POS][
+                relativeDirs[
+                  (ARTIFACTS.pushtargets[MARKS.selectdestination] || {}).dir
+                ][5]
+              ])
+          ) {
+            ARTIFACTS.pushees[POS] = emptyObj;
+          }
+        }
+      }
       for (const pos of Object.keys({
         ...UNITLAYERS.mysoldiers,
         ...Object.keys(TERRAIN1.edge)
@@ -122,13 +135,16 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers_basic,
-        MARKS: {},
+        ARTIFACTS,
+        MARKS,
         TURN: step.TURN + 1,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
     startTurn_basic_2: step => {
+      let ARTIFACTS = {
+        pushees: {}
+      };
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -139,10 +155,26 @@ const game = {
         mysoldiers: oldUnitLayers.oppsoldiers,
         oppsoldiers: oldUnitLayers.mysoldiers
       };
+      let MARKS = {};
       let LINKS = {
         marks: {},
         commands: {}
       };
+      if (false) {
+        {
+          let POS = MARKS.selectdestination;
+          while (
+            (POS =
+              connections[POS][
+                relativeDirs[
+                  (ARTIFACTS.pushtargets[MARKS.selectdestination] || {}).dir
+                ][5]
+              ])
+          ) {
+            ARTIFACTS.pushees[POS] = emptyObj;
+          }
+        }
+      }
       for (const pos of Object.keys({
         ...UNITLAYERS.mysoldiers,
         ...Object.keys(TERRAIN2.edge)
@@ -158,14 +190,15 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers_basic,
-        MARKS: {},
+        ARTIFACTS,
+        MARKS,
         TURN: step.TURN,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
     selectorigin_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
+        pushees: step.ARTIFACTS.pushees,
         connected: {},
         movetargets: {},
         pushtargets: {}
@@ -244,10 +277,10 @@ const game = {
     },
     selectdestination_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
+        pushees: { ...step.ARTIFACTS.pushees },
         connected: step.ARTIFACTS.connected,
         movetargets: step.ARTIFACTS.movetargets,
-        pushtargets: step.ARTIFACTS.pushtargets,
-        pushees: {}
+        pushtargets: step.ARTIFACTS.pushtargets
       };
       let LINKS = { marks: {}, commands: {} };
       let MARKS = {
@@ -287,6 +320,7 @@ const game = {
     },
     selectorigin_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
+        pushees: step.ARTIFACTS.pushees,
         connected: {},
         movetargets: {},
         pushtargets: {}
@@ -365,10 +399,10 @@ const game = {
     },
     selectdestination_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
+        pushees: { ...step.ARTIFACTS.pushees },
         connected: step.ARTIFACTS.connected,
         movetargets: step.ARTIFACTS.movetargets,
-        pushtargets: step.ARTIFACTS.pushtargets,
-        pushees: {}
+        pushtargets: step.ARTIFACTS.pushtargets
       };
       let LINKS = { marks: {}, commands: {} };
       let MARKS = {
@@ -454,6 +488,7 @@ const game = {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
+        pushees: step.ARTIFACTS.pushees,
         connected: step.ARTIFACTS.connected,
         movetargets: step.ARTIFACTS.movetargets,
         pushtargets: step.ARTIFACTS.pushtargets
@@ -577,6 +612,7 @@ const game = {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
+        pushees: step.ARTIFACTS.pushees,
         connected: step.ARTIFACTS.connected,
         movetargets: step.ARTIFACTS.movetargets,
         pushtargets: step.ARTIFACTS.pushtargets

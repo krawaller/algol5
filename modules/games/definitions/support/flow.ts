@@ -2,6 +2,9 @@ import { SupportDefinition } from "./_types";
 
 const supportFlow: SupportDefinition["flow"] = {
   startTurn: {
+    runGenerator: {
+      if: [["false"], "findpushees"],
+    },
     link: "selectorigin",
   },
   commands: {

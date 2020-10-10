@@ -2,7 +2,36 @@ import { SupportDefinition } from "./_types";
 
 const supportInstructions: SupportDefinition["instructions"] = {
   startTurn: {
-    line: ["Select where to insert", "soldiers", "or a", "soldiers", "to move"],
+    line: [
+      {
+        ifelse: [
+          { same: [{ battlevar: "plr1" }, { battlevar: "plr2" }] },
+          {
+            line: [
+              "You and",
+              { player: ["otherplayer"] },
+              "both have",
+              { value: { battlevar: "plr1" } },
+              "kills.",
+            ],
+          },
+          {
+            line: [
+              "You have",
+              { value: { battlevar: { playercase: ["plr1", "plr2"] } } },
+              "kills and",
+              { player: ["otherplayer"] },
+              "has",
+              { value: { battlevar: { playercase: ["plr2", "plr1"] } } },
+              ".",
+            ],
+          },
+        ],
+      },
+      "Select where to insert or a",
+      "soldiers",
+      "to move",
+    ],
   },
   selectorigin: {
     ifelse: [

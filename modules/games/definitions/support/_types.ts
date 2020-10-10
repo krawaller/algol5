@@ -46,7 +46,7 @@ type SupportLayer =
   | SupportArtifactLayer
   | SupportTerrainLayer;
 type SupportBattlePos = never;
-type SupportBattleVar = never;
+type SupportBattleVar = "plr1" | "plr2";
 type SupportTurnPos = never;
 type SupportTurnVar = never;
 

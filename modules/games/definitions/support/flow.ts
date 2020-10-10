@@ -1,6 +1,18 @@
 import { SupportDefinition } from "./_types";
 
 const supportFlow: SupportDefinition["flow"] = {
+  battleVars: {
+    plr1: 0,
+    plr2: 0,
+  },
+  endGame: {
+    killed18: {
+      condition: {
+        same: [{ battlevar: { playercase: ["plr1", "plr2"] } }, 18],
+      },
+      show: { single: "selectdestination" },
+    },
+  },
   startTurn: {
     runGenerator: {
       if: [["false"], "findpushees"],
@@ -11,7 +23,22 @@ const supportFlow: SupportDefinition["flow"] = {
     move: {
       applyEffects: [
         {
-          stompat: ["selectorigin", "selectdestination"],
+          if: [
+            { anyat: ["units", "selectdestination"] },
+            {
+              multi: [
+                {
+                  killat: "selectdestination",
+                },
+                {
+                  incbattlevar: [{ playercase: ["plr1", "plr2"] }],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          moveat: ["selectorigin", "selectdestination"],
         },
       ],
       link: "endTurn",
@@ -19,8 +46,21 @@ const supportFlow: SupportDefinition["flow"] = {
     insert: {
       applyEffects: [
         {
-          killat: "selectdestination",
+          if: [
+            { anyat: ["units", "selectdestination"] },
+            {
+              multi: [
+                {
+                  killat: "selectdestination",
+                },
+                {
+                  incbattlevar: [{ playercase: ["plr1", "plr2"] }],
+                },
+              ],
+            },
+          ],
         },
+
         {
           pushin: [
             "pushees",

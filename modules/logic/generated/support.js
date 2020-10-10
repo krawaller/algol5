@@ -80,6 +80,7 @@ const game = {
     }
     return game.action[`startTurn_${ruleset}_1`]({
       NEXTSPAWNID: 1,
+      BATTLEVARS: { plr1: 0, plr2: 0 },
       TURN: 0,
       UNITDATA,
       UNITLAYERS
@@ -138,7 +139,8 @@ const game = {
         ARTIFACTS,
         MARKS,
         TURN: step.TURN + 1,
-        NEXTSPAWNID: step.NEXTSPAWNID
+        NEXTSPAWNID: step.NEXTSPAWNID,
+        BATTLEVARS: step.BATTLEVARS
       };
     },
     startTurn_basic_2: step => {
@@ -193,7 +195,8 @@ const game = {
         ARTIFACTS,
         MARKS,
         TURN: step.TURN,
-        NEXTSPAWNID: step.NEXTSPAWNID
+        NEXTSPAWNID: step.NEXTSPAWNID,
+        BATTLEVARS: step.BATTLEVARS
       };
     },
     selectorigin_basic_1: (step, newMarkPos) => {
@@ -272,6 +275,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
         MARKS,
+        BATTLEVARS: step.BATTLEVARS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
@@ -315,6 +319,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
         MARKS,
+        BATTLEVARS: step.BATTLEVARS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
@@ -394,6 +399,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
         MARKS,
+        BATTLEVARS: step.BATTLEVARS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
@@ -437,15 +443,20 @@ const game = {
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
         MARKS,
+        BATTLEVARS: step.BATTLEVARS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
     move_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let UNITLAYERS = step.UNITLAYERS;
+      let BATTLEVARS = { ...step.BATTLEVARS };
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
-      delete UNITDATA[(UNITLAYERS.units[MARKS.selectdestination] || {}).id];
+      if (UNITLAYERS.units[MARKS.selectdestination]) {
+        delete UNITDATA[(UNITLAYERS.units[MARKS.selectdestination] || {}).id];
+        BATTLEVARS.plr1 = (BATTLEVARS.plr1 || 0) + 1;
+      }
       {
         let unitid = (UNITLAYERS.units[MARKS.selectorigin] || {}).id;
         if (unitid) {
@@ -471,7 +482,11 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (BATTLEVARS["plr1"] === 18) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "killed18";
+        LINKS.endMarks = Object.keys({ [MARKS.selectdestination]: 1 });
+      } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
       return {
@@ -481,6 +496,7 @@ const game = {
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
+        BATTLEVARS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
@@ -494,6 +510,7 @@ const game = {
         pushtargets: step.ARTIFACTS.pushtargets
       };
       let UNITLAYERS = step.UNITLAYERS;
+      let BATTLEVARS = { ...step.BATTLEVARS };
       let UNITDATA = { ...step.UNITDATA };
       let NEXTSPAWNID = step.NEXTSPAWNID;
       let MARKS = step.MARKS;
@@ -509,7 +526,10 @@ const game = {
         1,
         0
       );
-      delete UNITDATA[(UNITLAYERS.units[MARKS.selectdestination] || {}).id];
+      if (UNITLAYERS.units[MARKS.selectdestination]) {
+        delete UNITDATA[(UNITLAYERS.units[MARKS.selectdestination] || {}).id];
+        BATTLEVARS.plr1 = (BATTLEVARS.plr1 || 0) + 1;
+      }
       for (let LOOPPOS in ARTIFACTS.pushees) {
         {
           let pos = LOOPPOS;
@@ -550,7 +570,11 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (BATTLEVARS["plr1"] === 18) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "killed18";
+        LINKS.endMarks = Object.keys({ [MARKS.selectdestination]: 1 });
+      } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
       return {
@@ -560,6 +584,7 @@ const game = {
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
+        BATTLEVARS,
         NEXTSPAWNID,
         anim
       };
@@ -567,9 +592,13 @@ const game = {
     move_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let UNITLAYERS = step.UNITLAYERS;
+      let BATTLEVARS = { ...step.BATTLEVARS };
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
-      delete UNITDATA[(UNITLAYERS.units[MARKS.selectdestination] || {}).id];
+      if (UNITLAYERS.units[MARKS.selectdestination]) {
+        delete UNITDATA[(UNITLAYERS.units[MARKS.selectdestination] || {}).id];
+        BATTLEVARS.plr2 = (BATTLEVARS.plr2 || 0) + 1;
+      }
       {
         let unitid = (UNITLAYERS.units[MARKS.selectorigin] || {}).id;
         if (unitid) {
@@ -595,7 +624,11 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (BATTLEVARS["plr2"] === 18) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "killed18";
+        LINKS.endMarks = Object.keys({ [MARKS.selectdestination]: 1 });
+      } else {
         LINKS.endTurn = "startTurn_basic_1";
       }
       return {
@@ -605,6 +638,7 @@ const game = {
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
+        BATTLEVARS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
@@ -618,6 +652,7 @@ const game = {
         pushtargets: step.ARTIFACTS.pushtargets
       };
       let UNITLAYERS = step.UNITLAYERS;
+      let BATTLEVARS = { ...step.BATTLEVARS };
       let UNITDATA = { ...step.UNITDATA };
       let NEXTSPAWNID = step.NEXTSPAWNID;
       let MARKS = step.MARKS;
@@ -633,7 +668,10 @@ const game = {
         1,
         0
       );
-      delete UNITDATA[(UNITLAYERS.units[MARKS.selectdestination] || {}).id];
+      if (UNITLAYERS.units[MARKS.selectdestination]) {
+        delete UNITDATA[(UNITLAYERS.units[MARKS.selectdestination] || {}).id];
+        BATTLEVARS.plr2 = (BATTLEVARS.plr2 || 0) + 1;
+      }
       for (let LOOPPOS in ARTIFACTS.pushees) {
         {
           let pos = LOOPPOS;
@@ -674,7 +712,11 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (BATTLEVARS["plr2"] === 18) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "killed18";
+        LINKS.endMarks = Object.keys({ [MARKS.selectdestination]: 1 });
+      } else {
         LINKS.endTurn = "startTurn_basic_1";
       }
       return {
@@ -684,6 +726,7 @@ const game = {
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
+        BATTLEVARS,
         NEXTSPAWNID,
         anim
       };
@@ -691,11 +734,31 @@ const game = {
   },
   instruction: {
     startTurn_basic_1: step => {
+      let BATTLEVARS = step.BATTLEVARS;
       return collapseContent({
         line: [
-          { text: "Select where to insert" },
-          { unittype: ["pawn", 1] },
-          { text: "or a" },
+          BATTLEVARS["plr1"] === BATTLEVARS["plr2"]
+            ? collapseContent({
+                line: [
+                  { text: "You and" },
+                  { player: 2 },
+                  { text: "both have" },
+                  { text: BATTLEVARS["plr1"] },
+                  { text: "kills." }
+                ]
+              })
+            : collapseContent({
+                line: [
+                  { text: "You have" },
+                  { text: BATTLEVARS["plr1"] },
+                  { text: "kills and" },
+                  { player: 2 },
+                  { text: "has" },
+                  { text: BATTLEVARS["plr2"] },
+                  { text: "." }
+                ]
+              }),
+          { text: "Select where to insert or a" },
           { unittype: ["pawn", 1] },
           { text: "to move" }
         ]
@@ -890,11 +953,31 @@ const game = {
       });
     },
     startTurn_basic_2: step => {
+      let BATTLEVARS = step.BATTLEVARS;
       return collapseContent({
         line: [
-          { text: "Select where to insert" },
-          { unittype: ["pawn", 2] },
-          { text: "or a" },
+          BATTLEVARS["plr1"] === BATTLEVARS["plr2"]
+            ? collapseContent({
+                line: [
+                  { text: "You and" },
+                  { player: 1 },
+                  { text: "both have" },
+                  { text: BATTLEVARS["plr1"] },
+                  { text: "kills." }
+                ]
+              })
+            : collapseContent({
+                line: [
+                  { text: "You have" },
+                  { text: BATTLEVARS["plr2"] },
+                  { text: "kills and" },
+                  { player: 1 },
+                  { text: "has" },
+                  { text: BATTLEVARS["plr1"] },
+                  { text: "." }
+                ]
+              }),
+          { text: "Select where to insert or a" },
           { unittype: ["pawn", 2] },
           { text: "to move" }
         ]

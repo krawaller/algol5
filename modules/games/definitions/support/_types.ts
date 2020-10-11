@@ -4,7 +4,7 @@ import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 type SupportBoardHeight = 9;
 type SupportBoardWidth = 9;
 
-type SupportTerrain = "edge" | "center";
+type SupportTerrain = "edge" | "center" | "supported";
 type SupportUnit = "bases" | "soldiers";
 type SupportMark = "selectorigin" | "selectdestination";
 type SupportCommand = "move" | "insert";
@@ -37,9 +37,13 @@ type SupportTerrainLayer =
   | "edge"
   | "center"
   | "neutralcenter"
+  | "supported"
+  | "mysupported"
+  | "oppsupported"
   | "noedge"
   | "nocenter"
-  | "noneutralcenter";
+  | "noneutralcenter"
+  | "nosupported";
 type SupportLayer =
   | CommonLayer
   | SupportUnitLayer

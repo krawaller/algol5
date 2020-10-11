@@ -210,29 +210,32 @@ const game = {
       let MARKS = {
         selectorigin: newMarkPos
       };
+      let BATTLEVARS = step.BATTLEVARS;
       let UNITLAYERS = step.UNITLAYERS;
       if (UNITLAYERS.mysoldiers[MARKS.selectorigin]) {
-        const visited = {};
-        const toCheck = [MARKS.selectorigin];
-        const steps = UNITLAYERS.myunits;
-        while (toCheck.length) {
-          const from = toCheck.shift();
-          visited[from] = true;
-          for (const DIR of roseDirs) {
-            const POS = connections[from][DIR];
-            if (POS && !visited[POS] && steps[POS]) {
-              toCheck.push(POS);
-              ARTIFACTS.connected[POS] = emptyObj;
+        if (TERRAIN1.mysupported[MARKS.selectorigin]) {
+          const visited = {};
+          const toCheck = [MARKS.selectorigin];
+          const steps = UNITLAYERS.myunits;
+          while (toCheck.length) {
+            const from = toCheck.shift();
+            visited[from] = true;
+            for (const DIR of roseDirs) {
+              const POS = connections[from][DIR];
+              if (POS && !visited[POS] && steps[POS]) {
+                toCheck.push(POS);
+                ARTIFACTS.connected[POS] = emptyObj;
+              }
             }
           }
-        }
-        for (let STARTPOS in ARTIFACTS.connected) {
-          let startconnections = connections[STARTPOS];
-          for (let DIR of roseDirs) {
-            let POS = startconnections[DIR];
-            if (POS) {
-              if (!UNITLAYERS.myunits[POS] && !UNITLAYERS.bases[POS]) {
-                ARTIFACTS.movetargets[POS] = emptyObj;
+          for (let STARTPOS in ARTIFACTS.connected) {
+            let startconnections = connections[STARTPOS];
+            for (let DIR of roseDirs) {
+              let POS = startconnections[DIR];
+              if (POS) {
+                if (!UNITLAYERS.myunits[POS] && !UNITLAYERS.bases[POS]) {
+                  ARTIFACTS.movetargets[POS] = emptyObj;
+                }
               }
             }
           }
@@ -258,7 +261,10 @@ const game = {
           }
         }
       }
-      if (!UNITLAYERS.mysoldiers[MARKS.selectorigin]) {
+      if (
+        !UNITLAYERS.mysoldiers[MARKS.selectorigin] &&
+        5 !== BATTLEVARS["size2"]
+      ) {
         LINKS.commands.insert = "insert_basic_1";
       } else {
         for (const pos of Object.keys({
@@ -275,7 +281,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
         MARKS,
-        BATTLEVARS: step.BATTLEVARS,
+        BATTLEVARS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
@@ -309,7 +315,7 @@ const game = {
         }
       }
       if (
-        5 > BATTLEVARS["size2"] ||
+        5 !== BATTLEVARS["size2"] ||
         (TERRAIN1.center[MARKS.selectdestination] &&
           UNITLAYERS.oppunits[MARKS.selectdestination])
       ) {
@@ -342,29 +348,32 @@ const game = {
       let MARKS = {
         selectorigin: newMarkPos
       };
+      let BATTLEVARS = step.BATTLEVARS;
       let UNITLAYERS = step.UNITLAYERS;
       if (UNITLAYERS.mysoldiers[MARKS.selectorigin]) {
-        const visited = {};
-        const toCheck = [MARKS.selectorigin];
-        const steps = UNITLAYERS.myunits;
-        while (toCheck.length) {
-          const from = toCheck.shift();
-          visited[from] = true;
-          for (const DIR of roseDirs) {
-            const POS = connections[from][DIR];
-            if (POS && !visited[POS] && steps[POS]) {
-              toCheck.push(POS);
-              ARTIFACTS.connected[POS] = emptyObj;
+        if (TERRAIN2.mysupported[MARKS.selectorigin]) {
+          const visited = {};
+          const toCheck = [MARKS.selectorigin];
+          const steps = UNITLAYERS.myunits;
+          while (toCheck.length) {
+            const from = toCheck.shift();
+            visited[from] = true;
+            for (const DIR of roseDirs) {
+              const POS = connections[from][DIR];
+              if (POS && !visited[POS] && steps[POS]) {
+                toCheck.push(POS);
+                ARTIFACTS.connected[POS] = emptyObj;
+              }
             }
           }
-        }
-        for (let STARTPOS in ARTIFACTS.connected) {
-          let startconnections = connections[STARTPOS];
-          for (let DIR of roseDirs) {
-            let POS = startconnections[DIR];
-            if (POS) {
-              if (!UNITLAYERS.myunits[POS] && !UNITLAYERS.bases[POS]) {
-                ARTIFACTS.movetargets[POS] = emptyObj;
+          for (let STARTPOS in ARTIFACTS.connected) {
+            let startconnections = connections[STARTPOS];
+            for (let DIR of roseDirs) {
+              let POS = startconnections[DIR];
+              if (POS) {
+                if (!UNITLAYERS.myunits[POS] && !UNITLAYERS.bases[POS]) {
+                  ARTIFACTS.movetargets[POS] = emptyObj;
+                }
               }
             }
           }
@@ -390,7 +399,10 @@ const game = {
           }
         }
       }
-      if (!UNITLAYERS.mysoldiers[MARKS.selectorigin]) {
+      if (
+        !UNITLAYERS.mysoldiers[MARKS.selectorigin] &&
+        5 !== BATTLEVARS["size1"]
+      ) {
         LINKS.commands.insert = "insert_basic_2";
       } else {
         for (const pos of Object.keys({
@@ -407,7 +419,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
         MARKS,
-        BATTLEVARS: step.BATTLEVARS,
+        BATTLEVARS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
@@ -441,7 +453,7 @@ const game = {
         }
       }
       if (
-        5 > BATTLEVARS["size1"] ||
+        5 !== BATTLEVARS["size1"] ||
         (TERRAIN2.center[MARKS.selectdestination] &&
           UNITLAYERS.oppunits[MARKS.selectdestination])
       ) {

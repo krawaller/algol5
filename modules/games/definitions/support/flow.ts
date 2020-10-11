@@ -116,8 +116,12 @@ const supportFlow: SupportDefinition["flow"] = {
             { anyat: ["mysoldiers", "selectorigin"] },
             {
               multi: [
-                "findconnected",
-                "findmovetargets",
+                {
+                  if: [
+                    { anyat: ["mysupported", "selectorigin"] },
+                    { multi: ["findconnected", "findmovetargets"] },
+                  ],
+                },
                 {
                   if: [{ anyat: ["edge", "selectorigin"] }, "findpushtargets"],
                 },
@@ -128,7 +132,17 @@ const supportFlow: SupportDefinition["flow"] = {
       ],
       link: {
         ifelse: [
-          { noneat: ["mysoldiers", "selectorigin"] },
+          {
+            and: [
+              { noneat: ["mysoldiers", "selectorigin"] },
+              {
+                different: [
+                  5,
+                  { battlevar: { playercase: ["size2", "size1"] } },
+                ],
+              },
+            ],
+          },
           "insert",
           "selectdestination",
         ],
@@ -145,7 +159,7 @@ const supportFlow: SupportDefinition["flow"] = {
             {
               or: [
                 {
-                  morethan: [
+                  different: [
                     5,
                     { battlevar: { playercase: ["size2", "size1"] } },
                   ],

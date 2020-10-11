@@ -80,7 +80,7 @@ const game = {
     }
     return game.action[`startTurn_${ruleset}_1`]({
       NEXTSPAWNID: 1,
-      BATTLEVARS: { plr1: 0, plr2: 0 },
+      BATTLEVARS: { score1: 0, score2: 0, size1: 0, size2: 0 },
       TURN: 0,
       UNITDATA,
       UNITLAYERS
@@ -291,6 +291,8 @@ const game = {
         selectorigin: step.MARKS.selectorigin,
         selectdestination: newMarkPos
       };
+      let BATTLEVARS = step.BATTLEVARS;
+      let UNITLAYERS = step.UNITLAYERS;
       if (ARTIFACTS.pushtargets[MARKS.selectdestination]) {
         {
           let POS = MARKS.selectdestination;
@@ -306,20 +308,26 @@ const game = {
           }
         }
       }
-      if (ARTIFACTS.movetargets[MARKS.selectdestination]) {
-        LINKS.commands.move = "move_basic_1";
-      }
-      if (ARTIFACTS.pushtargets[MARKS.selectdestination]) {
-        LINKS.commands.insert = "insert_basic_1";
+      if (
+        5 > BATTLEVARS["size2"] ||
+        (TERRAIN1.center[MARKS.selectdestination] &&
+          UNITLAYERS.oppunits[MARKS.selectdestination])
+      ) {
+        if (ARTIFACTS.movetargets[MARKS.selectdestination]) {
+          LINKS.commands.move = "move_basic_1";
+        }
+        if (ARTIFACTS.pushtargets[MARKS.selectdestination]) {
+          LINKS.commands.insert = "insert_basic_1";
+        }
       }
       return {
         LINKS,
         ARTIFACTS,
-        UNITLAYERS: step.UNITLAYERS,
+        UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
         MARKS,
-        BATTLEVARS: step.BATTLEVARS,
+        BATTLEVARS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
@@ -415,6 +423,8 @@ const game = {
         selectorigin: step.MARKS.selectorigin,
         selectdestination: newMarkPos
       };
+      let BATTLEVARS = step.BATTLEVARS;
+      let UNITLAYERS = step.UNITLAYERS;
       if (ARTIFACTS.pushtargets[MARKS.selectdestination]) {
         {
           let POS = MARKS.selectdestination;
@@ -430,20 +440,26 @@ const game = {
           }
         }
       }
-      if (ARTIFACTS.movetargets[MARKS.selectdestination]) {
-        LINKS.commands.move = "move_basic_2";
-      }
-      if (ARTIFACTS.pushtargets[MARKS.selectdestination]) {
-        LINKS.commands.insert = "insert_basic_2";
+      if (
+        5 > BATTLEVARS["size1"] ||
+        (TERRAIN2.center[MARKS.selectdestination] &&
+          UNITLAYERS.oppunits[MARKS.selectdestination])
+      ) {
+        if (ARTIFACTS.movetargets[MARKS.selectdestination]) {
+          LINKS.commands.move = "move_basic_2";
+        }
+        if (ARTIFACTS.pushtargets[MARKS.selectdestination]) {
+          LINKS.commands.insert = "insert_basic_2";
+        }
       }
       return {
         LINKS,
         ARTIFACTS,
-        UNITLAYERS: step.UNITLAYERS,
+        UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
         MARKS,
-        BATTLEVARS: step.BATTLEVARS,
+        BATTLEVARS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
@@ -455,7 +471,10 @@ const game = {
       let MARKS = step.MARKS;
       if (UNITLAYERS.units[MARKS.selectdestination]) {
         delete UNITDATA[(UNITLAYERS.units[MARKS.selectdestination] || {}).id];
-        BATTLEVARS.plr1 = (BATTLEVARS.plr1 || 0) + 1;
+        BATTLEVARS.score1 = (BATTLEVARS.score1 || 0) + 1;
+        if (TERRAIN1.center[MARKS.selectdestination]) {
+          BATTLEVARS.size2 = (BATTLEVARS.size2 || 0) + -1;
+        }
       }
       {
         let unitid = (UNITLAYERS.units[MARKS.selectorigin] || {}).id;
@@ -465,6 +484,9 @@ const game = {
             pos: MARKS.selectdestination
           };
         }
+      }
+      if (TERRAIN1.center[MARKS.selectdestination]) {
+        BATTLEVARS.size1 = (BATTLEVARS.size1 || 0) + 1;
       }
       UNITLAYERS = {
         units: {},
@@ -482,10 +504,31 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      if (BATTLEVARS["plr1"] === 18) {
+      if (BATTLEVARS["score1"] === 18) {
         LINKS.endGame = "win";
         LINKS.endedBy = "killed18";
         LINKS.endMarks = Object.keys({ [MARKS.selectdestination]: 1 });
+      } else if (BATTLEVARS["size1"] === 5) {
+        LINKS.starvation = {
+          endGame: "win",
+          endedBy: "tookcenter",
+          endMarks: Object.keys(
+            Object.entries(
+              Object.keys(TERRAIN1.center)
+                .concat(Object.keys(UNITLAYERS.mysoldiers))
+                .reduce((mem, k) => {
+                  mem[k] = (mem[k] || 0) + 1;
+                  return mem;
+                }, {})
+            )
+              .filter(([key, n]) => n === 2)
+              .reduce((mem, [key]) => {
+                mem[key] = emptyObj;
+                return mem;
+              }, {})
+          )
+        };
+        LINKS.endTurn = "startTurn_basic_2";
       } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
@@ -497,7 +540,8 @@ const game = {
         UNITDATA,
         UNITLAYERS,
         BATTLEVARS,
-        NEXTSPAWNID: step.NEXTSPAWNID
+        NEXTSPAWNID: step.NEXTSPAWNID,
+        canAlwaysEnd: true
       };
     },
     insert_basic_1: step => {
@@ -528,7 +572,10 @@ const game = {
       );
       if (UNITLAYERS.units[MARKS.selectdestination]) {
         delete UNITDATA[(UNITLAYERS.units[MARKS.selectdestination] || {}).id];
-        BATTLEVARS.plr1 = (BATTLEVARS.plr1 || 0) + 1;
+        BATTLEVARS.score1 = (BATTLEVARS.score1 || 0) + 1;
+        if (TERRAIN1.center[MARKS.selectdestination]) {
+          BATTLEVARS.size2 = (BATTLEVARS.size2 || 0) + -1;
+        }
       }
       for (let LOOPPOS in ARTIFACTS.pushees) {
         {
@@ -554,6 +601,9 @@ const game = {
           owner: 1
         };
       }
+      if (TERRAIN1.center[MARKS.selectdestination]) {
+        BATTLEVARS.size1 = (BATTLEVARS.size1 || 0) + 1;
+      }
       UNITLAYERS = {
         units: {},
         myunits: {},
@@ -570,10 +620,31 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      if (BATTLEVARS["plr1"] === 18) {
+      if (BATTLEVARS["score1"] === 18) {
         LINKS.endGame = "win";
         LINKS.endedBy = "killed18";
         LINKS.endMarks = Object.keys({ [MARKS.selectdestination]: 1 });
+      } else if (BATTLEVARS["size1"] === 5) {
+        LINKS.starvation = {
+          endGame: "win",
+          endedBy: "tookcenter",
+          endMarks: Object.keys(
+            Object.entries(
+              Object.keys(TERRAIN1.center)
+                .concat(Object.keys(UNITLAYERS.mysoldiers))
+                .reduce((mem, k) => {
+                  mem[k] = (mem[k] || 0) + 1;
+                  return mem;
+                }, {})
+            )
+              .filter(([key, n]) => n === 2)
+              .reduce((mem, [key]) => {
+                mem[key] = emptyObj;
+                return mem;
+              }, {})
+          )
+        };
+        LINKS.endTurn = "startTurn_basic_2";
       } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
@@ -586,6 +657,7 @@ const game = {
         UNITLAYERS,
         BATTLEVARS,
         NEXTSPAWNID,
+        canAlwaysEnd: true,
         anim
       };
     },
@@ -597,7 +669,10 @@ const game = {
       let MARKS = step.MARKS;
       if (UNITLAYERS.units[MARKS.selectdestination]) {
         delete UNITDATA[(UNITLAYERS.units[MARKS.selectdestination] || {}).id];
-        BATTLEVARS.plr2 = (BATTLEVARS.plr2 || 0) + 1;
+        BATTLEVARS.score2 = (BATTLEVARS.score2 || 0) + 1;
+        if (TERRAIN2.center[MARKS.selectdestination]) {
+          BATTLEVARS.size1 = (BATTLEVARS.size1 || 0) + -1;
+        }
       }
       {
         let unitid = (UNITLAYERS.units[MARKS.selectorigin] || {}).id;
@@ -607,6 +682,9 @@ const game = {
             pos: MARKS.selectdestination
           };
         }
+      }
+      if (TERRAIN2.center[MARKS.selectdestination]) {
+        BATTLEVARS.size2 = (BATTLEVARS.size2 || 0) + 1;
       }
       UNITLAYERS = {
         units: {},
@@ -624,10 +702,31 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      if (BATTLEVARS["plr2"] === 18) {
+      if (BATTLEVARS["score2"] === 18) {
         LINKS.endGame = "win";
         LINKS.endedBy = "killed18";
         LINKS.endMarks = Object.keys({ [MARKS.selectdestination]: 1 });
+      } else if (BATTLEVARS["size2"] === 5) {
+        LINKS.starvation = {
+          endGame: "win",
+          endedBy: "tookcenter",
+          endMarks: Object.keys(
+            Object.entries(
+              Object.keys(TERRAIN2.center)
+                .concat(Object.keys(UNITLAYERS.mysoldiers))
+                .reduce((mem, k) => {
+                  mem[k] = (mem[k] || 0) + 1;
+                  return mem;
+                }, {})
+            )
+              .filter(([key, n]) => n === 2)
+              .reduce((mem, [key]) => {
+                mem[key] = emptyObj;
+                return mem;
+              }, {})
+          )
+        };
+        LINKS.endTurn = "startTurn_basic_1";
       } else {
         LINKS.endTurn = "startTurn_basic_1";
       }
@@ -639,7 +738,8 @@ const game = {
         UNITDATA,
         UNITLAYERS,
         BATTLEVARS,
-        NEXTSPAWNID: step.NEXTSPAWNID
+        NEXTSPAWNID: step.NEXTSPAWNID,
+        canAlwaysEnd: true
       };
     },
     insert_basic_2: step => {
@@ -670,7 +770,10 @@ const game = {
       );
       if (UNITLAYERS.units[MARKS.selectdestination]) {
         delete UNITDATA[(UNITLAYERS.units[MARKS.selectdestination] || {}).id];
-        BATTLEVARS.plr2 = (BATTLEVARS.plr2 || 0) + 1;
+        BATTLEVARS.score2 = (BATTLEVARS.score2 || 0) + 1;
+        if (TERRAIN2.center[MARKS.selectdestination]) {
+          BATTLEVARS.size1 = (BATTLEVARS.size1 || 0) + -1;
+        }
       }
       for (let LOOPPOS in ARTIFACTS.pushees) {
         {
@@ -696,6 +799,9 @@ const game = {
           owner: 2
         };
       }
+      if (TERRAIN2.center[MARKS.selectdestination]) {
+        BATTLEVARS.size2 = (BATTLEVARS.size2 || 0) + 1;
+      }
       UNITLAYERS = {
         units: {},
         myunits: {},
@@ -712,10 +818,31 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      if (BATTLEVARS["plr2"] === 18) {
+      if (BATTLEVARS["score2"] === 18) {
         LINKS.endGame = "win";
         LINKS.endedBy = "killed18";
         LINKS.endMarks = Object.keys({ [MARKS.selectdestination]: 1 });
+      } else if (BATTLEVARS["size2"] === 5) {
+        LINKS.starvation = {
+          endGame: "win",
+          endedBy: "tookcenter",
+          endMarks: Object.keys(
+            Object.entries(
+              Object.keys(TERRAIN2.center)
+                .concat(Object.keys(UNITLAYERS.mysoldiers))
+                .reduce((mem, k) => {
+                  mem[k] = (mem[k] || 0) + 1;
+                  return mem;
+                }, {})
+            )
+              .filter(([key, n]) => n === 2)
+              .reduce((mem, [key]) => {
+                mem[key] = emptyObj;
+                return mem;
+              }, {})
+          )
+        };
+        LINKS.endTurn = "startTurn_basic_1";
       } else {
         LINKS.endTurn = "startTurn_basic_1";
       }
@@ -728,6 +855,7 @@ const game = {
         UNITLAYERS,
         BATTLEVARS,
         NEXTSPAWNID,
+        canAlwaysEnd: true,
         anim
       };
     }
@@ -737,24 +865,32 @@ const game = {
       let BATTLEVARS = step.BATTLEVARS;
       return collapseContent({
         line: [
-          BATTLEVARS["plr1"] === BATTLEVARS["plr2"]
+          5 === BATTLEVARS["size2"]
+            ? collapseContent({
+                line: [
+                  { text: "You must kill one of the" },
+                  { unittype: ["pawn", 2] },
+                  { text: "in the center!" }
+                ]
+              })
+            : BATTLEVARS["score1"] === BATTLEVARS["score2"]
             ? collapseContent({
                 line: [
                   { text: "You and" },
                   { player: 2 },
                   { text: "both have" },
-                  { text: BATTLEVARS["plr1"] },
+                  { text: BATTLEVARS["score1"] },
                   { text: "kills." }
                 ]
               })
             : collapseContent({
                 line: [
                   { text: "You have" },
-                  { text: BATTLEVARS["plr1"] },
+                  { text: BATTLEVARS["score1"] },
                   { text: "kills and" },
                   { player: 2 },
                   { text: "has" },
-                  { text: BATTLEVARS["plr2"] },
+                  { text: BATTLEVARS["score2"] },
                   { text: "." }
                 ]
               }),
@@ -956,24 +1092,32 @@ const game = {
       let BATTLEVARS = step.BATTLEVARS;
       return collapseContent({
         line: [
-          BATTLEVARS["plr1"] === BATTLEVARS["plr2"]
+          5 === BATTLEVARS["size1"]
+            ? collapseContent({
+                line: [
+                  { text: "You must kill one of the" },
+                  { unittype: ["pawn", 1] },
+                  { text: "in the center!" }
+                ]
+              })
+            : BATTLEVARS["score1"] === BATTLEVARS["score2"]
             ? collapseContent({
                 line: [
                   { text: "You and" },
                   { player: 1 },
                   { text: "both have" },
-                  { text: BATTLEVARS["plr1"] },
+                  { text: BATTLEVARS["score1"] },
                   { text: "kills." }
                 ]
               })
             : collapseContent({
                 line: [
                   { text: "You have" },
-                  { text: BATTLEVARS["plr2"] },
+                  { text: BATTLEVARS["score2"] },
                   { text: "kills and" },
                   { player: 1 },
                   { text: "has" },
-                  { text: BATTLEVARS["plr1"] },
+                  { text: BATTLEVARS["score1"] },
                   { text: "." }
                 ]
               }),

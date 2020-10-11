@@ -1,9 +1,12 @@
 import { SupportDefinition } from "./_types";
 
 const supportPerformance: SupportDefinition["performance"] = {
-  canAlwaysEnd: {},
+  canAlwaysEnd: {
+    move: true,
+    insert: true,
+  },
   massiveTree: {},
-  noEndGameCheck: []
+  noEndGameCheck: [],
 };
 
 export default supportPerformance;

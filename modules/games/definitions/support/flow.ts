@@ -2,15 +2,24 @@ import { SupportDefinition } from "./_types";
 
 const supportFlow: SupportDefinition["flow"] = {
   battleVars: {
-    plr1: 0,
-    plr2: 0,
+    score1: 0,
+    score2: 0,
+    size1: 0,
+    size2: 0,
   },
   endGame: {
     killed18: {
       condition: {
-        same: [{ battlevar: { playercase: ["plr1", "plr2"] } }, 18],
+        same: [{ battlevar: { playercase: ["score1", "score2"] } }, 18],
       },
       show: { single: "selectdestination" },
+    },
+    tookcenter: {
+      condition: {
+        same: [{ battlevar: { playercase: ["size1", "size2"] } }, 5],
+      },
+      show: { intersect: ["center", "mysoldiers"] },
+      whenStarvation: true,
     },
   },
   startTurn: {
@@ -31,7 +40,13 @@ const supportFlow: SupportDefinition["flow"] = {
                   killat: "selectdestination",
                 },
                 {
-                  incbattlevar: [{ playercase: ["plr1", "plr2"] }],
+                  incbattlevar: [{ playercase: ["score1", "score2"] }],
+                },
+                {
+                  if: [
+                    { anyat: ["center", "selectdestination"] },
+                    { incbattlevar: [{ playercase: ["size2", "size1"] }, -1] },
+                  ],
                 },
               ],
             },
@@ -39,6 +54,12 @@ const supportFlow: SupportDefinition["flow"] = {
         },
         {
           moveat: ["selectorigin", "selectdestination"],
+        },
+        {
+          if: [
+            { anyat: ["center", "selectdestination"] },
+            { incbattlevar: [{ playercase: ["size1", "size2"] }] },
+          ],
         },
       ],
       link: "endTurn",
@@ -54,7 +75,13 @@ const supportFlow: SupportDefinition["flow"] = {
                   killat: "selectdestination",
                 },
                 {
-                  incbattlevar: [{ playercase: ["plr1", "plr2"] }],
+                  incbattlevar: [{ playercase: ["score1", "score2"] }],
+                },
+                {
+                  if: [
+                    { anyat: ["center", "selectdestination"] },
+                    { incbattlevar: [{ playercase: ["size2", "size1"] }, -1] },
+                  ],
                 },
               ],
             },
@@ -69,6 +96,12 @@ const supportFlow: SupportDefinition["flow"] = {
         },
         {
           spawnat: ["selectorigin", "soldiers"],
+        },
+        {
+          if: [
+            { anyat: ["center", "selectdestination"] },
+            { incbattlevar: [{ playercase: ["size1", "size2"] }] },
+          ],
         },
       ],
       link: "endTurn",
@@ -107,8 +140,39 @@ const supportFlow: SupportDefinition["flow"] = {
         if: [{ anyat: ["pushtargets", "selectdestination"] }, "findpushees"],
       },
       links: [
-        { if: [{ anyat: ["movetargets", "selectdestination"] }, "move"] },
-        { if: [{ anyat: ["pushtargets", "selectdestination"] }, "insert"] },
+        {
+          if: [
+            {
+              or: [
+                {
+                  morethan: [
+                    5,
+                    { battlevar: { playercase: ["size2", "size1"] } },
+                  ],
+                },
+                {
+                  and: [
+                    { anyat: ["center", "selectdestination"] },
+                    { anyat: ["oppunits", "selectdestination"] },
+                  ],
+                },
+              ],
+            },
+            {
+              multi: [
+                {
+                  if: [{ anyat: ["movetargets", "selectdestination"] }, "move"],
+                },
+                {
+                  if: [
+                    { anyat: ["pushtargets", "selectdestination"] },
+                    "insert",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
   },

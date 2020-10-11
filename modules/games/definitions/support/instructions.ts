@@ -5,25 +5,43 @@ const supportInstructions: SupportDefinition["instructions"] = {
     line: [
       {
         ifelse: [
-          { same: [{ battlevar: "plr1" }, { battlevar: "plr2" }] },
           {
-            line: [
-              "You and",
-              { player: ["otherplayer"] },
-              "both have",
-              { value: { battlevar: "plr1" } },
-              "kills.",
-            ],
+            same: [5, { battlevar: { playercase: ["size2", "size1"] } }],
           },
           {
             line: [
-              "You have",
-              { value: { battlevar: { playercase: ["plr1", "plr2"] } } },
-              "kills and",
-              { player: ["otherplayer"] },
-              "has",
-              { value: { battlevar: { playercase: ["plr2", "plr1"] } } },
-              ".",
+              "You must kill one of the",
+              { unittype: ["soldiers", ["otherplayer"]] },
+              "in the center!",
+            ],
+          },
+          {
+            ifelse: [
+              { same: [{ battlevar: "score1" }, { battlevar: "score2" }] },
+              {
+                line: [
+                  "You and",
+                  { player: ["otherplayer"] },
+                  "both have",
+                  { value: { battlevar: "score1" } },
+                  "kills.",
+                ],
+              },
+              {
+                line: [
+                  "You have",
+                  {
+                    value: { battlevar: { playercase: ["score1", "score2"] } },
+                  },
+                  "kills and",
+                  { player: ["otherplayer"] },
+                  "has",
+                  {
+                    value: { battlevar: { playercase: ["score2", "score1"] } },
+                  },
+                  ".",
+                ],
+              },
             ],
           },
         ],

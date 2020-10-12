@@ -4,16 +4,11 @@ import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 type DesdemonaBoardHeight = 8;
 type DesdemonaBoardWidth = 8;
 
-type DesdemonaTerrain = never;
+type DesdemonaTerrain = "edge";
 type DesdemonaUnit = "amazons" | "stones";
-type DesdemonaMark =
-  | "selectunit"
-  | "selectmovetarget"
-  | "selectfiretarget"
-  | "selectcapturer"
-  | "selectcapturestart";
+type DesdemonaMark = "selectunit" | "selectmovetarget" | "selectfiretarget";
 type DesdemonaCommand = "move" | "fire";
-type DesdemonaPhaseCommand = "move" | "fire";
+type DesdemonaPhaseCommand = "move";
 type DesdemonaPhase = "startTurn" | DesdemonaMark | DesdemonaPhaseCommand;
 type DesdemonaUnitLayer =
   | "units"
@@ -32,36 +27,27 @@ type DesdemonaGenerator =
   | "findmovetargets"
   | "findspawntargets"
   | "findcapturetargets"
-  | "findvictims"
-  | "findoppmovers"
-  | "findreachablesquares"
-  | "findcapturestarts"
-  | "findcapturers";
+  | "findvictims";
 type DesdemonaArtifactLayer =
-  | "capturers"
-  | "capturestarts"
   | "movetargets"
   | "firetargets"
   | "capturespot"
-  | "victims"
-  | "oppmovers"
-  | "reachablesquares";
-type DesdemonaTerrainLayer = never;
-type DesdemonaLayer = CommonLayer | DesdemonaUnitLayer | DesdemonaArtifactLayer;
+  | "victims";
+type DesdemonaTerrainLayer = "edge" | "noedge";
+type DesdemonaLayer =
+  | CommonLayer
+  | DesdemonaUnitLayer
+  | DesdemonaArtifactLayer
+  | DesdemonaTerrainLayer;
 type DesdemonaBattlePos = never;
 type DesdemonaBattleVar = never;
 type DesdemonaTurnPos = "movedto";
 type DesdemonaTurnVar = "movedto";
 
-type DesdemonaBoardName = "basic" | "xl";
-type DesdemonaSetupName = "basic" | "xl" | "basic_OLD" | "xl_OLD" | "blocktest";
-type DesdemonaRulesetName = "pie" | "basic";
-type DesdemonaVariantName =
-  | "regular"
-  | "XL"
-  | "blocktest"
-  | "regular (OLD)"
-  | "XL (OLD)";
+type DesdemonaBoardName = "basic" | "small";
+type DesdemonaSetupName = "basic" | "small";
+type DesdemonaRulesetName = "pie";
+type DesdemonaVariantName = "regular" | "small";
 
 type DesdemonaGrid = never;
 

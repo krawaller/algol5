@@ -9,7 +9,7 @@ const desdemonaGenerators: DesdemonaDefinition["generators"] = {
   findmovetargets: {
     type: "walker",
     dirs: "rose",
-    start: { firsttruthy: ["selectunit", "selectcapturer"] },
+    start: "selectunit",
     blocks: "units",
     draw: {
       steps: {
@@ -25,6 +25,7 @@ const desdemonaGenerators: DesdemonaDefinition["generators"] = {
     draw: {
       steps: [
         {
+          unlessover: "edge",
           tolayer: "firetargets",
         },
       ],
@@ -61,56 +62,6 @@ const desdemonaGenerators: DesdemonaDefinition["generators"] = {
     draw: {
       steps: {
         tolayer: "victims",
-      },
-    },
-  },
-  findoppmovers: {
-    type: "neighbour",
-    dirs: "rose",
-    condition: { noneat: ["units", ["target"]] },
-    starts: "oppamazons",
-    draw: {
-      start: {
-        condition: { truthy: ["neighbourcount"] },
-        tolayer: "oppmovers",
-      },
-    },
-  },
-  findreachablesquares: {
-    type: "walker",
-    dirs: "rose",
-    starts: "myunits",
-    blocks: "units",
-    draw: {
-      steps: {
-        tolayer: "reachablesquares",
-      },
-    },
-  },
-  findcapturestarts: {
-    type: "walker",
-    dirs: "rose",
-    starts: "reachablesquares",
-    blocks: { subtract: ["board", "units"] },
-    stopPrio: ["outofbounds", "hitblock", "nomoresteps"],
-    steps: "oppstones",
-    draw: {
-      start: {
-        condition: {
-          and: [{ truthy: ["walklength"] }, { stoppedBecause: "hitblock" }],
-        },
-        tolayer: "capturestarts",
-      },
-    },
-  },
-  findcapturers: {
-    type: "walker",
-    starts: "capturestarts",
-    dirs: "rose",
-    blocks: "myamazons",
-    draw: {
-      block: {
-        tolayer: "capturers",
       },
     },
   },

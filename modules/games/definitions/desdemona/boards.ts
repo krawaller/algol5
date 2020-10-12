@@ -6,14 +6,28 @@ import { DesdemonaDefinition } from "./_types";
 
 const desdemonaBoardBook: DesdemonaDefinition["boards"] = {
   basic: {
-    height: 7,
-    width: 7,
-    terrain: {},
-  },
-  xl: {
     height: 8,
     width: 8,
-    terrain: {},
+    terrain: {
+      edge: [
+        { rect: ["a1", "h1"] },
+        { rect: ["a8", "h8"] },
+        { rect: ["a2", "a7"] },
+        { rect: ["h2", "h7"] },
+      ],
+    },
+  },
+  small: {
+    height: 7,
+    width: 7,
+    terrain: {
+      edge: [
+        { rect: ["a1", "g1"] },
+        { rect: ["a7", "g7"] },
+        { rect: ["a2", "a6"] },
+        { rect: ["g2", "g6"] },
+      ],
+    },
   },
 };
 

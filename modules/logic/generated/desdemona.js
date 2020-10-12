@@ -185,8 +185,7 @@ const game = {
           selectmovetarget: newMarkPos
         },
         TURNVARS: step.TURNVARS,
-        NEXTSPAWNID: step.NEXTSPAWNID,
-        canAlwaysEnd: true
+        NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
     selectfiretarget_pie_1: (step, newMarkPos) => {
@@ -226,7 +225,8 @@ const game = {
         TURN: step.TURN,
         MARKS,
         TURNVARS: step.TURNVARS,
-        NEXTSPAWNID: step.NEXTSPAWNID
+        NEXTSPAWNID: step.NEXTSPAWNID,
+        canAlwaysEnd: true
       };
     },
     selectunit_pie_2: (step, newMarkPos) => {
@@ -275,8 +275,7 @@ const game = {
           selectmovetarget: newMarkPos
         },
         TURNVARS: step.TURNVARS,
-        NEXTSPAWNID: step.NEXTSPAWNID,
-        canAlwaysEnd: true
+        NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
     selectfiretarget_pie_2: (step, newMarkPos) => {
@@ -316,7 +315,8 @@ const game = {
         TURN: step.TURN,
         MARKS,
         TURNVARS: step.TURNVARS,
-        NEXTSPAWNID: step.NEXTSPAWNID
+        NEXTSPAWNID: step.NEXTSPAWNID,
+        canAlwaysEnd: true
       };
     },
     move_pie_1: step => {

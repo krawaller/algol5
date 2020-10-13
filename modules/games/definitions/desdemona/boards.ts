@@ -29,6 +29,18 @@ const desdemonaBoardBook: DesdemonaDefinition["boards"] = {
       ],
     },
   },
+  large: {
+    height: 10,
+    width: 10,
+    terrain: {
+      edge: [
+        { rect: ["a1", "j1"] },
+        { rect: ["a10", "j10"] },
+        { rect: ["a2", "a9"] },
+        { rect: ["j2", "j9"] },
+      ],
+    },
+  },
 };
 
 export default desdemonaBoardBook;

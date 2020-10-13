@@ -2,14 +2,15 @@
 updated: 2020-10-12
 ---
 
-{GAME} is played on a {DIM:board=basic} or {DIM:board=small} board with these setups:
+{GAME} is played on a {DIM:board=basic}, {DIM:board=small} or {DIM:board=large} board with these setups:
 
-<div class="md-2col">
+<div class="md-3col">
 {SETUP:name=basic,board=basic}
 {SETUP:name=small,board=small}
+{SETUP:name=large,board=large}
 </div>
 
-Regular variant shown to the left, small variant to the right.
+Regular variant shown to the left, small in the middle, large to the right.
 
 There are two types of units in {GAME}:
 

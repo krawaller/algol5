@@ -42,6 +42,13 @@ const desdemonaVariants: DesdemonaDefinition["variants"] = [
     desc: "small",
     code: "p",
   },
+  {
+    ruleset: "pie",
+    board: "large",
+    setup: "large",
+    desc: "large",
+    code: "L",
+  },
 ];
 
 export default desdemonaVariants;

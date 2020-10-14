@@ -14,7 +14,10 @@ const desdemonaSetupBook: DesdemonaDefinition["setups"] = {
     },
   },
   large: {
-    amazons: { "1": ["d10", "g10", "a7", "j7"], "2": ["a4", "d1", "g1", "j4"] },
+    amazons: {
+      "1": ["g10", "d1", "a7", "j4"],
+      "2": ["a4", "d10", "g1", "j7"],
+    },
   },
 };
 

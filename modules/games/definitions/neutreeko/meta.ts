@@ -7,11 +7,11 @@ const neutreekoMeta: NeutreekoDefinition["meta"] = {
   tags: ["formation", "iggamecenter", "slide"],
   tagline: "Battle of the rows",
   source: "https://www.neutreeko.net/neutreeko.htm",
-  code: "4",
+  code: "xL",
   slug: "neutreeko",
-  demo: "40Lr5|b2hag1cmg",
+  demo: "xL0Lr5|b2hag1cmg",
   added: "2020-10-01",
-  addedBy: "Lucas Wiener"
+  addedBy: "Lucas Wiener",
 };
 
 export default neutreekoMeta;

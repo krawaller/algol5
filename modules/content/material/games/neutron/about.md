@@ -13,3 +13,5 @@ It is a simple (and solved) game, but even so, the easy rules and tug-of-war ove
 {PIC:name=paperneutronbook.jpg,cred=Photo by me,title=Paper Neutron in the book}
 
 In this variant - presumably as a concession to having the players constantly redraw the board state - Joris made the board smaller and added a second neutron, which makes for a very quick and vicious game!
+
+If you enjoy Neutron, also check out {GAME:id=neutreeko}, which is a fusion of this and Teeko!

@@ -4,7 +4,7 @@ import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 type KingsvalleyBoardHeight = 7;
 type KingsvalleyBoardWidth = 7;
 
-type KingsvalleyTerrain = "goal" | "water";
+type KingsvalleyTerrain = "goal";
 type KingsvalleyUnit = "soldiers" | "kings";
 type KingsvalleyMark = "selectunit" | "selectmovetarget";
 type KingsvalleyCommand = "slide";
@@ -25,7 +25,11 @@ type KingsvalleyUnitLayer =
   | "neutralkings";
 type KingsvalleyGenerator = "findtrappedkings" | "findmovetargets";
 type KingsvalleyArtifactLayer = "enemytrappedkings" | "movetargets";
-type KingsvalleyTerrainLayer = "goal" | "water" | "nogoal" | "nowater";
+type KingsvalleyTerrainLayer =
+  | "goal"
+  | "neutralgoal"
+  | "nogoal"
+  | "noneutralgoal";
 type KingsvalleyLayer =
   | CommonLayer
   | KingsvalleyUnitLayer

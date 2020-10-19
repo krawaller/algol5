@@ -54,8 +54,8 @@ const game = {
   commands: { slide: {} },
   iconMap: iconMapping,
   setBoard: board => {
-    TERRAIN1 = terrainLayers(board.height, board.width, board.terrain, 1);
-    TERRAIN2 = terrainLayers(board.height, board.width, board.terrain, 2);
+    TERRAIN1 = terrainLayers(board, 1);
+    TERRAIN2 = terrainLayers(board, 2);
     dimensions = { height: board.height, width: board.width };
     BOARD = boardLayers(dimensions);
     connections = boardConnections(board);
@@ -156,7 +156,7 @@ const game = {
       };
       let UNITLAYERS = step.UNITLAYERS;
       {
-        let BLOCKS = { ...TERRAIN1.water, ...UNITLAYERS.units };
+        let BLOCKS = UNITLAYERS.units;
         let STARTPOS = MARKS.selectunit;
         for (let DIR of roseDirs) {
           let walkedsquares = [];
@@ -210,7 +210,7 @@ const game = {
       };
       let UNITLAYERS = step.UNITLAYERS;
       {
-        let BLOCKS = { ...TERRAIN2.water, ...UNITLAYERS.units };
+        let BLOCKS = UNITLAYERS.units;
         let STARTPOS = MARKS.selectunit;
         for (let DIR of roseDirs) {
           let walkedsquares = [];

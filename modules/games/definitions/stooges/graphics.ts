@@ -10,9 +10,7 @@ const stoogesGraphics: StoogesDefinition["graphics"] = {
     singles: "pawn",
     doubles: "rook",
   },
-  tiles: {
-    corners: "castle",
-  },
+  tiles: {},
 };
 
 export default stoogesGraphics;

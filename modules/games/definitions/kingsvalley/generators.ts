@@ -26,7 +26,7 @@ const kingsvalleyGenerators: KingsvalleyDefinition["generators"] = {
     type: "walker",
     start: "selectunit",
     dirs: "rose",
-    blocks: { union: ["water", "units"] },
+    blocks: "units",
     draw: {
       last: {
         condition: {

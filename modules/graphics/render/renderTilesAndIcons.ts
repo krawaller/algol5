@@ -1,4 +1,4 @@
-import { coords2pos, terrainLayers } from "../../common";
+import { boardHoles, coords2pos, terrainLayers } from "../../common";
 import { allTiles, colours, svgPicSide, allMarks, allIcons } from "../sprites";
 import { tileAtPos } from "./tileAtPos";
 import {
@@ -31,8 +31,9 @@ export function renderTilesAndIcons(opts: RenderTilesAndIconsOpts) {
     sprites = [],
     definitionStrategy,
   } = opts;
-  const { height, width, terrain } = board;
-  const layers = terrainLayers(height, width, terrain!);
+  const { height, width } = board;
+  const layers = terrainLayers(board);
+  const holes = boardHoles(board);
 
   const spritesPerPos = sprites.reduce(
     (memo, sprite) => ({
@@ -77,7 +78,7 @@ export function renderTilesAndIcons(opts: RenderTilesAndIconsOpts) {
     ) {
       let drawX = col * side;
       const pos = coords2pos({ x: col, y: row });
-      let tile = tileAtPos(layers, tileMap, pos);
+      let tile = holes.includes(pos) ? "hole" : tileAtPos(layers, tileMap, pos);
       let isDark = !((col + (row % 2)) % 2);
       if (!(tile === "empty" && !isDark)) {
         const id = tile + (isDark ? "Dark" : "");

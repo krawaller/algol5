@@ -5,7 +5,7 @@ export function tileAtPos(
   tilemap: FullDefAnon["graphics"]["tiles"],
   pos: string
 ) {
-  const found = Object.keys(tilemap).find(name => layers[name][pos]);
+  const found = Object.keys(tilemap).find(name => (layers[name] || {})[pos]);
   if (found) {
     const square = layers[found][pos];
     if (tilemap[found] === "playercolour") {
@@ -18,13 +18,4 @@ export function tileAtPos(
     }
   }
   return "empty";
-
-  return Object.keys(tilemap).reduce(function(mem, name) {
-    console.log(layers[name][pos]);
-    return layers[name][pos]
-      ? tilemap[name] === "playercolour"
-        ? `player${layers[name][pos].owner}base`
-        : (tilemap[name] as string)
-      : mem;
-  }, "empty");
 }

@@ -64,8 +64,8 @@ const game = {
   commands: { move: {}, north: {}, east: {}, south: {}, west: {} },
   iconMap: iconMapping,
   setBoard: board => {
-    TERRAIN1 = terrainLayers(board.height, board.width, board.terrain, 1);
-    TERRAIN2 = terrainLayers(board.height, board.width, board.terrain, 2);
+    TERRAIN1 = terrainLayers(board, 1);
+    TERRAIN2 = terrainLayers(board, 2);
     dimensions = { height: board.height, width: board.width };
     BOARD = boardLayers(dimensions);
     connections = boardConnections(board);

@@ -10,7 +10,9 @@ const desdemonaGraphics: DesdemonaDefinition["graphics"] = {
     amazons: "queen",
     stones: "pawn",
   },
-  tiles: {},
+  tiles: {
+    edge: "grass",
+  },
 };
 
 export default desdemonaGraphics;

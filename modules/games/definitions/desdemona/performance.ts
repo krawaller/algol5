@@ -1,9 +1,7 @@
 import { DesdemonaDefinition } from "./_types";
 
 const desdemonaPerformance: DesdemonaDefinition["performance"] = {
-  canAlwaysEnd: {
-    selectmovetarget: true,
-  },
+  canAlwaysEnd: { selectfiretarget: true },
   massiveTree: {},
   noEndGameCheck: [],
 };

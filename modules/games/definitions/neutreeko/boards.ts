@@ -9,7 +9,17 @@ const neutreekoBoardBook: NeutreekoDefinition["boards"] = {
     height: 5,
     width: 5,
     terrain: {}
-  }
+  },
+  small: {
+    height: 4,
+    width: 5,
+    terrain: {}
+  },
+  mini: {
+    height: 4,
+    width: 4,
+    terrain: {}
+  },
 };
 
 export default neutreekoBoardBook;

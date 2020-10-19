@@ -28,10 +28,10 @@ type NeutreekoBattleVar = never;
 type NeutreekoTurnPos = never;
 type NeutreekoTurnVar = never;
 
-type NeutreekoBoardName = "basic";
-type NeutreekoSetupName = "basic";
+type NeutreekoBoardName = "basic" | "small" | "mini";
+type NeutreekoSetupName = "basic" | "small" | "mini";
 type NeutreekoRulesetName = "basic";
-type NeutreekoVariantName = "regular";
+type NeutreekoVariantName = "regular" | "small" | "mini";
 
 type NeutreekoGrid = never;
 

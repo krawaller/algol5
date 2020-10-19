@@ -17,6 +17,30 @@ const neutreekoVariants: NeutreekoDefinition["variants"] = [
       marks: ["b5"],
       potentialMarks: ["a5", "c5", "a4", "b2", "e2"]
     }
+  },
+  {
+    ruleset: "basic",
+    board: "small",
+    setup: "small",
+    desc: "small",
+    code: "S",
+    arr: {
+      setup: {},
+      marks: [],
+      potentialMarks: []
+    }
+  },
+  {
+    ruleset: "basic",
+    board: "mini",
+    setup: "mini",
+    desc: "mini",
+    code: "M",
+    arr: {
+      setup: {},
+      marks: [],
+      potentialMarks: []
+    }
   }
 ];
 

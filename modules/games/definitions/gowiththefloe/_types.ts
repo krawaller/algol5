@@ -4,7 +4,7 @@ import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 type GowiththefloeBoardHeight = 8;
 type GowiththefloeBoardWidth = 8;
 
-type GowiththefloeTerrain = "water";
+type GowiththefloeTerrain = never;
 type GowiththefloeUnit = "seals" | "bears" | "holes";
 type GowiththefloeMark =
   | "selectunit"
@@ -43,12 +43,11 @@ type GowiththefloeArtifactLayer =
   | "jumptargets"
   | "canmove"
   | "cracks";
-type GowiththefloeTerrainLayer = "water" | "nowater";
+type GowiththefloeTerrainLayer = never;
 type GowiththefloeLayer =
   | CommonLayer
   | GowiththefloeUnitLayer
-  | GowiththefloeArtifactLayer
-  | GowiththefloeTerrainLayer;
+  | GowiththefloeArtifactLayer;
 type GowiththefloeBattlePos = never;
 type GowiththefloeBattleVar = never;
 type GowiththefloeTurnPos = never;

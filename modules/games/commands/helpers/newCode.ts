@@ -1,8 +1,6 @@
 import allMeta from "../../dist/meta";
 
-const chars = "ABCDEFGHIJKLMNOPRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789".split(
-  ""
-);
+const chars = "ABCDEFGHIJKLMNOPRSTUVWXYZabcdefghijklmnopqrstuvxyz".split("");
 const codes = chars.reduce(
   (memo, char) =>
     memo.concat(

@@ -4,7 +4,7 @@ import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 type StoogesBoardHeight = 5;
 type StoogesBoardWidth = 6;
 
-type StoogesTerrain = "corners";
+type StoogesTerrain = never;
 type StoogesUnit = "singles" | "doubles";
 type StoogesMark = "selectsingle" | "selectdouble" | "selectmovetarget";
 type StoogesCommand = "move" | "swap";
@@ -25,12 +25,8 @@ type StoogesUnitLayer =
   | "neutraldoubles";
 type StoogesGenerator = "findmovetargets" | "findwinline";
 type StoogesArtifactLayer = "movetargets" | "winline";
-type StoogesTerrainLayer = "corners" | "nocorners";
-type StoogesLayer =
-  | CommonLayer
-  | StoogesUnitLayer
-  | StoogesArtifactLayer
-  | StoogesTerrainLayer;
+type StoogesTerrainLayer = never;
+type StoogesLayer = CommonLayer | StoogesUnitLayer | StoogesArtifactLayer;
 type StoogesBattlePos = "lastswap";
 type StoogesBattleVar = "doubleswap" | "lastswap" | "lastswap";
 type StoogesTurnPos = never;

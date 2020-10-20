@@ -4,7 +4,7 @@ const supportMeta: SupportDefinition["meta"] = {
   id: "support",
   author: "João Pedro Neto",
   name: "Support",
-  tags: ["infiltration"],
+  tags: ["infiltration", "multiwin"],
   tagline: "May the best logistics win!",
   source: "http://www.di.fc.ul.pt/~jpn/gv/support.htm",
   code: "vl",

@@ -13,23 +13,6 @@ const desdemonaInstructions: DesdemonaDefinition["instructions"] = {
       "selectmovetarget",
     ],
   },
-  selectcapturer: {
-    line: [
-      "Select where to move",
-      { unitat: "selectcapturer" },
-      "to make a free capture",
-    ],
-  },
-  selectcapturestart: {
-    line: [
-      "Press",
-      "move",
-      "to move",
-      { unitat: "selectcapturer" },
-      "to",
-      "selectcapturestart",
-    ],
-  },
   move: {
     ifrulesetelse: [
       "pie",
@@ -82,28 +65,6 @@ const desdemonaInstructions: DesdemonaDefinition["instructions"] = {
         if: [
           { notempty: "victims" },
           { line: ["and capture", { unitlist: "victims" }] },
-        ],
-      },
-    ],
-  },
-  fire: {
-    ifelse: [
-      { and: [{ notempty: "capturers" }, { isempty: "oppmovers" }] },
-      {
-        line: [
-          "Since your opponent is blocked you get to make a free capture move! Select",
-          "amazons",
-          "to make it with",
-        ],
-      },
-      {
-        line: [
-          { text: "Press " },
-          "endTurn",
-          {
-            text: ` to submit your moves and hand over to `,
-          },
-          ["otherplayer"],
         ],
       },
     ],

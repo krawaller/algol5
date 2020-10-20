@@ -3,16 +3,13 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { DesdemonaDefinition } from "./_types";
+import { NeutreekoDefinition } from "./_types";
 
-const desdemonaGraphics: DesdemonaDefinition["graphics"] = {
+const neutreekoGraphics: NeutreekoDefinition["graphics"] = {
   icons: {
-    amazons: "queen",
-    stones: "pawn",
+      pieces: "queen"
   },
-  tiles: {
-    edge: "grass",
-  },
+  tiles: {}
 };
 
-export default desdemonaGraphics;
+export default neutreekoGraphics;

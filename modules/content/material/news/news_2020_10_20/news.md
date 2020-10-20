@@ -2,7 +2,7 @@
 id: "news_2020_10_20"
 title: "2020-10-20 — Not alone"
 slug: "not_alone"
-blurb: "I am not alone!"
+blurb: "I am not alone anymore!"
 thumbnail: "eye_thumb.jpg"
 mainImage: "not_alone_logo_edge.jpg"
 updated: "2020-10-20"

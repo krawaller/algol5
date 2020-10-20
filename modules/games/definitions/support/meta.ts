@@ -6,7 +6,7 @@ const supportMeta: SupportDefinition["meta"] = {
   name: "Support",
   tags: ["infiltration"],
   tagline: "May the best logistics win!",
-  source: "http://some.url.to.rules",
+  source: "http://www.di.fc.ul.pt/~jpn/gv/support.htm",
   code: "vl",
   slug: "support",
   added: "2020-10-10",

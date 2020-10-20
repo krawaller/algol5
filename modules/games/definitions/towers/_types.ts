@@ -4,10 +4,10 @@ import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 type TowersBoardHeight = 5;
 type TowersBoardWidth = 5;
 
-type TowersTerrain = never;
+type TowersTerrain = "base";
 type TowersUnit = "pieces";
-type TowersMark = never;
-type TowersCommand = never;
+type TowersMark = "selectunit" | "selectmovetarget";
+type TowersCommand = "move";
 type TowersPhaseCommand = never;
 type TowersPhase = "startTurn" | TowersMark;
 type TowersUnitLayer =
@@ -19,10 +19,14 @@ type TowersUnitLayer =
   | "mypieces"
   | "opppieces"
   | "neutralpieces";
-type TowersGenerator = never;
-type TowersArtifactLayer = never;
-type TowersTerrainLayer = never;
-type TowersLayer = CommonLayer | TowersUnitLayer;
+type TowersGenerator = "findmovetargets";
+type TowersArtifactLayer = "movetargets";
+type TowersTerrainLayer = "base" | "mybase" | "oppbase" | "nobase";
+type TowersLayer =
+  | CommonLayer
+  | TowersUnitLayer
+  | TowersArtifactLayer
+  | TowersTerrainLayer;
 type TowersBattlePos = never;
 type TowersBattleVar = never;
 type TowersTurnPos = never;

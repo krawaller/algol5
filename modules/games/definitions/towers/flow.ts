@@ -15,11 +15,9 @@ const towersFlow: TowersDefinition["flow"] = {
   startTurn: { link: "selectunit" },
   commands: {
     move: {
-      applyEffects: [
-        { moveat: ["selectunit", "selectmovetarget"] },
-      ],
+      applyEffect: { moveat: ["selectunit", "selectmovetarget"] },
       link: "endTurn",
-    }
+    },
   },
   marks: {
     selectunit: {
@@ -30,8 +28,8 @@ const towersFlow: TowersDefinition["flow"] = {
     selectmovetarget: {
       from: "movetargets",
       link: "move",
-    }
-  }
+    },
+  },
 };
 
 export default towersFlow;

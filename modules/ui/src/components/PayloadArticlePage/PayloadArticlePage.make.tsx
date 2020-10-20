@@ -16,6 +16,7 @@ export const makePayloadArticlePage = (article: AlgolArticle) => {
     key: article.id,
     crumbs: [],
     me: {
+      id: article.id,
       title: article.title,
       desc: article.blurb,
       links: [],

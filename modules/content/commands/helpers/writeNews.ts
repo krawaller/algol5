@@ -64,14 +64,11 @@ export const writeNews = (id: string) => {
     created: \`${date}\`,
     updated: \`${yaml.updated || date}\`,
     preloads: ${JSON.stringify(preloads)},
-    mainImage: \`/images/news/${date}/${yaml.mainImage}\`,
+    mainImage: \`/images/news/${id}/${yaml.mainImage}\`,
     thumbnail: \`${yaml.thumbnail}\`,
 };
 `;
   writeFileSync(path.join(out, "listing.ts"), listing);
-  fs.copySync(
-    picSourcePath,
-    path.join(out, "pics")
-  )
+  fs.copySync(picSourcePath, path.join(out, "pics"));
   console.log("Wrote news", date);
 };

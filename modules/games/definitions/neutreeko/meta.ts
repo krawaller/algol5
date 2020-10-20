@@ -5,11 +5,11 @@ const neutreekoMeta: NeutreekoDefinition["meta"] = {
   author: "Jan Kristian Haugland",
   name: "Neutreeko",
   tags: ["formation", "iggamecenter", "slide"],
-  tagline: "Battle of the rows",
+  tagline: "Slide into formation!",
   source: "https://www.neutreeko.net/neutreeko.htm",
   code: "xL",
   slug: "neutreeko",
-  demo: "xL0Lr5|b2hag1cmg",
+  demo: "xL0Gr7|c2hm3m2g1cgeji2h2",
   added: "2020-10-01",
   addedBy: "Lucas Wiener",
 };

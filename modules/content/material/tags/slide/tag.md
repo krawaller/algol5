@@ -2,7 +2,7 @@
 id: "slide"
 title: "Slide"
 slug: "slide"
-blurb: "The board is a skating rink"
+blurb: "Games where the board is a skating rink"
 thumbnail: "slide-thumb.png"
 mainImage: "slide.jpg"
 sort: "slide"

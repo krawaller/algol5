@@ -29,4 +29,12 @@ export const arrangements: AlgolArrangements<SupportBlob> = {
     },
     marks: ["c1", "e3"],
   },
+  mover: {
+    setup: {
+      bases: { 1: ["c2", "h3"], 2: ["b3", "g2"] },
+      soldiers: { 1: ["c1", "d2"], 2: ["e3"] },
+    },
+    marks: ["c1"],
+    potentialMarks: ["b1", "b2", "c3", "d1", "d3", "e1", "e2", "e3"],
+  },
 };

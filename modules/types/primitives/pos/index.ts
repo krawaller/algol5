@@ -24,6 +24,7 @@ type AlgolPosInner<Blob extends AlgolGameBlobAnon> =
   | ["start"]
   | ["target"]
   | ["looppos"]
+  | ["emptypos"]
   | AlgolPosMark<Blob>
   | AlgolPosOnlyIn<Blob>
   | AlgolPosBattlePos<Blob>

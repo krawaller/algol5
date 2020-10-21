@@ -32,6 +32,8 @@ export default function parsePos(
         return "POS";
       case "looppos":
         return "LOOPPOS";
+      case "emptypos":
+        return "'EMPTYPOS'";
       default:
         throw new Error("Unknown position singleton: " + expr);
     }

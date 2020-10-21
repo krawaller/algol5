@@ -29,6 +29,18 @@ const razzledazzleGenerators: RazzledazzleDefinition["generators"] = {
       },
     },
   },
+  findannoyer: {
+    start: { battlepos: { playercase: ["plr2lastmove", "plr1lastmove"] } },
+    type: "neighbour",
+    dirs: "rose",
+    ifover: "mycarriers",
+    draw: {
+      start: {
+        condition: { truthy: ["neighbourcount"] },
+        tolayer: "annoyer",
+      },
+    },
+  },
 };
 
 export default razzledazzleGenerators;

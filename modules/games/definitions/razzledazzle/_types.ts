@@ -38,8 +38,11 @@ type RazzledazzleUnitLayer =
   | "myball"
   | "oppball"
   | "neutralball";
-type RazzledazzleGenerator = "findpasstargets" | "findmovetargets";
-type RazzledazzleArtifactLayer = "passtargets" | "movetargets";
+type RazzledazzleGenerator =
+  | "findpasstargets"
+  | "findmovetargets"
+  | "findannoyer";
+type RazzledazzleArtifactLayer = "passtargets" | "movetargets" | "annoyer";
 type RazzledazzleTerrainLayer = "base" | "mybase" | "oppbase" | "nobase";
 type RazzledazzleLayer =
   | CommonLayer

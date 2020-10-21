@@ -2,7 +2,38 @@ import { RazzledazzleDefinition } from "./_types";
 
 const razzledazzleInstructions: RazzledazzleDefinition["instructions"] = {
   startTurn: {
-    line: ["Select", "a unit to act with"],
+    ifelse: [
+      { and: [{ notempty: "annoyer" }, { notempty: "passtargets" }] },
+      {
+        line: [
+          "Since",
+          { unitlist: "annoyer" },
+          "is intimidating",
+          { unitlist: "mycarriers" },
+          "you must",
+          "select",
+          "a",
+          "receivers",
+          "to throw to",
+        ],
+      },
+      {
+        ifelse: [
+          { notempty: "annoyer" },
+          {
+            line: [
+              { unitlist: "annoyer" },
+              "intimidates",
+              { unitlist: "mycarriers" },
+              "but there's no one to pass to, so you may",
+              "select",
+              "a unit to move with",
+            ],
+          },
+          { line: ["Select", "a unit to act with"] },
+        ],
+      },
+    ],
   },
   selectmover: {
     line: ["Select", "where to move", { unitat: "selectmover" }],
@@ -65,7 +96,7 @@ const razzledazzleInstructions: RazzledazzleDefinition["instructions"] = {
                   "receivers",
                   "for",
                   { unitlist: "mycarriers" },
-                  "to pass to",
+                  "to pass on to",
                 ],
               },
             ],

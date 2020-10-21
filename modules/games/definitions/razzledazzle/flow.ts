@@ -1,8 +1,35 @@
 import { RazzledazzleDefinition } from "./_types";
 
 const razzledazzleFlow: RazzledazzleDefinition["flow"] = {
+  endGame: {
+    goal: {
+      condition: { overlaps: ["mycarriers", "oppbase"] },
+      show: "mycarriers",
+    },
+  },
   startTurn: {
-    links: ["selectmover", "selectpasser"],
+    runGenerators: [
+      {
+        if: [
+          {
+            truthypos: {
+              battlepos: { playercase: ["plr2lastmove", "plr1lastmove"] },
+            },
+          },
+          "findannoyer",
+        ],
+      },
+      "findpasstargets",
+    ],
+    links: [
+      {
+        ifelse: [
+          { and: [{ notempty: "annoyer" }, { notempty: "passtargets" }] },
+          "selectpasstarget",
+          { multi: ["selectmover", "selectpasser"] },
+        ],
+      },
+    ],
   },
   commands: {
     move: {
@@ -51,7 +78,6 @@ const razzledazzleFlow: RazzledazzleDefinition["flow"] = {
     },
     selectpasser: {
       from: "mycarriers",
-      runGenerator: "findpasstargets",
       link: "selectpasstarget",
     },
     selectpasstarget: {

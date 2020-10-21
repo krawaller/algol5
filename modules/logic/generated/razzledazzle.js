@@ -73,7 +73,6 @@ const groupLayers2 = {
 };
 const prefixes1 = ["neutral", "my", "opp"];
 const prefixes2 = ["neutral", "opp", "my"];
-const emptyArtifactLayers_basic = { passtargets: {}, movetargets: {} };
 const game = {
   gameId: "razzledazzle",
   commands: { move: {}, pass: {} },
@@ -115,6 +114,10 @@ const game = {
   },
   action: {
     startTurn_basic_1: step => {
+      let ARTIFACTS = {
+        annoyer: {},
+        passtargets: {}
+      };
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -131,30 +134,75 @@ const game = {
         marks: {},
         commands: {}
       };
-      for (const pos of Object.keys(
-        Object.keys(UNITLAYERS.myunits)
-          .filter(k => !UNITLAYERS.mycarriers.hasOwnProperty(k))
-          .reduce((m, k) => {
-            m[k] = emptyObj;
-            return m;
-          }, {})
-      )) {
-        LINKS.marks[pos] = "selectmover_basic_1";
+      let BATTLEVARS = step.BATTLEVARS;
+      if (!!BATTLEVARS["plr2lastmove"]) {
+        {
+          let STARTPOS = BATTLEVARS["plr2lastmove"];
+          let foundneighbours = [];
+          let startconnections = connections[STARTPOS];
+          for (let DIR of roseDirs) {
+            let POS = startconnections[DIR];
+            if (POS && UNITLAYERS.mycarriers[POS]) {
+              foundneighbours.push(POS);
+            }
+          }
+          let NEIGHBOURCOUNT = foundneighbours.length;
+          if (!!NEIGHBOURCOUNT) {
+            ARTIFACTS.annoyer[STARTPOS] = emptyObj;
+          }
+        }
       }
-      for (const pos of Object.keys(UNITLAYERS.mycarriers)) {
-        LINKS.marks[pos] = "selectpasser_basic_1";
+      {
+        let BLOCKS = UNITLAYERS.units;
+        for (let STARTPOS in UNITLAYERS.mycarriers) {
+          for (let DIR of roseDirs) {
+            let POS = STARTPOS;
+            while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+            if (BLOCKS[POS]) {
+              if (UNITLAYERS.myreceivers[POS]) {
+                ARTIFACTS.passtargets[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (
+        Object.keys(ARTIFACTS.annoyer).length !== 0 &&
+        Object.keys(ARTIFACTS.passtargets).length !== 0
+      ) {
+        for (const pos of Object.keys(ARTIFACTS.passtargets)) {
+          LINKS.marks[pos] = "selectpasstarget_basic_1";
+        }
+      } else {
+        for (const pos of Object.keys(
+          Object.keys(UNITLAYERS.myunits)
+            .filter(k => !UNITLAYERS.mycarriers.hasOwnProperty(k))
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {})
+        )) {
+          LINKS.marks[pos] = "selectmover_basic_1";
+        }
+        for (const pos of Object.keys(UNITLAYERS.mycarriers)) {
+          LINKS.marks[pos] = "selectpasser_basic_1";
+        }
       }
       return {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers_basic,
+        ARTIFACTS,
         MARKS: {},
         TURN: step.TURN + 1,
-        BATTLEVARS: step.BATTLEVARS
+        BATTLEVARS
       };
     },
     startTurn_basic_2: step => {
+      let ARTIFACTS = {
+        annoyer: {},
+        passtargets: {}
+      };
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -171,31 +219,74 @@ const game = {
         marks: {},
         commands: {}
       };
-      for (const pos of Object.keys(
-        Object.keys(UNITLAYERS.myunits)
-          .filter(k => !UNITLAYERS.mycarriers.hasOwnProperty(k))
-          .reduce((m, k) => {
-            m[k] = emptyObj;
-            return m;
-          }, {})
-      )) {
-        LINKS.marks[pos] = "selectmover_basic_2";
+      let BATTLEVARS = step.BATTLEVARS;
+      if (!!BATTLEVARS["plr1lastmove"]) {
+        {
+          let STARTPOS = BATTLEVARS["plr1lastmove"];
+          let foundneighbours = [];
+          let startconnections = connections[STARTPOS];
+          for (let DIR of roseDirs) {
+            let POS = startconnections[DIR];
+            if (POS && UNITLAYERS.mycarriers[POS]) {
+              foundneighbours.push(POS);
+            }
+          }
+          let NEIGHBOURCOUNT = foundneighbours.length;
+          if (!!NEIGHBOURCOUNT) {
+            ARTIFACTS.annoyer[STARTPOS] = emptyObj;
+          }
+        }
       }
-      for (const pos of Object.keys(UNITLAYERS.mycarriers)) {
-        LINKS.marks[pos] = "selectpasser_basic_2";
+      {
+        let BLOCKS = UNITLAYERS.units;
+        for (let STARTPOS in UNITLAYERS.mycarriers) {
+          for (let DIR of roseDirs) {
+            let POS = STARTPOS;
+            while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
+            if (BLOCKS[POS]) {
+              if (UNITLAYERS.myreceivers[POS]) {
+                ARTIFACTS.passtargets[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (
+        Object.keys(ARTIFACTS.annoyer).length !== 0 &&
+        Object.keys(ARTIFACTS.passtargets).length !== 0
+      ) {
+        for (const pos of Object.keys(ARTIFACTS.passtargets)) {
+          LINKS.marks[pos] = "selectpasstarget_basic_2";
+        }
+      } else {
+        for (const pos of Object.keys(
+          Object.keys(UNITLAYERS.myunits)
+            .filter(k => !UNITLAYERS.mycarriers.hasOwnProperty(k))
+            .reduce((m, k) => {
+              m[k] = emptyObj;
+              return m;
+            }, {})
+        )) {
+          LINKS.marks[pos] = "selectmover_basic_2";
+        }
+        for (const pos of Object.keys(UNITLAYERS.mycarriers)) {
+          LINKS.marks[pos] = "selectpasser_basic_2";
+        }
       }
       return {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers_basic,
+        ARTIFACTS,
         MARKS: {},
         TURN: step.TURN,
-        BATTLEVARS: step.BATTLEVARS
+        BATTLEVARS
       };
     },
     selectmover_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
+        annoyer: step.ARTIFACTS.annoyer,
+        passtargets: step.ARTIFACTS.passtargets,
         movetargets: {}
       };
       let LINKS = { marks: {}, commands: {} };
@@ -227,31 +318,17 @@ const game = {
     },
     selectpasser_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
-        passtargets: {}
+        annoyer: step.ARTIFACTS.annoyer,
+        passtargets: step.ARTIFACTS.passtargets
       };
       let LINKS = { marks: {}, commands: {} };
-      let UNITLAYERS = step.UNITLAYERS;
-      {
-        let BLOCKS = UNITLAYERS.units;
-        for (let STARTPOS in UNITLAYERS.mycarriers) {
-          for (let DIR of roseDirs) {
-            let POS = STARTPOS;
-            while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
-            if (BLOCKS[POS]) {
-              if (UNITLAYERS.myreceivers[POS]) {
-                ARTIFACTS.passtargets[POS] = emptyObj;
-              }
-            }
-          }
-        }
-      }
       for (const pos of Object.keys(ARTIFACTS.passtargets)) {
         LINKS.marks[pos] = "selectpasstarget_basic_1";
       }
       return {
         LINKS,
         ARTIFACTS,
-        UNITLAYERS,
+        UNITLAYERS: step.UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
         MARKS: { selectpasser: newMarkPos },
@@ -267,10 +344,7 @@ const game = {
         UNITLAYERS: step.UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: {
-          selectpasser: step.MARKS.selectpasser,
-          selectpasstarget: newMarkPos
-        },
+        MARKS: { selectpasstarget: newMarkPos },
         BATTLEVARS: step.BATTLEVARS
       };
     },
@@ -292,6 +366,8 @@ const game = {
     },
     selectmover_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
+        annoyer: step.ARTIFACTS.annoyer,
+        passtargets: step.ARTIFACTS.passtargets,
         movetargets: {}
       };
       let LINKS = { marks: {}, commands: {} };
@@ -323,31 +399,17 @@ const game = {
     },
     selectpasser_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
-        passtargets: {}
+        annoyer: step.ARTIFACTS.annoyer,
+        passtargets: step.ARTIFACTS.passtargets
       };
       let LINKS = { marks: {}, commands: {} };
-      let UNITLAYERS = step.UNITLAYERS;
-      {
-        let BLOCKS = UNITLAYERS.units;
-        for (let STARTPOS in UNITLAYERS.mycarriers) {
-          for (let DIR of roseDirs) {
-            let POS = STARTPOS;
-            while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {}
-            if (BLOCKS[POS]) {
-              if (UNITLAYERS.myreceivers[POS]) {
-                ARTIFACTS.passtargets[POS] = emptyObj;
-              }
-            }
-          }
-        }
-      }
       for (const pos of Object.keys(ARTIFACTS.passtargets)) {
         LINKS.marks[pos] = "selectpasstarget_basic_2";
       }
       return {
         LINKS,
         ARTIFACTS,
-        UNITLAYERS,
+        UNITLAYERS: step.UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
         MARKS: { selectpasser: newMarkPos },
@@ -363,10 +425,7 @@ const game = {
         UNITLAYERS: step.UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: {
-          selectpasser: step.MARKS.selectpasser,
-          selectpasstarget: newMarkPos
-        },
+        MARKS: { selectpasstarget: newMarkPos },
         BATTLEVARS: step.BATTLEVARS
       };
     },
@@ -431,7 +490,27 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (
+        Object.keys(
+          Object.entries(
+            Object.keys(UNITLAYERS.mycarriers)
+              .concat(Object.keys(TERRAIN1.oppbase))
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
+        ).length !== 0
+      ) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "goal";
+        LINKS.endMarks = Object.keys(UNITLAYERS.mycarriers);
+      } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
       return {
@@ -448,7 +527,8 @@ const game = {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
-        passtargets: { ...step.ARTIFACTS.passtargets }
+        passtargets: { ...step.ARTIFACTS.passtargets },
+        annoyer: step.ARTIFACTS.annoyer
       };
       let UNITLAYERS = step.UNITLAYERS;
       let BATTLEVARS = { ...step.BATTLEVARS };
@@ -458,7 +538,7 @@ const game = {
       for (let LOOPPOS in UNITLAYERS.mycarriers) {
         anim.ghosts.push([LOOPPOS, MARKS.selectpasstarget, "pawn", 1]);
       }
-      BATTLEVARS.plr1lastmove = "EMPTYPOS";
+      BATTLEVARS.plr1lastmove = "";
       for (let LOOPPOS in UNITLAYERS.mycarriers) {
         {
           let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -511,7 +591,27 @@ const game = {
           }
         }
       }
-      {
+      if (
+        Object.keys(
+          Object.entries(
+            Object.keys(UNITLAYERS.mycarriers)
+              .concat(Object.keys(TERRAIN1.oppbase))
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
+        ).length !== 0
+      ) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "goal";
+        LINKS.endMarks = Object.keys(UNITLAYERS.mycarriers);
+      } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
       for (const pos of Object.keys(ARTIFACTS.passtargets)) {
@@ -573,7 +673,27 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (
+        Object.keys(
+          Object.entries(
+            Object.keys(UNITLAYERS.mycarriers)
+              .concat(Object.keys(TERRAIN2.oppbase))
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
+        ).length !== 0
+      ) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "goal";
+        LINKS.endMarks = Object.keys(UNITLAYERS.mycarriers);
+      } else {
         LINKS.endTurn = "startTurn_basic_1";
       }
       return {
@@ -590,7 +710,8 @@ const game = {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
-        passtargets: { ...step.ARTIFACTS.passtargets }
+        passtargets: { ...step.ARTIFACTS.passtargets },
+        annoyer: step.ARTIFACTS.annoyer
       };
       let UNITLAYERS = step.UNITLAYERS;
       let BATTLEVARS = { ...step.BATTLEVARS };
@@ -600,7 +721,7 @@ const game = {
       for (let LOOPPOS in UNITLAYERS.mycarriers) {
         anim.ghosts.push([LOOPPOS, MARKS.selectpasstarget, "pawn", 2]);
       }
-      BATTLEVARS.plr2lastmove = "EMPTYPOS";
+      BATTLEVARS.plr2lastmove = "";
       for (let LOOPPOS in UNITLAYERS.mycarriers) {
         {
           let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -653,7 +774,27 @@ const game = {
           }
         }
       }
-      {
+      if (
+        Object.keys(
+          Object.entries(
+            Object.keys(UNITLAYERS.mycarriers)
+              .concat(Object.keys(TERRAIN2.oppbase))
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
+        ).length !== 0
+      ) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "goal";
+        LINKS.endMarks = Object.keys(UNITLAYERS.mycarriers);
+      } else {
         LINKS.endTurn = "startTurn_basic_1";
       }
       for (const pos of Object.keys(ARTIFACTS.passtargets)) {
@@ -673,9 +814,113 @@ const game = {
   },
   instruction: {
     startTurn_basic_1: step => {
-      return collapseContent({
-        line: [{ select: "Select" }, { text: "a unit to act with" }]
-      });
+      let ARTIFACTS = step.ARTIFACTS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return Object.keys(ARTIFACTS.annoyer).length !== 0 &&
+        Object.keys(ARTIFACTS.passtargets).length !== 0
+        ? collapseContent({
+            line: [
+              { text: "Since" },
+              collapseContent({
+                line: Object.keys(ARTIFACTS.annoyer)
+                  .filter(p => UNITLAYERS.units[p])
+                  .map(p => ({
+                    unit: [
+                      iconMapping[UNITLAYERS.units[p].group],
+                      UNITLAYERS.units[p].owner,
+                      p
+                    ]
+                  }))
+                  .reduce((mem, i, n, list) => {
+                    mem.push(i);
+                    if (n === list.length - 2) {
+                      mem.push({ text: " and " });
+                    } else if (n < list.length - 2) {
+                      mem.push({ text: ", " });
+                    }
+                    return mem;
+                  }, [])
+              }),
+              { text: "is intimidating" },
+              collapseContent({
+                line: Object.keys(UNITLAYERS.mycarriers)
+                  .filter(p => UNITLAYERS.units[p])
+                  .map(p => ({
+                    unit: [
+                      iconMapping[UNITLAYERS.units[p].group],
+                      UNITLAYERS.units[p].owner,
+                      p
+                    ]
+                  }))
+                  .reduce((mem, i, n, list) => {
+                    mem.push(i);
+                    if (n === list.length - 2) {
+                      mem.push({ text: " and " });
+                    } else if (n < list.length - 2) {
+                      mem.push({ text: ", " });
+                    }
+                    return mem;
+                  }, [])
+              }),
+              { text: "you must" },
+              { select: "select" },
+              { text: "a" },
+              { unittype: ["king", 1] },
+              { text: "to throw to" }
+            ]
+          })
+        : Object.keys(ARTIFACTS.annoyer).length !== 0
+        ? collapseContent({
+            line: [
+              collapseContent({
+                line: Object.keys(ARTIFACTS.annoyer)
+                  .filter(p => UNITLAYERS.units[p])
+                  .map(p => ({
+                    unit: [
+                      iconMapping[UNITLAYERS.units[p].group],
+                      UNITLAYERS.units[p].owner,
+                      p
+                    ]
+                  }))
+                  .reduce((mem, i, n, list) => {
+                    mem.push(i);
+                    if (n === list.length - 2) {
+                      mem.push({ text: " and " });
+                    } else if (n < list.length - 2) {
+                      mem.push({ text: ", " });
+                    }
+                    return mem;
+                  }, [])
+              }),
+              { text: "intimidates" },
+              collapseContent({
+                line: Object.keys(UNITLAYERS.mycarriers)
+                  .filter(p => UNITLAYERS.units[p])
+                  .map(p => ({
+                    unit: [
+                      iconMapping[UNITLAYERS.units[p].group],
+                      UNITLAYERS.units[p].owner,
+                      p
+                    ]
+                  }))
+                  .reduce((mem, i, n, list) => {
+                    mem.push(i);
+                    if (n === list.length - 2) {
+                      mem.push({ text: " and " });
+                    } else if (n < list.length - 2) {
+                      mem.push({ text: ", " });
+                    }
+                    return mem;
+                  }, [])
+              }),
+              { text: "but there's no one to pass to, so you may" },
+              { select: "select" },
+              { text: "a unit to move with" }
+            ]
+          })
+        : collapseContent({
+            line: [{ select: "Select" }, { text: "a unit to act with" }]
+          });
     },
     move_basic_1: () => defaultInstruction(1),
     pass_basic_1: step => {
@@ -720,7 +965,7 @@ const game = {
                             return mem;
                           }, [])
                       }),
-                      { text: "to pass to" }
+                      { text: "to pass on to" }
                     ]
                   })
                 : undefined
@@ -843,9 +1088,113 @@ const game = {
       });
     },
     startTurn_basic_2: step => {
-      return collapseContent({
-        line: [{ select: "Select" }, { text: "a unit to act with" }]
-      });
+      let ARTIFACTS = step.ARTIFACTS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return Object.keys(ARTIFACTS.annoyer).length !== 0 &&
+        Object.keys(ARTIFACTS.passtargets).length !== 0
+        ? collapseContent({
+            line: [
+              { text: "Since" },
+              collapseContent({
+                line: Object.keys(ARTIFACTS.annoyer)
+                  .filter(p => UNITLAYERS.units[p])
+                  .map(p => ({
+                    unit: [
+                      iconMapping[UNITLAYERS.units[p].group],
+                      UNITLAYERS.units[p].owner,
+                      p
+                    ]
+                  }))
+                  .reduce((mem, i, n, list) => {
+                    mem.push(i);
+                    if (n === list.length - 2) {
+                      mem.push({ text: " and " });
+                    } else if (n < list.length - 2) {
+                      mem.push({ text: ", " });
+                    }
+                    return mem;
+                  }, [])
+              }),
+              { text: "is intimidating" },
+              collapseContent({
+                line: Object.keys(UNITLAYERS.mycarriers)
+                  .filter(p => UNITLAYERS.units[p])
+                  .map(p => ({
+                    unit: [
+                      iconMapping[UNITLAYERS.units[p].group],
+                      UNITLAYERS.units[p].owner,
+                      p
+                    ]
+                  }))
+                  .reduce((mem, i, n, list) => {
+                    mem.push(i);
+                    if (n === list.length - 2) {
+                      mem.push({ text: " and " });
+                    } else if (n < list.length - 2) {
+                      mem.push({ text: ", " });
+                    }
+                    return mem;
+                  }, [])
+              }),
+              { text: "you must" },
+              { select: "select" },
+              { text: "a" },
+              { unittype: ["king", 2] },
+              { text: "to throw to" }
+            ]
+          })
+        : Object.keys(ARTIFACTS.annoyer).length !== 0
+        ? collapseContent({
+            line: [
+              collapseContent({
+                line: Object.keys(ARTIFACTS.annoyer)
+                  .filter(p => UNITLAYERS.units[p])
+                  .map(p => ({
+                    unit: [
+                      iconMapping[UNITLAYERS.units[p].group],
+                      UNITLAYERS.units[p].owner,
+                      p
+                    ]
+                  }))
+                  .reduce((mem, i, n, list) => {
+                    mem.push(i);
+                    if (n === list.length - 2) {
+                      mem.push({ text: " and " });
+                    } else if (n < list.length - 2) {
+                      mem.push({ text: ", " });
+                    }
+                    return mem;
+                  }, [])
+              }),
+              { text: "intimidates" },
+              collapseContent({
+                line: Object.keys(UNITLAYERS.mycarriers)
+                  .filter(p => UNITLAYERS.units[p])
+                  .map(p => ({
+                    unit: [
+                      iconMapping[UNITLAYERS.units[p].group],
+                      UNITLAYERS.units[p].owner,
+                      p
+                    ]
+                  }))
+                  .reduce((mem, i, n, list) => {
+                    mem.push(i);
+                    if (n === list.length - 2) {
+                      mem.push({ text: " and " });
+                    } else if (n < list.length - 2) {
+                      mem.push({ text: ", " });
+                    }
+                    return mem;
+                  }, [])
+              }),
+              { text: "but there's no one to pass to, so you may" },
+              { select: "select" },
+              { text: "a unit to move with" }
+            ]
+          })
+        : collapseContent({
+            line: [{ select: "Select" }, { text: "a unit to act with" }]
+          });
     },
     move_basic_2: () => defaultInstruction(2),
     pass_basic_2: step => {
@@ -890,7 +1239,7 @@ const game = {
                             return mem;
                           }, [])
                       }),
-                      { text: "to pass to" }
+                      { text: "to pass on to" }
                     ]
                   })
                 : undefined

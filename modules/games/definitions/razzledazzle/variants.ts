@@ -14,7 +14,7 @@ const razzledazzleVariants: RazzledazzleDefinition["variants"] = [
           2: ["h4"],
         },
         receivers: {
-          1: ["a2", "c5", "a5", "a6"],
+          1: ["a2", "c4", "a5", "a6"],
           2: ["h2", "h3", "f6", "h6"],
         },
       },

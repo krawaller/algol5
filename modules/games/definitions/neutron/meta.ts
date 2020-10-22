@@ -2,7 +2,7 @@ import { NeutronDefinition } from "./_types";
 
 const neutronMeta: NeutronDefinition["meta"] = {
   id: "neutron",
-  author: "Robert A. Krauss",
+  author: "Robert Kraus",
   name: "Neutron",
   tags: ["slide", "walterjoris", "infiltration"],
   tagline: "A tug-o-war for the neutral neutron!",

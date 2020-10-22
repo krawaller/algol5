@@ -35,12 +35,16 @@
 
 .titlePageButtonContainer {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  justify-content: space-between;
+  padding: 10px;
 }
 
-.titlePageButtonContainer > :not(:first-child) {
-  margin-top: 10px;
+@media (max-width: 430px) {
+  .titlePageButtonContainer {
+    padding: 4px;
+    margin-left: -10px;
+    margin-right: -10px;
+  }
 }
 
 .titlePageBoardContainer {

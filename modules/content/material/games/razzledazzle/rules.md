@@ -9,7 +9,7 @@ updated: 2020-10-21
 Players take turn to either...
 
 - {CMND:name=move} a unit like a chess knight
-- {CMND:name=pass} the ball in an uninterrupted orthogonal or diagonal line to another unit. You may keep passing as long as you want and have valid receivers.
+- {CMND:name=pass} the ball in an uninterrupted orthogonal or diagonal line to another friendly unit. You may keep passing as long as you want and have valid receivers.
 
 There are three unit types, dictating what is possible:
 
@@ -27,6 +27,10 @@ In other words, when a {UNIT:group=carriers} makes a {CMND:name=pass} to a {UNIT
 </div>
 
 There is a special "tournament" rule that we have also implemented: if you {CMND:name=move} adjacent (including diagonals) to the enemy {UNIT:group=carriers}, then in the next turn they must {CMND:name=pass} if able.
+
+<div class="md-example">
+Note that it is only the {UNIT:group=receivers} that your opponent just moved that can force your {UNIT:group=carriers} to {CMND:name=pass}.
+</div>
 
 Win by getting your ball into the opponent base!
 

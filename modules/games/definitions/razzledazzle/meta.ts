@@ -3,7 +3,7 @@ import { RazzledazzleDefinition } from "./_types";
 const razzledazzleMeta: RazzledazzleDefinition["meta"] = {
   id: "razzledazzle",
   author: "Donald Green",
-  name: "Razzle dazzle",
+  name: "Razzle Dazzle",
   tags: ["infiltration", "superdupergames"],
   tagline: "Dazzle the crowd with a razzling goal!",
   source:

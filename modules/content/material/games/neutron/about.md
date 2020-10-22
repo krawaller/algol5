@@ -2,7 +2,7 @@
 updated: 2020-04-22
 ---
 
-{GAME} was invented by Robert A. Krauss in the early 70:s, and published in an issue of the Games & Puzzles magazine.
+{GAME} was invented by Robert Kraus in the early 70:s, and published in an issue of the Games & Puzzles magazine.
 
 {PIC:name=carcpig.jpg,credurl=https://boardgamegeek.com/image/1010428/neutron,cred=Photo by Szabó Tibor,title=Catch the pig!}
 

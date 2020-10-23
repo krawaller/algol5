@@ -67,10 +67,9 @@ function MyApp({ Component, pageProps, router }: AppProps) {
           <meta property="og:description" content={Comp.metaDesc} />
         )}
         {Comp.title && <title>{Comp.title}</title>}
-        {Comp.metaTitle ||
-          (Comp.title && (
-            <meta property="og:title" content={Comp.metaTitle || Comp.title} />
-          ))}
+        {(Comp.metaTitle || Comp.title) && (
+          <meta property="og:title" content={Comp.metaTitle || Comp.title} />
+        )}
         {preloads.length > 0 && preloads}
         <link
           rel="preload"

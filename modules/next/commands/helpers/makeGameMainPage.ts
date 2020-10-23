@@ -26,7 +26,9 @@ Game.mainImage = "/images/games/${gameId}/${gameId}_active.png"
 Game.metaDesc = "Play the abstract board game ${
     def.meta.name
   } at Chessicals! ${punctuate(def.meta.tagline, "!")}"
-Game.metaTitle = "Play ${def.meta.name} online"
+Game.metaTitle = "${def.meta.name}${
+    def.meta.author ? ` by ${def.meta.author}` : ""
+  }"
 Game.title = "${def.meta.name}"
 Game.preloadImages = payload.imgsToPreload
 Game.nav = makeGameNav(payload.meta)

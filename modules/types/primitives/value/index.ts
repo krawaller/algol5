@@ -52,6 +52,7 @@ type AlgolValInner<Blob extends AlgolGameBlobAnon, _T> =
   | ["totalcount"]
   | ["neighbourcount"]
   | ["walklength"]
+  | ["floatlength"]
   | ["max"]
   | ["step"]
   | ["boardheight"]

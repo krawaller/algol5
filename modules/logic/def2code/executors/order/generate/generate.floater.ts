@@ -11,8 +11,8 @@ export default function executeFloater(
 ) {
   const parser = makeParser(gameDef, player, action, ruleset);
   const startArr = def.start
-    ? `[${parser.pos(def.start)}]`
-    : `Object.keys(${parser.set(def.starts!)})`;
+    ? `[[${parser.pos(def.start)}, 0]]`
+    : `Object.keys(${parser.set(def.starts!)}).map(p => [p, 0])`;
   const drawStep = def.draw.steps
     ? draw(gameDef, player, action, ruleset, def.draw.steps)
     : "";
@@ -33,18 +33,23 @@ export default function executeFloater(
       blockDef += `let seenBlocks = {}; `;
     }
   }
+  if (def.max) {
+    const max = parser.val(def.max);
+    tests.push(`floatdist <= ${max}`);
+  }
   return `
     const visited = {};
     const toCheck = ${startArr};
     ${stepDef}
     ${blockDef}
     while (toCheck.length) {
-      const from = toCheck.shift();
+      const [from, sofar] = toCheck.shift();
       visited[from] = true;
+      const floatdist = sofar + 1;
       for (const DIR of ${parser.dirs(def.dirs)}) {
         const POS = connections[from][DIR];
         if (${tests.join(" && ")}) {
-          toCheck.push(POS);
+          toCheck.push([POS, floatdist]);
           ${drawStep}
         }
         ${def.draw.blocks ? `if (blocks[POS]) { ${drawBlock} } ` : ""}

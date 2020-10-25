@@ -59,6 +59,8 @@ export default function parseVal(
         return player === 1 ? 2 : 1;
       case "walklength":
         return "WALKLENGTH";
+      case "floatlength":
+        return "floatdist";
       case "stopreason":
         return "STOPREASON";
       case "totalcount":

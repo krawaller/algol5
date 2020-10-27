@@ -30,7 +30,7 @@ The game ends when a player is unable to move, and the winner is whoever has the
 
 <div class="md-example">
 
-Here {UNIT:group=amazons,who=1,at=a1} shoots out {UNIT:group=stones,who=1,at=d1} (left)...
+Here {UNIT:group=amazons,who=1,at=a1} shoots out {UNIT:group=stones,who=1,at=d4} (left)...
 
 <div class="md-2col">
 {ARR:name=beforefiring,from=a1,to=d1}

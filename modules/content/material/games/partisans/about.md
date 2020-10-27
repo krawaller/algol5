@@ -2,7 +2,7 @@
 updated: 2020-10-27
 ---
 
-{GAME} was invented by Luis Bolsoñaro in 2020, as an adaption of {TAG:id=reyalicea}'s {GAME:id=desdemona}.
+{GAME} was invented by Luis Bolaños Mures in 2020, as an adaption of {TAG:id=reyalicea}'s {GAME:id=desdemona}.
 
 {PIC:name=maclean.jpg,title=The novel version,cred=Pic by Morgan's Rare Books,credurl=https://www.morgansrarebooks.com/products/partisans-by-alistair-maclean}
 

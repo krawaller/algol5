@@ -8,4 +8,4 @@ updated: 2020-07-09
 
 It melds the mechanisms of {GAME:id=amazons} and {EXTLINK:url=https://en.wikipedia.org/wiki/Othello,text=Othello} in an ingenious way. Fans of either game will instantly recognize the source material, but the combination results in a new novel experience!
 
-Also check out {GAME:id=partisans}, where Luis Bolsoñaro tweaks {GAME} into something very different!
+Also check out {GAME:id=partisans}, where Luis Bolaños Mures tweaks {GAME} into something very different!

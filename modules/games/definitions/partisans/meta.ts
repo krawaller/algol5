@@ -2,7 +2,7 @@ import { PartisansDefinition } from "./_types";
 
 const partisansMeta: PartisansDefinition["meta"] = {
   id: "partisans",
-  author: "Luis Bolaños",
+  author: "Luis Bolaños Mures",
   name: "Partisans",
   tags: ["irreversible"],
   tagline: "Partisan amazons!",

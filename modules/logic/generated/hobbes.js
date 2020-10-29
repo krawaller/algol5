@@ -91,16 +91,17 @@ const game = {
       let TURNVARS = {};
       let TURN = step.TURN + 1;
       const visited = {};
-      const toCheck = [Object.keys(UNITLAYERS.myunits)[0]];
+      const toCheck = [[Object.keys(UNITLAYERS.myunits)[0], 0]];
       const blocks = UNITLAYERS.units;
       let seenBlocks = {};
       while (toCheck.length) {
-        const from = toCheck.shift();
+        const [from, sofar] = toCheck.shift();
         visited[from] = true;
+        const floatdist = sofar + 1;
         for (const DIR of orthoDirs) {
           const POS = connections[from][DIR];
           if (POS && !visited[POS] && !blocks[POS]) {
-            toCheck.push(POS);
+            toCheck.push([POS, floatdist]);
             ARTIFACTS.movetargets[POS] = emptyObj;
           }
           if (blocks[POS]) {
@@ -180,16 +181,17 @@ const game = {
       };
       let TURNVARS = {};
       const visited = {};
-      const toCheck = [Object.keys(UNITLAYERS.myunits)[0]];
+      const toCheck = [[Object.keys(UNITLAYERS.myunits)[0], 0]];
       const blocks = UNITLAYERS.units;
       let seenBlocks = {};
       while (toCheck.length) {
-        const from = toCheck.shift();
+        const [from, sofar] = toCheck.shift();
         visited[from] = true;
+        const floatdist = sofar + 1;
         for (const DIR of orthoDirs) {
           const POS = connections[from][DIR];
           if (POS && !visited[POS] && !blocks[POS]) {
-            toCheck.push(POS);
+            toCheck.push([POS, floatdist]);
             ARTIFACTS.movetargets[POS] = emptyObj;
           }
           if (blocks[POS]) {

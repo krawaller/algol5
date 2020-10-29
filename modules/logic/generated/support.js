@@ -215,15 +215,16 @@ const game = {
       if (UNITLAYERS.mysoldiers[MARKS.selectorigin]) {
         if (TERRAIN1.mysupported[MARKS.selectorigin]) {
           const visited = {};
-          const toCheck = [MARKS.selectorigin];
+          const toCheck = [[MARKS.selectorigin, 0]];
           const steps = UNITLAYERS.myunits;
           while (toCheck.length) {
-            const from = toCheck.shift();
+            const [from, sofar] = toCheck.shift();
             visited[from] = true;
+            const floatdist = sofar + 1;
             for (const DIR of roseDirs) {
               const POS = connections[from][DIR];
               if (POS && !visited[POS] && steps[POS]) {
-                toCheck.push(POS);
+                toCheck.push([POS, floatdist]);
                 ARTIFACTS.connected[POS] = emptyObj;
               }
             }
@@ -353,15 +354,16 @@ const game = {
       if (UNITLAYERS.mysoldiers[MARKS.selectorigin]) {
         if (TERRAIN2.mysupported[MARKS.selectorigin]) {
           const visited = {};
-          const toCheck = [MARKS.selectorigin];
+          const toCheck = [[MARKS.selectorigin, 0]];
           const steps = UNITLAYERS.myunits;
           while (toCheck.length) {
-            const from = toCheck.shift();
+            const [from, sofar] = toCheck.shift();
             visited[from] = true;
+            const floatdist = sofar + 1;
             for (const DIR of roseDirs) {
               const POS = connections[from][DIR];
               if (POS && !visited[POS] && steps[POS]) {
-                toCheck.push(POS);
+                toCheck.push([POS, floatdist]);
                 ARTIFACTS.connected[POS] = emptyObj;
               }
             }

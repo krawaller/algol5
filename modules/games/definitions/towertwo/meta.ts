@@ -8,7 +8,8 @@ const towertwoMeta: TowertwoDefinition["meta"] = {
   tagline: "An awesome game!",
   source: "http://some.url.to.rules",
   code: "oA",
-  slug: "towertwo"
+  slug: "towertwo",
+  added: "2020-10-29",
 };
 
 export default towertwoMeta;

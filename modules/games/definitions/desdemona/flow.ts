@@ -50,7 +50,13 @@ const desdemonaFlow: DesdemonaDefinition["flow"] = {
     },
     fire: {
       applyEffects: [
-        { spawnat: ["selectfiretarget", "stones"] },
+        {
+          spawnat: [
+            "selectfiretarget",
+            "stones",
+            { ifelse: [{ isempty: "victims" }, ["player"], 0] },
+          ],
+        },
         { adoptin: ["victims"] },
       ],
       link: "endTurn",

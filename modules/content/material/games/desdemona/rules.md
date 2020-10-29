@@ -1,5 +1,5 @@
 ---
-updated: 2020-10-12
+updated: 2020-10-29
 ---
 
 {GAME} is played on a {DIM:board=basic}, {DIM:board=small} or {DIM:board=large} board with these setups:
@@ -9,6 +9,8 @@ updated: 2020-10-12
 {SETUP:name=small,board=small}
 {SETUP:name=large,board=large}
 </div>
+
+**NOTE**: the rules are in flux at this moment!
 
 Regular variant shown to the left, small in the middle, large to the right.
 

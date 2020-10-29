@@ -362,9 +362,7 @@ const game = {
           let POS = TURNVARS["movedto"];
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
             {
-              if (!TERRAIN1.edge[POS]) {
-                ARTIFACTS.firetargets[POS] = emptyObj;
-              }
+              ARTIFACTS.firetargets[POS] = emptyObj;
             }
           }
         }
@@ -455,7 +453,7 @@ const game = {
           pos: MARKS.selectfiretarget,
           id: newunitid,
           group: "stones",
-          owner: 1
+          owner: Object.keys(ARTIFACTS.victims).length === 0 ? 1 : 0
         };
       }
       for (let LOOPPOS in ARTIFACTS.victims) {
@@ -560,9 +558,7 @@ const game = {
           let POS = TURNVARS["movedto"];
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
             {
-              if (!TERRAIN2.edge[POS]) {
-                ARTIFACTS.firetargets[POS] = emptyObj;
-              }
+              ARTIFACTS.firetargets[POS] = emptyObj;
             }
           }
         }
@@ -628,7 +624,7 @@ const game = {
           pos: MARKS.selectfiretarget,
           id: newunitid,
           group: "stones",
-          owner: 2
+          owner: Object.keys(ARTIFACTS.victims).length === 0 ? 2 : 0
         };
       }
       for (let LOOPPOS in ARTIFACTS.victims) {
@@ -777,7 +773,13 @@ const game = {
           { text: "Press" },
           { command: "fire" },
           { text: "to spawn" },
-          { unit: ["pawn", 1, MARKS.selectfiretarget] },
+          {
+            unit: [
+              "pawn",
+              Object.keys(ARTIFACTS.victims).length === 0 ? 1 : 0,
+              MARKS.selectfiretarget
+            ]
+          },
           Object.keys(ARTIFACTS.victims).length !== 0
             ? collapseContent({
                 line: [
@@ -879,7 +881,13 @@ const game = {
           { text: "Press" },
           { command: "fire" },
           { text: "to spawn" },
-          { unit: ["pawn", 2, MARKS.selectfiretarget] },
+          {
+            unit: [
+              "pawn",
+              Object.keys(ARTIFACTS.victims).length === 0 ? 2 : 0,
+              MARKS.selectfiretarget
+            ]
+          },
           Object.keys(ARTIFACTS.victims).length !== 0
             ? collapseContent({
                 line: [

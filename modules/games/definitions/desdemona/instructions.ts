@@ -60,7 +60,13 @@ const desdemonaInstructions: DesdemonaDefinition["instructions"] = {
       "Press",
       "fire",
       "to spawn",
-      { unittypepos: ["stones", ["player"], "selectfiretarget"] },
+      {
+        unittypepos: [
+          "stones",
+          { ifelse: [{ isempty: "victims" }, ["player"], 0] },
+          "selectfiretarget",
+        ],
+      },
       {
         if: [
           { notempty: "victims" },

@@ -25,7 +25,6 @@ const desdemonaGenerators: DesdemonaDefinition["generators"] = {
     draw: {
       steps: [
         {
-          unlessover: "edge",
           tolayer: "firetargets",
         },
       ],

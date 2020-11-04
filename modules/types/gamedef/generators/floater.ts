@@ -18,6 +18,7 @@ export type AlgolFloaterDef<Blob extends AlgolGameBlobAnon> = {
   starts?: AlgolSet<Blob>;
   blocks?: AlgolSet<Blob>;
   steps?: AlgolSet<Blob>;
+  max?: AlgolVal<Blob, number>;
   draw: {
     steps?: DrawDef<Blob>;
     blocks?: DrawDef<Blob>;

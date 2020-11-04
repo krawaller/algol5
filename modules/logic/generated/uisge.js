@@ -387,15 +387,16 @@ const game = {
         }
       }
       const visited = {};
-      const toCheck = [Object.keys(UNITLAYERS.units)[0]];
+      const toCheck = [[Object.keys(UNITLAYERS.units)[0], 0]];
       const steps = UNITLAYERS.units;
       while (toCheck.length) {
-        const from = toCheck.shift();
+        const [from, sofar] = toCheck.shift();
         visited[from] = true;
+        const floatdist = sofar + 1;
         for (const DIR of orthoDirs) {
           const POS = connections[from][DIR];
           if (POS && !visited[POS] && steps[POS]) {
-            toCheck.push(POS);
+            toCheck.push([POS, floatdist]);
             ARTIFACTS.group[POS] = emptyObj;
           }
         }
@@ -454,15 +455,16 @@ const game = {
         }
       }
       const visited = {};
-      const toCheck = [Object.keys(UNITLAYERS.units)[0]];
+      const toCheck = [[Object.keys(UNITLAYERS.units)[0], 0]];
       const steps = UNITLAYERS.units;
       while (toCheck.length) {
-        const from = toCheck.shift();
+        const [from, sofar] = toCheck.shift();
         visited[from] = true;
+        const floatdist = sofar + 1;
         for (const DIR of orthoDirs) {
           const POS = connections[from][DIR];
           if (POS && !visited[POS] && steps[POS]) {
-            toCheck.push(POS);
+            toCheck.push([POS, floatdist]);
             ARTIFACTS.group[POS] = emptyObj;
           }
         }
@@ -530,15 +532,16 @@ const game = {
         }
       }
       const visited = {};
-      const toCheck = [Object.keys(UNITLAYERS.units)[0]];
+      const toCheck = [[Object.keys(UNITLAYERS.units)[0], 0]];
       const steps = UNITLAYERS.units;
       while (toCheck.length) {
-        const from = toCheck.shift();
+        const [from, sofar] = toCheck.shift();
         visited[from] = true;
+        const floatdist = sofar + 1;
         for (const DIR of orthoDirs) {
           const POS = connections[from][DIR];
           if (POS && !visited[POS] && steps[POS]) {
-            toCheck.push(POS);
+            toCheck.push([POS, floatdist]);
             ARTIFACTS.group[POS] = emptyObj;
           }
         }
@@ -597,15 +600,16 @@ const game = {
         }
       }
       const visited = {};
-      const toCheck = [Object.keys(UNITLAYERS.units)[0]];
+      const toCheck = [[Object.keys(UNITLAYERS.units)[0], 0]];
       const steps = UNITLAYERS.units;
       while (toCheck.length) {
-        const from = toCheck.shift();
+        const [from, sofar] = toCheck.shift();
         visited[from] = true;
+        const floatdist = sofar + 1;
         for (const DIR of orthoDirs) {
           const POS = connections[from][DIR];
           if (POS && !visited[POS] && steps[POS]) {
-            toCheck.push(POS);
+            toCheck.push([POS, floatdist]);
             ARTIFACTS.group[POS] = emptyObj;
           }
         }

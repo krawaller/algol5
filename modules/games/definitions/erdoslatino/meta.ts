@@ -9,7 +9,7 @@ const erdoslatinoMeta: ErdoslatinoDefinition["meta"] = {
   source:
     "https://www.celebrationofmind.org/wp-content/uploads/2017/08/ErdosLatino-English-G4G10.pdf",
   code: "H",
-  slug: "erdoslatino",
+  slug: "erdos_latino",
   added: "2020-06-29",
 };
 

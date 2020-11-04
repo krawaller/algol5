@@ -6,16 +6,12 @@ import { DesdemonaDefinition } from "./_types";
 
 const desdemonaBoardBook: DesdemonaDefinition["boards"] = {
   basic: {
-    height: 8,
-    width: 8,
-  },
-  small: {
-    height: 7,
-    width: 7,
-  },
-  large: {
     height: 10,
     width: 10,
+  },
+  small: {
+    height: 8,
+    width: 8,
   },
 };
 

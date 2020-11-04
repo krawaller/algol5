@@ -40,10 +40,10 @@ type DesdemonaBattleVar = never;
 type DesdemonaTurnPos = "movedto";
 type DesdemonaTurnVar = "movedto";
 
-type DesdemonaBoardName = "basic" | "small" | "large";
-type DesdemonaSetupName = "basic" | "small" | "large";
+type DesdemonaBoardName = "basic" | "small";
+type DesdemonaSetupName = "basic" | "small";
 type DesdemonaRulesetName = "pie";
-type DesdemonaVariantName = "regular" | "small" | "large";
+type DesdemonaVariantName = "regular" | "small";
 
 type DesdemonaGrid = never;
 

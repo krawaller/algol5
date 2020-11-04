@@ -495,6 +495,9 @@ const game = {
         )) {
           LINKS.marks[pos] = "selectsource_basic_1";
         }
+        if (!!BATTLEVARS["plr1wounded"]) {
+          LINKS.commands.heal = "heal_basic_1";
+        }
       }
       return {
         LINKS,
@@ -575,6 +578,9 @@ const game = {
             : UNITLAYERS.myunits
         )) {
           LINKS.marks[pos] = "selectsource_basic_1";
+        }
+        if (!!BATTLEVARS["plr1wounded"]) {
+          LINKS.commands.heal = "heal_basic_1";
         }
       }
       return {
@@ -658,6 +664,9 @@ const game = {
         )) {
           LINKS.marks[pos] = "selectsource_basic_1";
         }
+        if (!!BATTLEVARS["plr1wounded"]) {
+          LINKS.commands.heal = "heal_basic_1";
+        }
       }
       return {
         LINKS,
@@ -719,6 +728,9 @@ const game = {
             : UNITLAYERS.myunits
         )) {
           LINKS.marks[pos] = "selectsource_basic_2";
+        }
+        if (!!BATTLEVARS["plr2wounded"]) {
+          LINKS.commands.heal = "heal_basic_2";
         }
       }
       return {
@@ -801,6 +813,9 @@ const game = {
         )) {
           LINKS.marks[pos] = "selectsource_basic_2";
         }
+        if (!!BATTLEVARS["plr2wounded"]) {
+          LINKS.commands.heal = "heal_basic_2";
+        }
       }
       return {
         LINKS,
@@ -882,6 +897,9 @@ const game = {
             : UNITLAYERS.myunits
         )) {
           LINKS.marks[pos] = "selectsource_basic_2";
+        }
+        if (!!BATTLEVARS["plr2wounded"]) {
+          LINKS.commands.heal = "heal_basic_2";
         }
       }
       return {

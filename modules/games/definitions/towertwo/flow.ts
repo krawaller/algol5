@@ -36,7 +36,21 @@ const towertwoFlow: TowertwoDefinition["flow"] = {
         ifelse: [
           { morethan: [{ turnvar: "spent" }, 2] },
           "endTurn",
-          "selectsource",
+          {
+            multi: [
+              "selectsource",
+              {
+                if: [
+                  {
+                    truthy: {
+                      battlevar: { playercase: ["plr1wounded", "plr2wounded"] },
+                    },
+                  },
+                  "heal",
+                ],
+              },
+            ],
+          },
         ],
       },
     },
@@ -56,7 +70,21 @@ const towertwoFlow: TowertwoDefinition["flow"] = {
         ifelse: [
           { morethan: [{ turnvar: "spent" }, 2] },
           "endTurn",
-          "selectsource",
+          {
+            multi: [
+              "selectsource",
+              {
+                if: [
+                  {
+                    truthy: {
+                      battlevar: { playercase: ["plr1wounded", "plr2wounded"] },
+                    },
+                  },
+                  "heal",
+                ],
+              },
+            ],
+          },
         ],
       },
     },
@@ -81,7 +109,21 @@ const towertwoFlow: TowertwoDefinition["flow"] = {
         ifelse: [
           { morethan: [{ turnvar: "spent" }, 2] },
           "endTurn",
-          "selectsource",
+          {
+            multi: [
+              "selectsource",
+              {
+                if: [
+                  {
+                    truthy: {
+                      battlevar: { playercase: ["plr1wounded", "plr2wounded"] },
+                    },
+                  },
+                  "heal",
+                ],
+              },
+            ],
+          },
         ],
       },
     },

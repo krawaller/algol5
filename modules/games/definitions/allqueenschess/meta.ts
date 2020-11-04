@@ -9,7 +9,7 @@ const allqueenschessMeta: AllqueenschessDefinition["meta"] = {
   source:
     "https://www.thinkfun.com/wp-content/uploads/2015/09/AllQu-3450-Instructions.pdf",
   code: "k",
-  slug: "allqueenschess",
+  slug: "all_queens_chess",
   added: "2020-05-02",
 };
 

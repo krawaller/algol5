@@ -4,7 +4,7 @@ import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 type DesdemonaBoardHeight = 10;
 type DesdemonaBoardWidth = 10;
 
-type DesdemonaTerrain = "edge";
+type DesdemonaTerrain = "border";
 type DesdemonaUnit = "amazons" | "stones";
 type DesdemonaMark = "selectunit" | "selectmovetarget" | "selectfiretarget";
 type DesdemonaCommand = "move" | "fire";
@@ -33,7 +33,7 @@ type DesdemonaArtifactLayer =
   | "firetargets"
   | "capturespot"
   | "victims";
-type DesdemonaTerrainLayer = "edge" | "noedge";
+type DesdemonaTerrainLayer = "border" | "noborder";
 type DesdemonaLayer =
   | CommonLayer
   | DesdemonaUnitLayer
@@ -44,10 +44,10 @@ type DesdemonaBattleVar = never;
 type DesdemonaTurnPos = "movedto";
 type DesdemonaTurnVar = "movedto";
 
-type DesdemonaBoardName = "basic" | "small" | "large";
-type DesdemonaSetupName = "basic" | "small" | "large";
-type DesdemonaRulesetName = "pie";
-type DesdemonaVariantName = "regular" | "small";
+type DesdemonaBoardName = "basic" | "border";
+type DesdemonaSetupName = "basic";
+type DesdemonaRulesetName = "regular" | "border";
+type DesdemonaVariantName = "regular" | "border";
 
 type DesdemonaGrid = never;
 

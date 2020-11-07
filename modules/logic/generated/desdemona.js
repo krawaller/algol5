@@ -40,7 +40,13 @@ const groupLayers2 = {
 };
 const prefixes1 = ["neutral", "my", "opp"];
 const prefixes2 = ["neutral", "opp", "my"];
-const emptyArtifactLayers_pie = {
+const emptyArtifactLayers_regular = {
+  movetargets: {},
+  firetargets: {},
+  capturespot: {},
+  victims: {}
+};
+const emptyArtifactLayers_border = {
   movetargets: {},
   firetargets: {},
   capturespot: {},
@@ -83,7 +89,7 @@ const game = {
     });
   },
   action: {
-    startTurn_pie_1: step => {
+    startTurn_regular_1: step => {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -98,20 +104,20 @@ const game = {
         commands: {}
       };
       for (const pos of Object.keys(UNITLAYERS.myamazons)) {
-        LINKS.marks[pos] = "selectunit_pie_1";
+        LINKS.marks[pos] = "selectunit_regular_1";
       }
       return {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers_pie,
+        ARTIFACTS: emptyArtifactLayers_regular,
         MARKS: {},
         TURN: step.TURN + 1,
         NEXTSPAWNID: step.NEXTSPAWNID,
         TURNVARS: {}
       };
     },
-    startTurn_pie_2: step => {
+    startTurn_regular_2: step => {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -126,20 +132,76 @@ const game = {
         commands: {}
       };
       for (const pos of Object.keys(UNITLAYERS.myamazons)) {
-        LINKS.marks[pos] = "selectunit_pie_2";
+        LINKS.marks[pos] = "selectunit_regular_2";
       }
       return {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers_pie,
+        ARTIFACTS: emptyArtifactLayers_regular,
         MARKS: {},
         TURN: step.TURN,
         NEXTSPAWNID: step.NEXTSPAWNID,
         TURNVARS: {}
       };
     },
-    selectunit_pie_1: (step, newMarkPos) => {
+    startTurn_border_1: step => {
+      const oldUnitLayers = step.UNITLAYERS;
+      let UNITLAYERS = {
+        units: oldUnitLayers.units,
+        myamazons: oldUnitLayers.oppamazons,
+        oppamazons: oldUnitLayers.myamazons,
+        stones: oldUnitLayers.stones,
+        mystones: oldUnitLayers.oppstones,
+        oppstones: oldUnitLayers.mystones
+      };
+      let LINKS = {
+        marks: {},
+        commands: {}
+      };
+      for (const pos of Object.keys(UNITLAYERS.myamazons)) {
+        LINKS.marks[pos] = "selectunit_border_1";
+      }
+      return {
+        UNITDATA: step.UNITDATA,
+        LINKS,
+        UNITLAYERS,
+        ARTIFACTS: emptyArtifactLayers_border,
+        MARKS: {},
+        TURN: step.TURN + 1,
+        NEXTSPAWNID: step.NEXTSPAWNID,
+        TURNVARS: {}
+      };
+    },
+    startTurn_border_2: step => {
+      const oldUnitLayers = step.UNITLAYERS;
+      let UNITLAYERS = {
+        units: oldUnitLayers.units,
+        myamazons: oldUnitLayers.oppamazons,
+        oppamazons: oldUnitLayers.myamazons,
+        stones: oldUnitLayers.stones,
+        mystones: oldUnitLayers.oppstones,
+        oppstones: oldUnitLayers.mystones
+      };
+      let LINKS = {
+        marks: {},
+        commands: {}
+      };
+      for (const pos of Object.keys(UNITLAYERS.myamazons)) {
+        LINKS.marks[pos] = "selectunit_border_2";
+      }
+      return {
+        UNITDATA: step.UNITDATA,
+        LINKS,
+        UNITLAYERS,
+        ARTIFACTS: emptyArtifactLayers_border,
+        MARKS: {},
+        TURN: step.TURN,
+        NEXTSPAWNID: step.NEXTSPAWNID,
+        TURNVARS: {}
+      };
+    },
+    selectunit_regular_1: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: {}
       };
@@ -158,7 +220,7 @@ const game = {
         }
       }
       for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-        LINKS.marks[pos] = "selectmovetarget_pie_1";
+        LINKS.marks[pos] = "selectmovetarget_regular_1";
       }
       return {
         LINKS,
@@ -171,9 +233,9 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectmovetarget_pie_1: (step, newMarkPos) => {
+    selectmovetarget_regular_1: (step, newMarkPos) => {
       let LINKS = { marks: {}, commands: {} };
-      LINKS.commands.move = "move_pie_1";
+      LINKS.commands.move = "move_regular_1";
       return {
         LINKS,
         ARTIFACTS: step.ARTIFACTS,
@@ -188,7 +250,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectfiretarget_pie_1: (step, newMarkPos) => {
+    selectfiretarget_regular_1: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
         firetargets: step.ARTIFACTS.firetargets,
@@ -216,7 +278,7 @@ const game = {
           }
         }
       }
-      LINKS.commands.fire = "fire_pie_1";
+      LINKS.commands.fire = "fire_regular_1";
       return {
         LINKS,
         ARTIFACTS,
@@ -229,7 +291,7 @@ const game = {
         canAlwaysEnd: true
       };
     },
-    selectunit_pie_2: (step, newMarkPos) => {
+    selectunit_regular_2: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: {}
       };
@@ -248,7 +310,7 @@ const game = {
         }
       }
       for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-        LINKS.marks[pos] = "selectmovetarget_pie_2";
+        LINKS.marks[pos] = "selectmovetarget_regular_2";
       }
       return {
         LINKS,
@@ -261,9 +323,9 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectmovetarget_pie_2: (step, newMarkPos) => {
+    selectmovetarget_regular_2: (step, newMarkPos) => {
       let LINKS = { marks: {}, commands: {} };
-      LINKS.commands.move = "move_pie_2";
+      LINKS.commands.move = "move_regular_2";
       return {
         LINKS,
         ARTIFACTS: step.ARTIFACTS,
@@ -278,7 +340,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectfiretarget_pie_2: (step, newMarkPos) => {
+    selectfiretarget_regular_2: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
         firetargets: step.ARTIFACTS.firetargets,
@@ -306,7 +368,7 @@ const game = {
           }
         }
       }
-      LINKS.commands.fire = "fire_pie_2";
+      LINKS.commands.fire = "fire_regular_2";
       return {
         LINKS,
         ARTIFACTS,
@@ -319,7 +381,187 @@ const game = {
         canAlwaysEnd: true
       };
     },
-    move_pie_1: step => {
+    selectunit_border_1: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        movetargets: {}
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectunit: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        let BLOCKS = UNITLAYERS.units;
+        for (let DIR of roseDirs) {
+          let POS = MARKS.selectunit;
+          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            ARTIFACTS.movetargets[POS] = emptyObj;
+          }
+        }
+      }
+      for (const pos of Object.keys(ARTIFACTS.movetargets)) {
+        LINKS.marks[pos] = "selectmovetarget_border_1";
+      }
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS,
+        TURNVARS: step.TURNVARS,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
+    selectmovetarget_border_1: (step, newMarkPos) => {
+      let LINKS = { marks: {}, commands: {} };
+      LINKS.commands.move = "move_border_1";
+      return {
+        LINKS,
+        ARTIFACTS: step.ARTIFACTS,
+        UNITLAYERS: step.UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS: {
+          selectunit: step.MARKS.selectunit,
+          selectmovetarget: newMarkPos
+        },
+        TURNVARS: step.TURNVARS,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
+    selectfiretarget_border_1: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        firetargets: step.ARTIFACTS.firetargets,
+        capturespot: step.ARTIFACTS.capturespot,
+        victims: {}
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectfiretarget: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      if (ARTIFACTS.capturespot[MARKS.selectfiretarget]) {
+        {
+          let allowedsteps = UNITLAYERS.oppstones;
+          let STARTPOS = MARKS.selectfiretarget;
+          let POS = STARTPOS;
+          while (
+            (POS =
+              connections[POS][
+                relativeDirs[(ARTIFACTS.capturespot[STARTPOS] || {}).dir][5]
+              ]) &&
+            allowedsteps[POS]
+          ) {
+            ARTIFACTS.victims[POS] = emptyObj;
+          }
+        }
+      }
+      LINKS.commands.fire = "fire_border_1";
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS,
+        TURNVARS: step.TURNVARS,
+        NEXTSPAWNID: step.NEXTSPAWNID,
+        canAlwaysEnd: true
+      };
+    },
+    selectunit_border_2: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        movetargets: {}
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectunit: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        let BLOCKS = UNITLAYERS.units;
+        for (let DIR of roseDirs) {
+          let POS = MARKS.selectunit;
+          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            ARTIFACTS.movetargets[POS] = emptyObj;
+          }
+        }
+      }
+      for (const pos of Object.keys(ARTIFACTS.movetargets)) {
+        LINKS.marks[pos] = "selectmovetarget_border_2";
+      }
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS,
+        TURNVARS: step.TURNVARS,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
+    selectmovetarget_border_2: (step, newMarkPos) => {
+      let LINKS = { marks: {}, commands: {} };
+      LINKS.commands.move = "move_border_2";
+      return {
+        LINKS,
+        ARTIFACTS: step.ARTIFACTS,
+        UNITLAYERS: step.UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS: {
+          selectunit: step.MARKS.selectunit,
+          selectmovetarget: newMarkPos
+        },
+        TURNVARS: step.TURNVARS,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
+    selectfiretarget_border_2: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        firetargets: step.ARTIFACTS.firetargets,
+        capturespot: step.ARTIFACTS.capturespot,
+        victims: {}
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectfiretarget: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      if (ARTIFACTS.capturespot[MARKS.selectfiretarget]) {
+        {
+          let allowedsteps = UNITLAYERS.oppstones;
+          let STARTPOS = MARKS.selectfiretarget;
+          let POS = STARTPOS;
+          while (
+            (POS =
+              connections[POS][
+                relativeDirs[(ARTIFACTS.capturespot[STARTPOS] || {}).dir][5]
+              ]) &&
+            allowedsteps[POS]
+          ) {
+            ARTIFACTS.victims[POS] = emptyObj;
+          }
+        }
+      }
+      LINKS.commands.fire = "fire_border_2";
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS,
+        TURNVARS: step.TURNVARS,
+        NEXTSPAWNID: step.NEXTSPAWNID,
+        canAlwaysEnd: true
+      };
+    },
+    move_regular_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
@@ -362,7 +604,7 @@ const game = {
           let POS = TURNVARS["movedto"];
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
             {
-              if (!TERRAIN1.edge[POS]) {
+              if (true) {
                 ARTIFACTS.firetargets[POS] = emptyObj;
               }
             }
@@ -414,13 +656,13 @@ const game = {
               ]
             )
           };
-          LINKS.endTurn = "startTurn_pie_2";
+          LINKS.endTurn = "startTurn_regular_2";
         } else {
-          LINKS.endTurn = "startTurn_pie_2";
+          LINKS.endTurn = "startTurn_regular_2";
         }
       } else {
         for (const pos of Object.keys(ARTIFACTS.firetargets)) {
-          LINKS.marks[pos] = "selectfiretarget_pie_1";
+          LINKS.marks[pos] = "selectfiretarget_regular_1";
         }
       }
       return {
@@ -434,7 +676,379 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    fire_pie_1: step => {
+    fire_regular_1: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        firetargets: step.ARTIFACTS.firetargets,
+        capturespot: step.ARTIFACTS.capturespot,
+        victims: step.ARTIFACTS.victims
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      let TURNVARS = step.TURNVARS;
+      let UNITDATA = { ...step.UNITDATA };
+      let NEXTSPAWNID = step.NEXTSPAWNID;
+      let MARKS = step.MARKS;
+      anim.enterFrom[MARKS.selectfiretarget] = TURNVARS["movedto"];
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: MARKS.selectfiretarget,
+          id: newunitid,
+          group: "stones",
+          owner: Object.keys(ARTIFACTS.victims).length === 0 ? 1 : 0
+        };
+      }
+      for (let LOOPPOS in ARTIFACTS.victims) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              owner: 1
+            };
+          }
+        }
+      }
+      UNITLAYERS = {
+        units: {},
+        myamazons: {},
+        oppamazons: {},
+        stones: {},
+        mystones: {},
+        oppstones: {}
+      };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers1[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      if (true) {
+        LINKS.starvation = {
+          endGame: ["draw", "win", "lose"][
+            whoWins(
+              Object.keys(UNITLAYERS.mystones).length,
+              Object.keys(UNITLAYERS.oppstones).length
+            )
+          ],
+          endedBy: "dominance",
+          endMarks: Object.keys(
+            [emptyObj, UNITLAYERS.mystones, UNITLAYERS.oppstones][
+              whoWins(
+                Object.keys(UNITLAYERS.mystones).length,
+                Object.keys(UNITLAYERS.oppstones).length
+              )
+            ]
+          )
+        };
+        LINKS.endTurn = "startTurn_regular_2";
+      } else {
+        LINKS.endTurn = "startTurn_regular_2";
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS,
+        TURNVARS,
+        NEXTSPAWNID,
+        anim
+      };
+    },
+    move_regular_2: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        firetargets: {},
+        capturespot: {}
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      let TURNVARS = { ...step.TURNVARS };
+      let UNITDATA = { ...step.UNITDATA };
+      let MARKS = step.MARKS;
+      TURNVARS.movedto = MARKS.selectmovetarget;
+      {
+        let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = {
+            ...UNITDATA[unitid],
+            pos: MARKS.selectmovetarget
+          };
+        }
+      }
+      UNITLAYERS = {
+        units: {},
+        myamazons: {},
+        oppamazons: {},
+        stones: {},
+        mystones: {},
+        oppstones: {}
+      };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers2[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      {
+        let BLOCKS = UNITLAYERS.units;
+        for (let DIR of roseDirs) {
+          let POS = TURNVARS["movedto"];
+          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            {
+              if (true) {
+                ARTIFACTS.firetargets[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      {
+        let BLOCKS = Object.keys(BOARD.board)
+          .filter(k => !UNITLAYERS.oppstones.hasOwnProperty(k))
+          .reduce((m, k) => {
+            m[k] = emptyObj;
+            return m;
+          }, {});
+        for (let DIR of roseDirs) {
+          let walkedsquares = [];
+          let POS = TURNVARS["movedto"];
+          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            walkedsquares.push(POS);
+          }
+          let WALKLENGTH = walkedsquares.length;
+          if (BLOCKS[POS]) {
+            {
+              ARTIFACTS.capturespot[POS] = { dir: DIR };
+            }
+            {
+              if (!UNITLAYERS.units[POS] && WALKLENGTH > 0) {
+                ARTIFACTS.firetargets[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      for (const pos of Object.keys(ARTIFACTS.firetargets)) {
+        LINKS.marks[pos] = "selectfiretarget_regular_2";
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS,
+        TURNVARS,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
+    fire_regular_2: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        firetargets: step.ARTIFACTS.firetargets,
+        capturespot: step.ARTIFACTS.capturespot,
+        victims: step.ARTIFACTS.victims
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      let TURNVARS = step.TURNVARS;
+      let UNITDATA = { ...step.UNITDATA };
+      let NEXTSPAWNID = step.NEXTSPAWNID;
+      let MARKS = step.MARKS;
+      anim.enterFrom[MARKS.selectfiretarget] = TURNVARS["movedto"];
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: MARKS.selectfiretarget,
+          id: newunitid,
+          group: "stones",
+          owner: Object.keys(ARTIFACTS.victims).length === 0 ? 2 : 0
+        };
+      }
+      for (let LOOPPOS in ARTIFACTS.victims) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              owner: 2
+            };
+          }
+        }
+      }
+      UNITLAYERS = {
+        units: {},
+        myamazons: {},
+        oppamazons: {},
+        stones: {},
+        mystones: {},
+        oppstones: {}
+      };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers2[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      if (true) {
+        LINKS.starvation = {
+          endGame: ["draw", "lose", "win"][
+            whoWins(
+              Object.keys(UNITLAYERS.oppstones).length,
+              Object.keys(UNITLAYERS.mystones).length
+            )
+          ],
+          endedBy: "dominance",
+          endMarks: Object.keys(
+            [emptyObj, UNITLAYERS.mystones, UNITLAYERS.oppstones][
+              whoWins(
+                Object.keys(UNITLAYERS.mystones).length,
+                Object.keys(UNITLAYERS.oppstones).length
+              )
+            ]
+          )
+        };
+        LINKS.endTurn = "startTurn_regular_1";
+      } else {
+        LINKS.endTurn = "startTurn_regular_1";
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS,
+        TURNVARS,
+        NEXTSPAWNID,
+        anim
+      };
+    },
+    move_border_1: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        firetargets: {},
+        capturespot: {}
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      let TURNVARS = { ...step.TURNVARS };
+      let UNITDATA = { ...step.UNITDATA };
+      let TURN = step.TURN;
+      let MARKS = step.MARKS;
+      TURNVARS.movedto = MARKS.selectmovetarget;
+      {
+        let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = {
+            ...UNITDATA[unitid],
+            pos: MARKS.selectmovetarget
+          };
+        }
+      }
+      UNITLAYERS = {
+        units: {},
+        myamazons: {},
+        oppamazons: {},
+        stones: {},
+        mystones: {},
+        oppstones: {}
+      };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers1[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      {
+        let BLOCKS = UNITLAYERS.units;
+        for (let DIR of roseDirs) {
+          let POS = TURNVARS["movedto"];
+          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            {
+              if (!TERRAIN1.border[POS]) {
+                ARTIFACTS.firetargets[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      {
+        let BLOCKS = Object.keys(BOARD.board)
+          .filter(k => !UNITLAYERS.oppstones.hasOwnProperty(k))
+          .reduce((m, k) => {
+            m[k] = emptyObj;
+            return m;
+          }, {});
+        for (let DIR of roseDirs) {
+          let walkedsquares = [];
+          let POS = TURNVARS["movedto"];
+          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            walkedsquares.push(POS);
+          }
+          let WALKLENGTH = walkedsquares.length;
+          if (BLOCKS[POS]) {
+            {
+              ARTIFACTS.capturespot[POS] = { dir: DIR };
+            }
+            {
+              if (!UNITLAYERS.units[POS] && WALKLENGTH > 0) {
+                ARTIFACTS.firetargets[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (TURN === 1) {
+        if (true) {
+          LINKS.starvation = {
+            endGame: ["draw", "win", "lose"][
+              whoWins(
+                Object.keys(UNITLAYERS.mystones).length,
+                Object.keys(UNITLAYERS.oppstones).length
+              )
+            ],
+            endedBy: "dominance",
+            endMarks: Object.keys(
+              [emptyObj, UNITLAYERS.mystones, UNITLAYERS.oppstones][
+                whoWins(
+                  Object.keys(UNITLAYERS.mystones).length,
+                  Object.keys(UNITLAYERS.oppstones).length
+                )
+              ]
+            )
+          };
+          LINKS.endTurn = "startTurn_border_2";
+        } else {
+          LINKS.endTurn = "startTurn_border_2";
+        }
+      } else {
+        for (const pos of Object.keys(ARTIFACTS.firetargets)) {
+          LINKS.marks[pos] = "selectfiretarget_border_1";
+        }
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS,
+        TURN,
+        UNITDATA,
+        UNITLAYERS,
+        TURNVARS,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
+    fire_border_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -502,9 +1116,9 @@ const game = {
             ]
           )
         };
-        LINKS.endTurn = "startTurn_pie_2";
+        LINKS.endTurn = "startTurn_border_2";
       } else {
-        LINKS.endTurn = "startTurn_pie_2";
+        LINKS.endTurn = "startTurn_border_2";
       }
       return {
         LINKS,
@@ -518,7 +1132,7 @@ const game = {
         anim
       };
     },
-    move_pie_2: step => {
+    move_border_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
@@ -560,7 +1174,7 @@ const game = {
           let POS = TURNVARS["movedto"];
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
             {
-              if (!TERRAIN2.edge[POS]) {
+              if (!TERRAIN2.border[POS]) {
                 ARTIFACTS.firetargets[POS] = emptyObj;
               }
             }
@@ -594,7 +1208,7 @@ const game = {
         }
       }
       for (const pos of Object.keys(ARTIFACTS.firetargets)) {
-        LINKS.marks[pos] = "selectfiretarget_pie_2";
+        LINKS.marks[pos] = "selectfiretarget_border_2";
       }
       return {
         LINKS,
@@ -607,7 +1221,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    fire_pie_2: step => {
+    fire_border_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -675,9 +1289,9 @@ const game = {
             ]
           )
         };
-        LINKS.endTurn = "startTurn_pie_1";
+        LINKS.endTurn = "startTurn_border_1";
       } else {
-        LINKS.endTurn = "startTurn_pie_1";
+        LINKS.endTurn = "startTurn_border_1";
       }
       return {
         LINKS,
@@ -693,7 +1307,7 @@ const game = {
     }
   },
   instruction: {
-    startTurn_pie_1: step => {
+    startTurn_regular_1: step => {
       return collapseContent({
         line: [
           { select: "Select" },
@@ -702,7 +1316,7 @@ const game = {
         ]
       });
     },
-    move_pie_1: step => {
+    move_regular_1: step => {
       let TURNVARS = step.TURNVARS;
       let UNITLAYERS = step.UNITLAYERS;
       let TURN = step.TURN;
@@ -731,8 +1345,8 @@ const game = {
             ]
           });
     },
-    fire_pie_1: () => defaultInstruction(1),
-    selectunit_pie_1: step => {
+    fire_regular_1: () => defaultInstruction(1),
+    selectunit_regular_1: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -748,7 +1362,7 @@ const game = {
         ]
       });
     },
-    selectmovetarget_pie_1: step => {
+    selectmovetarget_regular_1: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -768,7 +1382,236 @@ const game = {
         ]
       });
     },
-    selectfiretarget_pie_1: step => {
+    selectfiretarget_regular_1: step => {
+      let ARTIFACTS = step.ARTIFACTS;
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "fire" },
+          { text: "to spawn" },
+          {
+            unit: [
+              "pawn",
+              Object.keys(ARTIFACTS.victims).length === 0 ? 1 : 0,
+              MARKS.selectfiretarget
+            ]
+          },
+          Object.keys(ARTIFACTS.victims).length !== 0
+            ? collapseContent({
+                line: [
+                  { text: "and capture" },
+                  collapseContent({
+                    line: Object.keys(ARTIFACTS.victims)
+                      .filter(p => UNITLAYERS.units[p])
+                      .map(p => ({
+                        unit: [
+                          iconMapping[UNITLAYERS.units[p].group],
+                          UNITLAYERS.units[p].owner,
+                          p
+                        ]
+                      }))
+                      .reduce((mem, i, n, list) => {
+                        mem.push(i);
+                        if (n === list.length - 2) {
+                          mem.push({ text: " and " });
+                        } else if (n < list.length - 2) {
+                          mem.push({ text: ", " });
+                        }
+                        return mem;
+                      }, [])
+                  })
+                ]
+              })
+            : undefined
+        ]
+      });
+    },
+    startTurn_regular_2: step => {
+      return collapseContent({
+        line: [
+          { select: "Select" },
+          { unittype: ["queen", 2] },
+          { text: "to move" }
+        ]
+      });
+    },
+    move_regular_2: step => {
+      let TURNVARS = step.TURNVARS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Select where to fire with" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[TURNVARS["movedto"]] || {}).group],
+              (UNITLAYERS.units[TURNVARS["movedto"]] || {}).owner,
+              TURNVARS["movedto"]
+            ]
+          }
+        ]
+      });
+    },
+    fire_regular_2: () => defaultInstruction(2),
+    selectunit_regular_2: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Select where to move" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+              MARKS.selectunit
+            ]
+          }
+        ]
+      });
+    },
+    selectmovetarget_regular_2: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "move" },
+          { text: "to move" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+              MARKS.selectunit
+            ]
+          },
+          { text: "to" },
+          { pos: MARKS.selectmovetarget }
+        ]
+      });
+    },
+    selectfiretarget_regular_2: step => {
+      let ARTIFACTS = step.ARTIFACTS;
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "fire" },
+          { text: "to spawn" },
+          {
+            unit: [
+              "pawn",
+              Object.keys(ARTIFACTS.victims).length === 0 ? 2 : 0,
+              MARKS.selectfiretarget
+            ]
+          },
+          Object.keys(ARTIFACTS.victims).length !== 0
+            ? collapseContent({
+                line: [
+                  { text: "and capture" },
+                  collapseContent({
+                    line: Object.keys(ARTIFACTS.victims)
+                      .filter(p => UNITLAYERS.units[p])
+                      .map(p => ({
+                        unit: [
+                          iconMapping[UNITLAYERS.units[p].group],
+                          UNITLAYERS.units[p].owner,
+                          p
+                        ]
+                      }))
+                      .reduce((mem, i, n, list) => {
+                        mem.push(i);
+                        if (n === list.length - 2) {
+                          mem.push({ text: " and " });
+                        } else if (n < list.length - 2) {
+                          mem.push({ text: ", " });
+                        }
+                        return mem;
+                      }, [])
+                  })
+                ]
+              })
+            : undefined
+        ]
+      });
+    },
+    startTurn_border_1: step => {
+      return collapseContent({
+        line: [
+          { select: "Select" },
+          { unittype: ["queen", 1] },
+          { text: "to move" }
+        ]
+      });
+    },
+    move_border_1: step => {
+      let TURNVARS = step.TURNVARS;
+      let UNITLAYERS = step.UNITLAYERS;
+      let TURN = step.TURN;
+      return TURN === 1
+        ? collapseContent({
+            line: [
+              { text: "Press " },
+              { endTurn: "end turn" },
+              { text: " to submit your moves and hand over to " },
+              { player: 2 },
+              { text: "(you don't get to fire the first turn)" }
+            ]
+          })
+        : collapseContent({
+            line: [
+              { text: "Select where to fire with" },
+              {
+                unit: [
+                  iconMapping[
+                    (UNITLAYERS.units[TURNVARS["movedto"]] || {}).group
+                  ],
+                  (UNITLAYERS.units[TURNVARS["movedto"]] || {}).owner,
+                  TURNVARS["movedto"]
+                ]
+              }
+            ]
+          });
+    },
+    fire_border_1: () => defaultInstruction(1),
+    selectunit_border_1: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Select where to move" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+              MARKS.selectunit
+            ]
+          }
+        ]
+      });
+    },
+    selectmovetarget_border_1: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "move" },
+          { text: "to move" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+              MARKS.selectunit
+            ]
+          },
+          { text: "to" },
+          { pos: MARKS.selectmovetarget }
+        ]
+      });
+    },
+    selectfiretarget_border_1: step => {
       let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
@@ -808,7 +1651,7 @@ const game = {
         ]
       });
     },
-    startTurn_pie_2: step => {
+    startTurn_border_2: step => {
       return collapseContent({
         line: [
           { select: "Select" },
@@ -817,7 +1660,7 @@ const game = {
         ]
       });
     },
-    move_pie_2: step => {
+    move_border_2: step => {
       let TURNVARS = step.TURNVARS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -833,8 +1676,8 @@ const game = {
         ]
       });
     },
-    fire_pie_2: () => defaultInstruction(2),
-    selectunit_pie_2: step => {
+    fire_border_2: () => defaultInstruction(2),
+    selectunit_border_2: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -850,7 +1693,7 @@ const game = {
         ]
       });
     },
-    selectmovetarget_pie_2: step => {
+    selectmovetarget_border_2: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -870,7 +1713,7 @@ const game = {
         ]
       });
     },
-    selectfiretarget_pie_2: step => {
+    selectfiretarget_border_2: step => {
       let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;

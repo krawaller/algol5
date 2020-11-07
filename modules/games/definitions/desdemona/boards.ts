@@ -6,38 +6,18 @@ import { DesdemonaDefinition } from "./_types";
 
 const desdemonaBoardBook: DesdemonaDefinition["boards"] = {
   basic: {
-    height: 8,
-    width: 8,
-    terrain: {
-      edge: [
-        { rect: ["a1", "h1"] },
-        { rect: ["a8", "h8"] },
-        { rect: ["a2", "a7"] },
-        { rect: ["h2", "h7"] },
-      ],
-    },
+    height: 10,
+    width: 10,
   },
-  small: {
-    height: 7,
-    width: 7,
-    terrain: {
-      edge: [
-        { rect: ["a1", "g1"] },
-        { rect: ["a7", "g7"] },
-        { rect: ["a2", "a6"] },
-        { rect: ["g2", "g6"] },
-      ],
-    },
-  },
-  large: {
+  border: {
     height: 10,
     width: 10,
     terrain: {
-      edge: [
-        { rect: ["a1", "j1"] },
-        { rect: ["a10", "j10"] },
-        { rect: ["a2", "a9"] },
-        { rect: ["j2", "j9"] },
+      border: [
+        { rect: ["a1", "a10"] },
+        { rect: ["b10", "i10"] },
+        { rect: ["b1", "i1"] },
+        { rect: ["j1", "j10"] },
       ],
     },
   },

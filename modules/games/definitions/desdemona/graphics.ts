@@ -11,7 +11,7 @@ const desdemonaGraphics: DesdemonaDefinition["graphics"] = {
     stones: "pawn",
   },
   tiles: {
-    edge: "grass",
+    border: "grass",
   },
 };
 

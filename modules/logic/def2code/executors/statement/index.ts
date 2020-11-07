@@ -41,7 +41,7 @@ export function executeStatement<_T>(
       )}`
     );
   }
-  const exprParser = makeParser(gameDef, player, action, from);
+  const exprParser = makeParser(gameDef, player, action, ruleset, from);
   const me = (expr: AlgolStatementAnon<_T>) =>
     executeStatement(gameDef, player, action, ruleset, finalParser, expr, from);
 

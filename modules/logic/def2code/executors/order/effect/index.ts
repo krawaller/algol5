@@ -57,7 +57,7 @@ function executeEffectInner(
   ruleset: string,
   effect: AlgolEffectInnerAnon
 ): string {
-  const parser = makeParser(gameDef, player, action, "effect");
+  const parser = makeParser(gameDef, player, action, ruleset, "effect");
   const me = (efct: AlgolEffectAnon) =>
     executeEffect(gameDef, player, action, ruleset, efct);
 

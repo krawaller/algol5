@@ -18,7 +18,7 @@ const partisansGenerators: PartisansDefinition["generators"] = {
       },
     },
   },
-  findspawntargets: {
+  findfiretargets: {
     type: "walker",
     dirs: "rose",
     start: { turnpos: "movedto" },
@@ -27,40 +27,6 @@ const partisansGenerators: PartisansDefinition["generators"] = {
       steps: {
         unlessover: "units",
         tolayer: "firetargets",
-      },
-    },
-  },
-  findcapturetargets: {
-    type: "walker",
-    dirs: "rose",
-    start: { turnpos: "movedto" },
-    blocks: { subtract: ["board", "oppstones"] },
-    draw: {
-      block: [
-        {
-          tolayer: "capturespot",
-          include: { dir: ["dir"] },
-        },
-        {
-          condition: {
-            and: [
-              { noneat: ["units", ["target"]] },
-              { morethan: [["walklength"], 0] },
-            ],
-          },
-          tolayer: "firetargets",
-        },
-      ],
-    },
-  },
-  findvictims: {
-    type: "walker",
-    dir: { reldir: [{ read: ["capturespot", ["start"], "dir"] }, 5] },
-    start: "selectfiretarget",
-    steps: "oppstones",
-    draw: {
-      steps: {
-        tolayer: "victims",
       },
     },
   },

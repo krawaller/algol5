@@ -14,31 +14,20 @@ const desdemonaInstructions: DesdemonaDefinition["instructions"] = {
     ],
   },
   move: {
-    ifrulesetelse: [
-      "pie",
+    playercase: [
       {
-        playercase: [
+        ifelse: [
+          ["isFirstTurn"],
           {
-            ifelse: [
-              ["isFirstTurn"],
+            line: [
+              { text: "Press " },
+              "endTurn",
               {
-                line: [
-                  { text: "Press " },
-                  "endTurn",
-                  {
-                    text: ` to submit your moves and hand over to `,
-                  },
-                  ["otherplayer"],
-                  {
-                    text: `(you don't get to fire the first turn)`,
-                  },
-                ],
+                text: ` to submit your moves and hand over to `,
               },
+              ["otherplayer"],
               {
-                line: [
-                  "Select where to fire with",
-                  { unitat: { turnpos: "movedto" } },
-                ],
+                text: `(you don't get to fire the first turn)`,
               },
             ],
           },
@@ -63,7 +52,14 @@ const desdemonaInstructions: DesdemonaDefinition["instructions"] = {
       {
         unittypepos: [
           "stones",
-          { ifelse: [{ isempty: "victims" }, ["player"], 0] },
+          {
+            ifrulesetelse: [
+              "border",
+              ["player"],
+              { ifelse: [{ isempty: "victims" }, ["player"], 0] },
+            ],
+          },
+
           "selectfiretarget",
         ],
       },

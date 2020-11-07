@@ -25,6 +25,13 @@ const desdemonaGenerators: DesdemonaDefinition["generators"] = {
     draw: {
       steps: [
         {
+          condition: {
+            ifrulesetelse: [
+              "border",
+              { noneat: ["border", ["target"]] },
+              ["true"],
+            ],
+          },
           tolayer: "firetargets",
         },
       ],

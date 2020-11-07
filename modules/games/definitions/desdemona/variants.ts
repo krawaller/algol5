@@ -2,7 +2,7 @@ import { DesdemonaDefinition } from "./_types";
 
 const desdemonaVariants: DesdemonaDefinition["variants"] = [
   {
-    ruleset: "pie",
+    ruleset: "regular",
     board: "basic",
     setup: "basic",
     desc: "regular",
@@ -49,11 +49,11 @@ const desdemonaVariants: DesdemonaDefinition["variants"] = [
     },
   },
   {
-    ruleset: "pie",
-    board: "small",
-    setup: "small",
-    desc: "small",
-    code: "n",
+    ruleset: "border",
+    board: "border",
+    setup: "basic",
+    desc: "border",
+    code: "B",
   },
 ];
 

@@ -9,9 +9,17 @@ const desdemonaBoardBook: DesdemonaDefinition["boards"] = {
     height: 10,
     width: 10,
   },
-  small: {
-    height: 8,
-    width: 8,
+  border: {
+    height: 10,
+    width: 10,
+    terrain: {
+      border: [
+        { rect: ["a1", "a10"] },
+        { rect: ["b10", "i10"] },
+        { rect: ["b1", "i1"] },
+        { rect: ["j1", "j10"] },
+      ],
+    },
   },
 };
 

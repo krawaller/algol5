@@ -36,14 +36,8 @@ const desdemonaFlow: DesdemonaDefinition["flow"] = {
       ],
       runGenerators: ["findspawntargets", "findcapturetargets"],
       link: {
-        ifrulesetelse: [
-          "pie",
-          {
-            playercase: [
-              { ifelse: [["isFirstTurn"], "endTurn", "selectfiretarget"] },
-              "selectfiretarget",
-            ],
-          },
+        playercase: [
+          { ifelse: [["isFirstTurn"], "endTurn", "selectfiretarget"] },
           "selectfiretarget",
         ],
       },
@@ -54,7 +48,13 @@ const desdemonaFlow: DesdemonaDefinition["flow"] = {
           spawnat: [
             "selectfiretarget",
             "stones",
-            { ifelse: [{ isempty: "victims" }, ["player"], 0] },
+            {
+              ifrulesetelse: [
+                "border",
+                ["player"],
+                { ifelse: [{ isempty: "victims" }, ["player"], 0] },
+              ],
+            },
           ],
         },
         { adoptin: ["victims"] },

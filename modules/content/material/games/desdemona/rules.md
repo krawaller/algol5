@@ -1,5 +1,5 @@
 ---
-updated: 2020-10-29
+updated: 2020-11-07
 ---
 
 {GAME} is played on a {DIM:board=basic} with this setup:

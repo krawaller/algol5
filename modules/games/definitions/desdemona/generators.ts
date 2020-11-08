@@ -10,9 +10,10 @@ const desdemonaGenerators: DesdemonaDefinition["generators"] = {
     type: "walker",
     dirs: "rose",
     start: "selectunit",
-    blocks: "units",
+    blocks: { ifrulesetelse: ["lago", "oppunits", "units"] },
     draw: {
       steps: {
+        unlessover: "units",
         tolayer: "movetargets",
       },
     },

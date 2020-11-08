@@ -23,19 +23,27 @@ const emptyObj = {};
 const iconMapping = { amazons: "queen", stones: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
-  amazons: [["units"], ["units", "myamazons"], ["units", "oppamazons"]],
+  amazons: [
+    ["units"],
+    ["units", "myunits", "myamazons"],
+    ["units", "oppunits", "oppamazons"]
+  ],
   stones: [
     ["units", "stones"],
-    ["units", "stones", "mystones"],
-    ["units", "stones", "oppstones"]
+    ["units", "myunits", "stones", "mystones"],
+    ["units", "oppunits", "stones", "oppstones"]
   ]
 };
 const groupLayers2 = {
-  amazons: [["units"], ["units", "oppamazons"], ["units", "myamazons"]],
+  amazons: [
+    ["units"],
+    ["units", "oppunits", "oppamazons"],
+    ["units", "myunits", "myamazons"]
+  ],
   stones: [
     ["units", "stones"],
-    ["units", "stones", "oppstones"],
-    ["units", "stones", "mystones"]
+    ["units", "oppunits", "stones", "oppstones"],
+    ["units", "myunits", "stones", "mystones"]
   ]
 };
 const prefixes1 = ["neutral", "my", "opp"];
@@ -74,6 +82,8 @@ const game = {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
       units: {},
+      myunits: {},
+      oppunits: {},
       myamazons: {},
       oppamazons: {},
       stones: {},
@@ -99,6 +109,8 @@ const game = {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
+        myunits: oldUnitLayers.oppunits,
+        oppunits: oldUnitLayers.myunits,
         myamazons: oldUnitLayers.oppamazons,
         oppamazons: oldUnitLayers.myamazons,
         stones: oldUnitLayers.stones,
@@ -127,6 +139,8 @@ const game = {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
+        myunits: oldUnitLayers.oppunits,
+        oppunits: oldUnitLayers.myunits,
         myamazons: oldUnitLayers.oppamazons,
         oppamazons: oldUnitLayers.myamazons,
         stones: oldUnitLayers.stones,
@@ -155,6 +169,8 @@ const game = {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
+        myunits: oldUnitLayers.oppunits,
+        oppunits: oldUnitLayers.myunits,
         myamazons: oldUnitLayers.oppamazons,
         oppamazons: oldUnitLayers.myamazons,
         stones: oldUnitLayers.stones,
@@ -183,6 +199,8 @@ const game = {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
+        myunits: oldUnitLayers.oppunits,
+        oppunits: oldUnitLayers.myunits,
         myamazons: oldUnitLayers.oppamazons,
         oppamazons: oldUnitLayers.myamazons,
         stones: oldUnitLayers.stones,
@@ -211,6 +229,8 @@ const game = {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
+        myunits: oldUnitLayers.oppunits,
+        oppunits: oldUnitLayers.myunits,
         myamazons: oldUnitLayers.oppamazons,
         oppamazons: oldUnitLayers.myamazons,
         stones: oldUnitLayers.stones,
@@ -239,6 +259,8 @@ const game = {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
+        myunits: oldUnitLayers.oppunits,
+        oppunits: oldUnitLayers.myunits,
         myamazons: oldUnitLayers.oppamazons,
         oppamazons: oldUnitLayers.myamazons,
         stones: oldUnitLayers.stones,
@@ -277,7 +299,9 @@ const game = {
         for (let DIR of roseDirs) {
           let POS = MARKS.selectunit;
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-            ARTIFACTS.movetargets[POS] = emptyObj;
+            if (!UNITLAYERS.units[POS]) {
+              ARTIFACTS.movetargets[POS] = emptyObj;
+            }
           }
         }
       }
@@ -367,7 +391,9 @@ const game = {
         for (let DIR of roseDirs) {
           let POS = MARKS.selectunit;
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-            ARTIFACTS.movetargets[POS] = emptyObj;
+            if (!UNITLAYERS.units[POS]) {
+              ARTIFACTS.movetargets[POS] = emptyObj;
+            }
           }
         }
       }
@@ -457,7 +483,9 @@ const game = {
         for (let DIR of roseDirs) {
           let POS = MARKS.selectunit;
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-            ARTIFACTS.movetargets[POS] = emptyObj;
+            if (!UNITLAYERS.units[POS]) {
+              ARTIFACTS.movetargets[POS] = emptyObj;
+            }
           }
         }
       }
@@ -547,7 +575,9 @@ const game = {
         for (let DIR of roseDirs) {
           let POS = MARKS.selectunit;
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-            ARTIFACTS.movetargets[POS] = emptyObj;
+            if (!UNITLAYERS.units[POS]) {
+              ARTIFACTS.movetargets[POS] = emptyObj;
+            }
           }
         }
       }
@@ -633,11 +663,13 @@ const game = {
       };
       let UNITLAYERS = step.UNITLAYERS;
       {
-        let BLOCKS = UNITLAYERS.units;
+        let BLOCKS = UNITLAYERS.oppunits;
         for (let DIR of roseDirs) {
           let POS = MARKS.selectunit;
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-            ARTIFACTS.movetargets[POS] = emptyObj;
+            if (!UNITLAYERS.units[POS]) {
+              ARTIFACTS.movetargets[POS] = emptyObj;
+            }
           }
         }
       }
@@ -736,11 +768,13 @@ const game = {
       };
       let UNITLAYERS = step.UNITLAYERS;
       {
-        let BLOCKS = UNITLAYERS.units;
+        let BLOCKS = UNITLAYERS.oppunits;
         for (let DIR of roseDirs) {
           let POS = MARKS.selectunit;
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-            ARTIFACTS.movetargets[POS] = emptyObj;
+            if (!UNITLAYERS.units[POS]) {
+              ARTIFACTS.movetargets[POS] = emptyObj;
+            }
           }
         }
       }
@@ -853,6 +887,8 @@ const game = {
       }
       UNITLAYERS = {
         units: {},
+        myunits: {},
+        oppunits: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -981,6 +1017,8 @@ const game = {
       }
       UNITLAYERS = {
         units: {},
+        myunits: {},
+        oppunits: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -1051,6 +1089,8 @@ const game = {
       }
       UNITLAYERS = {
         units: {},
+        myunits: {},
+        oppunits: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -1154,6 +1194,8 @@ const game = {
       }
       UNITLAYERS = {
         units: {},
+        myunits: {},
+        oppunits: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -1225,6 +1267,8 @@ const game = {
       }
       UNITLAYERS = {
         units: {},
+        myunits: {},
+        oppunits: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -1353,6 +1397,8 @@ const game = {
       }
       UNITLAYERS = {
         units: {},
+        myunits: {},
+        oppunits: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -1423,6 +1469,8 @@ const game = {
       }
       UNITLAYERS = {
         units: {},
+        myunits: {},
+        oppunits: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -1526,6 +1574,8 @@ const game = {
       }
       UNITLAYERS = {
         units: {},
+        myunits: {},
+        oppunits: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -1596,6 +1646,8 @@ const game = {
       }
       UNITLAYERS = {
         units: {},
+        myunits: {},
+        oppunits: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -1697,6 +1749,8 @@ const game = {
       }
       UNITLAYERS = {
         units: {},
+        myunits: {},
+        oppunits: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -1766,6 +1820,8 @@ const game = {
       }
       UNITLAYERS = {
         units: {},
+        myunits: {},
+        oppunits: {},
         myamazons: {},
         oppamazons: {},
         stones: {},
@@ -1842,6 +1898,8 @@ const game = {
       }
       UNITLAYERS = {
         units: {},
+        myunits: {},
+        oppunits: {},
         myamazons: {},
         oppamazons: {},
         stones: {},

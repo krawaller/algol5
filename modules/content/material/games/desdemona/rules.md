@@ -45,7 +45,8 @@ Besides the regular rule there are two variants for the game:
 - The "border" variant changes two rules for when you {CMND:name=fire}:
   - When shooting to **flip** opponents you place a {UNIT:group=stones} of your own colour (not a neutral {UNIT:group=stones,who=0} as in the regular rules)
   - When shooting without flipping, you may not target the perimeter of the board (hence the name of the variant)
-- The "lago" variant also changes the {CMND:name=fire} action:
-  - You always fire a {UNIT:group=stones} of your own colour
-  - You can only fire across empty spaces
+- The "lago" variant introduces the following changes:
+  - You may move past pieces of your own colour
+  - You always {CMND:name=fire} a {UNIT:group=stones} of your own colour
+  - You can only {CMND:name=fire} across empty spaces
   - Opponent stones will **flip** if caught between the fired stone and another stone of your colour - just like when placing in Othello! {UNIT:group=amazons} are no longer involved in the capturing.

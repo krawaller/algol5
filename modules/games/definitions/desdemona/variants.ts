@@ -59,7 +59,7 @@ const desdemonaVariants: DesdemonaDefinition["variants"] = [
     ruleset: "lago",
     board: "basic",
     setup: "basic",
-    desc: "lago",
+    desc: "iago",
     code: "O",
   },
 ];

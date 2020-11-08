@@ -55,6 +55,13 @@ const desdemonaVariants: DesdemonaDefinition["variants"] = [
     desc: "border",
     code: "B",
   },
+  {
+    ruleset: "lago",
+    board: "basic",
+    setup: "basic",
+    desc: "lago",
+    code: "O",
+  },
 ];
 
 export default desdemonaVariants;

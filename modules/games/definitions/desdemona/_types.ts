@@ -27,7 +27,8 @@ type DesdemonaGenerator =
   | "findmovetargets"
   | "findspawntargets"
   | "findcapturetargets"
-  | "findvictims";
+  | "findvictims"
+  | "findothellovictims";
 type DesdemonaArtifactLayer =
   | "movetargets"
   | "firetargets"
@@ -46,8 +47,8 @@ type DesdemonaTurnVar = "movedto";
 
 type DesdemonaBoardName = "basic" | "border";
 type DesdemonaSetupName = "basic";
-type DesdemonaRulesetName = "regular" | "border";
-type DesdemonaVariantName = "regular" | "border";
+type DesdemonaRulesetName = "regular" | "border" | "lago";
+type DesdemonaVariantName = "regular" | "border" | "lago";
 
 type DesdemonaGrid = never;
 

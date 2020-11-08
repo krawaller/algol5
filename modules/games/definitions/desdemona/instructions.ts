@@ -54,12 +54,11 @@ const desdemonaInstructions: DesdemonaDefinition["instructions"] = {
           "stones",
           {
             ifrulesetelse: [
-              "border",
-              ["player"],
+              "regular",
               { ifelse: [{ isempty: "victims" }, ["player"], 0] },
+              ["player"],
             ],
           },
-
           "selectfiretarget",
         ],
       },

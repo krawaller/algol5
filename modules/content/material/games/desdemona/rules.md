@@ -9,7 +9,7 @@ updated: 2020-11-07
 {SETUP:name=basic,board=border}
 </div>
 
-Regular variant shown to the left, "border" variant to the right (see further below).
+Regular and "lago" variant shown to the left, "border" variant to the right (see further below).
 
 There are two types of units in {GAME}:
 
@@ -40,7 +40,12 @@ Here {UNIT:group=amazons,who=1,at=a1} shoots out {UNIT:group=stones,who=0,at=d4}
 
 </div>
 
-The "border" variant changes two rules for when you {CMND:name=fire}:
+Besides the regular rule there are two variants for the game:
 
-- When shooting to **flip** opponents you place a {UNIT:group=stones} of your own colour (not a neutral {UNIT:group=stones,who=0} as in the regular rules)
-- When shooting without flipping, you may not target the perimeter of the board (hence the name of the variant)
+- The "border" variant changes two rules for when you {CMND:name=fire}:
+  - When shooting to **flip** opponents you place a {UNIT:group=stones} of your own colour (not a neutral {UNIT:group=stones,who=0} as in the regular rules)
+  - When shooting without flipping, you may not target the perimeter of the board (hence the name of the variant)
+- The "lago" variant also changes the {CMND:name=fire} action:
+  - You always fire a {UNIT:group=stones} of your own colour
+  - You can only fire across empty spaces
+  - Opponent stones will **flip** if caught between the fired stone and another stone of your colour - just like when placing in Othello! {UNIT:group=amazons} are no longer involved in the capturing.

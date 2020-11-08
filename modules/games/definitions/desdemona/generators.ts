@@ -71,6 +71,20 @@ const desdemonaGenerators: DesdemonaDefinition["generators"] = {
       },
     },
   },
+  findothellovictims: {
+    type: "walker",
+    start: "selectfiretarget",
+    dirs: "rose",
+    steps: "oppstones",
+    blocks: "mystones",
+    stopPrio: ["outofbounds", "hitblock", "nomoresteps"],
+    draw: {
+      steps: {
+        condition: { stoppedBecause: "hitblock" },
+        tolayer: "victims",
+      },
+    },
+  },
 };
 
 export default desdemonaGenerators;

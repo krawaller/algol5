@@ -12,17 +12,13 @@ const jesonmorGenerators: JesonmorDefinition["generators"] = {
     dirs: "knight",
     draw: {
       neighbours: {
+        unlessover: "myunits",
         condition: {
-          and: [
-            {noneat: ["myunits", ["target"]]},
-            {
-              or: [
-                {not: {overlaps: ["oppunits", "center"]}},
-                {anyat: ["center", ["target"]]}
-              ]
-            }
+          or: [
+            {not: {overlaps: ["oppunits", "center"]}},
+            {anyat: ["center", ["target"]]}
           ]
-        },
+        }
         tolayer: "movetargets"
       }
     },

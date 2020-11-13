@@ -3,7 +3,7 @@ import { JesonmorDefinition } from "./_types";
 const jesonmorFlow: JesonmorDefinition["flow"] = {
   endGame: {
     tookcenter: {
-      condition: ["true"],
+      condition: { overlaps: ["center", "units"] },
       whenStarvation: true
     }
   },

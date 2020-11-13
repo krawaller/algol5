@@ -11,8 +11,7 @@ const jesonmorFlow: JesonmorDefinition["flow"] = {
   commands: {
     move: {
       applyEffects: [
-        { moveat: ["selectunit", "selectmovetarget"]},
-        { killat: "selectmovetarget" }
+        { stompat: ["selectunit", "selectmovetarget"]},
       ],
       link: "endTurn"
     },

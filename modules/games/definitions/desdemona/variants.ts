@@ -2,11 +2,11 @@ import { DesdemonaDefinition } from "./_types";
 
 const desdemonaVariants: DesdemonaDefinition["variants"] = [
   {
-    ruleset: "regular",
+    ruleset: "border",
     board: "basic",
     setup: "basic",
-    desc: "regular",
-    code: "L",
+    desc: "desdemona",
+    code: "B",
     arr: {
       setup: {
         amazons: {
@@ -14,8 +14,8 @@ const desdemonaVariants: DesdemonaDefinition["variants"] = [
           "2": ["a4", "d10", "g1", "d7"],
         },
         stones: {
-          1: [],
-          2: [],
+          "1": ["e5", "f6"],
+          "2": ["e6", "f5"],
         },
       },
       marks: ["d7"],
@@ -49,15 +49,15 @@ const desdemonaVariants: DesdemonaDefinition["variants"] = [
     },
   },
   {
-    ruleset: "border",
-    board: "border",
+    ruleset: "regular",
+    board: "noborder",
     setup: "basic",
-    desc: "border",
-    code: "B",
+    desc: "cassio",
+    code: "L",
   },
   {
     ruleset: "lago",
-    board: "basic",
+    board: "noborder",
     setup: "basic",
     desc: "iago",
     code: "O",

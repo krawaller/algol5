@@ -77,7 +77,7 @@ const desdemonaGenerators: DesdemonaDefinition["generators"] = {
     start: "selectfiretarget",
     dirs: "rose",
     steps: "oppstones",
-    blocks: "mystones",
+    blocks: "myunits",
     stopPrio: ["outofbounds", "hitblock", "nomoresteps"],
     draw: {
       steps: {

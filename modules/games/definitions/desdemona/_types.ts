@@ -45,10 +45,10 @@ type DesdemonaBattleVar = never;
 type DesdemonaTurnPos = "movedto";
 type DesdemonaTurnVar = "movedto";
 
-type DesdemonaBoardName = "basic" | "border";
+type DesdemonaBoardName = "basic" | "noborder";
 type DesdemonaSetupName = "basic";
-type DesdemonaRulesetName = "regular" | "border" | "lago";
-type DesdemonaVariantName = "regular" | "border" | "lago";
+type DesdemonaRulesetName = "border" | "regular" | "lago";
+type DesdemonaVariantName = "desdemona" | "cassio" | "iago";
 
 type DesdemonaGrid = never;
 

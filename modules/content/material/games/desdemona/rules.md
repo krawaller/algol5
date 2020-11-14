@@ -45,7 +45,7 @@ Besides the regular rule there are two variants for the game:
 - The "cassio" variant changes two rules for when you {CMND:name=fire}:
   - You always {CMND:name=fire} a neutral {UNIT:group=stones,who=0}, even when firing to **flip**
   - There is no board perimeter rule
-- The "lago" variant introduces the following changes:
+- The "iago" variant introduces the following changes:
   - You may move past pieces of your own colour
   - You always {CMND:name=fire} a {UNIT:group=stones} of your own colour
   - You can only {CMND:name=fire} across empty spaces, not across opponent stones

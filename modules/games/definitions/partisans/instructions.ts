@@ -50,12 +50,6 @@ const partisansInstructions: PartisansDefinition["instructions"] = {
       "fire",
       "to spawn",
       { unittypepos: ["stones", ["player"], "selectfiretarget"] },
-      {
-        if: [
-          { notempty: "victims" },
-          { line: ["and capture", { unitlist: "victims" }] },
-        ],
-      },
     ],
   },
 };

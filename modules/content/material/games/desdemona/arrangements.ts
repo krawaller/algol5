@@ -24,8 +24,8 @@ export const arrangements: AlgolArrangements<DesdemonaBlob> = {
         1: ["a1"],
       },
       stones: {
-        0: ["d1"],
-        1: ["b1", "c1"],
+        0: [],
+        1: ["b1", "c1", "d1"],
       },
     },
     marks: ["a1", "d1"],

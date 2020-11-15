@@ -10,7 +10,6 @@ const iagoMeta: IagoDefinition["meta"] = {
   code: "Gt",
   slug: "iago",
   added: "2020-11-15",
-  hidden: true,
 };
 
 export default iagoMeta;

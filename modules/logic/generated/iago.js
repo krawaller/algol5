@@ -452,15 +452,18 @@ const game = {
     },
     fire_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
+      let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
         firetargets: step.ARTIFACTS.firetargets,
         victims: step.ARTIFACTS.victims
       };
       let UNITLAYERS = step.UNITLAYERS;
+      let TURNVARS = step.TURNVARS;
       let UNITDATA = { ...step.UNITDATA };
       let NEXTSPAWNID = step.NEXTSPAWNID;
       let MARKS = step.MARKS;
+      anim.enterFrom[MARKS.selectfiretarget] = TURNVARS["movedto"];
       {
         let newunitid = "spawn" + NEXTSPAWNID++;
         UNITDATA[newunitid] = {
@@ -527,8 +530,9 @@ const game = {
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
-        TURNVARS: step.TURNVARS,
-        NEXTSPAWNID
+        TURNVARS,
+        NEXTSPAWNID,
+        anim
       };
     },
     move_basic_2: step => {
@@ -595,15 +599,18 @@ const game = {
     },
     fire_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
+      let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
         firetargets: step.ARTIFACTS.firetargets,
         victims: step.ARTIFACTS.victims
       };
       let UNITLAYERS = step.UNITLAYERS;
+      let TURNVARS = step.TURNVARS;
       let UNITDATA = { ...step.UNITDATA };
       let NEXTSPAWNID = step.NEXTSPAWNID;
       let MARKS = step.MARKS;
+      anim.enterFrom[MARKS.selectfiretarget] = TURNVARS["movedto"];
       {
         let newunitid = "spawn" + NEXTSPAWNID++;
         UNITDATA[newunitid] = {
@@ -670,8 +677,9 @@ const game = {
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
-        TURNVARS: step.TURNVARS,
-        NEXTSPAWNID
+        TURNVARS,
+        NEXTSPAWNID,
+        anim
       };
     }
   },

@@ -10,6 +10,8 @@
 
 import { IagoDefinition } from "./_types";
 
-const iagoAnim: IagoDefinition["anim"] = {};
+const iagoAnim: IagoDefinition["anim"] = {
+  fire: [{ enterfrom: ["selectfiretarget", { turnpos: "movedto" }] }],
+};
 
 export default iagoAnim;

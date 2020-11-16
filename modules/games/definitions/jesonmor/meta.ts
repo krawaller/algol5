@@ -5,7 +5,7 @@ const jesonmorMeta: JesonmorDefinition["meta"] = {
   author: "the ancient people of Mongolia",
   name: "Jeson Mor",
   tags: ["infiltration", "bloodshed"],
-  tagline: "Control the center!",
+  tagline: "Be the king of the hill!",
   source: "http://www.di.fc.ul.pt/~jpn/gv/jesonmor.htm",
   code: "je",
   slug: "jesonmor",

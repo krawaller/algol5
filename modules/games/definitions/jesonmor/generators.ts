@@ -18,7 +18,7 @@ const jesonmorGenerators: JesonmorDefinition["generators"] = {
             {not: {overlaps: ["oppunits", "center"]}},
             {anyat: ["center", ["target"]]}
           ]
-        }
+        },
         tolayer: "movetargets"
       }
     },

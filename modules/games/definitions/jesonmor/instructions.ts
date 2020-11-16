@@ -7,10 +7,15 @@ const jesonmorInstructions: JesonmorDefinition["instructions"] = {
     line: [
       "Press",
       "move",
-      "to move",
+      "to make",
       { unitat: "selectunit" },
-      "to",
-      "selectmovetarget"
+      {
+        ifelse: [
+          { anyat: ["units", "selectmovetarget"] },
+          { line: ["stomp", { unitat: "selectmovetarget" }] },
+          { line: ["go to", "selectmovetarget"] }  
+        ]
+      }
     ],
   }
 };

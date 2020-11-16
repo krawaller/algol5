@@ -1,0 +1,8 @@
+digraph {
+  rankdir=LR
+  Othello -> Desdemona 
+  Amazons -> Desdemona
+  Amazons -> Partisans
+  Partisans -> Iago
+  Desdemona -> Iago
+}

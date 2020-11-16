@@ -10,10 +10,9 @@ const desdemonaGenerators: DesdemonaDefinition["generators"] = {
     type: "walker",
     dirs: "rose",
     start: "selectunit",
-    blocks: { ifrulesetelse: ["lago", "oppunits", "units"] },
+    blocks: "units",
     draw: {
       steps: {
-        unlessover: "units",
         tolayer: "movetargets",
       },
     },
@@ -68,20 +67,6 @@ const desdemonaGenerators: DesdemonaDefinition["generators"] = {
     steps: "oppstones",
     draw: {
       steps: {
-        tolayer: "victims",
-      },
-    },
-  },
-  findothellovictims: {
-    type: "walker",
-    start: "selectfiretarget",
-    dirs: "rose",
-    steps: "oppstones",
-    blocks: "myunits",
-    stopPrio: ["outofbounds", "hitblock", "nomoresteps"],
-    draw: {
-      steps: {
-        condition: { stoppedBecause: "hitblock" },
         tolayer: "victims",
       },
     },

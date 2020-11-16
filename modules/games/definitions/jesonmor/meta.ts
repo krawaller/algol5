@@ -8,10 +8,10 @@ const jesonmorMeta: JesonmorDefinition["meta"] = {
   tagline: "Be the king of the hill!",
   source: "http://www.di.fc.ul.pt/~jpn/gv/jesonmor.htm",
   code: "je",
-  slug: "jesonmor",
-  demo: "je0Lr3|2Ajm2",
+  slug: "jeson_mor",
+  demo: "je0Hr5|a7S;hgS2",
   added: "2020-11-11",
-  addedBy: "Lucas Wiener"
+  addedBy: "Lucas Wiener",
 };
 
 export default jesonmorMeta;

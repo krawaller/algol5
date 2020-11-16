@@ -121,7 +121,6 @@ const game = {
           let POS = startconnections[DIR];
           if (POS) {
             if (
-              !UNITLAYERS.myunits[POS] &&
               (!(
                 Object.keys(
                   Object.entries(
@@ -139,7 +138,8 @@ const game = {
                     }, {})
                 ).length !== 0
               ) ||
-                TERRAIN1.center[POS])
+                TERRAIN1.center[POS]) &&
+              !UNITLAYERS.myunits[POS]
             ) {
               ARTIFACTS.movetargets[POS] = emptyObj;
             }
@@ -170,7 +170,8 @@ const game = {
         MARKS: {
           selectunit: step.MARKS.selectunit,
           selectmovetarget: newMarkPos
-        }
+        },
+        canAlwaysEnd: true
       };
     },
     selectunit_basic_2: (step, newMarkPos) => {
@@ -188,7 +189,6 @@ const game = {
           let POS = startconnections[DIR];
           if (POS) {
             if (
-              !UNITLAYERS.myunits[POS] &&
               (!(
                 Object.keys(
                   Object.entries(
@@ -206,7 +206,8 @@ const game = {
                     }, {})
                 ).length !== 0
               ) ||
-                TERRAIN2.center[POS])
+                TERRAIN2.center[POS]) &&
+              !UNITLAYERS.myunits[POS]
             ) {
               ARTIFACTS.movetargets[POS] = emptyObj;
             }
@@ -237,7 +238,8 @@ const game = {
         MARKS: {
           selectunit: step.MARKS.selectunit,
           selectmovetarget: newMarkPos
-        }
+        },
+        canAlwaysEnd: true
       };
     },
     move_basic_1: step => {
@@ -245,6 +247,7 @@ const game = {
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
+      delete UNITDATA[(UNITLAYERS.units[MARKS.selectmovetarget] || {}).id];
       {
         let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
         if (unitid) {
@@ -254,7 +257,6 @@ const game = {
           };
         }
       }
-      delete UNITDATA[(UNITLAYERS.units[MARKS.selectmovetarget] || {}).id];
       UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
       for (let unitid in UNITDATA) {
         const currentunit = UNITDATA[unitid];
@@ -263,7 +265,23 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      if (true) {
+      if (
+        Object.keys(
+          Object.entries(
+            Object.keys(TERRAIN1.center)
+              .concat(Object.keys(UNITLAYERS.units))
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
+        ).length !== 0
+      ) {
         LINKS.starvation = {
           endGame: "win",
           endedBy: "tookcenter"
@@ -286,6 +304,7 @@ const game = {
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
       let MARKS = step.MARKS;
+      delete UNITDATA[(UNITLAYERS.units[MARKS.selectmovetarget] || {}).id];
       {
         let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
         if (unitid) {
@@ -295,7 +314,6 @@ const game = {
           };
         }
       }
-      delete UNITDATA[(UNITLAYERS.units[MARKS.selectmovetarget] || {}).id];
       UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
       for (let unitid in UNITDATA) {
         const currentunit = UNITDATA[unitid];
@@ -304,7 +322,23 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      if (true) {
+      if (
+        Object.keys(
+          Object.entries(
+            Object.keys(TERRAIN2.center)
+              .concat(Object.keys(UNITLAYERS.units))
+              .reduce((mem, k) => {
+                mem[k] = (mem[k] || 0) + 1;
+                return mem;
+              }, {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => {
+              mem[key] = emptyObj;
+              return mem;
+            }, {})
+        ).length !== 0
+      ) {
         LINKS.starvation = {
           endGame: "win",
           endedBy: "tookcenter"
@@ -325,7 +359,35 @@ const game = {
   },
   instruction: {
     startTurn_basic_1: step => {
-      return collapseContent({ line: [{ text: "Go!" }] });
+      let UNITLAYERS = step.UNITLAYERS;
+      return UNITLAYERS.units[Object.keys(TERRAIN1.center)[0]]
+        ? collapseContent({
+            line: [
+              { select: "Select" },
+              { text: "a" },
+              { unittype: ["knight", 1] },
+              { text: "to oust" },
+              {
+                unit: [
+                  iconMapping[
+                    (UNITLAYERS.units[Object.keys(TERRAIN1.center)[0]] || {})
+                      .group
+                  ],
+                  (UNITLAYERS.units[Object.keys(TERRAIN1.center)[0]] || {})
+                    .owner,
+                  Object.keys(TERRAIN1.center)[0]
+                ]
+              }
+            ]
+          })
+        : collapseContent({
+            line: [
+              { select: "Select" },
+              { text: "which" },
+              { unittype: ["knight", 1] },
+              { text: "to act with" }
+            ]
+          });
     },
     move_basic_1: () => defaultInstruction(1),
     selectunit_basic_1: step => {
@@ -352,7 +414,7 @@ const game = {
         line: [
           { text: "Press" },
           { command: "move" },
-          { text: "to move" },
+          { text: "to make" },
           {
             unit: [
               iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
@@ -360,13 +422,57 @@ const game = {
               MARKS.selectunit
             ]
           },
-          { text: "to" },
-          { pos: MARKS.selectmovetarget }
+          UNITLAYERS.units[MARKS.selectmovetarget]
+            ? collapseContent({
+                line: [
+                  { text: "stomp" },
+                  {
+                    unit: [
+                      iconMapping[
+                        (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
+                      ],
+                      (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner,
+                      MARKS.selectmovetarget
+                    ]
+                  }
+                ]
+              })
+            : collapseContent({
+                line: [{ text: "go to" }, { pos: MARKS.selectmovetarget }]
+              })
         ]
       });
     },
     startTurn_basic_2: step => {
-      return collapseContent({ line: [{ text: "Go!" }] });
+      let UNITLAYERS = step.UNITLAYERS;
+      return UNITLAYERS.units[Object.keys(TERRAIN2.center)[0]]
+        ? collapseContent({
+            line: [
+              { select: "Select" },
+              { text: "a" },
+              { unittype: ["knight", 2] },
+              { text: "to oust" },
+              {
+                unit: [
+                  iconMapping[
+                    (UNITLAYERS.units[Object.keys(TERRAIN2.center)[0]] || {})
+                      .group
+                  ],
+                  (UNITLAYERS.units[Object.keys(TERRAIN2.center)[0]] || {})
+                    .owner,
+                  Object.keys(TERRAIN2.center)[0]
+                ]
+              }
+            ]
+          })
+        : collapseContent({
+            line: [
+              { select: "Select" },
+              { text: "which" },
+              { unittype: ["knight", 2] },
+              { text: "to act with" }
+            ]
+          });
     },
     move_basic_2: () => defaultInstruction(2),
     selectunit_basic_2: step => {
@@ -393,7 +499,7 @@ const game = {
         line: [
           { text: "Press" },
           { command: "move" },
-          { text: "to move" },
+          { text: "to make" },
           {
             unit: [
               iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
@@ -401,8 +507,24 @@ const game = {
               MARKS.selectunit
             ]
           },
-          { text: "to" },
-          { pos: MARKS.selectmovetarget }
+          UNITLAYERS.units[MARKS.selectmovetarget]
+            ? collapseContent({
+                line: [
+                  { text: "stomp" },
+                  {
+                    unit: [
+                      iconMapping[
+                        (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
+                      ],
+                      (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner,
+                      MARKS.selectmovetarget
+                    ]
+                  }
+                ]
+              })
+            : collapseContent({
+                line: [{ text: "go to" }, { pos: MARKS.selectmovetarget }]
+              })
         ]
       });
     }

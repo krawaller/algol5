@@ -1,6 +1,6 @@
-import { DesdemonaDefinition } from "./_types";
+import { IagoDefinition } from "./_types";
 
-const desdemonaSetupBook: DesdemonaDefinition["setups"] = {
+const iagoSetupBook: IagoDefinition["setups"] = {
   basic: {
     amazons: {
       "1": ["g10", "d1", "a7", "j4"],
@@ -13,4 +13,4 @@ const desdemonaSetupBook: DesdemonaDefinition["setups"] = {
   },
 };
 
-export default desdemonaSetupBook;
+export default iagoSetupBook;

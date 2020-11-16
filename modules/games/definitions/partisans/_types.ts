@@ -23,16 +23,8 @@ type PartisansUnitLayer =
   | "mystones"
   | "oppstones"
   | "neutralstones";
-type PartisansGenerator =
-  | "findmovetargets"
-  | "findspawntargets"
-  | "findcapturetargets"
-  | "findvictims";
-type PartisansArtifactLayer =
-  | "movetargets"
-  | "firetargets"
-  | "capturespot"
-  | "victims";
+type PartisansGenerator = "findmovetargets" | "findfiretargets";
+type PartisansArtifactLayer = "movetargets" | "firetargets";
 type PartisansTerrainLayer = never;
 type PartisansLayer = CommonLayer | PartisansUnitLayer | PartisansArtifactLayer;
 type PartisansBattlePos = never;

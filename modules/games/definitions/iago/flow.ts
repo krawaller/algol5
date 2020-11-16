@@ -1,6 +1,6 @@
-import { DesdemonaDefinition } from "./_types";
+import { IagoDefinition } from "./_types";
 
-const desdemonaFlow: DesdemonaDefinition["flow"] = {
+const iagoFlow: IagoDefinition["flow"] = {
   endGame: {
     dominance: {
       who: {
@@ -34,7 +34,7 @@ const desdemonaFlow: DesdemonaDefinition["flow"] = {
           moveat: ["selectunit", "selectmovetarget"],
         },
       ],
-      runGenerators: ["findspawntargets", "findcapturetargets"],
+      runGenerator: "findspawntargets",
       link: {
         playercase: [
           { ifelse: [["isFirstTurn"], "endTurn", "selectfiretarget"] },
@@ -45,17 +45,7 @@ const desdemonaFlow: DesdemonaDefinition["flow"] = {
     fire: {
       applyEffects: [
         {
-          spawnat: [
-            "selectfiretarget",
-            "stones",
-            {
-              ifrulesetelse: [
-                "regular",
-                { ifelse: [{ isempty: "victims" }, ["player"], 0] },
-                ["player"],
-              ],
-            },
-          ],
+          spawnat: ["selectfiretarget", "stones", ["player"]],
         },
         { adoptin: ["victims"] },
       ],
@@ -74,12 +64,10 @@ const desdemonaFlow: DesdemonaDefinition["flow"] = {
     },
     selectfiretarget: {
       from: "firetargets",
-      runGenerator: {
-        if: [{ anyat: ["capturespot", "selectfiretarget"] }, "findvictims"],
-      },
+      runGenerator: "findothellovictims",
       link: "fire",
     },
   },
 };
 
-export default desdemonaFlow;
+export default iagoFlow;

@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { PartisansDefinition } from "./_types";
+import { IagoDefinition } from "./_types";
 
-const partisansGenerators: PartisansDefinition["generators"] = {
+const iagoGenerators: IagoDefinition["generators"] = {
   findmovetargets: {
     type: "walker",
     dirs: "rose",
@@ -18,7 +18,7 @@ const partisansGenerators: PartisansDefinition["generators"] = {
       },
     },
   },
-  findfiretargets: {
+  findspawntargets: {
     type: "walker",
     dirs: "rose",
     start: { turnpos: "movedto" },
@@ -30,6 +30,20 @@ const partisansGenerators: PartisansDefinition["generators"] = {
       },
     },
   },
+  findothellovictims: {
+    type: "walker",
+    start: "selectfiretarget",
+    dirs: "rose",
+    steps: "oppstones",
+    blocks: "myunits",
+    stopPrio: ["outofbounds", "hitblock", "nomoresteps"],
+    draw: {
+      steps: {
+        condition: { stoppedBecause: "hitblock" },
+        tolayer: "victims",
+      },
+    },
+  },
 };
 
-export default partisansGenerators;
+export default iagoGenerators;

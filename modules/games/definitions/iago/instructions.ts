@@ -1,6 +1,6 @@
-import { PartisansDefinition } from "./_types";
+import { IagoDefinition } from "./_types";
 
-const partisansInstructions: PartisansDefinition["instructions"] = {
+const iagoInstructions: IagoDefinition["instructions"] = {
   startTurn: { line: ["Select", "amazons", "to move"] },
   selectunit: { line: ["Select where to move", { unitat: "selectunit" }] },
   selectmovetarget: {
@@ -49,9 +49,17 @@ const partisansInstructions: PartisansDefinition["instructions"] = {
       "Press",
       "fire",
       "to spawn",
-      { unittypepos: ["stones", ["player"], "selectfiretarget"] },
+      {
+        unittypepos: ["stones", ["player"], "selectfiretarget"],
+      },
+      {
+        if: [
+          { notempty: "victims" },
+          { line: ["and capture", { unitlist: "victims" }] },
+        ],
+      },
     ],
   },
 };
 
-export default partisansInstructions;
+export default iagoInstructions;

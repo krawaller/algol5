@@ -8,10 +8,6 @@ const desdemonaBoardBook: DesdemonaDefinition["boards"] = {
   basic: {
     height: 10,
     width: 10,
-  },
-  border: {
-    height: 10,
-    width: 10,
     terrain: {
       border: [
         { rect: ["a1", "a10"] },
@@ -20,6 +16,10 @@ const desdemonaBoardBook: DesdemonaDefinition["boards"] = {
         { rect: ["j1", "j10"] },
       ],
     },
+  },
+  noborder: {
+    height: 10,
+    width: 10,
   },
 };
 

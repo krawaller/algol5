@@ -14,7 +14,7 @@ const partisansFlow: PartisansDefinition["flow"] = {
           moveat: ["selectunit", "selectmovetarget"],
         },
       ],
-      runGenerators: ["findspawntargets", "findcapturetargets"],
+      runGenerator: "findfiretargets",
       link: {
         playercase: [
           { ifelse: [["isFirstTurn"], "endTurn", "selectfiretarget"] },
@@ -23,10 +23,8 @@ const partisansFlow: PartisansDefinition["flow"] = {
       },
     },
     fire: {
-      applyEffects: [
-        { spawnat: ["selectfiretarget", "stones"] },
-        { adoptin: ["victims"] },
-      ],
+      applyEffect: { spawnat: ["selectfiretarget", "stones"] },
+
       link: "endTurn",
     },
   },
@@ -42,9 +40,6 @@ const partisansFlow: PartisansDefinition["flow"] = {
     },
     selectfiretarget: {
       from: "firetargets",
-      runGenerator: {
-        if: [{ anyat: ["capturespot", "selectfiretarget"] }, "findvictims"],
-      },
       link: "fire",
     },
   },

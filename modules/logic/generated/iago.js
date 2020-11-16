@@ -16,9 +16,9 @@ import {
   jumpTwoDirs,
   ringTwoDirs
 } from "../../common";
-import boards from "../../games/definitions/partisans/boards";
-import setups from "../../games/definitions/partisans/setups";
-import variants from "../../games/definitions/partisans/variants";
+import boards from "../../games/definitions/iago/boards";
+import setups from "../../games/definitions/iago/setups";
+import variants from "../../games/definitions/iago/variants";
 const emptyObj = {};
 const iconMapping = { amazons: "queen", stones: "pawn" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
@@ -30,8 +30,8 @@ const groupLayers1 = {
   ],
   stones: [
     ["units", "stones"],
-    ["units", "myunits", "stones"],
-    ["units", "oppunits", "stones"]
+    ["units", "myunits", "stones", "mystones"],
+    ["units", "oppunits", "stones", "oppstones"]
   ]
 };
 const groupLayers2 = {
@@ -42,15 +42,19 @@ const groupLayers2 = {
   ],
   stones: [
     ["units", "stones"],
-    ["units", "oppunits", "stones"],
-    ["units", "myunits", "stones"]
+    ["units", "oppunits", "stones", "oppstones"],
+    ["units", "myunits", "stones", "mystones"]
   ]
 };
 const prefixes1 = ["neutral", "my", "opp"];
 const prefixes2 = ["neutral", "opp", "my"];
-const emptyArtifactLayers_basic = { movetargets: {}, firetargets: {} };
+const emptyArtifactLayers_basic = {
+  movetargets: {},
+  firetargets: {},
+  victims: {}
+};
 const game = {
-  gameId: "partisans",
+  gameId: "iago",
   commands: { move: {}, fire: {} },
   iconMap: iconMapping,
   setBoard: board => {
@@ -69,7 +73,9 @@ const game = {
       oppunits: {},
       myamazons: {},
       oppamazons: {},
-      stones: {}
+      stones: {},
+      mystones: {},
+      oppstones: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -94,7 +100,9 @@ const game = {
         oppunits: oldUnitLayers.myunits,
         myamazons: oldUnitLayers.oppamazons,
         oppamazons: oldUnitLayers.myamazons,
-        stones: oldUnitLayers.stones
+        stones: oldUnitLayers.stones,
+        mystones: oldUnitLayers.oppstones,
+        oppstones: oldUnitLayers.mystones
       };
       let LINKS = {
         marks: {},
@@ -122,7 +130,9 @@ const game = {
         oppunits: oldUnitLayers.myunits,
         myamazons: oldUnitLayers.oppamazons,
         oppamazons: oldUnitLayers.myamazons,
-        stones: oldUnitLayers.stones
+        stones: oldUnitLayers.stones,
+        mystones: oldUnitLayers.oppstones,
+        oppstones: oldUnitLayers.mystones
       };
       let LINKS = {
         marks: {},
@@ -195,15 +205,54 @@ const game = {
       };
     },
     selectfiretarget_basic_1: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        firetargets: step.ARTIFACTS.firetargets,
+        victims: {}
+      };
       let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectfiretarget: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        let allowedsteps = UNITLAYERS.oppstones;
+        let BLOCKS = UNITLAYERS.myunits;
+        for (let DIR of roseDirs) {
+          let walkedsquares = [];
+          let STOPREASON = "";
+          let POS = MARKS.selectfiretarget;
+          while (
+            !(STOPREASON = !(POS = connections[POS][DIR])
+              ? "outofbounds"
+              : BLOCKS[POS]
+              ? "hitblock"
+              : !allowedsteps[POS]
+              ? "nomoresteps"
+              : null)
+          ) {
+            walkedsquares.push(POS);
+          }
+          for (
+            let walkstepper = 0;
+            walkstepper < walkedsquares.length;
+            walkstepper++
+          ) {
+            POS = walkedsquares[walkstepper];
+            if (STOPREASON === "hitblock") {
+              ARTIFACTS.victims[POS] = emptyObj;
+            }
+          }
+        }
+      }
       LINKS.commands.fire = "fire_basic_1";
       return {
         LINKS,
-        ARTIFACTS: step.ARTIFACTS,
-        UNITLAYERS: step.UNITLAYERS,
+        ARTIFACTS,
+        UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: { selectfiretarget: newMarkPos },
+        MARKS,
         TURNVARS: step.TURNVARS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
@@ -261,15 +310,54 @@ const game = {
       };
     },
     selectfiretarget_basic_2: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        firetargets: step.ARTIFACTS.firetargets,
+        victims: {}
+      };
       let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectfiretarget: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        let allowedsteps = UNITLAYERS.oppstones;
+        let BLOCKS = UNITLAYERS.myunits;
+        for (let DIR of roseDirs) {
+          let walkedsquares = [];
+          let STOPREASON = "";
+          let POS = MARKS.selectfiretarget;
+          while (
+            !(STOPREASON = !(POS = connections[POS][DIR])
+              ? "outofbounds"
+              : BLOCKS[POS]
+              ? "hitblock"
+              : !allowedsteps[POS]
+              ? "nomoresteps"
+              : null)
+          ) {
+            walkedsquares.push(POS);
+          }
+          for (
+            let walkstepper = 0;
+            walkstepper < walkedsquares.length;
+            walkstepper++
+          ) {
+            POS = walkedsquares[walkstepper];
+            if (STOPREASON === "hitblock") {
+              ARTIFACTS.victims[POS] = emptyObj;
+            }
+          }
+        }
+      }
       LINKS.commands.fire = "fire_basic_2";
       return {
         LINKS,
-        ARTIFACTS: step.ARTIFACTS,
-        UNITLAYERS: step.UNITLAYERS,
+        ARTIFACTS,
+        UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: { selectfiretarget: newMarkPos },
+        MARKS,
         TURNVARS: step.TURNVARS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
@@ -301,7 +389,9 @@ const game = {
         oppunits: {},
         myamazons: {},
         oppamazons: {},
-        stones: {}
+        stones: {},
+        mystones: {},
+        oppstones: {}
       };
       for (let unitid in UNITDATA) {
         const currentunit = UNITDATA[unitid];
@@ -322,7 +412,26 @@ const game = {
         }
       }
       if (TURN === 1) {
-        {
+        if (true) {
+          LINKS.starvation = {
+            endGame: ["draw", "win", "lose"][
+              whoWins(
+                Object.keys(UNITLAYERS.mystones).length,
+                Object.keys(UNITLAYERS.oppstones).length
+              )
+            ],
+            endedBy: "dominance",
+            endMarks: Object.keys(
+              [emptyObj, UNITLAYERS.mystones, UNITLAYERS.oppstones][
+                whoWins(
+                  Object.keys(UNITLAYERS.mystones).length,
+                  Object.keys(UNITLAYERS.oppstones).length
+                )
+              ]
+            )
+          };
+          LINKS.endTurn = "startTurn_basic_2";
+        } else {
           LINKS.endTurn = "startTurn_basic_2";
         }
       } else {
@@ -344,6 +453,11 @@ const game = {
     fire_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        firetargets: step.ARTIFACTS.firetargets,
+        victims: step.ARTIFACTS.victims
+      };
       let UNITLAYERS = step.UNITLAYERS;
       let TURNVARS = step.TURNVARS;
       let UNITDATA = { ...step.UNITDATA };
@@ -359,13 +473,26 @@ const game = {
           owner: 1
         };
       }
+      for (let LOOPPOS in ARTIFACTS.victims) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              owner: 1
+            };
+          }
+        }
+      }
       UNITLAYERS = {
         units: {},
         myunits: {},
         oppunits: {},
         myamazons: {},
         oppamazons: {},
-        stones: {}
+        stones: {},
+        mystones: {},
+        oppstones: {}
       };
       for (let unitid in UNITDATA) {
         const currentunit = UNITDATA[unitid];
@@ -374,13 +501,32 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (true) {
+        LINKS.starvation = {
+          endGame: ["draw", "win", "lose"][
+            whoWins(
+              Object.keys(UNITLAYERS.mystones).length,
+              Object.keys(UNITLAYERS.oppstones).length
+            )
+          ],
+          endedBy: "dominance",
+          endMarks: Object.keys(
+            [emptyObj, UNITLAYERS.mystones, UNITLAYERS.oppstones][
+              whoWins(
+                Object.keys(UNITLAYERS.mystones).length,
+                Object.keys(UNITLAYERS.oppstones).length
+              )
+            ]
+          )
+        };
+        LINKS.endTurn = "startTurn_basic_2";
+      } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
       return {
         LINKS,
         MARKS: {},
-        ARTIFACTS: step.ARTIFACTS,
+        ARTIFACTS,
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
@@ -415,7 +561,9 @@ const game = {
         oppunits: {},
         myamazons: {},
         oppamazons: {},
-        stones: {}
+        stones: {},
+        mystones: {},
+        oppstones: {}
       };
       for (let unitid in UNITDATA) {
         const currentunit = UNITDATA[unitid];
@@ -452,6 +600,11 @@ const game = {
     fire_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
+      let ARTIFACTS = {
+        movetargets: step.ARTIFACTS.movetargets,
+        firetargets: step.ARTIFACTS.firetargets,
+        victims: step.ARTIFACTS.victims
+      };
       let UNITLAYERS = step.UNITLAYERS;
       let TURNVARS = step.TURNVARS;
       let UNITDATA = { ...step.UNITDATA };
@@ -467,13 +620,26 @@ const game = {
           owner: 2
         };
       }
+      for (let LOOPPOS in ARTIFACTS.victims) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              owner: 2
+            };
+          }
+        }
+      }
       UNITLAYERS = {
         units: {},
         myunits: {},
         oppunits: {},
         myamazons: {},
         oppamazons: {},
-        stones: {}
+        stones: {},
+        mystones: {},
+        oppstones: {}
       };
       for (let unitid in UNITDATA) {
         const currentunit = UNITDATA[unitid];
@@ -482,13 +648,32 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      {
+      if (true) {
+        LINKS.starvation = {
+          endGame: ["draw", "lose", "win"][
+            whoWins(
+              Object.keys(UNITLAYERS.oppstones).length,
+              Object.keys(UNITLAYERS.mystones).length
+            )
+          ],
+          endedBy: "dominance",
+          endMarks: Object.keys(
+            [emptyObj, UNITLAYERS.mystones, UNITLAYERS.oppstones][
+              whoWins(
+                Object.keys(UNITLAYERS.mystones).length,
+                Object.keys(UNITLAYERS.oppstones).length
+              )
+            ]
+          )
+        };
+        LINKS.endTurn = "startTurn_basic_1";
+      } else {
         LINKS.endTurn = "startTurn_basic_1";
       }
       return {
         LINKS,
         MARKS: {},
-        ARTIFACTS: step.ARTIFACTS,
+        ARTIFACTS,
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
@@ -575,13 +760,42 @@ const game = {
       });
     },
     selectfiretarget_basic_1: step => {
+      let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
         line: [
           { text: "Press" },
           { command: "fire" },
           { text: "to spawn" },
-          { unit: ["pawn", 1, MARKS.selectfiretarget] }
+          { unit: ["pawn", 1, MARKS.selectfiretarget] },
+          Object.keys(ARTIFACTS.victims).length !== 0
+            ? collapseContent({
+                line: [
+                  { text: "and capture" },
+                  collapseContent({
+                    line: Object.keys(ARTIFACTS.victims)
+                      .filter(p => UNITLAYERS.units[p])
+                      .map(p => ({
+                        unit: [
+                          iconMapping[UNITLAYERS.units[p].group],
+                          UNITLAYERS.units[p].owner,
+                          p
+                        ]
+                      }))
+                      .reduce((mem, i, n, list) => {
+                        mem.push(i);
+                        if (n === list.length - 2) {
+                          mem.push({ text: " and " });
+                        } else if (n < list.length - 2) {
+                          mem.push({ text: ", " });
+                        }
+                        return mem;
+                      }, [])
+                  })
+                ]
+              })
+            : undefined
         ]
       });
     },
@@ -648,13 +862,42 @@ const game = {
       });
     },
     selectfiretarget_basic_2: step => {
+      let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
         line: [
           { text: "Press" },
           { command: "fire" },
           { text: "to spawn" },
-          { unit: ["pawn", 2, MARKS.selectfiretarget] }
+          { unit: ["pawn", 2, MARKS.selectfiretarget] },
+          Object.keys(ARTIFACTS.victims).length !== 0
+            ? collapseContent({
+                line: [
+                  { text: "and capture" },
+                  collapseContent({
+                    line: Object.keys(ARTIFACTS.victims)
+                      .filter(p => UNITLAYERS.units[p])
+                      .map(p => ({
+                        unit: [
+                          iconMapping[UNITLAYERS.units[p].group],
+                          UNITLAYERS.units[p].owner,
+                          p
+                        ]
+                      }))
+                      .reduce((mem, i, n, list) => {
+                        mem.push(i);
+                        if (n === list.length - 2) {
+                          mem.push({ text: " and " });
+                        } else if (n < list.length - 2) {
+                          mem.push({ text: ", " });
+                        }
+                        return mem;
+                      }, [])
+                  })
+                ]
+              })
+            : undefined
         ]
       });
     }

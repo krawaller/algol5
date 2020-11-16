@@ -9,12 +9,15 @@ const jesonmorVariants: JesonmorDefinition["variants"] = [
     code: "r",
     arr: {
       setup: {
-        horses: {"1": [{rect: ["a1", "i1"]}], "2": [{rect: ["a9", "i9"]}]}
+        horses: {
+          "1": [{ holerect: ["a1", "i1", "c1"] }, "d3"],
+          "2": [{ rect: ["a9", "i9"] }],
+        },
       },
-      marks: [],
-      potentialMarks: []
-    }
-  }
+      marks: ["f9"],
+      potentialMarks: ["d8", "e7", "g7", "h8"],
+    },
+  },
 ];
 
 export default jesonmorVariants;

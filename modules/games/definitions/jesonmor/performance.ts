@@ -1,7 +1,9 @@
 import { JesonmorDefinition } from "./_types";
 
 const jesonmorPerformance: JesonmorDefinition["performance"] = {
-  canAlwaysEnd: {},
+  canAlwaysEnd: {
+    selectmovetarget: true
+  },
   massiveTree: {},
   noEndGameCheck: []
 };

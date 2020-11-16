@@ -8,6 +8,6 @@ updated: 2020-11-15
 
 It has an interesting lineage; it combines ideas from {GAME:id=partisans}, which is an {GAME:id=amazons} refinement, with the {GAME:id=amazons}-Othello mashup {GAME:id=desdemona}.
 
-{PIC:name=lineage.png,title=Iago's lineage,cred= }
+{PIC:name=lineage.png,title=Iago's lineage,naked=true}
 
 In spite of this {GAME} is neither convoluted or derivative, but a remarkably streamlined game with a flair and flavour of its own.

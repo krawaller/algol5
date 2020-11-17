@@ -1,12 +1,19 @@
 import { TokenHandler } from "./_handler";
 
-// Takes a DYNAMIC token and turns it into correct html
+// Takes a DYNAMIC token and turns it into correct html. Markdown component will update the contents.
 
 export const dynamic: TokenHandler = opts => {
   const { args } = opts;
-  const { id } = args;
+  const { id, style } = args;
   if (!id) {
     throw new Error("Have to provide dynamic id");
   }
-  return `<span data-dynamic data-dynamic-${id}></span>`;
+  const html = `<span data-dynamic data-dynamic-${id}></span>`;
+  if (style === "button") {
+    return `<button class="button">${html}</button>`;
+  }
+  if (style === "link") {
+    return `<a href="#">${html}</a>`;
+  }
+  return html;
 };

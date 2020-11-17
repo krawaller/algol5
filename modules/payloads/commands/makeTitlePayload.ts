@@ -12,9 +12,8 @@ const gameIds = list.filter(gameId => !defs[gameId].meta.hidden);
 
 const imports = gameIds
   .map(
-    gameId => `import ${gameId}Graphics from '../../graphics/dist/svgDataURIs/${gameId}'
-import ${gameId}Meta from '../../games/definitions/${gameId}/meta'
-import ${gameId}Variants from '../../games/definitions/${gameId}/variants'`
+    gameId =>
+      `import ${gameId}Variants from '../../games/definitions/${gameId}/variants'`
   )
   .join("\n");
 
@@ -22,10 +21,10 @@ const items = gameIds
   .map(
     gameId => `  {
     gameId: "${gameId}",
-    slug: ${gameId}Meta.slug,
-    name: ${gameId}Meta.name,
+    slug: allMeta.${gameId}.slug,
+    name: allMeta.${gameId}.name,
     setup: ${gameId}Variants[0].arr!.setup,
-    graphics: ${gameId}Graphics
+    graphics: allGraphics.${gameId}
   },`
   )
   .join("\n");
@@ -42,6 +41,8 @@ const data = list
 
 const code = prettier.format(
   `import { AlgolSetupAnon, AlgolGameGraphics } from '../../types'
+import allGraphics from '../../graphics/dist/svgDataURIs'
+import allMeta from '../../games/dist/meta'
 ${imports}
 
 export type TitleData = {

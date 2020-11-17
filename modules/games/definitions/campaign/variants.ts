@@ -15,11 +15,11 @@ const campaignVariants: CampaignDefinition["variants"] = [
         },
         marks: {
           1: ["d4", "e6", "f4", "f5"],
-          2: ["c5", "d3", "d6", "e4"],
+          2: ["c5", "d3", "d6"],
         },
       },
-      marks: [],
-      potentialMarks: [],
+      marks: ["e4"],
+      potentialMarks: ["f6", "g5", "g3", "f2", "d2", "c3"],
     },
   },
 ];

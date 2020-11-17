@@ -15,6 +15,7 @@ const data = list
     name: defs[gameId].meta.name,
     setup: defs[gameId].variants[0].arr!.setup,
     graphics: graphics[gameId],
+    slug: defs[gameId].meta.slug,
   }));
 
 const code = prettier.format(
@@ -22,6 +23,7 @@ const code = prettier.format(
 
 export type TitleData = {
   gameId: string
+  slug: string
   name: string
   setup: AlgolSetupAnon
   graphics: AlgolGameGraphics

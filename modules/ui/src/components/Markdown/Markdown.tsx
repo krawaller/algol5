@@ -15,14 +15,52 @@ export interface MarkdownActions {
 type MarkdownProps = {
   actions: MarkdownActions;
   html: string;
+  dynamicContent?: Record<string, string>;
+  dynamicActions?: Record<string, (e: Event) => void>;
 };
 
 const linksFinder = /data-algollink="[^"]+"/g;
 const urlExtracter = /"([^"]+)"/;
+const emptyObj = {};
 
 export const Markdown: FunctionComponent<MarkdownProps> = props => {
-  const { actions, html } = props;
+  const {
+    actions,
+    html,
+    dynamicContent = emptyObj,
+    dynamicActions = emptyObj,
+  } = props;
   const me = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (me.current) {
+      for (const dynamicId in dynamicContent) {
+        const elem = me.current.querySelector(`[data-dynamic-${dynamicId}]`);
+        if (elem) {
+          elem.innerHTML = dynamicContent[dynamicId];
+        }
+      }
+    }
+  }, [dynamicContent, me.current]);
+  useEffect(() => {
+    if (me.current) {
+      for (const dynamicId in dynamicActions) {
+        const elem = me.current.querySelector(`[data-dynamic-${dynamicId}]`);
+        if (elem) {
+          elem.addEventListener("click", dynamicActions[dynamicId]);
+        }
+      }
+    }
+    return () => {
+      if (me.current) {
+        for (const dynamicId in dynamicActions) {
+          const elem = me.current.querySelector(`[data-dynamic-${dynamicId}]`);
+          if (elem) {
+            elem.removeEventListener("click", dynamicActions[dynamicId]);
+          }
+        }
+      }
+    };
+  }, [dynamicActions, me.current]);
   useEffect(() => {
     if (html && html.match) {
       for (const hit of html.match(linksFinder) || []) {

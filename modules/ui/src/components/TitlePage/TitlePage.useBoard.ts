@@ -11,7 +11,7 @@ export const useBoard = () => {
   const [index, setIndex] = useState(0);
   let interval: ReturnType<typeof setInterval>;
   useEffect(() => {
-    interval = setInterval(() => setIndex(i => i + 1), 2000);
+    interval = setInterval(() => setIndex(i => i + 1), 2500);
     return () => clearInterval(interval);
   }, []);
   return list[index % list.length];

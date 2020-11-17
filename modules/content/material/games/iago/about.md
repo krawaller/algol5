@@ -10,4 +10,4 @@ It has an interesting lineage; it combines ideas from {GAME:id=partisans}, which
 
 {PIC:name=lineage.png,title=Iago's lineage,naked=true}
 
-In spite of this {GAME} is neither convoluted or derivative, but a remarkably streamlined game with a flair and flavour of its own.
+In spite of this {GAME} is neither convoluted nor derivative, but a remarkably streamlined game with a flair and flavour of its own.

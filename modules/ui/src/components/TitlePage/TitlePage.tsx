@@ -2,7 +2,7 @@
  * Used in the Next app as the main Index page for the app
  */
 
-import React, { Fragment, useMemo } from "react";
+import React, { Fragment, useMemo, useState } from "react";
 import { AlgolPage } from "../../../../types";
 import { homeNav } from "../../../../common/nav/homeNav";
 import { Page } from "../Page";
@@ -13,7 +13,12 @@ import { useModal } from "../../helpers";
 import { Modal } from "../Modal";
 import { Markdown } from "../Markdown";
 import { chunk as slackChunk } from "../../../../content/dist/chunks/slack/chunk";
-import { chunk as homeChunk } from "../../../../content/dist/chunks/home/chunk";
+import { chunk as newbieChunk } from "../../../../content/dist/chunks/newbie/chunk";
+import { chunk as veteranChunk } from "../../../../content/dist/chunks/veteran/chunk";
+import { ButtonBar } from "../ButtonBar";
+import { ButtonGroup } from "../ButtonGroup";
+
+const buttonTexts = ["Hi, I'm new!", "I'm a veteran"];
 
 export const TitlePage: AlgolPage = props => {
   const { actions } = props;
@@ -33,6 +38,7 @@ export const TitlePage: AlgolPage = props => {
     }),
     [name]
   );
+  const [contentIdx, setContentIdx] = useState(0);
   return (
     <Fragment>
       <Page
@@ -46,12 +52,30 @@ export const TitlePage: AlgolPage = props => {
           />
         }
         body={
-          <Markdown
-            html={homeChunk}
-            actions={actions}
-            dynamicContent={dynamicContent}
-            dynamicActions={dynamicActions}
-          />
+          <Fragment>
+            <ButtonGroup>
+              <ButtonBar
+                texts={buttonTexts}
+                onChange={setContentIdx}
+                current={contentIdx}
+              />
+            </ButtonGroup>
+            {contentIdx === 0 ? (
+              <Markdown
+                html={newbieChunk}
+                actions={actions}
+                dynamicContent={dynamicContent}
+                dynamicActions={dynamicActions}
+              />
+            ) : (
+              <Markdown
+                html={veteranChunk}
+                actions={actions}
+                dynamicContent={dynamicContent}
+                dynamicActions={dynamicActions}
+              />
+            )}
+          </Fragment>
         }
       />
       <Modal

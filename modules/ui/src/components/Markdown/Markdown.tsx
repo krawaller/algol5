@@ -40,7 +40,7 @@ export const Markdown: FunctionComponent<MarkdownProps> = props => {
         }
       }
     }
-  }, [dynamicContent, me.current]);
+  }, [dynamicContent, me.current, html]);
   useEffect(() => {
     if (me.current) {
       for (const dynamicId in dynamicActions) {
@@ -60,7 +60,7 @@ export const Markdown: FunctionComponent<MarkdownProps> = props => {
         }
       }
     };
-  }, [dynamicActions, me.current]);
+  }, [dynamicActions, me.current, html]);
   useEffect(() => {
     if (html && html.match) {
       for (const hit of html.match(linksFinder) || []) {

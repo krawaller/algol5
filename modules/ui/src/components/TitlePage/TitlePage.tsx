@@ -2,13 +2,14 @@
  * Used in the Next app as the main Index page for the app
  */
 
-import React, { Fragment, useMemo, useState } from "react";
+import React, { Fragment, useCallback, useMemo, useState } from "react";
+import classNames from "classnames";
 import { AlgolPage } from "../../../../types";
 import { homeNav } from "../../../../common/nav/homeNav";
 import { Page } from "../Page";
 import { Board } from "../Board";
 import { useBoard } from "./TitlePage.useBoard";
-import { setup2army } from "../../../../common";
+import { gameCount, setup2army } from "../../../../common";
 import { useModal } from "../../helpers";
 import { Modal } from "../Modal";
 import { Markdown } from "../Markdown";
@@ -17,8 +18,10 @@ import { chunk as newbieChunk } from "../../../../content/dist/chunks/newbie/chu
 import { chunk as veteranChunk } from "../../../../content/dist/chunks/veteran/chunk";
 import { ButtonBar } from "../ButtonBar";
 import { ButtonGroup } from "../ButtonGroup";
+import css from "./TitlePage.cssProxy";
+import { Button } from "../Button";
 
-const buttonTexts = ["Hi, I'm new!", "I'm a veteran"];
+const buttonTexts = ["Hi, I'm new! 👋", "Hello again! 🤘"];
 
 export const TitlePage: AlgolPage = props => {
   const { actions } = props;
@@ -28,15 +31,24 @@ export const TitlePage: AlgolPage = props => {
     () => ({ game: `play ${name} ☝`, slack: "join the Slack" }),
     [name]
   );
+  const goToCurrentGame = useCallback(() => actions.navTo(`/games/${slug}`), [
+    slug,
+    actions,
+  ]);
+  const seeAllGames = useCallback(() => actions.navTo("/games"), [actions]);
+  const triggerSlack = useCallback(
+    (e: Event) => {
+      e.preventDefault();
+      openSlackModal();
+    },
+    [openSlackModal]
+  );
   const dynamicActions = useMemo(
     () => ({
-      game: () => actions.navTo(`/games/${slug}`),
-      slack: (e: Event) => {
-        e.preventDefault();
-        openSlackModal();
-      },
+      game: goToCurrentGame,
+      slack: triggerSlack,
     }),
-    [name]
+    [goToCurrentGame, triggerSlack]
   );
   const [contentIdx, setContentIdx] = useState(0);
   return (
@@ -44,12 +56,45 @@ export const TitlePage: AlgolPage = props => {
       <Page
         title="Hello!"
         top={
-          <Board
-            graphics={graphics}
-            marks={[]}
-            potentialMarks={[]}
-            units={setup2army(setup)}
-          />
+          <Fragment>
+            <div
+              className={classNames(
+                css.titlePageBoardWelcome,
+                css.titlePageBoardBox
+              )}
+            >
+              <span>welcome to</span>
+              <h1>Chessicals</h1>
+            </div>
+            <div
+              className={classNames(
+                css.titlePageBoardBox,
+                css.titlePageBoardGames
+              )}
+            >
+              <div className={css.titlePageBoardGamesFlicker}>&lt;</div>
+              <div className={css.titlePageBoardGamesContent}>
+                <div>
+                  Here you can{" "}
+                  <Button text={`play ${name} ☝`} onClick={goToCurrentGame} />
+                </div>
+                <div>
+                  or{" "}
+                  <Button
+                    text={`browse all ${gameCount()} games 🙌`}
+                    onClick={seeAllGames}
+                  />
+                </div>
+              </div>
+              <div className={css.titlePageBoardGamesFlicker}>&gt;</div>
+            </div>
+            <Board
+              graphics={graphics}
+              marks={[]}
+              potentialMarks={[]}
+              units={setup2army(setup)}
+            />
+          </Fragment>
         }
         body={
           <Fragment>

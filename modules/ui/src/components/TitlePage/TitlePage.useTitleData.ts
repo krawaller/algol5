@@ -20,9 +20,9 @@ const pauseReducer = (state: boolean, action: string) => {
   return state;
 };
 
-export const useBoard = () => {
+export const useTitleData = () => {
   const [index, dispatchIndex] = useReducer(indexReducer, 0);
-  const [pause, dispatchPause] = useReducer(pauseReducer, false);
+  const [pause, dispatchPause] = useReducer(pauseReducer, true);
   let interval: ReturnType<typeof setInterval>;
   useEffect(() => {
     if (!pause) {

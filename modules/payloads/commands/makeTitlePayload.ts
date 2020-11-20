@@ -24,7 +24,8 @@ const items = gameIds
     slug: allMeta.${gameId}.slug,
     name: allMeta.${gameId}.name,
     setup: ${gameId}Variants[0].arr!.setup,
-    graphics: allGraphics.${gameId}
+    graphics: allGraphics.${gameId},
+    demo: allDemos.${gameId}
   },`
   )
   .join("\n");
@@ -40,9 +41,10 @@ const data = list
   }));
 
 const code = prettier.format(
-  `import { AlgolSetupAnon, AlgolGameGraphics } from '../../types'
+  `import { AlgolSetupAnon, AlgolGameGraphics, AlgolDemo } from '../../types'
 import allGraphics from '../../graphics/dist/svgDataURIs'
 import allMeta from '../../games/dist/meta'
+import allDemos from '../../battle/dist/allDemos'
 ${imports}
 
 export type TitleData = {
@@ -50,7 +52,8 @@ export type TitleData = {
   slug: string
   name: string
   setup: AlgolSetupAnon
-  graphics: AlgolGameGraphics
+  graphics: AlgolGameGraphics,
+  demo: AlgolDemo
 }
   
 export const data: TitleData[] = [

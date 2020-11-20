@@ -3,13 +3,10 @@
  */
 
 import React, { Fragment, useCallback, useMemo, useState } from "react";
-import classNames from "classnames";
 import { AlgolPage } from "../../../../types";
 import { homeNav } from "../../../../common/nav/homeNav";
 import { Page } from "../Page";
-import { Board } from "../Board";
-import { useBoard } from "./TitlePage.useBoard";
-import { gameCount, setup2army } from "../../../../common";
+import { useTitleData } from "./TitlePage.useTitleData";
 import { useModal } from "../../helpers";
 import { Modal } from "../Modal";
 import { Markdown } from "../Markdown";
@@ -18,14 +15,13 @@ import { chunk as newbieChunk } from "../../../../content/dist/chunks/newbie/chu
 import { chunk as veteranChunk } from "../../../../content/dist/chunks/veteran/chunk";
 import { ButtonBar } from "../ButtonBar";
 import { ButtonGroup } from "../ButtonGroup";
-import css from "./TitlePage.cssProxy";
-import { Button } from "../Button";
+import { TitleBoard } from "./TitlePage.Board";
 
 const buttonTexts = ["Hi, I'm new! 👋", "Hello again! 🤘"];
 
 export const TitlePage: AlgolPage = props => {
   const { actions } = props;
-  const { graphics, setup, name, slug } = useBoard().titleData;
+  const { name, slug } = useTitleData().titleData;
   const [isSlackModalOpen, openSlackModal, closeSlackModal] = useModal();
   const dynamicContent = useMemo(
     () => ({ game: `play ${name} ☝`, slack: "join the Slack" }),
@@ -35,7 +31,6 @@ export const TitlePage: AlgolPage = props => {
     slug,
     actions,
   ]);
-  const seeAllGames = useCallback(() => actions.navTo("/games"), [actions]);
   const triggerSlack = useCallback(
     (e: Event) => {
       e.preventDefault();
@@ -55,47 +50,7 @@ export const TitlePage: AlgolPage = props => {
     <Fragment>
       <Page
         title="Hello!"
-        top={
-          <Fragment>
-            <div
-              className={classNames(
-                css.titlePageBoardWelcome,
-                css.titlePageBoardBox
-              )}
-            >
-              <span>welcome to</span>
-              <h1>Chessicals</h1>
-            </div>
-            <div
-              className={classNames(
-                css.titlePageBoardBox,
-                css.titlePageBoardGames
-              )}
-            >
-              <div className={css.titlePageBoardGamesFlicker}>&lt;</div>
-              <div className={css.titlePageBoardGamesContent}>
-                <div>
-                  Here you can{" "}
-                  <Button text={`play ${name} ☝`} onClick={goToCurrentGame} />
-                </div>
-                <div>
-                  or{" "}
-                  <Button
-                    text={`browse all ${gameCount()} games 🙌`}
-                    onClick={seeAllGames}
-                  />
-                </div>
-              </div>
-              <div className={css.titlePageBoardGamesFlicker}>&gt;</div>
-            </div>
-            <Board
-              graphics={graphics}
-              marks={[]}
-              potentialMarks={[]}
-              units={setup2army(setup)}
-            />
-          </Fragment>
-        }
+        top={<TitleBoard actions={actions} />}
         body={
           <Fragment>
             <ButtonGroup>

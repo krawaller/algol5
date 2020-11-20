@@ -25,7 +25,7 @@ const buttonTexts = ["Hi, I'm new! 👋", "Hello again! 🤘"];
 
 export const TitlePage: AlgolPage = props => {
   const { actions } = props;
-  const { graphics, setup, name, slug } = useBoard();
+  const { graphics, setup, name, slug } = useBoard().titleData;
   const [isSlackModalOpen, openSlackModal, closeSlackModal] = useModal();
   const dynamicContent = useMemo(
     () => ({ game: `play ${name} ☝`, slack: "join the Slack" }),

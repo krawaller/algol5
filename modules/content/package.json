@@ -1,7 +1,7 @@
 {
   "scripts": {
     "clean": "rm -rf dist; mkdir dist;",
-    "robot": "npm run makeTagIndex && npm run writeNews && npm run writeAbout && npm run writeTag && npm run writeGame && npm run writeChunk",
+    "robot": "npm run makeTagIndex && npm run makeAboutIndex && npm run writeNews && npm run writeAbout && npm run writeTag && npm run writeGame && npm run writeChunk",
     "writeGame": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeGame.ts",
     "stubGame": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/stubGame.ts",
     "stubNews": "node ./commands/stubNews",
@@ -11,7 +11,8 @@
     "writeAbout": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeAbout.ts",
     "writeTag": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeTag.ts",
     "writeChunk": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeChunk.ts",
-    "makeTagIndex": "node ./commands/makeTagIndex"
+    "makeTagIndex": "node ./commands/makeTagIndex",
+    "makeAboutIndex": "node ./commands/makeAboutIndex"
   },
   "dependencies": {
     "front-matter": "^4.0.2",

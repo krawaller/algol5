@@ -2,4 +2,6 @@
 id: "newbie"
 ---
 
-We're happy to have you! Here you can {DYNAMIC:id=game,style=button},<br/>or {INTLINK:style=button,url=/games,text=browse the full catalogue} of {COUNT} abstract games.
+Hey, happy to have you! This is a web app that lets you play a whole bunch of abstract games. Perhaps you want to {ABOUT:id=overview,text=learn more about the site} and {ABOUT:id=overview,text=what type of games are included}?
+
+Or just {INTLINK:url=/games,text=go to the games} and get busy! 🙃

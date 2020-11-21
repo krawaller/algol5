@@ -8,8 +8,8 @@ const list = data.filter(
 );
 
 const indexReducer = (state: number, action: string) => {
-  if (action === "inc") return state + 1;
-  if (action === "dec") return state - 1;
+  if (action === "inc") return state === list.length - 1 ? 0 : state + 1;
+  if (action === "dec") return state === 0 ? list.length - 1 : state - 1;
   return state;
 };
 
@@ -40,7 +40,7 @@ export const useTitleData = () => {
     []
   );
   return {
-    titleData: list[index % list.length],
+    titleData: list[index],
     actions,
   };
 };

@@ -31,18 +31,14 @@ export const TitleBoard = (props: TitleBoardProps) => {
   return (
     <Fragment>
       <div
-        className={classNames(css.titlePageBoardWelcome, css.titlePageBoardBox)}
-      >
-        <span>welcome to</span>
-        <h1>Chessicals</h1>
-      </div>
-      <div
         className={classNames(css.titlePageBoardBox, css.titlePageBoardGames)}
       >
         <div className={css.titlePageBoardGamesFlicker}>
           <Button onClick={titleActions.dec} text="<-" />
         </div>
-        <div className={css.titlePageBoardGamesContent}>
+        <div className={css.titlePageBoardWelcome}>
+          <span>welcome to</span>
+          <h1>Chessicals</h1>
           <div>
             Here you can{" "}
             <Button text={`play ${name} ☝`} onClick={goToCurrentGame} />

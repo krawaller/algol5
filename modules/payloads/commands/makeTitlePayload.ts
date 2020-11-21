@@ -44,11 +44,12 @@ const code = prettier.format(
   `import { AlgolSetupAnon, AlgolGameGraphics, AlgolDemo } from '../../types'
 import allGraphics from '../../graphics/dist/svgDataURIs'
 import allMeta from '../../games/dist/meta'
+import { GameId } from "../../games/dist/list"
 import allDemos from '../../battle/dist/allDemos'
 ${imports}
 
 export type TitleData = {
-  gameId: string
+  gameId: GameId
   slug: string
   name: string
   setup: AlgolSetupAnon

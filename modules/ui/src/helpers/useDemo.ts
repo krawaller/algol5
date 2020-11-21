@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { AlgolDemo, AlgolHydratedDemo, AlgolDemoPatch } from "../../../types";
 import { hydrateDemoFrame, emptyDemo, hydrateDemoBase } from "../../../common";
+import { GameId } from "../../../games/dist/list";
 
 const FRAME_LENGTH_MS = 1500;
 const WIN_FRAME_FACTOR = 5;
@@ -9,6 +10,7 @@ type UseDemoOptions = {
   demo: AlgolDemo;
   playing?: boolean;
   restart?: boolean;
+  gameId: GameId;
 };
 
 type HydrationInfo = {

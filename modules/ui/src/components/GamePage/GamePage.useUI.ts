@@ -19,6 +19,7 @@ export const useUI = (
     demo,
     playing: mode === "gamelobby",
     restart: true,
+    gameId: api.gameId,
   });
   const prevBattleFrame = useRef(0);
   return useMemo(() => {

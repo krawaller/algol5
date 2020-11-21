@@ -21,7 +21,7 @@ export const Thumbnail: FunctionComponent<ThumbnailProps> = props => {
   const { demo, graphics, gameId } = props;
   // types for useInView are bogus, hence the "as" casting
   const [ref, inView] = useInView({ threshold: 1 } as {});
-  const { frame, hydrDemo } = useDemo({ demo, playing: inView });
+  const { frame, hydrDemo } = useDemo({ demo, playing: inView, gameId });
 
   return (
     <div ref={ref}>

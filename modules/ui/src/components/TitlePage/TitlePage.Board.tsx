@@ -14,8 +14,14 @@ type TitleBoardProps = {
 
 export const TitleBoard = (props: TitleBoardProps) => {
   const { actions } = props;
-  const { graphics, name, slug, demo } = useTitleData().titleData;
-  const { frame, hydrDemo } = useDemo({ demo, playing: true, restart: true });
+  const { titleData, actions: titleActions } = useTitleData();
+  const { graphics, name, slug, demo, gameId } = titleData;
+  const { frame, hydrDemo } = useDemo({
+    demo,
+    playing: true,
+    restart: true,
+    gameId,
+  });
   const ui = hydrDemo ? demo2ui(hydrDemo, frame) : emptyBattleUI;
   const goToCurrentGame = useCallback(() => actions.navTo(`/games/${slug}`), [
     slug,
@@ -33,7 +39,9 @@ export const TitleBoard = (props: TitleBoardProps) => {
       <div
         className={classNames(css.titlePageBoardBox, css.titlePageBoardGames)}
       >
-        <div className={css.titlePageBoardGamesFlicker}>&lt;</div>
+        <div className={css.titlePageBoardGamesFlicker}>
+          <Button onClick={titleActions.dec} text="<-" />
+        </div>
         <div className={css.titlePageBoardGamesContent}>
           <div>
             Here you can{" "}
@@ -47,7 +55,9 @@ export const TitleBoard = (props: TitleBoardProps) => {
             />
           </div>
         </div>
-        <div className={css.titlePageBoardGamesFlicker}>&gt;</div>
+        <div className={css.titlePageBoardGamesFlicker}>
+          <Button onClick={titleActions.inc} text="->" />
+        </div>
       </div>
       <Board
         graphics={graphics}

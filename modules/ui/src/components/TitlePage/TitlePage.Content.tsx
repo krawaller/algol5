@@ -51,7 +51,7 @@ export const TitlePageContent = (props: TitlePageContentProps) => {
   );
   return (
     <ScrollBox>
-      <ButtonGroup>
+      <ButtonGroup noBottomMargin>
         <ButtonBar
           texts={buttonTexts}
           onChange={setContentIdx}

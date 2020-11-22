@@ -3,13 +3,21 @@
   width: 100%;
 }
 
-.titlePageBoardBox {
+.titlePageBoardBoxContainer {
   position: absolute;
   z-index: 100;
   top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
-  margin: 10px;
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.titlePageBoardBox {
   background-color: rgba(255, 255, 255, 0.75);
   border-radius: 10px;
   text-align: center;

@@ -30,29 +30,29 @@ export const TitleBoard = (props: TitleBoardProps) => {
   const seeAllGames = useCallback(() => actions.navTo("/games"), [actions]);
   return (
     <Fragment>
-      <div
-        className={classNames(css.titlePageBoardBox, css.titlePageBoardGames)}
-      >
-        <div className={css.titlePageBoardGamesFlicker}>
-          <Button onClick={titleActions.dec} text="<-" />
-        </div>
-        <div className={css.titlePageBoardWelcome}>
-          <span>welcome to</span>
-          <h1>Chessicals</h1>
-          <div>
-            Here you can{" "}
-            <Button text={`play ${name} ☝`} onClick={goToCurrentGame} />
+      <div className={css.titlePageBoardBoxContainer}>
+        <div className={classNames(css.titlePageBoardBox)}>
+          <div className={css.titlePageBoardGamesFlicker}>
+            <Button onClick={titleActions.dec} text="←" />
           </div>
-          <div>
-            or{" "}
-            <Button
-              text={`browse all ${gameCount()} games 🙌`}
-              onClick={seeAllGames}
-            />
+          <div className={css.titlePageBoardWelcome}>
+            <span>welcome to</span>
+            <h1>Chessicals!</h1>
+            <div>
+              Here you can{" "}
+              <Button text={`play ${name}`} onClick={goToCurrentGame} />
+            </div>
+            <div>
+              or{" "}
+              <Button
+                text={`browse all ${gameCount()} games`}
+                onClick={seeAllGames}
+              />
+            </div>
           </div>
-        </div>
-        <div className={css.titlePageBoardGamesFlicker}>
-          <Button onClick={titleActions.inc} text="->" />
+          <div className={css.titlePageBoardGamesFlicker}>
+            <Button onClick={titleActions.inc} text="→" />
+          </div>
         </div>
       </div>
       <Board

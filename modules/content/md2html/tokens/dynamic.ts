@@ -4,11 +4,11 @@ import { TokenHandler } from "./_handler";
 
 export const dynamic: TokenHandler = opts => {
   const { args } = opts;
-  const { id, style } = args;
+  const { id, style, text = "" } = args;
   if (!id) {
     throw new Error("Have to provide dynamic id");
   }
-  const html = `<span data-dynamic data-dynamic-${id}></span>`;
+  const html = `<span data-dynamic data-dynamic-${id}>${text}</span>`;
   if (style === "button") {
     return `<button class="button">${html}</button>`;
   }

@@ -10,22 +10,15 @@ fs.ensureDirSync(out);
 
 const gameIds = list.filter(gameId => !defs[gameId].meta.hidden);
 
-const imports = gameIds
-  .map(
-    gameId =>
-      `import ${gameId}Variants from '../../games/definitions/${gameId}/variants'`
-  )
-  .join("\n");
-
 const items = gameIds
   .map(
     gameId => `  {
     gameId: "${gameId}",
     slug: allMeta.${gameId}.slug,
     name: allMeta.${gameId}.name,
-    setup: ${gameId}Variants[0].arr!.setup,
     graphics: allGraphics.${gameId},
-    demo: allDemos.${gameId}
+    demo: allDemos.${gameId},
+    added: allMeta.${gameId}.added
   },`
   )
   .join("\n");
@@ -41,20 +34,19 @@ const data = list
   }));
 
 const code = prettier.format(
-  `import { AlgolSetupAnon, AlgolGameGraphics, AlgolDemo } from '../../types'
+  `import { AlgolGameGraphics, AlgolDemo } from '../../types'
 import allGraphics from '../../graphics/dist/svgDataURIs'
 import allMeta from '../../games/dist/meta'
 import { GameId } from "../../games/dist/list"
 import allDemos from '../../battle/dist/allDemos'
-${imports}
 
 export type TitleData = {
   gameId: GameId
   slug: string
   name: string
-  setup: AlgolSetupAnon
   graphics: AlgolGameGraphics,
-  demo: AlgolDemo
+  demo: AlgolDemo,
+  added: string
 }
   
 export const data: TitleData[] = [

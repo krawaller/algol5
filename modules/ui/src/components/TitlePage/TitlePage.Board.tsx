@@ -7,6 +7,7 @@ import { useTitleData } from "./TitlePage.useTitleData";
 import { useDemo } from "../../helpers";
 import { demo2ui, emptyBattleUI, gameCount } from "../../../../common";
 import { AppActions } from "../../../../types";
+import shellCss from "../Shell/Shell.cssProxy";
 
 type TitleBoardProps = {
   actions: AppActions;
@@ -30,7 +31,12 @@ export const TitleBoard = (props: TitleBoardProps) => {
   const seeAllGames = useCallback(() => actions.navTo("/games"), [actions]);
   return (
     <Fragment>
-      <div className={css.titlePageBoardBoxContainer}>
+      <div
+        className={classNames(
+          css.titlePageBoardBoxContainer,
+          shellCss.hideDuringFullNav
+        )}
+      >
         <div className={classNames(css.titlePageBoardBox)}>
           <div className={css.titlePageBoardGamesFlicker}>
             <Button onClick={titleActions.dec} text="←" />

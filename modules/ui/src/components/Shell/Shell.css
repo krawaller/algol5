@@ -25,6 +25,14 @@ body.sb-show-main #root {
   position: relative;
 }
 
+.hideDuringFullNav {
+  transition: opacity 0.3s ease;
+}
+
+.shellContainerWithFullNav .hideDuringFullNav {
+  opacity: 0;
+}
+
 .shellNav {
   bottom: 0;
   left: 0;

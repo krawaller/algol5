@@ -9,6 +9,7 @@ import { AppActions } from "../../../../types";
 import { ButtonGroup } from "../ButtonGroup";
 import { ButtonBar } from "../ButtonBar";
 import { data, TitleData } from "../../../../payloads/dist/titleData";
+import { ScrollBox } from "../ScrollBox";
 
 const latestGame = data
   .slice(1)
@@ -49,7 +50,7 @@ export const TitlePageContent = (props: TitlePageContentProps) => {
     [gotoLatest, triggerSlack]
   );
   return (
-    <Fragment>
+    <ScrollBox>
       <ButtonGroup>
         <ButtonBar
           texts={buttonTexts}
@@ -79,6 +80,6 @@ export const TitlePageContent = (props: TitlePageContentProps) => {
       >
         <Markdown html={slackChunk} actions={actions} />
       </Modal>
-    </Fragment>
+    </ScrollBox>
   );
 };

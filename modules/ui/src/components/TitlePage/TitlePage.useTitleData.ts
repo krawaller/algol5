@@ -1,4 +1,5 @@
 import { useEffect, useReducer, useMemo } from "react";
+import { getLatestVisitedGameId } from "../../../../local/src";
 import { data } from "../../../../payloads/dist/titleData";
 
 const list = data;
@@ -22,7 +23,12 @@ const pauseReducer = (state: boolean, action: string) => {
 };
 
 export const useTitleData = () => {
-  const [index, dispatchIndex] = useReducer(indexReducer, 0);
+  const initialGameId = useMemo(() => {
+    const initial = list.findIndex(g => g.gameId === getLatestVisitedGameId());
+    if (initial === -1) return 0;
+    return initial;
+  }, []);
+  const [index, dispatchIndex] = useReducer(indexReducer, initialGameId);
   const [pause, dispatchPause] = useReducer(pauseReducer, true);
   let interval: ReturnType<typeof setInterval>;
   useEffect(() => {

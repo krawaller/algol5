@@ -5,3 +5,5 @@ export * from "./getSessionById";
 export * from "./setLatestSessionId";
 export * from "./getLatestSessionId";
 export * from "./deleteGameSessions";
+export * from "./getLatestVisitedGameId";
+export * from "./setLatestVisitedGameId";

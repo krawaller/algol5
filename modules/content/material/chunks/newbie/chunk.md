@@ -2,6 +2,6 @@
 id: "newbie"
 ---
 
-Hey, happy to have you! This is a web app that lets you play a whole bunch of abstract games. Perhaps you want to {ABOUT:id=overview,text=learn more about the site} and {ABOUT:id=overview,text=what type of games are included}?
+Hey, happy to have you! Come on in, {ABOUT:id=overview,text=learn more about the app} and {ABOUT:id=overview,text=what type of games you can play here}.
 
-Or just {INTLINK:url=/games,text=go to the games} and get busy! 🙃
+...or just just {INTLINK:url=/games,text=rush straight to the games} and start playing! 🙃

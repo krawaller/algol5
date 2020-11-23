@@ -7,6 +7,6 @@ export const getLatestVisitedGameId = () => {
   if (typeof localStorage === "undefined") {
     return null;
   }
-  const latestVisitedGameKey = localStorage.getItem(key);
-  return latestVisitedGameKey as GameId | null;
+  const latestVisitedGameId = localStorage.getItem(key);
+  return latestVisitedGameId as GameId | null;
 };

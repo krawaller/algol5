@@ -1,6 +1,6 @@
 import { GameId } from "../../../games/dist/list";
 import { getSessionStorageKey } from "./keys/getSessionStorageKey";
-import { setLatestSessionId } from "./setLatestSessionId";
+import { setLatestSessionIdForGame } from "./setLatestSessionIdForGame";
 
 export const deleteGameSessions = (gameId: GameId) => {
   const activeKey = getSessionStorageKey(gameId);
@@ -9,5 +9,5 @@ export const deleteGameSessions = (gameId: GameId) => {
   localStorage.removeItem(activeKey);
   localStorage.removeItem(finishedKey);
 
-  setLatestSessionId(gameId, null);
+  setLatestSessionIdForGame(gameId, null);
 };

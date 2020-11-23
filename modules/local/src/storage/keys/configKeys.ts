@@ -1,5 +1,5 @@
 export const configKeys = {
-  latestSessionId: "l",
+  latestSessionIdForGame: "l",
   latestVisitedGameId: "L",
   sessionStorage: "s",
 };

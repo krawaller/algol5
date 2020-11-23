@@ -10,9 +10,9 @@ import {
   updateSession,
   writeSession,
   session2battle,
-  getLatestSessionId,
+  getLatestSessionIdForGame,
   getSessionById,
-  setLatestSessionId,
+  setLatestSessionIdForGame,
 } from "../../../../local/src";
 
 type BattleAction =
@@ -50,7 +50,7 @@ const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
       // user started a new local battle! initiate it
       const battle = api.newBattle(arg);
       const session = newSessionFromBattle(battle, api.iconMap);
-      setLatestSessionId(api.gameId, session.id);
+      setLatestSessionIdForGame(api.gameId, session.id);
       return {
         ...state,
         battle,
@@ -66,7 +66,7 @@ const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
         const session = getSessionById(api.gameId, sessionId)!;
         try {
           const battle = session2battle(session, api);
-          setLatestSessionId(api.gameId, session.id);
+          setLatestSessionIdForGame(api.gameId, session.id);
           return {
             ...state,
             battle,
@@ -138,7 +138,7 @@ export function useBattle(
       battle: null,
       frame: -1,
       session: null,
-      hasPrevious: !!getLatestSessionId(api.gameId),
+      hasPrevious: !!getLatestSessionIdForGame(api.gameId),
       corruptSessions: {},
     }
   );

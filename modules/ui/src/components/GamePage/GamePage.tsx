@@ -21,7 +21,7 @@ import { useBattle } from "./GamePage.useBattle";
 import { useActions } from "./GamePage.useActions";
 import { BattleMove } from "../BattleMove";
 import {
-  getLatestSessionId,
+  getLatestSessionIdForGame,
   setLatestVisitedGameId,
 } from "../../../../local/src";
 import { BattleMode } from "../../../../types/page/battleActions";
@@ -69,7 +69,7 @@ export const GamePage = (props: GamePageProps) => {
   }, [mode, sessionId, actions.setNav]);
 
   // TODO - maybe not read this on every render? move to state somewhere?
-  const previousSessionId = getLatestSessionId(api.gameId);
+  const previousSessionId = getLatestSessionIdForGame(api.gameId);
 
   let body: ReactNode;
   if (mode === "history") {

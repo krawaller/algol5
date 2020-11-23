@@ -18,7 +18,8 @@ const items = gameIds
     name: allMeta.${gameId}.name,
     graphics: allGraphics.${gameId},
     demo: allDemos.${gameId},
-    added: allMeta.${gameId}.added
+    added: allMeta.${gameId}.added,
+    mainVariant: "${defs[gameId].variants[0].code}"
   },`
   )
   .join("\n");
@@ -46,7 +47,8 @@ export type TitleData = {
   name: string
   graphics: AlgolGameGraphics,
   demo: AlgolDemo,
-  added: string
+  added: string,
+  mainVariant: string
 }
   
 export const data: TitleData[] = [

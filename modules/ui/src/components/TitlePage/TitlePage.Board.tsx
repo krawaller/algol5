@@ -16,7 +16,7 @@ type TitleBoardProps = {
 export const TitleBoard = (props: TitleBoardProps) => {
   const { actions } = props;
   const { titleData, actions: titleActions } = useTitleData();
-  const { graphics, name, slug, demo, gameId } = titleData;
+  const { graphics, name, slug, demo, gameId, mainVariant } = titleData;
   const { frame, hydrDemo } = useDemo({
     demo,
     playing: true,
@@ -24,10 +24,10 @@ export const TitleBoard = (props: TitleBoardProps) => {
     gameId,
   });
   const ui = hydrDemo ? demo2ui(hydrDemo, frame) : emptyBattleUI;
-  const goToCurrentGame = useCallback(() => actions.navTo(`/games/${slug}`), [
-    slug,
-    actions,
-  ]);
+  const goToCurrentGame = useCallback(
+    () => actions.navTo(`/games/${slug}/?sid=new_${mainVariant}&m=playing`),
+    [slug, actions]
+  );
   const seeAllGames = useCallback(() => actions.navTo("/games"), [actions]);
   return (
     <Fragment>

@@ -1,11 +1,12 @@
 import { useEffect, useReducer, useMemo } from "react";
 import { data } from "../../../../payloads/dist/titleData";
 
-const list = data.filter(
-  entry =>
-    entry.graphics.boards["basic"].height ===
-    entry.graphics.boards["basic"].width
-);
+const list = data;
+// .filter(
+//   entry =>
+//     entry.graphics.boards["basic"].height ===
+//     entry.graphics.boards["basic"].width
+// );
 
 const indexReducer = (state: number, action: string) => {
   if (action === "inc") return state === list.length - 1 ? 0 : state + 1;

@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { chunk as slackChunk } from "../../../../content/dist/chunks/slack/chunk";
 import { chunk as newbieChunk } from "../../../../content/dist/chunks/newbie/chunk";
 import { chunk as veteranChunk } from "../../../../content/dist/chunks/veteran/chunk";
@@ -10,6 +10,7 @@ import { ButtonGroup } from "../ButtonGroup";
 import { ButtonBar } from "../ButtonBar";
 import { data, TitleData } from "../../../../payloads/dist/titleData";
 import { ScrollBox } from "../ScrollBox";
+import { getLatestSessionInfo } from "../../../../local/src";
 
 const latestGame = data
   .slice(1)
@@ -25,7 +26,11 @@ const buttonTexts = ["Hi, I'm new! 👋", "Hello again! 🤘"];
 
 export const TitlePageContent = (props: TitlePageContentProps) => {
   const { actions } = props;
-  const [contentIdx, setContentIdx] = useState(0);
+  const startContentIndex = useMemo(
+    () => (getLatestSessionInfo().gameId ? 1 : 0),
+    []
+  );
+  const [contentIdx, setContentIdx] = useState(startContentIndex);
   const [isSlackModalOpen, openSlackModal, closeSlackModal] = useModal();
   const gotoLatest = useCallback(
     () => actions.navTo(`/games/${latestGame.slug}`),

@@ -45,3 +45,7 @@ This root folder has...
 - `firebase`: contains all firebase code for login and online play, etc
 
 See `README.md` in each module for more details!
+
+## Other resources
+
+To see the full flow from beginning to end in how to add a new game, check out the [Adding Can the Sardines to Chessicals](https://www.youtube.com/playlist?list=PL-CCrKYYRXY4yNTCPPIXAse4KxmAXYZxf) Youtube video series!

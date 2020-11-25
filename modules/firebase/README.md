@@ -1,3 +1,11 @@
+# Firebase module
+
+This is an in-progress module for the upcoming online play. So far we have only implemented login via Firebase.
+
+More to come!
+
+### Dev notes
+
 The config for our firebase web app:
 
 ```typescript

@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
-import { AlgolPageProps } from "../../types";
+import { AlgolPage, AlgolPageProps } from "../../types";
+import { setTitlePageAttributes } from "../../ui/src/components/TitlePage/setTitlePageAttributes";
 
 // We don't want to server-side-render the TitlePage,
 // since it will have different content depending on
@@ -10,4 +11,10 @@ const LazyTitlePage = dynamic(
   { ssr: false }
 );
 
-export default (props: AlgolPageProps) => <LazyTitlePage {...props} />;
+const TitlePage: AlgolPage = (props: AlgolPageProps) => (
+  <LazyTitlePage {...props} />
+);
+
+setTitlePageAttributes(TitlePage);
+
+export default TitlePage;

@@ -4,10 +4,10 @@
 
 import React, { Fragment } from "react";
 import { AlgolPage } from "../../../../types";
-import { homeNav } from "../../../../common/nav/homeNav";
 import { Page } from "../Page";
 import { TitleBoard } from "./TitlePage.Board";
 import { TitlePageContent } from "./TitlePage.Content";
+import { setTitlePageAttributes } from "./setTitlePageAttributes";
 
 export const TitlePage: AlgolPage = props => {
   const { actions } = props;
@@ -22,8 +22,6 @@ export const TitlePage: AlgolPage = props => {
   );
 };
 
-TitlePage.title = "Chessicals";
-TitlePage.nav = homeNav;
-TitlePage.mainImage = "/images/title.png";
+setTitlePageAttributes(TitlePage);
 
 export default TitlePage;

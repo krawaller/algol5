@@ -48,4 +48,5 @@ See `README.md` in each module for more details!
 
 ## Other resources
 
-To see the full flow from beginning to end in how to add a new game, check out the [Adding Can the Sardines to Chessicals](https://www.youtube.com/playlist?list=PL-CCrKYYRXY4yNTCPPIXAse4KxmAXYZxf) Youtube video series!
+- To see the full flow from beginning to end in how to add a new game, check out the [Adding Can the Sardines to Chessicals](https://www.youtube.com/playlist?list=PL-CCrKYYRXY4yNTCPPIXAse4KxmAXYZxf) Youtube video series!
+- Ask questions in the [Chessicals Slack](https://chessicals.slack.com) (here's an [invite link](https://join.slack.com/t/chessicals/shared_invite/zt-g3vnd6ic-Fd8mB68nA4RvZ9KdFIiKcQ) if you're not a member)

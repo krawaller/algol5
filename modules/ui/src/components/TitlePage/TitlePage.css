@@ -1,83 +1,51 @@
-.titlePageModalCloser {
-  float: right;
-  background-color: lightcoral;
-}
-
-.titlePageSchpiel {
-  font-size: 12px;
-}
-
 .titlePageStrip {
   text-align: center;
   width: 100%;
 }
 
-.titlePageLink {
-  display: block;
-  text-decoration: none;
-  border-radius: 5px;
-  overflow: hidden;
-  width: 90px;
-  height: 30px;
-  background-size: contain;
-  background-position: left center;
-  background-repeat: no-repeat;
-  padding-left: 34px;
-  line-height: 30px;
-  font-family: Cookie;
-  color: white;
-  background-color: #ff823e;
-}
-
-.titlePageLink:hover {
-  opacity: 0.8;
-}
-
-.titlePageButtonContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.titlePageButtonContainer > :not(:first-child) {
-  margin-top: 10px;
-}
-
-.titlePageBoardContainer {
-  opacity: 0.5;
-}
-
-.titlePageBlarb {
+.titlePageBoardBoxContainer {
   position: absolute;
-  top: 30%;
+  z-index: 100;
+  top: 30px;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  margin: 15px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: stretch;
+}
+
+.titlePageBoardBox {
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
   align-items: center;
-  color: white;
-  text-shadow: 0 0 3px black;
 }
 
-.titlePageBlarb h3 {
-  font-size: 4em;
-  margin: 0px 0;
+.titlePageBoardWelcome {
+  flex-grow: 1;
 }
 
-.titlePageBlarb h4 {
-  margin-top: 8px;
-  font-size: 1.6em;
+.titlePageBoardWelcome > span {
+  margin-bottom: -20px;
+  display: block;
+  padding-left: 20px;
 }
 
-.titlePageBlarb h4:before,
-.titlePageBlarb h4:after {
-  content: " ... ";
+.titlePageBoardWelcome > h1 {
+  margin-bottom: -10px;
+  margin-top: -5px;
+  font-family: cursive;
+  font-size: 44px;
 }
 
-.titlePageBlarb em {
-  font-size: 1.4em;
-  font-style: normal;
+.titlePageBoardWelcome button {
+  margin-bottom: 5px;
+}
+
+.titlePageBoardBox > .titlePageBoardGamesFlicker {
+  width: 40px;
 }

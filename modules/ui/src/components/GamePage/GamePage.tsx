@@ -20,7 +20,10 @@ import { useUI } from "./GamePage.useUI";
 import { useBattle } from "./GamePage.useBattle";
 import { useActions } from "./GamePage.useActions";
 import { BattleMove } from "../BattleMove";
-import { getLatestSessionId } from "../../../../local/src";
+import {
+  getLatestSessionIdForGame,
+  setLatestVisitedGameId,
+} from "../../../../local/src";
 import { BattleMode } from "../../../../types/page/battleActions";
 import { makeSessionNav } from "../../../../common/nav/makeSessionNav";
 import { makeGameNav } from "../../../../common/nav/makeGameNav";
@@ -49,6 +52,8 @@ export const GamePage = (props: GamePageProps) => {
   const ui = useUI(api, battle, frame, demo, givenMode);
   const mode = battle ? givenMode : "gamelobby";
 
+  useEffect(() => setLatestVisitedGameId(api.gameId), [api.gameId]);
+
   useEffect(() => {
     actions.setNav(
       mode === "gamelobby"
@@ -64,7 +69,7 @@ export const GamePage = (props: GamePageProps) => {
   }, [mode, sessionId, actions.setNav]);
 
   // TODO - maybe not read this on every render? move to state somewhere?
-  const previousSessionId = getLatestSessionId(api.gameId);
+  const previousSessionId = getLatestSessionIdForGame(api.gameId);
 
   let body: ReactNode;
   if (mode === "history") {

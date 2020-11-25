@@ -1,7 +1,8 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 import { findShortcut } from "../../../../common/nav/findShortcut";
 import { AlgolNav, AppActions } from "../../../../types";
 import { BACK_BUTTON } from "./Nav.constants";
+import { navContext } from "./Nav.Context";
 
 type UseNavStateOpts = {
   actions: AppActions;
@@ -10,7 +11,9 @@ type UseNavStateOpts = {
 
 export const useNavState = (opts: UseNavStateOpts) => {
   const { actions: appActions, nav } = opts;
-  const [fullNav, _setFullNav] = useState(false);
+  const { isFullNav: fullNav, setFullNav: _setFullNav } = useContext(
+    navContext
+  );
   const [neverNav, _setNeverNav] = useState(true);
   const setFullNav = useCallback(
     (bool: boolean) => {

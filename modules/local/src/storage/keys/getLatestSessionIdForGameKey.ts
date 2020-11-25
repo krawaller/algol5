@@ -3,7 +3,5 @@ import id2code from "../../../../games/dist/id2code";
 import { prefix } from "./prefix";
 import { configKeys } from "./configKeys";
 
-export const getSessionStorageKey = (gameId: GameId, finished?: boolean) =>
-  `${prefix}${configKeys.sessionStorage}${id2code[gameId]}${
-    finished ? "g" : ""
-  }`;
+export const getLatestSessionIdForGameKey = (gameId: GameId) =>
+  `${prefix}${configKeys.latestSessionIdForGame}${id2code[gameId]}`;

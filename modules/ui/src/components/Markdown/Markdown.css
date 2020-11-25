@@ -1,4 +1,13 @@
+.markdownContainer > div:first-child > :first-child {
+  margin-top: 0;
+}
+
+.markdownContainer > div:last-child > :last-child {
+  margin-bottom: 0;
+}
+
 .markdownContainer {
+  margin-bottom: 1em;
 }
 
 .md-icon-svg {

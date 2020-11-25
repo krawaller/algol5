@@ -13,6 +13,8 @@ import { setup } from "./setup";
 import { intlink } from "./intlink";
 import { tag } from "./tag";
 import { count } from "./count";
+import { dynamic } from "./dynamic";
+import { about } from "./about";
 
 export const tokenHandlers = {
   arr,
@@ -29,5 +31,7 @@ export const tokenHandlers = {
   setup,
   intlink,
   tag,
-  count
+  count,
+  dynamic,
+  about,
 };

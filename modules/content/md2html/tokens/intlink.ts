@@ -4,7 +4,7 @@ import { TokenHandler } from "./_handler";
 
 export const intlink: TokenHandler = opts => {
   const { args } = opts;
-  const { url, text } = args;
+  const { url, text, style } = args;
   if (!url) {
     throw new Error(`Have to provide intlink url!`);
   }
@@ -14,8 +14,9 @@ export const intlink: TokenHandler = opts => {
   if (!text) {
     throw new Error(`Have to provide intlink text for url ${url}!`);
   }
-  return `<a class="md-internal-link" href="${url}" data-algollink="${url}">${text.replace(
-    /COMMA/,
-    ","
-  )}</a>`;
+  const processedText = text.replace(/COMMA/, ",");
+  if (style === "button") {
+    return `<button data-algollink="${url}" class="button">${processedText}</button>`;
+  }
+  return `<a class="md-internal-link" href="${url}" data-algollink="${url}">${processedText}</a>`;
 };

@@ -1,11 +1,11 @@
 import { GameId } from "../../../games/dist/list";
-import { getLatestSessionIdKey } from "./keys/getLatestSessionIdKey";
+import { getLatestSessionIdForGameKey } from "./keys/getLatestSessionIdForGameKey";
 
-export const setLatestSessionId = (
+export const setLatestSessionIdForGame = (
   gameId: GameId,
   sessionId: string | null
 ) => {
-  const key = getLatestSessionIdKey(gameId);
+  const key = getLatestSessionIdForGameKey(gameId);
   if (sessionId === null) {
     localStorage.removeItem(key);
   } else {

@@ -8,6 +8,22 @@ import graphics from "../../graphics/dist/svgDataURIs";
 const out = path.join(__dirname, "../dist");
 fs.ensureDirSync(out);
 
+const gameIds = list.filter(gameId => !defs[gameId].meta.hidden);
+
+const items = gameIds
+  .map(
+    gameId => `  {
+    gameId: "${gameId}",
+    slug: allMeta.${gameId}.slug,
+    name: allMeta.${gameId}.name,
+    graphics: allGraphics.${gameId},
+    demo: allDemos.${gameId},
+    added: allMeta.${gameId}.added,
+    mainVariant: "${defs[gameId].variants[0].code}"
+  },`
+  )
+  .join("\n");
+
 const data = list
   .filter(gameId => !defs[gameId].meta.hidden)
   .map(gameId => ({
@@ -15,19 +31,29 @@ const data = list
     name: defs[gameId].meta.name,
     setup: defs[gameId].variants[0].arr!.setup,
     graphics: graphics[gameId],
+    slug: defs[gameId].meta.slug,
   }));
 
 const code = prettier.format(
-  `import { AlgolSetupAnon, AlgolGameGraphics } from '../../types'
+  `import { AlgolGameGraphics, AlgolDemo } from '../../types'
+import allGraphics from '../../graphics/dist/svgDataURIs'
+import allMeta from '../../games/dist/meta'
+import { GameId } from "../../games/dist/list"
+import allDemos from '../../battle/dist/allDemos'
 
 export type TitleData = {
-  gameId: string
+  gameId: GameId
+  slug: string
   name: string
-  setup: AlgolSetupAnon
-  graphics: AlgolGameGraphics
+  graphics: AlgolGameGraphics,
+  demo: AlgolDemo,
+  added: string,
+  mainVariant: string
 }
   
-export const data: TitleData[] = ${JSON.stringify(data)}; export default data`,
+export const data: TitleData[] = [
+${items}
+]; export default data`,
   { filepath: "foo.ts" }
 );
 

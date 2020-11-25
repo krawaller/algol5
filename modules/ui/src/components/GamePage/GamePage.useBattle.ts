@@ -10,9 +10,10 @@ import {
   updateSession,
   writeSession,
   session2battle,
-  getLatestSessionId,
+  getLatestSessionIdForGame,
   getSessionById,
-  setLatestSessionId,
+  setLatestSessionIdForGame,
+  setLatestSessionInfo,
 } from "../../../../local/src";
 
 type BattleAction =
@@ -50,7 +51,7 @@ const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
       // user started a new local battle! initiate it
       const battle = api.newBattle(arg);
       const session = newSessionFromBattle(battle, api.iconMap);
-      setLatestSessionId(api.gameId, session.id);
+      setLatestSessionIdForGame(api.gameId, session.id);
       return {
         ...state,
         battle,
@@ -66,7 +67,7 @@ const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
         const session = getSessionById(api.gameId, sessionId)!;
         try {
           const battle = session2battle(session, api);
-          setLatestSessionId(api.gameId, session.id);
+          setLatestSessionIdForGame(api.gameId, session.id);
           return {
             ...state,
             battle,
@@ -138,7 +139,7 @@ export function useBattle(
       battle: null,
       frame: -1,
       session: null,
-      hasPrevious: !!getLatestSessionId(api.gameId),
+      hasPrevious: !!getLatestSessionIdForGame(api.gameId),
       corruptSessions: {},
     }
   );
@@ -158,7 +159,7 @@ export function useBattle(
   const currentSessionId = state.session && state.session.id;
   const hasMoves = ((state.battle && state.battle.history.length) || 0) >= 2;
   useEffect(() => {
-    // If we're in a new session that now has proper history, navigate to it
+    // If we're in a new session that now has proper history, navigate to it and remember it as last session
     if (
       !justStartedNew.current &&
       sessionId &&
@@ -166,6 +167,7 @@ export function useBattle(
       currentSessionId &&
       hasMoves
     ) {
+      setLatestSessionInfo(api.gameId, currentSessionId);
       toSession(currentSessionId, "playing", true);
     }
   }, [sessionId, currentSessionId, hasMoves]);

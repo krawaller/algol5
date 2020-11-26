@@ -17,7 +17,9 @@ export const useNavState = (opts: UseNavStateOpts) => {
   const [neverNav, _setNeverNav] = useState(true);
   const setFullNav = useCallback(
     (bool: boolean) => {
-      _setNeverNav(false);
+      if (bool) {
+        _setNeverNav(false);
+      }
       _setFullNav(bool);
     },
     [_setNeverNav, _setFullNav]

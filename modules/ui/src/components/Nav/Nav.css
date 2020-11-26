@@ -15,7 +15,7 @@
   pointer-events: all;
 }
 
-.navNever .navRow {
+.navNever .navRow:not(.navAlways) {
   visibility: hidden;
 }
 

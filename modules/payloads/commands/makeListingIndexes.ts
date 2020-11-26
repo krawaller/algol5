@@ -16,6 +16,7 @@ for (const listing of listings) {
   export const ${listing}Listings: AlgolListingContainer = {
     title: "${listing[0].toUpperCase()}${listing.slice(1)}",
     composite: "${listing}.png",
+    ${listing === "games" ? 'sorts: ["A → Z", "Newest → oldest"],' : ""}
     listings: [${all.join(", ")}]
   };
   export default ${listing}Listings;

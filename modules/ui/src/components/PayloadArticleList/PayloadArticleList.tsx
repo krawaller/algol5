@@ -1,8 +1,14 @@
-import React, { FunctionComponent, useMemo } from "react";
+import React, { Fragment, FunctionComponent, useMemo, useState } from "react";
 import css from "./PayloadArticleList.cssProxy";
 import { PayloadArticleListItem } from "./PayloadArticleList.Item";
-import { AppActions, AlgolListingContainer } from "../../../../types";
+import {
+  AppActions,
+  AlgolListingContainer,
+  AlgolListing,
+} from "../../../../types";
 import compositeId from "../../../../payloads/dist/compositeId";
+import { ButtonGroup } from "../ButtonGroup";
+import { ButtonBar } from "../ButtonBar";
 
 export type PayloadArticleListProps = {
   actions: AppActions;
@@ -10,29 +16,47 @@ export type PayloadArticleListProps = {
   list: AlgolListingContainer;
 };
 
+const sort1 = (l1: AlgolListing, l2: AlgolListing) =>
+  l1.sort < l2.sort ? -1 : 1;
+const sort2 = (l1: AlgolListing, l2: AlgolListing) =>
+  l1.sort2! < l2.sort2! ? -1 : 1;
+
 export const PayloadArticleList: FunctionComponent<PayloadArticleListProps> = props => {
   let { actions, list, reverse } = props;
+  const { composite, listings, sorts } = list;
+  const [sortIndex, setSortIndex] = useState(0);
   const listToRender = useMemo(() => {
-    const ret = list.listings
+    const ret = listings
       .slice()
       .filter(l => !l.hidden)
-      .sort((i1, i2) => (i1.sort < i2.sort ? -1 : 1));
+      .sort([sort1, sort2][sortIndex]);
     if (reverse) ret.reverse();
     return ret;
-  }, [list]);
+  }, [list, sortIndex, reverse]);
   return (
-    <div className={css.payloadArticleList}>
-      {listToRender.map(listing => (
-        <PayloadArticleListItem
-          key={listing.url}
-          actions={actions}
-          listing={listing}
-          compositeName={list.composite.replace(
-            ".png",
-            "_" + compositeId + ".png"
-          )}
-        />
-      ))}
-    </div>
+    <Fragment>
+      {sorts && (
+        <ButtonGroup noBottomMargin>
+          <ButtonBar
+            current={sortIndex}
+            onChange={setSortIndex}
+            texts={sorts}
+          />
+        </ButtonGroup>
+      )}
+      <div className={css.payloadArticleList}>
+        {listToRender.map(listing => (
+          <PayloadArticleListItem
+            key={listing.url}
+            actions={actions}
+            listing={listing}
+            compositeName={composite.replace(
+              ".png",
+              "_" + compositeId + ".png"
+            )}
+          />
+        ))}
+      </div>
+    </Fragment>
   );
 };

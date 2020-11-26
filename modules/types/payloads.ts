@@ -29,6 +29,7 @@ export type AlgolArticle = {
 export type AlgolListingContainer = {
   title: string;
   composite: string;
+  sorts?: string[];
   listings: AlgolListing[];
 };
 

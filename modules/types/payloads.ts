@@ -37,6 +37,7 @@ export type AlgolListing = {
   blurb: string;
   url: string;
   sort: string;
+  sort2?: string;
   preloads: string[];
   hidden?: boolean;
   composite: {

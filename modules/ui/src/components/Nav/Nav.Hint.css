@@ -1,3 +1,4 @@
+.navHintShortcut,
 .navHintBack,
 .navHintYouAreHere,
 .navHintHome {
@@ -5,10 +6,13 @@
   pointer-events: none;
 }
 
+.navHintShortcut:before,
 .navHintBack:before,
 .navHintYouAreHere:before,
 .navHintHome:before {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 36px;
   width: 36px;
   line-height: 10px;
@@ -24,7 +28,7 @@
   right: 0px;
   top: 0px;
   z-index: 1;
-  padding-top: 1px;
+  padding-bottom: 2px;
   text-align: center;
 }
 
@@ -46,4 +50,11 @@
   right: -45px;
   top: 0px;
   content: "go back home";
+}
+
+.navHintShortcut:before {
+  right: 24px;
+  top: 6px;
+  transform: rotate(24deg);
+  content: "shortcut";
 }

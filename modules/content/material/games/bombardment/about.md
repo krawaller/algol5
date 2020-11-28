@@ -2,7 +2,7 @@
 updated: 2020-07-13
 ---
 
-{GAME} was invented by Chris Huntoon in the early 2000's, inspired by the cult Missile Command arcade game.
+{GAME} was invented by {TAG:id=huntoon} in the early 2000's, inspired by the cult Missile Command arcade game.
 
 {PIC:name=missilecommand.jpg,cred=Arcade game by Atari,title=Bombardment inspiration}
 

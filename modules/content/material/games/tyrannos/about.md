@@ -2,7 +2,7 @@
 updated: 2020-07-16
 ---
 
-{GAME} was invented by Chris Huntoon in the early 2000's.
+{GAME} was invented by {TAG:id=huntoon} in the early 2000's.
 
 {PIC:name=morituritesalutant.jpeg,cred=Panel from Asterix,credurl=https://www.everythingasterix.com/latin-jokes-content/2015/2/21/asterix-the-gladiator,title=The Tyrannos in question?}
 

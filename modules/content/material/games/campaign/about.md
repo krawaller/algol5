@@ -2,7 +2,7 @@
 updated: 2020-05-04
 ---
 
-{GAME} was invented by {EXTLINK:text=Chris Huntoon,url=https://boardgamegeek.com/boardgamedesigner/8259/chris-huntoon/linkeditems/boardgamedesigner} in 2001.
+{GAME} was invented by {TAG:id=huntoon} in 2001.
 
 It is described in Neto's and Silva's book {TAG:id=netobook,text=Mathematical GamesCOMMA Abstract Games}.
 

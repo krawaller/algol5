@@ -28,6 +28,7 @@ export const Nav = (props: NavProps) => {
     hasCrumbs,
     hasUpBtn,
     shortcut,
+    isFirstNav,
   } = useNavState(props);
   useNavPrefetch({ actions, nav });
   if (!nav) return <div></div>;
@@ -40,7 +41,8 @@ export const Nav = (props: NavProps) => {
         className={classNames(
           css.navContainer,
           fullNav && css.navFull,
-          neverNav && css.navNever
+          neverNav && css.navNever,
+          crumbs.length > 0 && css.navWithCrumbs
         )}
         // onClick={e => setFullNav(false)}
       >

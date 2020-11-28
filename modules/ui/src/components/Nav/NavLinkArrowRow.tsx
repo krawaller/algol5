@@ -49,7 +49,12 @@ export const NavLinkArrowRow: FunctionComponent<NavLinkArrowRowProps> = props =>
       <div className={navCss.navFiller}>
         {hasShortcut && <Arrow layout="southeast" dashed={DASHED_SHORTCUTS} />}
       </div>
-      <div className={navCss.navSideButtonContainer}>
+      <div
+        className={classNames(
+          navCss.navSideButtonContainer,
+          hasShortcut && hintCss.navHintShortcut
+        )}
+      >
         {hasShortcut && <Arrow layout="northwest" dashed={DASHED_SHORTCUTS} />}
       </div>
     </div>

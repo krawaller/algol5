@@ -203,3 +203,31 @@
   height: 32px;
   background-color: sandybrown;
 }
+
+.navHomeBtnContainer {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  height: 21px;
+  z-index: 5; /* to be above toprow */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.navHomeBtnContainer a {
+  pointer-events: none;
+  cursor: inherit;
+}
+
+.navHomeBtnContainer > * {
+  height: 21px;
+}
+
+.navWithCrumbs .navHomeBtnContainer {
+  opacity: 1;
+}
+
+.navWithCrumbs .navHomeBtnContainer a {
+  pointer-events: all;
+  cursor: pointer;
+}

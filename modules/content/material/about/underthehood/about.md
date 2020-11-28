@@ -20,7 +20,7 @@ The games are defined through a JSON-based language. As you work on a game we ge
 
 Here for example we're editing the {GAME:id=amazons} data file, and when we want to refer to a layer our editor can show us what the valid references are for this particular game:
 
-{PIC:name=codecompletion.png,cred= ,title=Game-specific code completion}
+{PIC:name=codecompletion.png,naked=true}
 
 #### Compiled JavaScript
 
@@ -32,10 +32,10 @@ The latest generation of {ME} therefore generates JavaSript code from each JSON 
 
 To make adding contents easier we've created a {ME}-flavoured version of {EXTLINK:url=https://daringfireball.net/projects/markdown/syntax,text=Markdown}. Here for example is a peek at the source code for the {GAME:id=chameleon} rules description:
 
-{PIC:name=contentpipeline.png,cred= ,title=Chessicals-flavoured Markdown}
+{PIC:name=contentpipeline.png,naked=true}
 
 #### Web app
 
 Finally, this web app is built using {EXTLINK:url=https://reactjs.org/,text=React}, with a {EXTLINK:url=https://nextjs.org/,text=NextJS} layer on top.
 
-{PIC:name=technologies.png,cred= ,title=Used technologies}
+{PIC:name=technologies.png,naked=true}

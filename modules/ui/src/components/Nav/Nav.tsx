@@ -28,6 +28,7 @@ export const Nav = (props: NavProps) => {
     hasCrumbs,
     hasUpBtn,
     shortcut,
+    isFirstNav,
   } = useNavState(props);
   useNavPrefetch({ actions, nav });
   if (!nav) return <div></div>;

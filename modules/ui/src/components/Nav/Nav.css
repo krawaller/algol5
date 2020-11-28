@@ -211,6 +211,9 @@
   height: 21px;
   z-index: 5; /* to be above toprow */
   opacity: 0;
+}
+
+.navContainer:not(.navFirst) .navHomeBtnContainer {
   transition: opacity 0.3s ease;
 }
 

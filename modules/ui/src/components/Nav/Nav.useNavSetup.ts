@@ -1,4 +1,11 @@
-import { useCallback, useContext, useMemo, useState } from "react";
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { findShortcut } from "../../../../common/nav/findShortcut";
 import { AlgolNav, AppActions } from "../../../../types";
 import { BACK_BUTTON } from "./Nav.constants";
@@ -15,6 +22,13 @@ export const useNavState = (opts: UseNavStateOpts) => {
     navContext
   );
   const [neverNav, _setNeverNav] = useState(true);
+  const firstNav = useRef(nav);
+  const [isFirstNav, _setFirstNav] = useState(true);
+  useEffect(() => {
+    if (firstNav.current && firstNav.current !== nav) {
+      _setFirstNav(false);
+    }
+  }, [nav]);
   const setFullNav = useCallback(
     (bool: boolean) => {
       if (bool) {
@@ -34,5 +48,13 @@ export const useNavState = (opts: UseNavStateOpts) => {
   const hasCrumbs = Boolean(nav && nav.crumbs.length > 0);
   const hasUpBtn = BACK_BUTTON && hasCrumbs;
   const shortcut = useMemo(() => findShortcut(nav), [nav]);
-  return { fullNav, neverNav, actions, hasCrumbs, hasUpBtn, shortcut };
+  return {
+    fullNav,
+    neverNav,
+    actions,
+    hasCrumbs,
+    hasUpBtn,
+    shortcut,
+    isFirstNav,
+  };
 };

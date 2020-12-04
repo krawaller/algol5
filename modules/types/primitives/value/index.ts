@@ -31,6 +31,7 @@ import {
   AlgolValBitOr,
   AlgolValCompareVals,
   AlgolValCompareSets,
+  AlgolValDistance,
 } from "./value.interface";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -82,4 +83,5 @@ type AlgolValInner<Blob extends AlgolGameBlobAnon, _T> =
   | AlgolValBitDiff<Blob>
   | AlgolValBitOr<Blob>
   | AlgolValCompareVals<Blob>
-  | AlgolValCompareSets<Blob>;
+  | AlgolValCompareSets<Blob>
+  | AlgolValDistance<Blob>;

@@ -27,6 +27,7 @@ import {
   isAlgolValBitOr,
   isAlgolValCompareVals,
   isAlgolValCompareSets,
+  isAlgolValDistance,
 } from "../../../../../types";
 
 import { makeParser } from "../";
@@ -227,6 +228,18 @@ export default function parseVal(
       compareSets: [first, second],
     } = expr;
     return parser.val({ compareVals: [{ sizeof: first }, { sizeof: second }] });
+  }
+  if (isAlgolValDistance(expr)) {
+    const {
+      distance: [pos1, pos2],
+    } = expr;
+    const distX = `Math.abs(${parser.val({ posx: pos1 })} - ${parser.val({
+      posx: pos2,
+    })})`;
+    const distY = `Math.abs(${parser.val({ posy: pos1 })} - ${parser.val({
+      posy: pos2,
+    })})`;
+    return `(${distX} + ${distY})`;
   }
   throw new Error("Unknown val expression: " + JSON.stringify(expr || ""));
 }

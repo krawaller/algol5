@@ -27,6 +27,7 @@ import {
   AlgolValBitOr,
   AlgolValCompareVals,
   AlgolValCompareSets,
+  AlgolValDistance,
 } from "./value.interface";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -62,3 +63,4 @@ export type AlgolValBitDiffAnon = AlgolValBitDiff<AlgolGameBlobAnon>;
 export type AlgolValBitOrAnon = AlgolValBitOr<AlgolGameBlobAnon>;
 export type AlgolValCompareValsAnon = AlgolValCompareVals<AlgolGameBlobAnon>;
 export type AlgolValCompareSetsAnon = AlgolValCompareSets<AlgolGameBlobAnon>;
+export type AlgolValDistanceAnon = AlgolValDistance<AlgolGameBlobAnon>;

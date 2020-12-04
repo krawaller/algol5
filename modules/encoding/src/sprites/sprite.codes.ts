@@ -4,9 +4,9 @@ export type AlgolSpriteCode =
   | ["icon", AlgolIcon, 0 | 1 | 2, "none" | "mark" | "pot"]
   | ["mark"]
   | ["pot"]
-  | ["row", 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11]
-  | ["skip", 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10]
-  | ["repeat", 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10];
+  | ["row", 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12]
+  | ["skip", 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11]
+  | ["repeat", 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11];
 
 export const codes: Record<string, AlgolSpriteCode> = {
   x: ["icon", "bishop", 0, "none"],
@@ -75,6 +75,7 @@ export const codes: Record<string, AlgolSpriteCode> = {
   "!": ["row", 9],
   "=": ["row", 10],
   "€l": ["row", 11],
+  "€y": ["row", 12],
   "?": ["skip", 1],
   o: ["skip", 2],
   p: ["skip", 3],
@@ -85,6 +86,7 @@ export const codes: Record<string, AlgolSpriteCode> = {
   ";": ["skip", 8],
   "*": ["skip", 9],
   "€g": ["skip", 10],
+  "€X": ["skip", 11],
   ")": ["repeat", 2],
   "]": ["repeat", 3],
   "<": ["repeat", 4],
@@ -94,4 +96,5 @@ export const codes: Record<string, AlgolSpriteCode> = {
   "'": ["repeat", 8],
   "}": ["repeat", 9],
   "€f": ["repeat", 10],
+  "€8": ["repeat", 11],
 };

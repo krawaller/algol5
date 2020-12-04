@@ -8,11 +8,20 @@ const monkeyqueenVariants: MonkeyqueenDefinition["variants"] = [
     desc: "regular",
     code: "r",
     arr: {
-      setup: {},
-      marks: [],
-      potentialMarks: []
-    }
-  }
+      marks: ["j4"],
+      potentialMarks: ["i4", "i5", "j5", "h6", "j6", "j7"],
+      setup: {
+        babies: {
+          "1": ["g1", "j4"],
+          "2": ["f3", "f12"],
+        },
+        queens: {
+          "1": ["d4"],
+          "2": ["i6"],
+        },
+      },
+    },
+  },
 ];
 
 export default monkeyqueenVariants;

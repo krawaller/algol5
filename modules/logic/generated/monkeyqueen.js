@@ -51,7 +51,7 @@ const prefixes2 = ["neutral", "opp", "my"];
 const emptyArtifactLayers_basic = { movetargets: {} };
 const game = {
   gameId: "monkeyqueen",
-  commands: { move: {} },
+  commands: { move: {}, pie: {} },
   iconMap: iconMapping,
   setBoard: board => {
     TERRAIN1 = terrainLayers(board, 1);
@@ -135,8 +135,12 @@ const game = {
         marks: {},
         commands: {}
       };
+      let TURN = step.TURN;
       for (const pos of Object.keys(UNITLAYERS.myunits)) {
         LINKS.marks[pos] = "selectunit_basic_2";
+      }
+      if (TURN === 1) {
+        LINKS.commands.pie = "pie_basic_2";
       }
       return {
         UNITDATA: step.UNITDATA,
@@ -144,7 +148,7 @@ const game = {
         UNITLAYERS,
         ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
-        TURN: step.TURN,
+        TURN,
         NEXTSPAWNID: step.NEXTSPAWNID,
         BATTLEVARS: step.BATTLEVARS
       };
@@ -438,6 +442,68 @@ const game = {
         BATTLEVARS,
         NEXTSPAWNID
       };
+    },
+    pie_basic_2: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let UNITLAYERS = step.UNITLAYERS;
+      let UNITDATA = { ...step.UNITDATA };
+      let MARKS = step.MARKS;
+      for (let LOOPPOS in UNITLAYERS.myunits) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              owner: 1
+            };
+          }
+        }
+      }
+      for (let LOOPPOS in UNITLAYERS.oppunits) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              owner: 2
+            };
+          }
+        }
+      }
+      UNITLAYERS = {
+        units: {},
+        myunits: {},
+        oppunits: {},
+        myqueens: {},
+        oppqueens: {},
+        babies: {},
+        mybabies: {},
+        oppbabies: {}
+      };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers2[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      if (Object.keys(UNITLAYERS.oppqueens).length === 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "regicide";
+        LINKS.endMarks = Object.keys({ [MARKS.selectmovetarget]: 1 });
+      } else {
+        LINKS.endTurn = "startTurn_basic_1";
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS: step.ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS,
+        BATTLEVARS: step.BATTLEVARS,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
     }
   },
   instruction: {
@@ -628,6 +694,7 @@ const game = {
     startTurn_basic_2: step => {
       let BATTLEVARS = step.BATTLEVARS;
       let UNITLAYERS = step.UNITLAYERS;
+      let TURN = step.TURN;
       return collapseContent({
         line: [
           BATTLEVARS["plr1life"] === BATTLEVARS["plr2life"]
@@ -713,11 +780,21 @@ const game = {
                   { text: BATTLEVARS["plr1life"] }
                 ]
               }),
-          { text: ". Select unit to act with" }
+          { text: ". Select unit to act with" },
+          TURN === 1
+            ? collapseContent({
+                line: [
+                  { text: ", or press" },
+                  { command: "pie" },
+                  { text: "to swap with opponent" }
+                ]
+              })
+            : undefined
         ]
       });
     },
     move_basic_2: () => defaultInstruction(2),
+    pie_basic_2: () => defaultInstruction(2),
     selectunit_basic_2: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;

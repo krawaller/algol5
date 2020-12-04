@@ -12,7 +12,7 @@ const monkeyqueenFlow: MonkeyqueenDefinition["flow"] = {
     plr2life: 20,
   },
   startTurn: {
-    link: "selectunit",
+    links: ["selectunit", { ifplayer: [2, { if: [["isFirstTurn"], "pie"] }] }],
   },
   commands: {
     move: {
@@ -36,6 +36,13 @@ const monkeyqueenFlow: MonkeyqueenDefinition["flow"] = {
           ],
         },
         { stompat: ["selectunit", "selectmovetarget"] },
+      ],
+      link: "endTurn",
+    },
+    pie: {
+      applyEffects: [
+        { adoptin: ["myunits", ["otherplayer"]] },
+        { adoptin: ["oppunits", ["player"]] },
       ],
       link: "endTurn",
     },

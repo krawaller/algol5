@@ -33,6 +33,17 @@ const monkeyqueenInstructions: MonkeyqueenDefinition["instructions"] = {
         ],
       },
       ". Select unit to act with",
+      {
+        ifplayer: [
+          2,
+          {
+            if: [
+              ["isFirstTurn"],
+              { line: [", or press", "pie", "to swap with opponent"] },
+            ],
+          },
+        ],
+      },
     ],
   },
   selectunit: {

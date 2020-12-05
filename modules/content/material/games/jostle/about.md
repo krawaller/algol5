@@ -2,7 +2,7 @@
 updated: 2020-03-01
 ---
 
-{GAME} was invented by Mark Steere in 2010.
+{GAME} was invented by {TAG:id=marksteere,text=Mark Steere} in 2010.
 
 {PIC:name=endgame.jpg,cred=Photo by Gurgeh,credurl=https://boardgamegeek.com/image/4085449/jostle,title=A win for blue}
 

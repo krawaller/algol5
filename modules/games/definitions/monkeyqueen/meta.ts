@@ -4,7 +4,7 @@ const monkeyqueenMeta: MonkeyqueenDefinition["meta"] = {
   id: "monkeyqueen",
   author: "Mark Steere",
   name: "Monkey Queen",
-  tags: ["regicide", "bloodshed", "iggamecenter"],
+  tags: ["regicide", "bloodshed", "iggamecenter", "marksteere"],
   tagline: "Serious monkey business!",
   source: "http://www.marksteeregames.com/Monkey_Queen_rules.html",
   code: "sj",

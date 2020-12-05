@@ -3,7 +3,7 @@ id: "bloodshed"
 title: "Bloodshed"
 slug: "bloodshed"
 blurb: "Games where you get to kill your opponent"
-thumbnail: "thumb.jpg"
+thumbnail: "blood_thumb.jpg"
 mainImage: "actionoverlava.jpg"
 sort: "bloodshed"
 updated: 2020-07-20

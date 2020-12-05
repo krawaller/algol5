@@ -2,7 +2,7 @@
 updated: 2020-05-07
 ---
 
-{GAME} was invented by {EXTLINK:url=http://www.marksteeregames.com/,text=Mark Steere} in 2010.
+{GAME} was invented by {TAG:id=marksteere,text=Mark Steere} in 2010.
 
 {PIC:name=madbishopbeer.jpg,credurl=https://duclaw.com/,cred=Label by DuClaw Brewing,title=Also a good beer}
 

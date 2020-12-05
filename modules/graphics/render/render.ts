@@ -26,7 +26,7 @@ export function render(opts: RenderOpts) {
     board,
     tileMap,
     from = "a1",
-    to = "k14",
+    to = "m14",
     pad = true,
     sprites,
     definitionStrategy = "group",

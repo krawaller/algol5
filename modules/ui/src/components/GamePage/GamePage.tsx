@@ -27,6 +27,9 @@ import {
 import { BattleMode } from "../../../../types/page/battleActions";
 import { makeSessionNav } from "../../../../common/nav/makeSessionNav";
 import { makeGameNav } from "../../../../common/nav/makeGameNav";
+import { board2sprites, sprites2arrangement } from "../../../../common";
+
+const SCREENSHOT = false; // TODO - setting somewhere!
 
 type GamePageProps = {
   actions: AppActions & BattleNavActions;
@@ -122,6 +125,21 @@ export const GamePage = (props: GamePageProps) => {
         ? "Finished battle"
         : "Ongoing battle"
       : name;
+
+  if (SCREENSHOT && mode === "playing") {
+    console.log(
+      "SCREENSHOT",
+      sprites2arrangement({
+        iconMap: api.iconMap,
+        sprites: board2sprites({
+          iconMap: api.iconMap,
+          marks: ui.board.marks,
+          units: ui.board.units,
+          potentialMarks: ui.board.potentialMarks,
+        }),
+      })
+    );
+  }
 
   return (
     <Page

@@ -9,8 +9,8 @@ import { AlgolGameBlobAnon } from "../../blob";
 import { AlgolEntity } from "../../primitives";
 
 export type AlgolBoard<Blob extends AlgolGameBlobAnon> = {
-  height: 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
-  width: 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+  height: 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+  width: 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
   offsets?: AlgolOffset[];
   offset?: AlgolOffset;
   terrain?: { [terrain in Blob["terrain"]]: TerrainDef<Blob> };

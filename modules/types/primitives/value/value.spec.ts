@@ -35,6 +35,7 @@ const tests: TestVal[] = [
   ["dir"],
   ["offsetdir"],
   ["countsofar"],
+  { distance: ["mymark", "mymark"] },
 ];
 
 const tests2: TestNumberVal[] = [

@@ -26,6 +26,7 @@ import {
   AlgolValBitOrAnon,
   AlgolValCompareValsAnon,
   AlgolValCompareSetsAnon,
+  AlgolValDistanceAnon,
 } from "./value.anon";
 
 export function isAlgolValValue(expr: AlgolValAnon): expr is AlgolValValueAnon {
@@ -160,4 +161,10 @@ export function isAlgolValCompareSets(
   expr: AlgolValAnon
 ): expr is AlgolValCompareSetsAnon {
   return (expr as AlgolValCompareSetsAnon).compareSets !== undefined;
+}
+
+export function isAlgolValDistance(
+  expr: AlgolValAnon
+): expr is AlgolValDistanceAnon {
+  return (expr as AlgolValDistanceAnon).distance !== undefined;
 }

@@ -66,6 +66,25 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
         },
         {
           context: {
+            MARKS: { mark1: "a1", mark2: "c2", mark3: "c3" },
+            BOARD: {
+              board: {
+                a1: { x: 1, y: 1 },
+                c2: { x: 3, y: 2 },
+                c3: { x: 3, y: 3 },
+              },
+            },
+          },
+          tests: [
+            { expr: { distance: ["mark1", "mark1"] }, res: 0 },
+            { expr: { distance: ["mark1", "mark2"] }, res: 3 },
+            { expr: { distance: ["mark2", "mark1"] }, res: 3 },
+            { expr: { distance: ["mark1", "mark3"] }, res: 4 },
+            { expr: { distance: ["mark2", "mark3"] }, res: 1 },
+          ],
+        },
+        {
+          context: {
             MARKS: { mymark: "a1" },
             UNITLAYERS: { units: { a1: { id: 666, gnarp: 5 } } },
           },

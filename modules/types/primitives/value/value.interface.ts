@@ -117,3 +117,7 @@ export interface AlgolValCompareVals<Blob extends AlgolGameBlobAnon> {
 export interface AlgolValCompareSets<Blob extends AlgolGameBlobAnon> {
   compareSets: [AlgolSet<Blob>, AlgolSet<Blob>];
 }
+
+export interface AlgolValDistance<Blob extends AlgolGameBlobAnon> {
+  distance: [AlgolPos<Blob>, AlgolPos<Blob>];
+}

@@ -9,4 +9,5 @@ export const links = {
     "https://mindsports.nl/index.php/the-pit/581-monkey-queen",
   "Zillions of Games entry":
     "https://www.zillionsofgames.com/cgi-bin/zilligames/submissions.cgi?do=show;id=1915",
+  "BrascoGames entry": "https://brascogames.webs.com/monkeyqueen.htm",
 };

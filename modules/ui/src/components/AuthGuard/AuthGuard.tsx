@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback } from "react";
-import { useFirebaseUser } from "../../../../firebase/src/useFirebaseUser";
-import { useFirebaseLoginRenderer } from "../../../../firebase/src/useFirebaseLoginRenderer";
-import { useFirebaseApp } from "../../../../firebase/src/useFirebaseApp";
+import { useFirebaseUser } from "../../../../firebase/src/hooks/useFirebaseUser";
+import { useFirebaseLoginRenderer } from "../../../../firebase/src/hooks/useFirebaseLoginRenderer";
+import { useFirebaseApp } from "../../../../firebase/src/hooks/useFirebaseApp";
 import { Button } from "../Button";
 
 type AuthGuardProps = {

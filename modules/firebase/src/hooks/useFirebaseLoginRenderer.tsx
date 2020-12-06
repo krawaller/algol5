@@ -1,6 +1,6 @@
 import React from "react";
 
-import dynamic from "../../next/node_modules/next/dynamic";
+import dynamic from "../../../next/node_modules/next/dynamic";
 
 const StyledFirebaseAuth = dynamic(
   () => import("react-firebaseui/StyledFirebaseAuth"),
@@ -8,7 +8,7 @@ const StyledFirebaseAuth = dynamic(
 );
 
 import { useFirebaseApp } from "./useFirebaseApp";
-import firebaseUiConfig from "./firebaseUiConfig";
+import firebaseUiConfig from "../firebaseUiConfig";
 
 export const useFirebaseLoginRenderer = () => {
   const app = useFirebaseApp();

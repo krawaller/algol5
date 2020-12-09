@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useMemo, Fragment } from "react";
 import {
-  AlgolLocalBattle,
+  AlgolSession,
   AlgolMeta,
   AlgolBattle,
   AlgolErrorReporter,
@@ -20,7 +20,7 @@ type BattleLandingActions = {
 
 type BattleLandingProps = {
   actions: BattleLandingActions;
-  session: AlgolLocalBattle;
+  session: AlgolSession;
   battle: AlgolBattle;
   meta: AlgolMeta<AlgolGameBlobAnon>;
   manyVariants?: boolean;

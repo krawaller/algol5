@@ -1,9 +1,9 @@
-import { AlgolLocalBattle } from "../../../types";
+import { AlgolSession } from "../../../types";
 import { parseSession, stringifySession } from ".";
 
 type Test = {
   desc: string;
-  local: AlgolLocalBattle;
+  local: AlgolSession;
   method?: number;
 };
 
@@ -24,7 +24,7 @@ const tests: Test[] = [
   },
 ];
 
-describe("the parsing and stringification of AlgolLocalBattle", () => {
+describe("the parsing and stringification of AlgolSession", () => {
   for (const t of tests) {
     it(t.desc, () => {
       const str = stringifySession(t.local, t.method || 0);

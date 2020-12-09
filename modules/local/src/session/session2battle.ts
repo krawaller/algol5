@@ -1,7 +1,7 @@
-import { AlgolLocalBattle, AlgolStaticGameAPI } from "../../../types";
+import { AlgolSession, AlgolStaticGameAPI } from "../../../types";
 
 export const session2battle = (
-  session: AlgolLocalBattle,
+  session: AlgolSession,
   api: AlgolStaticGameAPI
 ) =>
   api.fromSave({

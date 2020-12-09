@@ -14,7 +14,7 @@ import {
   SessionInfo,
 } from "./SessionList.Inner";
 import { SessionLoadFail } from "../../../../local/src";
-import { AlgolLocalBattle, AlgolVariantAnon } from "../../../../types";
+import { AlgolSession, AlgolVariantAnon } from "../../../../types";
 
 const innerActions: SessionListInnerActions = {
   loadLocalSession: id => console.log("Loading session id", id),
@@ -60,7 +60,7 @@ storiesOf("SessionList", module)
     );
   })
   .add("Hacked data, with one failing line", () => {
-    const fakeSession: AlgolLocalBattle = {
+    const fakeSession: AlgolSession = {
       created: Date.now(),
       id: "foo",
       sprites: [

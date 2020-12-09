@@ -1,11 +1,11 @@
-import { AlgolBattle, AlgolLocalBattle, AlgolIconMap } from "../../../types";
+import { AlgolBattle, AlgolSession, AlgolIconMap } from "../../../types";
 import { newSessionId } from "./newSessionId";
 import { board2sprites } from "../../../common";
 
 export function forkSessionFromBattle(
   battle: AlgolBattle,
   iconMap: AlgolIconMap
-): AlgolLocalBattle {
+): AlgolSession {
   return {
     id: newSessionId(),
     variantCode: battle.variant.code,

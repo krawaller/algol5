@@ -1,10 +1,10 @@
-import { AlgolLocalBattle } from "../../../types";
+import { AlgolSession } from "../../../types";
 import { parsePath } from "../path";
 import { parseTimestamp } from "../timestamp";
 import { parseSprites } from "../sprites";
 import { sessionCodes } from "./session.codes";
 
-export const parseSession = (str: string, id: string): AlgolLocalBattle => {
+export const parseSession = (str: string, id: string): AlgolSession => {
   const method = Number(str[0]);
   if (method === 0) {
     const [

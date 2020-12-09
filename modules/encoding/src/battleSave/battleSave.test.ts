@@ -30,7 +30,7 @@ const tests: Test[] = [
   },
 ];
 
-describe("the parsing and stringification of AlgolLocalBattle", () => {
+describe("the parsing and stringification of AlgolSession", () => {
   for (const t of tests) {
     it(t.desc, () => {
       const str = stringifyBattleSave(t.save, t.method || 0);

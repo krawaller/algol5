@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from "react";
-import { AlgolLocalBattle, AlgolContentAnon } from "../../../../types";
+import { AlgolSession, AlgolContentAnon } from "../../../../types";
 import { Content } from "../Content";
 
 type SessionStatusProps = {
-  session: AlgolLocalBattle;
+  session: AlgolSession;
 };
 
 export const SessionStatus: FunctionComponent<SessionStatusProps> = ({

@@ -11,10 +11,10 @@ export type Crumb = {
   onClick?: () => void;
 };
 
-interface BreadcrumbsActions {
+type BreadcrumbsActions = {
   navTo: (path: string) => void;
   prefetch: (path: string) => void;
-}
+};
 
 type BreadcrumbsProps = {
   crumbs: Crumb[];

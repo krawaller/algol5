@@ -21,7 +21,7 @@ export type Content = ComplexContent | string[] | string | any; // | Line | Uni
 export type ComplexContent = { type: string; [other: string]: any };
 
 /*
-interface Line extends Array<Content> {
+type Line extends Array<Content>  = {
   0: "line";
   [idx: number]: Content;
 }

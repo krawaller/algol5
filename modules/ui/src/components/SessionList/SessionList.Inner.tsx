@@ -16,12 +16,12 @@ import { SessionListItem } from "./SessionList.Item";
 import { ButtonGroup } from "../ButtonGroup";
 import { Button } from "../Button";
 
-export interface SessionListInnerActions {
+export type SessionListInnerActions = {
   loadLocalSession: (sessionId: string) => void;
   reportError: AlgolErrorReporter;
   updateList: () => void;
   purgeErrorLines: () => void;
-}
+};
 
 type SessionListInnerProps = {
   graphics: AlgolGameGraphics;

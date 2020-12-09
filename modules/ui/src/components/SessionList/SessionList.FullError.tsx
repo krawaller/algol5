@@ -11,10 +11,10 @@ import { ButtonGroup } from "../ButtonGroup";
 import { Button } from "../Button";
 import { deleteGameSessions } from "../../../../local/src";
 
-interface SessionListFullErrorActions {
+type SessionListFullErrorActions = {
   reportError: AlgolErrorReporter;
   updateList: () => void;
-}
+};
 
 type SessionListFullErrorProps = {
   error: AlgolError;

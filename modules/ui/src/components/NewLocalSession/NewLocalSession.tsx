@@ -13,12 +13,12 @@ import { ImportBattle } from "../ImportBattle";
 import { Box } from "../Box";
 import { VariantSelector } from "./NewLocalSession.VariantSelector";
 
-export interface NewLocalSessionActions {
+export type NewLocalSessionActions = {
   newLocalBattle: (code: string) => void;
   loadLocalSession: (sessionId: string) => void;
   importSession: (str: string) => void;
   reportError: AlgolErrorReporter;
-}
+};
 
 type NewLocalSessionProps = {
   graphics: AlgolGameGraphics;

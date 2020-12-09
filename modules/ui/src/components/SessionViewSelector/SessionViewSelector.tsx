@@ -2,11 +2,11 @@ import React, { FunctionComponent, useCallback } from "react";
 import { TabBar } from "../TabBar";
 import css from "./SessionViewSelector.cssProxy";
 
-export interface SessionViewSelectorActions {
+export type SessionViewSelectorActions = {
   toHistory: () => void;
   toBattleControls: () => void;
   toBattleLobby: () => void;
-}
+};
 
 type SessionViewSelectorProps = {
   actions: SessionViewSelectorActions;

@@ -7,10 +7,10 @@ import React, {
 } from "react";
 import css from "./Markdown.cssProxy";
 
-export interface MarkdownActions {
+export type MarkdownActions = {
   navTo: (path: string) => void;
   prefetch: (path: string) => void;
-}
+};
 
 type MarkdownProps = {
   actions: MarkdownActions;

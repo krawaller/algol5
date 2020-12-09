@@ -12,13 +12,13 @@ import { ScrollBox } from "../ScrollBox";
 import { ButtonGroup } from "../ButtonGroup";
 import { Content } from "../Content";
 
-export interface BattleMoveActions {
+export type BattleMoveActions = {
   undoBattleCommand: () => void;
   endTurn: () => void;
   command: (cmnd: string) => void;
   navTo: (url: string) => void;
   prefetch: (url: string) => void;
-}
+};
 
 type BattleMoveProps = {
   ui: AlgolBattleUI;

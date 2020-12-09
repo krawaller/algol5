@@ -18,10 +18,10 @@ import {
 import { Icon } from "../Icon";
 import { Button } from "../Button";
 
-interface ContentActions {
+type ContentActions = {
   endTurn: () => void;
   command: (cmnd: string) => void;
-}
+};
 
 type ContentProps = {
   content: AlgolContentAnon;

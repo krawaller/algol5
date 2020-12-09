@@ -5,126 +5,126 @@ import { AlgolWalkerStop } from "../../gamedef";
 import { AlgolGameBlobAnon } from "../../blob";
 import { AlgolPos } from "../pos";
 
-export interface AlgolBoolNot<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolNot<Blob extends AlgolGameBlobAnon> = {
   not: AlgolBool<Blob>;
-}
+};
 
-export interface AlgolBoolAnd<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolAnd<Blob extends AlgolGameBlobAnon> = {
   and: AlgolBool<Blob>[];
-}
+};
 
-export interface AlgolBoolOr<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolOr<Blob extends AlgolGameBlobAnon> = {
   or: AlgolBool<Blob>[];
-}
+};
 
-export interface AlgolBoolSamePos<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolSamePos<Blob extends AlgolGameBlobAnon> = {
   samepos: [AlgolPos<Blob>, AlgolPos<Blob>];
-}
+};
 
-export interface AlgolBoolHigher<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolHigher<Blob extends AlgolGameBlobAnon> = {
   higher: [AlgolPos<Blob>, AlgolPos<Blob>];
-}
+};
 
-export interface AlgolBoolFurther<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolFurther<Blob extends AlgolGameBlobAnon> = {
   further: [AlgolPos<Blob>, AlgolPos<Blob>];
-}
+};
 
-export interface AlgolBoolOverlaps<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolOverlaps<Blob extends AlgolGameBlobAnon> = {
   overlaps: [AlgolSet<Blob>, AlgolSet<Blob>, ...AlgolSet<Blob>[]];
-}
+};
 
-export interface AlgolBoolIsEmpty<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolIsEmpty<Blob extends AlgolGameBlobAnon> = {
   isempty: AlgolSet<Blob>;
-}
+};
 
-export interface AlgolBoolNotEmpty<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolNotEmpty<Blob extends AlgolGameBlobAnon> = {
   notempty: AlgolSet<Blob>;
-}
+};
 
-export interface AlgolBoolAnyAt<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolAnyAt<Blob extends AlgolGameBlobAnon> = {
   anyat: [AlgolSet<Blob>, AlgolPos<Blob>];
-}
+};
 
-export interface AlgolBoolNoneAt<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolNoneAt<Blob extends AlgolGameBlobAnon> = {
   noneat: [AlgolSet<Blob>, AlgolPos<Blob>];
-}
+};
 
-export interface AlgolBoolCmndAvailable<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolCmndAvailable<Blob extends AlgolGameBlobAnon> = {
   cmndavailable: AlgolVal<Blob, Blob["cmnd"] | "endTurn">;
-}
+};
 
-export interface AlgolBoolTruthy<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolTruthy<Blob extends AlgolGameBlobAnon> = {
   truthy: AlgolVal<Blob, string | number>;
-}
+};
 
-export interface AlgolBoolFalsy<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolFalsy<Blob extends AlgolGameBlobAnon> = {
   falsy: AlgolVal<Blob, string | number>;
-}
+};
 
-export interface AlgolBoolMarkAvailable<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolMarkAvailable<Blob extends AlgolGameBlobAnon> = {
   markavailable: AlgolVal<Blob, Blob["mrk"]>;
-}
+};
 
-export interface AlgolBoolSame<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolSame<Blob extends AlgolGameBlobAnon> = {
   same: [AlgolVal<Blob, string | number>, AlgolVal<Blob, string | number>];
-}
+};
 
-export interface AlgolBoolDifferent<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolDifferent<Blob extends AlgolGameBlobAnon> = {
   different: [AlgolVal<Blob, string | number>, AlgolVal<Blob, string | number>];
-}
+};
 
-export interface AlgolBoolMoreThan<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolMoreThan<Blob extends AlgolGameBlobAnon> = {
   morethan: [AlgolVal<Blob, number>, AlgolVal<Blob, string | number>];
-}
+};
 
-export interface AlgolBoolLessThan<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolLessThan<Blob extends AlgolGameBlobAnon> = {
   lessthan: [AlgolVal<Blob, number>, AlgolVal<Blob, string | number>];
-}
+};
 
-export interface AlgolBoolValInList<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolValInList<Blob extends AlgolGameBlobAnon> = {
   valinlist: AlgolVal<Blob, string | number>[];
-}
+};
 
-export interface AlgolBoolOrtho<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolOrtho<Blob extends AlgolGameBlobAnon> = {
   ortho: AlgolVal<Blob, string | number>;
-}
+};
 
-export interface AlgolBoolDiag<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolDiag<Blob extends AlgolGameBlobAnon> = {
   diag: AlgolVal<Blob, string | number>;
-}
+};
 
-export interface AlgolBoolUphill<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolUphill<Blob extends AlgolGameBlobAnon> = {
   uphill: AlgolVal<Blob, string | number>;
-}
+};
 
-export interface AlgolBoolDownhill<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolDownhill<Blob extends AlgolGameBlobAnon> = {
   downhill: AlgolVal<Blob, string | number>;
-}
+};
 
-export interface AlgolBoolHorisontal<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolHorisontal<Blob extends AlgolGameBlobAnon> = {
   horisontal: AlgolVal<Blob, string | number>;
-}
+};
 
-export interface AlgolBoolVertical<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolVertical<Blob extends AlgolGameBlobAnon> = {
   vertical: AlgolVal<Blob, string | number>;
-}
+};
 
-export interface AlgolBoolStoppedBecause<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolStoppedBecause<Blob extends AlgolGameBlobAnon> = {
   stoppedBecause: AlgolVal<Blob, AlgolWalkerStop>;
-}
+};
 
-export interface AlgolBoolTruthyPos<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolTruthyPos<Blob extends AlgolGameBlobAnon> = {
   truthypos: AlgolPos<Blob>;
-}
+};
 
-export interface AlgolBoolFalsyPos<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolFalsyPos<Blob extends AlgolGameBlobAnon> = {
   falsypos: AlgolPos<Blob>;
-}
+};
 
-export interface AlgolBoolHasCommonBits<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolHasCommonBits<Blob extends AlgolGameBlobAnon> = {
   hascommonbits: [AlgolVal<Blob, number>, AlgolVal<Blob, number>];
-}
+};
 
-export interface AlgolBoolBitContains<Blob extends AlgolGameBlobAnon> {
+export type AlgolBoolBitContains<Blob extends AlgolGameBlobAnon> = {
   bitcontains: [AlgolVal<Blob, number>, AlgolVal<Blob, number>];
-}
+};

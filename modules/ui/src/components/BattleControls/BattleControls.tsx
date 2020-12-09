@@ -47,7 +47,7 @@ export const BattleControls: FunctionComponent<BattleControlsProps> = ({
           big
           disabled={
             disabledOver ||
-            (!Boolean(ui.endTurn) && "You haven't made a complete turn yet")
+            (!ui.endTurn && "You haven't made a complete turn yet")
           }
           onClick={actions.endTurn}
         >

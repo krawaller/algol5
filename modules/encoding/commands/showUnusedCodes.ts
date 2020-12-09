@@ -4,6 +4,7 @@ const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const lower = "abcdefghijklmnopqrstuvwxyz";
 const digits = "0123456789";
 const control = "_()[]{}-,.;:'*+?!%&/=<>";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const FORBIDDEN = "#€";
 
 const all = upper + lower + digits + control;

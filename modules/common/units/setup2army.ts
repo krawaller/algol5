@@ -7,12 +7,12 @@ the initial unit data blob
 export function setup2army(setup: AlgolSetupAnon): AlgolArmy {
   let id = 1;
   return Object.keys(setup).reduce((mem, group) => {
-    let defsbyplr = setup[group]!;
+    const defsbyplr = setup[group]!;
     return Object.keys(defsbyplr).reduce((mem, plr) => {
-      let entitydefs = defsbyplr[plr as "0" | "1" | "2"]!;
+      const entitydefs = defsbyplr[plr as "0" | "1" | "2"]!;
       return entitydefs.reduce((mem, entitydef) => {
         processEntity(entitydef).forEach(e => {
-          let newid = "unit" + id++;
+          const newid = "unit" + id++;
           mem[newid] = {
             ...e,
             ...{

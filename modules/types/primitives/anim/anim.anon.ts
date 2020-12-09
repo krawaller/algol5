@@ -10,8 +10,6 @@ import {
 import { AlgolAnim, AlgolAnimInner } from "./";
 import { AlgolGameBlobAnon } from "../../blob";
 
-type s = string;
-
 export type AlgolAnimAnon = AlgolAnim<AlgolGameBlobAnon>;
 export type AlgolAnimInnerAnon = AlgolAnimInner<AlgolGameBlobAnon>;
 

@@ -2,7 +2,7 @@ import {
   FullDefAnon,
   AlgolLinkAnon,
   AlgolLinkInnerAnon,
-  AlgolEffectActionDefAnon,
+  // AlgolEffectActionDefAnon,
 } from "../../../../../types";
 
 import { executeStatement, makeParser } from "../../../executors";
@@ -32,11 +32,11 @@ function executeLinkInner(
   ruleset: string,
   name: AlgolLinkInnerAnon
 ): string {
-  const actionDef: AlgolEffectActionDefAnon =
-    gameDef.flow.commands[action] ||
-    gameDef.flow.marks[action] ||
-    (action === "startTurn" && gameDef.flow.startTurn) ||
-    {}; // To allow tests to reference non-existing things
+  // const actionDef: AlgolEffectActionDefAnon =
+  //   gameDef.flow.commands[action] ||
+  //   gameDef.flow.marks[action] ||
+  //   (action === "startTurn" && gameDef.flow.startTurn) ||
+  //   {}; // To allow tests to reference non-existing things
   const parser = makeParser(gameDef, player, action, ruleset);
   if (gameDef && gameDef.flow.commands && gameDef.flow.commands[name]) {
     // ------------- Linking to a command
@@ -58,7 +58,7 @@ function executeLinkInner(
     }
     return Object.entries(gameDef.flow.endGame || {})
       .filter(
-        ([name, def]) =>
+        ([, def]) =>
           def.unlessAction !== action &&
           (!def.ifPlayer || def.ifPlayer === player)
       )
@@ -111,7 +111,7 @@ function executeLinkInner(
         return `if (${parser.bool(def.condition)}) { ${code} }`;
       })
       .concat(
-        `{ LINKS.endTurn = "startTurn_${ruleset}_${player === 1 ? 2 : 1}"; }`
+        `{ LINKS.endTurn = "startTurn_${ruleset}_${player === 1 ? 2 : 1}"; }`
       )
       .join(" else ");
   } else {

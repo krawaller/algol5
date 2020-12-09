@@ -8,6 +8,7 @@ const sizeOf = require("image-size");
 
 export const pic: TokenHandler = opts => {
   const { args, picSourcePath, picRefPath } = opts;
+  // eslint-disable-next-line prefer-const
   let { name, inline, title, cred, credurl, naked } = args;
   if (!name) {
     throw new Error("Have to provide picture filename");

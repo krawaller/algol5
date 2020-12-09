@@ -24,7 +24,7 @@ export const inflateBattleSave = (
     if (actionIdx === undefined) {
       throw new Error(`Ran out of actions before inflation was complete`);
     }
-    let opts = battleOptions(battle);
+    const opts = battleOptions(battle);
     const action = opts[actionIdx];
     if (!action) {
       throw new Error(

@@ -1,6 +1,5 @@
 const { createCanvas, loadImage } = require("canvas");
 const fs = require("fs-extra");
-const path = require("path");
 
 const svg2png = async svgPath => {
   const buffer = await fs.readFile(svgPath);
@@ -11,6 +10,7 @@ const svg2png = async svgPath => {
   if (!dims) {
     throw new Error("Failed to get dimensions for SVG");
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [, x1, y1, x2, y2] = dims;
   const width = +x2 * 2; // - x1;
   const height = +y2 * 2; // - y1;

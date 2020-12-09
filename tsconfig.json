@@ -1,4 +1,7 @@
 {
+  "env": {
+    "node": true
+  },
   "compilerOptions": {
     "lib": ["es2019", "dom"],
     "target": "es5",

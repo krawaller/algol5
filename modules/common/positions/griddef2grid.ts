@@ -1,4 +1,4 @@
-import { AlgolGrid, FullDefAnon } from "../../types";
+import { AlgolGrid } from "../../types";
 import { coords2pos } from "./coords2pos";
 
 export function griddef2grid(grid: AlgolGrid<number, number>) {

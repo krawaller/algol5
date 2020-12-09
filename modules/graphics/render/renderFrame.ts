@@ -30,7 +30,7 @@ export function renderFrame(opts: RenderFrameOpts) {
   }" stroke="none" />`;
 
   for (let row = startRow; row <= stopRow; row++) {
-    let drawY = (height - row + 1.5) * svgPicSide;
+    const drawY = (height - row + 1.5) * svgPicSide;
     if (row > 0 && row <= height) {
       // left side row numbers
       if (startCol === 0) {
@@ -48,7 +48,7 @@ export function renderFrame(opts: RenderFrameOpts) {
     }
     for (let col = startCol; col <= stopCol; col++) {
       if (col > 0 && col <= width) {
-        let drawX = col * svgPicSide;
+        const drawX = col * svgPicSide;
         // top column names
         if (row === height + 1) {
           const colName = coords2pos({ x: col, y: 1 })[0].toUpperCase();

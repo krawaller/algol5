@@ -104,7 +104,7 @@ function walkFromStart(
     `
     );
   } else {
-    let dirVar = dirMatters ? "DIR" : (parse.val(walkDef.dir!) as string);
+    const dirVar = dirMatters ? "DIR" : (parse.val(walkDef.dir!) as string);
     return (
       intro +
       `
@@ -350,7 +350,7 @@ function calcStopCondition(
   blocksVar = "BLOCKS"
 ) {
   const prio = genDef.stopPrio || defaultStopPrio;
-  let conds = [];
+  const conds = [];
   for (const stop of prio) {
     if (stop === "reachedmax" && genDef.max) {
       conds.push("LENGTH < MAX");

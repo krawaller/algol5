@@ -4,7 +4,7 @@ import { emptyArtifactLayers } from "..";
 type EmptyArtifactLayerTest = {
   generators: GeneratorsAnon;
   expected: {
-    [artifactLayerName: string]: {};
+    [artifactLayerName: string]: Record<string, unknown>;
   };
 };
 
@@ -13,26 +13,26 @@ const emptyArtifactLayerTests: EmptyArtifactLayerTest[] = [
     generators: {
       walk: {
         type: "walker",
-        draw: { steps: { tolayer: { playercase: ["w1", "w2"] } } }
-      }
+        draw: { steps: { tolayer: { playercase: ["w1", "w2"] } } },
+      },
     },
     expected: {
       w1: {},
-      w2: {}
-    }
+      w2: {},
+    },
   },
   {
     generators: {
       filt: {
         type: "filter",
         layer: "whatev",
-        tolayer: { ifelse: [["true"], "f1", "f2"] }
-      }
+        tolayer: { ifelse: [["true"], "f1", "f2"] },
+      },
     },
     expected: {
       f1: {},
-      f2: {}
-    }
+      f2: {},
+    },
   },
   {
     generators: {
@@ -40,22 +40,22 @@ const emptyArtifactLayerTests: EmptyArtifactLayerTest[] = [
         type: "neighbour",
         draw: {
           start: { tolayer: "n1", include: { foo: "bar" } },
-          neighbours: { tolayer: "n2", include: { owner: 1 } }
-        }
-      }
+          neighbours: { tolayer: "n2", include: { owner: 1 } },
+        },
+      },
     },
     expected: {
       n1: {},
       n2: {},
       myn2: {},
       oppn2: {},
-      neutraln2: {}
-    }
-  }
+      neutraln2: {},
+    },
+  },
 ];
 
 test("artifactLayers", () => {
   emptyArtifactLayerTests.forEach(({ generators, expected }) =>
-    expect(emptyArtifactLayers(generators)).toEqual(expected)
+    expect(emptyArtifactLayers(generators, "")).toEqual(expected)
   );
 });

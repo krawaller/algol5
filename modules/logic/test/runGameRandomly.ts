@@ -4,7 +4,7 @@ import games from "../../games/dist/lib";
 export function runGameRandomly(
   id: string,
   game: AlgolGame,
-  max: number = 1000
+  max = 1000
 ) {
   test(`Game - ${id} - random play, max ${max} moves`, () => {
     let remaining = max;
@@ -25,7 +25,7 @@ export function runGameRandomly(
 }
 
 function getActionObj(links: AlgolStepLinks) {
-  let actions = { ...links.commands, ...links.marks };
+  const actions = { ...links.commands, ...links.marks };
 
   if (links.endTurn) {
     actions.endTurn = links.endTurn;

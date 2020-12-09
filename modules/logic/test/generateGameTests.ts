@@ -12,9 +12,10 @@ async function setup() {
 
   await Promise.all(
     games.map(async g => {
-      const name = g
-        .split("/")
-        [g.split("/").length - 1].replace(/\.[tj]s$/, "");
+      const name = g.split("/")[
+        // just a comment to avoid weird prettier linebreak that eslint doesnt like
+        g.split("/").length - 1
+      ].replace(/\.[tj]s$/, "");
       await fs.writeFile(
         path.join(out, name + ".test.ts"),
         `

@@ -17,7 +17,7 @@ if (!gameId) {
 }
 
 function listener(changeType: string, fullPath: string) {
-  const fileName = (fullPath.match(/[^\/]*$/) || "")[0];
+  const fileName = (fullPath.match(/[^/]*$/) || "")[0];
   if (changeType === "update" && fileName !== "_types.ts") {
     console.log(
       gameId,

@@ -10,10 +10,10 @@ const codeMatcher = /^([A-Za-z]*)/;
 
 export const parseSeed = (str: string, expectedGameId: GameId) => {
   const expectedCode = Object.entries(id2code)
-    .filter(([i, c]) => i === expectedGameId)
+    .filter(([i]) => i === expectedGameId)
     .map(e => e[1])
     .pop();
-  const code = str.match(codeMatcher)[0];
+  const code = (str.match(codeMatcher) || [""])[0];
   if (!code.length) {
     throw NewAlgolError({
       errorId: "import-seed-missing-code",

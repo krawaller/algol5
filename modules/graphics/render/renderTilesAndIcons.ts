@@ -47,7 +47,7 @@ export function renderTilesAndIcons(opts: RenderTilesAndIconsOpts) {
   let icons = "";
   let marks = "";
   let defs = "";
-  let used: Record<string, boolean> = {};
+  const used: Record<string, boolean> = {};
 
   const { startCol, startRow, stopCol, stopRow } = getBounds({
     height,
@@ -58,7 +58,7 @@ export function renderTilesAndIcons(opts: RenderTilesAndIconsOpts) {
   });
 
   const startY = (height - Math.min(stopRow, height) + 1) * side;
-  let background = `<rect x="${Math.max(startCol, 1) *
+  const background = `<rect x="${Math.max(startCol, 1) *
     side}" y="${startY}" width="${(Math.min(stopCol, width) -
     Math.max(startCol, 1) +
     1) *
@@ -70,16 +70,16 @@ export function renderTilesAndIcons(opts: RenderTilesAndIconsOpts) {
     row <= Math.min(stopRow, height);
     row++
   ) {
-    let drawY = (height - row + 1) * side;
+    const drawY = (height - row + 1) * side;
     for (
       let col = Math.max(startCol, 1);
       col <= Math.min(stopCol, width);
       col++
     ) {
-      let drawX = col * side;
+      const drawX = col * side;
       const pos = coords2pos({ x: col, y: row });
-      let tile = holes.includes(pos) ? "hole" : tileAtPos(layers, tileMap, pos);
-      let isDark = !((col + (row % 2)) % 2);
+      const tile = holes.includes(pos) ? "hole" : tileAtPos(layers, tileMap, pos);
+      const isDark = !((col + (row % 2)) % 2);
       if (!(tile === "empty" && !isDark)) {
         const id = tile + (isDark ? "Dark" : "");
         const pic = allTiles[id as keyof typeof allTiles];

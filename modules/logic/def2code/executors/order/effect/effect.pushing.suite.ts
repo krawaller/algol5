@@ -1,10 +1,5 @@
 import { executeOrder } from "../../../executors";
-import {
-  emptyFullDef,
-  truthy,
-  falsy,
-  boardConnections,
-} from "../../../../../common";
+import { emptyFullDef, boardConnections } from "../../../../../common";
 import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
 export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {

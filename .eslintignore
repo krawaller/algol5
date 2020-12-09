@@ -1,0 +1,10 @@
+node_modules
+npm-debug.log
+dist
+thumbs.db
+bogus
+.DS_Store
+archive
+generated
+generatedSuiteTests
+generatedGameTests

@@ -52,7 +52,7 @@ export default function executeFloater(
           toCheck.push([POS, floatdist]);
           ${drawStep}
         }
-        ${def.draw.blocks ? `if (blocks[POS]) { ${drawBlock} } ` : ""}
+        ${def.draw.blocks ? `if (blocks[POS]) { ${drawBlock} } ` : ""}
       }
     }
   `;

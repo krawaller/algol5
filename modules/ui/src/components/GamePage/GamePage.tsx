@@ -9,7 +9,6 @@ import {
   AppActions,
   BattleNavActions,
 } from "../../../../types";
-import css from "./GamePage.cssProxy";
 
 import { Board } from "../Board";
 import { Page } from "../Page";
@@ -112,19 +111,19 @@ export const GamePage = (props: GamePageProps) => {
     );
   }
 
-  const name = gamePayload.meta.name;
-  const title =
-    mode === "playing"
-      ? "Making a move"
-      : mode === "history"
-      ? "Battle history"
-      : mode === "battlelobby"
-      ? battle!.history!.length
-        ? "New battle"
-        : battle!.gameEndedBy
-        ? "Finished battle"
-        : "Ongoing battle"
-      : name;
+  // const name = gamePayload.meta.name;
+  // const title =
+  //   mode === "playing"
+  //     ? "Making a move"
+  //     : mode === "history"
+  //     ? "Battle history"
+  //     : mode === "battlelobby"
+  //     ? battle!.history!.length
+  //       ? "New battle"
+  //       : battle!.gameEndedBy
+  //       ? "Finished battle"
+  //       : "Ongoing battle"
+  //     : name;
 
   if (SCREENSHOT && mode === "playing") {
     console.log(

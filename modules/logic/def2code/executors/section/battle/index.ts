@@ -4,8 +4,11 @@ import { usesSpawn, referencesBattleVars } from "../sectionUtils";
 
 export function executeNewBattle(
   gameDef: FullDefAnon,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   player: 1 | 2,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   action: string,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ruleset: string
 ): string {
   let ret = "";

@@ -8,7 +8,7 @@ import { stepOptions } from "../../../../common";
 export const battleTurnPath = (battle: AlgolBattle) => {
   const res: number[] = [];
   let stepId = "root";
-  let actions = battle.state.currentStepId
+  const actions = battle.state.currentStepId
     .split("-")
     .slice(1)
     .concat("endTurn");

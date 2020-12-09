@@ -7,8 +7,8 @@ Calculates the three BOARD layers (board,light,dark) and returns them.
 export function boardLayers(board: AlgolBoardAnon) {
   return boardPositions(board).reduce(
     function(mem, pos) {
-      var coords = pos2coords(pos);
-      var colour = ["dark", "light"][(coords.x + (coords.y % 2)) % 2];
+      const coords = pos2coords(pos);
+      const colour = ["dark", "light"][(coords.x + (coords.y % 2)) % 2];
       mem.board[pos] = mem[colour][pos] = {
         colour: colour,
         x: coords.x,

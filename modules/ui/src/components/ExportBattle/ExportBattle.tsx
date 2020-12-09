@@ -1,4 +1,7 @@
-import React, { FunctionComponent, useCallback } from "react";
+import React, {
+  FunctionComponent,
+  // useCallback
+} from "react";
 import {
   AlgolBattle,
   AlgolBattleSave,
@@ -10,9 +13,8 @@ import {
 // TODO - just showing import for now, can't make clipboard copying to work reliably :/
 
 import css from "./ExportBattle.cssProxy";
-import { InputButton } from "../InputButton";
 import { stringifySeed } from "../../../../encoding/src/seed/seed.stringify";
-import { clipboardCopy } from "../../helpers";
+// import { clipboardCopy } from "../../helpers";
 import { Input } from "../Input";
 
 type ExportBattleProps = {
@@ -33,10 +35,10 @@ export const ExportBattle: FunctionComponent<ExportBattleProps> = props => {
     path: battle.path,
   };
   const str = stringifySeed(save, meta.id, 0);
-  const handleClick = useCallback(() => {
-    clipboardCopy(str);
-    alert("Copied to clipboard!");
-  }, [str]);
+  // const handleClick = useCallback(() => {
+  //   clipboardCopy(str);
+  //   alert("Copied to clipboard!");
+  // }, [str]);
   return (
     <div>
       <div className={css.exportBattleInstruction}>

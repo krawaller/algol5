@@ -13,7 +13,6 @@ export function executeStartEnd(
   action: string,
   ruleset: string
 ): string {
-  const startDef = gameDef.flow.startTurn;
   const unitLayerNames = Object.keys(emptyUnitLayers(gameDef));
 
   const usage = orderUsage(gameDef, player, action, ruleset);

@@ -17,9 +17,9 @@ export function posConnections(
     }
   });
 
-  let offsets = board.offsets || [];
+  const offsets = board.offsets || [];
   if (board.offset) offsets.push(board.offset);
-  let parsedOffsets = offsets.reduce(
+  const parsedOffsets = offsets.reduce(
     (mem, offset) => mem.concat(parseOffset(offset)),
     [] as AlgolOffsetBasic[]
   );

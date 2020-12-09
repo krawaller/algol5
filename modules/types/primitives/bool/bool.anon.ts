@@ -35,8 +35,6 @@ import {
 } from "./bool.interfaces";
 import { AlgolGameBlobAnon } from "../../blob";
 
-type s = string;
-
 export type AlgolBoolAnon = AlgolBool<AlgolGameBlobAnon>;
 
 export type AlgolBoolNotAnon = AlgolBoolNot<AlgolGameBlobAnon>;

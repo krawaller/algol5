@@ -35,7 +35,7 @@ export const BoardUnits: React.FunctionComponent<BoardUnitsProps> = ({
   iconMapper,
 }) => {
   const targets = anim.ghosts
-    .map(([from, to]) => to)
+    .map(([, to]) => to)
     .concat(Object.values(anim.exitTo))
     .reduce(
       (mem, t) => ({ ...mem, [t]: true }),

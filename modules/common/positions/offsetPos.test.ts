@@ -1,5 +1,5 @@
 import { offsetPos } from "..";
-import { AlgolBoardAnon, isAlgolExpressionIfActionElse } from "../../types";
+import { AlgolBoardAnon } from "../../types";
 
 const testBoard: AlgolBoardAnon = { height: 3, width: 4 };
 

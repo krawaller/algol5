@@ -25,7 +25,7 @@ export function getContentText(content: AlgolContentAnon): string | number {
     return `plr ${content.unittype[1]} ${content.unittype[0]}`;
   }
   if (isAlgolContentUnit(content)) {
-    const [group, owner, pos] = content.unit;
+    const [group, , pos] = content.unit;
     return `${pos} ${group}`; // TODO - plr specific etc :P
   }
   if (isAlgolContentLine(content)) {

@@ -42,6 +42,7 @@ export default function parseVal(
   action: string,
   ruleset: string,
   expr: AlgolBoolAnon,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   from?: string
 ) {
   const parser = makeParser(gameDef, player, action, ruleset, "bool");

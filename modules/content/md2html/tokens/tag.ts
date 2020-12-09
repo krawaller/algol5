@@ -7,7 +7,7 @@ import tagIndex from "../../dist/tagIndex";
 
 export const tag: TokenHandler = opts => {
   const { args } = opts;
-  let { id, text } = args;
+  const { id, text } = args;
   if (!id) {
     throw new Error("Tag ref didn't have id!");
   }

@@ -1,11 +1,7 @@
 import { FullDefAnon } from "../../types";
 import { generatorLayers } from "./generatorLayers";
 
-export function gameArtifactLayers(
-  gameDef: FullDefAnon,
-  player: 1 | 2,
-  action: string
-) {
+export function gameArtifactLayers(gameDef: FullDefAnon) {
   let names = [] as string[];
 
   Object.keys(gameDef.generators).forEach(genName => {

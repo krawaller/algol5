@@ -38,6 +38,7 @@ export default function parseVal(
   action: string,
   ruleset: string,
   expr: AlgolValAnon,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   from?: string
 ) {
   const parser = makeParser(gameDef, player, action, ruleset, "value");
@@ -221,7 +222,7 @@ export default function parseVal(
     } = expr;
     const one = parser.val(first);
     const two = parser.val(second);
-    return `whoWins(${parser.val(first)},${parser.val(second)})`;
+    return `whoWins(${one},${two})`;
   }
   if (isAlgolValCompareSets(expr)) {
     const {

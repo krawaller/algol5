@@ -42,6 +42,7 @@ function executeOrderInner(
   action: string,
   ruleset: string,
   order: AlgolOrderInnerAnon,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   from?: string
 ): string {
   if (Array.isArray(order)) {

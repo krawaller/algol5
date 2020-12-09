@@ -10,10 +10,10 @@ export const firebaseUiConfig = {
   ],
   signInFlow: "popup",
   callbacks: {
-    signInSuccessWithAuthResult: (result: any) => {
+    signInSuccessWithAuthResult: () => {
       return false; // To prevent redirect
     },
-    signInFailure: (error: any) => {
+    signInFailure: () => {
       return Promise.resolve();
     },
   },

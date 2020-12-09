@@ -6,6 +6,7 @@ import lib from "../../../games/dist/lib";
 
 export const endgame: TokenHandler = opts => {
   const { args, gameId: thisGameId } = opts;
+  // eslint-disable-next-line prefer-const
   let { name, gameId } = args;
   if (!gameId) {
     if (thisGameId) {

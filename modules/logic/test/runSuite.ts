@@ -3,7 +3,7 @@ import * as path from "path";
 import { AlgolSuite, isAlgolExpressionTest } from "../../types";
 import { truthy, falsy, groupLayersForPlayer } from "../../common";
 
-export function runSuite<T, U>(suite: AlgolSuite) {
+export function runSuite(suite: AlgolSuite) {
   test(suite.title, () => {
     for (const {
       def,
@@ -25,7 +25,7 @@ export function runSuite<T, U>(suite: AlgolSuite) {
         } of contexts) {
           if (!skip) {
             for (const suiteTest of tests) {
-              let results: any[] = [];
+              const results: any[] = [];
               if (!suiteTest.skip) {
                 const player = suiteTest.player || ctxPlayer || defPlayer || 1;
                 const action =
@@ -110,7 +110,7 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                 }
 
                 pre += envelope || "";
-                let body = isAlgolExpressionTest(suiteTest)
+                const body = isAlgolExpressionTest(suiteTest)
                   ? `results[0] = ${code}`
                   : `${code.replace(
                       /return *([^;]*;\W*)$/,
@@ -140,7 +140,7 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                       },
                     ]
                   : suiteTest.asserts;
-                checks.forEach(({ res, desc, debug, skip }, n) => {
+                checks.forEach(({ res, debug, skip }, n) => {
                   if (!skip) {
                     const processedResult =
                       (res as unknown) === truthy || (res as unknown) === falsy

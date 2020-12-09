@@ -1,6 +1,6 @@
 import { GeneratorDefAnon } from "./";
 import { DrawDef } from "./draw";
-import { AlgolPos, AlgolSet, AlgolBool, AlgolVal, AlgolDirs } from "../../";
+import { AlgolPos, AlgolSet, AlgolVal, AlgolDirs } from "../../";
 import { AlgolGameBlobAnon } from "../../blob";
 
 export type FloaterDefAnon = AlgolFloaterDef<AlgolGameBlobAnon>;

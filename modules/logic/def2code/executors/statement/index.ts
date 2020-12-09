@@ -132,7 +132,7 @@ export function executeStatement<_T>(
       : `let LOOPID = (UNITLAYERS.units[LOOPPOS]||{}).id; if (LOOPID) { ${me(
           repeatEffect
         )} }`;
-    return `for(let LOOPPOS in ${setcode}) { ${loopInner} }`;
+    return `for(let LOOPPOS in ${setcode}) { ${loopInner} }`;
   }
 
   return finalParser(gameDef, player, action, ruleset, statement, from);

@@ -1,7 +1,6 @@
 import prettier from "prettier";
 import fs, { writeFileSync } from "fs-extra";
 import path from "path";
-import { GameId } from "../../../games/dist/list";
 import allMeta from "../../../games/dist/meta";
 import allDefs from "../../../games/dist/lib";
 import { AlgolMeta, AlgolGameBlobAnon } from "../../../types";

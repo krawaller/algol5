@@ -34,7 +34,7 @@ function drawSingle(
 ) {
   if (!drawDef) return "";
   const parser = makeParser(gameDef, player, action, ruleset);
-  let conds = [];
+  const conds = [];
   if (drawDef.condition) conds.push(parser.bool(drawDef.condition));
   if (drawDef.unlessover)
     conds.push(`!${parser.set(drawDef.unlessover)}[${posVar}]`);
@@ -49,8 +49,8 @@ function drawSingle(
   let body;
   if (drawDef.include && drawDef.include.owner) {
     // if artifact has owner it must be added to more than one layer
-    let prefix,
-      owner = parser.val(drawDef.include.owner);
+    let prefix;
+    const owner = parser.val(drawDef.include.owner);
     if (owner === 0) {
       prefix = '"neutral"';
     } else if (owner === player) {

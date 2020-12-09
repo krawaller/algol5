@@ -6,7 +6,7 @@ import {
   AlgolContentText,
 } from "../../types";
 
-const noSpacesBefore = /[,!\.? ]/;
+const noSpacesBefore = /[,!.? ]/;
 
 // included in parcel
 export function collapseContent(content: AlgolContentAnon): AlgolContentAnon {
@@ -53,7 +53,7 @@ export function collapseContent(content: AlgolContentAnon): AlgolContentAnon {
               (n && !(i.text + "")[0].match(noSpacesBefore) ? " " : "") +
               i.text +
               (n < items.length - 1 ? " " : "")
-            ).replace(/  /, " "),
+            ).replace(/ {2}/, " "),
           }
         : i
     );
@@ -68,7 +68,7 @@ export function collapseContent(content: AlgolContentAnon): AlgolContentAnon {
           !isAlgolContentText(items[n - 1])
       )) !== -1
     ) {
-      let val = items[idx];
+      const val = items[idx];
       items.splice(idx, 1, { text: " " } as AlgolContentText, val);
     }
 

@@ -8,7 +8,7 @@ import {
 import isEqual from "lodash.isequal";
 
 export default function validateDef(def: FullDefAnon) {
-  const { meta: skipMeta, scripts: skipScripts, ...rest } = def;
+  // const { meta: skipMeta, scripts: skipScripts, ...rest } = def;
   return validatePart(def.generators);
 }
 

@@ -40,7 +40,7 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
     depth: -1,
     dir: "same",
   });
-  const { nav, actions, onToggle, fullNav, hasBackBtn, hasShortcut } = props;
+  const { nav, actions, fullNav, hasBackBtn, hasShortcut } = props;
   const { crumbs, key, me } =
     nav ||
     (({

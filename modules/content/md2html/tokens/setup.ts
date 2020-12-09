@@ -7,6 +7,7 @@ import { render } from "../../../graphics/render";
 
 export const setup: TokenHandler = opts => {
   const { args, gameId: thisGameId } = opts;
+  // eslint-disable-next-line prefer-const
   let { gameId, name = "basic", board = "basic" } = args;
   if (!gameId) {
     if (thisGameId) {

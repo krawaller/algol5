@@ -22,8 +22,10 @@ export function runGameScripts(
       const seq = script.lines
         .reduce((mem, line) => mem.concat(line.commands), [] as string[])
         .slice(0, 5);
+      // eslint-disable-next-line prefer-const
       let { initialUI: ui, performAction } = api.newBattle(script.variantCode);
       for (const action of seq) {
+        // eslint-disable-next-line
         ui =
           action === "endTurn"
             ? performAction("endTurn")

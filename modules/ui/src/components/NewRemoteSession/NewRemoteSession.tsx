@@ -1,10 +1,8 @@
-import React, { FunctionComponent, useCallback, Fragment } from "react";
+import React, { useCallback, Fragment } from "react";
 import { AuthGuard } from "../AuthGuard";
 import css from "./NewRemoteSession.cssProxy";
 
-type NewRemoteSessionProps = {};
-
-export const NewRemoteSession: FunctionComponent<NewRemoteSessionProps> = props => {
+export const NewRemoteSession = () => {
   const content = useCallback(
     () => (
       <Fragment>

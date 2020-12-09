@@ -16,6 +16,7 @@ export const makeGameListing = (gameId: GameId) => {
       punctuate(meta[gameId].tagline) +
       "\nBy " +
       (meta[gameId].author || "unknown") +
+      // eslint-disable-next-line no-constant-condition
       (meta[gameId].added === "GENESIS" || true
         ? "."
         : ", added " +

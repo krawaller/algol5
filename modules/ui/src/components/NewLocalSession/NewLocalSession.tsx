@@ -30,14 +30,7 @@ type NewLocalSessionProps = {
 };
 
 export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props => {
-  const {
-    actions,
-    meta,
-    graphics,
-    previousSessionId,
-    variants,
-    corruptSessions,
-  } = props;
+  const { actions, meta, graphics, variants, corruptSessions } = props;
   const filteredVariants = variants.filter(v => !v.hidden);
   const [variant, setVariant] = useState(filteredVariants[0].code);
   return (

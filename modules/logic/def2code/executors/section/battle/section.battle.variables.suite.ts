@@ -16,7 +16,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             setup: {},
           },
-          envelope: "let game = { action: { startTurn_coolrulez_1: a => a } };",
+          envelope: "let game = { action: { startTurn_coolrulez_1: a => a } };",
           tests: [
             {
               expr: "newBattle",
@@ -52,7 +52,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             setup: {},
           },
-          envelope: "let game = { action: { startTurn_meeprulez_1: a => a } };",
+          envelope: "let game = { action: { startTurn_meeprulez_1: a => a } };",
           tests: [
             {
               expr: "newBattle",
@@ -87,7 +87,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             setup: {},
           },
-          envelope: "let game = { action: { startTurn_meeprulez_1: a => a } };",
+          envelope: "let game = { action: { startTurn_meeprulez_1: a => a } };",
           tests: [
             {
               expr: "newBattle",

@@ -20,7 +20,7 @@ export function makeDemoFromScript(
   );
   const { initialUI, performAction } = API.newBattle();
   let ui = initialUI;
-  let patches: AlgolDemo["patches"] = [];
+  const patches: AlgolDemo["patches"] = [];
   const anims: { [idx: string]: Partial<AlgolAnimCompiled> } = {};
   while (actions.length) {
     const action = (actions.shift() as unknown) as string;

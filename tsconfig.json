@@ -1,4 +1,7 @@
 {
+  "env": {
+    "node": true
+  },
   "compilerOptions": {
     "lib": ["es2019", "dom"],
     "target": "es5",
@@ -12,7 +15,7 @@
     "jsx": "react",
     "types": ["node", "jest", "fs-extra", "prettier", "lodash.isequal"]
   },
-  "include": ["modules/types", "modules/games/definitions", "global.d.ts"],
+  "include": ["modules/types", "modules/games/definitions", "global.d.ts", "modules/common"],
   "exclude": [
     "archive",
     "dev",

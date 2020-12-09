@@ -8,12 +8,9 @@ const img2data = require("../../graphics/img2data");
 
 fs.emptyDirSync(out);
 
-const support = ["png", "svg"];
-
 // TODO - this only handles images in static/images, but now we have images in static/images/news, static/images/games too...
 
 for (const f of fs.readdirSync(folder)) {
-  const ext = path.extname(f).substr(1);
   const fullPath = path.join(folder, f);
   if (fs.statSync(fullPath).isFile()) {
     try {

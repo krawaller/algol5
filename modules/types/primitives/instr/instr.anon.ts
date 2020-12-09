@@ -17,8 +17,6 @@ import {
 } from "./instr.interfaces";
 import { AlgolGameBlobAnon } from "../../blob";
 
-type s = string;
-
 export type AlgolInstrAnon = AlgolInstr<AlgolGameBlobAnon>;
 export type AlgolInstrInnerAnon = AlgolInstrInner<AlgolGameBlobAnon>;
 

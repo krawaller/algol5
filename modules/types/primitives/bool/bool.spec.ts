@@ -1,6 +1,7 @@
 import { AlgolBool } from "./";
 import { AlgolTestBlob } from "../../blob";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const tests: AlgolBool<AlgolTestBlob>[] = [
   ["true"],
   { not: ["false"] },

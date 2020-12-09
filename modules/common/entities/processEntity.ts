@@ -71,7 +71,7 @@ export function processEntity(entity: AlgolEntityAnon): ProcessedEntity[] {
     const {
       dataholerect: [blueprint, bottomleftPos, toprightPos, ...holes],
     } = entity;
-    let positions = [];
+    const positions = [];
     const bottomleft = pos2coords(bottomleftPos);
     const topright = pos2coords(toprightPos);
     for (let x = bottomleft.x; x <= topright.x; x++) {

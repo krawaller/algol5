@@ -129,7 +129,7 @@ function findAndDrawSingleNeighbour(
 ) {
   const parser = makeParser(gameDef, player, action, ruleset);
   const drawCaresAboutCount = contains(nghDef.draw, ["neighbourcount"]);
-  let conds = ["POS"];
+  const conds = ["POS"];
   if (nghDef.condition) conds.push(parser.bool(nghDef.condition) as string);
   if (nghDef.ifover) conds.push(parser.set(nghDef.ifover) + "[POS]");
   if (nghDef.unlessover)
@@ -182,7 +182,7 @@ function findNeighbourInDir(
   const parser = makeParser(gameDef, player, action, ruleset);
   const dirMatters = contains(nghDef.draw.neighbours, ["dir"]);
   const countMatters = contains(nghDef.draw, ["neighbourcount"]);
-  let conds = ["POS"];
+  const conds = ["POS"];
   if (nghDef.condition) conds.push(parser.bool(nghDef.condition) as string);
   if (nghDef.ifover) conds.push(parser.set(nghDef.ifover) + "[POS]");
   if (nghDef.unlessover)

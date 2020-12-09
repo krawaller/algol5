@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react";
-import css from "./PayloadArticlePage.cssProxy";
 import { Page } from "../Page";
 import { ScrollBox } from "../ScrollBox";
 import { AlgolArticle, AppActions } from "../../../../types";

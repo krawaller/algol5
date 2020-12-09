@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from "react";
 import { list } from "../../../../games/dist/list";
-import lib from "../../../../games/dist/lib";
 import meta from "../../../../games/dist/meta";
 import css from "./ActionGallery.cssProxy";
 
@@ -13,7 +12,7 @@ export const ActionGallery: FunctionComponent<ActionGalleryProps> = props => {
   return (
     <div className={css.actionGalleryContainer}>
       {list.map(gameId => {
-        const variantCode = lib[gameId].variants[0].code;
+        // const variantCode = lib[gameId].variants[0].code;
         const name = meta[gameId].name
           .split(" ")
           .map((word, n) => <span key={n}>{word} </span>);

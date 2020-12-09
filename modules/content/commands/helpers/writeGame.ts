@@ -1,5 +1,4 @@
 import { GameId } from "../../../games/dist/list";
-import meta from "../../../games/dist/meta";
 import { md2html } from "../../md2html";
 import path from "path";
 import fs, { readFileSync, writeFileSync } from "fs-extra";

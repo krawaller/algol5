@@ -69,7 +69,6 @@ export function executeExpression<_T>(
       ifrulesetelse: [testRuleset, whenYes, whenNo],
     } = expr;
     // TODO - testRuleset is dynamic? fix type?
-    // @ts-ignore TODO - why TS unhappy here?!
     return me(testRuleset === ruleset ? whenYes : whenNo);
   }
 

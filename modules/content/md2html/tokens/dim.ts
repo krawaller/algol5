@@ -5,6 +5,7 @@ import lib from "../../../games/dist/lib";
 
 export const dim: TokenHandler = opts => {
   const { args, gameId } = opts;
+  // eslint-disable-next-line prefer-const
   let { x, y, board = "basic" } = args;
   if (!x || !y) {
     if (!gameId) {

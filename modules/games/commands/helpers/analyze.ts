@@ -16,7 +16,6 @@ import {
 } from "../../../types";
 import {
   boardPositions,
-  terrainLayerNames,
   possibilities,
   emptyArtifactLayers,
   find,
@@ -56,11 +55,11 @@ export default async function analyze(def: FullDefAnon | string) {
   const marks = Object.keys(flow.marks);
   const commands = Object.keys(flow.commands);
   const nonEndCommands = commands.filter(c => {
-    let cdef = flow.commands[c];
-    let defs: AlgolLinkAnon[] = [];
+    const cdef = flow.commands[c];
+    const defs: AlgolLinkAnon[] = [];
     if (cdef.link) defs.push(cdef.link);
     if (cdef.links) defs.push(...cdef.links);
-    let poss: string[] = defs.reduce(
+    const poss: string[] = defs.reduce(
       (mem, d) => mem.concat(possibilities(d)),
       [] as string[]
     );
@@ -83,28 +82,28 @@ export default async function analyze(def: FullDefAnon | string) {
     Object.keys(b.grids || {})
   );
 
-  const origAI = def.AI;
-  const AI: typeof origAI = {
-    brains: {},
-    generators: {},
-    aspects: {},
-    grids: {},
-    terrain: {},
-    ...def.AI,
-  };
+  // const origAI = def.AI;
+  // const AI: typeof origAI = {
+  //   brains: {},
+  //   generators: {},
+  //   aspects: {},
+  //   grids: {},
+  //   terrain: {},
+  //   ...def.AI,
+  // };
 
-  const aiTerrainNames = Object.keys(AI.terrain || {});
-  const aiTerrainLayers = terrainLayerNames({
-    ...def.boards.basic,
-    //terrain: AI.terrain, // TODO - AI terrain, how to handle
-  });
-  const aiGenerators = Object.keys(AI.generators || {});
-  const aiAspects = Object.keys(AI.aspects);
-  const aiGrids = Object.keys(AI.grids || {});
-  const aiBrains = Object.keys(AI.brains);
-  const aiArtifactLayerNames = Object.keys(
-    emptyArtifactLayers(AI.generators, "basic")
-  ); // TODO - hardcoded ruleset
+  // const aiTerrainNames = Object.keys(AI.terrain || {});
+  // const aiTerrainLayers = terrainLayerNames({
+  //   ...def.boards.basic,
+  //   //terrain: AI.terrain, // TODO - AI terrain, how to handle
+  // });
+  // const aiGenerators = Object.keys(AI.generators || {});
+  // const aiAspects = Object.keys(AI.aspects);
+  // const aiGrids = Object.keys(AI.grids || {});
+  // const aiBrains = Object.keys(AI.brains);
+  // const aiArtifactLayerNames = Object.keys(
+  //   emptyArtifactLayers(AI.generators, "basic")
+  // ); // TODO - hardcoded ruleset
 
   const turnpos = Array.from(
     new Set(

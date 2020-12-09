@@ -2,8 +2,11 @@ import { FullDefAnon } from "../../../../../types";
 
 export function executeSetBoard(
   gameDef: FullDefAnon,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   player: 1 | 2,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   action: string,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ruleset: string
 ): string {
   const hasGrids = !!Object.values(gameDef.boards).find(b => b.grids);

@@ -9,8 +9,6 @@ import {
 } from "./order.interfaces";
 import { AlgolGameBlobAnon } from "../../blob";
 
-type s = string;
-
 export type AlgolOrderAnon = AlgolOrder<AlgolGameBlobAnon>;
 
 export type AlgolOrderInnerAnon = AlgolOrderInner<AlgolGameBlobAnon>;

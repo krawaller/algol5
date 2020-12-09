@@ -1,6 +1,7 @@
 import { GameId } from "../../games/dist/list";
 import { AlgolGameBlobAnon } from "../blob";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type AlgolMeta<Blob extends AlgolGameBlobAnon> = {
   author: string | null;
   id: GameId;
@@ -16,7 +17,7 @@ export type AlgolMeta<Blob extends AlgolGameBlobAnon> = {
   addedBy?: string;
 };
 
-export type Content = ComplexContent | string[] | string | any; // | Line | UnitRef | TileRef | string;
+export type Content = ComplexContent | string[] | string | any; // | Line | UnitRef | TileRef | string;
 
 export type ComplexContent = { type: string; [other: string]: any };
 

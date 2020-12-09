@@ -30,7 +30,7 @@ The latest generation of {ME} therefore generates JavaSript code from each JSON 
 
 #### Custom content pipeline
 
-To make adding contents easier we've created a {ME}-flavoured version of {EXTLINK:url=https://daringfireball.net/projects/markdown/syntax,text=Markdown}. Here for example is a peek at the source code for the {GAME:id=chameleon} rules description:
+To make adding contents easier we've created a {ME}-flavoured version of {EXTLINK:url=https://daringfireball.net/projects/markdown/syntax,text=Markdown}. Here for example is a peek at the source code for the {GAME:id=chameleon} rules description:
 
 {PIC:name=contentpipeline.png,naked=true}
 

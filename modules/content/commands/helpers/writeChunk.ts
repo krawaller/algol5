@@ -35,7 +35,7 @@ export const writeChunk = (id: string) => {
     yaml.mainImage = `/images/chunks/${id}/${yaml.mainImage}`;
   }
 
-  const { html, preloads } = md2html({ md, picSourcePath, picRefPath });
+  const { html } = md2html({ md, picSourcePath, picRefPath });
   writeFileSync(path.join(out, `chunk.html`), html);
 
   const exported = `export const chunk = \`${html}\`\n; export default chunk;`;

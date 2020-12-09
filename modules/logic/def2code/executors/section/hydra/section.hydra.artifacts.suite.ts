@@ -2,13 +2,6 @@ import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
-const defaultContext = {
-  emptyArtifactLayers_basic: {},
-  step: {
-    UNITLAYERS: {},
-  },
-};
-
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
   title: "Section - Hydra - Artifacts",
   func: executeSection,

@@ -3,6 +3,7 @@ import { AlgolTestBlob } from "../../blob";
 
 type TestStatement = AlgolStatement<AlgolTestBlob, "GNURP" | "FNURP">;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const tests: TestStatement[] = [
   "GNURP",
   { if: [{ anyat: ["mylayer", "mymark"] }, "GNURP"] },

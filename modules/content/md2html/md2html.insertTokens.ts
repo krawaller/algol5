@@ -10,7 +10,7 @@ export const insertTokens = (opts: InsertTokenOpts) => {
   const { md, arrs, gameId, yaml, picSourcePath, picRefPath } = opts;
   const preloads: string[] = [];
   const markdown = md.replace(
-    /\{([A-Z]{2,}):?([^\}]*)\}/g,
+    /\{([A-Z]{2,}):?([^}]*)\}/g,
     (_: string, token: string, instr: string) => {
       const args = instr.split(",").reduce(
         (memo, arg) => ({

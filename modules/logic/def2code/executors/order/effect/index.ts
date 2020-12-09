@@ -146,7 +146,7 @@ function executeEffectInner(
       setat: [pos, prop, val],
     } = effect;
     return `{
-      let unitid = (UNITLAYERS.units[${parser.pos(pos)}] || {}).id;
+      let unitid = (UNITLAYERS.units[${parser.pos(pos)}] || {}).id;
       if (unitid){
         UNITDATA[unitid]= {
           ...UNITDATA[unitid],
@@ -209,7 +209,7 @@ function executeEffectInner(
 `;
     return `{
       let pos = ${parser.pos(pos)};
-      let unitid = (UNITLAYERS.units[pos] || {}).id;
+      let unitid = (UNITLAYERS.units[pos] || {}).id;
       if (unitid){
         ${block}
       }

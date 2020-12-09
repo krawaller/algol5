@@ -24,7 +24,7 @@ export function analyseGame(gameDef: FullDefAnon): AnalysisBook {
     ret[ruleset] = {} as any;
     for (const plr of [1, 2]) {
       const plrAnalysis = {} as { [action: string]: ActionAnalysis };
-      let toCheck: ([string] | [string, string])[] = [["startTurn"]];
+      const toCheck: ([string] | [string, string])[] = [["startTurn"]];
       while (toCheck.length) {
         const [action, from] = (toCheck.shift() as unknown) as
           | [string]

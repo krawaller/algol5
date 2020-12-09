@@ -2,17 +2,12 @@ import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
-const defaultMarkInitContext = {
-  newMarkPos: "",
-  step: { ARTIFACTS: {} }
-};
-
 const defaultMarkEndContext = {
   MARKS: {},
   LINKS: {},
   UNITLAYERS: {},
   step: {},
-  newMarkPos: "a1"
+  newMarkPos: "a1",
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
@@ -27,10 +22,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           startTurn: { link: "somemark" },
           marks: {
             somemark: {
-              from: "units"
-            }
-          }
-        }
+              from: "units",
+            },
+          },
+        },
       },
       player: 1,
       action: "somemark",
@@ -40,8 +35,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             ...defaultMarkEndContext,
             step: {
               ...defaultMarkEndContext.step,
-              NEXTSPAWNID: "bogusSpawnId"
-            }
+              NEXTSPAWNID: "bogusSpawnId",
+            },
           },
           tests: [
             {
@@ -51,13 +46,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "returnVal.NEXTSPAWNID",
                   res: undefined,
                   desc:
-                    "we didn't pass on spawnId since game doesn't use spawning"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                    "we didn't pass on spawnId since game doesn't use spawning",
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
     {
       def: {
@@ -67,17 +62,17 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           startTurn: { link: "somemark" },
           marks: {
             somemark: {
-              from: "units"
-            }
+              from: "units",
+            },
           },
           commands: {
             gnurp: {
               applyEffect: {
-                spawnat: ["somemark", "flurps"]
-              }
-            }
-          }
-        }
+                spawnat: ["somemark", "flurps"],
+              },
+            },
+          },
+        },
       },
       player: 1,
       action: "somemark",
@@ -87,8 +82,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             ...defaultMarkEndContext,
             step: {
               ...defaultMarkEndContext.step,
-              NEXTSPAWNID: "oldSpawnId"
-            }
+              NEXTSPAWNID: "oldSpawnId",
+            },
           },
           tests: [
             {
@@ -97,13 +92,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.NEXTSPAWNID",
                   res: "oldSpawnId",
-                  desc: "we pass on spawnId since game uses it elsewhere"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  desc: "we pass on spawnId since game uses it elsewhere",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

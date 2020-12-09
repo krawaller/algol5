@@ -17,6 +17,7 @@ export default function parsePos(
   action: string,
   ruleset: string,
   expr: AlgolPosAnon,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   from?: string
 ) {
   const parser = makeParser(gameDef, player, action, ruleset, "pos");

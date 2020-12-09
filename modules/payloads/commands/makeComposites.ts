@@ -1,7 +1,5 @@
 const fs = require("fs-extra");
 const path = require("path");
-const tagsFolder = path.join(__dirname, "../material/tags");
-const prettier = require("prettier");
 const composite = require("../../graphics/composite");
 
 const content = path.join(__dirname, "../../content/dist");

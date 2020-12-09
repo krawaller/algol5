@@ -7,6 +7,7 @@ import { allIcons } from "../../../graphics/dist/allIconSVGs";
 
 export const unit: TokenHandler = opts => {
   const { args, gameId: thisGameId } = opts;
+  // eslint-disable-next-line prefer-const
   let { group, who, gameId, at } = args;
   if (!gameId) {
     if (thisGameId) {

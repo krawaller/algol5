@@ -14,8 +14,6 @@ import {
 } from "./statement.interfaces";
 import { AlgolGameBlobAnon } from "../../blob";
 
-type s = string;
-
 export type AlgolStatementAnon<_T> = AlgolStatement<AlgolGameBlobAnon, _T>;
 export type AlgolStatementMultiAnon<_T> = AlgolStatementMulti<
   AlgolGameBlobAnon,

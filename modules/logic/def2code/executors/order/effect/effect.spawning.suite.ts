@@ -1,5 +1,5 @@
 import { executeOrder } from "../../../executors";
-import { emptyFullDef, truthy, falsy } from "../../../../../common";
+import { emptyFullDef } from "../../../../../common";
 import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
 export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
@@ -15,7 +15,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
           context: {
             UNITDATA: { unit1: { id: "unit1" } },
             MARKS: { othermark: "c3", anothermark: "d4" },
-            NEXTSPAWNID: 1
+            NEXTSPAWNID: 1,
           },
           tests: [
             {
@@ -26,10 +26,10 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                       "othermark",
                       "flerps",
                       ["otherplayer"],
-                      { baz: { value: "bin" } }
-                    ]
-                  }
-                ]
+                      { baz: { value: "bin" } },
+                    ],
+                  },
+                ],
               },
               asserts: [
                 {
@@ -39,11 +39,11 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                     group: "flerps",
                     owner: 2,
                     baz: "bin",
-                    pos: "c3"
+                    pos: "c3",
                   },
-                  desc: "Spawning creates clone with correct characteristics"
-                }
-              ]
+                  desc: "Spawning creates clone with correct characteristics",
+                },
+              ],
             },
             {
               expr: { effects: [{ spawnat: ["othermark", "gnurps"] }] },
@@ -52,9 +52,9 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                   sample: "UNITDATA.spawn1.owner",
                   res: 1,
                   desc:
-                    "Spawning defaults owner to current player if none provided"
-                }
-              ]
+                    "Spawning defaults owner to current player if none provided",
+                },
+              ],
             },
             {
               expr: { effects: [{ spawnat: ["othermark", "gnurps"] }] },
@@ -62,9 +62,9 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "UNITDATA.unit1",
                   res: { id: "unit1" },
-                  desc: "Spawning doesn't affect already existing units"
-                }
-              ]
+                  desc: "Spawning doesn't affect already existing units",
+                },
+              ],
             },
             {
               expr: {
@@ -74,18 +74,18 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                       "othermark",
                       "flerps",
                       1,
-                      { baz: { value: "bin" } }
-                    ]
-                  }
-                ]
+                      { baz: { value: "bin" } },
+                    ],
+                  },
+                ],
               },
               asserts: [
                 {
                   sample: "NEXTSPAWNID",
                   res: 2,
-                  desc: "spawning increases the NEXTSPAWNID counter"
-                }
-              ]
+                  desc: "spawning increases the NEXTSPAWNID counter",
+                },
+              ],
             },
             {
               expr: {
@@ -93,18 +93,18 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                   {
                     spawnin: [
                       { singles: ["othermark", "anothermark"] },
-                      "flurps"
-                    ]
-                  }
-                ]
+                      "flurps",
+                    ],
+                  },
+                ],
               },
               asserts: [
                 {
                   sample: "UNITDATA.spawn1",
                   res: { id: "spawn1", group: "flurps", owner: 1, pos: "c3" },
-                  desc: "multispawn created correct first unit"
-                }
-              ]
+                  desc: "multispawn created correct first unit",
+                },
+              ],
             },
             {
               expr: {
@@ -112,18 +112,18 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                   {
                     spawnin: [
                       { singles: ["othermark", "anothermark"] },
-                      "flurps"
-                    ]
-                  }
-                ]
+                      "flurps",
+                    ],
+                  },
+                ],
               },
               asserts: [
                 {
                   sample: "UNITDATA.spawn2",
                   res: { id: "spawn2", group: "flurps", owner: 1, pos: "d4" },
-                  desc: "multispawn created correct second unit"
-                }
-              ]
+                  desc: "multispawn created correct second unit",
+                },
+              ],
             },
             {
               expr: {
@@ -131,18 +131,19 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                   {
                     spawnin: [
                       { singles: ["othermark", "anothermark"] },
-                      "flurps"
-                    ]
-                  }
-                ]
+                      "flurps",
+                    ],
+                  },
+                ],
               },
               asserts: [
                 {
                   sample: "NEXTSPAWNID",
                   res: 3,
-                  desc: "multispawn increased counter by total number of spawns"
-                }
-              ]
+                  desc:
+                    "multispawn increased counter by total number of spawns",
+                },
+              ],
             },
             {
               expr: {
@@ -152,10 +153,10 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                       { singles: ["othermark", "anothermark"] },
                       "flurps",
                       ["otherplayer"],
-                      { foo: { value: "bar" } }
-                    ]
-                  }
-                ]
+                      { foo: { value: "bar" } },
+                    ],
+                  },
+                ],
               },
               asserts: [
                 {
@@ -165,15 +166,15 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                     group: "flurps",
                     owner: 2,
                     pos: "d4",
-                    foo: "bar"
+                    foo: "bar",
                   },
-                  desc: "multispawn supports passing owner and props"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  desc: "multispawn supports passing owner and props",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

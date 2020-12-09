@@ -1,5 +1,5 @@
 import { executeOrder } from "../../../executors";
-import { emptyFullDef, truthy, falsy } from "../../../../../common";
+import { emptyFullDef } from "../../../../../common";
 import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
 export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
@@ -15,52 +15,54 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
           context: {
             UNITDATA: {
               unit1: { id: "unit1", pos: "a1", group: "flurps" },
-              unit2: { id: "unit2", pos: "b2", group: "gnurps" }
+              unit2: { id: "unit2", pos: "b2", group: "gnurps" },
             },
             UNITLAYERS: {
-              units: { a1: { id: "unit1" }, b2: { id: "unit2" } }
+              units: { a1: { id: "unit1" }, b2: { id: "unit2" } },
             },
-            MARKS: { unit1mark: "a1", unit2mark: "b2" }
+            MARKS: { unit1mark: "a1", unit2mark: "b2" },
           },
           tests: [
             {
               expr: {
-                effects: [{ morphat: ["unit1mark", { value: "berps" }] }]
+                effects: [{ morphat: ["unit1mark", { value: "berps" }] }],
               },
               asserts: [
                 {
                   sample: "UNITDATA.unit1.group",
-                  res: "berps"
-                }
-              ]
+                  res: "berps",
+                },
+              ],
             },
             {
               expr: {
-                effects: [{ morphid: [{ value: "unit2" }, { value: "berps" }] }]
+                effects: [
+                  { morphid: [{ value: "unit2" }, { value: "berps" }] },
+                ],
               },
               asserts: [
                 {
                   sample: "UNITDATA.unit2.group",
-                  res: "berps"
-                }
-              ]
+                  res: "berps",
+                },
+              ],
             },
             {
               expr: { effects: [{ morphin: ["units", "berps"] }] },
               asserts: [
                 {
                   sample: "UNITDATA.unit1.group",
-                  res: "berps"
+                  res: "berps",
                 },
                 {
                   sample: "UNITDATA.unit2.group",
-                  res: "berps"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  res: "berps",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

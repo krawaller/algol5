@@ -28,7 +28,7 @@ import { dataURI as ${id}_active } from "./actionShots/${id}/${id}_active"`
 
 const data: Record<GameId, { regular: string, active: string }> = {
 ${list
-  .map(id => `  ${id}: { regular: ${id}_regular, active: ${id}_active }`)
+  .map(id => `  ${id}: { regular: ${id}_regular, active: ${id}_active }`)
   .join(",\n")}
 }
 

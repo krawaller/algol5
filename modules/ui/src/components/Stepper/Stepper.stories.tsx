@@ -1,4 +1,4 @@
-import React, { useState, Dispatch } from "react";
+import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
 import { number } from "@storybook/addon-knobs";
 
@@ -8,7 +8,7 @@ storiesOf("Stepper", module).add("basic usage", () => {
   const max = number("Max", 10);
   return (
     <Parent>
-      {(state = max, setState = (n: number) => {}) => (
+      {(state = max, setState = () => {}) => (
         <div style={{ width: "250px" }}>
           <Stepper
             current={Math.min(state, max)}
@@ -23,7 +23,7 @@ storiesOf("Stepper", module).add("basic usage", () => {
   );
 });
 
-function Parent({ children, ...props }: any) {
+function Parent({ children }: any) {
   const [state, setState] = useState();
   return <div>{children(state, setState)}</div>;
 }

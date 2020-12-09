@@ -3,6 +3,7 @@ import { AlgolTestBlob } from "../../blob";
 
 type TestEntity = AlgolEntity<AlgolTestBlob>;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const testEntities: TestEntity[] = [
   "mypos",
   { sites: ["mypos"] },

@@ -7,9 +7,9 @@ function translator(def: FullDefAnon): FullDefAnon {
     ...def,
     meta: otherMeta,
     performance: {
-      ...def.performance,
-      massiveTree: {}
-    }
+      ...performance,
+      massiveTree: {},
+    },
   };
   // // revise scripts
   // return {

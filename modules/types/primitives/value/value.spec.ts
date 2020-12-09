@@ -5,6 +5,7 @@ type TestVal = AlgolVal<AlgolTestBlob, "FOO" | "BAR">;
 
 type TestNumberVal = AlgolVal<AlgolTestBlob, number>;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const tests: TestVal[] = [
   "FOO",
   "BAR",
@@ -38,6 +39,7 @@ const tests: TestVal[] = [
   { distance: ["mymark", "mymark"] },
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const tests2: TestNumberVal[] = [
   5,
   ["player"],

@@ -1,6 +1,7 @@
 import { AlgolInstr } from "./";
 import { AlgolTestBlob } from "../../blob";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const tests: AlgolInstr<AlgolTestBlob>[] = [
   "myunit",
   { line: ["woo", { line: ["bar"] }] },

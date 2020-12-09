@@ -18,8 +18,8 @@ import {
 export function possibilities<_T>(
   input: AlgolIfableExpressionAnon<_T> | AlgolStatementAnon<_T>,
   player: 0 | 1 | 2 = 0,
-  action: string = "any",
-  ruleset: string = "basic"
+  action = "any",
+  ruleset = "basic"
 ): _T[] {
   const listWithDuplicates = possibilitiesInner(input, player, action, ruleset);
   const possAsKeys = listWithDuplicates.reduce(
@@ -38,7 +38,7 @@ function possibilitiesInner<_T>(
   const expr = input as AlgolIfableExpressionAnon<_T>;
   if (isAlgolExpressionIfElse(expr)) {
     const {
-      ifelse: [test, whenTruthy, whenFalsy],
+      ifelse: [, whenTruthy, whenFalsy],
     } = expr;
     return possibilitiesInner(whenTruthy, player, action, ruleset).concat(
       possibilitiesInner(whenFalsy, player, action, ruleset)
@@ -83,7 +83,7 @@ function possibilitiesInner<_T>(
 
   if (isAlgolExpressionIndexList(expr)) {
     const {
-      indexlist: [idx, ...opts],
+      indexlist: [, ...opts],
     } = expr;
     return opts.reduce(
       (mem, o) => mem.concat(possibilitiesInner(o, player, action, ruleset)),
@@ -93,7 +93,7 @@ function possibilitiesInner<_T>(
 
   if (isAlgolIfableExpressionIf(expr)) {
     const {
-      if: [test, opt],
+      if: [, opt],
     } = expr;
     return ([] as any[]).concat(
       possibilitiesInner(opt, player, action, ruleset)
@@ -133,14 +133,14 @@ function possibilitiesInner<_T>(
 
   if (isAlgolStatementForIdIn(statement)) {
     const {
-      foridin: [set, repeatStatement],
+      foridin: [, repeatStatement],
     } = statement;
     return possibilitiesInner(repeatStatement, player, action, ruleset);
   }
 
   if (isAlgolStatementForPosIn(statement)) {
     const {
-      forposin: [set, repeatStatement],
+      forposin: [, repeatStatement],
     } = statement;
     return possibilitiesInner(repeatStatement, player, action, ruleset);
   }

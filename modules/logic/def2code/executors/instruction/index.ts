@@ -102,7 +102,7 @@ function executeInstructionInner(
       if (n === list.length - 2){
         mem.push({text: " or "});
       } else if (n < list.length - 2){
-        mem.push({text: ", " });
+        mem.push({text: ", " });
       }
       return mem;
     }, []) })`;
@@ -115,7 +115,7 @@ function executeInstructionInner(
       if (n === list.length - 2){
         mem.push({text: " and "});
       } else if (n < list.length - 2){
-        mem.push({text: ", " });
+        mem.push({text: ", " });
       }
       return mem;
     }, []) })`;
@@ -175,7 +175,7 @@ function executeInstructionInner(
       if (n === list.length - 2){
         mem.push({text: " and "});
       } else if (n < list.length - 2){
-        mem.push({text: ", " });
+        mem.push({text: ", " });
       }
       return mem;
     }, []) })`;
@@ -188,7 +188,7 @@ function executeInstructionInner(
       if (n === list.length - 2){
         mem.push({text: " and "});
       } else if (n < list.length - 2){
-        mem.push({text: ", " });
+        mem.push({text: ", " });
       }
       return mem;
     }, []) })`;
@@ -204,7 +204,7 @@ function executeInstructionInner(
       if (n === list.length - 2){
         mem.push({text: " and "});
       } else if (n < list.length - 2){
-        mem.push({text: ", " });
+        mem.push({text: ", " });
       }
       return mem;
     }, []) })`;

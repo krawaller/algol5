@@ -1,4 +1,4 @@
-import { emptyFullDef, truthy, falsy } from "../../../../../common";
+import { emptyFullDef } from "../../../../../common";
 import { AlgolDirsAnon, AlgolExpressionSuite } from "../../../../../types";
 import { parserTester } from "../";
 

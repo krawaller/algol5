@@ -4,7 +4,7 @@ const out = path.join(__dirname, "../src/components");
 
 const rawCompName = process.argv[2] || "";
 const compName = rawCompName[0].toUpperCase() + rawCompName.slice(1);
-const useCSS = process.argv[3];
+// const useCSS = process.argv[3];
 const nonCap = compName[0].toLowerCase() + compName.slice(1);
 
 if (!compName || !compName.length) {

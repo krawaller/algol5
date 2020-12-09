@@ -7,7 +7,7 @@ import aboutIndex from "../../dist/aboutIndex";
 
 export const about: TokenHandler = opts => {
   const { args } = opts;
-  let { id, text } = args;
+  const { id, text } = args;
   if (!id) {
     throw new Error("About ref didn't have id!");
   }

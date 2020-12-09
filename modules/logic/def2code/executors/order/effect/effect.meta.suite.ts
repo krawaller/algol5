@@ -1,5 +1,5 @@
 import { executeOrder } from "../../../executors";
-import { emptyFullDef, truthy, falsy } from "../../../../../common";
+import { emptyFullDef } from "../../../../../common";
 import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
 export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
@@ -14,7 +14,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         {
           context: {
             TURNVARS: { previous: 666 },
-            MARKS: { mymark: "a1" }
+            MARKS: { mymark: "a1" },
           },
           tests: [
             {
@@ -23,29 +23,29 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "TURNVARS.newturnvar",
                   res: 5,
-                  desc: "We can set a new turnvar"
+                  desc: "We can set a new turnvar",
                 },
                 {
                   sample: "TURNVARS.previous",
                   res: 666,
-                  desc: "Existing turnvar isn't affected when we set a new one"
-                }
-              ]
+                  desc: "Existing turnvar isn't affected when we set a new one",
+                },
+              ],
             },
             {
               expr: {
                 effects: [
-                  { setturnvar: [{ value: "newturnvar" }, { sum: [3, 2] }] }
-                ]
+                  { setturnvar: [{ value: "newturnvar" }, { sum: [3, 2] }] },
+                ],
               },
               asserts: [
                 {
                   sample: "TURNVARS.newturnvar",
                   res: 5,
                   desc:
-                    "Setturnvar supports value expressions for name and value"
-                }
-              ]
+                    "Setturnvar supports value expressions for name and value",
+                },
+              ],
             },
             {
               expr: { effects: [{ setturnpos: ["newturnpos", "mymark"] }] },
@@ -53,16 +53,16 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "TURNVARS.newturnpos",
                   res: "a1",
-                  desc: "We can set a new turnpos"
-                }
-              ]
-            }
-          ]
+                  desc: "We can set a new turnpos",
+                },
+              ],
+            },
+          ],
         },
         {
           context: {
             BATTLEVARS: { previous: 666 },
-            MARKS: { mymark: "a1" }
+            MARKS: { mymark: "a1" },
           },
           tests: [
             {
@@ -71,32 +71,32 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "BATTLEVARS.newbattlevar",
                   res: 5,
-                  desc: "We can set a new battlevar"
+                  desc: "We can set a new battlevar",
                 },
                 {
                   sample: "BATTLEVARS.previous",
                   res: 666,
                   desc:
-                    "Existing battlevar isn't affected when we set a new one"
-                }
-              ]
+                    "Existing battlevar isn't affected when we set a new one",
+                },
+              ],
             },
             {
               expr: {
                 effects: [
                   {
-                    setbattlevar: [{ value: "newbattlevar" }, { sum: [3, 2] }]
-                  }
-                ]
+                    setbattlevar: [{ value: "newbattlevar" }, { sum: [3, 2] }],
+                  },
+                ],
               },
               asserts: [
                 {
                   sample: "BATTLEVARS.newbattlevar",
                   res: 5,
                   desc:
-                    "Setbattlevar supports value expressions for name and value"
-                }
-              ]
+                    "Setbattlevar supports value expressions for name and value",
+                },
+              ],
             },
             {
               expr: { effects: [{ setbattlepos: ["newbattlepos", "mymark"] }] },
@@ -104,13 +104,13 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "BATTLEVARS.newbattlepos",
                   res: "a1",
-                  desc: "We can set a new battlepos"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  desc: "We can set a new battlepos",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

@@ -49,7 +49,7 @@ export const BattleMove: FunctionComponent<BattleMoveProps> = props => {
             <Button
               disabled={
                 (ui.winner !== undefined && "Battle is over") ||
-                (!Boolean(ui.undo) && "No command to undo")
+                (!ui.undo && "No command to undo")
               }
               onClick={actions.undoBattleCommand}
             >

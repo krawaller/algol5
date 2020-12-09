@@ -1,13 +1,12 @@
 import { FullDefAnon, AlgolDirsAnon } from "../../../../../types";
 
-import { makeParser } from "../";
-
 export default function parseDirs(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   ruleset: string,
   expr: AlgolDirsAnon,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   from?: string
 ) {
   if (typeof expr === "string") {

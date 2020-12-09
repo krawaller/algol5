@@ -3,7 +3,7 @@ import React, { FunctionComponent } from "react";
 import navCss from "./Nav.cssProxy";
 import hintCss from "./Nav.Hint.cssProxy";
 import { Arrow } from "../Arrow";
-import { ArrowMulti, ArrowMultiProps } from "../Arrow/Arrow.Multi";
+import { ArrowMulti } from "../Arrow/Arrow.Multi";
 import { DASHED_SHORTCUTS } from "./Nav.constants";
 
 type NavLinkArrowRowProps = {

@@ -1,5 +1,4 @@
 import { inflateBattleSave } from ".";
-import atrium from "../../../../logic/dist/indiv/atrium";
 import defs from "../../../../games/dist/lib";
 import trafficlights from "../../../../logic/dist/indiv/trafficlights";
 import { AlgolBattleSave, AlgolGame } from "../../../../types";

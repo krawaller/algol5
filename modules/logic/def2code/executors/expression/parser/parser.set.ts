@@ -24,6 +24,7 @@ export default function parseSet(
   action: string,
   ruleset: string,
   expr: AlgolSetAnon,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   from?: string
 ) {
   const parser = makeParser(gameDef, player, action, ruleset, "set");
@@ -103,7 +104,7 @@ export default function parseSet(
       .map(r => `.concat(Object.keys(${parser.set(r)}))`)
       .join("")}`;
     // reduce keys to an object with count per key
-    const countObj = `${keysArr}.reduce((mem, k) => { mem[k] = (mem[k] || 0) + 1; return mem; }, {})`;
+    const countObj = `${keysArr}.reduce((mem, k) => { mem[k] = (mem[k] || 0) + 1; return mem; }, {})`;
     // func that returns true if value of entry equals number of total sets
     const entryTester = `([key,n]) => n === ${rest.length + 1}`;
     // transform keys to object entries and keep only those with sufficient count

@@ -1,6 +1,7 @@
 import { AlgolDirs } from "./";
 import { AlgolTestBlob } from "../../blob";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const tests: AlgolDirs<AlgolTestBlob>[] = [
   [1, 2, 3],
   "ortho",

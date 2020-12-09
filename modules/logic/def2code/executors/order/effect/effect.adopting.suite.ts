@@ -1,5 +1,5 @@
 import { executeOrder } from "../../../executors";
-import { emptyFullDef, truthy, falsy } from "../../../../../common";
+import { emptyFullDef } from "../../../../../common";
 import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
 export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {

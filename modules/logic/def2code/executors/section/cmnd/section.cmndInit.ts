@@ -8,8 +8,6 @@ export function executeCmndInit(
   action: string,
   ruleset: string
 ): string {
-  const def = gameDef.flow.commands[action];
-
   let ret = "";
 
   // Always init a new LINKS object for each step
@@ -19,7 +17,7 @@ export function executeCmndInit(
 
   const analysis = analyseGame(gameDef)[ruleset][player][action];
 
-  if (!!gameDef.anim[action]) {
+  if (gameDef.anim[action]) {
     ret += `let anim = ${JSON.stringify(emptyAnim)}; `;
   }
 

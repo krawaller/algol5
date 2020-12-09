@@ -1,6 +1,7 @@
 import { AlgolEffect } from "./";
 import { AlgolTestBlob } from "../../blob";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const tests: AlgolEffect<AlgolTestBlob>[] = [
   { moveat: ["mymark", { onlyin: "mylayer" }] },
   { setturnpos: ["myturnp", "mymark"] },

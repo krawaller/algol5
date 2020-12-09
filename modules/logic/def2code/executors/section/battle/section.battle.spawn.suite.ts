@@ -53,7 +53,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             setup: {},
           },
           envelope:
-            "let game = { action: { startTurn_superrulez_1: a => a } };",
+            "let game = { action: { startTurn_superrulez_1: a => a } };",
           tests: [
             {
               expr: "newBattle",

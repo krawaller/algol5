@@ -22,7 +22,7 @@ const sort2 = (l1: AlgolListing, l2: AlgolListing) =>
   l1.sort2! < l2.sort2! ? -1 : 1;
 
 export const PayloadArticleList: FunctionComponent<PayloadArticleListProps> = props => {
-  let { actions, list, reverse } = props;
+  const { actions, list, reverse } = props;
   const { composite, listings, sorts } = list;
   const [sortIndex, setSortIndex] = useState(0);
   const listToRender = useMemo(() => {

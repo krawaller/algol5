@@ -2,13 +2,6 @@ import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
-const defaultStartInitContext = {
-  emptyArtifactLayers_basic: {},
-  step: {
-    UNITLAYERS: {},
-  },
-};
-
 const defaultStartEndContext = {
   emptyArtifactLayers_basic: {},
   MARKS: {},

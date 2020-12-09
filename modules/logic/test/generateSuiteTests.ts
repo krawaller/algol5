@@ -8,20 +8,16 @@ async function setup() {
   console.log(" -------- Generating test files for suites --------");
   await fs.remove(out);
   await fs.mkdir(out);
-  let suites;
-  try {
-    suites = await findSuites();
-  } catch (e) {
-    throw e;
-  }
+  const suites = await findSuites();
   await Promise.all(
     suites.map(async p => {
       const name = p.split("/")[p.split("/").length - 1].replace(/\.ts$/, "");
       await fs.writeFile(
         path.join(out, name + ".test.ts"),
-        `
-import { testSuite } from '${path.relative(out, p).replace(/\.ts$/, "")}';
-import { runSuite } from '../runSuite';
+        `import { testSuite } from '${path
+          .relative(out, p)
+          .replace(/\.ts$/, "")}';
+import { runSuite } from '../runSuite';
 
 runSuite(testSuite);
 `

@@ -5,7 +5,7 @@ module.exports = {
     autoPrerender: false,
   },
   exportTrailingSlash: true,
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+  webpack: config => {
     const babelRule = config.module.rules.find(
       rule =>
         rule.test.toString().includes("tsx|ts") &&

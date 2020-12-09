@@ -4,3 +4,7 @@ dist
 thumbs.db
 bogus
 .DS_Store
+archive
+generated
+generatedSuiteTests
+generatedGameTests

@@ -5,10 +5,9 @@ export * from "./session";
 export * from "./generated";
 export * from "./suite";
 export * from "./screenshot";
-export * from "./_args";
 export * from "./error";
 export * from "./blob";
 export * from "./misc";
 export * from "./content";
 export * from "./payloads";
-export * from './page'
+export * from "./page";

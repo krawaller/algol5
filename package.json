@@ -41,7 +41,7 @@
     "immer": "^3.1.2",
     "jest": "^25.1.0",
     "prettier": "^1.19.1",
-    "typescript": "^3.8.3"
+    "typescript": "^4.1.2"
   },
   "dependencies": {
     "jsondiffpatch": "^0.3.11",

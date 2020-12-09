@@ -1,41 +1,41 @@
 import { AlgolContent, AlgolIcon } from "../../";
 
-export interface AlgolContentPos<Pos> {
+export type AlgolContentPos<Pos> = {
   pos: Pos;
-}
+};
 
-export interface AlgolContentUnit<Pos> {
+export type AlgolContentUnit<Pos> = {
   unit: [AlgolIcon, 0 | 1 | 2 | 12 | "01" | "02", Pos];
-}
+};
 
-export interface AlgolContentUnitType {
+export type AlgolContentUnitType = {
   unittype: [AlgolIcon, 0 | 1 | 2 | 12 | "01" | "02"];
-}
+};
 
-export interface AlgolContentCmnd<Cmnd> {
+export type AlgolContentCmnd<Cmnd> = {
   command: Cmnd;
-}
+};
 
-export interface AlgolContentEndTurn {
+export type AlgolContentEndTurn = {
   endTurn: string;
-}
+};
 
-export interface AlgolContentText {
+export type AlgolContentText = {
   text: string | number;
-}
+};
 
-export interface AlgolContentLine<Cmnd, Pos> {
+export type AlgolContentLine<Cmnd, Pos> = {
   line: AlgolContent<Cmnd, Pos>[];
-}
+};
 
-export interface AlgolContentSelect {
+export type AlgolContentSelect = {
   select: string;
-}
+};
 
-export interface AlgolContentPlayer {
+export type AlgolContentPlayer = {
   player: 0 | 1 | 2;
-}
+};
 
-export interface AlgolContentBold {
+export type AlgolContentBold = {
   bold: string;
-}
+};

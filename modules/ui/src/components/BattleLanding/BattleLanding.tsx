@@ -14,10 +14,10 @@ import { ExportBattle } from "../ExportBattle";
 import { BattleLandingOngoing } from "./BattleLanding.Ongoing";
 import { ButtonGroup } from "../ButtonGroup";
 
-interface BattleLandingActions {
+type BattleLandingActions = {
   deleteSession: (sessionId: string, retreatToGameLobby: boolean) => void;
   reportError: AlgolErrorReporter;
-}
+};
 
 type BattleLandingProps = {
   actions: BattleLandingActions;

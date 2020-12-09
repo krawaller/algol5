@@ -1,14 +1,14 @@
 import { AlgolNav } from "./nav";
 import { AlgolEvent } from "./events";
 
-export interface AppActions {
+export type AppActions = {
   navTo: (path: string) => void;
   replace: (path: string) => void;
   back: () => void;
   prefetch: (path: string) => void;
   setNav: (nav: AlgolNav) => void;
   logEvent: (evt: AlgolEvent) => void;
-}
+};
 
 export const fakeAppActions: AppActions = {
   navTo: str => console.log("nav to", str),

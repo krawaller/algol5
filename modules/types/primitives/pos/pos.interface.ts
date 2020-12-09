@@ -3,27 +3,27 @@ import { AlgolSet } from "../set";
 import { AlgolPos } from ".";
 import { AlgolGameBlobAnon } from "../../blob";
 
-export interface AlgolPosMark<Blob extends AlgolGameBlobAnon> {
+export type AlgolPosMark<Blob extends AlgolGameBlobAnon> = {
   mark: AlgolVal<Blob, Blob["mrk"]>;
-}
+};
 
-export interface AlgolPosBattlePos<Blob extends AlgolGameBlobAnon> {
+export type AlgolPosBattlePos<Blob extends AlgolGameBlobAnon> = {
   battlepos: AlgolVal<Blob, Blob["btlp"]>;
-}
+};
 
-export interface AlgolPosTurnPos<Blob extends AlgolGameBlobAnon> {
+export type AlgolPosTurnPos<Blob extends AlgolGameBlobAnon> = {
   turnpos: AlgolVal<Blob, Blob["turnp"]>;
-}
+};
 
-export interface AlgolPosOnlyIn<Blob extends AlgolGameBlobAnon> {
+export type AlgolPosOnlyIn<Blob extends AlgolGameBlobAnon> = {
   onlyin: AlgolSet<Blob>;
-}
+};
 
-export interface AlgolPosFromXY<Blob extends AlgolGameBlobAnon> {
+export type AlgolPosFromXY<Blob extends AlgolGameBlobAnon> = {
   fromxy: [AlgolVal<Blob, number>, AlgolVal<Blob, number>];
-}
+};
 
-export interface AlgolPosOffset<Blob extends AlgolGameBlobAnon> {
+export type AlgolPosOffset<Blob extends AlgolGameBlobAnon> = {
   offset: // pos, dir, forward, right
   | [
         // pos
@@ -51,4 +51,4 @@ export interface AlgolPosOffset<Blob extends AlgolGameBlobAnon> {
         // dir
         AlgolVal<Blob, 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8>
       ];
-}
+};

@@ -6,11 +6,11 @@ import { ButtonGroup } from "../ButtonGroup";
 import { Content } from "../Content";
 import css from "./BattleControls.cssProxy";
 
-export interface BattleControlsActions {
+export type BattleControlsActions = {
   undoBattleCommand: () => void;
   endTurn: () => void;
   command: (cmnd: string) => void;
-}
+};
 
 type BattleControlsProps = {
   ui: AlgolBattleUI;

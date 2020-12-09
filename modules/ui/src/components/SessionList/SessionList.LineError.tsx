@@ -10,9 +10,9 @@ import css from "./SessionList.cssProxy";
 import { Board } from "../Board";
 import { SessionLoadFail } from "../../../../local/src";
 
-interface SessionListLineErrorActions {
+type SessionListLineErrorActions = {
   reportError: AlgolErrorReporter;
-}
+};
 
 type SessionListLineErrorProps = {
   fail: SessionLoadFail;

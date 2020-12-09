@@ -14,10 +14,10 @@ import {
 } from "../../../../local/src";
 import { SessionListInner, SessionInfo } from "./SessionList.Inner";
 
-export interface SessionListActions {
+export type SessionListActions = {
   loadLocalSession: (sessionId: string) => void;
   reportError: AlgolErrorReporter;
-}
+};
 
 type SessionListProps = {
   graphics: AlgolGameGraphics;

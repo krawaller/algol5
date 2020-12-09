@@ -10,9 +10,9 @@ import {
 import { Board } from "../Board";
 import { SessionItemInfo } from "./SessionList.ItemInfo";
 
-interface SessionListItemActions {
+type SessionListItemActions = {
   loadLocalSession: (sessionId: string) => void;
-}
+};
 
 type SessionListItemProps = {
   session: AlgolLocalBattle;

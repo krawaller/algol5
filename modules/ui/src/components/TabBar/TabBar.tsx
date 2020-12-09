@@ -2,9 +2,9 @@ import React, { FunctionComponent } from "react";
 import classNames from "classnames";
 import css from "./TabBar.cssProxy";
 
-export interface TabBarActions {
+export type TabBarActions = {
   foo: () => void;
-}
+};
 
 type TabBarProps<T extends string = string> = {
   onTabClick: (to: T) => void;

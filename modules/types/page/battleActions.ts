@@ -1,6 +1,6 @@
 export type BattleMode = "gamelobby" | "battlelobby" | "playing" | "history";
 
-export interface BattleNavActions {
+export type BattleNavActions = {
   toHistory: () => void;
   toGameLobby: () => void;
   toBattleLobby: () => void;
@@ -11,7 +11,7 @@ export interface BattleNavActions {
     replace?: boolean
   ) => void;
   newLocalBattle: (code: string, mode?: BattleMode | undefined) => void;
-}
+};
 
 export const fakeBattleNavActions: BattleNavActions = {
   toHistory: () => console.log("to history"),

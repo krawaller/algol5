@@ -10,11 +10,11 @@ import { Stepper } from "../Stepper";
 import css from "./BattleHistory.cssProxy";
 import { Button } from "../Button";
 
-interface BattleHistoryActions {
+type BattleHistoryActions = {
   toFrame: (frame: number) => void;
   forkBattleFrame: (battle: AlgolBattle, frame: number) => void;
   reportError: AlgolErrorReporter;
-}
+};
 
 type BattleHistoryProps = {
   content: AlgolContentAnon;

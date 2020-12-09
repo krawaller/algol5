@@ -22,7 +22,7 @@ if (!compName || !compName.length) {
     `import React, { FunctionComponent } from "react";
 import css from "./${compName}.cssProxy";
 
-export interface ${compName}Actions {
+export type $ = {compName}Actions {
   foo: () => void;
 }
 

@@ -15,7 +15,7 @@ import { NewRemoteSession } from "../NewRemoteSession";
 import { useModal } from "../../helpers";
 import { ButtonGroup } from "../ButtonGroup";
 
-export interface GameLandingActions {
+export type GameLandingActions = {
   navTo: (path: string) => void;
   prefetch: (path: string) => void;
   newLocalBattle: (code: string) => void;
@@ -23,7 +23,7 @@ export interface GameLandingActions {
   toBattleLobby: () => void;
   importSession: (str: string) => void;
   reportError: AlgolErrorReporter;
-}
+};
 
 type GameLandingProps = {
   meta: AlgolMeta<AlgolGameBlobAnon>;

@@ -5,4 +5,4 @@ jobs:
       - image: circleci/node:12.9.1
     steps:
       - checkout
-      - run: npm run installAll && npm run robot && npm run test:ts && npx jest -w 1
+      - run: npm run installAll && npm run test:ts && npx jest -w 1 && npm run robot

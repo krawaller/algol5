@@ -12,7 +12,7 @@ export const getLatestSessionInfo = (): LatestSessionInfo => {
   if (typeof localStorage === "undefined") {
     return { gameId: null, sessionId: null };
   }
-  const latestSessionInfo = localStorage.getItem(key) ?? "";
+  const latestSessionInfo = localStorage.getItem(key) || "";
   const [gameId, sessionId] = latestSessionInfo.split("\n");
   if (gameId && sessionId) {
     return {

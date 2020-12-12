@@ -29,6 +29,7 @@
   display: inline-block;
   width: 2em;
   height: 2em;
+  vertical-align: middle;
 }
 
 .contentSelectInstruction {

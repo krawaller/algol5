@@ -8,11 +8,11 @@ const gameId = process.argv[2];
 if (!gameId) {
   console.log("No gameId provided! Usage: npm run stub mynewgameid");
 } else if (!gameId.match(/^[A-Za-z]+$/)) {
-  console.log(
+  throw new Error(
     `New gameId should only consist of letters, "${gameId}" doesn't qualify!`
   );
 } else if (fs.existsSync(path.join(__dirname, "../definitions", gameId))) {
-  console.log(`Game "${gameId}" already exists!`);
+  throw new Error(`Game "${gameId}" already exists!`);
 } else {
   stub(gameId).then(() => {
     console.log(

@@ -2,7 +2,7 @@ import { OutwitDefinition } from "./_types";
 
 const outwitFlow: OutwitDefinition["flow"] = {
   endGame: {
-    winline: {
+    infiltration: {
       condition: {
         same: [
           { sizeof: "mycorner" },

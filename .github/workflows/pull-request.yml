@@ -1,0 +1,20 @@
+steps:
+- uses: actions/checkout@v2
+- uses: actions/setup-node@v1
+  with:
+    node-version: '12'
+- run: npm installAll
+- run: npm test
+# cd modules/common && npm run robot
+# cd ../local && npm run robot 
+# cd ../encoding && npm run robot
+# cd ../games && npm run robot
+# cd ../graphics && npm run robot
+# cd ../content && npm run robot
+# cd ../logic && npm run robot
+# cd ../battle && npm run robot
+# cd ../payloads && npm run robot
+# cd ../ui && npm run robot
+# cd ../next && npm run robot
+# cd ../firebase && npm run robot
+

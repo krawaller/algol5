@@ -17,7 +17,7 @@ const outwitFlow: OutwitDefinition["flow"] = {
   },
   marks: {
     selectunit: {
-      from: { subtract: ["myunits", "corner"] },
+      from: { subtract: ["myunits", "mycorner"] },
       runGenerator: {
         ifelse: [
           { anyat: ["kings", "selectunit"] },

@@ -84,7 +84,7 @@ const game = {
       };
       for (const pos of Object.keys(
         Object.keys(UNITLAYERS.myunits)
-          .filter(k => !TERRAIN1.corner.hasOwnProperty(k))
+          .filter(k => !TERRAIN1.mycorner.hasOwnProperty(k))
           .reduce((m, k) => {
             m[k] = emptyObj;
             return m;
@@ -115,7 +115,7 @@ const game = {
       };
       for (const pos of Object.keys(
         Object.keys(UNITLAYERS.myunits)
-          .filter(k => !TERRAIN2.corner.hasOwnProperty(k))
+          .filter(k => !TERRAIN2.mycorner.hasOwnProperty(k))
           .reduce((m, k) => {
             m[k] = emptyObj;
             return m;

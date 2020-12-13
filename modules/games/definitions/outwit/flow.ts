@@ -1,13 +1,30 @@
 import { OutwitDefinition } from "./_types";
 
 const outwitFlow: OutwitDefinition["flow"] = {
+  endGame: {
+    winline: {
+      condition: {
+        same: [
+          { sizeof: "mycorner" },
+          { sizeof: { intersect: ["mycorner", "myunits"] } },
+        ],
+      },
+      show: "myunits",
+    },
+  },
   startTurn: {
     link: "selectunit",
   },
   marks: {
     selectunit: {
       from: { subtract: ["myunits", "corner"] },
-      runGenerator: "findmovetargets",
+      runGenerator: {
+        ifelse: [
+          { anyat: ["kings", "selectunit"] },
+          "findkingtargets",
+          "findsoldiertargets",
+        ],
+      },
       link: "selectmovetarget",
     },
     selectmovetarget: {

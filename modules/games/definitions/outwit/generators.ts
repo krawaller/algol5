@@ -6,16 +6,23 @@
 import { OutwitDefinition } from "./_types";
 
 const outwitGenerators: OutwitDefinition["generators"] = {
-  findmovetargets: {
+  findkingtargets: {
     type: "walker",
     start: "selectunit",
-    dirs: "ortho",
+    dirs: "rose",
     blocks: "units",
     draw: {
       steps: {
         tolayer: "movetargets",
       },
     },
+  },
+  findsoldiertargets: {
+    type: "walker",
+    start: "selectunit",
+    dirs: "ortho",
+    blocks: "units",
+    draw: { last: { tolayer: "movetargets" } },
   },
 };
 

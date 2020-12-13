@@ -23,7 +23,7 @@ type OutwitUnitLayer =
   | "mykings"
   | "oppkings"
   | "neutralkings";
-type OutwitGenerator = "findmovetargets";
+type OutwitGenerator = "findkingtargets" | "findsoldiertargets";
 type OutwitArtifactLayer = "movetargets";
 type OutwitTerrainLayer = "corner" | "mycorner" | "oppcorner" | "nocorner";
 type OutwitLayer =

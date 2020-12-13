@@ -3,12 +3,12 @@ import { OutwitDefinition } from "./_types";
 const outwitInstructions: OutwitDefinition["instructions"] = {
   startTurn: {
     line: [
-      "Select a"
+      "Select a",
       "soldiers",
       "or",
       "kings",
-      "to move"
-    ]
+      "to move",
+    ],
   },
   selectunit: { line: ["Select where to move", { unitat: "selectunit" }] },
   selectmovetarget: {

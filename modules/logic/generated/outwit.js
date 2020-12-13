@@ -297,7 +297,7 @@ const game = {
         ).length
       ) {
         LINKS.endGame = "win";
-        LINKS.endedBy = "winline";
+        LINKS.endedBy = "infiltration";
         LINKS.endMarks = Object.keys(UNITLAYERS.myunits);
       } else {
         LINKS.endTurn = "startTurn_basic_2";
@@ -352,7 +352,7 @@ const game = {
         ).length
       ) {
         LINKS.endGame = "win";
-        LINKS.endedBy = "winline";
+        LINKS.endedBy = "infiltration";
         LINKS.endMarks = Object.keys(UNITLAYERS.myunits);
       } else {
         LINKS.endTurn = "startTurn_basic_1";
@@ -369,7 +369,15 @@ const game = {
   },
   instruction: {
     startTurn_basic_1: step => {
-      return collapseContent({ line: [{ text: "Select a piece to move" }] });
+      return collapseContent({
+        line: [
+          { text: "Select a" },
+          { unittype: ["rook", 1] },
+          { text: "or" },
+          { unittype: ["queen", 1] },
+          { text: "to move" }
+        ]
+      });
     },
     move_basic_1: () => defaultInstruction(1),
     selectunit_basic_1: step => {
@@ -411,7 +419,15 @@ const game = {
       });
     },
     startTurn_basic_2: step => {
-      return collapseContent({ line: [{ text: "Select a piece to move" }] });
+      return collapseContent({
+        line: [
+          { text: "Select a" },
+          { unittype: ["rook", 2] },
+          { text: "or" },
+          { unittype: ["queen", 2] },
+          { text: "to move" }
+        ]
+      });
     },
     move_basic_2: () => defaultInstruction(2),
     selectunit_basic_2: step => {

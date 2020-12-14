@@ -62,7 +62,7 @@ export const BattleMove: FunctionComponent<BattleMoveProps> = props => {
                 onFlip={() => setShowHelp(!showHelp)}
               />
             </Button>{" "}
-            <Button onClick={openRulesModal}>Peek rules</Button>
+            <Button onClick={openRulesModal}>How to play</Button>
           </ButtonGroup>
           {showHelp ? (
             <BattleHelp actions={actions} instruction={ui.instruction} />

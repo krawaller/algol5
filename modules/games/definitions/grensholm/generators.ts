@@ -5,20 +5,6 @@
 
 import { GrensholmDefinition } from "./_types";
 
-const knightLeftToRightDirs = [
-  "d1f2r1",
-  "d3f2r1",
-  "d3f2r-1",
-  "d5f2r-1"
-];
-
-const knightRightToLeftDirs = [
-  "d1f2r-1",
-  "d5f2r1",
-  "d7f2r1",
-  "d7f2r-1"
-];
-
 const grensholmGenerators: GrensholmDefinition["generators"] = {
   findmovetargets: {
     type: "neighbour",
@@ -28,14 +14,34 @@ const grensholmGenerators: GrensholmDefinition["generators"] = {
         { anyat: ["mykings", "selectunit"] },
         {
           playercase: [
-            knightRightToLeftDirs,
-            knightLeftToRightDirs
+            [
+              "d1f2r-1",
+              "d5f2r1",
+              "d7f2r1",
+              "d7f2r-1"
+            ],
+            [
+              "d1f2r1",
+              "d3f2r1",
+              "d3f2r-1",
+              "d5f2r-1"
+            ]
           ]
         },
         {
           playercase: [
-            knightLeftToRightDirs,
-            knightRightToLeftDirs
+            [
+              "d1f2r1",
+              "d3f2r1",
+              "d3f2r-1",
+              "d5f2r-1"
+            ],
+            [
+              "d1f2r-1",
+              "d5f2r1",
+              "d7f2r1",
+              "d7f2r-1"
+            ]
           ]
         }
       ]

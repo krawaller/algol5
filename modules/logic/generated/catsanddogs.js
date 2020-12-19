@@ -20,16 +20,28 @@ import boards from "../../games/definitions/catsanddogs/boards";
 import setups from "../../games/definitions/catsanddogs/setups";
 import variants from "../../games/definitions/catsanddogs/variants";
 const emptyObj = {};
-const iconMapping = {};
+const iconMapping = { animals: "queen" };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
-const groupLayers1 = {};
-const groupLayers2 = {};
+const groupLayers1 = {
+  animals: [
+    ["units", "animals"],
+    ["units", "animals"],
+    ["units", "animals"]
+  ]
+};
+const groupLayers2 = {
+  animals: [
+    ["units", "animals"],
+    ["units", "animals"],
+    ["units", "animals"]
+  ]
+};
 const prefixes1 = ["neutral", "my", "opp"];
 const prefixes2 = ["neutral", "opp", "my"];
-const emptyArtifactLayers_basic = {};
+const emptyArtifactLayers_basic = { droptargets: {} };
 const game = {
   gameId: "catsanddogs",
-  commands: {},
+  commands: { deploy: {} },
   iconMap: iconMapping,
   setBoard: board => {
     TERRAIN1 = terrainLayers(board, 1);
@@ -41,7 +53,7 @@ const game = {
   },
   newBattle: (setup, ruleset) => {
     let UNITDATA = setup2army(setup);
-    let UNITLAYERS = { units: {} };
+    let UNITLAYERS = { units: {}, animals: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -50,6 +62,7 @@ const game = {
       }
     }
     return game.action[`startTurn_${ruleset}_1`]({
+      NEXTSPAWNID: 1,
       TURN: 0,
       UNITDATA,
       UNITLAYERS
@@ -57,46 +70,198 @@ const game = {
   },
   action: {
     startTurn_basic_1: step => {
+      const oldUnitLayers = step.UNITLAYERS;
+      let UNITLAYERS = {
+        units: oldUnitLayers.units,
+        animals: oldUnitLayers.animals
+      };
       let LINKS = {
         marks: {},
         commands: {}
       };
-      const oldUnitLayers = step.UNITLAYERS;
+      for (const pos of Object.keys(
+        Object.keys(BOARD.board)
+          .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+          .reduce((m, k) => {
+            m[k] = emptyObj;
+            return m;
+          }, {})
+      )) {
+        LINKS.marks[pos] = "selectdeploytarget_basic_1";
+      }
       return {
         UNITDATA: step.UNITDATA,
         LINKS,
-        UNITLAYERS: {
-          units: oldUnitLayers.units
-        },
+        UNITLAYERS,
         ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
-        TURN: step.TURN + 1
+        TURN: step.TURN + 1,
+        NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
     startTurn_basic_2: step => {
+      const oldUnitLayers = step.UNITLAYERS;
+      let UNITLAYERS = {
+        units: oldUnitLayers.units,
+        animals: oldUnitLayers.animals
+      };
       let LINKS = {
         marks: {},
         commands: {}
       };
-      const oldUnitLayers = step.UNITLAYERS;
+      for (const pos of Object.keys(
+        Object.keys(BOARD.board)
+          .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+          .reduce((m, k) => {
+            m[k] = emptyObj;
+            return m;
+          }, {})
+      )) {
+        LINKS.marks[pos] = "selectdeploytarget_basic_2";
+      }
       return {
         UNITDATA: step.UNITDATA,
         LINKS,
-        UNITLAYERS: {
-          units: oldUnitLayers.units
-        },
+        UNITLAYERS,
         ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
-        TURN: step.TURN
+        TURN: step.TURN,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
+    selectdeploytarget_basic_1: (step, newMarkPos) => {
+      let LINKS = { marks: {}, commands: {} };
+      LINKS.commands.deploy = "deploy_basic_1";
+      return {
+        LINKS,
+        ARTIFACTS: step.ARTIFACTS,
+        UNITLAYERS: step.UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS: { selectdeploytarget: newMarkPos },
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
+    selectdeploytarget_basic_2: (step, newMarkPos) => {
+      let LINKS = { marks: {}, commands: {} };
+      LINKS.commands.deploy = "deploy_basic_2";
+      return {
+        LINKS,
+        ARTIFACTS: step.ARTIFACTS,
+        UNITLAYERS: step.UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS: { selectdeploytarget: newMarkPos },
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
+    deploy_basic_1: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let UNITLAYERS = step.UNITLAYERS;
+      let UNITDATA = { ...step.UNITDATA };
+      let NEXTSPAWNID = step.NEXTSPAWNID;
+      let MARKS = step.MARKS;
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: MARKS.selectdeploytarget,
+          id: newunitid,
+          group: "animals",
+          owner: 1
+        };
+      }
+      UNITLAYERS = { units: {}, animals: {} };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers1[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      {
+        LINKS.endTurn = "startTurn_basic_2";
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS: step.ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS,
+        NEXTSPAWNID
+      };
+    },
+    deploy_basic_2: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let UNITLAYERS = step.UNITLAYERS;
+      let UNITDATA = { ...step.UNITDATA };
+      let NEXTSPAWNID = step.NEXTSPAWNID;
+      let MARKS = step.MARKS;
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: MARKS.selectdeploytarget,
+          id: newunitid,
+          group: "animals",
+          owner: 2
+        };
+      }
+      UNITLAYERS = { units: {}, animals: {} };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers2[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      {
+        LINKS.endTurn = "startTurn_basic_1";
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS: step.ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS,
+        NEXTSPAWNID
       };
     }
   },
   instruction: {
     startTurn_basic_1: step => {
-      return collapseContent({ line: [{ text: "Go!" }] });
+      return collapseContent({
+        line: [{ text: "Go you noob, haha just kidding, but go!" }]
+      });
+    },
+    deploy_basic_1: () => defaultInstruction(1),
+    selectdeploytarget_basic_1: step => {
+      let MARKS = step.MARKS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "deploy" },
+          { text: "to spawn" },
+          { unit: ["queen", 1, MARKS.selectdeploytarget] }
+        ]
+      });
     },
     startTurn_basic_2: step => {
-      return collapseContent({ line: [{ text: "Go!" }] });
+      return collapseContent({
+        line: [{ text: "Go you noob, haha just kidding, but go!" }]
+      });
+    },
+    deploy_basic_2: () => defaultInstruction(2),
+    selectdeploytarget_basic_2: step => {
+      let MARKS = step.MARKS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "deploy" },
+          { text: "to spawn" },
+          { unit: ["queen", 2, MARKS.selectdeploytarget] }
+        ]
+      });
     }
   },
   variants,

@@ -5,7 +5,7 @@ type CatsanddogsBoardHeight = 11;
 type CatsanddogsBoardWidth = 11;
 
 type CatsanddogsTerrain = never;
-type CatsanddogsUnit = "unit";
+type CatsanddogsUnit = "animals";
 type CatsanddogsMark = "selectdeploytarget";
 type CatsanddogsCommand = "deploy";
 type CatsanddogsPhaseCommand = never;
@@ -15,12 +15,12 @@ type CatsanddogsUnitLayer =
   | "myunits"
   | "oppunits"
   | "neutralunits"
-  | "unit"
-  | "myunit"
-  | "oppunit"
-  | "neutralunit";
-type CatsanddogsGenerator = "findlines";
-type CatsanddogsArtifactLayer = "line";
+  | "animals"
+  | "myanimals"
+  | "oppanimals"
+  | "neutralanimals";
+type CatsanddogsGenerator = "finddroptargets";
+type CatsanddogsArtifactLayer = "droptargets";
 type CatsanddogsTerrainLayer = never;
 type CatsanddogsLayer =
   | CommonLayer

@@ -3,9 +3,9 @@ import { CatsanddogsDefinition } from "./_types";
 const catsanddogsMeta: CatsanddogsDefinition["meta"] = {
   id: "catsanddogs",
   author: "Chris Huntoon, Simon Norton",
-  name: "Catsanddogs",
+  name: "Cats and dogs",
   tags: [],
-  tagline: "An awesome game!",
+  tagline: "It's raining cats and dogs!",
   source: "https://boardgamegeek.com/boardgame/151888/snort",
   code: "DL",
   slug: "catsanddogs",

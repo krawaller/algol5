@@ -6,16 +6,18 @@
 import { CatsanddogsDefinition } from "./_types";
 
 const catsanddogsGenerators: CatsanddogsDefinition["generators"] = {
-    findlines: {
+    finddroptargets: {
         type: "walker",
-        dirs: [1, 2, 3, 4],
-        starts: "units",
-        steps: { groupat: ["start"] },
+        dir: 5,
+        starts: { subtract: ["board", "units"] },
+        blocks: "animals",
         startasstep: true,
         draw: {
-          steps: { condition: { morethan: [["walklength"], 2] }, tolayer: "line" }
-        }
-      }
+            last: {
+                tolayer: "droptargets",
+            },
+        },
+    }
 };
 
 export default catsanddogsGenerators;

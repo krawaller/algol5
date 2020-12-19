@@ -1,13 +1,13 @@
 import { CatsanddogsDefinition } from "./_types";
 
 const catsanddogsInstructions: CatsanddogsDefinition["instructions"] = {
-  startTurn: { line: ["Go!"] },
-  selectdeploytarget: {
+  startTurn: { line: ["Go you noob, haha just kidding, but go!"] },
+  "selectdeploytarget": {
     line: [
       "Press",
       "deploy",
       "to spawn",
-      { unittypepos: ["unit", 0, "selectdeploytarget"] }
+      { unittypepos: ["animals", ['player'], "selectdeploytarget"] }
     ]
   },
 };

@@ -6,7 +6,7 @@
 import { CatsanddogsDefinition } from "./_types";
 
 const catsanddogsGraphics: CatsanddogsDefinition["graphics"] = {
-  icons: { unit: "queen" },
+  icons: { animals: "queen" },
   tiles: { }
 };
 

@@ -19,8 +19,8 @@ const outwitInstructions: OutwitDefinition["instructions"] = {
       { unitat: "selectunit" },
       {
         ifelse: [
-          { anyat: ["corner", "selectmovetarget"] },
-          "into the corner at",
+          { anyat: ["base", "selectmovetarget"] },
+          "into the base at",
           "to",
         ],
       },

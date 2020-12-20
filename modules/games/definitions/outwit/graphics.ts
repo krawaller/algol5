@@ -11,7 +11,7 @@ const outwitGraphics: OutwitDefinition["graphics"] = {
     kings: "queen",
   },
   tiles: {
-    corner: "playercolour",
+    base: "playercolour",
   },
 };
 

@@ -5,8 +5,8 @@ const outwitFlow: OutwitDefinition["flow"] = {
     infiltration: {
       condition: {
         same: [
-          { sizeof: "mycorner" },
-          { sizeof: { intersect: ["mycorner", "myunits"] } },
+          { sizeof: "mybase" },
+          { sizeof: { intersect: ["mybase", "myunits"] } },
         ],
       },
       show: "myunits",
@@ -17,7 +17,7 @@ const outwitFlow: OutwitDefinition["flow"] = {
   },
   marks: {
     selectunit: {
-      from: { subtract: ["myunits", "mycorner"] },
+      from: { subtract: ["myunits", "mybase"] },
       runGenerator: {
         ifelse: [
           { anyat: ["kings", "selectunit"] },

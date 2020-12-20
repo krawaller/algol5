@@ -84,7 +84,7 @@ const game = {
       };
       for (const pos of Object.keys(
         Object.keys(UNITLAYERS.myunits)
-          .filter(k => !TERRAIN1.mycorner.hasOwnProperty(k))
+          .filter(k => !TERRAIN1.mybase.hasOwnProperty(k))
           .reduce((m, k) => {
             m[k] = emptyObj;
             return m;
@@ -115,7 +115,7 @@ const game = {
       };
       for (const pos of Object.keys(
         Object.keys(UNITLAYERS.myunits)
-          .filter(k => !TERRAIN2.mycorner.hasOwnProperty(k))
+          .filter(k => !TERRAIN2.mybase.hasOwnProperty(k))
           .reduce((m, k) => {
             m[k] = emptyObj;
             return m;
@@ -279,10 +279,10 @@ const game = {
         }
       }
       if (
-        Object.keys(TERRAIN1.mycorner).length ===
+        Object.keys(TERRAIN1.mybase).length ===
         Object.keys(
           Object.entries(
-            Object.keys(TERRAIN1.mycorner)
+            Object.keys(TERRAIN1.mybase)
               .concat(Object.keys(UNITLAYERS.myunits))
               .reduce((mem, k) => {
                 mem[k] = (mem[k] || 0) + 1;
@@ -334,10 +334,10 @@ const game = {
         }
       }
       if (
-        Object.keys(TERRAIN2.mycorner).length ===
+        Object.keys(TERRAIN2.mybase).length ===
         Object.keys(
           Object.entries(
-            Object.keys(TERRAIN2.mycorner)
+            Object.keys(TERRAIN2.mybase)
               .concat(Object.keys(UNITLAYERS.myunits))
               .reduce((mem, k) => {
                 mem[k] = (mem[k] || 0) + 1;
@@ -411,8 +411,8 @@ const game = {
               MARKS.selectunit
             ]
           },
-          TERRAIN1.corner[MARKS.selectmovetarget]
-            ? { text: "into the corner at" }
+          TERRAIN1.base[MARKS.selectmovetarget]
+            ? { text: "into the base at" }
             : { text: "to" },
           { pos: MARKS.selectmovetarget }
         ]
@@ -461,8 +461,8 @@ const game = {
               MARKS.selectunit
             ]
           },
-          TERRAIN2.corner[MARKS.selectmovetarget]
-            ? { text: "into the corner at" }
+          TERRAIN2.base[MARKS.selectmovetarget]
+            ? { text: "into the base at" }
             : { text: "to" },
           { pos: MARKS.selectmovetarget }
         ]

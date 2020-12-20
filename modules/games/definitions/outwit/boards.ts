@@ -9,7 +9,7 @@ const outwitBoardBook: OutwitDefinition["boards"] = {
     height: 9,
     width: 10,
     terrain: {
-      corner: {
+      base: {
         1: [{ rect: ["h1", "j3"] }],
         2: [{ rect: ["a7", "c9"] }],
       },

@@ -19,8 +19,8 @@ type CatsanddogsUnitLayer =
   | "myanimals"
   | "oppanimals"
   | "neutralanimals";
-type CatsanddogsGenerator = "finddroptargets";
-type CatsanddogsArtifactLayer = "droptargets";
+type CatsanddogsGenerator = "findforbidden";
+type CatsanddogsArtifactLayer = "forbidden";
 type CatsanddogsTerrainLayer = never;
 type CatsanddogsLayer =
   | CommonLayer

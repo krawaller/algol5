@@ -10,6 +10,6 @@
 
 import { CatsanddogsDefinition } from "./_types";
 
-const catsanddogsAnim: CatsanddogsDefinition["anim"] = {};
+const catsanddogsAnim: CatsanddogsDefinition["anim"] = {}
 
 export default catsanddogsAnim;

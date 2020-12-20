@@ -25,20 +25,19 @@ let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   animals: [
     ["units", "animals"],
-    ["units", "animals"],
-    ["units", "animals"]
+    ["units", "animals", "myanimals"],
+    ["units", "animals", "oppanimals"]
   ]
 };
 const groupLayers2 = {
   animals: [
     ["units", "animals"],
-    ["units", "animals"],
-    ["units", "animals"]
+    ["units", "animals", "oppanimals"],
+    ["units", "animals", "myanimals"]
   ]
 };
 const prefixes1 = ["neutral", "my", "opp"];
 const prefixes2 = ["neutral", "opp", "my"];
-const emptyArtifactLayers_basic = { droptargets: {} };
 const game = {
   gameId: "catsanddogs",
   commands: { deploy: {} },
@@ -53,7 +52,7 @@ const game = {
   },
   newBattle: (setup, ruleset) => {
     let UNITDATA = setup2army(setup);
-    let UNITLAYERS = { units: {}, animals: {} };
+    let UNITLAYERS = { units: {}, animals: {}, myanimals: {}, oppanimals: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -70,18 +69,36 @@ const game = {
   },
   action: {
     startTurn_basic_1: step => {
+      let ARTIFACTS = {
+        forbidden: {}
+      };
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
-        animals: oldUnitLayers.animals
+        animals: oldUnitLayers.animals,
+        myanimals: oldUnitLayers.oppanimals,
+        oppanimals: oldUnitLayers.myanimals
       };
       let LINKS = {
         marks: {},
         commands: {}
       };
+      for (let STARTPOS in UNITLAYERS.oppanimals) {
+        let startconnections = connections[STARTPOS];
+        for (let DIR of orthoDirs) {
+          let POS = startconnections[DIR];
+          if (POS) {
+            ARTIFACTS.forbidden[POS] = emptyObj;
+          }
+        }
+      }
       for (const pos of Object.keys(
         Object.keys(BOARD.board)
-          .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+          .filter(
+            k =>
+              !UNITLAYERS.units.hasOwnProperty(k) &&
+              !ARTIFACTS.forbidden.hasOwnProperty(k)
+          )
           .reduce((m, k) => {
             m[k] = emptyObj;
             return m;
@@ -93,25 +110,43 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers_basic,
+        ARTIFACTS,
         MARKS: {},
         TURN: step.TURN + 1,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
     startTurn_basic_2: step => {
+      let ARTIFACTS = {
+        forbidden: {}
+      };
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
-        animals: oldUnitLayers.animals
+        animals: oldUnitLayers.animals,
+        myanimals: oldUnitLayers.oppanimals,
+        oppanimals: oldUnitLayers.myanimals
       };
       let LINKS = {
         marks: {},
         commands: {}
       };
+      for (let STARTPOS in UNITLAYERS.oppanimals) {
+        let startconnections = connections[STARTPOS];
+        for (let DIR of orthoDirs) {
+          let POS = startconnections[DIR];
+          if (POS) {
+            ARTIFACTS.forbidden[POS] = emptyObj;
+          }
+        }
+      }
       for (const pos of Object.keys(
         Object.keys(BOARD.board)
-          .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+          .filter(
+            k =>
+              !UNITLAYERS.units.hasOwnProperty(k) &&
+              !ARTIFACTS.forbidden.hasOwnProperty(k)
+          )
           .reduce((m, k) => {
             m[k] = emptyObj;
             return m;
@@ -123,7 +158,7 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS: emptyArtifactLayers_basic,
+        ARTIFACTS,
         MARKS: {},
         TURN: step.TURN,
         NEXTSPAWNID: step.NEXTSPAWNID
@@ -170,7 +205,7 @@ const game = {
           owner: 1
         };
       }
-      UNITLAYERS = { units: {}, animals: {} };
+      UNITLAYERS = { units: {}, animals: {}, myanimals: {}, oppanimals: {} };
       for (let unitid in UNITDATA) {
         const currentunit = UNITDATA[unitid];
         const { group, pos, owner } = currentunit;
@@ -206,7 +241,7 @@ const game = {
           owner: 2
         };
       }
-      UNITLAYERS = { units: {}, animals: {} };
+      UNITLAYERS = { units: {}, animals: {}, myanimals: {}, oppanimals: {} };
       for (let unitid in UNITDATA) {
         const currentunit = UNITDATA[unitid];
         const { group, pos, owner } = currentunit;

@@ -6,18 +6,12 @@
 import { CatsanddogsDefinition } from "./_types";
 
 const catsanddogsGenerators: CatsanddogsDefinition["generators"] = {
-    finddroptargets: {
-        type: "walker",
-        dir: 5,
-        starts: { subtract: ["board", "units"] },
-        blocks: "animals",
-        startasstep: true,
-        draw: {
-            last: {
-                tolayer: "droptargets",
-            },
-        },
-    }
+    findforbidden: {
+        type: "neighbour",
+        dirs: 'ortho',
+        starts: 'oppanimals',
+        draw: { neighbours: {tolayer: 'forbidden'} },
+    },
 };
 
 export default catsanddogsGenerators;

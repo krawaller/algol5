@@ -4,7 +4,7 @@ import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 type OutwitBoardHeight = 9;
 type OutwitBoardWidth = 10;
 
-type OutwitTerrain = "corner";
+type OutwitTerrain = "base";
 type OutwitUnit = "soldiers" | "kings";
 type OutwitMark = "selectunit" | "selectmovetarget";
 type OutwitCommand = "move";
@@ -25,7 +25,7 @@ type OutwitUnitLayer =
   | "neutralkings";
 type OutwitGenerator = "findkingtargets" | "findsoldiertargets";
 type OutwitArtifactLayer = "movetargets";
-type OutwitTerrainLayer = "corner" | "mycorner" | "oppcorner" | "nocorner";
+type OutwitTerrainLayer = "base" | "mybase" | "oppbase" | "nobase";
 type OutwitLayer =
   | CommonLayer
   | OutwitUnitLayer

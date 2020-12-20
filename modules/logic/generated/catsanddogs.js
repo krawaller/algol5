@@ -38,6 +38,7 @@ const groupLayers2 = {
 };
 const prefixes1 = ["neutral", "my", "opp"];
 const prefixes2 = ["neutral", "opp", "my"];
+const emptyArtifactLayers_basic = { forbidden: {} };
 const game = {
   gameId: "catsanddogs",
   commands: { deploy: {} },
@@ -69,9 +70,6 @@ const game = {
   },
   action: {
     startTurn_basic_1: step => {
-      let ARTIFACTS = {
-        forbidden: {}
-      };
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -83,22 +81,9 @@ const game = {
         marks: {},
         commands: {}
       };
-      for (let STARTPOS in UNITLAYERS.oppanimals) {
-        let startconnections = connections[STARTPOS];
-        for (let DIR of orthoDirs) {
-          let POS = startconnections[DIR];
-          if (POS) {
-            ARTIFACTS.forbidden[POS] = emptyObj;
-          }
-        }
-      }
       for (const pos of Object.keys(
         Object.keys(BOARD.board)
-          .filter(
-            k =>
-              !UNITLAYERS.units.hasOwnProperty(k) &&
-              !ARTIFACTS.forbidden.hasOwnProperty(k)
-          )
+          .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
           .reduce((m, k) => {
             m[k] = emptyObj;
             return m;
@@ -110,16 +95,13 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN + 1,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
     startTurn_basic_2: step => {
-      let ARTIFACTS = {
-        forbidden: {}
-      };
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -131,22 +113,9 @@ const game = {
         marks: {},
         commands: {}
       };
-      for (let STARTPOS in UNITLAYERS.oppanimals) {
-        let startconnections = connections[STARTPOS];
-        for (let DIR of orthoDirs) {
-          let POS = startconnections[DIR];
-          if (POS) {
-            ARTIFACTS.forbidden[POS] = emptyObj;
-          }
-        }
-      }
       for (const pos of Object.keys(
         Object.keys(BOARD.board)
-          .filter(
-            k =>
-              !UNITLAYERS.units.hasOwnProperty(k) &&
-              !ARTIFACTS.forbidden.hasOwnProperty(k)
-          )
+          .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
           .reduce((m, k) => {
             m[k] = emptyObj;
             return m;
@@ -158,35 +127,83 @@ const game = {
         UNITDATA: step.UNITDATA,
         LINKS,
         UNITLAYERS,
-        ARTIFACTS,
+        ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
         TURN: step.TURN,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
     selectdeploytarget_basic_1: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        forbidden: {}
+      };
       let LINKS = { marks: {}, commands: {} };
-      LINKS.commands.deploy = "deploy_basic_1";
+      let MARKS = {
+        selectdeploytarget: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        let STARTPOS = MARKS.selectdeploytarget;
+        let foundneighbours = [];
+        let startconnections = connections[STARTPOS];
+        for (let DIR of orthoDirs) {
+          let POS = startconnections[DIR];
+          if (POS && UNITLAYERS.oppanimals[POS]) {
+            foundneighbours.push(POS);
+          }
+        }
+        let NEIGHBOURCOUNT = foundneighbours.length;
+        if (!!NEIGHBOURCOUNT) {
+          ARTIFACTS.forbidden[STARTPOS] = emptyObj;
+        }
+      }
+      if (!ARTIFACTS.forbidden[MARKS.selectdeploytarget]) {
+        LINKS.commands.deploy = "deploy_basic_1";
+      }
       return {
         LINKS,
-        ARTIFACTS: step.ARTIFACTS,
-        UNITLAYERS: step.UNITLAYERS,
+        ARTIFACTS,
+        UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: { selectdeploytarget: newMarkPos },
+        MARKS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
     selectdeploytarget_basic_2: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        forbidden: {}
+      };
       let LINKS = { marks: {}, commands: {} };
-      LINKS.commands.deploy = "deploy_basic_2";
+      let MARKS = {
+        selectdeploytarget: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        let STARTPOS = MARKS.selectdeploytarget;
+        let foundneighbours = [];
+        let startconnections = connections[STARTPOS];
+        for (let DIR of orthoDirs) {
+          let POS = startconnections[DIR];
+          if (POS && UNITLAYERS.oppanimals[POS]) {
+            foundneighbours.push(POS);
+          }
+        }
+        let NEIGHBOURCOUNT = foundneighbours.length;
+        if (!!NEIGHBOURCOUNT) {
+          ARTIFACTS.forbidden[STARTPOS] = emptyObj;
+        }
+      }
+      if (!ARTIFACTS.forbidden[MARKS.selectdeploytarget]) {
+        LINKS.commands.deploy = "deploy_basic_2";
+      }
       return {
         LINKS,
-        ARTIFACTS: step.ARTIFACTS,
-        UNITLAYERS: step.UNITLAYERS,
+        ARTIFACTS,
+        UNITLAYERS,
         UNITDATA: step.UNITDATA,
         TURN: step.TURN,
-        MARKS: { selectdeploytarget: newMarkPos },
+        MARKS,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },

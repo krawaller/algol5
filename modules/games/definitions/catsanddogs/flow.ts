@@ -1,7 +1,7 @@
 import { CatsanddogsDefinition } from "./_types";
 
 const catsanddogsFlow: CatsanddogsDefinition["flow"] = {
-  startTurn: { links: ["selectdeploytarget"], runGenerator: 'findforbidden'},
+  startTurn: { links: ["selectdeploytarget"]},
   commands: {
     deploy: {
       applyEffect: { spawnat: ["selectdeploytarget", "animals", ['player']] },
@@ -10,8 +10,9 @@ const catsanddogsFlow: CatsanddogsDefinition["flow"] = {
   },
   marks: {
     selectdeploytarget: {
-      from: { subtract: ["board", "units", "forbidden"] },
-      link: "deploy"
+      runGenerator: 'findforbidden',
+      from: { subtract: ["board", "units" ] },
+      link: {if: [{noneat: ['forbidden', "selectdeploytarget"]}, 'deploy']}
     },
   },
 };

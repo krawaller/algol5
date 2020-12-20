@@ -9,8 +9,9 @@ const catsanddogsGenerators: CatsanddogsDefinition["generators"] = {
     findforbidden: {
         type: "neighbour",
         dirs: 'ortho',
-        starts: 'oppanimals',
-        draw: { neighbours: {tolayer: 'forbidden'} },
+        start: 'selectdeploytarget',
+        ifover: 'oppanimals',
+        draw: { start: {tolayer: 'forbidden', condition: {truthy: ['neighbourcount']}} },
     },
 };
 

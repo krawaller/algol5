@@ -11,8 +11,19 @@ const catsanddogsFlow: CatsanddogsDefinition["flow"] = {
   marks: {
     selectdeploytarget: {
       runGenerator: 'findforbidden',
-      from: { subtract: ["board", "units" ] },
-      link: {if: [{noneat: ['forbidden', "selectdeploytarget"]}, 'deploy']}
+      from: {
+        playercase: [
+          {
+            ifelse: [
+              ["isFirstTurn"],
+              {subtract: ["board", "units", "center"]},
+              {subtract: ["board", "units"]}
+            ]
+          },
+          {subtract: ["board", "units"]}
+        ]
+      },
+      link: { if: [{ noneat: ['forbidden', "selectdeploytarget"] }, 'deploy'] }
     },
   },
 };

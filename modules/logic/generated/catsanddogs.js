@@ -81,13 +81,25 @@ const game = {
         marks: {},
         commands: {}
       };
+      let TURN = step.TURN + 1;
       for (const pos of Object.keys(
-        Object.keys(BOARD.board)
-          .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-          .reduce((m, k) => {
-            m[k] = emptyObj;
-            return m;
-          }, {})
+        TURN === 1
+          ? Object.keys(BOARD.board)
+              .filter(
+                k =>
+                  !UNITLAYERS.units.hasOwnProperty(k) &&
+                  !TERRAIN1.center.hasOwnProperty(k)
+              )
+              .reduce((m, k) => {
+                m[k] = emptyObj;
+                return m;
+              }, {})
+          : Object.keys(BOARD.board)
+              .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+              .reduce((m, k) => {
+                m[k] = emptyObj;
+                return m;
+              }, {})
       )) {
         LINKS.marks[pos] = "selectdeploytarget_basic_1";
       }
@@ -97,7 +109,7 @@ const game = {
         UNITLAYERS,
         ARTIFACTS: emptyArtifactLayers_basic,
         MARKS: {},
-        TURN: step.TURN + 1,
+        TURN,
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },

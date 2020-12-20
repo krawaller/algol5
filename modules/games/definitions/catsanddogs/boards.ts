@@ -8,7 +8,9 @@ const catsanddogsBoardBook: CatsanddogsDefinition["boards"] = {
   basic: {
     height: 11,
     width: 11,
-    terrain: {}
+    terrain: {
+      "center": ["f6"]
+    }
   }
 };
 

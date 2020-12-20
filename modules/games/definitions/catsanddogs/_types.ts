@@ -4,7 +4,7 @@ import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 type CatsanddogsBoardHeight = 11;
 type CatsanddogsBoardWidth = 11;
 
-type CatsanddogsTerrain = never;
+type CatsanddogsTerrain = "center";
 type CatsanddogsUnit = "animals";
 type CatsanddogsMark = "selectdeploytarget";
 type CatsanddogsCommand = "deploy";
@@ -19,13 +19,14 @@ type CatsanddogsUnitLayer =
   | "myanimals"
   | "oppanimals"
   | "neutralanimals";
-type CatsanddogsGenerator = "findforbidden";
+type CatsanddogsGenerator = "findforbidden" | "firstroundforbid";
 type CatsanddogsArtifactLayer = "forbidden";
-type CatsanddogsTerrainLayer = never;
+type CatsanddogsTerrainLayer = "center" | "nocenter";
 type CatsanddogsLayer =
   | CommonLayer
   | CatsanddogsUnitLayer
-  | CatsanddogsArtifactLayer;
+  | CatsanddogsArtifactLayer
+  | CatsanddogsTerrainLayer;
 type CatsanddogsBattlePos = never;
 type CatsanddogsBattleVar = never;
 type CatsanddogsTurnPos = never;

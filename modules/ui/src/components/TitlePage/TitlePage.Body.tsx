@@ -18,13 +18,13 @@ const latestGame = data
   .sort((a: TitleData, b: TitleData) => (a.added > b.added ? -1 : 1))
   .slice(0)[0];
 
-type TitlePageContentProps = {
+type TitlePageBodyProps = {
   actions: AppActions;
 };
 
 const buttonTexts = ["Hi, I'm new! 👋", "Hello again! 🤘"];
 
-export const TitlePageContent = (props: TitlePageContentProps) => {
+export const TitlePageBody = (props: TitlePageBodyProps) => {
   const { actions } = props;
   const startContentIndex = useMemo(
     () => (getLatestSessionInfo().gameId ? 1 : 0),

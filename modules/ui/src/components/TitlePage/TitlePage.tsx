@@ -6,7 +6,7 @@ import React, { Fragment } from "react";
 import { AlgolPage } from "../../../../types";
 import { Page } from "../Page";
 import { TitleBoard } from "./TitlePage.Board";
-import { TitlePageContent } from "./TitlePage.Content";
+import { TitlePageBody } from "./TitlePage.Body";
 import { setTitlePageAttributes } from "./setTitlePageAttributes";
 
 export const TitlePage: AlgolPage = props => {
@@ -16,7 +16,7 @@ export const TitlePage: AlgolPage = props => {
       <Page
         title="Hello!"
         top={<TitleBoard actions={actions} />}
-        body={<TitlePageContent actions={actions} />}
+        body={<TitlePageBody actions={actions} />}
       />
     </Fragment>
   );

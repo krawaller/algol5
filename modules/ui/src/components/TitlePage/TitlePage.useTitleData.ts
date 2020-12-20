@@ -3,11 +3,6 @@ import { getLatestVisitedGameId } from "../../../../local/src";
 import { data } from "../../../../payloads/dist/titleData";
 
 const list = data;
-// .filter(
-//   entry =>
-//     entry.graphics.boards["basic"].height ===
-//     entry.graphics.boards["basic"].width
-// );
 
 const indexReducer = (state: number, action: string) => {
   if (action === "inc") return state === list.length - 1 ? 0 : state + 1;
@@ -51,3 +46,5 @@ export const useTitleData = () => {
     actions,
   };
 };
+
+export type TitleDemo = ReturnType<typeof useTitleData>;

@@ -2,18 +2,19 @@ import classNames from "classnames";
 import css from "./TitlePage.cssProxy";
 import React, { Fragment, useCallback } from "react";
 import { Button } from "../Button";
-import { useTitleData } from "./TitlePage.useTitleData";
+import { TitleDemo } from "./TitlePage.useTitleData";
 import { gameCount } from "../../../../common";
 import { AppActions } from "../../../../types";
 import shellCss from "../Shell/Shell.cssProxy";
 
 type TitleWelcomeProps = {
   actions: AppActions;
+  titleDemo: TitleDemo;
 };
 
 export const TitleWelcome = (props: TitleWelcomeProps) => {
-  const { actions } = props;
-  const { titleData, actions: titleActions } = useTitleData();
+  const { actions, titleDemo } = props;
+  const { titleData, actions: titleActions } = titleDemo;
   const { name, slug, mainVariant } = titleData;
   const goToCurrentGame = useCallback(
     () => actions.navTo(`/games/${slug}/?sid=new_${mainVariant}&m=playing`),

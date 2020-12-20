@@ -1,18 +1,15 @@
 import React, { Fragment } from "react";
 import { Board } from "../Board";
-import { useTitleData } from "./TitlePage.useTitleData";
 import { useDemo } from "../../helpers";
 import { demo2ui, emptyBattleUI } from "../../../../common";
-import { AppActions } from "../../../../types";
-import { TitleWelcome } from "./TitlePage.Welcome";
+import { TitleData } from "../../../../payloads/dist/titleData";
 
 type TitleBoardProps = {
-  actions: AppActions;
+  titleData: TitleData;
 };
 
 export const TitleBoard = (props: TitleBoardProps) => {
-  const { actions } = props;
-  const { titleData } = useTitleData();
+  const { titleData } = props;
   const { graphics, demo, gameId } = titleData;
   const { frame, hydrDemo } = useDemo({
     demo,
@@ -23,7 +20,6 @@ export const TitleBoard = (props: TitleBoardProps) => {
   const ui = hydrDemo ? demo2ui(hydrDemo, frame) : emptyBattleUI;
   return (
     <Fragment>
-      <TitleWelcome actions={actions} />
       <Board
         graphics={graphics}
         units={ui.board.units}

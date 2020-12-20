@@ -1,7 +1,7 @@
 import { CatsanddogsDefinition } from "./_types";
 
 const catsanddogsPerformance: CatsanddogsDefinition["performance"] = {
-  canAlwaysEnd: {},
+  canAlwaysEnd: { "deploy": true },
   massiveTree: {},
   noEndGameCheck: []
 };

@@ -240,7 +240,8 @@ const game = {
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
-        NEXTSPAWNID
+        NEXTSPAWNID,
+        canAlwaysEnd: true
       };
     },
     deploy_basic_2: step => {
@@ -276,7 +277,8 @@ const game = {
         TURN: step.TURN,
         UNITDATA,
         UNITLAYERS,
-        NEXTSPAWNID
+        NEXTSPAWNID,
+        canAlwaysEnd: true
       };
     }
   },

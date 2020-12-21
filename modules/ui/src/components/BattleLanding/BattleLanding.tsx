@@ -1,4 +1,4 @@
-import React, { FunctionComponent, Fragment, useState, useMemo } from "react";
+import React, { FunctionComponent, useState, useMemo } from "react";
 import {
   AlgolLocalBattle,
   AlgolMeta,
@@ -38,7 +38,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
   );
   const stillFirstTurn = battle.turnNumber === 1 && battle.player === 1;
   return (
-    <Fragment>
+    <div>
       <div className={css.battleLandingContent}>
         <BattleLandingOngoing session={session} variant={battle.variant} />
       </div>
@@ -72,6 +72,6 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
       <Modal isOpen={isModalOpen} onClose={closeModal} title="Export session">
         <ExportBattle battle={battle} meta={meta} session={session} />
       </Modal>
-    </Fragment>
+    </div>
   );
 };

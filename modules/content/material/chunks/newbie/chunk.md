@@ -5,8 +5,12 @@ mainImage: "yoda-newbie.jpg"
 
 {PIC:name=yoda-newbie.jpg,naked=true}
 
-Hey, happy to have you! Come on in, {ABOUT:id=overview,text=learn more} about the app and the {ABOUT:id=whichgames,text=type of games} you can play here.
+Hey, happy to have you! Here's the TL;DR:
 
-The TL:DR; this is a work-in-progress abstract game site, so far only with local play and a very rickety UI. But both points are {ABOUT:id=roadmap,text=being addressed}!
+- {ME} is a site for playing {ABOUT:id=whichgames,text=abstract games}
+- We have {COUNT} games and counting
+- Only local play so far, online is in the works
+- UI and design is also pretty placeholdery
+- But we're {ABOUT:id=roadmap,text=working hard} on developing the site!
 
-Now, go on, {INTLINK:url=/games,text=rush over to the games} and start playing! 🙃
+Now, {INTLINK:url=/games,text=head over to the games} and start playing! 🙃

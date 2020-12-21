@@ -24,7 +24,7 @@ export const TitleWelcome = (props: TitleWelcomeProps) => {
     () => actions.navTo(`/games/${slug}/?sid=new_${mainVariant}&m=playing`),
     [slug, actions]
   );
-  const seeAllGames = useCallback(() => actions.navTo("/games"), [actions]);
+  //const seeAllGames = useCallback(() => actions.navTo("/games"), [actions]);
   return (
     <Fragment>
       <div
@@ -39,19 +39,19 @@ export const TitleWelcome = (props: TitleWelcomeProps) => {
           </div>
           <div className={css.titlePageBoardWelcome}>
             <span>welcome to</span>
-            <h1>Chessicals!</h1>
+            <h1>Chessicals</h1>
             <div>
-              Here you can{" "}
-              <Button text={`play ${name}`} onClick={goToCurrentGame} />
+              where you can{" "}
+              <Button text={`play ${name}`} onClick={goToCurrentGame} />!
             </div>
-            <div>
-              or{" "}
+            {/* <div>
+              and{" "}
               <Button
-                text={`browse all ${gameCount()} games`}
+                text={`${gameCount() - 1} other games`}
                 onClick={seeAllGames}
               />
               !
-            </div>
+            </div> */}
             <div>
               Want to <Button onClick={openModal}>learn more</Button>?
             </div>

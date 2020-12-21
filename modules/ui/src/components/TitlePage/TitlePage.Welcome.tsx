@@ -6,6 +6,9 @@ import { TitleDemo } from "./TitlePage.useTitleData";
 import { gameCount } from "../../../../common";
 import { AppActions } from "../../../../types";
 import shellCss from "../Shell/Shell.cssProxy";
+import { useModal } from "../../helpers";
+import { Modal } from "../Modal";
+import { TitleMoreInfo } from "./TitlePage.MoreInfo";
 
 type TitleWelcomeProps = {
   actions: AppActions;
@@ -16,6 +19,7 @@ export const TitleWelcome = (props: TitleWelcomeProps) => {
   const { actions, titleDemo } = props;
   const { titleData, actions: titleActions } = titleDemo;
   const { name, slug, mainVariant } = titleData;
+  const [isModalOpen, openModal, closeModal] = useModal();
   const goToCurrentGame = useCallback(
     () => actions.navTo(`/games/${slug}/?sid=new_${mainVariant}&m=playing`),
     [slug, actions]
@@ -46,6 +50,10 @@ export const TitleWelcome = (props: TitleWelcomeProps) => {
                 text={`browse all ${gameCount()} games`}
                 onClick={seeAllGames}
               />
+              !
+            </div>
+            <div>
+              Want to <Button onClick={openModal}>learn more</Button>?
             </div>
           </div>
           <div className={css.titlePageBoardGamesFlicker}>
@@ -53,6 +61,13 @@ export const TitleWelcome = (props: TitleWelcomeProps) => {
           </div>
         </div>
       </div>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title="Welcome to Chessicals!"
+      >
+        <TitleMoreInfo actions={actions} />
+      </Modal>
     </Fragment>
   );
 };

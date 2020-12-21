@@ -31,7 +31,13 @@ export const TitleMoreInfo = (props: TitleMoreInfoProps) => {
     () => actions.navTo(`/games/${latestGame.slug}`),
     [actions]
   );
-  const dynamicContent = useMemo(() => ({ latest: latestGame.name }), []);
+  const dynamicContent = useMemo(
+    () => ({
+      latest: latestGame.name,
+      latestAdded: latestGame.added,
+    }),
+    []
+  );
   const dynamicActions = useMemo(
     () => ({
       latest: gotoLatest,

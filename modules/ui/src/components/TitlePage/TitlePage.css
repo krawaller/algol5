@@ -34,7 +34,7 @@
   flex-grow: 1;
 }
 
-.titlePageBoardWelcome > span {
+/* .titlePageBoardWelcome > span {
   margin-bottom: -20px;
   display: block;
   padding-left: 20px;
@@ -45,12 +45,22 @@
   margin-top: -5px;
   font-family: cursive;
   font-size: 44px;
-}
+} */
 
 .titlePageBoardWelcome button {
   margin-bottom: 5px;
 }
 
-.titlePageBoardBox > .titlePageBoardGamesFlicker {
+.titlePageBoardGamesFlicker {
   width: 40px;
+}
+
+.titlePageBoardGamesFlicker > button {
+  height: 60px;
+}
+
+.titlePageLogo {
+  height: 38px;
+  width: 235px;
+  display: inline-block;
 }

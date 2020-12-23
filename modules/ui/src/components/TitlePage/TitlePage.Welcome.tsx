@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import css from "./TitlePage.cssProxy";
-import React, { Fragment, useCallback } from "react";
+import React, { Fragment, useCallback, CSSProperties } from "react";
 import { Button } from "../Button";
 import { TitleDemo } from "./TitlePage.useTitleData";
 import { gameCount } from "../../../../common";
@@ -9,6 +9,7 @@ import shellCss from "../Shell/Shell.cssProxy";
 import { useModal } from "../../helpers";
 import { Modal } from "../Modal";
 import { TitleMoreInfo } from "./TitlePage.MoreInfo";
+import logo from "../../../dist/base64/logo.png.proxy";
 
 type TitleWelcomeProps = {
   actions: AppActions;
@@ -39,7 +40,14 @@ export const TitleWelcome = (props: TitleWelcomeProps) => {
           </div>
           <div className={css.titlePageBoardWelcome}>
             <span>welcome to</span>
-            <h1>Chessicals</h1>
+            <div>
+              <img
+                className={css.titlePageLogo}
+                src={logo}
+                alt="logo"
+                title="logo"
+              />
+            </div>
             <div>
               where you can{" "}
               <Button text={`play ${name}`} onClick={goToCurrentGame} />!

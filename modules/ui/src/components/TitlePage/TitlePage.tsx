@@ -16,7 +16,7 @@ export const TitlePage: AlgolPage = props => {
   return (
     <Fragment>
       <Page
-        title="Hello!"
+        title="Chessicals"
         top={<TitleBoard titleData={titleDemo.titleData} />}
         body={<TitleBody actions={actions} titleDemo={titleDemo} />}
       />

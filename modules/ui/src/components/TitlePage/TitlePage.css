@@ -56,7 +56,10 @@
 }
 
 .titlePageBoardGamesFlicker > button {
-  height: 60px;
+  --flicker-size: 35px;
+  height: var(--flicker-size);
+  width: var(--flicker-size);
+  border-radius: var(--flicker-size);
   -webkit-user-select: none;
   user-select: none;
 }
@@ -65,4 +68,5 @@
   height: 38px;
   width: 235px;
   display: inline-block;
+  margin: 2px 0;
 }

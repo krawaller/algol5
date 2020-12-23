@@ -39,7 +39,9 @@ export const TitleWelcome = (props: TitleWelcomeProps) => {
             <Button onClick={titleActions.dec} text="←" />
           </div>
           <div className={css.titlePageBoardWelcome}>
-            <span>welcome to</span>
+            <div>
+              <Button onClick={openModal}>Welcome</Button> to
+            </div>
             <div>
               <img
                 className={css.titlePageLogo}
@@ -49,7 +51,7 @@ export const TitleWelcome = (props: TitleWelcomeProps) => {
               />
             </div>
             <div>
-              where you can{" "}
+              where we{" "}
               <Button text={`play ${name}`} onClick={goToCurrentGame} />!
             </div>
             {/* <div>
@@ -60,9 +62,6 @@ export const TitleWelcome = (props: TitleWelcomeProps) => {
               />
               !
             </div> */}
-            <div>
-              Want to <Button onClick={openModal}>learn more</Button>?
-            </div>
           </div>
           <div className={css.titlePageBoardGamesFlicker}>
             <Button onClick={titleActions.inc} text="→" />

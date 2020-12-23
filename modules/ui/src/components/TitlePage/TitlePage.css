@@ -57,6 +57,8 @@
 
 .titlePageBoardGamesFlicker > button {
   height: 60px;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .titlePageLogo {

@@ -39,8 +39,9 @@ export const TitleWelcome = (props: TitleWelcomeProps) => {
             <Button onClick={titleActions.dec} text="←" />
           </div>
           <div className={css.titlePageBoardWelcome}>
-            <div>
-              <Button onClick={openModal}>Welcome</Button> to
+            <div className={css.titlePageWelcomeRow}>
+              <Button onClick={openModal}>Welcome</Button>
+              <span>&nbsp;to</span>
             </div>
             <div>
               <img
@@ -50,8 +51,8 @@ export const TitleWelcome = (props: TitleWelcomeProps) => {
                 title="logo"
               />
             </div>
-            <div>
-              where we{" "}
+            <div className={css.titlePageWelcomeRow}>
+              <span>where we&nbsp;</span>
               <Button text={`play ${name}`} onClick={goToCurrentGame} />!
             </div>
             {/* <div>

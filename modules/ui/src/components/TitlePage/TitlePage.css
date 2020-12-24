@@ -47,10 +47,6 @@
   font-size: 44px;
 } */
 
-.titlePageBoardWelcome button {
-  margin-bottom: 5px;
-}
-
 .titlePageBoardGamesFlicker {
   width: 40px;
 }
@@ -68,5 +64,13 @@
   height: 38px;
   width: 235px;
   display: inline-block;
-  margin: 2px 0;
+  margin: 5px 0;
+}
+
+.titlePageWelcomeRow {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* to make text and button on the same line */
+  font-size: 11px;
+  font-family: system-ui;
 }

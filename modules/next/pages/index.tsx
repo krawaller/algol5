@@ -7,7 +7,7 @@ import { setTitlePageAttributes } from "../../ui/src/components/TitlePage/setTit
 // since it will have different content depending on
 // local data. This would case a server-client mismatch.
 
-const EmptyPage = () => <Page title="Chessicals" top={null} body={null} />;
+const EmptyPage = () => <Page title="Hello!" top={null} body={null} />;
 
 const LazyTitlePage = dynamic(
   () => import("../../ui/src/components/TitlePage/TitlePage"),

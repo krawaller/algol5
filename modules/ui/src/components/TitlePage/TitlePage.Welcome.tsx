@@ -43,14 +43,12 @@ export const TitleWelcome = (props: TitleWelcomeProps) => {
               <Button onClick={openModal}>Welcome</Button>
               <span>&nbsp;to</span>
             </div>
-            <div>
-              <img
-                className={css.titlePageLogo}
-                src={logo}
-                alt="logo"
-                title="logo"
-              />
-            </div>
+            <img
+              className={css.titlePageLogo}
+              src={logo}
+              alt="logo"
+              title="logo"
+            />
             <div className={css.titlePageWelcomeRow}>
               <span>where we&nbsp;</span>
               <Button text={`play ${name}`} onClick={goToCurrentGame} />!

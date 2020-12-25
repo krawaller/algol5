@@ -37,6 +37,14 @@
   min-height: 1px; /* otherwise flex-items uses content size as min-height  */
   padding: 10px;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+}
+
+.pageBody > * {
+  flex-grow: 1;
 }
 
 .pageContainer img {

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo, Fragment } from "react";
+import React, { FunctionComponent, useMemo } from "react";
 import { punctuate } from "../../../../common";
 import styles from "./GameLanding.cssProxy";
 import {
@@ -66,7 +66,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
     []
   );
   return (
-    <Fragment>
+    <div>
       <div className={styles.gameLandingQuote}>
         A game {meta.author ? `by ${meta.author}` : "of unknown origin"}
         {". "}
@@ -106,7 +106,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
           corruptSessions={corruptSessions}
         />
       </Modal>
-    </Fragment>
+    </div>
   );
 };
 

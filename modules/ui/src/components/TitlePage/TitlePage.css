@@ -3,14 +3,19 @@
   width: 100%;
 }
 
-.titlePageBoardBoxContainer {
-  position: absolute;
-  z-index: 100;
-  top: 30px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: 15px;
+.titlePageBodyContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.titlePageBodyContainer:after {
+  content: "";
+  height: 20px;
+  flex-shrink: 10;
+}
+
+.titlePageWelcomeContainer {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -27,25 +32,35 @@
 
 .titlePageBoardWelcome {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.titlePageBoardWelcome > span {
-  margin-bottom: -20px;
-  display: block;
-  padding-left: 20px;
-}
-
-.titlePageBoardWelcome > h1 {
-  margin-bottom: -10px;
-  margin-top: -5px;
-  font-family: cursive;
-  font-size: 44px;
-}
-
-.titlePageBoardWelcome button {
-  margin-bottom: 5px;
-}
-
-.titlePageBoardBox > .titlePageBoardGamesFlicker {
+.titlePageBoardGamesFlicker {
   width: 40px;
+}
+
+.titlePageBoardGamesFlicker > button {
+  --flicker-size: 35px;
+  height: var(--flicker-size);
+  width: var(--flicker-size);
+  border-radius: var(--flicker-size);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.titlePageLogo {
+  width: 235px;
+  display: inline-block;
+  margin: 5px 0;
+}
+
+.titlePageWelcomeRow {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* to make text and button on the same line */
+  font-size: 11px;
+  font-family: system-ui;
 }

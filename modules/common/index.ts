@@ -9,6 +9,7 @@ export * from "./units";
 export * from "./demo";
 export * from "./empty";
 export * from "./sprites";
+export * from "./constants";
 
 export const truthy = "TRUTHY";
 export const falsy = "FALSY";

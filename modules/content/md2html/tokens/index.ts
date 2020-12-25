@@ -15,6 +15,7 @@ import { tag } from "./tag";
 import { count } from "./count";
 import { dynamic } from "./dynamic";
 import { about } from "./about";
+import { slack } from "./slack";
 
 export const tokenHandlers = {
   arr,
@@ -34,4 +35,5 @@ export const tokenHandlers = {
   count,
   dynamic,
   about,
+  slack,
 };

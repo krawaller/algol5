@@ -70,9 +70,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
       <div className={typography.boardPageCopy}>
         <p>
           {punctuate(meta.tagline, "!")} A game{" "}
-          {meta.author ? `by ${meta.author}` : "of unknown origin"}.
-        </p>
-        <p>
+          {meta.author ? `by ${meta.author}` : "of unknown origin"}.{" "}
           {meta.added === "GENESIS"
             ? "Included in Chessicals since the beginning."
             : "Added to Chessicals " +

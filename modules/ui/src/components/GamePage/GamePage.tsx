@@ -92,6 +92,7 @@ export const GamePage = (props: GamePageProps) => {
         actions={actions}
         session={session!}
         meta={meta}
+        manyVariants={api.variants.length > 1}
       />
     );
   } else if (mode === "playing") {

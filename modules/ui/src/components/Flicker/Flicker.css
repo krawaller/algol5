@@ -1,0 +1,19 @@
+.flickerContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  --flicker-size: 35px;
+}
+
+.flickerButton button {
+  height: var(--flicker-size);
+  width: var(--flicker-size);
+  border-radius: var(--flicker-size);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.flickerContent {
+  flex-grow: 1;
+  margin: 0 6px;
+}

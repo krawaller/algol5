@@ -1,6 +1,5 @@
-import React, { FunctionComponent, useMemo } from "react";
+import React, { Fragment, FunctionComponent, useMemo } from "react";
 import { punctuate } from "../../../../common";
-import typography from "../../typography.cssProxy";
 import {
   AlgolMeta,
   AlgolGameGraphics,
@@ -13,6 +12,7 @@ import { Button } from "../Button";
 import { NewLocalSession, NewLocalSessionActions } from "../NewLocalSession";
 import { NewRemoteSession } from "../NewRemoteSession";
 import { useModal } from "../../helpers";
+import { BoardPageContent } from "../BoardPageContent";
 
 export type GameLandingActions = {
   navTo: (path: string) => void;
@@ -65,9 +65,8 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
     []
   );
   return (
-    <div>
-      <div className={typography.boardPageHeadline}>{meta.name}</div>
-      <div className={typography.boardPageCopy}>
+    <Fragment>
+      <BoardPageContent title={meta.name}>
         <p>
           {punctuate(meta.tagline, "!")} A game{" "}
           {meta.author ? `by ${meta.author}` : "of unknown origin"}.{" "}
@@ -83,7 +82,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
           Play <Button onClick={openSessionModal}>local</Button> or{" "}
           <Button onClick={openRemoteModal}>online</Button>!
         </p>
-      </div>
+      </BoardPageContent>
       <Modal
         isOpen={isRemoteModalOpen}
         onClose={closeRemoteModal}
@@ -105,6 +104,6 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
           corruptSessions={corruptSessions}
         />
       </Modal>
-    </div>
+    </Fragment>
   );
 };

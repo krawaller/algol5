@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useMemo } from "react";
+import React, { FunctionComponent, useState, useMemo, Fragment } from "react";
 import {
   AlgolLocalBattle,
   AlgolMeta,
@@ -7,11 +7,11 @@ import {
   AlgolGameBlobAnon,
 } from "../../../../types";
 
-import typography from "../../typography.cssProxy";
 import { Button } from "../Button";
 import { Modal } from "../Modal";
 import { ExportBattle } from "../ExportBattle";
 import { BattleLandingOngoing } from "./BattleLanding.Ongoing";
+import { BoardPageContent } from "../BoardPageContent";
 
 type BattleLandingActions = {
   deleteSession: (sessionId: string, retreatToGameLobby: boolean) => void;
@@ -37,12 +37,10 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
     [setModal]
   );
   const stillFirstTurn = battle.turnNumber === 1 && battle.player === 1;
+  const title = `${battle.gameEndedBy ? "Finished" : "Ongoing"} local session`;
   return (
-    <div>
-      <div className={typography.boardPageHeadline}>
-        {battle.gameEndedBy ? "Finished" : "Ongoing"} local session
-      </div>
-      <div className={typography.boardPageCopy}>
+    <Fragment>
+      <BoardPageContent title={title}>
         <BattleLandingOngoing
           session={session}
           variant={battle.variant}
@@ -79,10 +77,10 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
           </Button>{" "}
           it if you don't want it around.
         </p>
-      </div>
+      </BoardPageContent>
       <Modal isOpen={isModalOpen} onClose={closeModal} title="Export session">
         <ExportBattle battle={battle} meta={meta} session={session} />
       </Modal>
-    </div>
+    </Fragment>
   );
 };

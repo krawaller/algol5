@@ -1,13 +1,3 @@
-.stepperContainer {
-  display: flex;
-  align-items: center;
-}
-
-.stepperRangeContainer {
-  flex-grow: 1;
-  margin-right: 5px;
-}
-
 .stepperRange {
   width: 100%;
 }

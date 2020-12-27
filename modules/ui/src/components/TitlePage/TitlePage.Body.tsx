@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { AppActions } from "../../../../types";
 import { TitleWelcome } from "./TitlePage.Welcome";
 import { TitleDemo } from "./TitlePage.useTitleData";

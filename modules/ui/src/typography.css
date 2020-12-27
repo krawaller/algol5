@@ -1,0 +1,15 @@
+.boardPageHeadline {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+
+.boardPageCopy {
+  font-family: system-ui;
+  font-size: 11px;
+  text-align: center;
+}
+
+.boardPageCopy > p {
+  margin-bottom: 12px;
+}

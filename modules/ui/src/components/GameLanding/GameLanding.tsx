@@ -1,6 +1,5 @@
-import React, { FunctionComponent, useMemo } from "react";
+import React, { Fragment, FunctionComponent, useMemo } from "react";
 import { punctuate } from "../../../../common";
-import styles from "./GameLanding.cssProxy";
 import {
   AlgolMeta,
   AlgolGameGraphics,
@@ -13,7 +12,7 @@ import { Button } from "../Button";
 import { NewLocalSession, NewLocalSessionActions } from "../NewLocalSession";
 import { NewRemoteSession } from "../NewRemoteSession";
 import { useModal } from "../../helpers";
-import { ButtonGroup } from "../ButtonGroup";
+import { BoardPageContent } from "../BoardPageContent";
 
 export type GameLandingActions = {
   navTo: (path: string) => void;
@@ -66,25 +65,24 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
     []
   );
   return (
-    <div>
-      <div className={styles.gameLandingQuote}>
-        A game {meta.author ? `by ${meta.author}` : "of unknown origin"}
-        {". "}
-        {punctuate(meta.tagline, "!")}
-      </div>
-      <ButtonGroup>
-        <Button big onClick={openSessionModal}>
-          Local
-        </Button>
-        <Button big onClick={openRemoteModal}>
-          Online
-        </Button>
-      </ButtonGroup>
-      {/* <div className={styles.gameLandingQuote}>
-        {meta.added === "GENESIS"
-          ? meta.name + " has been included in Chessicals since the beginning."
-          : meta.name + " was added to Chessicals " + meta.added + "."}
-      </div> */}
+    <Fragment>
+      <BoardPageContent title={meta.name}>
+        <p>
+          {punctuate(meta.tagline, "!")} A game{" "}
+          {meta.author ? `by ${meta.author}` : "of unknown origin"}.{" "}
+          {meta.added === "GENESIS"
+            ? "Included in Chessicals since the beginning."
+            : "Added to Chessicals " +
+              meta.added +
+              " by " +
+              (meta.addedBy || "David Waller") +
+              "."}
+        </p>
+        <p>
+          Play <Button onClick={openSessionModal}>local</Button> or{" "}
+          <Button onClick={openRemoteModal}>online</Button>!
+        </p>
+      </BoardPageContent>
       <Modal
         isOpen={isRemoteModalOpen}
         onClose={closeRemoteModal}
@@ -106,11 +104,6 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
           corruptSessions={corruptSessions}
         />
       </Modal>
-    </div>
+    </Fragment>
   );
 };
-
-//   (date === "GENESIS"
-//     ? meta[gameId].name +
-//       " has been included in Chessicals since the beginning."
-//     : meta[gameId].name + " was added to Chessicals " + date + ".");

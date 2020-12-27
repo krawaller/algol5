@@ -9,6 +9,7 @@ import { Stepper } from "../Stepper";
 
 import css from "./BattleHistory.cssProxy";
 import { Button } from "../Button";
+import { BoardPageContent } from "../BoardPageContent";
 
 type BattleHistoryActions = {
   toFrame: (frame: number) => void;
@@ -35,34 +36,38 @@ export const BattleHistory: FunctionComponent<BattleHistoryProps> = props => {
     );
   }
   return (
-    <div className={css.battleHistoryContainer}>
-      <Stepper max={frameCount} current={frame} onChange={actions.toFrame} />
-      <Content content={content} />
-      <div className={css.battleHistoryButtons}>
-        <Button
-          onClick={() => {
-            if (
-              confirm(
-                "Do you create a copy of this session from this point in the history, and switch to the new session?"
-              )
-            ) {
-              actions.forkBattleFrame(battle, frame);
+    <BoardPageContent title={"Session history"}>
+      <div className={css.battleHistoryContainer}>
+        <Stepper max={frameCount} current={frame} onChange={actions.toFrame} />
+        <Content content={content} />
+        <p>
+          You can{" "}
+          <Button
+            onClick={() => {
+              if (
+                confirm(
+                  "Do you create a copy of this session from this point in the history, and switch to the new session?"
+                )
+              ) {
+                actions.forkBattleFrame(battle, frame);
+              }
+            }}
+            onError={actions.reportError}
+            controlId="fork-history-frame-button"
+            disabled={
+              battle.gameEndedBy && frame === frameCount
+                ? "Cannot fork a finished battle!"
+                : frame === 0 ||
+                  (historyFrame.turn === 1 && historyFrame.player === 1)
+                ? "Cannot fork the beginning of a battle"
+                : false
             }
-          }}
-          onError={actions.reportError}
-          controlId="fork-history-frame-button"
-          disabled={
-            battle.gameEndedBy && frame === frameCount
-              ? "Cannot fork a finished battle!"
-              : frame === 0 ||
-                (historyFrame.turn === 1 && historyFrame.player === 1)
-              ? "Cannot fork the beginning of a battle"
-              : false
-          }
-        >
-          Fork from this turn
-        </Button>
+          >
+            fork
+          </Button>{" "}
+          a new session from this point.
+        </p>
       </div>
-    </div>
+    </BoardPageContent>
   );
 };

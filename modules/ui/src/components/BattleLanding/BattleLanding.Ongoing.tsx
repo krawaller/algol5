@@ -5,29 +5,31 @@ import { SessionStatus } from "../SessionStatus";
 type BattleLandingOngoing = {
   session: AlgolLocalBattle;
   variant: AlgolVariantAnon;
+  manyVariants?: boolean;
+  gameName: string;
 };
 
 export const BattleLandingOngoing: FunctionComponent<BattleLandingOngoing> = props => {
-  const { session, variant } = props;
+  const { session, variant, manyVariants, gameName } = props;
   return (
     <Fragment>
-      <div>
-        Session ID <code>{session.id}</code>, {variant.desc},{" "}
+      <p>
+        This {manyVariants ? variant.desc + " variant" : ""} {gameName} battle
+        with id <code>{session.id}</code> was{" "}
         {session.type === "normal"
           ? "created"
           : session.type === "fork"
           ? "forked"
           : "imported"}{" "}
-        {new Date(session.created).toString().slice(0, 10)}
-        {session.updated && (
-          <Fragment>
-            , updated {new Date(session.updated!).toString().slice(0, 10)}
-          </Fragment>
-        )}
-      </div>
-      <div>
-        Status: <SessionStatus session={session} />
-      </div>
+        {stamptoStr(session.created)}
+        {session.updated &&
+          stamptoStr(session.updated) !== stamptoStr(session.created) && (
+            <Fragment> and updated {stamptoStr(session.updated)}</Fragment>
+          )}
+        . <SessionStatus session={session} />.
+      </p>
     </Fragment>
   );
 };
+
+const stamptoStr = (stamp: number) => new Date(stamp).toString().slice(0, 10);

@@ -15,13 +15,6 @@
   flex-shrink: 10;
 }
 
-.titlePageWelcomeContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-}
-
 .titlePageBoardBox {
   background-color: rgba(255, 255, 255, 0.75);
   border-radius: 10px;
@@ -36,19 +29,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.titlePageBoardGamesFlicker {
-  width: 40px;
-}
-
-.titlePageBoardGamesFlicker > button {
-  --flicker-size: 35px;
-  height: var(--flicker-size);
-  width: var(--flicker-size);
-  border-radius: var(--flicker-size);
-  -webkit-user-select: none;
-  user-select: none;
 }
 
 .titlePageLogo {

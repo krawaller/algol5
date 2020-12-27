@@ -5,7 +5,7 @@ const catsanddogsScripts: CatsanddogsDefinition["scripts"] = [
     desc: "basic",
     lines: [
       {
-        commands: []
+        commands: ["f6", "endTurn"]
       }
     ]
   }

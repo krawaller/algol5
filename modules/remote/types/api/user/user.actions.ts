@@ -1,15 +1,14 @@
-import { AlgolRemoteResponse } from "./response";
-import { AlgolRemoteUser } from "./user";
+import { AlgolRemoteUser } from "./user.type";
 
 export type AlgolRemoteUserActions = {
   login: (opts: {
     userName: string;
     password: string;
-  }) => AlgolRemoteResponse<AlgolRemoteUser>;
+  }) => Promise<AlgolRemoteUser>;
   register: (opts: {
     userName: string;
     password: string;
-  }) => AlgolRemoteResponse<AlgolRemoteUser>;
+  }) => Promise<AlgolRemoteUser>;
 };
 
 // TODO - displayname, update info?

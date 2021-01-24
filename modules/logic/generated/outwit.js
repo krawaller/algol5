@@ -143,7 +143,7 @@ const game = {
       let UNITLAYERS = step.UNITLAYERS;
       if (UNITLAYERS.kings[MARKS.selectunit]) {
         {
-          let BLOCKS = UNITLAYERS.units;
+          let BLOCKS = { ...UNITLAYERS.units, ...TERRAIN1.oppbase };
           for (let DIR of roseDirs) {
             let POS = MARKS.selectunit;
             while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
@@ -153,7 +153,7 @@ const game = {
         }
       } else {
         {
-          let BLOCKS = UNITLAYERS.units;
+          let BLOCKS = { ...UNITLAYERS.units, ...TERRAIN1.oppbase };
           for (let DIR of orthoDirs) {
             let walkedsquares = [];
             let POS = MARKS.selectunit;
@@ -205,7 +205,7 @@ const game = {
       let UNITLAYERS = step.UNITLAYERS;
       if (UNITLAYERS.kings[MARKS.selectunit]) {
         {
-          let BLOCKS = UNITLAYERS.units;
+          let BLOCKS = { ...UNITLAYERS.units, ...TERRAIN2.oppbase };
           for (let DIR of roseDirs) {
             let POS = MARKS.selectunit;
             while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
@@ -215,7 +215,7 @@ const game = {
         }
       } else {
         {
-          let BLOCKS = UNITLAYERS.units;
+          let BLOCKS = { ...UNITLAYERS.units, ...TERRAIN2.oppbase };
           for (let DIR of orthoDirs) {
             let walkedsquares = [];
             let POS = MARKS.selectunit;

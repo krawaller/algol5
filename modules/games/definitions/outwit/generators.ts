@@ -10,7 +10,7 @@ const outwitGenerators: OutwitDefinition["generators"] = {
     type: "walker",
     start: "selectunit",
     dirs: "rose",
-    blocks: "units",
+    blocks: { union: ["units", "oppbase"] },
     draw: {
       steps: {
         tolayer: "movetargets",
@@ -21,7 +21,7 @@ const outwitGenerators: OutwitDefinition["generators"] = {
     type: "walker",
     start: "selectunit",
     dirs: "ortho",
-    blocks: "units",
+    blocks: { union: ["units", "oppbase"] },
     draw: { last: { tolayer: "movetargets" } },
   },
 };

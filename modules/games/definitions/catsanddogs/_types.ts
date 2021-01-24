@@ -19,7 +19,7 @@ type CatsanddogsUnitLayer =
   | "myanimals"
   | "oppanimals"
   | "neutralanimals";
-type CatsanddogsGenerator = "findforbidden" | "firstroundforbid";
+type CatsanddogsGenerator = "findforbidden";
 type CatsanddogsArtifactLayer = "forbidden";
 type CatsanddogsTerrainLayer = "center" | "nocenter";
 type CatsanddogsLayer =

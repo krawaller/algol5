@@ -12,16 +12,7 @@ const catsanddogsGenerators: CatsanddogsDefinition["generators"] = {
         start: 'selectdeploytarget',
         ifover: 'oppanimals',
         draw: { start: {tolayer: 'forbidden', condition: {truthy: ['neighbourcount']}} },
-    },
-    firstroundforbid: {
-        type: 'filter',
-        layer: 'forbidden',
-        tolayer: 'forbidden',
-        matching: {
-            dir: []
-        },
-        condition: ["isFirstTurn"]
-    },
+    }
 };
 
 export default catsanddogsGenerators;

@@ -7,7 +7,7 @@ import { CatsanddogsDefinition } from "./_types";
 
 const catsanddogsGraphics: CatsanddogsDefinition["graphics"] = {
   icons: { animals: "queen" },
-  tiles: { }
+  tiles: { 'center': 'grass' }
 };
 
 export default catsanddogsGraphics;

@@ -296,7 +296,22 @@ const game = {
   },
   instruction: {
     startTurn_basic_1: step => {
-      return collapseContent({ line: [{ text: "Go ahead and play!" }] });
+      let TURN = step.TURN;
+      return collapseContent({
+        line: [
+          { text: "Select where to deploy" },
+          { unittype: ["queen", 1] },
+          TURN === 1
+            ? collapseContent({
+                line: [
+                  { text: "(but you can't deploy to" },
+                  { pos: Object.keys(TERRAIN1.center)[0] },
+                  { text: "on the 1st turn)" }
+                ]
+              })
+            : undefined
+        ]
+      });
     },
     deploy_basic_1: () => defaultInstruction(1),
     selectdeploytarget_basic_1: step => {
@@ -311,7 +326,9 @@ const game = {
       });
     },
     startTurn_basic_2: step => {
-      return collapseContent({ line: [{ text: "Go ahead and play!" }] });
+      return collapseContent({
+        line: [{ text: "Select where to deploy" }, { unittype: ["queen", 2] }]
+      });
     },
     deploy_basic_2: () => defaultInstruction(2),
     selectdeploytarget_basic_2: step => {

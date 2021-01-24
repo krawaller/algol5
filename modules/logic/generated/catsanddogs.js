@@ -296,9 +296,7 @@ const game = {
   },
   instruction: {
     startTurn_basic_1: step => {
-      return collapseContent({
-        line: [{ text: "Go you noob, haha just kidding, but go!" }]
-      });
+      return collapseContent({ line: [{ text: "Go ahead and play!" }] });
     },
     deploy_basic_1: () => defaultInstruction(1),
     selectdeploytarget_basic_1: step => {
@@ -313,9 +311,7 @@ const game = {
       });
     },
     startTurn_basic_2: step => {
-      return collapseContent({
-        line: [{ text: "Go you noob, haha just kidding, but go!" }]
-      });
+      return collapseContent({ line: [{ text: "Go ahead and play!" }] });
     },
     deploy_basic_2: () => defaultInstruction(2),
     selectdeploytarget_basic_2: step => {

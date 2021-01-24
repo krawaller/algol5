@@ -1,7 +1,7 @@
 import { CatsanddogsDefinition } from "./_types";
 
 const catsanddogsInstructions: CatsanddogsDefinition["instructions"] = {
-  startTurn: { line: ["Go you noob, haha just kidding, but go!"] },
+  startTurn: { line: ["Go ahead and play!"] },
   "selectdeploytarget": {
     line: [
       "Press",

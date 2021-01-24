@@ -1,9 +1,9 @@
-import { AlgolLocalBattle } from "../../../types";
+import { AlgolSession } from "../../../types";
 import { GameId } from "../../../games/dist/list";
 import { stringifySession } from "../../../encoding/src/session";
 import { getSessionStorageKey } from "./keys/getSessionStorageKey";
 
-export const writeSession = (gameId: GameId, session: AlgolLocalBattle) => {
+export const writeSession = (gameId: GameId, session: AlgolSession) => {
   const activeKey = getSessionStorageKey(gameId);
   const activeList = JSON.parse(localStorage.getItem(activeKey) || "{}");
   const finishedKey = getSessionStorageKey(gameId, true);

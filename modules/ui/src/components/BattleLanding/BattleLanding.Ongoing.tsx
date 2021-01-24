@@ -1,9 +1,9 @@
 import React, { FunctionComponent, Fragment } from "react";
-import { AlgolLocalBattle, AlgolVariantAnon } from "../../../../types";
+import { AlgolSession, AlgolVariantAnon } from "../../../../types";
 import { SessionStatus } from "../SessionStatus";
 
 type BattleLandingOngoing = {
-  session: AlgolLocalBattle;
+  session: AlgolSession;
   variant: AlgolVariantAnon;
   manyVariants?: boolean;
   gameName: string;

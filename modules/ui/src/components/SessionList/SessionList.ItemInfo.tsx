@@ -1,10 +1,10 @@
 import React, { FunctionComponent, Fragment } from "react";
-import { AlgolLocalBattle, AlgolVariantAnon } from "../../../../types";
+import { AlgolSession, AlgolVariantAnon } from "../../../../types";
 import css from "./SessionList.cssProxy";
 import { SessionStatus } from "../SessionStatus";
 
 type SessionItemInfoProps = {
-  session: AlgolLocalBattle;
+  session: AlgolSession;
   variant: AlgolVariantAnon;
   corrupt?: string;
 };

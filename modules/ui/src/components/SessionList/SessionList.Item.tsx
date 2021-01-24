@@ -3,7 +3,7 @@ import React, { FunctionComponent } from "react";
 import css from "./SessionList.cssProxy";
 import { sprites2board } from "../../../../common/sprites/sprite.sprites2board";
 import {
-  AlgolLocalBattle,
+  AlgolSession,
   AlgolGameGraphics,
   AlgolVariantAnon,
 } from "../../../../types";
@@ -15,7 +15,7 @@ type SessionListItemActions = {
 };
 
 type SessionListItemProps = {
-  session: AlgolLocalBattle;
+  session: AlgolSession;
   actions: SessionListItemActions;
   graphics: AlgolGameGraphics;
   variant: AlgolVariantAnon;

@@ -1,6 +1,6 @@
-import { AlgolLocalBattle } from "../../../types";
+import { AlgolSession } from "../../../types";
 
-type SessionType = AlgolLocalBattle["type"];
+type SessionType = AlgolSession["type"];
 
 export const sessionCodes: Record<string, [0 | 1 | 2, SessionType]> = {
   x: [0, "fork"],

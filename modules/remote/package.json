@@ -1,0 +1,9 @@
+{
+  "name": "algol-remote",
+  "scripts": {
+    "robot": "echo 'remote module robot is a noop'",
+    "clean": "echo 'remote module clean is a noop'"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

@@ -1,11 +1,11 @@
-import { AlgolBattle, AlgolLocalBattle, AlgolIconMap } from "../../../types";
+import { AlgolBattle, AlgolSession, AlgolIconMap } from "../../../types";
 import { board2sprites } from "../../../common";
 
 export function updateSession(
   battle: AlgolBattle,
-  session: AlgolLocalBattle,
+  session: AlgolSession,
   iconMap: AlgolIconMap
-): AlgolLocalBattle {
+): AlgolSession {
   return {
     ...session,
     updated: Date.now(),

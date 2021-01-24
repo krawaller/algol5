@@ -1,7 +1,7 @@
 import {
   AlgolGameBlobAnon,
   AlgolMeta,
-  AlgolLocalBattle,
+  AlgolSession,
   BattleNavActions,
   BattleMode,
   AlgolNav,
@@ -13,7 +13,7 @@ import { makeGameNav } from "./makeGameNav";
 
 type MakeSessionNavOpts = {
   meta: AlgolMeta<AlgolGameBlobAnon>;
-  session: AlgolLocalBattle;
+  session: AlgolSession;
   battleNavActions: BattleNavActions;
   mode: BattleMode;
   isNew?: boolean;

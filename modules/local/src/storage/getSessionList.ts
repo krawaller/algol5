@@ -1,4 +1,4 @@
-import { AlgolLocalBattle, AlgolError } from "../../../types";
+import { AlgolSession, AlgolError } from "../../../types";
 import { GameId } from "../../../games/dist/list";
 import { parseSession } from "../../../encoding/src/session";
 import { getSessionStorageKey } from "./keys/getSessionStorageKey";
@@ -8,7 +8,7 @@ export type SessionLoadFail = {
   id: string;
   str: string;
 };
-export type SessionOrFail = AlgolLocalBattle | SessionLoadFail;
+export type SessionOrFail = AlgolSession | SessionLoadFail;
 
 export const isSessionLoadFail = (
   session: SessionOrFail

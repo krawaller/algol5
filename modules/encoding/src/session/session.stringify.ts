@@ -1,10 +1,10 @@
-import { AlgolLocalBattle } from "../../../types";
+import { AlgolSession } from "../../../types";
 import { stringifyPath } from "../path";
 import { stringifyTimestamp } from "../timestamp";
 import { stringifySprites } from "../sprites";
 import { codeForSession } from "./session.codes";
 
-export const stringifySession = (local: AlgolLocalBattle, method: number) => {
+export const stringifySession = (local: AlgolSession, method: number) => {
   if (method === 0) {
     return [
       "0" +

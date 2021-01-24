@@ -1,6 +1,6 @@
 import { AlgolSprite } from "../screenshot";
 
-export type AlgolLocalBattle = {
+export type AlgolSession = {
   id: string;
   variantCode: string;
   created: number;
@@ -9,6 +9,6 @@ export type AlgolLocalBattle = {
   player: 0 | 1 | 2;
   turn: number;
   endedBy?: string;
-  type: "normal" | "fork" | "imported";
+  type: "normal" | "fork" | "imported" | "remote";
   sprites: AlgolSprite[];
 };

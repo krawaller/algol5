@@ -2,7 +2,7 @@ import { useReducer, useMemo, useEffect, useRef } from "react";
 import {
   AlgolStaticGameAPI,
   AlgolBattle,
-  AlgolLocalBattle,
+  AlgolSession,
   BattleNavActions,
 } from "../../../../types";
 import {
@@ -29,7 +29,7 @@ type BattleCmnd = [BattleAction, any];
 type BattleHookState = {
   battle: AlgolBattle | null;
   frame: number;
-  session: AlgolLocalBattle | null;
+  session: AlgolSession | null;
   hasPrevious: boolean;
   corruptSessions: Record<string, string>;
 };

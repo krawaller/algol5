@@ -5,7 +5,7 @@ import React, {
 import {
   AlgolBattle,
   AlgolBattleSave,
-  AlgolLocalBattle,
+  AlgolSession,
   AlgolMeta,
   AlgolGameBlobAnon,
 } from "../../../../types";
@@ -20,7 +20,7 @@ import { Input } from "../Input";
 type ExportBattleProps = {
   meta: AlgolMeta<AlgolGameBlobAnon>;
   battle: AlgolBattle;
-  session: AlgolLocalBattle;
+  session: AlgolSession;
 };
 
 const noop = () => {};

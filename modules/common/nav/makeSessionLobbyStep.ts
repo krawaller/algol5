@@ -1,9 +1,9 @@
-import { AlgolLocalBattle, BattleNavActions, AlgolNavStep } from "../../types";
+import { AlgolSession, BattleNavActions, AlgolNavStep } from "../../types";
 import { makeSessionControlsStep } from "./makeSessionControlsStep";
 import { makeSessionHistoryStep } from "./makeSessionHistoryStep";
 
 type MakeSessionLobbyStepOpts = {
-  session: AlgolLocalBattle;
+  session: AlgolSession;
   gameId: string;
   battleNavActions: BattleNavActions;
 };

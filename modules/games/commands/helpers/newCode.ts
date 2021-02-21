@@ -1,5 +1,6 @@
 import allMeta from "../../dist/meta";
 
+// Must only use letters, to be distinguishable in battlesave parsing
 const chars = "ABCDEFGHIJKLMNOPRSTUVWXYZabcdefghijklmnopqrstuvxyz".split("");
 const codes = chars.reduce(
   (memo, char) =>

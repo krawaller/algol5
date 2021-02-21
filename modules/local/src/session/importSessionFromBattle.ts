@@ -8,6 +8,7 @@ export function importSessionFromBattle(
 ): AlgolSession {
   return {
     id: newSessionId(),
+    gameId: battle.gameId,
     variantCode: battle.variant.code,
     created: Date.now(),
     type: "imported",

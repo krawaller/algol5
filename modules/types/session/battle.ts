@@ -1,8 +1,10 @@
 import { AlgolTurn, AlgolArmy, AlgolContentAnon } from "../";
 import { AlgolAnimCompiled } from "../generated";
 import { AlgolVariantAnon } from "../gamedef";
+import { GameId } from "../../games/dist/list";
 
 export type AlgolBattle = {
+  gameId: GameId;
   turn: AlgolTurn;
   turnNumber: number;
   player: 1 | 2;

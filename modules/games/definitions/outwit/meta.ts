@@ -8,9 +8,9 @@ const outwitMeta: OutwitDefinition["meta"] = {
   tagline: "It looks easy 'till you try it!",
   source: "https://boardgamegeek.com/boardgame/4696/outwit",
   code: "Pu",
-  demo: "Pu0Gri|D4d20,4io:ihnchgmblbhchcgaba1:b0Yg1bbb0Zk",
+  demo: "Pu0Hr11|5AR1b5AzT8SzniB4jerji&ghqbnc5ahThc1cZa<bh15f21",
   slug: "outwit",
-  added: "2020-12-13",
+  added: "2021-02-21",
   addedBy: "Joel Fransson",
 };
 

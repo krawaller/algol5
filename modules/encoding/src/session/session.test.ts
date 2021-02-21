@@ -11,6 +11,7 @@ const tests: Test[] = [
   {
     desc: "basic",
     local: {
+      gameId: "amazons",
       variantCode: "p",
       created: 1579671300000,
       type: "normal",

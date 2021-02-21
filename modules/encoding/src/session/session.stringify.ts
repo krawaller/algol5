@@ -3,6 +3,7 @@ import { stringifyPath } from "../path";
 import { stringifyTimestamp } from "../timestamp";
 import { stringifySprites } from "../sprites";
 import { codeForSession } from "./session.codes";
+import id2code from "../../../games/dist/id2code";
 
 export const stringifySession = (local: AlgolSession, method: number) => {
   if (method === 0) {
@@ -15,6 +16,7 @@ export const stringifySession = (local: AlgolSession, method: number) => {
       stringifySprites(local.sprites),
       stringifyTimestamp(local.created),
       local.updated ? stringifyTimestamp(local.updated) : "",
+      id2code[local.gameId],
       local.endedBy || "",
     ].join("\n");
   }

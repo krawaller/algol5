@@ -5,6 +5,7 @@ module.exports = {
     "@babel/typescript",
   ],
   plugins: [
+    "@babel/plugin-proposal-optional-chaining",
     // class { handleThing = () => { } }
     "@babel/proposal-class-properties",
     // { ...spread }

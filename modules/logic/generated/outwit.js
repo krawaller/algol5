@@ -191,7 +191,8 @@ const game = {
         MARKS: {
           selectunit: step.MARKS.selectunit,
           selectmovetarget: newMarkPos
-        }
+        },
+        canAlwaysEnd: true
       };
     },
     selectunit_basic_2: (step, newMarkPos) => {
@@ -253,7 +254,8 @@ const game = {
         MARKS: {
           selectunit: step.MARKS.selectunit,
           selectmovetarget: newMarkPos
-        }
+        },
+        canAlwaysEnd: true
       };
     },
     move_basic_1: step => {

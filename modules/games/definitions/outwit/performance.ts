@@ -1,9 +1,11 @@
 import { OutwitDefinition } from "./_types";
 
 const outwitPerformance: OutwitDefinition["performance"] = {
-  canAlwaysEnd: {},
+  canAlwaysEnd: {
+    selectmovetarget: true,
+  },
   massiveTree: {},
-  noEndGameCheck: []
+  noEndGameCheck: [],
 };
 
 export default outwitPerformance;

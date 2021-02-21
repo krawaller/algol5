@@ -1,6 +1,8 @@
+import { GameId } from "../../games/dist/list";
 import { AlgolSprite } from "../screenshot";
 
 export type AlgolSession = {
+  gameId: GameId;
   id: string;
   variantCode: string;
   created: number;

@@ -3,6 +3,8 @@ import { parsePath } from "../path";
 import { parseTimestamp } from "../timestamp";
 import { parseSprites } from "../sprites";
 import { sessionCodes } from "./session.codes";
+import { GameId } from "../../../games/dist/list";
+import code2id from "../../../games/dist/code2id";
 
 export const parseSession = (str: string, id: string): AlgolSession => {
   const method = Number(str[0]);
@@ -13,11 +15,13 @@ export const parseSession = (str: string, id: string): AlgolSession => {
       encodedSprites,
       encodedCreated,
       encodedUpdated,
+      gameCode,
       endedBy,
     ] = str.split("\n");
     const status = sessionCodes[methodCodeTurn[1]];
     return {
       id,
+      gameId: code2id[gameCode] as GameId,
       player: status[0],
       variantCode: methodCodeTurn[2],
       turn: parseInt(methodCodeTurn.slice(3), 36),

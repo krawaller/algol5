@@ -45,14 +45,22 @@ export const useActions = (opts: UseActionsOpts) => {
       forkBattleFrame: (battle: AlgolBattle, frame: number) => {
         const historyFrame = battle.history[frame];
         const newBattle = api.fromFrame(historyFrame, battle.variant.code);
-        const session = forkSessionFromBattle(newBattle, api.iconMap);
+        const session = forkSessionFromBattle(
+          newBattle,
+          api.iconMap,
+          api.gameId
+        );
         writeSession(api.gameId, session);
         pageActions.toSession(session.id);
       },
       importSession: (str: string) => {
         const save = parseSeed(str, api.gameId);
         const battle = api.fromSave(save);
-        const session = importSessionFromBattle(battle, api.iconMap);
+        const session = importSessionFromBattle(
+          battle,
+          api.iconMap,
+          api.gameId
+        );
         writeSession(api.gameId, session);
         pageActions.toSession(session.id);
       },

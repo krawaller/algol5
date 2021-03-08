@@ -1,4 +1,4 @@
-import { AlgolSession } from "../../../types";
+import { AlgolSession, localParticipants } from "../../../types";
 import { parseSession, stringifySession } from ".";
 
 type Test = {
@@ -21,6 +21,7 @@ const tests: Test[] = [
       player: 1,
       turn: 7,
       sprites: [{ pos: "a1", unit: { owner: 1, icon: "king" } }],
+      participants: localParticipants,
     },
   },
 ];

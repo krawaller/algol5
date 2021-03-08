@@ -1,4 +1,9 @@
-import { AlgolBattle, AlgolSession, AlgolIconMap } from "../../../types";
+import {
+  AlgolBattle,
+  AlgolSession,
+  AlgolIconMap,
+  localParticipants,
+} from "../../../types";
 import { newSessionId } from "./newSessionId";
 import { board2sprites } from "../../../common";
 import { GameId } from "../../../games/dist/list";
@@ -22,5 +27,6 @@ export function newSessionFromBattle(
       units: battle.state.board.units,
       iconMap: iconMap,
     }),
+    participants: localParticipants,
   };
 }

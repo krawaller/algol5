@@ -14,7 +14,11 @@ import {
   SessionInfo,
 } from "./SessionList.Inner";
 import { SessionLoadFail } from "../../../../local/src";
-import { AlgolSession, AlgolVariantAnon } from "../../../../types";
+import {
+  AlgolSession,
+  AlgolVariantAnon,
+  localParticipants,
+} from "../../../../types";
 
 const innerActions: SessionListInnerActions = {
   loadLocalSession: id => console.log("Loading session id", id),
@@ -73,6 +77,7 @@ storiesOf("SessionList", module)
       turn: 7,
       type: "normal",
       variantCode: "c",
+      participants: localParticipants,
     };
     const fakeLoadFail: SessionLoadFail = {
       error: new Error(),

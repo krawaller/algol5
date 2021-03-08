@@ -1,4 +1,4 @@
-import { AlgolSession } from "../../../types";
+import { AlgolSession, localParticipants } from "../../../types";
 import { parsePath } from "../path";
 import { parseTimestamp } from "../timestamp";
 import { parseSprites } from "../sprites";
@@ -35,6 +35,7 @@ export const parseSession = (str: string, id: string): AlgolSession => {
       ...(endedBy && {
         endedBy, // TODO - encode this too, just for fun?
       }),
+      participants: localParticipants,
     };
   }
   throw new Error("Unknown parse method");

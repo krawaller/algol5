@@ -21,7 +21,7 @@ export const parseSession = (str: string, id: string): AlgolSession => {
     const status = sessionCodes[methodCodeTurn[1]];
     return {
       id,
-      gameId: code2id[gameCode] as GameId,
+      gameId: code2id[gameCode as keyof typeof code2id] as GameId,
       player: status[0],
       variantCode: methodCodeTurn[2],
       turn: parseInt(methodCodeTurn.slice(3), 36),

@@ -62,6 +62,7 @@ storiesOf("SessionList", module)
   .add("Hacked data, with one failing line", () => {
     const fakeSession: AlgolSession = {
       created: Date.now(),
+      gameId: "allqueenschess",
       id: "foo",
       sprites: [
         { pos: "a1", unit: { icon: "pawn", owner: 1 } },

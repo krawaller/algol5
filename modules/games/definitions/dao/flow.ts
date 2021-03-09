@@ -12,6 +12,10 @@ const daoFlow: DaoDefinition["flow"] = {
       condition: { notempty: "winline" },
       show: "winline",
     },
+    madeblock: {
+      condition: { notempty: "winblock" },
+      show: "winblock",
+    },
   },
   startTurn: {
     link: "selectunit",
@@ -19,7 +23,7 @@ const daoFlow: DaoDefinition["flow"] = {
   commands: {
     move: {
       applyEffect: { moveat: ["selectunit", "selectmovetarget"] },
-      runGenerator: "findwinline",
+      runGenerators: ["findwinline", "findwinblock"],
       link: "endTurn",
     },
   },

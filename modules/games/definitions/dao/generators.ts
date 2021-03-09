@@ -30,6 +30,22 @@ const daoGenerators: DaoDefinition["generators"] = {
       },
     },
   },
+  findwinblock: {
+    type: "neighbour",
+    dirs: [1, 2, 3],
+    starts: "myunits",
+    ifover: "myunits",
+    draw: {
+      start: {
+        condition: { same: [["neighbourcount"], 3] },
+        tolayer: "winblock",
+      },
+      neighbours: {
+        condition: { same: [["neighbourcount"], 3] },
+        tolayer: "winblock",
+      },
+    },
+  },
 };
 
 export default daoGenerators;

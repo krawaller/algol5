@@ -30,7 +30,11 @@ const groupLayers2 = {
 };
 const prefixes1 = ["neutral", "my", "opp"];
 const prefixes2 = ["neutral", "opp", "my"];
-const emptyArtifactLayers_basic = { movetargets: {}, winline: {} };
+const emptyArtifactLayers_basic = {
+  movetargets: {},
+  winline: {},
+  winblock: {}
+};
 const game = {
   gameId: "dao",
   commands: { move: {} },
@@ -210,7 +214,8 @@ const game = {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
-        winline: {}
+        winline: {},
+        winblock: {}
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -252,6 +257,30 @@ const game = {
           }
         }
       }
+      for (let STARTPOS in UNITLAYERS.myunits) {
+        let foundneighbours = [];
+        let startconnections = connections[STARTPOS];
+        for (let DIR of [1, 2, 3]) {
+          let POS = startconnections[DIR];
+          if (POS && UNITLAYERS.myunits[POS]) {
+            foundneighbours.push(POS);
+          }
+        }
+        let NEIGHBOURCOUNT = foundneighbours.length;
+        for (
+          let neighbournbr = 0;
+          neighbournbr < NEIGHBOURCOUNT;
+          neighbournbr++
+        ) {
+          let POS = foundneighbours[neighbournbr];
+          if (NEIGHBOURCOUNT === 3) {
+            ARTIFACTS.winblock[POS] = emptyObj;
+          }
+        }
+        if (NEIGHBOURCOUNT === 3) {
+          ARTIFACTS.winblock[STARTPOS] = emptyObj;
+        }
+      }
       if (
         4 ===
         Object.keys(
@@ -277,6 +306,10 @@ const game = {
         LINKS.endGame = "win";
         LINKS.endedBy = "madeline";
         LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      } else if (Object.keys(ARTIFACTS.winblock).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeblock";
+        LINKS.endMarks = Object.keys(ARTIFACTS.winblock);
       } else {
         LINKS.endTurn = "startTurn_basic_2";
       }
@@ -293,7 +326,8 @@ const game = {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
-        winline: {}
+        winline: {},
+        winblock: {}
       };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -335,6 +369,30 @@ const game = {
           }
         }
       }
+      for (let STARTPOS in UNITLAYERS.myunits) {
+        let foundneighbours = [];
+        let startconnections = connections[STARTPOS];
+        for (let DIR of [1, 2, 3]) {
+          let POS = startconnections[DIR];
+          if (POS && UNITLAYERS.myunits[POS]) {
+            foundneighbours.push(POS);
+          }
+        }
+        let NEIGHBOURCOUNT = foundneighbours.length;
+        for (
+          let neighbournbr = 0;
+          neighbournbr < NEIGHBOURCOUNT;
+          neighbournbr++
+        ) {
+          let POS = foundneighbours[neighbournbr];
+          if (NEIGHBOURCOUNT === 3) {
+            ARTIFACTS.winblock[POS] = emptyObj;
+          }
+        }
+        if (NEIGHBOURCOUNT === 3) {
+          ARTIFACTS.winblock[STARTPOS] = emptyObj;
+        }
+      }
       if (
         4 ===
         Object.keys(
@@ -360,6 +418,10 @@ const game = {
         LINKS.endGame = "win";
         LINKS.endedBy = "madeline";
         LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      } else if (Object.keys(ARTIFACTS.winblock).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeblock";
+        LINKS.endMarks = Object.keys(ARTIFACTS.winblock);
       } else {
         LINKS.endTurn = "startTurn_basic_1";
       }

@@ -19,8 +19,17 @@ type DaoUnitLayer =
   | "mysoldiers"
   | "oppsoldiers"
   | "neutralsoldiers";
-type DaoGenerator = "findmovetargets" | "findwinline" | "findwinblock";
-type DaoArtifactLayer = "movetargets" | "winline" | "winblock";
+type DaoGenerator =
+  | "findmovetargets"
+  | "findwinline"
+  | "findwinblock"
+  | "findforbidden";
+type DaoArtifactLayer =
+  | "movetargets"
+  | "winline"
+  | "winblock"
+  | "blockvictim"
+  | "forbidden";
 type DaoTerrainLayer = "corners" | "nocorners";
 type DaoLayer = CommonLayer | DaoUnitLayer | DaoArtifactLayer | DaoTerrainLayer;
 type DaoBattlePos = never;

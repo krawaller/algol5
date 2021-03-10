@@ -30,7 +30,7 @@ const daoFlow: DaoDefinition["flow"] = {
   marks: {
     selectunit: {
       from: "myunits",
-      runGenerator: "findmovetargets",
+      runGenerators: ["findforbidden", "findmovetargets"],
       link: "selectmovetarget",
     },
     selectmovetarget: {

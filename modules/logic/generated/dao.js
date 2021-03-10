@@ -33,7 +33,9 @@ const prefixes2 = ["neutral", "opp", "my"];
 const emptyArtifactLayers_basic = {
   movetargets: {},
   winline: {},
-  winblock: {}
+  winblock: {},
+  blockvictim: {},
+  forbidden: {}
 };
 const game = {
   gameId: "dao",
@@ -112,6 +114,8 @@ const game = {
     },
     selectunit_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
+        blockvictim: {},
+        forbidden: {},
         movetargets: {}
       };
       let LINKS = { marks: {}, commands: {} };
@@ -119,6 +123,52 @@ const game = {
         selectunit: newMarkPos
       };
       let UNITLAYERS = step.UNITLAYERS;
+      for (let STARTPOS in Object.entries(
+        Object.keys(TERRAIN1.corners)
+          .concat(Object.keys(UNITLAYERS.oppunits))
+          .reduce((mem, k) => {
+            mem[k] = (mem[k] || 0) + 1;
+            return mem;
+          }, {})
+      )
+        .filter(([key, n]) => n === 2)
+        .reduce((mem, [key]) => {
+          mem[key] = emptyObj;
+          return mem;
+        }, {})) {
+        let TOTALCOUNT = 0;
+        let specialCountSet = Object.keys(UNITLAYERS.myunits)
+          .filter(k => k !== MARKS.selectunit)
+          .reduce((m, k) => {
+            m[k] = emptyObj;
+            return m;
+          }, {});
+        let foundneighbours = [];
+        let startconnections = connections[STARTPOS];
+        for (let DIR of roseDirs) {
+          let POS = startconnections[DIR];
+          if (POS) {
+            foundneighbours.push(POS);
+            if (specialCountSet[POS]) {
+              TOTALCOUNT++;
+            }
+          }
+        }
+        let NEIGHBOURCOUNT = foundneighbours.length;
+        for (
+          let neighbournbr = 0;
+          neighbournbr < NEIGHBOURCOUNT;
+          neighbournbr++
+        ) {
+          let POS = foundneighbours[neighbournbr];
+          if (TOTALCOUNT === 2 && !UNITLAYERS.units[POS]) {
+            ARTIFACTS.forbidden[POS] = emptyObj;
+          }
+        }
+        if (TOTALCOUNT === 2) {
+          ARTIFACTS.blockvictim[STARTPOS] = emptyObj;
+        }
+      }
       {
         let BLOCKS = UNITLAYERS.units;
         for (let DIR of roseDirs) {
@@ -129,7 +179,9 @@ const game = {
           }
           let WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
-            ARTIFACTS.movetargets[walkedsquares[WALKLENGTH - 1]] = emptyObj;
+            if (!ARTIFACTS.forbidden[walkedsquares[WALKLENGTH - 1]]) {
+              ARTIFACTS.movetargets[walkedsquares[WALKLENGTH - 1]] = emptyObj;
+            }
           }
         }
       }
@@ -162,6 +214,8 @@ const game = {
     },
     selectunit_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
+        blockvictim: {},
+        forbidden: {},
         movetargets: {}
       };
       let LINKS = { marks: {}, commands: {} };
@@ -169,6 +223,52 @@ const game = {
         selectunit: newMarkPos
       };
       let UNITLAYERS = step.UNITLAYERS;
+      for (let STARTPOS in Object.entries(
+        Object.keys(TERRAIN2.corners)
+          .concat(Object.keys(UNITLAYERS.oppunits))
+          .reduce((mem, k) => {
+            mem[k] = (mem[k] || 0) + 1;
+            return mem;
+          }, {})
+      )
+        .filter(([key, n]) => n === 2)
+        .reduce((mem, [key]) => {
+          mem[key] = emptyObj;
+          return mem;
+        }, {})) {
+        let TOTALCOUNT = 0;
+        let specialCountSet = Object.keys(UNITLAYERS.myunits)
+          .filter(k => k !== MARKS.selectunit)
+          .reduce((m, k) => {
+            m[k] = emptyObj;
+            return m;
+          }, {});
+        let foundneighbours = [];
+        let startconnections = connections[STARTPOS];
+        for (let DIR of roseDirs) {
+          let POS = startconnections[DIR];
+          if (POS) {
+            foundneighbours.push(POS);
+            if (specialCountSet[POS]) {
+              TOTALCOUNT++;
+            }
+          }
+        }
+        let NEIGHBOURCOUNT = foundneighbours.length;
+        for (
+          let neighbournbr = 0;
+          neighbournbr < NEIGHBOURCOUNT;
+          neighbournbr++
+        ) {
+          let POS = foundneighbours[neighbournbr];
+          if (TOTALCOUNT === 2 && !UNITLAYERS.units[POS]) {
+            ARTIFACTS.forbidden[POS] = emptyObj;
+          }
+        }
+        if (TOTALCOUNT === 2) {
+          ARTIFACTS.blockvictim[STARTPOS] = emptyObj;
+        }
+      }
       {
         let BLOCKS = UNITLAYERS.units;
         for (let DIR of roseDirs) {
@@ -179,7 +279,9 @@ const game = {
           }
           let WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
-            ARTIFACTS.movetargets[walkedsquares[WALKLENGTH - 1]] = emptyObj;
+            if (!ARTIFACTS.forbidden[walkedsquares[WALKLENGTH - 1]]) {
+              ARTIFACTS.movetargets[walkedsquares[WALKLENGTH - 1]] = emptyObj;
+            }
           }
         }
       }
@@ -213,6 +315,8 @@ const game = {
     move_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
+        blockvictim: step.ARTIFACTS.blockvictim,
+        forbidden: step.ARTIFACTS.forbidden,
         movetargets: step.ARTIFACTS.movetargets,
         winline: {},
         winblock: {}
@@ -325,6 +429,8 @@ const game = {
     move_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let ARTIFACTS = {
+        blockvictim: step.ARTIFACTS.blockvictim,
+        forbidden: step.ARTIFACTS.forbidden,
         movetargets: step.ARTIFACTS.movetargets,
         winline: {},
         winblock: {}
@@ -447,6 +553,7 @@ const game = {
     },
     move_basic_1: () => defaultInstruction(1),
     selectunit_basic_1: step => {
+      let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -458,7 +565,49 @@ const game = {
               (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
               MARKS.selectunit
             ]
-          }
+          },
+          Object.keys(ARTIFACTS.forbidden).length !== 0
+            ? collapseContent({
+                line: [
+                  { text: "(but not to" },
+                  collapseContent({
+                    line: Object.keys(ARTIFACTS.forbidden)
+                      .map(p => ({ pos: p }))
+                      .reduce((mem, i, n, list) => {
+                        mem.push(i);
+                        if (n === list.length - 2) {
+                          mem.push({ text: " and " });
+                        } else if (n < list.length - 2) {
+                          mem.push({ text: ", " });
+                        }
+                        return mem;
+                      }, [])
+                  }),
+                  { text: "which blocks" },
+                  collapseContent({
+                    line: Object.keys(ARTIFACTS.blockvictim)
+                      .filter(p => UNITLAYERS.units[p])
+                      .map(p => ({
+                        unit: [
+                          iconMapping[UNITLAYERS.units[p].group],
+                          UNITLAYERS.units[p].owner,
+                          p
+                        ]
+                      }))
+                      .reduce((mem, i, n, list) => {
+                        mem.push(i);
+                        if (n === list.length - 2) {
+                          mem.push({ text: " and " });
+                        } else if (n < list.length - 2) {
+                          mem.push({ text: ", " });
+                        }
+                        return mem;
+                      }, [])
+                  }),
+                  { text: ")" }
+                ]
+              })
+            : undefined
         ]
       });
     },
@@ -493,6 +642,7 @@ const game = {
     },
     move_basic_2: () => defaultInstruction(2),
     selectunit_basic_2: step => {
+      let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -504,7 +654,49 @@ const game = {
               (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
               MARKS.selectunit
             ]
-          }
+          },
+          Object.keys(ARTIFACTS.forbidden).length !== 0
+            ? collapseContent({
+                line: [
+                  { text: "(but not to" },
+                  collapseContent({
+                    line: Object.keys(ARTIFACTS.forbidden)
+                      .map(p => ({ pos: p }))
+                      .reduce((mem, i, n, list) => {
+                        mem.push(i);
+                        if (n === list.length - 2) {
+                          mem.push({ text: " and " });
+                        } else if (n < list.length - 2) {
+                          mem.push({ text: ", " });
+                        }
+                        return mem;
+                      }, [])
+                  }),
+                  { text: "which blocks" },
+                  collapseContent({
+                    line: Object.keys(ARTIFACTS.blockvictim)
+                      .filter(p => UNITLAYERS.units[p])
+                      .map(p => ({
+                        unit: [
+                          iconMapping[UNITLAYERS.units[p].group],
+                          UNITLAYERS.units[p].owner,
+                          p
+                        ]
+                      }))
+                      .reduce((mem, i, n, list) => {
+                        mem.push(i);
+                        if (n === list.length - 2) {
+                          mem.push({ text: " and " });
+                        } else if (n < list.length - 2) {
+                          mem.push({ text: ", " });
+                        }
+                        return mem;
+                      }, [])
+                  }),
+                  { text: ")" }
+                ]
+              })
+            : undefined
         ]
       });
     },

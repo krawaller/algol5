@@ -13,6 +13,7 @@ const daoGenerators: DaoDefinition["generators"] = {
     blocks: "units",
     draw: {
       last: {
+        unlessover: "forbidden",
         tolayer: "movetargets",
       },
     },
@@ -43,6 +44,23 @@ const daoGenerators: DaoDefinition["generators"] = {
       neighbours: {
         condition: { same: [["neighbourcount"], 3] },
         tolayer: "winblock",
+      },
+    },
+  },
+  findforbidden: {
+    type: "neighbour",
+    dirs: "rose",
+    starts: { intersect: ["corners", "oppunits"] },
+    count: { exceptpos: ["myunits", "selectunit"] },
+    draw: {
+      start: {
+        condition: { same: [["totalcount"], 2] },
+        tolayer: "blockvictim",
+      },
+      neighbours: {
+        condition: { same: [["totalcount"], 2] },
+        unlessover: "units",
+        tolayer: "forbidden",
       },
     },
   },

@@ -14,6 +14,9 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
             ...emptyFullDef.boards.basic,
             height: 3,
             width: 3,
+            terrain: {
+              hurp: {},
+            },
           },
         },
         generators: {
@@ -37,7 +40,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         {
           context: {
             MARKS: { mymark: "a1", myothermark: "b1" },
-            TERRAIN: { hurp: { a2: {}, b2: {} } },
+            TERRAIN1: { hurp: { a2: {}, b2: {} } },
             ARTIFACTS: { flarps: {}, blarps: {} },
           },
           tests: [

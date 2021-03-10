@@ -1,9 +1,11 @@
 import { DaoDefinition } from "./_types";
 
 const daoPerformance: DaoDefinition["performance"] = {
-  canAlwaysEnd: {},
+  canAlwaysEnd: {
+    selectmovetarget: true,
+  },
   massiveTree: {},
-  noEndGameCheck: []
+  noEndGameCheck: [],
 };
 
 export default daoPerformance;

@@ -209,7 +209,8 @@ const game = {
         MARKS: {
           selectunit: step.MARKS.selectunit,
           selectmovetarget: newMarkPos
-        }
+        },
+        canAlwaysEnd: true
       };
     },
     selectunit_basic_2: (step, newMarkPos) => {
@@ -309,7 +310,8 @@ const game = {
         MARKS: {
           selectunit: step.MARKS.selectunit,
           selectmovetarget: newMarkPos
-        }
+        },
+        canAlwaysEnd: true
       };
     },
     move_basic_1: step => {
@@ -569,7 +571,7 @@ const game = {
           Object.keys(ARTIFACTS.forbidden).length !== 0
             ? collapseContent({
                 line: [
-                  { text: "(but not to" },
+                  { text: "(except to" },
                   collapseContent({
                     line: Object.keys(ARTIFACTS.forbidden)
                       .map(p => ({ pos: p }))
@@ -658,7 +660,7 @@ const game = {
           Object.keys(ARTIFACTS.forbidden).length !== 0
             ? collapseContent({
                 line: [
-                  { text: "(but not to" },
+                  { text: "(except to" },
                   collapseContent({
                     line: Object.keys(ARTIFACTS.forbidden)
                       .map(p => ({ pos: p }))

@@ -13,19 +13,23 @@ export default function executeNeighbours(
   nghDef: NeighbourDefAnon
 ) {
   const parser = makeParser(gameDef, player, action, ruleset);
-  // single start, no drawing of start
-  if (nghDef.start && !nghDef.draw.start && !contains(nghDef, ["start"])) {
-    return `{ ${findAndDrawNeighboursFromStart(
-      gameDef,
-      player,
-      action,
-      ruleset,
-      nghDef,
-      {
-        startVar: parser.pos(nghDef.start) as string,
-      }
-    )} }`;
-  } else if (nghDef.start) {
+
+  // Single start
+  if (nghDef.start) {
+    // inothing cares where single startpos is
+    if (nghDef.start && !nghDef.draw.start && !contains(nghDef, ["start"])) {
+      return `{ ${findAndDrawNeighboursFromStart(
+        gameDef,
+        player,
+        action,
+        ruleset,
+        nghDef,
+        {
+          startVar: parser.pos(nghDef.start) as string,
+        }
+      )} }`;
+    }
+    // Something cares about startpos so we must store it
     return `{
       let STARTPOS = ${parser.pos(nghDef.start)};
       ${findAndDrawNeighboursFromStart(
@@ -40,9 +44,10 @@ export default function executeNeighbours(
       )}
       ${draw(gameDef, player, action, ruleset, nghDef.draw.start, "STARTPOS")}
     }`;
-    // many starts, must loop
-  } else {
-    return `
+  }
+
+  // many starts, we must loop for each one
+  return `
       for(let STARTPOS in ${parser.set(nghDef.starts!)}){
         ${findAndDrawNeighboursFromStart(
           gameDef,
@@ -57,7 +62,6 @@ export default function executeNeighbours(
         ${draw(gameDef, player, action, ruleset, nghDef.draw.start, "STARTPOS")}
       }
     `;
-  }
 }
 
 function findAndDrawNeighboursFromStart(

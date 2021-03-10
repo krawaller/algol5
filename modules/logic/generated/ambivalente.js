@@ -162,7 +162,7 @@ const game = {
         }
       }
       for (let STARTPOS in ARTIFACTS.touchedfoes) {
-        let NEIGHBOURCOUNT;
+        let NEIGHBOURCOUNT = 0;
         let POS =
           connections[STARTPOS][(ARTIFACTS.touchedfoes[STARTPOS] || {}).dir];
         if (POS && UNITLAYERS.myunits[POS]) {
@@ -265,7 +265,7 @@ const game = {
         }
       }
       for (let STARTPOS in ARTIFACTS.touchedfoes) {
-        let NEIGHBOURCOUNT;
+        let NEIGHBOURCOUNT = 0;
         let POS =
           connections[STARTPOS][(ARTIFACTS.touchedfoes[STARTPOS] || {}).dir];
         if (POS && UNITLAYERS.myunits[POS]) {

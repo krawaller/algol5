@@ -75,50 +75,34 @@ function findAndDrawNeighboursFromStart(
   const parser = makeParser(gameDef, player, action, ruleset);
   const counting = contains(nghDef.draw, ["neighbourcount"]);
   const dirMatters = contains(nghDef, ["dir"]);
-  if (nghDef.dirs && !counting) {
-    // many dirs, no counting so they'll be drawn individually
+  const drawNeigh = Boolean(nghDef.draw.neighbours);
+
+  if (nghDef.dirs) {
     return `
       ${findManyNeighbours(gameDef, player, action, ruleset, nghDef, {
         startVar,
       })}
-    `;
-  } else if (nghDef.dirs && counting && !nghDef.draw.neighbours) {
-    // many dirs, counting, no draw now
-    return `
-      ${findManyNeighbours(gameDef, player, action, ruleset, nghDef, {
-        startVar,
-      })}
-      let NEIGHBOURCOUNT = foundneighbours.length;
-    `;
-  } else if (nghDef.dirs && counting && nghDef.draw.neighbours) {
-    // many dirs, counting, drawing neigh
-    return `
-      ${findManyNeighbours(gameDef, player, action, ruleset, nghDef, {
-        startVar,
-      })}
-      let NEIGHBOURCOUNT = foundneighbours.length;
-      for(let neighbournbr=0; neighbournbr < NEIGHBOURCOUNT; neighbournbr++){
+      ${counting ? "let NEIGHBOURCOUNT = foundneighbours.length; " : ""}
+      ${
+        !drawNeigh || !counting
+          ? ""
+          : `      for(let neighbournbr=0; neighbournbr < NEIGHBOURCOUNT; neighbournbr++){
         let POS=foundneighbours[neighbournbr];
         ${dirMatters ? "let DIR=foundneighbourdirs[neighbournbr]; " : ""}
         ${draw(gameDef, player, action, ruleset, nghDef.draw.neighbours)}
+      }`
       }
     `;
-  } else if (nghDef.dir && !dirMatters) {
-    // one dir, nothing cares about exactly which
-    return `
-      ${handleNeighbour(gameDef, player, action, ruleset, nghDef, {
-        pos: `connections[${startVar}][${parser.val(nghDef.dir)}]`,
-      })}
-    `;
-  } else {
-    // one dir, sth in def needs to now which
-    return `
-      let DIR=${parser.val(nghDef.dir!)};
-      ${handleNeighbour(gameDef, player, action, ruleset, nghDef, {
-        pos: `connections[${startVar}][DIR]`,
-      })}
-    `;
   }
+
+  return `
+  ${dirMatters ? `let DIR=${parser.val(nghDef.dir)};` : ""}
+  ${handleNeighbour(gameDef, player, action, ruleset, nghDef, {
+    pos: `connections[${startVar}][${
+      dirMatters ? "DIR" : parser.val(nghDef.dir)
+    }]`,
+  })}
+`;
 }
 
 function findManyNeighbours(

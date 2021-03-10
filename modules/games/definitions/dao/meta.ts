@@ -11,6 +11,7 @@ const daoMeta: DaoDefinition["meta"] = {
   code: "it",
   slug: "dao",
   added: "2021-03-08",
+  demo: "it0Gr6|h3cbib3ncciq",
 };
 
 export default daoMeta;

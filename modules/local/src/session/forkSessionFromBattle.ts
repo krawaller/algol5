@@ -1,12 +1,20 @@
-import { AlgolBattle, AlgolSession, AlgolIconMap } from "../../../types";
+import {
+  AlgolBattle,
+  AlgolSession,
+  AlgolIconMap,
+  localParticipants,
+} from "../../../types";
 import { newSessionId } from "./newSessionId";
 import { board2sprites } from "../../../common";
+import { GameId } from "../../../games/dist/list";
 
 export function forkSessionFromBattle(
   battle: AlgolBattle,
-  iconMap: AlgolIconMap
+  iconMap: AlgolIconMap,
+  gameId: GameId
 ): AlgolSession {
   return {
+    gameId,
     id: newSessionId(),
     variantCode: battle.variant.code,
     created: Date.now(),
@@ -19,5 +27,6 @@ export function forkSessionFromBattle(
       units: battle.state.board.units,
       iconMap: iconMap,
     }),
+    participants: localParticipants,
   };
 }

@@ -50,7 +50,7 @@ const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
     } else if (cmnd === "new") {
       // user started a new local battle! initiate it
       const battle = api.newBattle(arg);
-      const session = newSessionFromBattle(battle, api.iconMap);
+      const session = newSessionFromBattle(battle, api.iconMap, api.gameId);
       setLatestSessionIdForGame(api.gameId, session.id);
       return {
         ...state,

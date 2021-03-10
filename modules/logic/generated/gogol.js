@@ -311,7 +311,7 @@ const game = {
       for (let STARTPOS in ARTIFACTS.adjacentenemies) {
         let DIR =
           relativeDirs[1][(ARTIFACTS.adjacentenemies[STARTPOS] || {}).dir];
-        let NEIGHBOURCOUNT;
+        let NEIGHBOURCOUNT = 0;
         let POS = connections[STARTPOS][DIR];
         if (
           POS &&
@@ -474,7 +474,7 @@ const game = {
       for (let STARTPOS in ARTIFACTS.adjacentenemies) {
         let DIR =
           relativeDirs[1][(ARTIFACTS.adjacentenemies[STARTPOS] || {}).dir];
-        let NEIGHBOURCOUNT;
+        let NEIGHBOURCOUNT = 0;
         let POS = connections[STARTPOS][DIR];
         if (
           POS &&

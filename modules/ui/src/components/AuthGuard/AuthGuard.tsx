@@ -1,24 +1,73 @@
-import React, { FunctionComponent, useCallback } from "react";
-import { useFirebaseUser } from "../../../../firebase/src/hooks/useFirebaseUser";
-import { useFirebaseLoginRenderer } from "../../../../firebase/src/hooks/useFirebaseLoginRenderer";
-import { useFirebaseApp } from "../../../../firebase/src/hooks/useFirebaseApp";
+import React, { FunctionComponent, useState } from "react";
+import { useCurrentUser, useRemoteAPI } from "../../../../remote/utils/context";
 import { Button } from "../Button";
+import { ButtonGroup } from "../ButtonGroup";
+import { Input } from "../Input";
+import styles from "./AuthGuard.cssProxy";
 
 type AuthGuardProps = {
   content: () => React.ReactNode;
 };
 
 export const AuthGuard: FunctionComponent<AuthGuardProps> = props => {
-  const app = useFirebaseApp();
-  const user = useFirebaseUser();
-  const loginRenderer = useFirebaseLoginRenderer();
-  const signOut = useCallback(() => app.auth().signOut(), []);
-  if (!user) return loginRenderer();
+  const [userName, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [disabled, setDisabled] = useState(false);
+  const user = useCurrentUser();
+  const remote = useRemoteAPI();
+  if (!user)
+    return (
+      <div className={styles.AuthGuardForm}>
+        <p>Must log in or register!</p>
+        <Input
+          value={userName}
+          onValue={setUsername}
+          disabled={disabled}
+          placeholder="username"
+          autoSelect
+        />
+        <br />
+        <br />
+        <Input
+          value={password}
+          onValue={setPassword}
+          disabled={disabled}
+          placeholder="password"
+          password
+        />
+        <br />
+        <br />
+        <ButtonGroup>
+          <Button
+            text="Log in"
+            disabled={disabled}
+            onClick={() => {
+              setDisabled(true);
+              remote.auth
+                .login({ userName, password })
+                .catch(err => alert(err.message))
+                .finally(() => setDisabled(false));
+            }}
+          />
+          <Button
+            text="Register"
+            disabled={disabled}
+            onClick={() => {
+              setDisabled(true);
+              remote.auth
+                .register({ userName, password })
+                .catch(err => alert(err.message))
+                .finally(() => setDisabled(false));
+            }}
+          />
+        </ButtonGroup>
+      </div>
+    );
   return (
     <div>
       <p>
-        Logged in as {user.displayName}!{" "}
-        <Button onClick={signOut}>Sign out</Button>
+        Logged in as {user.userName}!{" "}
+        <Button onClick={remote.auth.logout}>Sign out</Button>
       </p>
       <hr />
       {props.content()}

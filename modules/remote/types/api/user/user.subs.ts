@@ -1,5 +1,6 @@
+import { Subscriber } from "../../helpers";
 import { AlgolRemoteUser } from "./user.type";
 
 export type AlgolRemoteUserSubs = {
-  auth: (opts: { listener: (user: AlgolRemoteUser | null) => void }) => void;
+  user: Subscriber<AlgolRemoteUser | null>;
 };

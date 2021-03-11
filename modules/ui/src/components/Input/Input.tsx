@@ -20,6 +20,7 @@ type InputProps = {
   disabled?: boolean;
   placeholder?: string;
   controlId?: string;
+  password?: boolean;
 };
 
 export const Input: FunctionComponent<InputProps> = props => {
@@ -34,6 +35,7 @@ export const Input: FunctionComponent<InputProps> = props => {
     disabled,
     placeholder,
     controlId,
+    password,
   } = props;
   const ref = useRef<HTMLInputElement>(null);
   const haveSelected = useRef<boolean>(false);
@@ -79,7 +81,7 @@ export const Input: FunctionComponent<InputProps> = props => {
       onKeyDown={handleEnter}
       onChange={handleChange}
       value={value}
-      type="text"
+      type={password ? "password" : "text"}
       className={css.input}
       autoFocus={autoFocus}
     />

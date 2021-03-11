@@ -1,24 +1,54 @@
-import React, { FunctionComponent, useCallback } from "react";
-import { useFirebaseUser } from "../../../../firebase/src/hooks/useFirebaseUser";
-import { useFirebaseLoginRenderer } from "../../../../firebase/src/hooks/useFirebaseLoginRenderer";
-import { useFirebaseApp } from "../../../../firebase/src/hooks/useFirebaseApp";
+import React, { FunctionComponent, useState } from "react";
+import { useCurrentUser, useRemoteAPI } from "../../../../remote/utils/context";
 import { Button } from "../Button";
+import { Input } from "../Input";
 
 type AuthGuardProps = {
   content: () => React.ReactNode;
 };
 
 export const AuthGuard: FunctionComponent<AuthGuardProps> = props => {
-  const app = useFirebaseApp();
-  const user = useFirebaseUser();
-  const loginRenderer = useFirebaseLoginRenderer();
-  const signOut = useCallback(() => app.auth().signOut(), []);
-  if (!user) return loginRenderer();
+  const [userName, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [disabled, setDisabled] = useState(false);
+  const user = useCurrentUser();
+  const api = useRemoteAPI();
+  if (!user)
+    return (
+      <div>
+        <p>Must log in or register!</p>
+        <Input value={userName} onValue={setUsername} disabled={disabled} />
+        <br />
+        <Input value={password} onValue={setPassword} disabled={disabled} />
+        <Button
+          text="Log in"
+          disabled={disabled}
+          onClick={() => {
+            setDisabled(true);
+            api.auth.actions
+              .login({ userName, password })
+              .catch(err => alert(err.message))
+              .finally(() => setDisabled(false));
+          }}
+        />
+        <Button
+          text="Register"
+          disabled={disabled}
+          onClick={() => {
+            setDisabled(true);
+            api.auth.actions
+              .register({ userName, password })
+              .catch(err => alert(err.message))
+              .finally(() => setDisabled(false));
+          }}
+        />
+      </div>
+    );
   return (
     <div>
       <p>
-        Logged in as {user.displayName}!{" "}
-        <Button onClick={signOut}>Sign out</Button>
+        Logged in as {user.userName}!{" "}
+        <Button onClick={api.auth.actions.logout}>Sign out</Button>
       </p>
       <hr />
       {props.content()}

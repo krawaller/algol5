@@ -25,7 +25,9 @@ export const fakerUserAPI: AlgolRemoteUserAPI = {
       new Promise((resolve, reject) =>
         setTimeout(() => {
           const user = users.find(
-            u => u.userName === opts.userName && u.password === opts.password
+            u =>
+              u.userName.toLowerCase() === opts.userName.toLowerCase() &&
+              u.password === opts.password
           );
           if (user) {
             setLoggedInUser(user);
@@ -38,7 +40,9 @@ export const fakerUserAPI: AlgolRemoteUserAPI = {
     register: opts =>
       new Promise((resolve, reject) =>
         setTimeout(() => {
-          const existingUser = users.find(u => u.userName === opts.userName);
+          const existingUser = users.find(
+            u => u.userName.toLowerCase() === opts.userName.toLowerCase()
+          );
           if (existingUser) {
             reject(new Error("Username is taken"));
           } else if (opts.userName.match(/[^A-Za-z0-9]/)) {

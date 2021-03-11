@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState } from "react";
 import { useCurrentUser, useRemoteAPI } from "../../../../remote/utils/context";
 import { Button } from "../Button";
+import { ButtonGroup } from "../ButtonGroup";
 import { Input } from "../Input";
 
 type AuthGuardProps = {
@@ -17,31 +18,48 @@ export const AuthGuard: FunctionComponent<AuthGuardProps> = props => {
     return (
       <div>
         <p>Must log in or register!</p>
-        <Input value={userName} onValue={setUsername} disabled={disabled} />
+        <Input
+          value={userName}
+          onValue={setUsername}
+          disabled={disabled}
+          placeholder="username"
+          autoSelect
+        />
         <br />
-        <Input value={password} onValue={setPassword} disabled={disabled} />
-        <Button
-          text="Log in"
+        <br />
+        <Input
+          value={password}
+          onValue={setPassword}
           disabled={disabled}
-          onClick={() => {
-            setDisabled(true);
-            api.auth.actions
-              .login({ userName, password })
-              .catch(err => alert(err.message))
-              .finally(() => setDisabled(false));
-          }}
+          placeholder="password"
+          password
         />
-        <Button
-          text="Register"
-          disabled={disabled}
-          onClick={() => {
-            setDisabled(true);
-            api.auth.actions
-              .register({ userName, password })
-              .catch(err => alert(err.message))
-              .finally(() => setDisabled(false));
-          }}
-        />
+        <br />
+        <br />
+        <ButtonGroup>
+          <Button
+            text="Log in"
+            disabled={disabled}
+            onClick={() => {
+              setDisabled(true);
+              api.auth.actions
+                .login({ userName, password })
+                .catch(err => alert(err.message))
+                .finally(() => setDisabled(false));
+            }}
+          />
+          <Button
+            text="Register"
+            disabled={disabled}
+            onClick={() => {
+              setDisabled(true);
+              api.auth.actions
+                .register({ userName, password })
+                .catch(err => alert(err.message))
+                .finally(() => setDisabled(false));
+            }}
+          />
+        </ButtonGroup>
       </div>
     );
   return (

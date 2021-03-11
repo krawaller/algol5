@@ -1,7 +1,7 @@
 import { AlgolRemoteUser, AlgolRemoteUserAPI } from "../types/api/user";
 
 let currentUser: AlgolRemoteUser | null = null;
-const subs = new Set<(user: AlgolRemoteUser) => void>();
+const subs = new Set<(user: AlgolRemoteUser | null) => void>();
 
 const setLoggedInUser = (user: AlgolRemoteUser | null) => {
   currentUser = user;
@@ -28,7 +28,6 @@ export const fakerUserAPI: AlgolRemoteUserAPI = {
             u => u.userName === opts.userName && u.password === opts.password
           );
           if (user) {
-            resolve(user);
             setLoggedInUser(user);
             resolve(user);
           } else {
@@ -42,6 +41,8 @@ export const fakerUserAPI: AlgolRemoteUserAPI = {
           const existingUser = users.find(u => u.userName === opts.userName);
           if (existingUser) {
             reject(new Error("Username is taken"));
+          } else if (opts.userName.match(/[^A-Za-z0-9]/)) {
+            throw new Error("Please only use English alphanumeric characters");
           } else {
             const newUser: AlgolRemoteUser = {
               ...opts,
@@ -57,11 +58,11 @@ export const fakerUserAPI: AlgolRemoteUserAPI = {
       ),
   },
   subs: {
-    auth: opts => {
-      if (!subs.has(opts.listener)) {
-        subs.add(opts.listener);
-        return () => subs.delete(opts.listener);
+    auth: ({ listener }) => {
+      if (!subs.has(listener)) {
+        subs.add(listener);
       }
+      return () => subs.delete(listener);
     },
   },
 };

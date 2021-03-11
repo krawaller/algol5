@@ -3,4 +3,7 @@
 import { AlgolRemoteUserAPI } from "./user";
 import { AlgolRemoteChallengeAPI } from "./challenge";
 
-export type AlgolRemoteAPI = AlgolRemoteUserAPI & AlgolRemoteChallengeAPI;
+export type AlgolRemoteAPI = {
+  auth: AlgolRemoteUserAPI;
+  challenge: AlgolRemoteChallengeAPI;
+};

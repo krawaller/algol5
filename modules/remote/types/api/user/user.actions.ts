@@ -9,6 +9,7 @@ export type AlgolRemoteUserActions = {
     userName: string;
     password: string;
   }) => Promise<AlgolRemoteUser>;
+  logout: () => void;
 };
 
 // TODO - displayname, update info?

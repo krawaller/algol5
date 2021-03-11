@@ -3,6 +3,7 @@ import { useCurrentUser, useRemoteAPI } from "../../../../remote/utils/context";
 import { Button } from "../Button";
 import { ButtonGroup } from "../ButtonGroup";
 import { Input } from "../Input";
+import styles from "./AuthGuard.cssProxy";
 
 type AuthGuardProps = {
   content: () => React.ReactNode;
@@ -16,7 +17,7 @@ export const AuthGuard: FunctionComponent<AuthGuardProps> = props => {
   const remote = useRemoteAPI();
   if (!user)
     return (
-      <div>
+      <div className={styles.AuthGuardForm}>
         <p>Must log in or register!</p>
         <Input
           value={userName}

@@ -13,7 +13,7 @@ export const AuthGuard: FunctionComponent<AuthGuardProps> = props => {
   const [password, setPassword] = useState("");
   const [disabled, setDisabled] = useState(false);
   const user = useCurrentUser();
-  const api = useRemoteAPI();
+  const remote = useRemoteAPI();
   if (!user)
     return (
       <div>
@@ -42,7 +42,7 @@ export const AuthGuard: FunctionComponent<AuthGuardProps> = props => {
             disabled={disabled}
             onClick={() => {
               setDisabled(true);
-              api.auth.actions
+              remote.auth
                 .login({ userName, password })
                 .catch(err => alert(err.message))
                 .finally(() => setDisabled(false));
@@ -53,7 +53,7 @@ export const AuthGuard: FunctionComponent<AuthGuardProps> = props => {
             disabled={disabled}
             onClick={() => {
               setDisabled(true);
-              api.auth.actions
+              remote.auth
                 .register({ userName, password })
                 .catch(err => alert(err.message))
                 .finally(() => setDisabled(false));
@@ -66,7 +66,7 @@ export const AuthGuard: FunctionComponent<AuthGuardProps> = props => {
     <div>
       <p>
         Logged in as {user.userName}!{" "}
-        <Button onClick={api.auth.actions.logout}>Sign out</Button>
+        <Button onClick={remote.auth.logout}>Sign out</Button>
       </p>
       <hr />
       {props.content()}

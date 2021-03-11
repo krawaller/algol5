@@ -9,6 +9,6 @@ export const useRemoteAPI = () => useContext(RemoteContext);
 export const useCurrentUser = () => {
   const [user, setUser] = useState<AlgolRemoteUser | null>(null);
   const api = useRemoteAPI();
-  useEffect(() => api.auth.subs.auth({ listener: setUser }));
+  useEffect(() => api.auth.subscribe.user({ listener: setUser }));
   return user;
 };

@@ -1,9 +1,7 @@
 import { GameId } from "../../../../games/dist/list";
+import { Subscriber } from "../../helpers";
 import { AlgolRemoteChallenge } from "./challenge.type";
 
 export type AlgolRemoteChallengeSubs = {
-  perGame: (opts: {
-    gameId: GameId;
-    listener: (challenges: AlgolRemoteChallenge[]) => void;
-  }) => void;
+  forGame: Subscriber<Record<string, AlgolRemoteChallenge>, { gameId: GameId }>;
 };

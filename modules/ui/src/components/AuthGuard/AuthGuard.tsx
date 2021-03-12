@@ -6,10 +6,10 @@ import { Input } from "../Input";
 import styles from "./AuthGuard.cssProxy";
 
 type AuthGuardProps = {
-  content: () => React.ReactNode;
+  Content: () => JSX.Element;
 };
 
-export const AuthGuard: FunctionComponent<AuthGuardProps> = props => {
+export const AuthGuard: FunctionComponent<AuthGuardProps> = ({ Content }) => {
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [disabled, setDisabled] = useState(false);
@@ -78,7 +78,7 @@ export const AuthGuard: FunctionComponent<AuthGuardProps> = props => {
         <Button onClick={remote.auth.logout}>Sign out</Button>
       </p>
       <hr />
-      {props.content()}
+      <Content />
     </div>
   );
 };

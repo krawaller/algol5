@@ -1,4 +1,6 @@
+import { focusAtom } from "klyva";
 import { AlgolRemoteChallengeAPI } from "../types/api/challenge";
+import { challengesPerGame, currentGameChallenges } from "./atoms";
 
 export const fakerChallengeAPI: AlgolRemoteChallengeAPI = {
   acceptChallenge: opts => {
@@ -12,7 +14,15 @@ export const fakerChallengeAPI: AlgolRemoteChallengeAPI = {
   },
   subscribe: {
     forGame: opts => {
-      return () => {};
+      const atom = focusAtom(challengesPerGame, optics =>
+        optics.prop(opts.gameId)
+      );
+      opts.listener(atom.getValue());
+      return atom.subscribe(opts.listener);
+    },
+    forCurrentGame: opts => {
+      opts.listener(currentGameChallenges.getValue());
+      return currentGameChallenges.subscribe(opts.listener);
     },
   },
 };

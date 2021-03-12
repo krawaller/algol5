@@ -4,4 +4,5 @@ import { AlgolRemoteChallenge } from "./challenge.type";
 
 export type AlgolRemoteChallengeSubs = {
   forGame: Subscriber<Record<string, AlgolRemoteChallenge>, { gameId: GameId }>;
+  forCurrentGame: Subscriber<Record<string, AlgolRemoteChallenge>>;
 };

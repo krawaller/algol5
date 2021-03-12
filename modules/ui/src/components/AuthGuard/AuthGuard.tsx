@@ -45,6 +45,10 @@ export const AuthGuard: FunctionComponent<AuthGuardProps> = props => {
               setDisabled(true);
               remote.auth
                 .login({ userName, password })
+                .then(() => {
+                  setUsername("");
+                  setPassword("");
+                })
                 .catch(err => alert(err.message))
                 .finally(() => setDisabled(false));
             }}
@@ -56,6 +60,10 @@ export const AuthGuard: FunctionComponent<AuthGuardProps> = props => {
               setDisabled(true);
               remote.auth
                 .register({ userName, password })
+                .then(() => {
+                  setUsername("");
+                  setPassword("");
+                })
                 .catch(err => alert(err.message))
                 .finally(() => setDisabled(false));
             }}

@@ -1,14 +1,5 @@
 import { AlgolRemoteUser, AlgolRemoteUserAPI } from "../types/api/user";
-
-let currentUser: AlgolRemoteUser | null = null;
-const subs = new Set<(user: AlgolRemoteUser | null) => void>();
-
-const setLoggedInUser = (user: AlgolRemoteUser | null) => {
-  currentUser = user;
-  for (const listener of subs) {
-    listener(currentUser);
-  }
-};
+import { makeFakerVal } from "./utils";
 
 const kurt: AlgolRemoteUser = {
   userId: "thisisaveryrandomguid",
@@ -16,20 +7,23 @@ const kurt: AlgolRemoteUser = {
   password: "kurt123",
 };
 
-const users = [kurt];
+const users = makeFakerVal<AlgolRemoteUser[]>([kurt]);
+const currentUser = makeFakerVal<AlgolRemoteUser | null>(null);
 
 export const fakerUserAPI: AlgolRemoteUserAPI = {
-  logout: () => setLoggedInUser(null),
+  logout: () => currentUser.setVal(null),
   login: opts =>
     new Promise((resolve, reject) =>
       setTimeout(() => {
-        const user = users.find(
-          u =>
-            u.userName.toLowerCase() === opts.userName.toLowerCase() &&
-            u.password === opts.password
-        );
+        const user = users
+          .getVal()
+          .find(
+            u =>
+              u.userName.toLowerCase() === opts.userName.toLowerCase() &&
+              u.password === opts.password
+          );
         if (user) {
-          setLoggedInUser(user);
+          currentUser.setVal(user);
           resolve(user);
         } else {
           reject(new Error("No user with that info found"));
@@ -39,9 +33,9 @@ export const fakerUserAPI: AlgolRemoteUserAPI = {
   register: opts =>
     new Promise((resolve, reject) =>
       setTimeout(() => {
-        const existingUser = users.find(
-          u => u.userName.toLowerCase() === opts.userName.toLowerCase()
-        );
+        const existingUser = users
+          .getVal()
+          .find(u => u.userName.toLowerCase() === opts.userName.toLowerCase());
         if (existingUser) {
           reject(new Error("Username is taken"));
         } else if (opts.userName.match(/[^A-Za-z0-9]/)) {
@@ -53,18 +47,15 @@ export const fakerUserAPI: AlgolRemoteUserAPI = {
               .toString()
               .slice(2),
           };
-          users.push(newUser);
-          setLoggedInUser(newUser);
+          users.setVal(users.getVal().concat(newUser));
+          currentUser.setVal(newUser);
           resolve(newUser);
         }
       }, 2000)
     ),
   subscribe: {
-    user: ({ listener }) => {
-      if (!subs.has(listener)) {
-        subs.add(listener);
-      }
-      return () => subs.delete(listener);
+    user: opts => {
+      return currentUser.subscribe(opts);
     },
   },
 };

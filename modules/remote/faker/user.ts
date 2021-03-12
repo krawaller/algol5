@@ -1,29 +1,20 @@
 import { AlgolRemoteUser, AlgolRemoteUserAPI } from "../types/api/user";
-import { makeFakerVal } from "./utils";
-
-const kurt: AlgolRemoteUser = {
-  userId: "thisisaveryrandomguid",
-  userName: "Kurt",
-  password: "kurt123",
-};
-
-const users = makeFakerVal<AlgolRemoteUser[]>([kurt]);
-const currentUser = makeFakerVal<AlgolRemoteUser | null>(null);
+import { currentUser, users } from "./atoms";
 
 export const fakerUserAPI: AlgolRemoteUserAPI = {
-  logout: () => currentUser.setVal(null),
+  logout: () => currentUser.update(null),
   login: opts =>
     new Promise((resolve, reject) =>
       setTimeout(() => {
         const user = users
-          .getVal()
+          .getValue()
           .find(
             u =>
               u.userName.toLowerCase() === opts.userName.toLowerCase() &&
               u.password === opts.password
           );
         if (user) {
-          currentUser.setVal(user);
+          currentUser.update(user);
           resolve(user);
         } else {
           reject(new Error("No user with that info found"));
@@ -34,7 +25,7 @@ export const fakerUserAPI: AlgolRemoteUserAPI = {
     new Promise((resolve, reject) =>
       setTimeout(() => {
         const existingUser = users
-          .getVal()
+          .getValue()
           .find(u => u.userName.toLowerCase() === opts.userName.toLowerCase());
         if (existingUser) {
           reject(new Error("Username is taken"));
@@ -47,15 +38,16 @@ export const fakerUserAPI: AlgolRemoteUserAPI = {
               .toString()
               .slice(2),
           };
-          users.setVal(users.getVal().concat(newUser));
-          currentUser.setVal(newUser);
+          users.update(users.getValue().concat(newUser));
+          currentUser.update(newUser);
           resolve(newUser);
         }
       }, 2000)
     ),
   subscribe: {
     user: opts => {
-      return currentUser.subscribe(opts);
+      opts.listener(currentUser.getValue());
+      return currentUser.subscribe(opts.listener);
     },
   },
 };

@@ -6,7 +6,10 @@ import { currentGame } from "./atoms";
 export const FakerAPI: AlgolRemoteAPI = {
   auth: fakerUserAPI,
   challenge: fakerChallengeAPI,
-  setGame: gameAPI => {
-    currentGame.update(gameAPI);
+  game: {
+    setGameAPI: gameAPI => {
+      currentGame.update(gameAPI);
+    },
+    getGameAPI: () => currentGame.getValue(),
   },
 };

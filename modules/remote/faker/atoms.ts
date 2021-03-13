@@ -1,46 +1,30 @@
 import { atom } from "klyva";
 import { GameId, list } from "../../games/dist/list";
 import { AlgolStaticGameAPI } from "../../types";
+import { randBelow } from "../../common";
 import { AlgolRemoteUser } from "../types/api/user";
 import { AlgolRemoteChallenge } from "../types/api/challenge/challenge.type";
+import { fakeChallengeByUser, fakeUserKurt, fakeUserRandy } from "./mocks";
 
 export const currentUser = atom<AlgolRemoteUser | null>(null);
 
-const randy: AlgolRemoteUser = {
-  userId: "RANDY",
-  userName: "Randy",
-  password: "heydontbeme",
-};
-
-const kurt: AlgolRemoteUser = {
-  userId: "thisisaveryrandomguid",
-  userName: "Kurt",
-  password: "kurt123",
-};
-
-export const users = atom<AlgolRemoteUser[]>([kurt, randy]);
+export const users = atom<AlgolRemoteUser[]>([fakeUserKurt, fakeUserRandy]);
 
 export const currentGame = atom<AlgolStaticGameAPI | null>(null);
 
-const withRandyChallenge = (gameId: GameId): ChallengeById => {
-  const id = Math.random()
-    .toString()
-    .slice(2);
-  return {
-    [id]: {
-      challengeId: id,
-      gameId,
-      issuer: randy.userId,
-      lookingFor: ([0, 1, 2] as const)[Math.floor(Math.random() * 3)],
-      timestamp: Date.now(),
-    },
-  };
+const withRandyChallenges = (gameId: GameId) => {
+  const ret: ChallengeById = {};
+  for (let i = 0; i < randBelow(3) + 1; i++) {
+    const challenge = fakeChallengeByUser({ user: fakeUserRandy, gameId });
+    ret[challenge.challengeId] = challenge;
+  }
+  return ret;
 };
 
 type ChallengeById = Record<string, AlgolRemoteChallenge>;
 type ChallengesPerGame = Record<string, ChallengeById>;
 const initial = Object.fromEntries(
-  list.map(gameId => [gameId, withRandyChallenge(gameId)])
+  list.map(gameId => [gameId, withRandyChallenges(gameId)])
 ) as ChallengesPerGame;
 
 export const challengesPerGame = atom(initial);

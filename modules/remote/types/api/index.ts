@@ -7,5 +7,8 @@ import { AlgolStaticGameAPI } from "../../../types";
 export type AlgolRemoteAPI = {
   auth: AlgolRemoteUserAPI;
   challenge: AlgolRemoteChallengeAPI;
-  setGame: (game: AlgolStaticGameAPI | null) => void;
+  game: {
+    setGameAPI: (game: AlgolStaticGameAPI | null) => void;
+    getGameAPI: () => AlgolStaticGameAPI | null;
+  };
 };

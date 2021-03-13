@@ -59,8 +59,8 @@ export const GamePage = (props: GamePageProps) => {
 
   const remoteAPI = useRemoteAPI();
   useEffect(() => {
-    remoteAPI.setGame(api);
-    return () => remoteAPI.setGame(null);
+    remoteAPI.game.setGameAPI(api);
+    return () => remoteAPI.game.setGameAPI(null);
   }, [api]);
 
   useEffect(() => {

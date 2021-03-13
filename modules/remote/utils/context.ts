@@ -5,6 +5,11 @@ import { AlgolRemoteUser } from "../types/api/user";
 
 export const RemoteContext = createContext(FakerAPI);
 
+export const useCurrentGame = () => {
+  const api = useRemoteAPI();
+  return api.game.getGameAPI();
+};
+
 export const useRemoteAPI = () => useContext(RemoteContext);
 
 export const useCurrentUser = () => {

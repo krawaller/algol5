@@ -1,7 +1,7 @@
 import { atom } from "klyva";
 import { GameId, list } from "../../games/dist/list";
 import { AlgolStaticGameAPI } from "../../types";
-import { randBelow } from "../../common";
+import { randBelow } from "../utils/random";
 import { AlgolRemoteUser } from "../types/api/user";
 import { AlgolRemoteChallenge } from "../types/api/challenge/challenge.type";
 import { fakeChallengeByUser, fakeUserKurt, fakeUserRandy } from "./mocks";

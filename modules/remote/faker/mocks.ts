@@ -1,6 +1,6 @@
 import { GameId } from "../../games/dist/list";
 import { AlgolRemoteUser } from "../types/api/user";
-import { randBelow } from "../../common";
+import { randBelow } from "../utils/random";
 
 export const fakeUserRandy: AlgolRemoteUser = {
   userId: "RANDY",

@@ -15,15 +15,27 @@ export const AuthGuard: FunctionComponent<AuthGuardProps> = ({ Content }) => {
   const [disabled, setDisabled] = useState(false);
   const user = useCurrentUser();
   const remote = useRemoteAPI();
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    setDisabled(true);
+    remote.auth
+      .login({ userName, password })
+      .then(() => {
+        setUsername("");
+        setPassword("");
+      })
+      .catch(err => alert(err.message))
+      .finally(() => setDisabled(false));
+  };
   if (!user)
     return (
-      <div className={styles.AuthGuardForm}>
-        <p>Must log in or register!</p>
+      <form className={styles.AuthGuardForm} onSubmit={handleSubmit}>
+        <p>Must log in!</p>
         <Input
           value={userName}
           onValue={setUsername}
           disabled={disabled}
-          placeholder="username"
+          placeholder="username (kurt)"
           autoSelect
         />
         <br />
@@ -32,44 +44,15 @@ export const AuthGuard: FunctionComponent<AuthGuardProps> = ({ Content }) => {
           value={password}
           onValue={setPassword}
           disabled={disabled}
-          placeholder="password"
+          placeholder="password (kurt123)"
           password
         />
         <br />
         <br />
         <ButtonGroup>
-          <Button
-            text="Log in"
-            disabled={disabled}
-            onClick={() => {
-              setDisabled(true);
-              remote.auth
-                .login({ userName, password })
-                .then(() => {
-                  setUsername("");
-                  setPassword("");
-                })
-                .catch(err => alert(err.message))
-                .finally(() => setDisabled(false));
-            }}
-          />
-          <Button
-            text="Register"
-            disabled={disabled}
-            onClick={() => {
-              setDisabled(true);
-              remote.auth
-                .register({ userName, password })
-                .then(() => {
-                  setUsername("");
-                  setPassword("");
-                })
-                .catch(err => alert(err.message))
-                .finally(() => setDisabled(false));
-            }}
-          />
+          <Button text="Log in" disabled={disabled} onClick={handleSubmit} />
         </ButtonGroup>
-      </div>
+      </form>
     );
   return (
     <div>

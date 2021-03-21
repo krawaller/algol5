@@ -7,7 +7,7 @@ storiesOf("AuthGuard", module).add(
   () => {
     return (
       <div style={{ padding: 10 }}>
-        <AuthGuard content={() => <p>Secret stuff</p>} />
+        <AuthGuard Content={() => <p>Secret stuff</p>} />
       </div>
     );
   }

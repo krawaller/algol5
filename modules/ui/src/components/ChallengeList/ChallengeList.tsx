@@ -3,6 +3,7 @@ import Gravatar from "react-gravatar";
 import { AlgolRemoteChallenge } from "../../../../remote/types/api/challenge";
 import { AlgolRemoteUser } from "../../../../remote/types/api/user";
 import css from "./ChallengeList.cssProxy";
+import { ChallengeListItem } from "./ChallengeList.Item";
 
 type ChallengeListProps = {
   challenges: AlgolRemoteChallenge[];
@@ -14,8 +15,9 @@ export const ChallengeList: FunctionComponent<ChallengeListProps> = props => {
   console.log("ChallengeList!", challenges, user);
   return (
     <div className={css.challengeListContainer}>
-      Stub for ChallengeList{" "}
-      <Gravatar md5="0bb93d13ba17249145c60bdf0f509bc7" size={80} />
+      {challenges.map(c => (
+        <ChallengeListItem challenge={c} />
+      ))}
     </div>
   );
 };

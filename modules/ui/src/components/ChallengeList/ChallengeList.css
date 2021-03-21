@@ -1,3 +1,6 @@
 .challengeListContainer {
+}
 
+.challengeListItem {
+  display: flex;
 }

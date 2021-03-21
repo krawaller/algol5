@@ -30,9 +30,10 @@ const initial = Object.fromEntries(
 export const challengesPerGame = atom(initial);
 
 export const currentGameChallenges = atom(
-  get => get(challengesPerGame)[get(currentGame)?.gameId ?? ""] ?? {},
+  get => get(challengesPerGame)[get(currentGame)!.gameId || ""] || {},
   (newVal: ChallengeById) => {
-    const id = currentGame.getValue()?.gameId;
+    const api = currentGame.getValue();
+    const id = api ? api.gameId : "";
     if (!id) {
       throw new Error("No current game registered!");
     }

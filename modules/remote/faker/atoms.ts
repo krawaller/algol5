@@ -30,7 +30,11 @@ const initial = Object.fromEntries(
 export const challengesPerGame = atom(initial);
 
 export const currentGameChallenges = atom(
-  get => get(challengesPerGame)[get(currentGame)!.gameId || ""] || {},
+  get => {
+    const api = get(currentGame);
+    const challenges = get(challengesPerGame);
+    return api ? challenges[api.gameId] : {};
+  },
   (newVal: ChallengeById) => {
     const api = currentGame.getValue();
     const id = api ? api.gameId : "";

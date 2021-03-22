@@ -1,7 +1,7 @@
 import React from "react";
 import Gravatar from "react-gravatar";
 import { AlgolRemoteChallenge } from "../../../../remote/types/api/challenge";
-import css from "./ChallengeList.cssProxy";
+import { ListItem } from "../List";
 
 type ChallengeListItemProps = {
   challenge: AlgolRemoteChallenge;
@@ -10,10 +10,11 @@ type ChallengeListItemProps = {
 export const ChallengeListItem = (props: ChallengeListItemProps) => {
   const { challenge } = props;
   const { issuer } = challenge;
+  const pic = <Gravatar size={80} md5={issuer.gravatarHash || issuer.userId} />;
+  const title = issuer.userName;
+  const content = <p>Do u dare?</p>;
+  const onClick = () => alert("Not yet implemented");
   return (
-    <div className={css.challengeListItem}>
-      <Gravatar size={80} md5={issuer.gravatarHash || issuer.userId} />
-      <div>{issuer.userName}</div>
-    </div>
+    <ListItem pic={pic} title={title} content={content} onClick={onClick} />
   );
 };

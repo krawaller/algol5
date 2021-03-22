@@ -9,6 +9,7 @@ import {
 import css from "./SessionList.cssProxy";
 import { Board } from "../Board";
 import { SessionLoadFail } from "../../../../local/src";
+import { ListItem } from "../List";
 
 type SessionListLineErrorActions = {
   reportError: AlgolErrorReporter;
@@ -29,6 +30,34 @@ const EMPTYOBJ = {};
 
 export const SessionListLineError: FunctionComponent<SessionListLineErrorProps> = props => {
   const { fail, graphics, actions, meta } = props;
+  const onClick = () =>
+    actions.reportError(
+      decorateError({
+        err: fail.error,
+        description: `Something has happened to this ${meta.name} save file, and it couldn't be correctly read.`,
+        errorId: "local-save-parse-error",
+        meta: {
+          gameId: meta.id,
+          saveStr: fail.str,
+          saveId: fail.id,
+        },
+      }),
+      "severe"
+    );
+  const pic = (
+    <Board
+      graphics={graphics}
+      potentialMarks={EMPTYARR}
+      marks={EMPTYARR}
+      units={EMPTYOBJ}
+    />
+  );
+  const content = (
+    <div className={css.sessionListItemErrorInfo}>
+      The save data for this session is corrupt :/
+    </div>
+  );
+  return <ListItem pic={pic} content={content} onClick={onClick} />;
   return (
     <div
       className={css.sessionListItem}

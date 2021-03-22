@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react";
-import Gravatar from "react-gravatar";
 import { AlgolRemoteChallenge } from "../../../../remote/types/api/challenge";
 import { AlgolRemoteUser } from "../../../../remote/types/api/user";
 import css from "./ChallengeList.cssProxy";

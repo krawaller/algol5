@@ -12,9 +12,15 @@ export const users = atom<AlgolRemoteUser[]>([fakeUserKurt, fakeUserRandy]);
 
 export const currentGame = atom<AlgolStaticGameAPI | null>(null);
 
-const withRandyChallenges = (gameId: GameId) => {
+const withChallenges = (gameId: GameId) => {
   const ret: ChallengeById = {};
-  for (let i = 0; i < randBelow(3) + 1; i++) {
+  const kurtCount = 1;
+  for (let j = 0; j < kurtCount; j++) {
+    const challenge = fakeChallengeByUser({ user: fakeUserKurt, gameId });
+    ret[challenge.challengeId] = challenge;
+  }
+  const randyCount = randBelow(3) + 1;
+  for (let i = 0; i < randyCount; i++) {
     const challenge = fakeChallengeByUser({ user: fakeUserRandy, gameId });
     ret[challenge.challengeId] = challenge;
   }
@@ -24,7 +30,7 @@ const withRandyChallenges = (gameId: GameId) => {
 type ChallengeById = Record<string, AlgolRemoteChallenge>;
 type ChallengesPerGame = Record<string, ChallengeById>;
 const initial = Object.fromEntries(
-  list.map(gameId => [gameId, withRandyChallenges(gameId)])
+  list.map(gameId => [gameId, withChallenges(gameId)])
 ) as ChallengesPerGame;
 
 export const challengesPerGame = atom(initial);

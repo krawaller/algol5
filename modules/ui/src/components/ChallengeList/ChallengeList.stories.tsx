@@ -18,7 +18,7 @@ storiesOf("ChallengeList", module).add(
     ];
     return (
       <div style={{ padding: 10 }}>
-        <ChallengeList challenges={challenges} user={fakeUserKurt} />
+        <ChallengeList challenges={challenges} />
       </div>
     );
   }

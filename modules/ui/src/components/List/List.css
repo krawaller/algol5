@@ -1,6 +1,5 @@
 .listItem {
   margin-bottom: 10px;
-  cursor: pointer;
   user-select: none;
   display: flex;
   justify-content: space-between;
@@ -8,6 +7,10 @@
 
 .listItem:hover {
   background-color: #f7cb8c;
+}
+
+.listItemClickable:hover {
+  cursor: pointer;
 }
 
 .listItemPic {
@@ -23,6 +26,18 @@
   display: flex;
   font-size: 12px;
   flex-direction: column;
+}
+
+.listItemActions {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.listItemActions > :not(:first-child) {
+  margin-top: 8px;
 }
 
 .listItemTitle {

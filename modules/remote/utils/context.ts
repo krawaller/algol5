@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { FakerAPI } from "../faker";
 import { AlgolRemoteChallenge } from "../types/api/challenge";
 import { AlgolRemoteUser } from "../types/api/user";
@@ -29,4 +29,26 @@ export const useCurrentGameChallenges = () => {
     []
   );
   return challenges;
+};
+
+export const useMyCurrentGameChallenges = () => {
+  const user = useCurrentUser();
+  const challenges = useCurrentGameChallenges();
+  const myChallenges = useMemo(
+    () =>
+      Object.values(challenges).filter(c => c.issuer.userId === user?.userId),
+    [challenges, user]
+  );
+  return myChallenges;
+};
+
+export const useForeignCurrentGameChallenges = () => {
+  const user = useCurrentUser();
+  const challenges = useCurrentGameChallenges();
+  const foreignChallenges = useMemo(
+    () =>
+      Object.values(challenges).filter(c => c.issuer.userId !== user?.userId),
+    [challenges, user]
+  );
+  return foreignChallenges;
 };

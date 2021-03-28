@@ -28,6 +28,7 @@ import { makeSessionNav } from "../../../../common/nav/makeSessionNav";
 import { makeGameNav } from "../../../../common/nav/makeGameNav";
 import { board2sprites, sprites2arrangement } from "../../../../common";
 import { useRemoteAPI } from "../../../../remote/utils/context";
+import { GameAPIContext } from "../../contexts";
 
 const SCREENSHOT = false; // TODO - setting somewhere!
 
@@ -164,7 +165,9 @@ export const GamePage = (props: GamePageProps) => {
           name={mode !== "gamelobby" ? battle!.variant.board : "basic"}
         />
       }
-      body={body}
+      body={
+        <GameAPIContext.Provider value={api}>{body}</GameAPIContext.Provider>
+      }
     />
   );
 };

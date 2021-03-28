@@ -3,4 +3,6 @@ import { fakeToaster } from "../../../types";
 
 export const ToasterContext = createContext(fakeToaster);
 
-export const useToaster = useContext(ToasterContext);
+export const useToaster = () => {
+  return useContext(ToasterContext);
+};

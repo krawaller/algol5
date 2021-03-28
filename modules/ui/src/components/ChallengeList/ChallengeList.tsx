@@ -11,9 +11,11 @@ export const ChallengeList: FunctionComponent<ChallengeListProps> = props => {
   const { challenges } = props;
   return (
     <div className={css.challengeListContainer}>
-      {challenges.map(c => (
-        <ChallengeListItem challenge={c} key={c.challengeId} />
-      ))}
+      {challenges
+        .filter(c => !c.deleting)
+        .map(c => (
+          <ChallengeListItem challenge={c} key={c.challengeId} />
+        ))}
     </div>
   );
 };

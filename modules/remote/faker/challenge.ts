@@ -1,4 +1,5 @@
 import { focusAtom } from "klyva";
+import produce from "immer";
 import { AlgolRemoteChallengeAPI } from "../types/api/challenge";
 import { challengesPerGame, currentGameChallenges } from "./atoms";
 
@@ -12,11 +13,18 @@ export const fakerChallengeAPI: AlgolRemoteChallengeAPI = {
   deleteChallenge: opts =>
     new Promise(resolve => {
       const { challengeId, gameId } = opts.challenge;
+      challengesPerGame.update(c =>
+        produce(c, draft => {
+          // TODO - put in common logic
+          draft[gameId][challengeId].deleting = true;
+        })
+      );
       setTimeout(() => {
-        challengesPerGame.update(c => {
-          delete c[gameId][challengeId];
-          return c;
-        });
+        challengesPerGame.update(c =>
+          produce(c, draft => {
+            delete draft[gameId][challengeId];
+          })
+        );
         resolve(true);
       }, 2000);
     }),

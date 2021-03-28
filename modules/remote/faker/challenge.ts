@@ -9,9 +9,17 @@ export const fakerChallengeAPI: AlgolRemoteChallengeAPI = {
   createChallenge: opts => {
     return Promise.reject(new Error("Not implemented"));
   },
-  deleteChallenge: opts => {
-    return Promise.reject(new Error("Not implemented"));
-  },
+  deleteChallenge: opts =>
+    new Promise(resolve => {
+      const { challengeId, gameId } = opts.challenge;
+      setTimeout(() => {
+        challengesPerGame.update(c => {
+          delete c[gameId][challengeId];
+          return c;
+        });
+        resolve(true);
+      }, 2000);
+    }),
   subscribe: {
     forGame: opts => {
       const atom = focusAtom(challengesPerGame, optics =>

@@ -3,7 +3,7 @@ import { AlgolRemoteChallenge } from "./challenge.type";
 
 export type AlgolRemoteChallengeActions = {
   acceptChallenge: (opts: {
-    challengeId: string;
+    challenge: AlgolRemoteChallenge;
     as: 0 | 1 | 2;
   }) => Promise<0 | 1 | 2>;
   createChallenge: (opts: {
@@ -11,5 +11,5 @@ export type AlgolRemoteChallengeActions = {
     gameId: GameId;
     variantCode: string;
   }) => Promise<AlgolRemoteChallenge>;
-  deleteChallenge: (opts: { challengeId: string }) => Promise<true>;
+  deleteChallenge: (opts: { challenge: AlgolRemoteChallenge }) => Promise<true>;
 };

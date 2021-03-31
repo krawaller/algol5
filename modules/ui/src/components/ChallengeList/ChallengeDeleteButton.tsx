@@ -9,7 +9,10 @@ type ChallengeDeleteButtonProps = {
 
 export const ChallengeDeleteButton = (props: ChallengeDeleteButtonProps) => {
   const { challenge } = props;
-  const api = useRemoteAPI();
-  const handleClick = () => api.challenge.deleteChallenge({ challenge });
-  return <AsyncButton text="X" onClick={handleClick} />;
+  const remoteAPI = useRemoteAPI();
+  const { challengeId, gameId, accepting, deleting } = challenge;
+  const disabled = accepting || deleting;
+  const handleClick = () =>
+    remoteAPI.challenge.deleteChallenge({ challengeId, gameId });
+  return <AsyncButton text="X" onClick={handleClick} disabled={disabled} />;
 };

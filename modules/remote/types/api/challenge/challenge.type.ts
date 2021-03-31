@@ -9,4 +9,5 @@ export type AlgolRemoteChallenge = {
   lookingFor: 1 | 2 | 0; // 0 means any
   timestamp: number;
   deleting?: boolean; // TODO - Only local
+  accepting?: boolean; // TODO - Only local
 };

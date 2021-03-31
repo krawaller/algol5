@@ -7,9 +7,24 @@ import {
 import { challengesPerGame, currentGameChallenges, currentUser } from "./atoms";
 
 export const fakerChallengeAPI: AlgolRemoteChallengeAPI = {
-  acceptChallenge: opts => {
-    return Promise.reject(new Error("Not implemented"));
-  },
+  acceptChallenge: opts =>
+    new Promise(resolve => {
+      const { challengeId, as, gameId } = opts;
+      challengesPerGame.update(c =>
+        produce(c, draft => {
+          // TODO - put in common logic
+          draft[gameId][challengeId].accepting = true;
+        })
+      );
+      setTimeout(() => {
+        challengesPerGame.update(c =>
+          produce(c, draft => {
+            delete draft[gameId][challengeId];
+          })
+        );
+        resolve(as);
+      }, 2000);
+    }),
   createChallenge: opts =>
     new Promise(resolve => {
       const { gameId, lookingFor, variantCode } = opts;
@@ -39,7 +54,7 @@ export const fakerChallengeAPI: AlgolRemoteChallengeAPI = {
     }),
   deleteChallenge: opts =>
     new Promise(resolve => {
-      const { challengeId, gameId } = opts.challenge;
+      const { challengeId, gameId } = opts;
       challengesPerGame.update(c =>
         produce(c, draft => {
           // TODO - put in common logic

@@ -1,7 +1,7 @@
 import React from "react";
 import { AlgolRemoteChallenge } from "../../../../remote/types/api/challenge";
 import { useRemoteAPI } from "../../../../remote/utils/context";
-import { Button } from "../Button";
+import { AsyncButton } from "../Button";
 import markdownCss from "../Markdown/Markdown.cssProxy";
 
 type ChallengeAcceptButtonProps = {
@@ -11,19 +11,22 @@ type ChallengeAcceptButtonProps = {
 
 export const ChallengeAcceptButton = (props: ChallengeAcceptButtonProps) => {
   const { challenge, as } = props;
-  const api = useRemoteAPI();
+  const { accepting, deleting } = challenge;
+  const remoteAPI = useRemoteAPI();
   const ok = challenge.lookingFor === 0 || challenge.lookingFor === as;
+  const disabled = accepting || deleting;
   const handleClick = () => {
-    api.challenge.acceptChallenge({
+    return remoteAPI.challenge.acceptChallenge({
       challengeId: challenge.challengeId,
+      gameId: challenge.gameId,
       as,
     });
   };
   return (
-    <Button onClick={handleClick} disabled={!ok}>
+    <AsyncButton onClick={handleClick} disabled={!ok || disabled}>
       <span className={markdownCss[as === 1 ? "md-plr-1" : "md-plr-2"]}>
         Plr{as}
       </span>
-    </Button>
+    </AsyncButton>
   );
 };

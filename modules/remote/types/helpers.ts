@@ -6,5 +6,5 @@ export type SubscriberOpts<Data> = { listener: Listener<Data> };
 
 export type Subscriber<
   Data,
-  Opts extends SubscriberOpts<Data> = SubscriberOpts<Data>
-> = (opts: Opts) => Unsubscriber;
+  Opts extends Record<string, unknown> = Record<string, unknown>
+> = (opts: SubscriberOpts<Data> & Opts) => Unsubscriber;

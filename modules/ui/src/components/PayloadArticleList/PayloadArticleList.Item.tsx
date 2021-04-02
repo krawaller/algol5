@@ -1,7 +1,7 @@
 import React, { Fragment, FunctionComponent, useCallback } from "react";
-import css from "./PayloadArticleList.cssProxy";
 import { Link } from "../Link";
 import { AlgolListing, AppActions } from "../../../../types";
+import { ListItem } from "../List";
 
 type PayloadArticleListItemProps = {
   actions: AppActions;
@@ -18,29 +18,35 @@ export const PayloadArticleListItem: FunctionComponent<PayloadArticleListItemPro
     url,
   } = listing;
   const handleClick = useCallback(() => actions.navTo(url), [actions.navTo]);
+  const pic = (
+    <div
+      style={{
+        backgroundImage: `url(/images/composites/${compositeName})`,
+        backgroundPositionX: -x,
+        backgroundPositionY: -y,
+        height: 80 * ratio,
+        backgroundRepeat: "no-repeat",
+      }}
+    />
+  );
+  const content = (
+    <Fragment>
+      {blurb.split("\n").map((t, n) => (
+        <Fragment key={n}>
+          {t}
+          <br />
+        </Fragment>
+      ))}
+    </Fragment>
+  );
   return (
     <Link url={url} actions={actions} styleMode="none">
-      <div className={css.payloadArticleListItem} onClick={handleClick}>
-        <div>
-          <div
-            style={{
-              backgroundImage: `url(/images/composites/${compositeName})`,
-              backgroundPositionX: -x,
-              backgroundPositionY: -y,
-              height: 80 * ratio,
-            }}
-          />
-        </div>
-        <div className={css.payloadArticleListInfoBox}>
-          <h4 className={css.payloadArticleListInfoTitle}>{title}</h4>
-          {blurb.split("\n").map((t, n) => (
-            <Fragment key={n}>
-              {t}
-              <br />
-            </Fragment>
-          ))}
-        </div>
-      </div>
+      <ListItem
+        title={title}
+        pic={pic}
+        content={content}
+        onClick={handleClick}
+      />
     </Link>
   );
 };

@@ -16,6 +16,7 @@ export const VariantSelector: FunctionComponent<VariantSelectorProps> = props =>
   );
   return (
     <RadioSelector
+      title="Variant"
       options={opts}
       onSelect={onSelect}
       value={current}

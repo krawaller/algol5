@@ -11,3 +11,4 @@ export * from "./misc";
 export * from "./content";
 export * from "./payloads";
 export * from "./page";
+export * from "./toaster";

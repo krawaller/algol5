@@ -1,70 +1,30 @@
-import { AlgolRemoteUser, AlgolRemoteUserAPI } from "../types/api/user";
-
-let currentUser: AlgolRemoteUser | null = null;
-const subs = new Set<(user: AlgolRemoteUser | null) => void>();
-
-const setLoggedInUser = (user: AlgolRemoteUser | null) => {
-  currentUser = user;
-  for (const listener of subs) {
-    listener(currentUser);
-  }
-};
-
-const kurt: AlgolRemoteUser = {
-  userId: "thisisaveryrandomguid",
-  userName: "Kurt",
-  password: "kurt123",
-};
-
-const users = [kurt];
+import { AlgolRemoteUserAPI } from "../types/api/user";
+import { currentUser, users } from "./atoms";
 
 export const fakerUserAPI: AlgolRemoteUserAPI = {
-  logout: () => setLoggedInUser(null),
+  logout: () => currentUser.update(null),
   login: opts =>
     new Promise((resolve, reject) =>
       setTimeout(() => {
-        const user = users.find(
-          u =>
-            u.userName.toLowerCase() === opts.userName.toLowerCase() &&
-            u.password === opts.password
-        );
+        const user = users
+          .getValue()
+          .find(
+            u =>
+              u.userName.toLowerCase() === opts.userName.toLowerCase() &&
+              u.password === opts.password
+          );
         if (user) {
-          setLoggedInUser(user);
+          currentUser.update(user);
           resolve(user);
         } else {
           reject(new Error("No user with that info found"));
         }
       }, 2000)
     ),
-  register: opts =>
-    new Promise((resolve, reject) =>
-      setTimeout(() => {
-        const existingUser = users.find(
-          u => u.userName.toLowerCase() === opts.userName.toLowerCase()
-        );
-        if (existingUser) {
-          reject(new Error("Username is taken"));
-        } else if (opts.userName.match(/[^A-Za-z0-9]/)) {
-          throw new Error("Please only use English alphanumeric characters");
-        } else {
-          const newUser: AlgolRemoteUser = {
-            ...opts,
-            userId: Math.random()
-              .toString()
-              .slice(2),
-          };
-          users.push(newUser);
-          setLoggedInUser(newUser);
-          resolve(newUser);
-        }
-      }, 2000)
-    ),
   subscribe: {
-    user: ({ listener }) => {
-      if (!subs.has(listener)) {
-        subs.add(listener);
-      }
-      return () => subs.delete(listener);
+    user: opts => {
+      opts.listener(currentUser.getValue());
+      return currentUser.subscribe(opts.listener);
     },
   },
 };

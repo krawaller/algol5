@@ -11,7 +11,7 @@ import { Button } from "../Button";
 import { SessionList } from "../SessionList";
 import { ImportBattle } from "../ImportBattle";
 import { Box } from "../Box";
-import { VariantSelector } from "./NewLocalSession.VariantSelector";
+import { VariantSelector } from "../VariantSelector";
 
 export type NewLocalSessionActions = {
   newLocalBattle: (code: string) => void;

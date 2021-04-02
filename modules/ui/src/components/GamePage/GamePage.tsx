@@ -27,6 +27,8 @@ import { BattleMode } from "../../../../types/page/battleActions";
 import { makeSessionNav } from "../../../../common/nav/makeSessionNav";
 import { makeGameNav } from "../../../../common/nav/makeGameNav";
 import { board2sprites, sprites2arrangement } from "../../../../common";
+import { useRemoteAPI } from "../../../../remote/utils/context";
+import { GameAPIContext } from "../../contexts";
 
 const SCREENSHOT = false; // TODO - setting somewhere!
 
@@ -55,6 +57,12 @@ export const GamePage = (props: GamePageProps) => {
   const mode = battle ? givenMode : "gamelobby";
 
   useEffect(() => setLatestVisitedGameId(api.gameId), [api.gameId]);
+
+  const remoteAPI = useRemoteAPI();
+  useEffect(() => {
+    remoteAPI.game.setGameAPI(api);
+    return () => remoteAPI.game.setGameAPI(null);
+  }, [api]);
 
   useEffect(() => {
     actions.setNav(
@@ -157,7 +165,9 @@ export const GamePage = (props: GamePageProps) => {
           name={mode !== "gamelobby" ? battle!.variant.board : "basic"}
         />
       }
-      body={body}
+      body={
+        <GameAPIContext.Provider value={api}>{body}</GameAPIContext.Provider>
+      }
     />
   );
 };

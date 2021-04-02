@@ -16,12 +16,15 @@ export const ChallengeListItem = (props: ChallengeListItemProps) => {
   const { issuer } = challenge;
   const pic = <Gravatar size={80} md5={issuer.gravatarHash || issuer.userId} />;
   const title = issuer.userName;
-  const content = <p>Do u dare?</p>;
+  const content = <div>wants to play!</div>;
   const actions =
     user?.userId === issuer.userId ? (
       <ChallengeDeleteButton challenge={challenge} />
     ) : (
       <Fragment>
+        <div>
+          <small>Accept as</small>
+        </div>
         {challenge.lookingFor !== 2 && (
           <ChallengeAcceptButton challenge={challenge} as={1} />
         )}

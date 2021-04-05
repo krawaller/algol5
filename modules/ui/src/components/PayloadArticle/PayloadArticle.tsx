@@ -1,8 +1,9 @@
 import React, { Fragment, FunctionComponent } from "react";
 import css from "./PayloadArticle.cssProxy";
-import { AlgolArticle, AppActions } from "../../../../types";
+import { AlgolArticle } from "../../../../types";
 import { Markdown } from "../Markdown";
 import { PayloadArticleList } from "../PayloadArticleList";
+import { AppActions } from "../../contexts";
 
 type PayloadArticleProps = {
   actions: AppActions;

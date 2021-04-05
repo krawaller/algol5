@@ -1,2 +1,2 @@
-export * from "./appActions";
+export * from "./useAppActions";
 export * from "./useBattleNavActions";

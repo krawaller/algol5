@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from "react";
 import { Page } from "../Page";
 import { ScrollBox } from "../ScrollBox";
-import { AlgolArticle, AppActions } from "../../../../types";
+import { AlgolArticle } from "../../../../types";
 import { PayloadArticle } from "../PayloadArticle/PayloadArticle";
+import { AppActions } from "../../contexts";
 
 type PayloadArticlePageProps = {
   actions: AppActions;

@@ -7,7 +7,8 @@ import {
   useState,
 } from "react";
 import { findShortcut } from "../../../../common/nav/findShortcut";
-import { AlgolNav, AppActions } from "../../../../types";
+import { AlgolNav } from "../../../../types";
+import { AppActions } from "../../contexts";
 import { BACK_BUTTON } from "./Nav.constants";
 import { navContext } from "./Nav.Context";
 

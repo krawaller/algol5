@@ -1,7 +1,8 @@
 import React, { Fragment, FunctionComponent, useCallback } from "react";
 import { Link } from "../Link";
-import { AlgolListing, AppActions } from "../../../../types";
+import { AlgolListing } from "../../../../types";
 import { ListItem } from "../List";
+import { AppActions } from "../../contexts";
 
 type PayloadArticleListItemProps = {
   actions: AppActions;

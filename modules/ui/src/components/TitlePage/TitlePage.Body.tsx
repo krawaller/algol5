@@ -1,5 +1,5 @@
 import React from "react";
-import { AppActions } from "../../../../types";
+import { AppActions } from "../../contexts";
 import { TitleWelcome } from "./TitlePage.Welcome";
 import { TitleDemo } from "./TitlePage.useTitleData";
 import css from "./TitlePage.cssProxy";

@@ -1,9 +1,10 @@
 import classNames from "classnames";
 import React, { FunctionComponent } from "react";
 import css from "./Nav.cssProxy";
-import { AlgolNavStep, AppActions } from "../../../../types";
+import { AlgolNavStep } from "../../../../types";
 import { useNavHandler } from "./Nav.useNavHandler";
 import { DASHED_SHORTCUTS } from "./Nav.constants";
+import { AppActions } from "../../contexts";
 
 type NavButtonProps = {
   actions: AppActions;

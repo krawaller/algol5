@@ -10,13 +10,14 @@ import { TransitionGroup } from "react-transition-group";
 import Transition, {
   TransitionStatus,
 } from "react-transition-group/Transition";
-import { AlgolNav, AppActions } from "../../../../types";
+import { AlgolNav } from "../../../../types";
 import { findShortcut } from "../../../../common/nav/findShortcut";
 import navCss from "./Nav.cssProxy";
 import navBottomCss from "./Nav.Bottom.cssProxy";
 import { NavButton } from "./Nav.Button";
 import { Arrow } from "../Arrow";
 import { DASHED_SHORTCUTS } from "./Nav.constants";
+import { AppActions } from "../../contexts";
 
 type Dir = "up" | "down" | "same";
 type Pos = "nearer" | "further" | "same";

@@ -1,6 +1,6 @@
 import { Router } from "next/router";
 import { useMemo } from "react";
-import { BattleNavActions, BattleMode } from "../../types";
+import { BattleNavActions, BattleMode } from "../../ui/src/contexts";
 
 const gameRoot = (path: string) =>
   path

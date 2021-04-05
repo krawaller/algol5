@@ -2,9 +2,10 @@ import classNames from "classnames";
 import React, { FunctionComponent, useMemo, useState } from "react";
 import Div100vh from "react-div-100vh";
 import css from "./Shell.cssProxy";
-import { AlgolNav, AppActions } from "../../../../types";
+import { AlgolNav } from "../../../../types";
 import { Nav } from "../Nav";
 import { NavProvider } from "../Nav/Nav.Context";
+import { AppActions } from "../../contexts";
 
 type ShellProps = {
   nav?: AlgolNav;

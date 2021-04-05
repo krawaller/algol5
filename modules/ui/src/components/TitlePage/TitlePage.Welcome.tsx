@@ -2,7 +2,7 @@ import css from "./TitlePage.cssProxy";
 import React, { Fragment, useCallback } from "react";
 import { Button } from "../Button";
 import { TitleDemo } from "./TitlePage.useTitleData";
-import { AppActions } from "../../../../types";
+import { AppActions } from "../../contexts";
 import { useModal } from "../../helpers";
 import { Modal } from "../Modal";
 import { TitleMoreInfo } from "./TitlePage.MoreInfo";

@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React from "react";
-import { AlgolNavStep, AppActions } from "../../../../types";
+import { AlgolNavStep } from "../../../../types";
+import { AppActions } from "../../contexts";
 import { NavButton } from "./Nav.Button";
 import navCss from "./Nav.cssProxy";
 

@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState, Fragment } from "react";
 import { chunk as newbieChunk } from "../../../../content/dist/chunks/newbie/chunk";
 import { chunk as veteranChunk } from "../../../../content/dist/chunks/veteran/chunk";
 import { Markdown } from "../Markdown";
-import { AppActions } from "../../../../types";
+import { AppActions } from "../../contexts";
 import { ButtonGroup } from "../ButtonGroup";
 import { ButtonBar } from "../ButtonBar";
 import { data, TitleData } from "../../../../payloads/dist/titleData";

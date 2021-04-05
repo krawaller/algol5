@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { FunctionComponent, Fragment } from "react";
-import { AlgolNavStep, AppActions } from "../../../../types";
+import { AlgolNavStep } from "../../../../types";
 import { DASHED_SHORTCUTS, SHORTCUT_STRATEGY } from "./Nav.constants";
 
 import navCss from "./Nav.cssProxy";
@@ -8,6 +8,7 @@ import navStepCss from "./Nav.Step.cssProxy";
 import { NavStep } from "./Nav.Step";
 import { Arrow } from "../Arrow";
 import { NavButton } from "./Nav.Button";
+import { AppActions } from "../../contexts";
 
 type NavStepRowProps = {
   hasBackBtn?: boolean;

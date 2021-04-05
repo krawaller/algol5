@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { Fragment } from "react";
-import { AlgolNav, AppActions } from "../../../../types";
+import { AlgolNav } from "../../../../types";
 import css from "./Nav.cssProxy";
 import { NavBottomRow } from "./Nav.BottomRow";
 import { NavLinkArrowRow } from "./NavLinkArrowRow";
@@ -13,6 +13,7 @@ import { NavHomeButton } from "./Nav.HomeButton";
 import { NavToggleButton } from "./Nav.ToggleButton";
 import { useNavState } from "./Nav.useNavSetup";
 import { useNavPrefetch } from "./Nav.useNavPrefetch.";
+import { AppActions } from "../../contexts";
 
 export type NavProps = {
   nav?: AlgolNav;

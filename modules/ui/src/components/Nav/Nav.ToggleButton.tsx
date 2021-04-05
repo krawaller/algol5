@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 import { NavButton } from "./Nav.Button";
-import { AppActions } from "../../../../types";
+import { AppActions } from "../../contexts";
 import css from "./Nav.cssProxy";
 
 type NavToggleButtonProps = {

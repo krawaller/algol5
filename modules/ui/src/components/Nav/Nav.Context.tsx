@@ -2,7 +2,9 @@ import { createContext } from "react";
 
 const defaultNavContext = {
   isFullNav: false,
-  setFullNav: () => {},
+  setFullNav: (bool: boolean) => {
+    console.log("Full nav set to", bool);
+  },
 };
 
 export const navContext = createContext(defaultNavContext);

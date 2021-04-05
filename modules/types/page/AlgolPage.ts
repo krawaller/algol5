@@ -1,7 +1,10 @@
 import { FunctionComponent } from "react";
 
-import { AppActions } from "./appActions";
-import { BattleMode, BattleNavActions } from "./battleActions";
+import { AppActions } from "../../ui/src/contexts/appActions";
+import {
+  BattleMode,
+  BattleNavActions,
+} from "../../ui/src/contexts/battleActions";
 import { AlgolNav } from "./nav";
 
 export type AlgolPageProps = {

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { AlgolNav, AppActions } from "../../../../types";
+import { AlgolNav } from "../../../../types";
+import { AppActions } from "../../contexts";
 
 type UseNavPrefetchOpts = {
   nav?: AlgolNav | undefined;

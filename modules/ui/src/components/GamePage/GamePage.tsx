@@ -3,12 +3,7 @@
  */
 
 import React, { ReactNode, useState, useEffect } from "react";
-import {
-  AlgolErrorReport,
-  AlgolGamePayload,
-  AppActions,
-  BattleNavActions,
-} from "../../../../types";
+import { AlgolErrorReport, AlgolGamePayload } from "../../../../types";
 
 import { Board } from "../Board";
 import { Page } from "../Page";
@@ -23,12 +18,12 @@ import {
   getLatestSessionIdForGame,
   setLatestVisitedGameId,
 } from "../../../../local/src";
-import { BattleMode } from "../../../../types/page/battleActions";
+import { BattleMode } from "../../contexts/battleActions";
 import { makeSessionNav } from "../../../../common/nav/makeSessionNav";
 import { makeGameNav } from "../../../../common/nav/makeGameNav";
 import { board2sprites, sprites2arrangement } from "../../../../common";
 import { useRemoteAPI } from "../../../../remote/utils/context";
-import { GameAPIContext } from "../../contexts";
+import { GameAPIContext, AppActions, BattleNavActions } from "../../contexts";
 
 const SCREENSHOT = false; // TODO - setting somewhere!
 

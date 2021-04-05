@@ -3,8 +3,9 @@ import Router from "next/router";
 import Head from "next/head";
 import { useMemo, useState, useEffect, Fragment } from "react";
 import { Shell } from "../../ui/src/components/Shell";
+import { AppActionContext, BattleNavContext } from "../../ui/src/contexts";
 import { AlgolPage } from "../../types";
-import { useBattleNavActions, appActions } from "../helpers";
+import { useBattleNavActions, useAppActions } from "../helpers";
 import compositeId from "../../payloads/dist/compositeId";
 
 const compositePrefix = `/images/composites/`;
@@ -30,10 +31,11 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   const Comp = Component as AlgolPage;
   const [mode, sessionId, battleNavActions] = useBattleNavActions(router);
   const [nav, setNav] = useState(Comp.nav);
+  const appActions = useAppActions({ router, global, setNav });
   useEffect(() => setNav(Comp.nav), [Comp]);
   const actions = useMemo(
     () => ({ ...appActions, ...battleNavActions, setNav }),
-    [battleNavActions]
+    [battleNavActions, appActions]
   );
   useEffect(() => {
     if (global.document) {
@@ -111,9 +113,13 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
       </Head>
-      <Shell nav={nav} actions={actions}>
-        <Component {...pageProps} actions={actions} ctxt={ctxt} />
-      </Shell>
+      <AppActionContext.Provider value={appActions}>
+        <BattleNavContext.Provider value={battleNavActions}>
+          <Shell nav={nav} actions={actions}>
+            <Component {...pageProps} actions={actions} ctxt={ctxt} />
+          </Shell>
+        </BattleNavContext.Provider>
+      </AppActionContext.Provider>
     </Fragment>
   );
 }

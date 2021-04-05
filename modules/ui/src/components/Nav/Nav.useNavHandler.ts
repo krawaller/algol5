@@ -1,4 +1,5 @@
-import { AppActions, AlgolNavStep } from "../../../../types";
+import { AlgolNavStep } from "../../../../types";
+import { AppActions } from "../../contexts";
 import { useMemo, SyntheticEvent } from "react";
 
 type UseNavHandlerOpts = {

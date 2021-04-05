@@ -1,5 +1,6 @@
 import React, { FunctionComponent, Fragment } from "react";
-import { AppActions, AlgolNav, AlgolNavStep } from "../../../../types";
+import { AlgolNav, AlgolNavStep } from "../../../../types";
+import { AppActions } from "../../contexts";
 import { NavStepRow } from "./Nav.StepRow";
 import NavBetweenRow from "./Nav.BetweenRow";
 

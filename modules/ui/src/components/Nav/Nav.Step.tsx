@@ -1,10 +1,11 @@
 import classNames from "classnames";
 import React, { FunctionComponent } from "react";
-import { AlgolNavStep, AppActions } from "../../../../types";
+import { AlgolNavStep } from "../../../../types";
 import stepCss from "./Nav.Step.cssProxy";
 import navCss from "./Nav.cssProxy";
 import hintCss from "./Nav.Hint.cssProxy";
 import { useNavHandler } from "./Nav.useNavHandler";
+import { AppActions } from "../../contexts";
 
 type NavStepProps = {
   step: AlgolNavStep;

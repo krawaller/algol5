@@ -1,5 +1,6 @@
-import { AlgolNav } from "./nav";
-import { AlgolEvent } from "./events";
+import { createContext, useContext } from "react";
+import { AlgolNav } from "../../../types/page/nav";
+import { AlgolEvent } from "../../../types/page/events";
 
 export type AppActions = {
   navTo: (path: string) => void;
@@ -17,4 +18,10 @@ export const fakeAppActions: AppActions = {
   back: () => console.log("back"),
   setNav: nav => console.log("nav updated", nav),
   logEvent: evt => console.log("logged event", evt),
+};
+
+export const AppActionContext = createContext(fakeAppActions);
+
+export const useAppActions = () => {
+  return useContext(AppActionContext);
 };

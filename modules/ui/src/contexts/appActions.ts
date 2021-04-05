@@ -9,7 +9,7 @@ export type AppActions = {
   prefetch: (path: string) => void;
   setNav: (nav: AlgolNav) => void;
   logEvent: (evt: AlgolEvent) => void;
-  nav?: AlgolNav;
+  setFullscreenNav: (bool: boolean) => void;
 };
 
 export const fakeAppActions: AppActions = {
@@ -19,6 +19,7 @@ export const fakeAppActions: AppActions = {
   back: () => console.log("back"),
   setNav: nav => console.log("nav updated", nav),
   logEvent: evt => console.log("logged event", evt),
+  setFullscreenNav: bool => console.log("fullscreen nav set to", bool),
 };
 
 export const AppActionContext = createContext(fakeAppActions);

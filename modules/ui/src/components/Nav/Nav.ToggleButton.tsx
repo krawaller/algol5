@@ -6,7 +6,7 @@ import css from "./Nav.cssProxy";
 
 type NavToggleButtonProps = {
   fullNav?: boolean;
-  actions: AppActions & { setFullNav: (to: boolean) => void };
+  actions: AppActions;
 };
 
 export const NavToggleButton = (props: NavToggleButtonProps) => {
@@ -25,7 +25,7 @@ export const NavToggleButton = (props: NavToggleButtonProps) => {
           id: "toggleNav",
           desc: fullNav ? "Hide full nav" : "Show full nav",
           title: "N",
-          onClick: () => actions.setFullNav(!fullNav),
+          onClick: () => actions.setFullscreenNav(!fullNav),
           links: [],
         }}
       />

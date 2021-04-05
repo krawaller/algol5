@@ -1,8 +1,8 @@
 import { Router } from "next/router";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { AlgolNav } from "../../types";
 import { AlgolEvent } from "../../types/page/events";
-import { AppActions } from "../../ui/src/contexts";
+import { AppActions, AppState } from "../../ui/src/contexts";
 
 type useAppActionsOpts = {
   router: Router;
@@ -10,10 +10,24 @@ type useAppActionsOpts = {
   initialNav?: AlgolNav;
 };
 
-export const useAppActions = (opts: useAppActionsOpts): AppActions => {
+export const useAppActionsAndState = (
+  opts: useAppActionsOpts
+): { actions: AppActions; state: AppState } => {
   const { router, global, initialNav } = opts;
   const [nav, setNav] = useState(initialNav);
-  const actions = useMemo(
+  const [isFullscreenNav, _setFullscreenNav] = useState(false);
+  const [neverFullscreenNav, setNeverFullscreenNav] = useState(true);
+  const setFullscreenNav = useCallback(
+    (b: boolean) => {
+      _setFullscreenNav(b);
+      console.log("WOOP", b);
+      if (b && neverFullscreenNav) {
+        setNeverFullscreenNav(false);
+      }
+    },
+    [neverFullscreenNav]
+  );
+  const actions: AppActions = useMemo(
     () => ({
       navTo: path => {
         router.push(path);
@@ -36,14 +50,17 @@ export const useAppActions = (opts: useAppActionsOpts): AppActions => {
         }
       },
       setNav,
+      setFullscreenNav,
     }),
     [router, global]
   );
-  return useMemo(
+  const state: AppState = useMemo(
     () => ({
-      ...actions,
       nav,
+      isFullscreenNav,
+      neverFullscreenNav,
     }),
-    [actions, nav]
+    [nav, isFullscreenNav, neverFullscreenNav]
   );
+  return { actions, state };
 };

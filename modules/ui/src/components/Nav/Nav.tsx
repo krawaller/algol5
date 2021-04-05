@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import React, { Fragment } from "react";
-import { AlgolNav } from "../../../../types";
 import css from "./Nav.cssProxy";
 import { NavBottomRow } from "./Nav.BottomRow";
 import { NavLinkArrowRow } from "./NavLinkArrowRow";
@@ -13,23 +12,16 @@ import { NavHomeButton } from "./Nav.HomeButton";
 import { NavToggleButton } from "./Nav.ToggleButton";
 import { useNavState } from "./Nav.useNavSetup";
 import { useNavPrefetch } from "./Nav.useNavPrefetch.";
-import { AppActions } from "../../contexts";
+import { useAppActions, useAppState } from "../../contexts";
 
-export type NavProps = {
-  nav?: AlgolNav;
-  actions: AppActions;
-};
-
-export const Nav = (props: NavProps) => {
-  const { nav } = props;
+export const Nav = () => {
   const {
-    actions,
-    fullNav,
-    neverNav,
-    hasCrumbs,
-    hasUpBtn,
-    shortcut,
-  } = useNavState(props);
+    isFullscreenNav: fullNav,
+    neverFullscreenNav: neverNav,
+    nav,
+  } = useAppState();
+  const { hasCrumbs, hasUpBtn, shortcut } = useNavState(nav);
+  const actions = useAppActions();
   useNavPrefetch({ actions, nav });
   if (!nav) return <div></div>;
   const { crumbs, me } = nav;

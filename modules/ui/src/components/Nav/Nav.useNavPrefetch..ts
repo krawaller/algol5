@@ -4,7 +4,7 @@ import { AppActions } from "../../contexts";
 
 type UseNavPrefetchOpts = {
   nav?: AlgolNav | undefined;
-  actions: AppActions & { setFullNav: (to: boolean) => void };
+  actions: AppActions;
 };
 
 const prefetched: Record<string, boolean> = {};
@@ -12,7 +12,7 @@ const prefetched: Record<string, boolean> = {};
 export const useNavPrefetch = (opts: UseNavPrefetchOpts) => {
   const { actions, nav } = opts;
   useEffect(() => {
-    actions.setFullNav(false);
+    actions.setFullscreenNav(false);
     if (nav) {
       const allSteps = nav.crumbs.concat(nav.me).flatMap(s => [s, ...s.links]);
       if (nav.me.url) {

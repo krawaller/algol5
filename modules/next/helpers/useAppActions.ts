@@ -1,5 +1,5 @@
 import { Router } from "next/router";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { AlgolNav } from "../../types";
 import { AlgolEvent } from "../../types/page/events";
 import { AppActions } from "../../ui/src/contexts";
@@ -7,12 +7,13 @@ import { AppActions } from "../../ui/src/contexts";
 type useAppActionsOpts = {
   router: Router;
   global: any;
-  setNav: (nav: AlgolNav) => void;
+  initialNav?: AlgolNav;
 };
 
 export const useAppActions = (opts: useAppActionsOpts): AppActions => {
-  const { router, global, setNav } = opts;
-  return useMemo(
+  const { router, global, initialNav } = opts;
+  const [nav, setNav] = useState(initialNav);
+  const actions = useMemo(
     () => ({
       navTo: path => {
         router.push(path);
@@ -37,5 +38,12 @@ export const useAppActions = (opts: useAppActionsOpts): AppActions => {
       setNav,
     }),
     [router, global]
+  );
+  return useMemo(
+    () => ({
+      ...actions,
+      nav,
+    }),
+    [actions, nav]
   );
 };

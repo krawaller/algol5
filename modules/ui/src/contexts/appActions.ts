@@ -9,6 +9,7 @@ export type AppActions = {
   prefetch: (path: string) => void;
   setNav: (nav: AlgolNav) => void;
   logEvent: (evt: AlgolEvent) => void;
+  nav?: AlgolNav;
 };
 
 export const fakeAppActions: AppActions = {

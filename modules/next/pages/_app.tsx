@@ -1,7 +1,7 @@
 import { AppProps } from "next/app";
 import Router from "next/router";
 import Head from "next/head";
-import { useMemo, useState, useEffect, Fragment } from "react";
+import { useMemo, useEffect, Fragment } from "react";
 import { Shell } from "../../ui/src/components/Shell";
 import { AppActionContext, BattleNavContext } from "../../ui/src/contexts";
 import { AlgolPage } from "../../types";
@@ -30,13 +30,12 @@ Router.events.on("routeChangeStart", url => {
 function MyApp({ Component, pageProps, router }: AppProps) {
   const Comp = Component as AlgolPage;
   const [mode, sessionId, battleNavActions] = useBattleNavActions(router);
-  const [nav, setNav] = useState(Comp.nav);
-  const appActions = useAppActions({ router, global, setNav });
-  useEffect(() => setNav(Comp.nav), [Comp]);
-  const actions = useMemo(
-    () => ({ ...appActions, ...battleNavActions, setNav }),
-    [battleNavActions, appActions]
-  );
+  const appActions = useAppActions({ router, global, initialNav: Comp.nav });
+  useEffect(() => appActions.setNav(Comp.nav), [Comp]);
+  const actions = useMemo(() => ({ ...appActions, ...battleNavActions }), [
+    battleNavActions,
+    appActions,
+  ]);
   useEffect(() => {
     if (global.document) {
       global.document.body.addEventListener("click", e => {
@@ -115,7 +114,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       </Head>
       <AppActionContext.Provider value={appActions}>
         <BattleNavContext.Provider value={battleNavActions}>
-          <Shell nav={nav} actions={actions}>
+          <Shell nav={appActions.nav} actions={actions}>
             <Component {...pageProps} actions={actions} ctxt={ctxt} />
           </Shell>
         </BattleNavContext.Provider>

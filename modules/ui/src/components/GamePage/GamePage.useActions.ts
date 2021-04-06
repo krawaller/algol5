@@ -14,32 +14,34 @@ import {
   forkSessionFromBattle,
   deleteSession,
 } from "../../../../local/src";
-import { AppActions, BattleNavActions } from "../../contexts";
+import { useAppActions, useBattleNav } from "../../contexts";
 
 type UseActionsOpts = {
   battleActions: BattleActions;
-  pageActions: AppActions & BattleNavActions;
   setErrorReport: (err: AlgolErrorReport) => void;
   api: AlgolStaticGameAPI;
 };
 
 export const useActions = (opts: UseActionsOpts) => {
-  const { battleActions, pageActions, setErrorReport, api } = opts;
+  const { battleActions, setErrorReport, api } = opts;
+  const battleNavActions = useBattleNav();
+  const appActions = useAppActions();
   const actions = useMemo(
     () => ({
-      ...pageActions,
+      ...appActions,
+      ...battleNavActions,
       ...battleActions,
       newLocalBattle: (code: string) => {
-        pageActions.newLocalBattle(code);
+        battleNavActions.newLocalBattle(code);
       },
       deleteSession: (sessionId: string, retreatToGameLobby: boolean) => {
         deleteSession(api.gameId, sessionId);
         if (retreatToGameLobby) {
-          pageActions.toGameLobby();
+          battleNavActions.toGameLobby();
         }
       },
       loadLocalSession: (sessionId: string) => {
-        pageActions.toSession(sessionId);
+        battleNavActions.toSession(sessionId);
       },
       forkBattleFrame: (battle: AlgolBattle, frame: number) => {
         const historyFrame = battle.history[frame];
@@ -50,7 +52,7 @@ export const useActions = (opts: UseActionsOpts) => {
           api.gameId
         );
         writeSession(api.gameId, session);
-        pageActions.toSession(session.id);
+        battleNavActions.toSession(session.id);
       },
       importSession: (str: string) => {
         const save = parseSeed(str, api.gameId);
@@ -61,14 +63,14 @@ export const useActions = (opts: UseActionsOpts) => {
           api.gameId
         );
         writeSession(api.gameId, session);
-        pageActions.toSession(session.id);
+        battleNavActions.toSession(session.id);
       },
       reportError: (
         error: AlgolError,
         level: AlgolErrorReportLevel = "warning"
       ) => setErrorReport({ error, level }),
     }),
-    [pageActions, battleActions, setErrorReport, api]
+    [battleNavActions, battleActions, setErrorReport, api]
   );
   return actions;
 };

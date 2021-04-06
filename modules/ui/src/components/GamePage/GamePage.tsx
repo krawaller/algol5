@@ -22,31 +22,25 @@ import { makeSessionNav } from "../../../../common/nav/makeSessionNav";
 import { makeGameNav } from "../../../../common/nav/makeGameNav";
 import { board2sprites, sprites2arrangement } from "../../../../common";
 import { useRemoteAPI } from "../../../../remote/utils/context";
-import {
-  GameAPIContext,
-  AppActions,
-  BattleNavActions,
-  useAppState,
-} from "../../contexts";
+import { GameAPIContext, useAppState, useBattleNav } from "../../contexts";
 
 const SCREENSHOT = false; // TODO - setting somewhere!
 
 type GamePageProps = {
-  actions: AppActions & BattleNavActions;
   gamePayload: AlgolGamePayload;
 };
 
 export const GamePage = (props: GamePageProps) => {
-  const { actions: pageActions, gamePayload } = props;
+  const battleNavActions = useBattleNav();
+  const { gamePayload } = props;
   const { battleMode: givenMode = "gamelobby", sessionId } = useAppState();
   const { api, graphics, meta, demo, rules } = gamePayload;
   const [
     { battle, frame, session, corruptSessions },
     battleActions,
-  ] = useBattle(api, sessionId as string, pageActions.toSession);
+  ] = useBattle(api, sessionId as string, battleNavActions.toSession);
   const [errorReport, setErrorReport] = useState<AlgolErrorReport>();
   const actions = useActions({
-    pageActions,
     battleActions,
     setErrorReport,
     api,

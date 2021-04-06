@@ -3,7 +3,6 @@ import {
   AlgolStaticGameAPI,
   AlgolBattle,
   AlgolSession,
-  BattleNavActions,
 } from "../../../../types";
 import {
   newSessionFromBattle,
@@ -15,6 +14,7 @@ import {
   setLatestSessionIdForGame,
   setLatestSessionInfo,
 } from "../../../../local/src";
+import { BattleNavActions } from "../../contexts";
 
 type BattleAction =
   | "mark"

@@ -3,8 +3,8 @@ import { AlgolArticle, AlgolPage } from "../../../../types";
 import { PayloadArticlePage } from "./PayloadArticlePage";
 
 export const makePayloadArticlePage = (article: AlgolArticle) => {
-  const ArticleComp: AlgolPage = props => {
-    return <PayloadArticlePage article={article} actions={props.actions} />;
+  const ArticleComp: AlgolPage = () => {
+    return <PayloadArticlePage article={article} />;
   };
 
   ArticleComp.mainImage = article.mainImage;

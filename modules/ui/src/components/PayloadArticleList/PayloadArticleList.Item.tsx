@@ -2,22 +2,22 @@ import React, { Fragment, FunctionComponent, useCallback } from "react";
 import { Link } from "../Link";
 import { AlgolListing } from "../../../../types";
 import { ListItem } from "../List";
-import { AppActions } from "../../contexts";
+import { useAppActions } from "../../contexts";
 
 type PayloadArticleListItemProps = {
-  actions: AppActions;
   listing: AlgolListing;
   compositeName: string;
 };
 
 export const PayloadArticleListItem: FunctionComponent<PayloadArticleListItemProps> = props => {
-  const { actions, listing, compositeName } = props;
+  const { listing, compositeName } = props;
   const {
     title,
     composite: { x, y, ratio },
     blurb,
     url,
   } = listing;
+  const actions = useAppActions();
   const handleClick = useCallback(() => actions.navTo(url), [actions.navTo]);
   const pic = (
     <div

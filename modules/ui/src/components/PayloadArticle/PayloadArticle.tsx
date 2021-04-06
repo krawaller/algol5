@@ -3,15 +3,13 @@ import css from "./PayloadArticle.cssProxy";
 import { AlgolArticle } from "../../../../types";
 import { Markdown } from "../Markdown";
 import { PayloadArticleList } from "../PayloadArticleList";
-import { AppActions } from "../../contexts";
 
 type PayloadArticleProps = {
-  actions: AppActions;
   article: AlgolArticle;
 };
 
 export const PayloadArticle: FunctionComponent<PayloadArticleProps> = props => {
-  const { actions, article } = props;
+  const { article } = props;
   return (
     <>
       <Markdown html={article.html} />
@@ -24,7 +22,7 @@ export const PayloadArticle: FunctionComponent<PayloadArticleProps> = props => {
                 {rel.title}
               </div>
             )}
-            <PayloadArticleList actions={actions} list={rel} />
+            <PayloadArticleList list={rel} />
           </Fragment>
         ))}
     </>

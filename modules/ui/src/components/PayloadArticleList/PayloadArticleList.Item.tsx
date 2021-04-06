@@ -41,7 +41,7 @@ export const PayloadArticleListItem: FunctionComponent<PayloadArticleListItemPro
     </Fragment>
   );
   return (
-    <Link url={url} actions={actions} styleMode="none">
+    <Link url={url} styleMode="none">
       <ListItem
         title={title}
         pic={pic}

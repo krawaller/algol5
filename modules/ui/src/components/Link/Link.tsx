@@ -6,18 +6,18 @@ import React, {
 } from "react";
 import classNames from "classnames";
 import css from "./Link.cssProxy";
-import { AppActions } from "../../contexts";
 import { Button } from "../Button";
+import { useAppActions } from "../../contexts";
 
 type LinkProps = {
-  actions?: AppActions;
   url: string;
   styleMode?: "asButton" | "asBigButton" | "link" | "none";
   text?: string;
 };
 
 export const Link: FunctionComponent<LinkProps> = props => {
-  const { actions, url, styleMode = "none", children, text } = props;
+  const { url, styleMode = "none", children, text } = props;
+  const actions = useAppActions();
   const external = url[0] === "h";
   const handler = useMemo(
     () =>
@@ -25,7 +25,7 @@ export const Link: FunctionComponent<LinkProps> = props => {
         ? undefined
         : (e: MouseEvent) => {
             e.preventDefault();
-            actions!.navTo(url);
+            actions.navTo(url);
           },
     [url, actions]
   );
@@ -53,9 +53,6 @@ export const Link: FunctionComponent<LinkProps> = props => {
     );
   }
   // internal link
-  if (!actions) {
-    throw new Error(`Internal link to ${url} didn't get actions!`);
-  }
   useEffect(() => actions.prefetch(url), []);
   return (
     <a onClick={handler} className={classes} href={url}>

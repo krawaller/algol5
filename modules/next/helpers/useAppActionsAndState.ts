@@ -1,5 +1,5 @@
 import { Router } from "next/router";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { AlgolNav } from "../../types";
 import { AlgolEvent } from "../../types/page/events";
 import { AppActions, AppState } from "../../ui/src/contexts";
@@ -17,10 +17,18 @@ export const useAppActionsAndState = (
   const [nav, setNav] = useState(initialNav);
   const [isFullscreenNav, _setFullscreenNav] = useState(false);
   const [neverFullscreenNav, setNeverFullscreenNav] = useState(true);
+  const [query, setQuery] = useState<Record<string, any>>(router.query);
+  const handleQueryChange = useCallback(() => setQuery(router.query), [router]);
+  useEffect(() => {
+    router.events.on("routeChangeComplete", handleQueryChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleQueryChange);
+    };
+  }, [router]);
+
   const setFullscreenNav = useCallback(
     (b: boolean) => {
       _setFullscreenNav(b);
-      console.log("WOOP", b);
       if (b && neverFullscreenNav) {
         setNeverFullscreenNav(false);
       }
@@ -59,8 +67,10 @@ export const useAppActionsAndState = (
       nav,
       isFullscreenNav,
       neverFullscreenNav,
+      sessionId: query.sid,
+      battleMode: query.m,
     }),
-    [nav, isFullscreenNav, neverFullscreenNav]
+    [nav, isFullscreenNav, neverFullscreenNav, query.sid, query.m]
   );
   return { actions, state };
 };

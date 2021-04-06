@@ -21,7 +21,6 @@ storiesOf("GamePage", module).add(
           ...fakeAppActions,
           ...fakeBattleNavActions,
         }}
-        ctxt={{ mode: "gamelobby", sessionId: null }}
       />
     );
   }

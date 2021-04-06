@@ -33,7 +33,7 @@ Router.events.on("routeChangeStart", url => {
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const Comp = Component as AlgolPage;
-  const [mode, sessionId, battleNavActions] = useBattleNavActions(router);
+  const [, , battleNavActions] = useBattleNavActions(router);
   const { actions: appActions, state } = useAppActionsAndState({
     router,
     global,
@@ -58,7 +58,6 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       });
     }
   }, []);
-  const ctxt = useMemo(() => ({ sessionId, mode }), [sessionId, mode]);
   const preloads = useMemo(
     () =>
       (Comp.preloadImages || []).map(url => (
@@ -124,7 +123,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         <AppStateContext.Provider value={state}>
           <BattleNavContext.Provider value={battleNavActions}>
             <Shell>
-              <Component {...pageProps} actions={actions} ctxt={ctxt} />
+              <Component {...pageProps} actions={actions} />
             </Shell>
           </BattleNavContext.Provider>
         </AppStateContext.Provider>

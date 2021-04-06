@@ -18,24 +18,27 @@ import {
   getLatestSessionIdForGame,
   setLatestVisitedGameId,
 } from "../../../../local/src";
-import { BattleMode } from "../../contexts/battleActions";
 import { makeSessionNav } from "../../../../common/nav/makeSessionNav";
 import { makeGameNav } from "../../../../common/nav/makeGameNav";
 import { board2sprites, sprites2arrangement } from "../../../../common";
 import { useRemoteAPI } from "../../../../remote/utils/context";
-import { GameAPIContext, AppActions, BattleNavActions } from "../../contexts";
+import {
+  GameAPIContext,
+  AppActions,
+  BattleNavActions,
+  useAppState,
+} from "../../contexts";
 
 const SCREENSHOT = false; // TODO - setting somewhere!
 
 type GamePageProps = {
   actions: AppActions & BattleNavActions;
   gamePayload: AlgolGamePayload;
-  ctxt: { sessionId?: string | null; mode?: BattleMode };
 };
 
 export const GamePage = (props: GamePageProps) => {
-  const { actions: pageActions, gamePayload, ctxt } = props;
-  const { mode: givenMode = "gamelobby", sessionId } = ctxt;
+  const { actions: pageActions, gamePayload } = props;
+  const { battleMode: givenMode = "gamelobby", sessionId } = useAppState();
   const { api, graphics, meta, demo, rules } = gamePayload;
   const [
     { battle, frame, session, corruptSessions },

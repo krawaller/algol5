@@ -15,9 +15,9 @@ import { AlgolPage } from "../../../../types";
 import { makeGameNav } from "../../../../common/nav/makeGameNav";
 
 export const Game: AlgolPage = props => {
-  const { ctxt, actions } = props;
+  const { actions } = props;
   return (
-    <GamePage gamePayload={payload} actions={actions} ctxt={ctxt} />
+    <GamePage gamePayload={payload} actions={actions} />
   );
 };
 

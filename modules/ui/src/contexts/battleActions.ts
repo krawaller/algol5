@@ -1,6 +1,5 @@
 import { createContext, useContext } from "react";
-
-export type BattleMode = "gamelobby" | "battlelobby" | "playing" | "history";
+import { BattleMode } from "./appState";
 
 export type BattleNavActions = {
   toHistory: () => void;

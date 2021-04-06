@@ -43,5 +43,5 @@ export const useBattleNavActions = (router: Router) => {
     }),
     []
   );
-  return [router.query.m, router.query.sid, actions] as const;
+  return actions;
 };

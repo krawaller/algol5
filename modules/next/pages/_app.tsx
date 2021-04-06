@@ -33,7 +33,7 @@ Router.events.on("routeChangeStart", url => {
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const Comp = Component as AlgolPage;
-  const [, , battleNavActions] = useBattleNavActions(router);
+  const battleNavActions = useBattleNavActions(router);
   const { actions: appActions, state } = useAppActionsAndState({
     router,
     global,

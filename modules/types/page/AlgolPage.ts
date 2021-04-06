@@ -1,13 +1,7 @@
 import { FunctionComponent } from "react";
-
-import { BattleNavActions, AppActions } from "../../ui/src/contexts";
 import { AlgolNav } from "./nav";
 
-export type AlgolPageProps = {
-  actions: AppActions & BattleNavActions;
-};
-
-export type AlgolPage = FunctionComponent<AlgolPageProps> & {
+export type AlgolPage = FunctionComponent & {
   domain?: string;
   nav?: AlgolNav;
   title?: string;

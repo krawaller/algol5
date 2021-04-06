@@ -14,7 +14,7 @@ export const PayloadArticle: FunctionComponent<PayloadArticleProps> = props => {
   const { actions, article } = props;
   return (
     <>
-      <Markdown html={article.html} actions={actions} />
+      <Markdown html={article.html} />
       {article.relations
         .filter(rel => rel.listings.length)
         .map(rel => (

@@ -77,7 +77,7 @@ export const BattleMove: FunctionComponent<BattleMoveProps> = props => {
         title={"How to play"}
         subtitle={`updated ${rules.updated}`}
       >
-        <Markdown actions={actions} html={rules.html} />
+        <Markdown html={rules.html} />
       </Modal>
     </>
   );

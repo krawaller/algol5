@@ -6,8 +6,6 @@ import {
   AlgolErrorReportLevel,
   AlgolStaticGameAPI,
   AlgolBattle,
-  AppActions,
-  BattleNavActions,
 } from "../../../../types";
 import { parseSeed } from "../../../../encoding/src/seed";
 import {
@@ -16,6 +14,7 @@ import {
   forkSessionFromBattle,
   deleteSession,
 } from "../../../../local/src";
+import { AppActions, BattleNavActions } from "../../contexts";
 
 type UseActionsOpts = {
   battleActions: BattleActions;

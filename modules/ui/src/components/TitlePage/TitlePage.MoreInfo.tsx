@@ -56,14 +56,12 @@ export const TitleMoreInfo = (props: TitleMoreInfoProps) => {
       {contentIdx === 0 ? (
         <Markdown
           html={newbieChunk}
-          actions={actions}
           dynamicContent={dynamicContent}
           dynamicActions={dynamicActions}
         />
       ) : (
         <Markdown
           html={veteranChunk}
-          actions={actions}
           dynamicContent={dynamicContent}
           dynamicActions={dynamicActions}
         />

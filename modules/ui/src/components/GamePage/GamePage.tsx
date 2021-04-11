@@ -2,8 +2,8 @@
  * Used in the Next app as a "homepage" for the individual games.
  */
 
-import React, { ReactNode, useState, useEffect } from "react";
-import { AlgolErrorReport, AlgolGamePayload } from "../../../../types";
+import React, { ReactNode, useEffect } from "react";
+import { AlgolGamePayload } from "../../../../types";
 
 import { Board } from "../Board";
 import { Page } from "../Page";
@@ -39,10 +39,8 @@ export const GamePage = (props: GamePageProps) => {
     { battle, frame, session, corruptSessions },
     battleActions,
   ] = useBattle(api, sessionId as string, battleNavActions.toSession);
-  const [errorReport, setErrorReport] = useState<AlgolErrorReport>();
   const actions = useActions({
     battleActions,
-    setErrorReport,
     api,
   });
   const ui = useUI(api, battle, frame, demo, givenMode);
@@ -143,7 +141,6 @@ export const GamePage = (props: GamePageProps) => {
 
   return (
     <Page
-      errorReport={errorReport}
       title={gamePayload.meta.name}
       top={
         <Board

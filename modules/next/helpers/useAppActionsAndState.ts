@@ -62,6 +62,7 @@ export const useAppActionsAndState = (
       reportError: (err, lvl) => {
         // TODO - handle error properly! Analytics event + UI popup (depending on level)
         console.log("ERROR", err, "LVL", lvl);
+        alert(err.description || "Something went wrong! :/");
       },
     }),
     [router, global]

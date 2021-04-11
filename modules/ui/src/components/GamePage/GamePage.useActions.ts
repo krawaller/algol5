@@ -1,12 +1,6 @@
 import { useMemo } from "react";
 import { BattleActions } from "./GamePage.useBattle";
-import {
-  AlgolErrorReport,
-  AlgolError,
-  AlgolErrorReportLevel,
-  AlgolStaticGameAPI,
-  AlgolBattle,
-} from "../../../../types";
+import { AlgolStaticGameAPI, AlgolBattle } from "../../../../types";
 import { parseSeed } from "../../../../encoding/src/seed";
 import {
   importSessionFromBattle,
@@ -18,12 +12,11 @@ import { useAppActions, useBattleNav } from "../../contexts";
 
 type UseActionsOpts = {
   battleActions: BattleActions;
-  setErrorReport: (err: AlgolErrorReport) => void;
   api: AlgolStaticGameAPI;
 };
 
 export const useActions = (opts: UseActionsOpts) => {
-  const { battleActions, setErrorReport, api } = opts;
+  const { battleActions, api } = opts;
   const battleNavActions = useBattleNav();
   const appActions = useAppActions();
   const actions = useMemo(
@@ -65,12 +58,8 @@ export const useActions = (opts: UseActionsOpts) => {
         writeSession(api.gameId, session);
         battleNavActions.toSession(session.id);
       },
-      reportError: (
-        error: AlgolError,
-        level: AlgolErrorReportLevel = "warning"
-      ) => setErrorReport({ error, level }),
     }),
-    [battleNavActions, battleActions, setErrorReport, api]
+    [battleNavActions, battleActions, api]
   );
   return actions;
 };

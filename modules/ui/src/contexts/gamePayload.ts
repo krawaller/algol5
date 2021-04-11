@@ -7,3 +7,7 @@ export const GamePayloadContext = createContext(payload);
 export const useGamePayload = () => {
   return useContext(GamePayloadContext);
 };
+
+export const useGameAPI = () => {
+  return useGamePayload().api;
+};

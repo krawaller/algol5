@@ -3,7 +3,6 @@
  */
 
 import React, { ReactNode, useEffect } from "react";
-import { AlgolGamePayload } from "../../../../types";
 
 import { Board } from "../Board";
 import { Page } from "../Page";
@@ -22,17 +21,13 @@ import { makeSessionNav } from "../../../../common/nav/makeSessionNav";
 import { makeGameNav } from "../../../../common/nav/makeGameNav";
 import { board2sprites, sprites2arrangement } from "../../../../common";
 import { useRemoteAPI } from "../../../../remote/utils/context";
-import { GameAPIContext, useAppState, useBattleNav } from "../../contexts";
+import { useAppState, useBattleNav, useGamePayload } from "../../contexts";
 
 const SCREENSHOT = false; // TODO - setting somewhere!
 
-type GamePageProps = {
-  gamePayload: AlgolGamePayload;
-};
-
-export const GamePage = (props: GamePageProps) => {
+export const GamePage = () => {
   const battleNavActions = useBattleNav();
-  const { gamePayload } = props;
+  const gamePayload = useGamePayload();
   const { battleMode: givenMode = "gamelobby", sessionId } = useAppState();
   const { api, graphics, meta, demo, rules } = gamePayload;
   const [
@@ -154,9 +149,7 @@ export const GamePage = (props: GamePageProps) => {
           name={mode !== "gamelobby" ? battle!.variant.board : "basic"}
         />
       }
-      body={
-        <GameAPIContext.Provider value={api}>{body}</GameAPIContext.Provider>
-      }
+      body={body}
     />
   );
 };

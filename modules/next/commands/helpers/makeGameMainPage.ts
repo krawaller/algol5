@@ -11,13 +11,19 @@ import React from "react";
 
 import payload from "../../../../payloads/dist/games/${gameId}";
 import { GamePage } from "../../../../ui/src/components/GamePage";
+import { LocalBattleActionContext, GamePayloadContext } from "../../../../ui/src/contexts";
 import { AlgolPage } from "../../../../types";
 import { makeGameNav } from "../../../../common/nav/makeGameNav";
+import { useLocalBattleActions } from "../../../helpers";
 
-export const Game: AlgolPage = props => {
-  const { actions } = props;
+export const Game: AlgolPage = () => {
+  const localBattleActions = useLocalBattleActions(payload.api)
   return (
-    <GamePage gamePayload={payload} actions={actions} />
+    <GamePayloadContext.Provider value={payload}>
+      <LocalBattleActionContext.Provider value={localBattleActions}>
+        <GamePage />
+      </LocalBattleActionContext.Provider>
+    </GamePayloadContext.Provider>
   );
 };
 

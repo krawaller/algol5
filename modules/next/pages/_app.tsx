@@ -11,6 +11,7 @@ import {
 import { AlgolPage } from "../../types";
 import { useBattleNavActions, useAppActionsAndState } from "../helpers";
 import compositeId from "../../payloads/dist/compositeId";
+import { RouterContext } from "../helpers/router";
 
 const compositePrefix = `/images/composites/`;
 
@@ -119,15 +120,17 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
       </Head>
-      <AppActionContext.Provider value={appActions}>
-        <AppStateContext.Provider value={state}>
-          <BattleNavContext.Provider value={battleNavActions}>
-            <Shell>
-              <Component {...pageProps} actions={actions} />
-            </Shell>
-          </BattleNavContext.Provider>
-        </AppStateContext.Provider>
-      </AppActionContext.Provider>
+      <RouterContext.Provider value={router}>
+        <AppActionContext.Provider value={appActions}>
+          <AppStateContext.Provider value={state}>
+            <BattleNavContext.Provider value={battleNavActions}>
+              <Shell>
+                <Component {...pageProps} actions={actions} />
+              </Shell>
+            </BattleNavContext.Provider>
+          </AppStateContext.Provider>
+        </AppActionContext.Provider>
+      </RouterContext.Provider>
     </Fragment>
   );
 }

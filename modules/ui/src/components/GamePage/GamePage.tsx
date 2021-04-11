@@ -11,7 +11,6 @@ import { GameLanding } from "../GameLanding";
 import { BattleHistory } from "../BattleHistory";
 import { useUI } from "./GamePage.useUI";
 import { useBattle } from "./GamePage.useBattle";
-import { useActions } from "./GamePage.useActions";
 import { BattleMove } from "../BattleMove";
 import {
   getLatestSessionIdForGame,
@@ -40,10 +39,6 @@ export const GamePage = () => {
     { battle, frame, session, corruptSessions },
     battleActions,
   ] = useBattle(api, sessionId as string, battleNavActions.toSession);
-  const actions = useActions({
-    battleActions,
-    api,
-  });
   const ui = useUI(api, battle, frame, demo, givenMode);
   const mode = battle ? givenMode : "gamelobby";
 
@@ -79,7 +74,7 @@ export const GamePage = () => {
       <BattleHistory
         content={ui.instruction}
         frame={Math.max(0, frame)}
-        toFrame={actions.toFrame}
+        toFrame={battleActions.toFrame}
         battle={battle!}
       />
     );
@@ -95,7 +90,7 @@ export const GamePage = () => {
     );
   } else if (mode === "playing") {
     // We are actively playing an ongoing battle
-    body = <BattleMove actions={actions} ui={ui} rules={rules} />;
+    body = <BattleMove actions={battleActions} ui={ui} rules={rules} />;
   } else {
     // No battle active, we're just at the game landing page
     body = (
@@ -129,7 +124,7 @@ export const GamePage = () => {
       title={gamePayload.meta.name}
       top={
         <Board
-          callback={actions.mark}
+          callback={battleActions.mark}
           graphics={graphics}
           units={ui.board.units}
           marks={ui.board.marks}

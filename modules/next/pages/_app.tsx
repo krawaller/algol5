@@ -41,16 +41,12 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     initialNav: Comp.nav,
   });
   useEffect(() => appActions.setNav(Comp.nav), [Comp]);
-  const actions = useMemo(() => ({ ...appActions, ...battleNavActions }), [
-    battleNavActions,
-    appActions,
-  ]);
   useEffect(() => {
     if (global.document) {
       global.document.body.addEventListener("click", e => {
         const node = e.target as HTMLDivElement;
         if (node.matches('a[href^="http"]')) {
-          actions.logEvent({
+          appActions.logEvent({
             action: "linkclick",
             category: "external",
             label: node.getAttribute("href"),
@@ -125,7 +121,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
           <AppStateContext.Provider value={state}>
             <BattleNavContext.Provider value={battleNavActions}>
               <Shell>
-                <Component {...pageProps} actions={actions} />
+                <Component {...pageProps} />
               </Shell>
             </BattleNavContext.Provider>
           </AppStateContext.Provider>

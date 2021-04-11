@@ -3,7 +3,6 @@ import css from "./NewLocalSession.cssProxy";
 import {
   AlgolGameGraphics,
   AlgolMeta,
-  AlgolErrorReporter,
   AlgolGameBlobAnon,
   AlgolVariantAnon,
 } from "../../../../types";
@@ -12,17 +11,10 @@ import { SessionList } from "../SessionList";
 import { ImportBattle } from "../ImportBattle";
 import { Box } from "../Box";
 import { VariantSelector } from "../VariantSelector";
-
-export type NewLocalSessionActions = {
-  newLocalBattle: (code: string) => void;
-  loadLocalSession: (sessionId: string) => void;
-  importSession: (str: string) => void;
-  reportError: AlgolErrorReporter;
-};
+import { useLocalBattleActions } from "../../contexts";
 
 type NewLocalSessionProps = {
   graphics: AlgolGameGraphics;
-  actions: NewLocalSessionActions;
   previousSessionId?: string | null;
   meta: AlgolMeta<AlgolGameBlobAnon>;
   variants: AlgolVariantAnon[];
@@ -30,7 +22,8 @@ type NewLocalSessionProps = {
 };
 
 export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props => {
-  const { actions, meta, graphics, variants, corruptSessions } = props;
+  const { meta, graphics, variants, corruptSessions } = props;
+  const localBattleActions = useLocalBattleActions();
   const filteredVariants = variants.filter(v => !v.hidden);
   const [variant, setVariant] = useState<string | number>(
     filteredVariants[0].code
@@ -54,7 +47,7 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
           )}
           <Button
             big
-            onClick={() => actions.newLocalBattle(variant as string)}
+            onClick={() => localBattleActions.newLocalBattle(variant as string)}
             text="Create"
           />
         </Fragment>
@@ -76,7 +69,6 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
         <SessionList
           meta={meta}
           graphics={graphics}
-          actions={actions}
           variants={variants}
           corruptSessions={corruptSessions}
         />

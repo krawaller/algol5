@@ -5,7 +5,6 @@ import {
   AlgolGameGraphics,
   AlgolMeta,
   AlgolError,
-  AlgolErrorReporter,
   AlgolGameBlobAnon,
   AlgolVariantAnon,
 } from "../../../../types";
@@ -16,16 +15,10 @@ import { SessionListItem } from "./SessionList.Item";
 import { ButtonGroup } from "../ButtonGroup";
 import { Button } from "../Button";
 
-export type SessionListInnerActions = {
-  loadLocalSession: (sessionId: string) => void;
-  reportError: AlgolErrorReporter;
-  updateList: () => void;
-  purgeErrorLines: () => void;
-};
-
 type SessionListInnerProps = {
   graphics: AlgolGameGraphics;
-  actions: SessionListInnerActions;
+  updateList: () => void;
+  purgeErrorLines: () => void;
   meta: AlgolMeta<AlgolGameBlobAnon>;
   sessionInfo: SessionInfo;
   corruptSessions: Record<string, string>;
@@ -39,7 +32,8 @@ export type SessionInfo = {
 };
 
 export const SessionListInner: React.FunctionComponent<SessionListInnerProps> = ({
-  actions,
+  updateList,
+  purgeErrorLines,
   graphics,
   meta,
   sessionInfo,
@@ -53,7 +47,7 @@ export const SessionListInner: React.FunctionComponent<SessionListInnerProps> = 
     return (
       <SessionListFullError
         meta={meta}
-        actions={actions}
+        updateList={updateList}
         error={sessionInfo.error!}
       />
     );
@@ -72,7 +66,6 @@ export const SessionListInner: React.FunctionComponent<SessionListInnerProps> = 
             return (
               <SessionListLineError
                 key={session.id}
-                actions={actions}
                 graphics={graphics}
                 fail={session}
                 meta={meta}
@@ -85,7 +78,6 @@ export const SessionListInner: React.FunctionComponent<SessionListInnerProps> = 
             return (
               <SessionListLineError
                 key={session.id}
-                actions={actions}
                 graphics={graphics}
                 fail={{
                   error: new Error("Unknown variant"),
@@ -104,7 +96,6 @@ export const SessionListInner: React.FunctionComponent<SessionListInnerProps> = 
               key={session.id}
               session={session}
               graphics={graphics}
-              actions={actions}
               variant={variants.find(v => v.code === session.variantCode)!}
               corrupt={corruptSessions[session.id]}
             />
@@ -114,7 +105,7 @@ export const SessionListInner: React.FunctionComponent<SessionListInnerProps> = 
       {hasErrorLines && (
         <ButtonGroup>
           <Button
-            onClick={actions.purgeErrorLines}
+            onClick={purgeErrorLines}
             controlId="session-list-remove-error-lines-btn"
           >
             Remove corruped session saves

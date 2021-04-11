@@ -9,14 +9,10 @@ import {
 import { Board } from "../Board";
 import { SessionItemInfo } from "./SessionList.ItemInfo";
 import { ListItem } from "../List";
-
-type SessionListItemActions = {
-  loadLocalSession: (sessionId: string) => void;
-};
+import { useLocalBattleActions } from "../../contexts";
 
 type SessionListItemProps = {
   session: AlgolSession;
-  actions: SessionListItemActions;
   graphics: AlgolGameGraphics;
   variant: AlgolVariantAnon;
   corrupt?: string;
@@ -25,7 +21,8 @@ type SessionListItemProps = {
 const EMPTYARR: string[] = [];
 
 export const SessionListItem: FunctionComponent<SessionListItemProps> = props => {
-  const { session, actions, graphics, variant, corrupt } = props;
+  const { session, graphics, variant, corrupt } = props;
+  const localBattleActions = useLocalBattleActions();
   const board = sprites2board(session.sprites);
   const pic = (
     <Board
@@ -40,7 +37,7 @@ export const SessionListItem: FunctionComponent<SessionListItemProps> = props =>
     <SessionItemInfo session={session} variant={variant} corrupt={corrupt} />
   );
   const onClick = () => {
-    actions.loadLocalSession(session.id);
+    localBattleActions.loadLocalSession(session.id);
   };
   return <ListItem pic={pic} content={content} onClick={onClick} />;
 };

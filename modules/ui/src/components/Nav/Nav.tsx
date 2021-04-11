@@ -12,7 +12,7 @@ import { NavHomeButton } from "./Nav.HomeButton";
 import { NavToggleButton } from "./Nav.ToggleButton";
 import { useNavState } from "./Nav.useNavSetup";
 import { useNavPrefetch } from "./Nav.useNavPrefetch.";
-import { useAppActions, useAppState } from "../../contexts";
+import { useAppState } from "../../contexts";
 
 export const Nav = () => {
   const {
@@ -21,8 +21,7 @@ export const Nav = () => {
     nav,
   } = useAppState();
   const { hasCrumbs, hasUpBtn, shortcut } = useNavState(nav);
-  const actions = useAppActions();
-  useNavPrefetch({ actions, nav });
+  useNavPrefetch({ nav });
   if (!nav) return <div></div>;
   const { crumbs, me } = nav;
 
@@ -38,7 +37,7 @@ export const Nav = () => {
         )}
         // onClick={e => setFullNav(false)}
       >
-        <NavHomeButton fullNav={fullNav} crumbs={crumbs} actions={actions} />
+        <NavHomeButton crumbs={crumbs} />
         <NavTopRow fullNav={fullNav && crumbs.length > 0} />
         <div className={classNames(css.navRow, css.navFiller)}>
           {hasCrumbs && (
@@ -46,18 +45,12 @@ export const Nav = () => {
           )}
         </div>
         <div>
-          <NavCrumbs
-            actions={actions}
-            nav={nav}
-            mute={!fullNav}
-            shortcut={shortcut}
-          />
+          <NavCrumbs mute={!fullNav} shortcut={shortcut} />
           <NavStepRow
             step={me}
             hasBackBtn={hasUpBtn}
             shortcut={shortcut}
             position="current"
-            actions={actions}
             mute={!fullNav}
           />
           <NavLinkArrowRow
@@ -65,14 +58,8 @@ export const Nav = () => {
             hasBackBtn={hasUpBtn}
             hasShortcut={!!shortcut}
           />
-          <NavBottomRow
-            nav={nav}
-            actions={actions}
-            hasBackBtn={hasUpBtn}
-            fullNav={fullNav}
-            hasShortcut={!!shortcut}
-          />
-          <NavToggleButton fullNav={fullNav} actions={actions} />
+          <NavBottomRow hasBackBtn={hasUpBtn} hasShortcut={!!shortcut} />
+          <NavToggleButton />
         </div>
       </div>
     </Fragment>

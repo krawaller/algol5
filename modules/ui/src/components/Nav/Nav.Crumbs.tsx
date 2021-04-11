@@ -1,25 +1,23 @@
-import React, { FunctionComponent, Fragment } from "react";
-import { AlgolNav, AlgolNavStep } from "../../../../types";
-import { AppActions } from "../../contexts";
+import React, { Fragment } from "react";
+import { AlgolNavStep } from "../../../../types";
+import { useAppState } from "../../contexts";
 import { NavStepRow } from "./Nav.StepRow";
 import NavBetweenRow from "./Nav.BetweenRow";
 
 type NavCrumbsProps = {
-  nav: AlgolNav;
-  actions: AppActions;
   mute?: boolean;
   shortcut?: AlgolNavStep | null;
 };
 
-export const NavCrumbs: FunctionComponent<NavCrumbsProps> = props => {
-  const { nav, actions, mute, shortcut } = props;
-  const { me, crumbs } = nav;
+export const NavCrumbs = (props: NavCrumbsProps) => {
+  const { mute, shortcut } = props;
+  const { nav } = useAppState();
+  const { me, crumbs } = nav!;
   return (
     <Fragment>
       {crumbs.map((crumb, i) => (
         <Fragment key={i}>
           <NavStepRow
-            actions={actions}
             step={crumb}
             hasBackBtn
             shortcut={shortcut}

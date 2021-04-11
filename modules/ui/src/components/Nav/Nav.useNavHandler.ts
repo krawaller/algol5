@@ -1,14 +1,14 @@
 import { AlgolNavStep } from "../../../../types";
-import { AppActions } from "../../contexts";
+import { useAppActions } from "../../contexts";
 import { useMemo, SyntheticEvent } from "react";
 
 type UseNavHandlerOpts = {
-  actions: AppActions;
   step: AlgolNavStep;
 };
 
 export const useNavHandler = (opts: UseNavHandlerOpts) => {
-  const { actions, step } = opts;
+  const { step } = opts;
+  const actions = useAppActions();
   const { url, onClick } = step;
   return useMemo(
     () =>

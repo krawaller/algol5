@@ -21,7 +21,12 @@ import { makeSessionNav } from "../../../../common/nav/makeSessionNav";
 import { makeGameNav } from "../../../../common/nav/makeGameNav";
 import { board2sprites, sprites2arrangement } from "../../../../common";
 import { useRemoteAPI } from "../../../../remote/utils/context";
-import { useAppState, useBattleNav, useGamePayload } from "../../contexts";
+import {
+  useAppActions,
+  useAppState,
+  useBattleNav,
+  useGamePayload,
+} from "../../contexts";
 
 const SCREENSHOT = false; // TODO - setting somewhere!
 
@@ -29,6 +34,7 @@ export const GamePage = () => {
   const battleNavActions = useBattleNav();
   const gamePayload = useGamePayload();
   const { battleMode: givenMode = "gamelobby", sessionId } = useAppState();
+  const appActions = useAppActions();
   const { api, graphics, meta, demo, rules } = gamePayload;
   const [
     { battle, frame, session, corruptSessions },
@@ -50,18 +56,18 @@ export const GamePage = () => {
   }, [api]);
 
   useEffect(() => {
-    actions.setNav(
+    appActions.setNav(
       mode === "gamelobby"
         ? makeGameNav(gamePayload.meta)
         : makeSessionNav({
             mode,
             session: session!,
-            battleNavActions: actions,
+            battleNavActions,
             meta: gamePayload.meta,
             isNew: Boolean(sessionId && sessionId.match(/new/)),
           })
     );
-  }, [mode, sessionId, actions.setNav]);
+  }, [mode, sessionId, appActions, battleNavActions]);
 
   // TODO - maybe not read this on every render? move to state somewhere?
   const previousSessionId = getLatestSessionIdForGame(api.gameId);

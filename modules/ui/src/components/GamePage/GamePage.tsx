@@ -88,7 +88,6 @@ export const GamePage = () => {
     body = (
       <BattleLanding
         battle={battle!}
-        actions={actions}
         session={session!}
         meta={meta}
         manyVariants={api.variants.length > 1}

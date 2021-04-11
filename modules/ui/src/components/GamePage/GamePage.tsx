@@ -102,7 +102,6 @@ export const GamePage = () => {
     body = (
       <GameLanding
         meta={meta}
-        actions={actions}
         graphics={graphics}
         previousSessionId={previousSessionId}
         variants={api.variants}

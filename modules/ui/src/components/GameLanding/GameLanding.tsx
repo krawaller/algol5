@@ -3,7 +3,6 @@ import { punctuate } from "../../../../common";
 import {
   AlgolMeta,
   AlgolGameGraphics,
-  AlgolErrorReporter,
   AlgolGameBlobAnon,
   AlgolVariantAnon,
 } from "../../../../types";
@@ -15,19 +14,8 @@ import { useModal } from "../../helpers";
 import { BoardPageContent } from "../BoardPageContent";
 import { useAppState } from "../../contexts";
 
-export type GameLandingActions = {
-  navTo: (path: string) => void;
-  prefetch: (path: string) => void;
-  newLocalBattle: (code: string) => void;
-  loadLocalSession: (sessionId: string) => void;
-  toBattleLobby: () => void;
-  importSession: (str: string) => void;
-  reportError: AlgolErrorReporter;
-};
-
 type GameLandingProps = {
   meta: AlgolMeta<AlgolGameBlobAnon>;
-  actions: GameLandingActions;
   graphics: AlgolGameGraphics;
   variants: AlgolVariantAnon[];
   previousSessionId?: string | null;
@@ -37,7 +25,6 @@ type GameLandingProps = {
 export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   const {
     meta,
-    actions,
     graphics,
     previousSessionId,
     variants,
@@ -82,7 +69,6 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         title="Local pass-and-play"
       >
         <NewLocalSession
-          actions={actions}
           meta={meta}
           graphics={graphics}
           previousSessionId={previousSessionId}

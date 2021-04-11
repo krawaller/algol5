@@ -77,9 +77,9 @@ export const GamePage = () => {
     // We are currently watching the history of a battle
     body = (
       <BattleHistory
-        actions={actions}
         content={ui.instruction}
         frame={Math.max(0, frame)}
+        toFrame={actions.toFrame}
         battle={battle!}
       />
     );
@@ -108,20 +108,6 @@ export const GamePage = () => {
       />
     );
   }
-
-  // const name = gamePayload.meta.name;
-  // const title =
-  //   mode === "playing"
-  //     ? "Making a move"
-  //     : mode === "history"
-  //     ? "Battle history"
-  //     : mode === "battlelobby"
-  //     ? battle!.history!.length
-  //       ? "New battle"
-  //       : battle!.gameEndedBy
-  //       ? "Finished battle"
-  //       : "Ongoing battle"
-  //     : name;
 
   if (SCREENSHOT && mode === "playing") {
     console.log(

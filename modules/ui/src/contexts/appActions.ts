@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import { AlgolNav } from "../../../types/page/nav";
 import { AlgolEvent } from "../../../types/page/events";
+import { AlgolErrorReporter } from "../../../types/error";
 
 export type AppActions = {
   navTo: (path: string) => void;
@@ -10,6 +11,7 @@ export type AppActions = {
   setNav: (nav: AlgolNav) => void;
   logEvent: (evt: AlgolEvent) => void;
   setFullscreenNav: (bool: boolean) => void;
+  reportError: AlgolErrorReporter;
 };
 
 export const fakeAppActions: AppActions = {
@@ -20,6 +22,7 @@ export const fakeAppActions: AppActions = {
   setNav: nav => console.log("nav updated", nav),
   logEvent: evt => console.log("logged event", evt),
   setFullscreenNav: bool => console.log("fullscreen nav set to", bool),
+  reportError: (err, lvl) => console.log("logged error", err, "level", lvl),
 };
 
 export const AppActionContext = createContext(fakeAppActions);

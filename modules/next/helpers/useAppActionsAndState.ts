@@ -59,6 +59,10 @@ export const useAppActionsAndState = (
       },
       setNav,
       setFullscreenNav,
+      reportError: (err, lvl) => {
+        // TODO - handle error properly! Analytics event + UI popup (depending on level)
+        console.log("ERROR", err, "LVL", lvl);
+      },
     }),
     [router, global]
   );

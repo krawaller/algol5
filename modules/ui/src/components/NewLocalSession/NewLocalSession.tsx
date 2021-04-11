@@ -32,7 +32,9 @@ type NewLocalSessionProps = {
 export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props => {
   const { actions, meta, graphics, variants, corruptSessions } = props;
   const filteredVariants = variants.filter(v => !v.hidden);
-  const [variant, setVariant] = useState(filteredVariants[0].code);
+  const [variant, setVariant] = useState<string | number>(
+    filteredVariants[0].code
+  );
   return (
     <div className={css.newLocalSession}>
       <div className={css.newLocalSessionTopInstruction}>
@@ -52,7 +54,7 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
           )}
           <Button
             big
-            onClick={() => actions.newLocalBattle(variant)}
+            onClick={() => actions.newLocalBattle(variant as string)}
             text="Create"
           />
         </Fragment>
@@ -80,7 +82,7 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
         />
       </Box>
       <Box title="Import session">
-        <ImportBattle actions={actions} />
+        <ImportBattle />
       </Box>
     </div>
   );

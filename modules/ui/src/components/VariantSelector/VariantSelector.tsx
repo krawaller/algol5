@@ -5,7 +5,7 @@ import { RadioSelector } from "../RadioSelector";
 type VariantSelectorProps = {
   onSelect: (v: string | number) => void;
   variants: AlgolVariantAnon[];
-  current: string;
+  current: string | number;
 };
 
 export const VariantSelector: FunctionComponent<VariantSelectorProps> = props => {

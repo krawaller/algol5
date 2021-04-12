@@ -1,8 +1,9 @@
 import { createContext, useContext } from "react";
+import { AlgolGamePayload } from "../../../types";
 
-import { payload } from "../../../payloads/dist/games/amazons";
-
-export const GamePayloadContext = createContext(payload);
+export const GamePayloadContext = createContext(
+  (null as unknown) as AlgolGamePayload
+);
 
 export const useGamePayload = () => {
   return useContext(GamePayloadContext);

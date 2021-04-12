@@ -19,19 +19,12 @@ if (!compName || !compName.length) {
   );
   fs.writeFileSync(
     path.join(out, compName, `${compName}.tsx`),
-    `import React, { FunctionComponent } from "react";
+    `import React from "react";
 import css from "./${compName}.cssProxy";
 
-export type $ = {compName}Actions {
-  foo: () => void;
-}
+type ${compName}Props = {};
 
-type ${compName}Props = {
-  actions: ${compName}Actions;
-};
-
-export const ${compName}: FunctionComponent<${compName}Props> = props => {
-  const { actions } = props;
+export const ${compName} = (props: ${compName}Props) => {
   return (
     <div className={css.${nonCap}Container}>Stub for ${compName}</div>
   );
@@ -61,15 +54,12 @@ export default styles;
 import React from "react";
 import { storiesOf } from "@storybook/react";
 
-import { ${compName}, ${compName}Actions } from ".";
+import { ${compName} } from ".";
 
 storiesOf("${compName}", module).add("A common ${compName} component", () => {
-  const actions: ${compName}Actions = {
-    foo: () => console.log('Executed foo')
-  };
   return (
     <div style={{ padding: 10 }}>
-      <${compName} actions={actions} />
+      <${compName} />
     </div>
   );
 });

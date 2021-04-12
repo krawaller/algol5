@@ -1,7 +1,6 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import {
   AlgolGameGraphics,
-  AlgolErrorReporter,
   decorateError,
   AlgolMeta,
   AlgolGameBlobAnon,
@@ -10,15 +9,11 @@ import css from "./SessionList.cssProxy";
 import { Board } from "../Board";
 import { SessionLoadFail } from "../../../../local/src";
 import { ListItem } from "../List";
-
-type SessionListLineErrorActions = {
-  reportError: AlgolErrorReporter;
-};
+import { useAppActions } from "../../contexts";
 
 type SessionListLineErrorProps = {
   fail: SessionLoadFail;
   graphics: AlgolGameGraphics;
-  actions: SessionListLineErrorActions;
   meta: AlgolMeta<AlgolGameBlobAnon>;
 };
 
@@ -28,10 +23,11 @@ const EMPTYOBJ = {};
 // TODO - button to purge corrupt save data?
 // TODO - preserve more metadata about error. we need the original save string and game id
 
-export const SessionListLineError: FunctionComponent<SessionListLineErrorProps> = props => {
-  const { fail, graphics, actions, meta } = props;
+export const SessionListLineError = (props: SessionListLineErrorProps) => {
+  const { fail, graphics, meta } = props;
+  const appActions = useAppActions();
   const onClick = () =>
-    actions.reportError(
+    appActions.reportError(
       decorateError({
         err: fail.error,
         description: `Something has happened to this ${meta.name} save file, and it couldn't be correctly read.`,
@@ -58,37 +54,4 @@ export const SessionListLineError: FunctionComponent<SessionListLineErrorProps> 
     </div>
   );
   return <ListItem pic={pic} content={content} onClick={onClick} />;
-  return (
-    <div
-      className={css.sessionListItem}
-      title="Click to report"
-      onClick={() =>
-        actions.reportError(
-          decorateError({
-            err: fail.error,
-            description: `Something has happened to this ${meta.name} save file, and it couldn't be correctly read.`,
-            errorId: "local-save-parse-error",
-            meta: {
-              gameId: meta.id,
-              saveStr: fail.str,
-              saveId: fail.id,
-            },
-          }),
-          "severe"
-        )
-      }
-    >
-      <div className={css.sessionListItemScreenshot}>
-        <Board
-          graphics={graphics}
-          potentialMarks={EMPTYARR}
-          marks={EMPTYARR}
-          units={EMPTYOBJ}
-        />
-      </div>
-      <div className={css.sessionListItemErrorInfo}>
-        The save data for this session is corrupt :/
-      </div>
-    </div>
-  );
 };

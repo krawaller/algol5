@@ -1,4 +1,5 @@
-export type BattleMode = "gamelobby" | "battlelobby" | "playing" | "history";
+import { createContext, useContext } from "react";
+import { BattleMode } from "./appState";
 
 export type BattleNavActions = {
   toHistory: () => void;
@@ -10,7 +11,6 @@ export type BattleNavActions = {
     mode?: BattleMode | undefined,
     replace?: boolean
   ) => void;
-  newLocalBattle: (code: string, mode?: BattleMode | undefined) => void;
 };
 
 export const fakeBattleNavActions: BattleNavActions = {
@@ -19,5 +19,10 @@ export const fakeBattleNavActions: BattleNavActions = {
   toBattleLobby: () => console.log("to battle lobby"),
   toBattleControls: () => console.log("to battle controls"),
   toSession: (id, mode) => console.log("to session", id, mode),
-  newLocalBattle: (code, mode) => console.log("new local battle", code, mode),
+};
+
+export const BattleNavContext = createContext(fakeBattleNavActions);
+
+export const useBattleNav = () => {
+  return useContext(BattleNavContext);
 };

@@ -1,17 +1,18 @@
 import { useEffect } from "react";
-import { AlgolNav, AppActions } from "../../../../types";
+import { AlgolNav } from "../../../../types";
+import { useAppActions } from "../../contexts";
 
 type UseNavPrefetchOpts = {
   nav?: AlgolNav | undefined;
-  actions: AppActions & { setFullNav: (to: boolean) => void };
 };
 
 const prefetched: Record<string, boolean> = {};
 
 export const useNavPrefetch = (opts: UseNavPrefetchOpts) => {
-  const { actions, nav } = opts;
+  const { nav } = opts;
+  const actions = useAppActions();
   useEffect(() => {
-    actions.setFullNav(false);
+    actions.setFullscreenNav(false);
     if (nav) {
       const allSteps = nav.crumbs.concat(nav.me).flatMap(s => [s, ...s.links]);
       if (nav.me.url) {

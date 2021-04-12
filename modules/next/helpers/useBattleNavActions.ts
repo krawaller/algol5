@@ -1,6 +1,6 @@
 import { Router } from "next/router";
 import { useMemo } from "react";
-import { BattleNavActions, BattleMode } from "../../types";
+import { BattleNavActions, BattleMode } from "../../ui/src/contexts";
 
 const gameRoot = (path: string) =>
   path
@@ -43,5 +43,5 @@ export const useBattleNavActions = (router: Router) => {
     }),
     []
   );
-  return [router.query.m, router.query.sid, actions] as const;
+  return actions;
 };

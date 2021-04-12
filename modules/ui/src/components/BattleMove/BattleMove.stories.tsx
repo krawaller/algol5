@@ -7,8 +7,6 @@ import allStatefulAPIs from "../../../../battle/dist/allStatefulAPIs";
 import { BattleMove, BattleMoveActions } from ".";
 
 const actions: BattleMoveActions = {
-  navTo: url => console.log("Nav to", url),
-  prefetch: url => console.log("Prefetch", url),
   undoBattleCommand: () => console.log("undo"),
   endTurn: () => console.log("endTurn"),
   command: (cmnd: string) => console.log("cmnd", cmnd),

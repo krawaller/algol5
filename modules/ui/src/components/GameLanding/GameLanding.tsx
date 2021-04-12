@@ -1,32 +1,21 @@
-import React, { Fragment, FunctionComponent, useMemo } from "react";
+import React, { Fragment, FunctionComponent, useEffect } from "react";
 import { punctuate } from "../../../../common";
 import {
   AlgolMeta,
   AlgolGameGraphics,
-  AlgolErrorReporter,
   AlgolGameBlobAnon,
   AlgolVariantAnon,
 } from "../../../../types";
 import { Modal } from "../Modal";
 import { Button } from "../Button";
-import { NewLocalSession, NewLocalSessionActions } from "../NewLocalSession";
+import { NewLocalSession } from "../NewLocalSession";
 import { NewRemoteSession } from "../NewRemoteSession";
 import { useModal } from "../../helpers";
 import { BoardPageContent } from "../BoardPageContent";
-
-export type GameLandingActions = {
-  navTo: (path: string) => void;
-  prefetch: (path: string) => void;
-  newLocalBattle: (code: string) => void;
-  loadLocalSession: (sessionId: string) => void;
-  toBattleLobby: () => void;
-  importSession: (str: string) => void;
-  reportError: AlgolErrorReporter;
-};
+import { useAppState } from "../../contexts";
 
 type GameLandingProps = {
   meta: AlgolMeta<AlgolGameBlobAnon>;
-  actions: GameLandingActions;
   graphics: AlgolGameGraphics;
   variants: AlgolVariantAnon[];
   previousSessionId?: string | null;
@@ -36,7 +25,6 @@ type GameLandingProps = {
 export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   const {
     meta,
-    actions,
     graphics,
     previousSessionId,
     variants,
@@ -44,26 +32,11 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   } = props;
   const [isSessionModalOpen, openSessionModal, closeSessionModal] = useModal();
   const [isRemoteModalOpen, openRemoteModal, closeRemoteModal] = useModal();
+  const { battleMode, sessionId } = useAppState();
+  useEffect(() => {
+    closeSessionModal(); // close session as soon as we have created a new game
+  }, [battleMode, sessionId]);
 
-  // hack actions to close game modal when chosen a game
-  const localSessionActions = useMemo(
-    (): NewLocalSessionActions => ({
-      loadLocalSession: (sessionId: string) => {
-        actions.loadLocalSession(sessionId);
-        closeSessionModal();
-      },
-      newLocalBattle: (code: string) => {
-        actions.newLocalBattle(code);
-        closeSessionModal();
-      },
-      importSession: (str: string) => {
-        actions.importSession(str);
-        closeSessionModal();
-      },
-      reportError: actions.reportError,
-    }),
-    []
-  );
   return (
     <Fragment>
       <BoardPageContent title={meta.name}>
@@ -96,7 +69,6 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         title="Local pass-and-play"
       >
         <NewLocalSession
-          actions={localSessionActions}
           meta={meta}
           graphics={graphics}
           previousSessionId={previousSessionId}

@@ -5,15 +5,10 @@ import React, {
   useEffect,
   useRef,
 } from "react";
+import { useAppActions } from "../../contexts";
 import css from "./Markdown.cssProxy";
 
-export type MarkdownActions = {
-  navTo: (path: string) => void;
-  prefetch: (path: string) => void;
-};
-
 type MarkdownProps = {
-  actions: MarkdownActions;
   html: string;
   dynamicContent?: Record<string, string>;
   dynamicActions?: Record<string, (e: Event) => void>;
@@ -24,12 +19,8 @@ const urlExtracter = /"([^"]+)"/;
 const emptyObj = {};
 
 export const Markdown: FunctionComponent<MarkdownProps> = props => {
-  const {
-    actions,
-    html,
-    dynamicContent = emptyObj,
-    dynamicActions = emptyObj,
-  } = props;
+  const actions = useAppActions();
+  const { html, dynamicContent = emptyObj, dynamicActions = emptyObj } = props;
   const me = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (me.current) {

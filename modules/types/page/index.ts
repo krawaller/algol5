@@ -1,4 +1,2 @@
-export * from './AlgolPage'
-export * from './appActions'
-export * from './battleActions'
-export * from './nav'
+export * from "./AlgolPage";
+export * from "./nav";

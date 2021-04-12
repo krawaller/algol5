@@ -3,7 +3,6 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import {
   AlgolGameGraphics,
   AlgolMeta,
-  AlgolErrorReporter,
   AlgolGameBlobAnon,
   AlgolVariantAnon,
 } from "../../../../types";
@@ -14,14 +13,8 @@ import {
 } from "../../../../local/src";
 import { SessionListInner, SessionInfo } from "./SessionList.Inner";
 
-export type SessionListActions = {
-  loadLocalSession: (sessionId: string) => void;
-  reportError: AlgolErrorReporter;
-};
-
 type SessionListProps = {
   graphics: AlgolGameGraphics;
-  actions: SessionListActions;
   meta: AlgolMeta<AlgolGameBlobAnon>;
   variants: AlgolVariantAnon[];
   corruptSessions: Record<string, string>;
@@ -31,7 +24,6 @@ type SessionListProps = {
  * A component to show a list of sessions
  */
 export const SessionList: React.FunctionComponent<SessionListProps> = ({
-  actions,
   graphics,
   meta,
   variants,
@@ -81,18 +73,10 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
     readSessions();
   }, [errorIds]);
 
-  const innerActions = useMemo(
-    () => ({
-      ...actions,
-      purgeErrorLines,
-      updateList: readSessions,
-    }),
-    [purgeErrorLines]
-  );
-
   return (
     <SessionListInner
-      actions={innerActions}
+      purgeErrorLines={purgeErrorLines}
+      updateList={readSessions}
       graphics={graphics}
       meta={meta}
       sessionInfo={sessionInfo}

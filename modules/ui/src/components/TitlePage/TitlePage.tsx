@@ -10,15 +10,14 @@ import { TitleBody } from "./TitlePage.Body";
 import { setTitlePageAttributes } from "./setTitlePageAttributes";
 import { useTitleData } from "./TitlePage.useTitleData";
 
-export const TitlePage: AlgolPage = props => {
-  const { actions } = props;
+export const TitlePage: AlgolPage = () => {
   const titleDemo = useTitleData();
   return (
     <Fragment>
       <Page
         title="Hello!"
         top={<TitleBoard titleData={titleDemo.titleData} />}
-        body={<TitleBody actions={actions} titleDemo={titleDemo} />}
+        body={<TitleBody titleDemo={titleDemo} />}
       />
     </Fragment>
   );

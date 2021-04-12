@@ -6,26 +6,14 @@ import { SessionList } from ".";
 import { GameId, list } from "../../../../games/dist/list";
 
 import dataURIs from "../../../../graphics/dist/svgDataURIs";
-import { SessionListActions } from "./SessionList";
 import meta from "../../../../games/dist/meta";
-import {
-  SessionListInner,
-  SessionListInnerActions,
-  SessionInfo,
-} from "./SessionList.Inner";
+import { SessionListInner, SessionInfo } from "./SessionList.Inner";
 import { SessionLoadFail } from "../../../../local/src";
 import {
   AlgolSession,
   AlgolVariantAnon,
   localParticipants,
 } from "../../../../types";
-
-const innerActions: SessionListInnerActions = {
-  loadLocalSession: id => console.log("Loading session id", id),
-  reportError: (error, level) => console.log("Reported error", error, level),
-  updateList: () => console.log("Updating list"),
-  purgeErrorLines: () => console.log("Purging"),
-};
 
 const variants: AlgolVariantAnon[] = [
   {
@@ -41,11 +29,6 @@ storiesOf("SessionList", module)
   .add("Real component, reading localStorage", () => {
     const gameId = select("Game", list, list[0]) as GameId;
     const finished = boolean("Finished", false);
-    const actions: SessionListActions = {
-      loadLocalSession: id => console.log("Loading session id", id),
-      reportError: (error, level) =>
-        console.log("Reported error", error, level),
-    };
     return (
       <Fragment>
         <div>
@@ -55,7 +38,6 @@ storiesOf("SessionList", module)
         <hr />
         <SessionList
           graphics={dataURIs[gameId]}
-          actions={actions}
           meta={meta[gameId]}
           variants={variants}
           corruptSessions={{}}
@@ -90,12 +72,13 @@ storiesOf("SessionList", module)
     };
     return (
       <SessionListInner
-        actions={innerActions}
         meta={meta.atrium}
         graphics={dataURIs.atrium}
         sessionInfo={sessionInfo}
         variants={variants}
         corruptSessions={{}}
+        purgeErrorLines={() => {}}
+        updateList={() => {}}
       />
     );
   })
@@ -107,12 +90,13 @@ storiesOf("SessionList", module)
     };
     return (
       <SessionListInner
-        actions={innerActions}
         meta={meta.atrium}
         graphics={dataURIs.atrium}
         sessionInfo={sessionInfo}
         variants={variants}
         corruptSessions={{}}
+        purgeErrorLines={() => {}}
+        updateList={() => {}}
       />
     );
   });

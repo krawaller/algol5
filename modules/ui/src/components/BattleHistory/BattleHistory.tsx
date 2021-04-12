@@ -1,33 +1,27 @@
 import React, { FunctionComponent } from "react";
-import {
-  AlgolContentAnon,
-  AlgolBattle,
-  AlgolErrorReporter,
-} from "../../../../types";
+import { AlgolContentAnon, AlgolBattle } from "../../../../types";
 import { Content } from "../Content";
 import { Stepper } from "../Stepper";
 
 import css from "./BattleHistory.cssProxy";
 import { Button } from "../Button";
 import { BoardPageContent } from "../BoardPageContent";
-
-type BattleHistoryActions = {
-  toFrame: (frame: number) => void;
-  forkBattleFrame: (battle: AlgolBattle, frame: number) => void;
-  reportError: AlgolErrorReporter;
-};
+import { useAppActions, useLocalBattleActions } from "../../contexts";
 
 type BattleHistoryProps = {
   content: AlgolContentAnon;
   frame: number;
-  actions: BattleHistoryActions;
+  toFrame: (frame: number) => void;
   battle: AlgolBattle;
 };
 
 export const BattleHistory: FunctionComponent<BattleHistoryProps> = props => {
-  const { content, frame, actions, battle } = props;
+  const { content, frame, toFrame, battle } = props;
   const frameCount = battle.history.length - 1;
   const historyFrame = battle.history[frame];
+  const { forkBattleFrame } = useLocalBattleActions();
+  const { reportError } = useAppActions();
+
   if (frameCount === 0) {
     return (
       <div className={css.battleHistoryContainer}>
@@ -38,7 +32,7 @@ export const BattleHistory: FunctionComponent<BattleHistoryProps> = props => {
   return (
     <BoardPageContent title={"Session history"}>
       <div className={css.battleHistoryContainer}>
-        <Stepper max={frameCount} current={frame} onChange={actions.toFrame} />
+        <Stepper max={frameCount} current={frame} onChange={toFrame} />
         <Content content={content} />
         <p>
           You can{" "}
@@ -49,10 +43,10 @@ export const BattleHistory: FunctionComponent<BattleHistoryProps> = props => {
                   "Do you create a copy of this session from this point in the history, and switch to the new session?"
                 )
               ) {
-                actions.forkBattleFrame(battle, frame);
+                forkBattleFrame(battle, frame);
               }
             }}
-            onError={actions.reportError}
+            onError={reportError}
             controlId="fork-history-frame-button"
             disabled={
               battle.gameEndedBy && frame === frameCount

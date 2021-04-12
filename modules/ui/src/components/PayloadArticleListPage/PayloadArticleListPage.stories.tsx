@@ -14,7 +14,6 @@ const lists = {
 };
 
 import { PayloadArticleListPage } from ".";
-import { fakeAppActions } from "../../../../types";
 
 storiesOf("PayloadArticleListPage", module).add(
   "A common PayloadArticleListPage component",
@@ -27,11 +26,7 @@ storiesOf("PayloadArticleListPage", module).add(
     const list = lists[title];
     return (
       <div style={{ padding: 10 }}>
-        <PayloadArticleListPage
-          actions={fakeAppActions}
-          list={list}
-          title={title}
-        />
+        <PayloadArticleListPage list={list} title={title} />
       </div>
     );
   }

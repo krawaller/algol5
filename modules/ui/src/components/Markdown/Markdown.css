@@ -123,8 +123,7 @@
 }
 
 .md-setup {
-  display: flex;
-  justify-content: center;
+  text-align: center;
 }
 
 .md-setup > svg {

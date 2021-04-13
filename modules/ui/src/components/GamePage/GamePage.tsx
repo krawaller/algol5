@@ -2,13 +2,7 @@
  * Used in the Next app as a "homepage" for the individual games.
  */
 
-import React, { ReactNode, useState, useEffect } from "react";
-import {
-  AlgolErrorReport,
-  AlgolGamePayload,
-  AppActions,
-  BattleNavActions,
-} from "../../../../types";
+import React, { ReactNode, useEffect } from "react";
 
 import { Board } from "../Board";
 import { Page } from "../Page";
@@ -17,58 +11,58 @@ import { GameLanding } from "../GameLanding";
 import { BattleHistory } from "../BattleHistory";
 import { useUI } from "./GamePage.useUI";
 import { useBattle } from "./GamePage.useBattle";
-import { useActions } from "./GamePage.useActions";
 import { BattleMove } from "../BattleMove";
 import {
   getLatestSessionIdForGame,
   setLatestVisitedGameId,
 } from "../../../../local/src";
-import { BattleMode } from "../../../../types/page/battleActions";
 import { makeSessionNav } from "../../../../common/nav/makeSessionNav";
 import { makeGameNav } from "../../../../common/nav/makeGameNav";
 import { board2sprites, sprites2arrangement } from "../../../../common";
+import { useRemoteAPI } from "../../../../remote/utils/context";
+import {
+  useAppActions,
+  useAppState,
+  useBattleNav,
+  useGamePayload,
+} from "../../contexts";
 
 const SCREENSHOT = false; // TODO - setting somewhere!
 
-type GamePageProps = {
-  actions: AppActions & BattleNavActions;
-  gamePayload: AlgolGamePayload;
-  ctxt: { sessionId?: string | null; mode?: BattleMode };
-};
-
-export const GamePage = (props: GamePageProps) => {
-  const { actions: pageActions, gamePayload, ctxt } = props;
-  const { mode: givenMode = "gamelobby", sessionId } = ctxt;
+export const GamePage = () => {
+  const battleNavActions = useBattleNav();
+  const gamePayload = useGamePayload();
+  const { battleMode: givenMode = "gamelobby", sessionId } = useAppState();
+  const appActions = useAppActions();
   const { api, graphics, meta, demo, rules } = gamePayload;
   const [
     { battle, frame, session, corruptSessions },
     battleActions,
-  ] = useBattle(api, sessionId as string, pageActions.toSession);
-  const [errorReport, setErrorReport] = useState<AlgolErrorReport>();
-  const actions = useActions({
-    pageActions,
-    battleActions,
-    setErrorReport,
-    api,
-  });
+  ] = useBattle(api, sessionId as string, battleNavActions.toSession);
   const ui = useUI(api, battle, frame, demo, givenMode);
   const mode = battle ? givenMode : "gamelobby";
 
   useEffect(() => setLatestVisitedGameId(api.gameId), [api.gameId]);
 
+  const remoteAPI = useRemoteAPI();
   useEffect(() => {
-    actions.setNav(
+    remoteAPI.game.setGameAPI(api);
+    return () => remoteAPI.game.setGameAPI(null);
+  }, [api]);
+
+  useEffect(() => {
+    appActions.setNav(
       mode === "gamelobby"
         ? makeGameNav(gamePayload.meta)
         : makeSessionNav({
             mode,
             session: session!,
-            battleNavActions: actions,
+            battleNavActions,
             meta: gamePayload.meta,
             isNew: Boolean(sessionId && sessionId.match(/new/)),
           })
     );
-  }, [mode, sessionId, actions.setNav]);
+  }, [mode, sessionId, appActions, battleNavActions]);
 
   // TODO - maybe not read this on every render? move to state somewhere?
   const previousSessionId = getLatestSessionIdForGame(api.gameId);
@@ -78,9 +72,9 @@ export const GamePage = (props: GamePageProps) => {
     // We are currently watching the history of a battle
     body = (
       <BattleHistory
-        actions={actions}
         content={ui.instruction}
         frame={Math.max(0, frame)}
+        toFrame={battleActions.toFrame}
         battle={battle!}
       />
     );
@@ -89,7 +83,6 @@ export const GamePage = (props: GamePageProps) => {
     body = (
       <BattleLanding
         battle={battle!}
-        actions={actions}
         session={session!}
         meta={meta}
         manyVariants={api.variants.length > 1}
@@ -97,13 +90,12 @@ export const GamePage = (props: GamePageProps) => {
     );
   } else if (mode === "playing") {
     // We are actively playing an ongoing battle
-    body = <BattleMove actions={actions} ui={ui} rules={rules} />;
+    body = <BattleMove actions={battleActions} ui={ui} rules={rules} />;
   } else {
     // No battle active, we're just at the game landing page
     body = (
       <GameLanding
         meta={meta}
-        actions={actions}
         graphics={graphics}
         previousSessionId={previousSessionId}
         variants={api.variants}
@@ -111,20 +103,6 @@ export const GamePage = (props: GamePageProps) => {
       />
     );
   }
-
-  // const name = gamePayload.meta.name;
-  // const title =
-  //   mode === "playing"
-  //     ? "Making a move"
-  //     : mode === "history"
-  //     ? "Battle history"
-  //     : mode === "battlelobby"
-  //     ? battle!.history!.length
-  //       ? "New battle"
-  //       : battle!.gameEndedBy
-  //       ? "Finished battle"
-  //       : "Ongoing battle"
-  //     : name;
 
   if (SCREENSHOT && mode === "playing") {
     console.log(
@@ -143,11 +121,10 @@ export const GamePage = (props: GamePageProps) => {
 
   return (
     <Page
-      errorReport={errorReport}
       title={gamePayload.meta.name}
       top={
         <Board
-          callback={actions.mark}
+          callback={battleActions.mark}
           graphics={graphics}
           units={ui.board.units}
           marks={ui.board.marks}

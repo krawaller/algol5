@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEvent } from "react";
+import React, { MouseEvent, ReactNode } from "react";
 import classNames from "classnames";
 import { preventDoubleTapZoom } from "../../helpers/preventDoubleTap";
 
@@ -11,12 +11,13 @@ export type ButtonProps = {
   text?: string;
   active?: boolean;
   intent?: "primary" | "danger" | "";
+  children?: ReactNode;
 };
 
 import css from "./Button.cssProxy";
 import { useButtonClickHandler } from "./Button.handler";
 
-export const Button: FunctionComponent<ButtonProps> = props => {
+export const Button = (props: ButtonProps) => {
   const {
     disabled,
     onClick = preventDoubleTapZoom,

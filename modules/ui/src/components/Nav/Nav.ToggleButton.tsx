@@ -1,16 +1,12 @@
 import classNames from "classnames";
 import React from "react";
 import { NavButton } from "./Nav.Button";
-import { AppActions } from "../../../../types";
+import { useAppActions, useAppState } from "../../contexts";
 import css from "./Nav.cssProxy";
 
-type NavToggleButtonProps = {
-  fullNav?: boolean;
-  actions: AppActions & { setFullNav: (to: boolean) => void };
-};
-
-export const NavToggleButton = (props: NavToggleButtonProps) => {
-  const { actions, fullNav } = props;
+export const NavToggleButton = () => {
+  const actions = useAppActions();
+  const { isFullscreenNav } = useAppState();
   return (
     <div
       className={classNames(
@@ -19,13 +15,12 @@ export const NavToggleButton = (props: NavToggleButtonProps) => {
       )}
     >
       <NavButton
-        actions={actions}
-        active={fullNav}
+        active={isFullscreenNav}
         step={{
           id: "toggleNav",
-          desc: fullNav ? "Hide full nav" : "Show full nav",
+          desc: isFullscreenNav ? "Hide full nav" : "Show full nav",
           title: "N",
-          onClick: () => actions.setFullNav(!fullNav),
+          onClick: () => actions.setFullscreenNav(!isFullscreenNav),
           links: [],
         }}
       />

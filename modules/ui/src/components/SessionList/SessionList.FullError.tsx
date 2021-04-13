@@ -1,7 +1,6 @@
 import React, { FunctionComponent, Fragment } from "react";
 import {
   AlgolError,
-  AlgolErrorReporter,
   decorateError,
   AlgolMeta,
   AlgolGameBlobAnon,
@@ -10,25 +9,22 @@ import css from "./SessionList.cssProxy";
 import { ButtonGroup } from "../ButtonGroup";
 import { Button } from "../Button";
 import { deleteGameSessions } from "../../../../local/src";
-
-type SessionListFullErrorActions = {
-  reportError: AlgolErrorReporter;
-  updateList: () => void;
-};
+import { useAppActions } from "../../contexts";
 
 type SessionListFullErrorProps = {
   error: AlgolError;
-  actions: SessionListFullErrorActions;
+  updateList: () => void;
   meta: AlgolMeta<AlgolGameBlobAnon>;
 };
 
 export const SessionListFullError: FunctionComponent<SessionListFullErrorProps> = ({
   error,
-  actions,
+  updateList,
   meta,
 }) => {
+  const appActions = useAppActions();
   const handler = () =>
-    actions.reportError(
+    appActions.reportError(
       decorateError({
         err: error,
         description: `Something went wrong when trying to retrieve the stored sessions for ${meta.name}.`,
@@ -51,7 +47,7 @@ export const SessionListFullError: FunctionComponent<SessionListFullErrorProps> 
         <Button
           onClick={() => {
             deleteGameSessions(meta.id);
-            actions.updateList();
+            updateList();
           }}
           controlId="local-session-full-error-purge"
         >

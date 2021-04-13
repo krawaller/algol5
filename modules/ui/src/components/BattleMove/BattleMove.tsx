@@ -16,8 +16,6 @@ export type BattleMoveActions = {
   undoBattleCommand: () => void;
   endTurn: () => void;
   command: (cmnd: string) => void;
-  navTo: (url: string) => void;
-  prefetch: (url: string) => void;
 };
 
 type BattleMoveProps = {
@@ -77,7 +75,7 @@ export const BattleMove: FunctionComponent<BattleMoveProps> = props => {
         title={"How to play"}
         subtitle={`updated ${rules.updated}`}
       >
-        <Markdown actions={actions} html={rules.html} />
+        <Markdown html={rules.html} />
       </Modal>
     </>
   );

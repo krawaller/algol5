@@ -1,24 +1,16 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { useState } from "react";
 import { InputButton } from "../InputButton";
-import { AlgolErrorReporter } from "../../../../types";
+import { useAppActions, useLocalBattleActions } from "../../contexts";
 
-export type ImportBattleActions = {
-  importSession: (str: string) => void;
-  reportError: AlgolErrorReporter;
-};
-
-type ImportBattleProps = {
-  actions: ImportBattleActions;
-};
-
-export const ImportBattle: FunctionComponent<ImportBattleProps> = props => {
-  const { actions } = props;
+export const ImportBattle = () => {
   const [field, setField] = useState<string>("");
+  const localBattleActions = useLocalBattleActions();
+  const appActions = useAppActions();
   return (
     <InputButton
-      onClick={() => actions.importSession(field)}
-      onEnter={() => actions.importSession(field)}
-      onError={actions.reportError}
+      onClick={() => localBattleActions.importSession(field)}
+      onEnter={() => localBattleActions.importSession(field)}
+      onError={appActions.reportError}
       value={field}
       onValue={setField}
       buttonDisabled={!field ? "Enter a savestring!" : false}

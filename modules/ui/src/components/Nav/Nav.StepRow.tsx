@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { FunctionComponent, Fragment } from "react";
-import { AlgolNavStep, AppActions } from "../../../../types";
+import { AlgolNavStep } from "../../../../types";
 import { DASHED_SHORTCUTS, SHORTCUT_STRATEGY } from "./Nav.constants";
 
 import navCss from "./Nav.cssProxy";
@@ -16,21 +16,15 @@ type NavStepRowProps = {
   mute?: boolean;
   skipLink?: string;
   position: "current" | "prior" | "other";
-  actions: AppActions;
 };
 
 export const NavStepRow: FunctionComponent<NavStepRowProps> = props => {
-  const { step, actions, mute, position } = props;
+  const { step, mute, position } = props;
   return (
     <div className={navCss.navRow}>
       <LeftSide {...props} />
       <div className={navCss.navRowStepContainer}>
-        <NavStep
-          step={step}
-          isCurrent={position === "current"}
-          actions={actions}
-          mute={mute}
-        />
+        <NavStep step={step} isCurrent={position === "current"} mute={mute} />
       </div>
       <RightSide {...props} />
     </div>
@@ -59,7 +53,6 @@ const RightSide = ({
   shortcut,
   position,
   skipLink,
-  actions,
   mute,
   step,
 }: NavStepRowProps) => {
@@ -99,7 +92,7 @@ const RightSide = ({
           )}
         >
           <div className="arrowContainer" />
-          <NavButton step={shortcut} actions={actions} mute={mute} />
+          <NavButton step={shortcut} mute={mute} />
         </div>
         <div className={classNames(navCss.navFiller, navCss.navFlexRight)}>
           <div className={navCss.navSideButtonContainer}>
@@ -120,7 +113,7 @@ const RightSide = ({
             <Fragment key={l.title}>
               <div className={navStepCss.navStepLinkEntry}>
                 <Arrow head="east" layout="eastwest" />
-                <NavButton step={l} actions={actions} mute={mute} />
+                <NavButton step={l} mute={mute} />
               </div>
               <div
                 className={classNames(

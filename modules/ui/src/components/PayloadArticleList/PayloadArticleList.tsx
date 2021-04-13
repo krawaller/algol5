@@ -1,17 +1,12 @@
 import React, { Fragment, FunctionComponent, useMemo, useState } from "react";
 import css from "./PayloadArticleList.cssProxy";
 import { PayloadArticleListItem } from "./PayloadArticleList.Item";
-import {
-  AppActions,
-  AlgolListingContainer,
-  AlgolListing,
-} from "../../../../types";
+import { AlgolListingContainer, AlgolListing } from "../../../../types";
 import compositeId from "../../../../payloads/dist/compositeId";
 import { ButtonGroup } from "../ButtonGroup";
 import { ButtonBar } from "../ButtonBar";
 
 export type PayloadArticleListProps = {
-  actions: AppActions;
   reverse?: boolean;
   list: AlgolListingContainer;
 };
@@ -22,7 +17,7 @@ const sort2 = (l1: AlgolListing, l2: AlgolListing) =>
   l1.sort2! < l2.sort2! ? -1 : 1;
 
 export const PayloadArticleList: FunctionComponent<PayloadArticleListProps> = props => {
-  const { actions, list, reverse } = props;
+  const { list, reverse } = props;
   const { composite, listings, sorts } = list;
   const [sortIndex, setSortIndex] = useState(0);
   const listToRender = useMemo(() => {
@@ -48,7 +43,6 @@ export const PayloadArticleList: FunctionComponent<PayloadArticleListProps> = pr
         {listToRender.map(listing => (
           <PayloadArticleListItem
             key={listing.url}
-            actions={actions}
             listing={listing}
             compositeName={composite.replace(
               ".png",

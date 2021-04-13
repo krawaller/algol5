@@ -1,30 +1,22 @@
-import React, {
-  FunctionComponent,
-  useState,
-  useEffect,
-  useMemo,
-  Fragment,
-} from "react";
+import React, { useState, useEffect, useMemo, Fragment } from "react";
 import classNames from "classnames";
 import { TransitionGroup } from "react-transition-group";
 import Transition, {
   TransitionStatus,
 } from "react-transition-group/Transition";
-import { AlgolNav, AppActions } from "../../../../types";
+import { AlgolNav } from "../../../../types";
 import { findShortcut } from "../../../../common/nav/findShortcut";
 import navCss from "./Nav.cssProxy";
 import navBottomCss from "./Nav.Bottom.cssProxy";
 import { NavButton } from "./Nav.Button";
 import { Arrow } from "../Arrow";
 import { DASHED_SHORTCUTS } from "./Nav.constants";
+import { useAppState } from "../../contexts";
 
 type Dir = "up" | "down" | "same";
 type Pos = "nearer" | "further" | "same";
 
 export type NavBottomRowProps = {
-  nav?: AlgolNav;
-  actions: AppActions;
-  fullNav?: boolean;
   onToggle?: () => void;
   hasBackBtn?: boolean;
   hasShortcut?: boolean;
@@ -35,12 +27,13 @@ type NavBottomRowState = {
   dir: Dir;
 };
 
-export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
+export const NavBottomRow = (props: NavBottomRowProps) => {
   const [{ depth, dir }, setState] = useState<NavBottomRowState>({
     depth: -1,
     dir: "same",
   });
-  const { nav, actions, fullNav, hasBackBtn, hasShortcut } = props;
+  const { hasBackBtn, hasShortcut } = props;
+  const { isFullscreenNav: fullNav, nav } = useAppState();
   const { crumbs, key, me } =
     nav ||
     (({
@@ -109,8 +102,6 @@ export const NavBottomRow: FunctionComponent<NavBottomRowProps> = props => {
                     <NavButton
                       key={btn.id}
                       step={btn}
-                      actions={actions}
-                      fullNav={fullNav}
                       type={
                         hasBackBtn && n === 0
                           ? "back"

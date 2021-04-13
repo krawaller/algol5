@@ -148,3 +148,18 @@
 .buttonDanger:active {
   background-color: #a82a2a;
 }
+
+.asyncButtonHidden {
+  overflow-y: hidden;
+  height: 0;
+}
+
+.asyncButtonMegaHidden {
+  display: none;
+}
+
+.asyncButtonContent {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}

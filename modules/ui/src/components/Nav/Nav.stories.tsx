@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { select } from "@storybook/addon-knobs";
 
 import { Nav } from ".";
-import { AlgolNav, fakeAppActions } from "../../../../types";
+import { AlgolNav } from "../../../../types";
 
 const btn = (str: string) => ({
   title: str,
@@ -32,7 +32,7 @@ storiesOf("Navbar", module).add("A common Navbar component", () => {
   const scenario = scenarios[key];
   return (
     <div style={{ width: 500, height: 500, position: "relative" }}>
-      <Nav nav={scenario} actions={fakeAppActions} />
+      <Nav nav={scenario} />
     </div>
   );
 });

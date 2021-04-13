@@ -2,14 +2,13 @@ import {
   AlgolGameBlobAnon,
   AlgolMeta,
   AlgolSession,
-  BattleNavActions,
-  BattleMode,
   AlgolNav,
 } from "../../types";
 import { makeSessionControlsStep } from "./makeSessionControlsStep";
 import { makeSessionHistoryStep } from "./makeSessionHistoryStep";
 import { makeSessionLobbyStep } from "./makeSessionLobbyStep";
 import { makeGameNav } from "./makeGameNav";
+import { BattleMode, BattleNavActions } from "../../ui/src/contexts";
 
 type MakeSessionNavOpts = {
   meta: AlgolMeta<AlgolGameBlobAnon>;

@@ -8,7 +8,6 @@ import news from "../../../../payloads/dist/listings/news";
 import tags from "../../../../payloads/dist/listings/tags";
 import games from "../../../../payloads/dist/listings/games";
 import about from "../../../../payloads/dist/listings/about";
-import { fakeAppActions } from "../../../../types";
 
 const lists = {
   News: news,
@@ -28,7 +27,7 @@ storiesOf("PayloadArticleList", module).add(
     const list = lists[title];
     return (
       <div style={{ padding: 10 }}>
-        <PayloadArticleList actions={fakeAppActions} list={list} />
+        <PayloadArticleList list={list} />
       </div>
     );
   }

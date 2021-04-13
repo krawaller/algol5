@@ -1,11 +1,17 @@
 import { AppProps } from "next/app";
 import Router from "next/router";
 import Head from "next/head";
-import { useMemo, useState, useEffect, Fragment } from "react";
+import { useMemo, useEffect, Fragment } from "react";
 import { Shell } from "../../ui/src/components/Shell";
+import {
+  AppActionContext,
+  AppStateContext,
+  BattleNavContext,
+} from "../../ui/src/contexts";
 import { AlgolPage } from "../../types";
-import { useBattleNavActions, appActions } from "../helpers";
+import { useBattleNavActions, useAppActionsAndState } from "../helpers";
 import compositeId from "../../payloads/dist/compositeId";
+import { RouterContext } from "../helpers/router";
 
 const compositePrefix = `/images/composites/`;
 
@@ -28,19 +34,19 @@ Router.events.on("routeChangeStart", url => {
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const Comp = Component as AlgolPage;
-  const [mode, sessionId, battleNavActions] = useBattleNavActions(router);
-  const [nav, setNav] = useState(Comp.nav);
-  useEffect(() => setNav(Comp.nav), [Comp]);
-  const actions = useMemo(
-    () => ({ ...appActions, ...battleNavActions, setNav }),
-    [battleNavActions]
-  );
+  const battleNavActions = useBattleNavActions(router);
+  const { actions: appActions, state } = useAppActionsAndState({
+    router,
+    global,
+    initialNav: Comp.nav,
+  });
+  useEffect(() => appActions.setNav(Comp.nav), [Comp]);
   useEffect(() => {
     if (global.document) {
       global.document.body.addEventListener("click", e => {
         const node = e.target as HTMLDivElement;
         if (node.matches('a[href^="http"]')) {
-          actions.logEvent({
+          appActions.logEvent({
             action: "linkclick",
             category: "external",
             label: node.getAttribute("href"),
@@ -49,7 +55,6 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       });
     }
   }, []);
-  const ctxt = useMemo(() => ({ sessionId, mode }), [sessionId, mode]);
   const preloads = useMemo(
     () =>
       (Comp.preloadImages || []).map(url => (
@@ -111,9 +116,17 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
       </Head>
-      <Shell nav={nav} actions={actions}>
-        <Component {...pageProps} actions={actions} ctxt={ctxt} />
-      </Shell>
+      <RouterContext.Provider value={router}>
+        <AppActionContext.Provider value={appActions}>
+          <AppStateContext.Provider value={state}>
+            <BattleNavContext.Provider value={battleNavActions}>
+              <Shell>
+                <Component {...pageProps} />
+              </Shell>
+            </BattleNavContext.Provider>
+          </AppStateContext.Provider>
+        </AppActionContext.Provider>
+      </RouterContext.Provider>
     </Fragment>
   );
 }

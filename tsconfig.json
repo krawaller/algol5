@@ -12,10 +12,11 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "noImplicitAny": true,
+    "downlevelIteration": true,
     "jsx": "react",
     "types": ["node", "jest", "fs-extra", "prettier", "lodash.isequal"]
   },
-  "include": ["modules/types", "modules/games/definitions", "global.d.ts"],
+  "include": ["modules/types", "modules/games/definitions", "modules/remote", "global.d.ts"],
   "exclude": [
     "archive",
     "dev",

@@ -121,3 +121,12 @@
 .md-example > :last-child {
   margin-bottom: 0;
 }
+
+.md-setup {
+  text-align: center;
+}
+
+.md-setup > svg {
+  max-height: 280px;
+  max-width: 280px;
+}

@@ -8,3 +8,12 @@
   background-color: lightblue;
   border-radius: 3px;
 }
+
+.newRemoteSessionForm {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 6px;
+  background-color: #ddd;
+  margin-bottom: 6px;
+}

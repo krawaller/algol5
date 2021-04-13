@@ -11,18 +11,12 @@ export type Crumb = {
   onClick?: () => void;
 };
 
-type BreadcrumbsActions = {
-  navTo: (path: string) => void;
-  prefetch: (path: string) => void;
-};
-
 type BreadcrumbsProps = {
   crumbs: Crumb[];
-  actions: BreadcrumbsActions;
 };
 
 export const Breadcrumbs: FunctionComponent<BreadcrumbsProps> = props => {
-  const { crumbs, actions } = props;
+  const { crumbs } = props;
   const homeCrumb = useMemo(
     (): Crumb => ({
       content: "Home",
@@ -39,7 +33,7 @@ export const Breadcrumbs: FunctionComponent<BreadcrumbsProps> = props => {
             <span
               className={classNames(css.breadcrumb, css.breadcrumbClickable)}
             >
-              <Link actions={actions} text={crumb.content} url={crumb.url} />
+              <Link text={crumb.content} url={crumb.url} />
             </span>
           ) : (
             <span

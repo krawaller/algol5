@@ -1,19 +1,18 @@
 import React, { Fragment, FunctionComponent } from "react";
 import css from "./PayloadArticle.cssProxy";
-import { AlgolArticle, AppActions } from "../../../../types";
+import { AlgolArticle } from "../../../../types";
 import { Markdown } from "../Markdown";
 import { PayloadArticleList } from "../PayloadArticleList";
 
 type PayloadArticleProps = {
-  actions: AppActions;
   article: AlgolArticle;
 };
 
 export const PayloadArticle: FunctionComponent<PayloadArticleProps> = props => {
-  const { actions, article } = props;
+  const { article } = props;
   return (
     <>
-      <Markdown html={article.html} actions={actions} />
+      <Markdown html={article.html} />
       {article.relations
         .filter(rel => rel.listings.length)
         .map(rel => (
@@ -23,7 +22,7 @@ export const PayloadArticle: FunctionComponent<PayloadArticleProps> = props => {
                 {rel.title}
               </div>
             )}
-            <PayloadArticleList actions={actions} list={rel} />
+            <PayloadArticleList list={rel} />
           </Fragment>
         ))}
     </>

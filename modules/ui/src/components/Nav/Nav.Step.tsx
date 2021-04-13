@@ -1,6 +1,6 @@
 import classNames from "classnames";
-import React, { FunctionComponent } from "react";
-import { AlgolNavStep, AppActions } from "../../../../types";
+import React from "react";
+import { AlgolNavStep } from "../../../../types";
 import stepCss from "./Nav.Step.cssProxy";
 import navCss from "./Nav.cssProxy";
 import hintCss from "./Nav.Hint.cssProxy";
@@ -10,13 +10,12 @@ type NavStepProps = {
   step: AlgolNavStep;
   isCurrent?: boolean;
   mute?: boolean;
-  actions: AppActions;
 };
 
-export const NavStep: FunctionComponent<NavStepProps> = props => {
-  const { step, isCurrent, actions, mute } = props;
+export const NavStep = (props: NavStepProps) => {
+  const { step, isCurrent, mute } = props;
   const { title, desc } = step;
-  const handleClick = useNavHandler({ actions, step });
+  const handleClick = useNavHandler({ step });
   return (
     <div
       className={classNames(

@@ -6,15 +6,8 @@ import { chunk } from "../../../../content/dist/chunks/404/chunk";
 import { info } from "../../../../content/dist/chunks/404/info";
 import { fourOhFourNav } from "../../../../common/nav/fourOhFourNav";
 
-export const FourOhFourPage: AlgolPage = props => {
-  const { actions } = props;
-  return (
-    <Page
-      title="404"
-      top={null}
-      body={<Markdown html={chunk} actions={actions} />}
-    />
-  );
+export const FourOhFourPage: AlgolPage = () => {
+  return <Page title="404" top={null} body={<Markdown html={chunk} />} />;
 };
 
 FourOhFourPage.mainImage = info.mainImage;

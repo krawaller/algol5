@@ -3,7 +3,6 @@ import {
   AlgolSession,
   AlgolMeta,
   AlgolBattle,
-  AlgolErrorReporter,
   AlgolGameBlobAnon,
 } from "../../../../types";
 
@@ -12,14 +11,9 @@ import { Modal } from "../Modal";
 import { ExportBattle } from "../ExportBattle";
 import { BattleLandingOngoing } from "./BattleLanding.Ongoing";
 import { BoardPageContent } from "../BoardPageContent";
-
-type BattleLandingActions = {
-  deleteSession: (sessionId: string, retreatToGameLobby: boolean) => void;
-  reportError: AlgolErrorReporter;
-};
+import { useAppActions, useLocalBattleActions } from "../../contexts";
 
 type BattleLandingProps = {
-  actions: BattleLandingActions;
   session: AlgolSession;
   battle: AlgolBattle;
   meta: AlgolMeta<AlgolGameBlobAnon>;
@@ -27,7 +21,9 @@ type BattleLandingProps = {
 };
 
 export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
-  const { session, actions, meta, battle, manyVariants } = props;
+  const { session, meta, battle, manyVariants } = props;
+  const appActions = useAppActions();
+  const localBattleActions = useLocalBattleActions();
   const [isModalOpen, setModal] = useState<boolean>(false);
   const { closeModal, openModal } = useMemo(
     () => ({
@@ -60,7 +56,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
           </Button>{" "}
           the session to continue it elsewhere, or{" "}
           <Button
-            onError={actions.reportError}
+            onError={appActions.reportError}
             intent="danger"
             controlId="delete-session-button"
             onClick={() => {
@@ -69,7 +65,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
                   "Are you sure you want to delete this session? It will be forever lost!"
                 )
               ) {
-                actions.deleteSession(session.id, true);
+                localBattleActions.deleteSession(session.id, true);
               }
             }}
           >

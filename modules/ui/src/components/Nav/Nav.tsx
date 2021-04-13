@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import React, { Fragment } from "react";
-import { AlgolNav, AppActions } from "../../../../types";
 import css from "./Nav.cssProxy";
 import { NavBottomRow } from "./Nav.BottomRow";
 import { NavLinkArrowRow } from "./NavLinkArrowRow";
@@ -13,23 +12,16 @@ import { NavHomeButton } from "./Nav.HomeButton";
 import { NavToggleButton } from "./Nav.ToggleButton";
 import { useNavState } from "./Nav.useNavSetup";
 import { useNavPrefetch } from "./Nav.useNavPrefetch.";
+import { useAppState } from "../../contexts";
 
-export type NavProps = {
-  nav?: AlgolNav;
-  actions: AppActions;
-};
-
-export const Nav = (props: NavProps) => {
-  const { nav } = props;
+export const Nav = () => {
   const {
-    actions,
-    fullNav,
-    neverNav,
-    hasCrumbs,
-    hasUpBtn,
-    shortcut,
-  } = useNavState(props);
-  useNavPrefetch({ actions, nav });
+    isFullscreenNav: fullNav,
+    neverFullscreenNav: neverNav,
+    nav,
+  } = useAppState();
+  const { hasCrumbs, hasUpBtn, shortcut } = useNavState(nav);
+  useNavPrefetch({ nav });
   if (!nav) return <div></div>;
   const { crumbs, me } = nav;
 
@@ -45,7 +37,7 @@ export const Nav = (props: NavProps) => {
         )}
         // onClick={e => setFullNav(false)}
       >
-        <NavHomeButton fullNav={fullNav} crumbs={crumbs} actions={actions} />
+        <NavHomeButton crumbs={crumbs} />
         <NavTopRow fullNav={fullNav && crumbs.length > 0} />
         <div className={classNames(css.navRow, css.navFiller)}>
           {hasCrumbs && (
@@ -53,18 +45,12 @@ export const Nav = (props: NavProps) => {
           )}
         </div>
         <div>
-          <NavCrumbs
-            actions={actions}
-            nav={nav}
-            mute={!fullNav}
-            shortcut={shortcut}
-          />
+          <NavCrumbs mute={!fullNav} shortcut={shortcut} />
           <NavStepRow
             step={me}
             hasBackBtn={hasUpBtn}
             shortcut={shortcut}
             position="current"
-            actions={actions}
             mute={!fullNav}
           />
           <NavLinkArrowRow
@@ -72,14 +58,8 @@ export const Nav = (props: NavProps) => {
             hasBackBtn={hasUpBtn}
             hasShortcut={!!shortcut}
           />
-          <NavBottomRow
-            nav={nav}
-            actions={actions}
-            hasBackBtn={hasUpBtn}
-            fullNav={fullNav}
-            hasShortcut={!!shortcut}
-          />
-          <NavToggleButton fullNav={fullNav} actions={actions} />
+          <NavBottomRow hasBackBtn={hasUpBtn} hasShortcut={!!shortcut} />
+          <NavToggleButton />
         </div>
       </div>
     </Fragment>

@@ -1,0 +1,49 @@
+.listItem {
+  margin-bottom: 10px;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.listItem:hover {
+  background-color: #f7cb8c;
+}
+
+.listItemClickable:hover {
+  cursor: pointer;
+}
+
+.listItemPic {
+  flex-shrink: 0;
+  flex-grow: 0;
+  height: 80px;
+  width: 80px;
+}
+
+.listItemContent {
+  flex-grow: 1;
+  margin: 0 10px;
+  display: flex;
+  font-size: 12px;
+  flex-direction: column;
+}
+
+.listItemActions {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.listItemActions > :not(:first-child) {
+  margin-top: 8px;
+}
+
+.listItemTitle {
+  font-family: verdana;
+  font-weight: normal;
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}

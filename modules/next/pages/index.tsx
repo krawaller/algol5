@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { AlgolPage, AlgolPageProps } from "../../types";
+import { AlgolPage } from "../../types";
 import { Page } from "../../ui/src/components/Page";
 import { setTitlePageAttributes } from "../../ui/src/components/TitlePage/setTitlePageAttributes";
 
@@ -14,9 +14,7 @@ const LazyTitlePage = dynamic(
   { ssr: false, loading: EmptyPage }
 );
 
-const TitlePage: AlgolPage = (props: AlgolPageProps) => (
-  <LazyTitlePage {...props} />
-);
+const TitlePage: AlgolPage = () => <LazyTitlePage />;
 
 setTitlePageAttributes(TitlePage);
 

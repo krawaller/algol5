@@ -6,7 +6,6 @@ import tagArticles from "../../../../payloads/dist/articles/tags";
 const articleIds = tagArticles.map(item => item.id);
 
 import { PayloadArticlePage } from ".";
-import { fakeAppActions } from "../../../../types";
 
 storiesOf("PayloadArticlePage", module).add(
   "A common PayloadArticlePage component",
@@ -15,7 +14,7 @@ storiesOf("PayloadArticlePage", module).add(
     const article = tagArticles.find(item => item.id === newsId)!;
     return (
       <div style={{ padding: 10 }}>
-        <PayloadArticlePage actions={fakeAppActions} article={article} />
+        <PayloadArticlePage article={article} />
       </div>
     );
   }

@@ -3,9 +3,9 @@ import { AlgolVariantAnon } from "../../../../types";
 import { RadioSelector } from "../RadioSelector";
 
 type VariantSelectorProps = {
-  onSelect: (v: string) => void;
+  onSelect: (v: string | number) => void;
   variants: AlgolVariantAnon[];
-  current: string;
+  current: string | number;
 };
 
 export const VariantSelector: FunctionComponent<VariantSelectorProps> = props => {
@@ -16,6 +16,7 @@ export const VariantSelector: FunctionComponent<VariantSelectorProps> = props =>
   );
   return (
     <RadioSelector
+      title="Variant"
       options={opts}
       onSelect={onSelect}
       value={current}

@@ -4,8 +4,6 @@ import { AlgolContentAnon } from "../../../../types";
 import { Content } from "../Content";
 
 export type BattleHelpActions = {
-  navTo: (path: string) => void;
-  undoBattleCommand: () => void;
   endTurn: () => void;
   command: (cmnd: string) => void;
 };

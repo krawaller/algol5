@@ -81,7 +81,7 @@ export const Content: React.FunctionComponent<ContentProps> = ({
     const [icon, owner] = content.unittype;
     return (
       <span className={css.contentUnitType}>
-        <Icon owner={owner} icon={icon} />
+        <Icon owner={owner as 0 | 1 | 2} icon={icon} />
       </span>
     );
   }

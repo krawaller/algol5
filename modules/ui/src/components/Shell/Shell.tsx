@@ -1,35 +1,24 @@
 import classNames from "classnames";
-import React, { FunctionComponent, useMemo, useState } from "react";
+import React, { FunctionComponent } from "react";
 import Div100vh from "react-div-100vh";
 import css from "./Shell.cssProxy";
-import { AlgolNav, AppActions } from "../../../../types";
 import { Nav } from "../Nav";
-import { NavProvider } from "../Nav/Nav.Context";
+import { useAppState } from "../../contexts";
 
-type ShellProps = {
-  nav?: AlgolNav;
-  actions: AppActions;
-};
-
-export const Shell: FunctionComponent<ShellProps> = props => {
-  const { nav, children, actions } = props;
-  const [isFullNav, setFullNav] = useState(false);
-  const navProviderVal = useMemo(() => ({ isFullNav, setFullNav }), [
-    isFullNav,
-  ]);
+export const Shell: FunctionComponent = props => {
+  const { children } = props;
+  const { isFullscreenNav } = useAppState();
   return (
     <Div100vh
       className={classNames(
         css.shellContainer,
-        isFullNav && css.shellContainerWithFullNav
+        isFullscreenNav && css.shellContainerWithFullNav
       )}
     >
-      <NavProvider value={navProviderVal}>
-        {children}
-        <div className={css.shellNav}>
-          <Nav key="_nav" nav={nav} actions={actions}></Nav>
-        </div>
-      </NavProvider>
+      {children}
+      <div className={css.shellNav}>
+        <Nav key="_nav"></Nav>
+      </div>
     </Div100vh>
   );
 };

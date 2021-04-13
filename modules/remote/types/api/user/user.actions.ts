@@ -5,10 +5,7 @@ export type AlgolRemoteUserActions = {
     userName: string;
     password: string;
   }) => Promise<AlgolRemoteUser>;
-  register: (opts: {
-    userName: string;
-    password: string;
-  }) => Promise<AlgolRemoteUser>;
+  logout: () => void;
 };
 
-// TODO - displayname, update info?
+// TODO - update info, register? Holding off until we know how backend works.

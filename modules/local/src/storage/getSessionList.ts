@@ -15,6 +15,11 @@ export const isSessionLoadFail = (
 ): session is SessionLoadFail =>
   Boolean(((session as unknown) as SessionLoadFail).error);
 
+export const isSessionLoadSuccess = (
+  session: SessionOrFail
+): session is AlgolSession =>
+  Boolean(((session as unknown) as AlgolSession).gameId);
+
 export const getSessionList = (
   gameId: GameId,
   finished?: boolean

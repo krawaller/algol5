@@ -12,39 +12,50 @@ import {
   deleteSession,
   getSessionById,
   getSessionList,
-  isSessionLoadSuccess,
+  isSessionLoadFail,
   setLatestSessionIdForGame,
   writeSession,
 } from "../storage";
 
-type SessionId = string;
+type SessionContainer =
+  | { session: AlgolSession; error: null; id: string }
+  | { session: AlgolSession | null; error: Error; id: string };
 
 type LocalSessionGameState = {
-  sessions: AlgolSession[];
-  corruptSessions: Record<SessionId, string>;
+  containers: Record<string, SessionContainer>;
   retrieved: false | true | Error;
 };
 
-const getDefaultLocalSessionGameState = (
+const getInitialLocalSessionGameState = (
   api: AlgolStaticGameAPI
 ): LocalSessionGameState => {
-  let sessions: AlgolSession[] = [];
+  let containers: Record<string, SessionContainer> = {};
   try {
-    sessions = getSessionList(api.gameId, false)
+    containers = getSessionList(api.gameId, false)
       .concat(getSessionList(api.gameId, true))
-      .filter(isSessionLoadSuccess) // TODO - show corrupted sessions too
-      .filter(session =>
-        Boolean(api.variants.find(v => v.code === session.variantCode))
-      );
+      .map(s => {
+        if (isSessionLoadFail(s))
+          return { session: null, error: s.error, id: s.id };
+        if (!api.variants.find(v => v.code === s.variantCode)) {
+          return {
+            session: s,
+            error: new Error("Unknown variant code"),
+            id: s.id,
+          };
+        }
+        return { session: s, error: null, id: s.id };
+      })
+      .reduce((memo, c) => {
+        memo[c.id] = c;
+        return memo;
+      }, {} as Record<string, SessionContainer>);
     return {
-      sessions,
-      corruptSessions: {},
+      containers,
       retrieved: true,
     };
   } catch (err) {
     return {
-      sessions: [],
-      corruptSessions: {},
+      containers: {},
       retrieved: err,
     };
   }
@@ -64,32 +75,47 @@ const gameAtoms: Partial<Record<GameId, Atom<LocalSessionGameState>>> = {};
 
 const ensureGameSessions = () => {
   const api = apiAtom.getValue();
+  const { gameId } = api;
   const val = sessionStateAtom.getValue();
-  if (!val[api.gameId]) {
+  if (!val[gameId]) {
     sessionStateAtom.update(old =>
       produce(old, draft => {
-        if (!draft.perGame[api.gameId]) {
-          draft.perGame[api.gameId] = getDefaultLocalSessionGameState(api);
+        if (!draft.perGame[gameId]) {
+          draft.perGame[gameId] = getInitialLocalSessionGameState(api);
         }
       })
     );
   }
+  if (!gameAtoms[gameId]) {
+    gameAtoms[gameId] = focusAtom(sessionStateAtom, o => o.prop[gameId]);
+  }
 };
 
 // Write to disk and update atom
-const updateSession = (session: AlgolSession) => {
+const updateContainer = (container: SessionContainer) => {
   const api = apiAtom.getValue()!;
   ensureGameSessions();
-  writeSession(api.gameId, session);
+  if (container.session) {
+    writeSession(api.gameId, container.session);
+  }
   sessionStateAtom.update(old =>
     produce(old, draft => {
-      draft.perGame[api.gameId].sessions[session.id] = session;
+      draft.perGame[api.gameId].containers[container.id] = container;
     })
   );
 };
 
 // Stateful mostly just to track corrupt session state
 export const brain = {
+  getSessions: () => {
+    const api = apiAtom.getValue()!;
+    ensureGameSessions();
+    return sessionStateAtom.getValue[api.gameId];
+  },
+  getSessionsAtom: () => {
+    const api = apiAtom.getValue()!;
+    return gameAtoms[api.gameId];
+  },
   subscribe: (listener: (v: LocalSessionGameState) => void) => {
     const gameId = apiAtom.getValue().gameId;
     if (!gameAtoms[gameId]) {
@@ -103,7 +129,11 @@ export const brain = {
     const save = parseSeed(seed, api.gameId);
     const battle = api.fromSave(save);
     const session = importSessionFromBattle(battle, api.iconMap, api.gameId);
-    updateSession(session);
+    updateContainer({
+      error: null,
+      id: session.id,
+      session,
+    });
     return { session, battle };
   },
   forkBattleFrame: (battle: AlgolBattle, frame: number) => {
@@ -111,7 +141,7 @@ export const brain = {
     const historyFrame = battle.history[frame];
     const newBattle = api.fromFrame(historyFrame, battle.variant.code);
     const session = forkSessionFromBattle(newBattle, api.iconMap, api.gameId);
-    updateSession(session);
+    updateContainer({ session, id: session.id, error: null });
     return { session, battle: newBattle };
   },
   deleteSession: (sessionId: string) => {
@@ -119,12 +149,12 @@ export const brain = {
     deleteSession(api.gameId, sessionId);
     sessionStateAtom.update(old =>
       produce(old, draft => {
-        delete draft.perGame[api.gameId].sessions[sessionId];
+        delete draft.perGame[api.gameId].containers[sessionId];
       })
     );
   },
   saveSession: (session: AlgolSession) => {
-    updateSession(session);
+    updateContainer({ session, id: session.id, error: null });
   },
   loadSession: (
     sessionId: string
@@ -146,8 +176,9 @@ export const brain = {
       } catch (err) {
         sessionStateAtom.update(old =>
           produce(old, draft => {
-            draft.perGame[api.gameId].corruptSessions[sessionId] =
-              "The moves in this session where not valid!";
+            draft.perGame[api.gameId].containers[sessionId].error = new Error(
+              "The moves in this session where not valid!"
+            );
           })
         );
         return {
@@ -159,8 +190,9 @@ export const brain = {
     } catch (err) {
       sessionStateAtom.update(old =>
         produce(old, draft => {
-          draft.perGame[api.gameId].corruptSessions[sessionId] =
-            "Failed to read this session";
+          draft.perGame[api.gameId].containers[sessionId].error = new Error(
+            "Failed to read this session"
+          );
         })
       );
       return {

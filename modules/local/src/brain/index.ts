@@ -65,16 +65,11 @@ type LocalSessionState = {
   perGame: Partial<Record<GameId, LocalSessionGameState>>;
 };
 
-const apiAtom = atom<AlgolStaticGameAPI | null>(
-  (null as unknown) as AlgolStaticGameAPI
-); // Weird bug: have to cast to not be typed as ReadableAtom
-
 const sessionStateAtom = atom<LocalSessionState>({ perGame: {} });
 
 const gameAtoms: Partial<Record<GameId, Atom<LocalSessionGameState>>> = {};
 
-const ensureGameSessions = () => {
-  const api = apiAtom.getValue();
+const ensureGameSessions = (api: AlgolStaticGameAPI) => {
   const { gameId } = api;
   const val = sessionStateAtom.getValue();
   if (!val[gameId]) {
@@ -92,9 +87,11 @@ const ensureGameSessions = () => {
 };
 
 // Write to disk and update atom
-const updateContainer = (container: SessionContainer) => {
-  const api = apiAtom.getValue()!;
-  ensureGameSessions();
+const updateContainer = (
+  container: SessionContainer,
+  api: AlgolStaticGameAPI
+) => {
+  ensureGameSessions(api);
   if (container.session) {
     writeSession(api.gameId, container.session);
   }
@@ -107,62 +104,62 @@ const updateContainer = (container: SessionContainer) => {
 
 // Stateful mostly just to track corrupt session state
 export const brain = {
-  getSessions: () => {
-    const api = apiAtom.getValue()!;
-    ensureGameSessions();
+  getSessions: (api: AlgolStaticGameAPI) => {
+    ensureGameSessions(api);
     return sessionStateAtom.getValue[api.gameId];
   },
-  getSessionsAtom: () => {
-    const api = apiAtom.getValue()!;
-    return gameAtoms[api.gameId];
+  getSessionsAtom: (gameId: GameId) => {
+    return gameAtoms[gameId];
   },
-  subscribe: (listener: (v: LocalSessionGameState) => void) => {
-    const gameId = apiAtom.getValue().gameId;
+  subscribe: (listener: (v: LocalSessionGameState) => void, gameId: GameId) => {
     if (!gameAtoms[gameId]) {
       gameAtoms[gameId] = focusAtom(sessionStateAtom, o => o.prop[gameId]);
     }
     return gameAtoms[gameId].subscribe(listener);
   },
-  setGameAPI: (api: AlgolStaticGameAPI | null) => apiAtom.update(api),
-  importSession: (seed: string) => {
-    const api = apiAtom.getValue()!;
+  importSession: (seed: string, api: AlgolStaticGameAPI) => {
     const save = parseSeed(seed, api.gameId);
     const battle = api.fromSave(save);
     const session = importSessionFromBattle(battle, api.iconMap, api.gameId);
-    updateContainer({
-      error: null,
-      id: session.id,
-      session,
-    });
+    updateContainer(
+      {
+        error: null,
+        id: session.id,
+        session,
+      },
+      api
+    );
     return { session, battle };
   },
-  forkBattleFrame: (battle: AlgolBattle, frame: number) => {
-    const api = apiAtom.getValue()!;
+  forkBattleFrame: (
+    battle: AlgolBattle,
+    frame: number,
+    api: AlgolStaticGameAPI
+  ) => {
     const historyFrame = battle.history[frame];
     const newBattle = api.fromFrame(historyFrame, battle.variant.code);
     const session = forkSessionFromBattle(newBattle, api.iconMap, api.gameId);
-    updateContainer({ session, id: session.id, error: null });
+    updateContainer({ session, id: session.id, error: null }, api);
     return { session, battle: newBattle };
   },
-  deleteSession: (sessionId: string) => {
-    const api = apiAtom.getValue()!;
-    deleteSession(api.gameId, sessionId);
+  deleteSession: (sessionId: string, gameId: GameId) => {
+    deleteSession(gameId, sessionId);
     sessionStateAtom.update(old =>
       produce(old, draft => {
-        delete draft.perGame[api.gameId].containers[sessionId];
+        delete draft.perGame[gameId].containers[sessionId];
       })
     );
   },
-  saveSession: (session: AlgolSession) => {
-    updateContainer({ session, id: session.id, error: null });
+  saveSession: (session: AlgolSession, api: AlgolStaticGameAPI) => {
+    updateContainer({ session, id: session.id, error: null }, api);
   },
   loadSession: (
-    sessionId: string
+    sessionId: string,
+    api: AlgolStaticGameAPI
   ):
     | { battle: AlgolBattle; session: AlgolSession; error: null }
     | { battle: null; session: null; error: string } => {
-    ensureGameSessions();
-    const api = apiAtom.getValue();
+    ensureGameSessions(api);
     try {
       const session = getSessionById(api.gameId, sessionId)!;
       try {

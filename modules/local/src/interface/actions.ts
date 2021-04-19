@@ -18,20 +18,30 @@ import {
 import produce from "immer";
 
 export const localSessionActions = {
-  getSessions: (api: AlgolStaticGameAPI) => {
+  getSessionsForGame: (api: AlgolStaticGameAPI) => {
     ensureGameSessions(api);
-    return sessionStateAtom.getValue[api.gameId];
+    return sessionStateAtom.getValue().perGame[api.gameId];
   },
-  getSessionsAtom: (gameId: GameId) => {
-    return gameAtoms[gameId];
+  getGameSessionsAtom: (api: AlgolStaticGameAPI) => {
+    ensureGameSessions(api);
+    return gameAtoms[api.gameId];
   },
-  subscribe: (listener: (v: LocalSessionGameState) => void, gameId: GameId) => {
-    if (!gameAtoms[gameId]) {
-      gameAtoms[gameId] = focusAtom(sessionStateAtom, o => o.prop[gameId]);
+  subscribe: (opts: {
+    listener: (v: LocalSessionGameState) => void;
+    api: AlgolStaticGameAPI;
+  }) => {
+    const { listener, api } = opts;
+    ensureGameSessions(api);
+    if (!gameAtoms[api.gameId]) {
+      gameAtoms[api.gameId] = focusAtom(
+        sessionStateAtom,
+        o => o.prop[api.gameId]
+      );
     }
-    return gameAtoms[gameId].subscribe(listener);
+    return gameAtoms[api.gameId].subscribe(listener);
   },
-  importSession: (seed: string, api: AlgolStaticGameAPI) => {
+  importSession: (opts: { seed: string; api: AlgolStaticGameAPI }) => {
+    const { seed, api } = opts;
     const save = parseSeed(seed, api.gameId);
     const battle = api.fromSave(save);
     const session = importSessionFromBattle(battle, api.iconMap, api.gameId);
@@ -45,11 +55,12 @@ export const localSessionActions = {
     );
     return { session, battle };
   },
-  forkBattleFrame: (
-    battle: AlgolBattle,
-    frame: number,
-    api: AlgolStaticGameAPI
-  ) => {
+  forkBattleFrame: (opts: {
+    battle: AlgolBattle;
+    frame: number;
+    api: AlgolStaticGameAPI;
+  }) => {
+    const { battle, frame, api } = opts;
     const historyFrame = battle.history[frame];
     const newBattle = api.fromFrame(historyFrame, battle.variant.code);
     const session = forkSessionFromBattle(newBattle, api.iconMap, api.gameId);
@@ -64,15 +75,17 @@ export const localSessionActions = {
       })
     );
   },
-  saveSession: (session: AlgolSession, api: AlgolStaticGameAPI) => {
+  saveSession: (opts: { session: AlgolSession; api: AlgolStaticGameAPI }) => {
+    const { session, api } = opts;
     updateContainer({ session, id: session.id, error: null }, api);
   },
-  loadSession: (
-    sessionId: string,
-    api: AlgolStaticGameAPI
-  ):
+  loadSession: (opts: {
+    sessionId: string;
+    api: AlgolStaticGameAPI;
+  }):
     | { battle: AlgolBattle; session: AlgolSession; error: null }
     | { battle: null; session: null; error: string } => {
+    const { sessionId, api } = opts;
     ensureGameSessions(api);
     try {
       const session = getSessionById(api.gameId, sessionId)!;

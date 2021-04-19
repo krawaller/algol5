@@ -10,6 +10,4 @@ export type LocalSessionGameState = {
   retrieved: false | true | Error;
 };
 
-export type LocalSessionState = {
-  perGame: Partial<Record<GameId, LocalSessionGameState>>;
-};
+export type LocalSessionState = Record<GameId, LocalSessionGameState>;

@@ -5,12 +5,15 @@ import { parseSeed } from "../../../encoding/src/seed/seed.parse";
 import {
   forkSessionFromBattle,
   importSessionFromBattle,
+  newSessionFromBattle,
   session2battle,
+  updateSession,
 } from "../session";
 import { gameAtoms, sessionStateAtom } from "./atoms";
 import { ensureGameSessions, updateContainer } from "./helpers";
 import { LocalSessionGameState } from "./types";
 import {
+  deleteGameSessions,
   deleteSession,
   getSessionById,
   setLatestSessionIdForGame,
@@ -20,7 +23,7 @@ import produce from "immer";
 export const localSessionActions = {
   getSessionsForGame: (api: AlgolStaticGameAPI) => {
     ensureGameSessions(api);
-    return sessionStateAtom.getValue().perGame[api.gameId];
+    return sessionStateAtom.getValue()[api.gameId];
   },
   getGameSessionsAtom: (api: AlgolStaticGameAPI) => {
     ensureGameSessions(api);
@@ -35,10 +38,19 @@ export const localSessionActions = {
     if (!gameAtoms[api.gameId]) {
       gameAtoms[api.gameId] = focusAtom(
         sessionStateAtom,
+        // eslint-disable-next-line
+        // @ts-ignore
         o => o.prop[api.gameId]
       );
     }
-    return gameAtoms[api.gameId].subscribe(listener);
+    return gameAtoms[api.gameId]!.subscribe(listener);
+  },
+  newSession: (opts: { api: AlgolStaticGameAPI; code: string }) => {
+    const { api, code } = opts;
+    const battle = api.newBattle(code);
+    const session = newSessionFromBattle(battle, api.iconMap, api.gameId);
+    setLatestSessionIdForGame(api.gameId, session.id);
+    return { battle, session };
   },
   importSession: (opts: { seed: string; api: AlgolStaticGameAPI }) => {
     const { seed, api } = opts;
@@ -71,9 +83,42 @@ export const localSessionActions = {
     deleteSession(gameId, sessionId);
     sessionStateAtom.update(old =>
       produce(old, draft => {
-        delete draft.perGame[gameId].containers[sessionId];
+        delete draft[gameId].containers[sessionId];
       })
     );
+  },
+  deleteErrorSessions: (gameId: GameId) => {
+    sessionStateAtom.update(old =>
+      produce(old, draft => {
+        for (const sessionId of Object.keys(draft[gameId].containers)) {
+          if (draft[gameId].containers[sessionId].error) {
+            delete draft[gameId].containers[sessionId];
+            deleteSession(gameId, sessionId);
+          }
+        }
+      })
+    );
+  },
+  deleteGameSessions: (gameId: GameId) => {
+    deleteGameSessions(gameId);
+    sessionStateAtom.update(old =>
+      produce(old, draft => {
+        delete draft[gameId];
+      })
+    );
+  },
+  updateSessionFromBattle: (opts: {
+    battle: AlgolBattle;
+    session: AlgolSession;
+    api: AlgolStaticGameAPI;
+  }) => {
+    const { battle, api, session } = opts;
+    const updatedSession = updateSession(battle, session, api.iconMap);
+    updateContainer(
+      { session: updatedSession, error: null, id: session.id },
+      api
+    );
+    return updatedSession;
   },
   saveSession: (opts: { session: AlgolSession; api: AlgolStaticGameAPI }) => {
     const { session, api } = opts;
@@ -100,7 +145,7 @@ export const localSessionActions = {
       } catch (err) {
         sessionStateAtom.update(old =>
           produce(old, draft => {
-            draft.perGame[api.gameId].containers[sessionId].error = new Error(
+            draft[api.gameId].containers[sessionId].error = new Error(
               "The moves in this session where not valid!"
             );
           })
@@ -114,7 +159,7 @@ export const localSessionActions = {
     } catch (err) {
       sessionStateAtom.update(old =>
         produce(old, draft => {
-          draft.perGame[api.gameId].containers[sessionId].error = new Error(
+          draft[api.gameId].containers[sessionId].error = new Error(
             "Failed to read this session"
           );
         })

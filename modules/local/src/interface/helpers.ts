@@ -46,13 +46,15 @@ export const ensureGameSessions = (api: AlgolStaticGameAPI) => {
   if (!val[gameId]) {
     sessionStateAtom.update(old =>
       produce(old, draft => {
-        if (!draft.perGame[gameId]) {
-          draft.perGame[gameId] = getInitialLocalSessionGameState(api);
+        if (!draft[gameId]) {
+          draft[gameId] = getInitialLocalSessionGameState(api);
         }
       })
     );
   }
   if (!gameAtoms[gameId]) {
+    // eslint-disable-next-line
+    // @ts-ignore
     gameAtoms[gameId] = focusAtom(sessionStateAtom, o => o.prop[gameId]);
   }
 };
@@ -68,7 +70,7 @@ export const updateContainer = (
   }
   sessionStateAtom.update(old =>
     produce(old, draft => {
-      draft.perGame[api.gameId].containers[container.id] = container;
+      draft[api.gameId]!.containers[container.id] = container;
     })
   );
 };

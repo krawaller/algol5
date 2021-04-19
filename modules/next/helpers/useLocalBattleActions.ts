@@ -1,13 +1,7 @@
 import { useMemo } from "react";
 import { AlgolBattle, AlgolStaticGameAPI } from "../../types";
 import { BattleMode } from "../../ui/src/contexts";
-import { parseSeed } from "../../encoding/src/seed";
-import {
-  importSessionFromBattle,
-  writeSession,
-  forkSessionFromBattle,
-  deleteSession,
-} from "../../local/src";
+import { localSessionActions } from "../../local/expose";
 import { useRouter } from "./router";
 import { useBattleNavActions } from "./useBattleNavActions";
 
@@ -28,7 +22,7 @@ export const useLocalBattleActions = (api: AlgolStaticGameAPI) => {
           query: { sid: `new_${code}`, m: mode || "playing" },
         }),
       deleteSession: (sessionId: string, retreatToGameLobby: boolean) => {
-        deleteSession(api.gameId, sessionId);
+        localSessionActions.deleteSession(sessionId, api.gameId);
         if (retreatToGameLobby) {
           battleNavActions.toGameLobby();
         }
@@ -37,25 +31,15 @@ export const useLocalBattleActions = (api: AlgolStaticGameAPI) => {
         battleNavActions.toSession(sessionId);
       },
       forkBattleFrame: (battle: AlgolBattle, frame: number) => {
-        const historyFrame = battle.history[frame];
-        const newBattle = api.fromFrame(historyFrame, battle.variant.code);
-        const session = forkSessionFromBattle(
-          newBattle,
-          api.iconMap,
-          api.gameId
-        );
-        writeSession(api.gameId, session);
+        const { session } = localSessionActions.forkBattleFrame({
+          battle,
+          frame,
+          api,
+        });
         battleNavActions.toSession(session.id);
       },
-      importSession: (str: string) => {
-        const save = parseSeed(str, api.gameId);
-        const battle = api.fromSave(save);
-        const session = importSessionFromBattle(
-          battle,
-          api.iconMap,
-          api.gameId
-        );
-        writeSession(api.gameId, session);
+      importSession: (seed: string) => {
+        const { session } = localSessionActions.importSession({ seed, api });
         battleNavActions.toSession(session.id);
       },
     }),

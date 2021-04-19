@@ -7,12 +7,12 @@ import {
 } from "../../../../types";
 import css from "./SessionList.cssProxy";
 import { Board } from "../Board";
-import { SessionLoadFail } from "../../../../local/src";
 import { ListItem } from "../List";
 import { useAppActions } from "../../contexts";
+import { SessionContainer } from "../../../../local/expose";
 
 type SessionListLineErrorProps = {
-  fail: SessionLoadFail;
+  fail: SessionContainer;
   graphics: AlgolGameGraphics;
   meta: AlgolMeta<AlgolGameBlobAnon>;
 };
@@ -29,12 +29,12 @@ export const SessionListLineError = (props: SessionListLineErrorProps) => {
   const onClick = () =>
     appActions.reportError(
       decorateError({
-        err: fail.error,
+        err: fail.error!,
         description: `Something has happened to this ${meta.name} save file, and it couldn't be correctly read.`,
         errorId: "local-save-parse-error",
         meta: {
           gameId: meta.id,
-          saveStr: fail.str,
+          saveStr: fail.error!.message,
           saveId: fail.id,
         },
       }),

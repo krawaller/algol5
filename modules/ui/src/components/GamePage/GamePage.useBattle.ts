@@ -5,15 +5,10 @@ import {
   AlgolSession,
 } from "../../../../types";
 import {
-  newSessionFromBattle,
-  updateSession,
-  writeSession,
-  session2battle,
   getLatestSessionIdForGame,
-  getSessionById,
-  setLatestSessionIdForGame,
   setLatestSessionInfo,
-} from "../../../../local/src";
+  localSessionActions,
+} from "../../../../local/expose";
 import { BattleNavActions } from "../../contexts";
 
 type BattleAction =
@@ -31,7 +26,6 @@ type BattleHookState = {
   frame: number;
   session: AlgolSession | null;
   hasPrevious: boolean;
-  corruptSessions: Record<string, string>;
 };
 
 const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
@@ -49,9 +43,10 @@ const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
       };
     } else if (cmnd === "new") {
       // user started a new local battle! initiate it
-      const battle = api.newBattle(arg);
-      const session = newSessionFromBattle(battle, api.iconMap, api.gameId);
-      setLatestSessionIdForGame(api.gameId, session.id);
+      const { battle, session } = localSessionActions.newSession({
+        api,
+        code: arg,
+      });
       return {
         ...state,
         battle,
@@ -63,44 +58,22 @@ const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
       // user chose a battle in the list of saved battles. we load it
       // and set it as current battle.
       const sessionId = arg;
-      try {
-        const session = getSessionById(api.gameId, sessionId)!;
-        try {
-          const battle = session2battle(session, api);
-          setLatestSessionIdForGame(api.gameId, session.id);
-          return {
-            ...state,
-            battle,
-            session,
-            frame: battle.history.length - 1,
-            hasPrevious: true,
-          };
-        } catch (e) {
-          alert(
-            `The moves in session ${sessionId} did not make a valid battle! :(`
-          );
-          return {
-            ...state,
-            battle: null,
-            session: null,
-            corruptSessions: {
-              ...state.corruptSessions,
-              [sessionId]: "Failed to load this session",
-            },
-          };
-        }
-      } catch (e) {
-        alert(
-          `Failed to read session ${sessionId}! The savefile is corrupt. :(`
-        );
+      const { session, battle, error } = localSessionActions.loadSession({
+        sessionId,
+        api,
+      });
+      if (error) {
+        alert(error);
         return {
           ...state,
           battle: null,
           session: null,
-          corruptSessions: {
-            ...state.corruptSessions,
-            [sessionId]: "Failed to read this session",
-          },
+        };
+      } else {
+        return {
+          ...state,
+          battle,
+          session,
         };
       }
     } else {
@@ -109,8 +82,11 @@ const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
       let newFrame = state.frame;
       let session = state.session;
       if (cmnd === "endTurn") {
-        session = updateSession(battle, state.session!, api.iconMap);
-        writeSession(api.gameId, session);
+        session = localSessionActions.updateSessionFromBattle({
+          battle,
+          session: session!,
+          api,
+        });
         newFrame = battle.history.length - 1;
       }
       return {
@@ -140,7 +116,6 @@ export function useBattle(
       frame: -1,
       session: null,
       hasPrevious: !!getLatestSessionIdForGame(api.gameId),
-      corruptSessions: {},
     }
   );
   const justStartedNew = useRef(false);

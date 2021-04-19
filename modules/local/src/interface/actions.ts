@@ -1,109 +1,23 @@
-import { Atom, atom, focusAtom } from "klyva";
-import produce from "immer";
-import { parseSeed } from "../../../encoding/src/seed";
+import { focusAtom } from "klyva";
 import { GameId } from "../../../games/dist/list";
 import { AlgolBattle, AlgolSession, AlgolStaticGameAPI } from "../../../types";
+import { parseSeed } from "../../../encoding/src/seed/seed.parse";
 import {
   forkSessionFromBattle,
   importSessionFromBattle,
   session2battle,
 } from "../session";
+import { gameAtoms, sessionStateAtom } from "./atoms";
+import { ensureGameSessions, updateContainer } from "./helpers";
+import { LocalSessionGameState } from "./types";
 import {
   deleteSession,
   getSessionById,
-  getSessionList,
-  isSessionLoadFail,
   setLatestSessionIdForGame,
-  writeSession,
 } from "../storage";
+import produce from "immer";
 
-type SessionContainer =
-  | { session: AlgolSession; error: null; id: string }
-  | { session: AlgolSession | null; error: Error; id: string };
-
-type LocalSessionGameState = {
-  containers: Record<string, SessionContainer>;
-  retrieved: false | true | Error;
-};
-
-const getInitialLocalSessionGameState = (
-  api: AlgolStaticGameAPI
-): LocalSessionGameState => {
-  let containers: Record<string, SessionContainer> = {};
-  try {
-    containers = getSessionList(api.gameId, false)
-      .concat(getSessionList(api.gameId, true))
-      .map(s => {
-        if (isSessionLoadFail(s))
-          return { session: null, error: s.error, id: s.id };
-        if (!api.variants.find(v => v.code === s.variantCode)) {
-          return {
-            session: s,
-            error: new Error("Unknown variant code"),
-            id: s.id,
-          };
-        }
-        return { session: s, error: null, id: s.id };
-      })
-      .reduce((memo, c) => {
-        memo[c.id] = c;
-        return memo;
-      }, {} as Record<string, SessionContainer>);
-    return {
-      containers,
-      retrieved: true,
-    };
-  } catch (err) {
-    return {
-      containers: {},
-      retrieved: err,
-    };
-  }
-};
-
-type LocalSessionState = {
-  perGame: Partial<Record<GameId, LocalSessionGameState>>;
-};
-
-const sessionStateAtom = atom<LocalSessionState>({ perGame: {} });
-
-const gameAtoms: Partial<Record<GameId, Atom<LocalSessionGameState>>> = {};
-
-const ensureGameSessions = (api: AlgolStaticGameAPI) => {
-  const { gameId } = api;
-  const val = sessionStateAtom.getValue();
-  if (!val[gameId]) {
-    sessionStateAtom.update(old =>
-      produce(old, draft => {
-        if (!draft.perGame[gameId]) {
-          draft.perGame[gameId] = getInitialLocalSessionGameState(api);
-        }
-      })
-    );
-  }
-  if (!gameAtoms[gameId]) {
-    gameAtoms[gameId] = focusAtom(sessionStateAtom, o => o.prop[gameId]);
-  }
-};
-
-// Write to disk and update atom
-const updateContainer = (
-  container: SessionContainer,
-  api: AlgolStaticGameAPI
-) => {
-  ensureGameSessions(api);
-  if (container.session) {
-    writeSession(api.gameId, container.session);
-  }
-  sessionStateAtom.update(old =>
-    produce(old, draft => {
-      draft.perGame[api.gameId].containers[container.id] = container;
-    })
-  );
-};
-
-// Stateful mostly just to track corrupt session state
-export const brain = {
+export const localSessionActions = {
   getSessions: (api: AlgolStaticGameAPI) => {
     ensureGameSessions(api);
     return sessionStateAtom.getValue[api.gameId];

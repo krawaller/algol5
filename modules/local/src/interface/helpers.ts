@@ -1,5 +1,5 @@
 import produce from "immer";
-import { focusAtom } from "klyva";
+import { atom } from "klyva";
 import { AlgolStaticGameAPI } from "../../../types";
 import { getSessionList, isSessionLoadFail, writeSession } from "../storage";
 import { gameAtoms, sessionStateAtom } from "./atoms";
@@ -51,11 +51,7 @@ export const ensureGameSessions = (api: AlgolStaticGameAPI) => {
         }
       })
     );
-  }
-  if (!gameAtoms[gameId]) {
-    // eslint-disable-next-line
-    // @ts-ignore
-    gameAtoms[gameId] = focusAtom(sessionStateAtom, o => o.prop[gameId]);
+    gameAtoms[gameId] = atom(get => get(sessionStateAtom)[gameId]);
   }
 };
 

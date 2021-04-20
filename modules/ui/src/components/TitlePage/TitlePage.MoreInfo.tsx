@@ -5,7 +5,7 @@ import { Markdown } from "../Markdown";
 import { ButtonGroup } from "../ButtonGroup";
 import { ButtonBar } from "../ButtonBar";
 import { data, TitleData } from "../../../../payloads/dist/titleData";
-import { getLatestSessionInfo } from "../../../../local/src";
+import { getLatestSessionInfo } from "../../../../local/expose";
 import { useAppActions } from "../../contexts";
 
 const latestGame = data

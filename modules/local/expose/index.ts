@@ -3,5 +3,7 @@ export * from "../src/interface/types";
 export {
   getLatestSessionIdForGame,
   setLatestSessionInfo,
+  getLatestSessionInfo,
   setLatestVisitedGameId,
+  getLatestVisitedGameId,
 } from "../src/storage";

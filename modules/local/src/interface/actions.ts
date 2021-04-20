@@ -157,11 +157,20 @@ export const localSessionActions = {
         };
       }
     } catch (err) {
+      if (!sessionStateAtom.getValue()[api.gameId]?.containers[sessionId]) {
+        return {
+          battle: null,
+          session: null,
+          error: `Failed to find session with id "${sessionId}"`,
+        };
+      }
       sessionStateAtom.update(old =>
         produce(old, draft => {
-          draft[api.gameId].containers[sessionId].error = new Error(
-            "Failed to read this session"
-          );
+          if (draft[api.gameId].containers[sessionId]) {
+            draft[api.gameId].containers[sessionId].error = new Error(
+              "Failed to read this session"
+            );
+          }
         })
       );
       return {

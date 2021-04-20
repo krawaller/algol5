@@ -19,7 +19,7 @@ export const SessionList = () => {
     [api]
   );
 
-  if (sessionInfo.retrieved === false) {
+  if (!sessionInfo || sessionInfo.retrieved === false) {
     return null;
   }
   if (sessionInfo.retrieved instanceof Error) {

@@ -8,19 +8,18 @@ import {
 import css from "./SessionList.cssProxy";
 import { ButtonGroup } from "../ButtonGroup";
 import { Button } from "../Button";
-import { deleteGameSessions } from "../../../../local/src";
 import { useAppActions } from "../../contexts";
 
 type SessionListFullErrorProps = {
   error: AlgolError;
-  updateList: () => void;
   meta: AlgolMeta<AlgolGameBlobAnon>;
+  wipe: () => void;
 };
 
 export const SessionListFullError: FunctionComponent<SessionListFullErrorProps> = ({
   error,
-  updateList,
   meta,
+  wipe,
 }) => {
   const appActions = useAppActions();
   const handler = () =>
@@ -44,13 +43,7 @@ export const SessionListFullError: FunctionComponent<SessionListFullErrorProps> 
         <Button onClick={handler} controlId="local-session-full-error-btn">
           Report error
         </Button>
-        <Button
-          onClick={() => {
-            deleteGameSessions(meta.id);
-            updateList();
-          }}
-          controlId="local-session-full-error-purge"
-        >
+        <Button onClick={wipe} controlId="local-session-full-error-purge">
           Remove corrupted save data
         </Button>
       </ButtonGroup>

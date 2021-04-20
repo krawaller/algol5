@@ -19,17 +19,10 @@ type GameLandingProps = {
   graphics: AlgolGameGraphics;
   variants: AlgolVariantAnon[];
   previousSessionId?: string | null;
-  corruptSessions: Record<string, string>;
 };
 
 export const GameLanding: FunctionComponent<GameLandingProps> = props => {
-  const {
-    meta,
-    graphics,
-    previousSessionId,
-    variants,
-    corruptSessions,
-  } = props;
+  const { meta, graphics, previousSessionId, variants } = props;
   const [isSessionModalOpen, openSessionModal, closeSessionModal] = useModal();
   const [isRemoteModalOpen, openRemoteModal, closeRemoteModal] = useModal();
   const { battleMode, sessionId } = useAppState();
@@ -73,7 +66,6 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
           graphics={graphics}
           previousSessionId={previousSessionId}
           variants={variants}
-          corruptSessions={corruptSessions}
         />
       </Modal>
     </Fragment>

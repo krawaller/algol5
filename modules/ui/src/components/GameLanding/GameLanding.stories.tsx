@@ -25,7 +25,6 @@ storiesOf("GameLanding", module).add("init game", () => {
       key={gameId}
       meta={meta[gameId]}
       graphics={dataURIs[gameId]}
-      corruptSessions={{}}
       previousSessionId={hasPrevious ? "somePreviousId" : undefined}
       variants={variants}
     />

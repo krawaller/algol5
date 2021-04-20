@@ -15,7 +15,7 @@ import { BattleMove } from "../BattleMove";
 import {
   getLatestSessionIdForGame,
   setLatestVisitedGameId,
-} from "../../../../local/src";
+} from "../../../../local/expose";
 import { makeSessionNav } from "../../../../common/nav/makeSessionNav";
 import { makeGameNav } from "../../../../common/nav/makeGameNav";
 import { board2sprites, sprites2arrangement } from "../../../../common";
@@ -35,10 +35,11 @@ export const GamePage = () => {
   const { battleMode: givenMode = "gamelobby", sessionId } = useAppState();
   const appActions = useAppActions();
   const { api, graphics, meta, demo, rules } = gamePayload;
-  const [
-    { battle, frame, session, corruptSessions },
-    battleActions,
-  ] = useBattle(api, sessionId as string, battleNavActions.toSession);
+  const [{ battle, frame, session }, battleActions] = useBattle(
+    api,
+    sessionId as string,
+    battleNavActions.toSession
+  );
   const ui = useUI(api, battle, frame, demo, givenMode);
   const mode = battle ? givenMode : "gamelobby";
 
@@ -99,7 +100,6 @@ export const GamePage = () => {
         graphics={graphics}
         previousSessionId={previousSessionId}
         variants={api.variants}
-        corruptSessions={corruptSessions}
       />
     );
   }

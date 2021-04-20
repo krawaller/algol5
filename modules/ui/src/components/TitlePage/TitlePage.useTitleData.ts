@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useMemo } from "react";
-import { getLatestVisitedGameId } from "../../../../local/src";
+import { getLatestVisitedGameId } from "../../../../local/expose";
 import { data } from "../../../../payloads/dist/titleData";
 
 const list = data;

@@ -18,11 +18,10 @@ type NewLocalSessionProps = {
   previousSessionId?: string | null;
   meta: AlgolMeta<AlgolGameBlobAnon>;
   variants: AlgolVariantAnon[];
-  corruptSessions: Record<string, string>;
 };
 
 export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props => {
-  const { meta, graphics, variants, corruptSessions } = props;
+  const { variants } = props;
   const localBattleActions = useLocalBattleActions();
   const filteredVariants = variants.filter(v => !v.hidden);
   const [variant, setVariant] = useState<string | number>(
@@ -66,12 +65,7 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
         Load last battle
       </Button> */}
       <Box title="Load previous session">
-        <SessionList
-          meta={meta}
-          graphics={graphics}
-          variants={variants}
-          corruptSessions={corruptSessions}
-        />
+        <SessionList />
       </Box>
       <Box title="Import session">
         <ImportBattle />

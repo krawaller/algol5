@@ -1,26 +1,15 @@
 import { useMemo } from "react";
 import { AlgolBattle, AlgolStaticGameAPI } from "../../types";
-import { BattleMode } from "../../ui/src/contexts";
 import { localSessionActions } from "../../local/expose";
 import { useRouter } from "./router";
 import { useBattleNavActions } from "./useBattleNavActions";
-
-const gameRoot = (path: string) =>
-  path
-    .split("/")
-    .slice(0, 3)
-    .join("/");
 
 export const useLocalBattleActions = (api: AlgolStaticGameAPI) => {
   const router = useRouter();
   const battleNavActions = useBattleNavActions(router);
   const actions = useMemo(
     () => ({
-      newLocalBattle: (code: string, mode?: BattleMode) =>
-        router.push({
-          pathname: gameRoot(router.pathname),
-          query: { sid: `new_${code}`, m: mode || "playing" },
-        }),
+      newLocalBattle: battleNavActions.toNewLocalBattle,
       deleteSession: (sessionId: string, retreatToGameLobby: boolean) => {
         localSessionActions.deleteSession(sessionId, api.gameId);
         if (retreatToGameLobby) {

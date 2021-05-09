@@ -62,18 +62,21 @@ const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
         sessionId,
         api,
       });
+      const frame = battle ? battle.history.length - 1 : -1;
       if (error) {
         alert(error);
         return {
           ...state,
           battle: null,
           session: null,
+          frame,
         };
       } else {
         return {
           ...state,
           battle,
           session,
+          frame,
         };
       }
     } else {

@@ -11,7 +11,7 @@ import { SessionList } from "../SessionList";
 import { ImportBattle } from "../ImportBattle";
 import { Box } from "../Box";
 import { VariantSelector } from "../VariantSelector";
-import { useLocalBattleActions } from "../../contexts";
+import { useBattleNav } from "../../contexts";
 
 type NewLocalSessionProps = {
   graphics: AlgolGameGraphics;
@@ -22,7 +22,7 @@ type NewLocalSessionProps = {
 
 export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props => {
   const { variants } = props;
-  const localBattleActions = useLocalBattleActions();
+  const battleNav = useBattleNav();
   const filteredVariants = variants.filter(v => !v.hidden);
   const [variant, setVariant] = useState<string | number>(
     filteredVariants[0].code
@@ -46,7 +46,7 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
           )}
           <Button
             big
-            onClick={() => localBattleActions.newLocalBattle(variant as string)}
+            onClick={() => battleNav.toNewLocalBattle(variant as string)}
             text="Create"
           />
         </Fragment>

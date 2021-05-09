@@ -35,9 +35,9 @@ export const useBattleNavActions = (router: Router) => {
           pathname: gameRoot(router.pathname),
           query: { sid: sessionId, m: mode || "battlelobby" },
         }),
-      newLocalBattle: (code: string, mode?: BattleMode) =>
+      toNewLocalBattle: (code: string, mode?: BattleMode, slug?: string) =>
         router.push({
-          pathname: gameRoot(router.pathname),
+          pathname: slug ? `/games/${slug}/` : gameRoot(router.pathname),
           query: { sid: `new_${code}`, m: mode || "playing" },
         }),
     }),

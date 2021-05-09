@@ -6,6 +6,7 @@ export type BattleNavActions = {
   toGameLobby: () => void;
   toBattleLobby: () => void;
   toBattleControls: () => void;
+  toNewLocalBattle: (code: string, mode?: BattleMode, slug?: string) => void;
   toSession: (
     sessionId: string,
     mode?: BattleMode | undefined,
@@ -18,7 +19,9 @@ export const fakeBattleNavActions: BattleNavActions = {
   toGameLobby: () => console.log("to game lobby"),
   toBattleLobby: () => console.log("to battle lobby"),
   toBattleControls: () => console.log("to battle controls"),
-  toSession: (id, mode) => console.log("to session", id, mode),
+  toNewLocalBattle: (code, mode, slug) =>
+    console.log("to new local battle", { code, mode, slug }),
+  toSession: (id, mode) => console.log("to session", { id, mode }),
 };
 
 export const BattleNavContext = createContext(fakeBattleNavActions);

@@ -79,25 +79,25 @@ const makeReducerForAPI = (api: AlgolStaticGameAPI) => {
           frame,
         };
       }
-    } else {
-      // action was mark, command or endTurn. passing it on to game API
+    } else if (cmnd === "endTurn") {
+      // we update session with the submitted turn
       const battle = api.performAction(state.battle!, cmnd, instr[1]);
-      let newFrame = state.frame;
-      let session = state.session;
-      if (cmnd === "endTurn") {
-        session = localSessionActions.updateSessionFromBattle({
-          battle,
-          session: session!,
-          api,
-        });
-        newFrame = battle.history.length - 1;
-      }
+      const session = localSessionActions.updateSessionFromBattle({
+        battle,
+        session: state.session!,
+        api,
+      });
       return {
-        ...state,
-        frame: newFrame,
+        frame: battle.history.length - 1,
         battle,
         session,
         hasPrevious: true,
+      };
+    } else {
+      // action was mark / command / undo, so we just use API to locally apply
+      return {
+        ...state,
+        battle: api.performAction(state.battle!, cmnd, instr[1]),
       };
     }
   };

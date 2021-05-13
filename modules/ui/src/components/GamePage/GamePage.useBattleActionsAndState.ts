@@ -24,7 +24,7 @@ export const useBattleActionsAndState = (api: AlgolStaticGameAPI) => {
           ...current,
           frame,
         })),
-      newLocal: (code: string) => {
+      newLocalSession: (code: string) => {
         const { battle, session } = localSessionActions.newSession({
           api,
           code,
@@ -35,7 +35,7 @@ export const useBattleActionsAndState = (api: AlgolStaticGameAPI) => {
           session,
         });
       },
-      load: (sessionId: string) => {
+      loadSession: (sessionId: string) => {
         // TODO - act different if remote
         const { session, battle, error } = localSessionActions.loadSession({
           sessionId,

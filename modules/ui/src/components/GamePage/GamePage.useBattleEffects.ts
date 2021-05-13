@@ -68,9 +68,9 @@ export function useBattleEffects(opts: UseBattleEffectsOpts) {
       if (sessionId.match(/^new_/)) {
         const code = sessionId.slice(4);
         justStartedNew.current = true;
-        actions.newLocal(code);
+        actions.newLocalSession(code);
       } else {
-        actions.load(sessionId);
+        actions.loadSession(sessionId);
       }
     }
   }, [sessionId, api]);

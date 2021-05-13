@@ -10,7 +10,7 @@ import { useDemo } from "../../helpers";
 
 export const useUI = (
   api: AlgolStaticGameAPI,
-  battle: AlgolBattle | null,
+  battle: AlgolBattle | null | undefined,
   battleFrame: number,
   demo: AlgolDemo,
   mode: "gamelobby" | "battlelobby" | "playing" | "history" | "battlehelp"

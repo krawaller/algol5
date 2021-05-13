@@ -2,7 +2,7 @@
  * Used in the Next app as a "homepage" for the individual games.
  */
 
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode } from "react";
 
 import { Board } from "../Board";
 import { Page } from "../Page";
@@ -10,60 +10,29 @@ import { BattleLanding } from "../BattleLanding";
 import { GameLanding } from "../GameLanding";
 import { BattleHistory } from "../BattleHistory";
 import { useUI } from "./GamePage.useUI";
-import { useBattle } from "./GamePage.useBattle";
 import { BattleMove } from "../BattleMove";
-import {
-  getLatestSessionIdForGame,
-  setLatestVisitedGameId,
-} from "../../../../local/expose";
-import { makeSessionNav } from "../../../../common/nav/makeSessionNav";
-import { makeGameNav } from "../../../../common/nav/makeGameNav";
-import { board2sprites, sprites2arrangement } from "../../../../common";
-import { useRemoteAPI } from "../../../../remote/utils/context";
-import {
-  useAppActions,
-  useAppState,
-  useBattleNav,
-  useGamePayload,
-} from "../../contexts";
-
-const SCREENSHOT = false; // TODO - setting somewhere!
+import { getLatestSessionIdForGame } from "../../../../local/expose";
+import { useAppState, useGamePayload } from "../../contexts";
+import { useBattleActionsAndState } from "./GamePage.useBattleActionsAndState";
+import { useBattleEffects } from "./GamePage.useBattleEffects";
 
 export const GamePage = () => {
-  const battleNavActions = useBattleNav();
   const gamePayload = useGamePayload();
   const { battleMode: givenMode = "gamelobby", sessionId } = useAppState();
-  const appActions = useAppActions();
   const { api, graphics, meta, demo, rules } = gamePayload;
-  const [{ battle, frame, session }, battleActions] = useBattle(
-    api,
-    sessionId as string,
-    battleNavActions.toSession
-  );
+  const [state, battleActions] = useBattleActionsAndState(api);
+  const { battle, frame, session } = state;
   const ui = useUI(api, battle, frame, demo, givenMode);
   const mode = battle ? givenMode : "gamelobby";
-
-  useEffect(() => setLatestVisitedGameId(api.gameId), [api.gameId]);
-
-  const remoteAPI = useRemoteAPI();
-  useEffect(() => {
-    remoteAPI.game.setGameAPI(api);
-    return () => remoteAPI.game.setGameAPI(null);
-  }, [api]);
-
-  useEffect(() => {
-    appActions.setNav(
-      mode === "gamelobby"
-        ? makeGameNav(gamePayload.meta)
-        : makeSessionNav({
-            mode,
-            session: session!,
-            battleNavActions,
-            meta: gamePayload.meta,
-            isNew: Boolean(sessionId && sessionId.match(/new/)),
-          })
-    );
-  }, [mode, sessionId, appActions, battleNavActions]);
+  useBattleEffects({
+    api,
+    actions: battleActions,
+    state,
+    meta,
+    mode,
+    sessionId,
+    ui,
+  });
 
   // TODO - maybe not read this on every render? move to state somewhere?
   const previousSessionId = getLatestSessionIdForGame(api.gameId);
@@ -101,21 +70,6 @@ export const GamePage = () => {
         previousSessionId={previousSessionId}
         variants={api.variants}
       />
-    );
-  }
-
-  if (SCREENSHOT && mode === "playing") {
-    console.log(
-      "SCREENSHOT",
-      sprites2arrangement({
-        iconMap: api.iconMap,
-        sprites: board2sprites({
-          iconMap: api.iconMap,
-          marks: ui.board.marks,
-          units: ui.board.units,
-          potentialMarks: ui.board.potentialMarks,
-        }),
-      })
     );
   }
 

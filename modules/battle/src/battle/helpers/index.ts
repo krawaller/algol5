@@ -9,3 +9,4 @@ export * from "./inflateBattleSave";
 export * from "./makeBattleSave";
 export * from "./addStarvationToStep";
 export * from "./executeAction";
+export * from "./randomEndTurn";

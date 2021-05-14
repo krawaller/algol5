@@ -44,7 +44,7 @@ export function useBattleEffects(opts: UseBattleEffectsOpts) {
     return () => remoteAPI.game.setGameAPI(null);
   }, [api]);
 
-  // update nav
+  // update nav map whenever we change mode or sessionId
   useEffect(() => {
     appActions.setNav(
       mode === "gamelobby"

@@ -9,8 +9,8 @@ import { useUI } from "./GamePage.useUI";
 import { useAppState, useGamePayload } from "../../contexts";
 import { useBattleActionsAndState } from "./GamePage.useBattleActionsAndState";
 import { useBattleEffects } from "./GamePage.useBattleEffects";
-import { Board } from "../Board";
 import { GamePageBody } from "./GamePage.Body";
+import { GamePageBoard } from "./GamePage.Board";
 
 export const GamePage = () => {
   // static assets for the current game
@@ -25,7 +25,7 @@ export const GamePage = () => {
   const { battle, frame } = state;
   const mode = battle ? givenMode : "gamelobby";
 
-  // current rendered board
+  // current rendered board (will be for demo while no active battle)
   const ui = useUI(api, battle, frame, demo, givenMode);
 
   // battle-related side effects
@@ -41,17 +41,14 @@ export const GamePage = () => {
 
   return (
     <Page
-      title={gamePayload.meta.name}
+      title={meta.name}
       top={
-        <Board
-          callback={battleActions.mark}
+        <GamePageBoard
+          ui={ui}
+          mode={mode}
           graphics={graphics}
-          units={ui.board.units}
-          marks={ui.board.marks}
-          potentialMarks={ui.board.potentialMarks}
-          anim={ui.board.anim}
-          active={mode === "playing" && !battle!.gameEndedBy}
-          name={mode !== "gamelobby" ? battle!.variant.board : "basic"}
+          battle={battle}
+          mark={battleActions.mark}
         />
       }
       body={

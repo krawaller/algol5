@@ -1,5 +1,5 @@
 import { AlgolGame, AlgolBattle, AlgolBattleSave } from "../../../../types";
-import { stepOptions } from "../../../../common";
+import { isPos, stepOptions } from "../../../../common";
 import { battleAction } from "../battleAction";
 import { newBattle } from "../newBattle";
 
@@ -78,7 +78,7 @@ const executeAction = (
 ) => {
   if (action === "endTurn") {
     return battleAction(game, battle, "endTurn");
-  } else if (action.match(/^[a-z]{1,2}[0-9]{1,2}$/)) {
+  } else if (isPos(action)) {
     return battleAction(game, battle, "mark", action);
   } else {
     return battleAction(game, battle, "command", action);

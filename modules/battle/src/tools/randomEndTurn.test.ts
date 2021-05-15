@@ -1,5 +1,5 @@
-import amazons from "../../../dist/apis/amazons/static";
-import { randomEndTurn } from "./randomEndTurn";
+import amazons from "../../dist/apis/amazons/static";
+import { randomEndTurn } from "../tools/randomEndTurn";
 
 describe("the randomEndTurnPath helper", () => {
   describe("for amazons", () => {

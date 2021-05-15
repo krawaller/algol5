@@ -1,5 +1,5 @@
-import { isPos, stepOptions } from "../../../../common";
-import { AlgolBattle, AlgolStaticGameAPI } from "../../../../types";
+import { isPos, stepOptions } from "../../../common";
+import { AlgolBattle, AlgolStaticGameAPI } from "../../../types";
 
 export const randomEndTurn = (
   api: AlgolStaticGameAPI,

@@ -1,7 +1,7 @@
 import { AlgolGame, AlgolBattle, AlgolBattleSave } from "../../../../types";
 import { stepOptions } from "../../../../common";
-import { battleAction } from "../battleAction";
 import { newBattle } from "../newBattle";
+import { executeAction } from "./executeAction";
 
 export const inflateBattleSave = (
   game: AlgolGame,
@@ -69,18 +69,4 @@ const fastForward = (
     opts = battleOptions(battle);
   }
   return battle;
-};
-
-const executeAction = (
-  game: AlgolGame,
-  battle: AlgolBattle,
-  action: string
-) => {
-  if (action === "endTurn") {
-    return battleAction(game, battle, "endTurn");
-  } else if (action.match(/^[a-z]{1,2}[0-9]{1,2}$/)) {
-    return battleAction(game, battle, "mark", action);
-  } else {
-    return battleAction(game, battle, "command", action);
-  }
 };

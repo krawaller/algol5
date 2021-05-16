@@ -10,7 +10,7 @@ import { useDemo } from "../../helpers";
 
 export const useUI = (
   api: AlgolStaticGameAPI,
-  battle: AlgolBattle | null,
+  battle: AlgolBattle | null | undefined,
   battleFrame: number,
   demo: AlgolDemo,
   mode: "gamelobby" | "battlelobby" | "playing" | "history" | "battlehelp"
@@ -39,11 +39,12 @@ export const useUI = (
           board: battle!.history[battleFrame].board,
           instruction: battle!.history[battleFrame].description,
         };
-        //console.log("BATTLE", battle, battle!.history[battleFrame]);
         if (prevBattleFrame.current !== battleFrame) {
           if (prevBattleFrame.current !== battleFrame - 1) {
-            //console.log("ALARM", prevBattleFrame.current, battleFrame);
-            historyUI.board.anim = emptyAnim;
+            historyUI.board = {
+              ...historyUI.board,
+              anim: emptyAnim,
+            };
           }
           prevBattleFrame.current = battleFrame;
         }

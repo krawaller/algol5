@@ -23,7 +23,6 @@ storiesOf("NewLocalSession", module).add(
     ];
     return (
       <NewLocalSession
-        corruptSessions={{}}
         meta={meta[gameId]}
         graphics={dataURIs[gameId]}
         previousSessionId={hasPrevious ? "somePreviousId" : undefined}

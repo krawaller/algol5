@@ -15,13 +15,13 @@ type SessionListItemProps = {
   session: AlgolSession;
   graphics: AlgolGameGraphics;
   variant: AlgolVariantAnon;
-  corrupt?: string;
+  error?: Error | null;
 };
 
 const EMPTYARR: string[] = [];
 
 export const SessionListItem: FunctionComponent<SessionListItemProps> = props => {
-  const { session, graphics, variant, corrupt } = props;
+  const { session, graphics, variant, error } = props;
   const localBattleActions = useLocalBattleActions();
   const board = sprites2board(session.sprites);
   const pic = (
@@ -34,7 +34,11 @@ export const SessionListItem: FunctionComponent<SessionListItemProps> = props =>
     />
   );
   const content = (
-    <SessionItemInfo session={session} variant={variant} corrupt={corrupt} />
+    <SessionItemInfo
+      session={session}
+      variant={variant}
+      corrupt={error?.message}
+    />
   );
   const onClick = () => {
     localBattleActions.loadLocalSession(session.id);

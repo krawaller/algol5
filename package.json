@@ -34,8 +34,8 @@
     "@types/lodash.isequal": "^4.5.5",
     "@types/node": "^12.12.16",
     "@types/prettier": "^1.19.0",
-    "@types/react": "^16.9.16",
-    "@types/react-dom": "^16.9.4",
+    "@types/react": "^17.0.5",
+    "@types/react-dom": "^17.0.5",
     "@typescript-eslint/eslint-plugin": "^4.9.1",
     "@typescript-eslint/parser": "^4.9.1",
     "babel-loader": "^8.0.6",
@@ -54,7 +54,7 @@
     "jsondiffpatch": "^0.3.11",
     "klyva": "^0.8.3",
     "lodash.isequal": "^4.5.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

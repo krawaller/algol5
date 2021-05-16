@@ -1,8 +1,8 @@
 import css from "./TitlePage.cssProxy";
-import React, { Fragment, useCallback } from "react";
+import React, { Fragment } from "react";
 import { Button } from "../Button";
 import { TitleDemo } from "./TitlePage.useTitleData";
-import { useAppActions } from "../../contexts";
+import { useBattleNav } from "../../contexts";
 import { useModal } from "../../helpers";
 import { Modal } from "../Modal";
 import { TitleMoreInfo } from "./TitlePage.MoreInfo";
@@ -16,13 +16,11 @@ type TitleWelcomeProps = {
 export const TitleWelcome = (props: TitleWelcomeProps) => {
   const { titleDemo } = props;
   const { titleData, actions: titleActions } = titleDemo;
-  const { name, slug, mainVariant } = titleData;
+  const { name, mainVariant, slug } = titleData;
   const [isModalOpen, openModal, closeModal] = useModal();
-  const actions = useAppActions();
-  const goToCurrentGame = useCallback(
-    () => actions.navTo(`/games/${slug}/?sid=new_${mainVariant}&m=playing`),
-    [slug, actions]
-  );
+  const battleNavActions = useBattleNav();
+  const goToCurrentGame = () =>
+    battleNavActions.toNewLocalBattle(mainVariant, "playing", slug);
   return (
     <Fragment>
       <Flicker onLeft={titleActions.dec} onRight={titleActions.inc}>

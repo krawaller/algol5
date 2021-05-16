@@ -4,13 +4,12 @@ import {
   AlgolStaticGameAPI,
   AlgolGameBlobAnon,
 } from "../../types";
+import { isPos } from "../../common";
 import { makeBattleSave } from "../src/battle/helpers";
 import {
   parseBattleSave,
   stringifyBattleSave,
 } from "../../encoding/src/battleSave";
-
-const identifyMark = /^[a-z][0-9]+$/;
 
 export function runGameScripts(
   gameId: string,
@@ -29,7 +28,7 @@ export function runGameScripts(
         ui =
           action === "endTurn"
             ? performAction("endTurn")
-            : identifyMark.test(action)
+            : isPos(action)
             ? performAction("mark", action)
             : performAction("command", action);
       }
@@ -53,7 +52,7 @@ export function runGameScriptsStatic(
         battle =
           action === "win" || action === "endturn" || action === "endTurn"
             ? api.performAction(battle, "endTurn")
-            : identifyMark.test(action)
+            : isPos(action)
             ? api.performAction(battle, "mark", action)
             : api.performAction(battle, "command", action);
       }

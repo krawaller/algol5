@@ -11,10 +11,11 @@
     "build": "next build",
     "start": "next start",
     "export": "next export -o dist && cp vercel.json dist/vercel.json",
-    "deploy": "./commands/deploy.sh"
+    "deploy": "./commands/deploy.sh",
+    "postinstall": "rm -rf node_modules/react; rm -rf node_modules/react-dom; rm -rf node_modules/@types/react"
   },
   "dependencies": {
-    "next": "^9.3.2"
+    "next": "^10.2.0"
   },
   "devDependencies": {
     "svgexport": "^0.4.0"

@@ -22,11 +22,11 @@ export const GamePage = () => {
 
   // current battle state
   const [state, battleActions] = useBattleActionsAndState(api);
-  const { battle, frame } = state;
+  const { battle } = state;
   const mode = battle ? givenMode : "gamelobby";
 
   // current rendered board (will be for demo while no active battle)
-  const ui = useUI(api, battle, frame, demo, givenMode);
+  const ui = useUI({ api, state, demo, mode: givenMode });
 
   // battle-related side effects
   useBattleEffects({

@@ -1,5 +1,4 @@
 import {
-  AlgolBattle,
   AlgolStaticGameAPI,
   AlgolBattleUI,
   AlgolDemo,
@@ -7,23 +6,32 @@ import {
 import { useMemo, useRef } from "react";
 import { demo2ui, emptyBattleUI, emptyAnim } from "../../../../common";
 import { useDemo } from "../../helpers";
+import { BattleMode } from "../../contexts";
+import { BattleHookState } from "./GamePage.useBattleActionsAndState";
 
-export const useUI = (
-  api: AlgolStaticGameAPI,
-  battle: AlgolBattle | null | undefined,
-  battleFrame: number,
-  demo: AlgolDemo,
-  mode: "gamelobby" | "battlelobby" | "playing" | "history" | "battlehelp"
-): AlgolBattleUI => {
+type UseUIOpts = {
+  api: AlgolStaticGameAPI;
+  demo: AlgolDemo;
+  mode: BattleMode;
+  state: BattleHookState;
+};
+
+export const useUI = (opts: UseUIOpts): AlgolBattleUI => {
+  const { demo, mode, api, state } = opts;
+  const { frame: battleFrame, loading, battle } = state;
+  const demoPlaying =
+    mode === "gamelobby" ||
+    (mode === "battlelobby" && !battle) ||
+    loading === "session";
   const { frame: demoFrame, hydrDemo } = useDemo({
     demo,
-    playing: mode === "gamelobby",
+    playing: demoPlaying,
     restart: true,
     gameId: api.gameId,
   });
   const prevBattleFrame = useRef(0);
   return useMemo(() => {
-    if (mode === "gamelobby") {
+    if (demoPlaying) {
       return hydrDemo ? demo2ui(hydrDemo, demoFrame) : emptyBattleUI;
     } else if (battle) {
       // if statement is mostly for TS inference, battle should always be defined here

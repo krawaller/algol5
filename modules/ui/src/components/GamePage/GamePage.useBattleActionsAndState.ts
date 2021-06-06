@@ -19,6 +19,9 @@ export const useBattleActionsAndState = (api: AlgolStaticGameAPI) => {
   });
   const actions = useMemo(
     () => ({
+      wipe: () => {
+        setState({ frame: -1 });
+      },
       toFrame: (frame: number) =>
         setState(current => ({
           ...current,

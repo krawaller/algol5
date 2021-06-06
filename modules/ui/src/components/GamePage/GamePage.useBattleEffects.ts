@@ -72,6 +72,8 @@ export function useBattleEffects(opts: UseBattleEffectsOpts) {
       } else {
         actions.loadSession(sessionId);
       }
+    } else {
+      actions.wipe();
     }
   }, [sessionId, api]);
   const currentSessionId = state.session && state.session.id;

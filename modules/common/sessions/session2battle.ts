@@ -1,4 +1,4 @@
-import { AlgolSession, AlgolStaticGameAPI } from "../../../types";
+import { AlgolSession, AlgolStaticGameAPI } from "../../types";
 
 export const session2battle = (
   session: AlgolSession,

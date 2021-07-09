@@ -11,7 +11,9 @@ import { SessionList } from "../SessionList";
 import { ImportBattle } from "../ImportBattle";
 import { Box } from "../Box";
 import { VariantSelector } from "../VariantSelector";
-import { useBattleNav } from "../../contexts";
+import { useBattleNav, useGamePayload } from "../../contexts";
+import { useAtom } from "klyva";
+import { localSessionActions } from "../../../../local/expose";
 
 type NewLocalSessionProps = {
   graphics: AlgolGameGraphics;
@@ -27,6 +29,8 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
   const [variant, setVariant] = useState<string | number>(
     filteredVariants[0].code
   );
+  const { api } = useGamePayload();
+  const [sessionInfo] = useAtom(localSessionActions.getGameSessionsAtom(api));
   return (
     <div className={css.newLocalSession}>
       <div className={css.newLocalSessionTopInstruction}>
@@ -65,7 +69,7 @@ export const NewLocalSession: FunctionComponent<NewLocalSessionProps> = props =>
         Load last battle
       </Button> */}
       <Box title="Load previous session">
-        <SessionList />
+        <SessionList sessionInfo={sessionInfo} />
       </Box>
       <Box title="Import session">
         <ImportBattle />

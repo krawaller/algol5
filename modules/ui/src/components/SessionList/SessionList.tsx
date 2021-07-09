@@ -1,19 +1,23 @@
 import React, { useCallback } from "react";
 import css from "./SessionList.cssProxy";
 
-import { localSessionActions } from "../../../../local/expose";
+import { GameSessions, localSessionActions } from "../../../../local/expose";
 import { SessionListFullError } from "./SessionList.FullError";
 import { SessionListLineError } from "./SessionList.LineError";
 import { SessionListItem } from "./SessionList.Item";
 import { ButtonGroup } from "../ButtonGroup";
 import { Button } from "../Button";
 import { useGamePayload } from "../../contexts";
-import { useAtom } from "klyva";
 
-export const SessionList = () => {
+type SessionListProps = {
+  sessionInfo: GameSessions;
+};
+
+export const SessionList = (props: SessionListProps) => {
   const { api, meta, graphics } = useGamePayload();
-  const [sessionInfo] = useAtom(localSessionActions.getGameSessionsAtom(api));
+  const { sessionInfo } = props;
 
+  // TODO - act different if remote
   const wipe = useCallback(
     () => localSessionActions.deleteGameSessions(api.gameId),
     [api]

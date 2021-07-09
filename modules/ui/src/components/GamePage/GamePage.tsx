@@ -47,7 +47,7 @@ export const GamePage = () => {
           ui={ui}
           mode={mode}
           graphics={graphics}
-          battle={battle}
+          battleState={state}
           mark={battleActions.mark}
         />
       }

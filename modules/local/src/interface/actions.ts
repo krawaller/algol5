@@ -6,12 +6,10 @@ import {
   forkSessionFromBattle,
   importSessionFromBattle,
   newSessionFromBattle,
-  session2battle,
-  updateSession,
 } from "../session";
 import { gameAtoms, sessionStateAtom } from "./atoms";
 import { ensureGameSessions, updateContainer } from "./helpers";
-import { LocalSessionGameState } from "./types";
+import { GameSessions } from "./types";
 import {
   deleteGameSessions,
   deleteSession,
@@ -19,6 +17,7 @@ import {
   setLatestSessionIdForGame,
 } from "../storage";
 import produce from "immer";
+import { session2battle, updateSession } from "../../../common";
 
 export const localSessionActions = {
   getSessionsForGame: (api: AlgolStaticGameAPI) => {
@@ -30,7 +29,7 @@ export const localSessionActions = {
     return gameAtoms[api.gameId];
   },
   subscribe: (opts: {
-    listener: (v: LocalSessionGameState) => void;
+    listener: (v: GameSessions) => void;
     api: AlgolStaticGameAPI;
   }) => {
     const { listener, api } = opts;

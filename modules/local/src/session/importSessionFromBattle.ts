@@ -4,7 +4,7 @@ import {
   AlgolIconMap,
   localParticipants,
 } from "../../../types";
-import { newSessionId } from "./newSessionId";
+import { newSessionId } from "../../../common/sessions";
 import { board2sprites } from "../../../common";
 import { GameId } from "../../../games/dist/list";
 

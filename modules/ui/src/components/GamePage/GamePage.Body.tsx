@@ -3,6 +3,7 @@ import { BattleLanding } from "../BattleLanding";
 import { GameLanding } from "../GameLanding";
 import { BattleHistory } from "../BattleHistory";
 import { BattleMove } from "../BattleMove";
+import { getCurrentPlr, isWaitingForRemote } from "../../../../common";
 import { getLatestSessionIdForGame } from "../../../../local/expose";
 import { BattleMode } from "../../contexts";
 import {
@@ -29,7 +30,7 @@ export const GamePageBody = (props: GamePageBodyProps) => {
   const previousSessionId = getLatestSessionIdForGame(api.gameId);
 
   if (battleState.loading === "session") {
-    return <div className={css.gamePageSpinner}>...loading...</div>;
+    return <div className={css.centerBox}>...loading...</div>;
   }
 
   if (mode === "history") {
@@ -53,6 +54,14 @@ export const GamePageBody = (props: GamePageBodyProps) => {
       />
     );
   } else if (mode === "playing") {
+    if (isWaitingForRemote(session)) {
+      return (
+        <div className={css.centerBox}>
+          ...waiting for {getCurrentPlr(session)?.name}...
+        </div>
+      );
+    }
+
     // We are actively playing an ongoing battle
     return <BattleMove actions={battleActions} ui={ui} rules={rules} />;
   } else {

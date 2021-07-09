@@ -10,6 +10,7 @@ import {
   BattleHookState,
 } from "./GamePage.useBattleActionsAndState";
 import { AlgolBattleUI, AlgolGamePayload } from "../../../../types";
+import css from "./GamePage.cssProxy";
 
 type GamePageBodyProps = {
   mode: BattleMode;
@@ -26,6 +27,10 @@ export const GamePageBody = (props: GamePageBodyProps) => {
 
   // TODO - maybe not read this on every render? move to state somewhere?
   const previousSessionId = getLatestSessionIdForGame(api.gameId);
+
+  if (battleState.loading === "session") {
+    return <div className={css.gamePageSpinner}>...loading...</div>;
+  }
 
   if (mode === "history") {
     // We are currently watching the history of a battle

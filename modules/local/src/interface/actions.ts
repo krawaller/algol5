@@ -11,7 +11,7 @@ import {
 } from "../session";
 import { gameAtoms, sessionStateAtom } from "./atoms";
 import { ensureGameSessions, updateContainer } from "./helpers";
-import { LocalSessionGameState } from "./types";
+import { GameSessions } from "./types";
 import {
   deleteGameSessions,
   deleteSession,
@@ -30,7 +30,7 @@ export const localSessionActions = {
     return gameAtoms[api.gameId];
   },
   subscribe: (opts: {
-    listener: (v: LocalSessionGameState) => void;
+    listener: (v: GameSessions) => void;
     api: AlgolStaticGameAPI;
   }) => {
     const { listener, api } = opts;

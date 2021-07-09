@@ -28,7 +28,6 @@ export const useUI = (opts: UseUIOpts): AlgolBattleUI => {
   });
   const prevBattleFrame = useRef(0);
   return useMemo(() => {
-
     // if no active battle we show demo
     if (demoPlaying) {
       return hydrDemo ? demo2ui(hydrDemo, demoFrame) : emptyBattleUI;
@@ -36,9 +35,9 @@ export const useUI = (opts: UseUIOpts): AlgolBattleUI => {
 
     // In first render of battlelobby we don't have battle and we are not loading yet
     if (!battle) {
-      return emptyBattleUI
+      return emptyBattleUI;
     }
-    
+
     const battleUi = api.getBattleUI(battle);
 
     // While making moves we show current state
@@ -79,6 +78,8 @@ export const useUI = (opts: UseUIOpts): AlgolBattleUI => {
       return historyUI;
     }
 
-    throw new Error(`Unknown UI request! Mode: "${mode}", has battle: "${Boolean(battle)}"`)
+    throw new Error(
+      `Unknown UI request! Mode: "${mode}", has battle: "${Boolean(battle)}"`
+    );
   }, [battle, hydrDemo, demoFrame, battleFrame, mode]);
 };

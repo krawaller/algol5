@@ -3,11 +3,11 @@ import { atom } from "klyva";
 import { AlgolStaticGameAPI } from "../../../types";
 import { getSessionList, isSessionLoadFail, writeSession } from "../storage";
 import { gameAtoms, sessionStateAtom } from "./atoms";
-import { LocalSessionGameState, SessionContainer } from "./types";
+import { GameSessions, SessionContainer } from "./types";
 
 export const getInitialLocalSessionGameState = (
   api: AlgolStaticGameAPI
-): LocalSessionGameState => {
+): GameSessions => {
   let containers: Record<string, SessionContainer> = {};
   try {
     containers = getSessionList(api.gameId, false)

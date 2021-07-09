@@ -4,7 +4,12 @@ import {
   AlgolDemo,
 } from "../../../../types";
 import { useMemo, useRef } from "react";
-import { demo2ui, emptyBattleUI, emptyAnim } from "../../../../common";
+import {
+  demo2ui,
+  emptyBattleUI,
+  emptyAnim,
+  isWaitingForRemote,
+} from "../../../../common";
 import { useDemo } from "../../helpers";
 import { BattleMode } from "../../contexts";
 import { BattleHookState } from "./GamePage.useBattleActionsAndState";
@@ -18,7 +23,7 @@ type UseUIOpts = {
 
 export const useUI = (opts: UseUIOpts): AlgolBattleUI => {
   const { demo, mode, api, state } = opts;
-  const { frame: battleFrame, loading, battle } = state;
+  const { frame: battleFrame, loading, battle, session } = state;
   const demoPlaying = mode === "gamelobby" || loading === "session";
   const { frame: demoFrame, hydrDemo } = useDemo({
     demo,
@@ -42,6 +47,15 @@ export const useUI = (opts: UseUIOpts): AlgolBattleUI => {
 
     // While making moves we show current state
     if (mode === "playing") {
+      if (isWaitingForRemote(session)) {
+        return {
+          ...battleUi,
+          board: {
+            ...battleUi.board,
+            potentialMarks: [], // no potential marks if remote plr
+          },
+        };
+      }
       return battleUi;
     }
 

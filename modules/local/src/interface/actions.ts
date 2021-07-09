@@ -6,8 +6,6 @@ import {
   forkSessionFromBattle,
   importSessionFromBattle,
   newSessionFromBattle,
-  session2battle,
-  updateSession,
 } from "../session";
 import { gameAtoms, sessionStateAtom } from "./atoms";
 import { ensureGameSessions, updateContainer } from "./helpers";
@@ -19,6 +17,7 @@ import {
   setLatestSessionIdForGame,
 } from "../storage";
 import produce from "immer";
+import { session2battle, updateSession } from "../../../common";
 
 export const localSessionActions = {
   getSessionsForGame: (api: AlgolStaticGameAPI) => {

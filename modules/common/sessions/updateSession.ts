@@ -1,6 +1,8 @@
-import { AlgolBattle, AlgolSession, AlgolIconMap } from "../../../types";
-import { board2sprites } from "../../../common";
+import { AlgolBattle, AlgolSession, AlgolIconMap } from "../../types";
+import { board2sprites } from "..";
 
+// Update the given session to match the given battle
+// (which has presumably been updated via endTurn)
 export function updateSession(
   battle: AlgolBattle,
   session: AlgolSession,

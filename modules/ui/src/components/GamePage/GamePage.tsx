@@ -11,6 +11,8 @@ import { useBattleActionsAndState } from "./GamePage.useBattleActionsAndState";
 import { useBattleEffects } from "./GamePage.useBattleEffects";
 import { GamePageBody } from "./GamePage.Body";
 import { GamePageBoard } from "./GamePage.Board";
+import { AuthGuard } from "../AuthGuard";
+import { sessionIdType } from "../../../../common";
 
 export const GamePage = () => {
   // static assets for the current game
@@ -52,13 +54,15 @@ export const GamePage = () => {
         />
       }
       body={
-        <GamePageBody
-          ui={ui}
-          mode={mode}
-          battleActions={battleActions}
-          battleState={state}
-          gamePayload={gamePayload}
-        />
+        <AuthGuard bypass={sessionIdType(sessionId) !== "remote"} noHeader>
+          <GamePageBody
+            ui={ui}
+            mode={mode}
+            battleActions={battleActions}
+            battleState={state}
+            gamePayload={gamePayload}
+          />
+        </AuthGuard>
       }
     />
   );

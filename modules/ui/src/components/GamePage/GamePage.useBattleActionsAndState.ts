@@ -50,7 +50,7 @@ export const useBattleActionsAndState = (api: AlgolStaticGameAPI) => {
           // Handle loading remote session
           setState({
             frame: -1,
-            loading: "remotesession",
+            loading: "session",
           });
           const { battle, session } = await remote.battle.load(sessionId);
           if (isMounted()) {
@@ -90,7 +90,7 @@ export const useBattleActionsAndState = (api: AlgolStaticGameAPI) => {
             _battle = current.battle!;
             return {
               ...current,
-              loading: "remote-end-turn",
+              loading: "endTurn",
             };
           });
           const { session, battle } = await remote.battle.endTurn({

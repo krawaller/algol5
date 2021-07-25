@@ -17,6 +17,8 @@ import {
 
 import { Icon } from "../Icon";
 import { Button } from "../Button";
+import { useBattleActionsAndState } from "../GamePage/GamePage.useBattleActionsAndState";
+import { useGameAPI } from "../../contexts";
 
 type ContentActions = {
   endTurn: () => void;
@@ -40,6 +42,9 @@ export const Content: React.FunctionComponent<ContentProps> = ({
   content,
   actions = noopActions,
 }) => {
+  const api = useGameAPI();
+  const [{ session }] = useBattleActionsAndState(api);
+  if (!content) return null;
   if (isAlgolContentLine(content)) {
     return (
       <span className={css.contentLine}>
@@ -103,7 +108,7 @@ export const Content: React.FunctionComponent<ContentProps> = ({
     if (player === 1) {
       return (
         <span className={classNames(css.contentPlayer, css.contentPlayer1)}>
-          Player 1
+          {session?.participants[1].name ?? "Player 1"}
         </span>
       );
     } else if (player === 0) {
@@ -115,7 +120,7 @@ export const Content: React.FunctionComponent<ContentProps> = ({
     }
     return (
       <span className={classNames(css.contentPlayer, css.contentPlayer2)}>
-        Player 2
+        {session?.participants[2].name ?? "Player 2"}
       </span>
     );
   }

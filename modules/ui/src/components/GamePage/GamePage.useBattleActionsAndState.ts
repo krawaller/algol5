@@ -5,6 +5,10 @@ import {
   AlgolSession,
 } from "../../../../types";
 import { localSessionActions } from "../../../../local/expose";
+import { useRemoteAPI } from "../../../../remote/utils/context";
+import { sessionIdType } from "../../../../common";
+import { useIsMounted } from "../../helpers";
+import { useAppState } from "../../contexts";
 
 export type BattleHookState = {
   battle?: AlgolBattle | null;
@@ -14,6 +18,9 @@ export type BattleHookState = {
 };
 
 export const useBattleActionsAndState = (api: AlgolStaticGameAPI) => {
+  const remote = useRemoteAPI();
+  const isMounted = useIsMounted();
+  const { sessionId } = useAppState();
   const [state, setState] = useState<BattleHookState>({
     frame: -1,
   });
@@ -38,40 +45,82 @@ export const useBattleActionsAndState = (api: AlgolStaticGameAPI) => {
           session,
         });
       },
-      loadSession: (sessionId: string) => {
-        // TODO - act different if remote
-        const { session, battle, error } = localSessionActions.loadSession({
-          sessionId,
-          api,
-        });
-        if (error) {
-          alert(error);
+      loadSession: async (sessionId: string) => {
+        if (sessionIdType(sessionId) === "remote") {
+          // Handle loading remote session
           setState({
             frame: -1,
+            loading: "remotesession",
           });
-        }
-        const frame = battle ? battle.history.length - 1 : -1;
-        setState({
-          battle,
-          session,
-          frame,
-        });
-      },
-      endTurn: () => {
-        // TODO - act different if remote
-        setState(current => {
-          const battle = api.performAction(current.battle!, "endTurn");
-          const session = localSessionActions.updateSessionFromBattle({
-            battle,
-            session: current.session!,
+          const { battle, session } = await remote.battle.load(sessionId);
+          if (isMounted()) {
+            setState({
+              frame: battle.history.length - 1,
+              session,
+              battle,
+            });
+          }
+        } else {
+          // Handle loading local session
+          const { session, battle, error } = localSessionActions.loadSession({
+            sessionId,
             api,
           });
-          return {
-            frame: battle.history.length - 1,
+          if (error) {
+            alert(error);
+            setState({
+              frame: -1,
+            });
+          }
+          const frame = battle ? battle.history.length - 1 : -1;
+          setState({
             battle,
             session,
-          };
-        });
+            frame,
+          });
+        }
+      },
+      endTurn: async () => {
+        if (sessionIdType(sessionId) === "remote") {
+          // Ending turn in remote battle
+          let _session: AlgolSession;
+          let _battle: AlgolBattle;
+          setState(current => {
+            _session = current.session!;
+            _battle = current.battle!;
+            return {
+              ...current,
+              loading: "remote-end-turn",
+            };
+          });
+          const { session, battle } = await remote.battle.endTurn({
+            session: _session!,
+            battle: _battle!,
+          });
+          if (isMounted()) {
+            setState({
+              session,
+              battle,
+              frame: battle.history.length - 1,
+              loading: null,
+            });
+          }
+        } else {
+          // Ending turn in local battle
+          setState(current => {
+            const battle = api.performAction(current.battle!, "endTurn");
+            const session = localSessionActions.updateSessionFromBattle({
+              battle,
+              session: current.session!,
+              api,
+            });
+            return {
+              frame: battle.history.length - 1,
+              battle,
+              session,
+            };
+          });
+        }
       },
       mark: (pos: string) => {
         setState(current => ({

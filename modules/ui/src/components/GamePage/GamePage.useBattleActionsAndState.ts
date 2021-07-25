@@ -14,7 +14,7 @@ export type BattleHookState = {
   battle?: AlgolBattle | null;
   frame: number;
   session?: AlgolSession | null;
-  loading?: string | null;
+  loading?: "session" | "endTurn" | null;
 };
 
 export const useBattleActionsAndState = (api: AlgolStaticGameAPI) => {
@@ -67,7 +67,7 @@ export const useBattleActionsAndState = (api: AlgolStaticGameAPI) => {
             api,
           });
           if (error) {
-            alert(error);
+            alert(error); // TODO - proper error toaster
             setState({
               frame: -1,
             });
@@ -93,17 +93,25 @@ export const useBattleActionsAndState = (api: AlgolStaticGameAPI) => {
               loading: "endTurn",
             };
           });
-          const { session, battle } = await remote.battle.endTurn({
-            session: _session!,
-            battle: _battle!,
-          });
-          if (isMounted()) {
-            setState({
-              session,
-              battle,
-              frame: battle.history.length - 1,
-              loading: null,
+          try {
+            const { session, battle } = await remote.battle.endTurn({
+              session: _session!,
+              battle: _battle!,
             });
+            if (isMounted()) {
+              setState({
+                session,
+                battle,
+                frame: battle.history.length - 1,
+                loading: null,
+              });
+            }
+          } catch (err) {
+            alert(err); // TODO - proper error toaster
+            setState(current => ({
+              ...current,
+              loading: null,
+            }));
           }
         } else {
           // Ending turn in local battle
@@ -141,7 +149,7 @@ export const useBattleActionsAndState = (api: AlgolStaticGameAPI) => {
         }));
       },
     }),
-    [api]
+    [api, sessionId]
   );
   return [state, actions] as const;
 };

@@ -16,8 +16,13 @@ import {
 } from "./GamePage.useBattleActionsAndState";
 import { makeGameNav } from "../../../../common/nav/makeGameNav";
 import { makeSessionNav } from "../../../../common/nav/makeSessionNav";
-import { useRemoteAPI } from "../../../../remote/utils/context";
-import { board2sprites, sprites2arrangement } from "../../../../common";
+import { useCurrentUser, useRemoteAPI } from "../../../../remote/utils/context";
+import {
+  board2sprites,
+  sessionIdType,
+  sprites2arrangement,
+} from "../../../../common";
+import { useIsMounted } from "../../helpers";
 
 type UseBattleEffectsOpts = {
   api: AlgolStaticGameAPI;
@@ -36,6 +41,8 @@ export function useBattleEffects(opts: UseBattleEffectsOpts) {
   const battleNavActions = useBattleNav();
   const appActions = useAppActions();
   const justStartedNew = useRef(false);
+  const user = useCurrentUser();
+  const isMounted = useIsMounted();
 
   // register api with remote service
   const remoteAPI = useRemoteAPI();
@@ -44,10 +51,26 @@ export function useBattleEffects(opts: UseBattleEffectsOpts) {
     return () => remoteAPI.game.setGameAPI(null);
   }, [api]);
 
+  // subscribe to remote game
+  const unsubRef = useRef<() => void>();
+  useEffect(() => {
+    unsubRef.current?.();
+    if (sessionId && sessionIdType(sessionId) === "remote") {
+      unsubRef.current = remoteAPI.battle.subscribe({
+        sessionId,
+        listener: ({ battle, session }) => {
+          if (isMounted()) {
+            actions.subscriptionUpdate(session, battle);
+          }
+        },
+      });
+    }
+  }, [sessionId]);
+
   // update nav map whenever we change mode or sessionId
   useEffect(() => {
     appActions.setNav(
-      mode === "gamelobby"
+      mode === "gamelobby" || (sessionIdType(sessionId) && !user)
         ? makeGameNav(meta)
         : makeSessionNav({
             mode,
@@ -57,7 +80,7 @@ export function useBattleEffects(opts: UseBattleEffectsOpts) {
             isNew: Boolean(sessionId && sessionId.match(/new/)),
           })
     );
-  }, [mode, sessionId, appActions, battleNavActions]);
+  }, [mode, sessionId, appActions, battleNavActions, user]);
 
   // Register last visited game
   useEffect(() => setLatestVisitedGameId(api.gameId), [api.gameId]);

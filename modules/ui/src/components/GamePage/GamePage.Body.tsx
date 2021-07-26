@@ -33,6 +33,10 @@ export const GamePageBody = (props: GamePageBodyProps) => {
     return <div className={css.centerBox}>...loading...</div>;
   }
 
+  if (battleState.loading === "endTurn") {
+    return <div className={css.centerBox}>...submitting...</div>;
+  }
+
   if (mode === "history") {
     // We are currently watching the history of a battle
     return (
@@ -54,7 +58,7 @@ export const GamePageBody = (props: GamePageBodyProps) => {
       />
     );
   } else if (mode === "playing") {
-    if (isWaitingForRemote(session)) {
+    if (isWaitingForRemote(session) && ui.winner === undefined) {
       return (
         <div className={css.centerBox}>
           ...waiting for {getCurrentPlr(session)?.name}...
@@ -62,7 +66,7 @@ export const GamePageBody = (props: GamePageBodyProps) => {
       );
     }
 
-    // We are actively playing an ongoing battle
+    // We are actively playing an ongoing battle, or it has ended
     return <BattleMove actions={battleActions} ui={ui} rules={rules} />;
   } else {
     // No battle active, we're just at the game landing page

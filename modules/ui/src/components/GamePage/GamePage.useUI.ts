@@ -9,10 +9,12 @@ import {
   emptyBattleUI,
   emptyAnim,
   isWaitingForRemote,
+  sessionIdType,
 } from "../../../../common";
 import { useDemo } from "../../helpers";
-import { BattleMode } from "../../contexts";
+import { BattleMode, useAppState } from "../../contexts";
 import { BattleHookState } from "./GamePage.useBattleActionsAndState";
+import { useCurrentUser } from "../../../../remote/utils/context";
 
 type UseUIOpts = {
   api: AlgolStaticGameAPI;
@@ -23,8 +25,13 @@ type UseUIOpts = {
 
 export const useUI = (opts: UseUIOpts): AlgolBattleUI => {
   const { demo, mode, api, state } = opts;
+  const { sessionId } = useAppState();
+  const user = useCurrentUser();
   const { frame: battleFrame, loading, battle, session } = state;
-  const demoPlaying = mode === "gamelobby" || loading === "session";
+  const demoPlaying =
+    mode === "gamelobby" ||
+    loading === "session" ||
+    (!user && sessionIdType(sessionId) === "remote");
   const { frame: demoFrame, hydrDemo } = useDemo({
     demo,
     playing: demoPlaying,

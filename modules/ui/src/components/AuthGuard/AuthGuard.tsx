@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { useState } from "react";
 import { useCurrentUser, useRemoteAPI } from "../../../../remote/utils/context";
 import { Button } from "../Button";
 import { ButtonGroup } from "../ButtonGroup";
@@ -6,10 +6,18 @@ import { Input } from "../Input";
 import styles from "./AuthGuard.cssProxy";
 
 type AuthGuardProps = {
-  Content: () => JSX.Element;
+  Content?: () => JSX.Element;
+  noHeader?: boolean;
+  bypass?: boolean;
+  children?: JSX.Element;
 };
 
-export const AuthGuard: FunctionComponent<AuthGuardProps> = ({ Content }) => {
+export const AuthGuard = ({
+  Content,
+  noHeader,
+  bypass,
+  children,
+}: AuthGuardProps) => {
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [disabled, setDisabled] = useState(false);
@@ -27,7 +35,8 @@ export const AuthGuard: FunctionComponent<AuthGuardProps> = ({ Content }) => {
       .catch(err => alert(err.message))
       .finally(() => setDisabled(false));
   };
-  if (!user)
+  const content = Content ? <Content /> : children ?? null;
+  if (!user && !bypass)
     return (
       <form className={styles.AuthGuardForm} onSubmit={handleSubmit}>
         <p>Must log in!</p>
@@ -54,14 +63,16 @@ export const AuthGuard: FunctionComponent<AuthGuardProps> = ({ Content }) => {
         </ButtonGroup>
       </form>
     );
-  return (
+  return noHeader || bypass ? (
+    content
+  ) : (
     <div>
       <p>
-        Logged in as {user.userName}!{" "}
+        Logged in as {user?.userName}!{" "}
         <Button onClick={remote.auth.logout}>Sign out</Button>
       </p>
       <hr />
-      <Content />
+      {content}
     </div>
   );
 };

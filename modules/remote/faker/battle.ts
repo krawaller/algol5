@@ -5,7 +5,18 @@ import { currentGame } from "./atoms";
 import { makeFakeBattle } from "./makeFakeBattle";
 import { makeFakeSession } from "./makeFakeSession";
 
+const subs: Record<
+  string,
+  Parameters<AlgolRemoteBattleAPI["subscribe"]>["0"]["listener"]
+> = {};
+
 export const fakerBattleAPI: AlgolRemoteBattleAPI = {
+  subscribe: opts => {
+    subs[opts.sessionId] = opts.listener;
+    return () => {
+      delete subs[opts.sessionId];
+    };
+  },
   load: (id: string) =>
     new Promise(resolve => {
       const api = currentGame.getValue()!;
@@ -25,7 +36,7 @@ export const fakerBattleAPI: AlgolRemoteBattleAPI = {
       const { battle, session } = opts;
       const api = currentGame.getValue()!;
       setTimeout(() => {
-        const updatedBattle = randomEndTurn(api, battle);
+        const updatedBattle = api.performAction(battle, "endTurn");
         const updatedSession = updateSession(
           updatedBattle,
           session,
@@ -35,6 +46,18 @@ export const fakerBattleAPI: AlgolRemoteBattleAPI = {
           battle: updatedBattle,
           session: updatedSession,
         });
+        setTimeout(() => {
+          const randomBattle = randomEndTurn(api, updatedBattle);
+          const randomSession = updateSession(
+            randomBattle,
+            updatedSession,
+            api.iconMap
+          );
+          subs[opts.session.id]?.({
+            battle: randomBattle,
+            session: randomSession,
+          });
+        }, 2000 + 5000 * Math.random());
       }, 500 + 2000 * Math.random());
     }),
 };

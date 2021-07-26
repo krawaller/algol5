@@ -46,7 +46,10 @@ export const SessionList = (props: SessionListProps) => {
         <div className={css.sessionListEmpty}>No saved sessions found</div>
       ) : (
         containers.map(container => {
-          if (!container.session) {
+          const variant = api.variants.find(
+            v => v.code === container.session!.variantCode
+          )!;
+          if (!container.session || !variant) {
             hasErrorLines = true;
             return (
               <SessionListLineError

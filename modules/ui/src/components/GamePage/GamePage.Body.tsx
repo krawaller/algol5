@@ -3,15 +3,20 @@ import { BattleLanding } from "../BattleLanding";
 import { GameLanding } from "../GameLanding";
 import { BattleHistory } from "../BattleHistory";
 import { BattleMove } from "../BattleMove";
-import { getCurrentPlr, isWaitingForRemote } from "../../../../common";
+import { isWaitingForRemote } from "../../../../common";
 import { getLatestSessionIdForGame } from "../../../../local/expose";
 import { BattleMode } from "../../contexts";
 import {
   BattleActions,
   BattleHookState,
 } from "./GamePage.useBattleActionsAndState";
-import { AlgolBattleUI, AlgolGamePayload } from "../../../../types";
+import {
+  AlgolBattleUI,
+  AlgolContentAnon,
+  AlgolGamePayload,
+} from "../../../../types";
 import css from "./GamePage.cssProxy";
+import { Content } from "../Content";
 
 type GamePageBodyProps = {
   mode: BattleMode;
@@ -59,9 +64,16 @@ export const GamePageBody = (props: GamePageBodyProps) => {
     );
   } else if (mode === "playing") {
     if (isWaitingForRemote(session) && ui.winner === undefined) {
+      const content: AlgolContentAnon = {
+        line: [
+          { text: "...waiting for " },
+          { player: session!.player! },
+          { text: " to make a move..." },
+        ],
+      };
       return (
         <div className={css.centerBox}>
-          ...waiting for {getCurrentPlr(session)?.name}...
+          <Content content={content} />
         </div>
       );
     }

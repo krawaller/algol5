@@ -70,7 +70,7 @@ export function useBattleEffects(opts: UseBattleEffectsOpts) {
   // update nav map whenever we change mode or sessionId
   useEffect(() => {
     appActions.setNav(
-      mode === "gamelobby" || (sessionIdType(sessionId) && !user)
+      mode === "gamelobby" || (sessionIdType(sessionId) === "remote" && !user)
         ? makeGameNav(meta)
         : makeSessionNav({
             mode,

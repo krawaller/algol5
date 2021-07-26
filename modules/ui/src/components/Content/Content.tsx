@@ -17,8 +17,7 @@ import {
 
 import { Icon } from "../Icon";
 import { Button } from "../Button";
-import { useBattleActionsAndState } from "../GamePage/GamePage.useBattleActionsAndState";
-import { useGameAPI } from "../../contexts";
+import { useBattleSession } from "../../contexts/battleSession";
 
 type ContentActions = {
   endTurn: () => void;
@@ -42,8 +41,7 @@ export const Content: React.FunctionComponent<ContentProps> = ({
   content,
   actions = noopActions,
 }) => {
-  const api = useGameAPI();
-  const [{ session }] = useBattleActionsAndState(api);
+  const [{ session }] = useBattleSession();
   if (!content) return null;
   if (isAlgolContentLine(content)) {
     return (

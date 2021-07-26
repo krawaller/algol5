@@ -35,6 +35,7 @@ export const useBattleActionsAndState = (api: AlgolStaticGameAPI) => {
           frame,
         })),
       subscriptionUpdate: (session: AlgolSession, battle: AlgolBattle) => {
+        // TODO - do this incrementally
         setState({
           battle,
           session,

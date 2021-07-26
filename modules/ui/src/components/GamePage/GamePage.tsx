@@ -13,6 +13,7 @@ import { GamePageBody } from "./GamePage.Body";
 import { GamePageBoard } from "./GamePage.Board";
 import { AuthGuard } from "../AuthGuard";
 import { sessionIdType } from "../../../../common";
+import { BattleSessionContext } from "../../contexts/battleSession";
 
 export const GamePage = () => {
   // static assets for the current game
@@ -45,24 +46,28 @@ export const GamePage = () => {
     <Page
       title={meta.name}
       top={
-        <GamePageBoard
-          ui={ui}
-          mode={mode}
-          graphics={graphics}
-          battleState={state}
-          mark={battleActions.mark}
-        />
-      }
-      body={
-        <AuthGuard bypass={sessionIdType(sessionId) !== "remote"} noHeader>
-          <GamePageBody
+        <BattleSessionContext.Provider value={[state, battleActions]}>
+          <GamePageBoard
             ui={ui}
             mode={mode}
-            battleActions={battleActions}
+            graphics={graphics}
             battleState={state}
-            gamePayload={gamePayload}
+            mark={battleActions.mark}
           />
-        </AuthGuard>
+        </BattleSessionContext.Provider>
+      }
+      body={
+        <BattleSessionContext.Provider value={[state, battleActions]}>
+          <AuthGuard bypass={sessionIdType(sessionId) !== "remote"} noHeader>
+            <GamePageBody
+              ui={ui}
+              mode={mode}
+              battleActions={battleActions}
+              battleState={state}
+              gamePayload={gamePayload}
+            />
+          </AuthGuard>
+        </BattleSessionContext.Provider>
       }
     />
   );

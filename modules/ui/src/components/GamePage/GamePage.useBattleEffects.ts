@@ -22,6 +22,7 @@ import {
   sessionIdType,
   sprites2arrangement,
 } from "../../../../common";
+import { useIsMounted } from "../../helpers";
 
 type UseBattleEffectsOpts = {
   api: AlgolStaticGameAPI;
@@ -41,6 +42,7 @@ export function useBattleEffects(opts: UseBattleEffectsOpts) {
   const appActions = useAppActions();
   const justStartedNew = useRef(false);
   const user = useCurrentUser();
+  const isMounted = useIsMounted();
 
   // register api with remote service
   const remoteAPI = useRemoteAPI();
@@ -48,6 +50,22 @@ export function useBattleEffects(opts: UseBattleEffectsOpts) {
     remoteAPI.game.setGameAPI(api);
     return () => remoteAPI.game.setGameAPI(null);
   }, [api]);
+
+  // subscribe to remote game
+  const unsubRef = useRef<() => void>();
+  useEffect(() => {
+    unsubRef.current?.();
+    if (sessionId && sessionIdType(sessionId) === "remote") {
+      unsubRef.current = remoteAPI.battle.subscribe({
+        sessionId,
+        listener: ({ battle, session }) => {
+          if (isMounted()) {
+            actions.subscriptionUpdate(session, battle);
+          }
+        },
+      });
+    }
+  }, [sessionId]);
 
   // update nav map whenever we change mode or sessionId
   useEffect(() => {

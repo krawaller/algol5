@@ -34,6 +34,14 @@ export const useBattleActionsAndState = (api: AlgolStaticGameAPI) => {
           ...current,
           frame,
         })),
+      subscriptionUpdate: (session: AlgolSession, battle: AlgolBattle) => {
+        setState({
+          battle,
+          session,
+          frame: battle.history.length - 1,
+          loading: null,
+        });
+      },
       newLocalSession: (code: string) => {
         const { battle, session } = localSessionActions.newSession({
           api,

@@ -33,7 +33,9 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
     [setModal]
   );
   const stillFirstTurn = battle.turnNumber === 1 && battle.player === 1;
-  const title = `${battle.gameEndedBy ? "Finished" : "Ongoing"} local session`;
+  const title = `${battle.gameEndedBy ? "Finished" : "Ongoing"} ${
+    session.type === "remote" ? "remote" : "local"
+  } session`;
   return (
     <Fragment>
       <BoardPageContent title={title}>

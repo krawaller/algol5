@@ -15,7 +15,7 @@
     "postinstall": "rm -rf node_modules/react; rm -rf node_modules/react-dom; rm -rf node_modules/@types/react"
   },
   "dependencies": {
-    "next": "^10.2.0"
+    "next": "^11.1.1"
   },
   "devDependencies": {
     "svgexport": "^0.4.0"
